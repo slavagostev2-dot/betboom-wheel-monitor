@@ -1,7 +1,134 @@
 {
-  "version": 2,
-  "initialized_sources": [],
-  "seen": {},
+  "initialized_sources": [
+    "AdamStaya",
+    "Blindzonexbet",
+    "DayneezBet",
+    "NeretCast",
+    "PAPAdota2",
+    "StrayDungeon228",
+    "YBNFedor",
+    "ZZoneRM",
+    "acoolbazarit",
+    "aunkereEZ",
+    "aunkeretg",
+    "aviciixd",
+    "betboom_esports",
+    "betboom_esports_cs",
+    "betboomru",
+    "betboomstreamersbattle",
+    "betboomteam",
+    "blast_betboom",
+    "blindzonexgod",
+    "boltcast",
+    "chopperis",
+    "ct0mislove",
+    "dartwager",
+    "dayneZz",
+    "dekocs",
+    "dekocsoff",
+    "dyrachyo",
+    "gshikaryan",
+    "homakolesa",
+    "ihuntnoobs",
+    "kzmantis",
+    "mAger_de_nuke",
+    "mechanogun",
+    "meowbettt",
+    "narodCast",
+    "nixtalk",
+    "obshakstaya",
+    "pandafx",
+    "pandafx2",
+    "risenhaha",
+    "shoketg",
+    "smurf_gigachad",
+    "solo_q_q",
+    "whylollycrry"
+  ],
+  "known_status": {
+    "zonertg1": {
+      "http_code": 200,
+      "note": "страница открылась, но активность не подтверждена",
+      "status": "unknown"
+    },
+    "zonertg12": {
+      "http_code": 200,
+      "note": "страница открылась, но активность не подтверждена",
+      "status": "unknown"
+    },
+    "zonertg13": {
+      "http_code": 200,
+      "note": "страница открылась, но активность не подтверждена",
+      "status": "unknown"
+    },
+    "zonertg14": {
+      "http_code": 200,
+      "note": "страница открылась, но активность не подтверждена",
+      "status": "unknown"
+    },
+    "zonertg2": {
+      "http_code": 200,
+      "note": "страница открылась, но активность не подтверждена",
+      "status": "unknown"
+    },
+    "zonertg8": {
+      "http_code": 200,
+      "note": "страница открылась, но активность не подтверждена",
+      "status": "unknown"
+    },
+    "zonertg9": {
+      "http_code": 200,
+      "note": "страница открылась, но активность не подтверждена",
+      "status": "unknown"
+    },
+    "zonertw10": {
+      "http_code": 200,
+      "note": "страница открылась, но активность не подтверждена",
+      "status": "unknown"
+    },
+    "zonertw16": {
+      "http_code": 200,
+      "note": "страница открылась, но активность не подтверждена",
+      "status": "unknown"
+    },
+    "zonertw6": {
+      "http_code": 200,
+      "note": "страница открылась, но активность не подтверждена",
+      "status": "unknown"
+    }
+  },
   "recent_url_alerts": {},
-  "known_status": {}
+  "seen": {
+    "0389975cb70b3f9d43699fcb61108c5818b7b8483f8f8f86a75dbb1dc4d6252f": "2026-07-12T15:09:43.022880+00:00",
+    "058ddce2804d4dd2fd4277191a222c1b2e6a436570e3915b57d4339d3733f784": "2026-07-12T15:10:04.958834+00:00",
+    "1138f4acdbb886bcbfe4a6939d317435cb32f24d1c06d890e8d2bbec58f4f746": "2026-07-12T15:09:37.922692+00:00",
+    "11f29c11faaa721b479b06a271c8e8233779353fdc11461fd4010af1a733780c": "2026-07-12T15:09:13.354369+00:00",
+    "131dadb6f58e8e7e80acb9745832a889825955f0050f4e4e69ff1d8cfc040d86": "2026-07-12T15:09:37.922706+00:00",
+    "1e386ffd28b794e439bb5f1287cebe487a0cbb81581ebbda58a83cd1d46565c5": "2026-07-12T15:09:56.683803+00:00",
+    "26ccad6d4c8feb686c73bcffcedf7df7f0d56854d08938cadee5ee2e289915a0": "2026-07-12T15:09:13.354384+00:00",
+    "38ecb8af297b2a1beb12a20efcc39489c982c632a4579e58b2bc87eb243362af": "2026-07-12T15:09:56.683820+00:00",
+    "3b6de4abe27bdd72a5f2e85fe73a3792492a28b3f69d91f2a411daa2ec39cb4c": "2026-07-12T15:09:47.544174+00:00",
+    "3ce4c4424b51d81f437992ba1fd02d24967064ded712ae4c21b9fe9d132f33a7": "2026-07-12T15:10:04.958836+00:00",
+    "55e0214f74e007a47174b82f0afc8ffde5718c708858cedf49ade4d6571c4aea": "2026-07-12T15:09:13.354381+00:00",
+    "58ff2284b470bfbd26d63736eae2468711b2e32a309d0813028bea35429e61fd": "2026-07-12T15:09:46.050564+00:00",
+    "74cc5642c469241cbefe2c1ffd60ec881114ec481507099bb1668a2c261b934f": "2026-07-12T15:10:04.958830+00:00",
+    "7b1e4eeacb8c3b8a18ce17ddd255e6bb63ea2db9eb9770e74622d330bd442c66": "2026-07-12T15:09:58.068418+00:00",
+    "7c0db4a6feeda434bed555b014e9a856a4100e6789887aea7ff339197f46dbd4": "2026-07-12T15:10:04.958832+00:00",
+    "8fc16d0d85802adea6cc607f19e13d01dea59fd7de8a6ca951af369bf29bd539": "2026-07-12T15:10:04.958824+00:00",
+    "90ab32961a9de8465cd7da233a1dfc591ab3b620126d161206b66f6c5afdc202": "2026-07-12T15:09:46.050561+00:00",
+    "997d5b6b33d9263a510cb3b3ea28fc879a5d83f132620987ca12032e75aaad66": "2026-07-12T15:09:46.050550+00:00",
+    "9f1b7087c70a36f9599f46265dbcf3cbfe95e3f8503cb7050bcc4e8e23b0c251": "2026-07-12T15:09:23.912472+00:00",
+    "b1a700cc4ddc4ef49c1414af86ec8f6a93f12fb64e29ae1260222773f61d89e6": "2026-07-12T15:10:04.958827+00:00",
+    "b5c70e9ab3ed25ea60af739cd21cd16254d67228c17afc849101f6b8b56675cd": "2026-07-12T15:09:43.022864+00:00",
+    "baa3264a0dcdac8ad59fceae2c90916cb1d27e6ef55f0f525e02fdc43d85dc82": "2026-07-12T15:09:43.022878+00:00",
+    "bbca12513d18e3fc90c854cb5b06bf67b29045c7c3ed2668808545920561fdb7": "2026-07-12T15:09:45.307645+00:00",
+    "d30169b28e9b2c1e142ecb5a7250d7dc9a04906e55e77558bb175a258b378abf": "2026-07-12T15:09:43.809994+00:00",
+    "d4fa31f2a589420a8f824bb4bde52b3dfe93db3a76d5b704da796185c36b1a81": "2026-07-12T15:10:05.815332+00:00",
+    "e48faa6c63aa2de704956cc8b9fe894aceb9a0d0bff18f1b2c610db97b07c2e7": "2026-07-12T15:09:56.683822+00:00",
+    "f6b44fe52830b4eb77617f3578ffb6ac06e693a8aa7ef21aa7d27a295155f8db": "2026-07-12T15:10:04.958811+00:00",
+    "fb4ba954e407736dea38b26236f0bf90d432a9373c0aeda0a1f9077df971d2a1": "2026-07-12T15:10:04.958829+00:00",
+    "fb6247a58e952c95b6c9145ea41984a351e4383932bde9306a3f2000388f9a79": "2026-07-12T15:08:28.238429+00:00",
+    "fef67b001238e32446563a0eae9670161f9625559100e8e39eaabe6dcba71dad": "2026-07-12T15:09:56.683817+00:00"
+  },
+  "version": 2
 }
