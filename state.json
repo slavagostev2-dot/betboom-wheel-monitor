@@ -1,4 +1,5 @@
 {
+  "activation_alerts": {},
   "health": {},
   "initialized_sources": [
     "AdamStaya",
@@ -67,7 +68,8 @@
     "source_errors": 2,
     "sources": 41
   },
-  "notification_key_version": 5,
+  "notification_key_version": 7,
+  "pending_posts": {},
   "seen": {
     "012299e0d83138e2bb8a30f9bedc98e45443d27f84571a20a8372b1c96f6ea50": "2026-07-12T18:26:18.034381+00:00",
     "0389975cb70b3f9d43699fcb61108c5818b7b8483f8f8f86a75dbb1dc4d6252f": "2026-07-12T15:09:43.022880+00:00",
@@ -320,5 +322,5 @@
       "url": "https://betboom.ru/freestream/zonertw9"
     }
   },
-  "version": 4
+  "version": 5
 }
