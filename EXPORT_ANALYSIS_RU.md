@@ -1,64 +1,80 @@
-# Анализ Chat Стаи Ставки — экспорт 12.07.2026
+name: Nightly Telegram source discovery
 
-Экспорт использован только для выделения ссылок `betboom.ru/freestream/` и статистики источников. Имена участников и обычные сообщения в репозиторий не переносились.
+on:
+  push:
+    branches: [main]
+    paths:
+      - "nightly_discovery.py"
+      - "source_catalog.txt"
+      - "public_sources.txt"
+      - ".github/workflows/nightly-discovery.yml"
+  workflow_dispatch:
+  schedule:
+    # 20:27 UTC = 03:27 в Барнауле. Не начало часа.
+    - cron: "27 20 * * *"
 
-## Итоги
+permissions:
+  contents: write
+  actions: write
 
-- Сообщений в экспорте: **1 000 759**
-- Сообщений со ссылками на колёса: **290**
-- Уникальных идентификаторов: **89**
-- Новых идентификаторов для текущей базы: **28**
+concurrency:
+  group: betboom-wheel-nightly-discovery
+  cancel-in-progress: false
 
-## Часто встречавшиеся идентификаторы
+jobs:
+  discovery:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
 
-| Идентификатор / группа | Количество публикаций |
-|---|---:|
-| `zonertg*`, `zonertw*`, `zonerwheel` | 61 |
-| `solo*`, `solotg` | 23 |
-| `dyrachyo` | 21 |
-| `papa` | 21 |
-| `cct1` | 20 |
-| `nix*` | 14 |
-| `bolt` | 13 |
-| `aunkere` | 12 |
-| `staya*` | 12 |
-| `krat` | 10 |
-| `neret` | 9 |
-| `sigma` | 8 |
-| `ewc` | 7 |
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
 
-## Подтверждённые сопоставления с публичными источниками
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
 
-- `zoner*` → `@mechanogun`
-- `dyrachyo` → `@dyrachyo`
-- `papa` → `@PAPAdota2`
-- `solo*` → `@solo_q_q`
-- `nix*` → `@nixtalk`
-- `bolt` → `@boltcast`
-- `aunkere*` → `@aunkereEZ`
-- `staya*` → `@obshakstaya`
-- `adam` → `@AdamStaya`
-- `neret` → `@NeretCast`
-- `stray*` → `@StrayDungeon228`
-- `shoke` → `@shoketg`
-- `over` → `@ihuntnoobs`
-- `deko` → `@dekocs`
-- `MAGER*` → `@mAger_de_nuke`
-- `CTOM*` → `@meowbettt`
-- `acool*` → `@acoolbazarit`
-- `chopper*` → `@chopperis`
-- `HOOCH*` → `@hoochcs2`
-- `LOLLY*` → `@whylollycrry`
-- `avice*` → `@aviciixd`
-- `blindzone` → `@Blindzonexbet`
-- `dayneez` → `@DayneezBet`
-- `danila.gorilla`, `gorilla` → `@danila_gorilla`, `@gorilla_armor`
-- `krat` → `@KRATtv`
-- `shadowkek` → `@shadowkekw`, `@burdakekw`
-- `relax` → `@relaxcis`, `@RelaxCisBet`
+      - name: Install dependencies
+        run: python -m pip install -r requirements.txt
 
-Кроме авторских каналов, в быструю проверку добавлены публичные сборщики
-`@frixa_betboom` и `@amam0610`, где регулярно появляются ссылки на разные
-колёса.
+      - name: Check project files
+        run: |
+          python -m py_compile monitor.py nightly_discovery.py
+          python self_test.py
 
-Некоторые ссылки имеют одноразовые или неочевидные идентификаторы (`PFMHP6WT`, `O0XEAX75` и подобные). Они добавлены в базу идентификаторов, но не приписаны случайному Telegram-каналу без подтверждения.
+      - name: Scan nightly source catalog
+        env:
+          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+          BOT_CHAT_ID: ${{ secrets.BOT_CHAT_ID }}
+          DISPLAY_TIMEZONE: Asia/Barnaul
+          REQUEST_TIMEOUT_SECONDS: "15"
+          DISCOVERY_LOOKBACK_HOURS: "48"
+          DISCOVERY_PAGES: "4"
+          MANUAL_RUN: ${{ github.event_name == 'workflow_dispatch' }}
+        run: python nightly_discovery.py
+
+      - name: Save discovery and promotions
+        shell: bash
+        run: |
+          if git diff --quiet -- public_sources.txt source_catalog.txt discovery_state.json; then
+            echo "Discovery state did not change."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public_sources.txt source_catalog.txt discovery_state.json
+          git commit -m "Update Telegram source discovery [skip ci]"
+          git pull --rebase origin "${GITHUB_REF_NAME}"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
+
+      - name: Wake or restart fast monitor
+        if: ${{ always() }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run monitor.yml --ref main -f continuous=true
