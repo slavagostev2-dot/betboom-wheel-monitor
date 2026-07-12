@@ -1,0 +1,68 @@
+# BetBoom Wheel Monitor — GitHub Actions
+
+Версия для работы без VPS и без постоянно включённого компьютера.
+
+## Состав репозитория
+
+```text
+.github/workflows/monitor.yml      автоматический запуск каждые 5 минут
+.github/workflows/get-chat-id.yml получение BOT_CHAT_ID
+monitor.py                         основной монитор
+get_chat_id.py                     служебный скрипт
+public_sources.txt                 публичные Telegram-источники
+known_freestream_ids.txt           исторические идентификаторы колёс
+state.json                         защита от повторных уведомлений
+requirements.txt                   зависимости Python
+SECURITY_RU.md                     правила безопасности
+```
+
+## Что делает монитор
+
+- читает публичные страницы Telegram `t.me/s/<username>` без подписки;
+- извлекает обычные, скрытые и кнопочные ссылки `betboom.ru/freestream/...`;
+- присылает новые ссылки через Telegram-бота;
+- пытается определить оставшееся время из текста публикации;
+- подавляет повторные уведомления об одной ссылке в течение 60 минут;
+- небольшими партиями перепроверяет исторические идентификаторы;
+- сохраняет состояние между запусками в `state.json`.
+
+## Установка
+
+1. Создайте публичный репозиторий GitHub.
+2. Загрузите **содержимое этой папки** в корень репозитория.
+3. В Telegram создайте бота через `@BotFather`.
+4. В GitHub откройте:
+   `Settings → Secrets and variables → Actions`.
+5. Добавьте Repository Secret `BOT_TOKEN`.
+6. Напишите созданному боту любое сообщение.
+7. Запустите:
+   `Actions → Get Telegram chat ID → Run workflow`.
+8. В логе шага `Show chat IDs` скопируйте число после `BOT_CHAT_ID=`.
+9. Добавьте Repository Secret `BOT_CHAT_ID`.
+10. В `Settings → Actions → General → Workflow permissions`
+    включите `Read and write permissions`.
+11. Запустите:
+    `Actions → Monitor BetBoom wheels → Run workflow`.
+
+Первый запуск создаёт исходную точку и не рассылает старые публикации.
+
+## Добавление источника
+
+Добавьте в `public_sources.txt` публичный username без `@`, например:
+
+```text
+example_channel
+```
+
+Закрытые каналы и группы GitHub-версия читать не может.
+
+## Важные ограничения
+
+- GitHub может запускать расписание с небольшой задержкой.
+- Публичный веб-просмотр Telegram иногда не показывает отдельные сообщения.
+- Таймер на BetBoom может загружаться JavaScript-кодом; резервная проверка
+  старых адресов не всегда сможет определить активность.
+- Не загружайте старую локальную папку: в ней могут находиться `.env`,
+  `.session` и `.venv`.
+
+См. также [SECURITY_RU.md](SECURITY_RU.md).
