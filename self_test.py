@@ -4,6 +4,7 @@ from datetime import datetime, timedelta
 from pathlib import Path
 
 import monitor
+import monitor_data as data_store
 
 
 ROOT = Path(__file__).resolve().parent
@@ -55,6 +56,7 @@ def main() -> None:
         )
         assert inspection.status == "active"
         assert "кнопка" in inspection.method
+        assert "Участвовать" in inspection.page_excerpt
     finally:
         monitor.request_with_retries = original_request
 
@@ -71,6 +73,9 @@ def main() -> None:
         "pending_posts": {},
         "activation_alerts": {},
         "url_alerts": {},
+        "button_contexts": {},
+        "manual_overrides": {},
+        "seen": {},
     }
     monitor.remember_pending(
         state,
@@ -88,14 +93,12 @@ def main() -> None:
 
     original_inspection = monitor.inspect_wheel_page
     monitor.inspect_wheel_page = lambda value: monitor.WheelInspection(
-        "active", None, "активная кнопка: найдено «участвовать»"
+        "active", None, "активная кнопка: найдено «участвовать»", "Участвовать"
     )
     try:
-        should_notify, deadline, method, status = monitor.assess_pending_wheel(
-            message, link
-        )
-        assert should_notify and status == "active"
-        assert deadline is None and "кнопка" in method
+        assessment = monitor.assess_pending_wheel(message, link, state)
+        assert assessment.should_notify and assessment.status == "active"
+        assert assessment.deadline is None and "кнопка" in assessment.method
     finally:
         monitor.inspect_wheel_page = original_inspection
 
@@ -103,10 +106,113 @@ def main() -> None:
     monitor.remember_activation(state, link, None)
     assert monitor.is_activation_suppressed(state, link)
 
-    quick = {item.casefold() for item in monitor.read_list(ROOT / "public_sources.txt")}
-    nightly = {item.casefold() for item in monitor.read_list(ROOT / "source_catalog.txt")}
+
+    markup_state = {"button_contexts": {}}
+    markup = monitor.wheel_reply_markup(
+        markup_state,
+        message,
+        link,
+        active=False,
+        status="unconfirmed",
+        method="таймер не найден",
+        page_excerpt="пример страницы",
+    )
+    labels = [button["text"] for row in markup["inline_keyboard"] for button in row]
+    assert "🔄 Проверить" in labels
+    assert "✅ Активно" in labels
+    assert "🚫 Неактивно" in labels
+    assert "🕒 Нет времени" in labels
+    assert markup_state["button_contexts"]
+
+    unknown = {"version": 1, "samples": []}
+    added = data_store.record_unknown_timer_sample(
+        unknown,
+        source="test",
+        message_id=77,
+        message_url="https://t.me/test/77",
+        wheel_url=link,
+        wheel_identifier="pending-wheel",
+        status="unknown",
+        method="таймер не найден",
+        telegram_text="Новый формат времени",
+        page_excerpt="Необычная строка таймера",
+    )
+    assert added and len(unknown["samples"]) == 1
+    assert not data_store.record_unknown_timer_sample(
+        unknown,
+        source="test",
+        message_id=77,
+        message_url="https://t.me/test/77",
+        wheel_url=link,
+        wheel_identifier="pending-wheel",
+        status="unknown",
+        method="таймер не найден",
+        telegram_text="Новый формат времени",
+        page_excerpt="Необычная строка таймера",
+    )
+
+    catalog = data_store.load_partner_catalog()
+    channels = data_store.flatten_partner_channels(catalog)
+    assert channels["shadowkekw"]["relationship"] == "confirmed_ambassador"
+    assert channels["gazazor"]["scan_mode"] == "fast"
+    assert channels["aunkeretg"]["scan_mode"] == "fast"
+    assert channels["dekocsoff"]["scan_mode"] == "fast"
+    assert channels["ct0mislove"]["scan_mode"] == "fast"
+    assert channels["blindzonexgod"]["scan_mode"] == "fast"
+    assert channels["daynezz"]["scan_mode"] == "fast"
+    assert channels["betboomteamcs2"]["scan_mode"] == "nightly"
+
+    quick = {
+        item.casefold()
+        for item in data_store.operational_sources(
+            monitor.read_list(ROOT / "public_sources.txt"), "fast"
+        )
+    }
+    nightly = {
+        item.casefold()
+        for item in data_store.operational_sources(
+            monitor.read_list(ROOT / "source_catalog.txt"), "nightly"
+        )
+    }
     assert not quick.intersection(nightly), "Быстрый и ночной списки пересекаются"
     assert "gazazor" in quick
+    assert "kolesabb" in quick
+    assert "homakolesa" in quick
+    assert "narodcast" in quick
+    assert "dartwager" in quick
+    assert "frixa_betboom" in quick
+    assert "amam0610" in quick
+    assert "gazazor" in quick
+    assert "aunkeretg" in quick
+    assert "dekocsoff" in quick
+    assert "ct0mislove" in quick
+    assert "blindzonexgod" in quick
+    assert "daynezz" in quick
+    assert monitor.NEW_SOURCE_CATCHUP_MINUTES >= 0
+
+    health = {"version": 1, "sources": {}}
+    for _ in range(data_store.QUARANTINE_FAILURE_THRESHOLD):
+        quarantined = data_store.record_source_problem(
+            health, "broken_channel", "error", "test"
+        )
+    assert quarantined
+    assert not data_store.source_due_for_check(health, "broken_channel")
+    data_store.record_source_success(health, "broken_channel", 10)
+    assert data_store.source_due_for_check(health, "broken_channel")
+
+    stats = {"version": 1, "sources": {}, "daily": {}}
+    assert data_store.mark_unique_wheel_post(stats, "test", key, "pending-wheel")
+    assert not data_store.mark_unique_wheel_post(stats, "test", key, "pending-wheel")
+
+
+    timezone_stats = {"version": 1, "sources": {}, "daily": {}}
+    data_store.increment_stat(
+        timezone_stats,
+        "test",
+        "checks",
+        at=datetime(2026, 7, 12, 18, 0, tzinfo=monitor.UTC),
+    )
+    assert "2026-07-13" in timezone_stats["daily"]
 
     project_text = "\n".join(
         path.read_text(encoding="utf-8")

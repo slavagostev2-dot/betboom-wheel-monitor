@@ -3,6 +3,8 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
+import monitor_data as data_store
+
 ROOT = Path(__file__).resolve().parent
 
 
@@ -18,33 +20,63 @@ def require_text(path: str, markers: tuple[str, ...]) -> None:
         )
 
 
-def read_list(path: str) -> list[str]:
-    values: list[str] = []
-    for raw in (ROOT / path).read_text(encoding="utf-8").splitlines():
-        value = raw.split("#", 1)[0].strip().lstrip("@")
-        if value:
-            values.append(value)
-    return values
+def read_json(path: str) -> dict:
+    try:
+        value = json.loads((ROOT / path).read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        raise SystemExit(f"PRECHECK ERROR: invalid {path}: {exc}") from exc
+    if not isinstance(value, dict):
+        raise SystemExit(f"PRECHECK ERROR: {path} must contain a JSON object")
+    return value
 
 
 def main() -> None:
     require_text("requirements.txt", ("requests==", "beautifulsoup4==", "tzdata"))
-    require_text("monitor.py", ("from __future__ import annotations", "def main()"))
+    require_text("monitor.py", ("from __future__ import annotations", "def main()", "process_bot_feedback"))
+    require_text("monitor_data.py", ("def load_health", "def load_stats", "def operational_sources"))
     require_text("nightly_discovery.py", ("import monitor", "def main()"))
+    require_text("daily_report.py", ("Ежедневный отчёт", "def main()"))
     require_text("telegram_monitor.py", ("from monitor import main", "raise SystemExit(main())"))
     require_text("self_test.py", ("import monitor", "def main()"))
     require_text("public_sources.txt", ("gazazor",))
     require_text("source_catalog.txt", ("Ночной каталог",))
+    require_text(".github/workflows/daily-report.yml", ("Daily BetBoom monitor report", "daily_report.py"))
 
-    try:
-        mapping = json.loads((ROOT / "identifier_sources.json").read_text(encoding="utf-8"))
-    except (OSError, json.JSONDecodeError) as exc:
-        raise SystemExit(f"PRECHECK ERROR: invalid identifier_sources.json: {exc}") from exc
-    if not isinstance(mapping, dict) or not isinstance(mapping.get("mappings"), list):
+    mapping = read_json("identifier_sources.json")
+    if not isinstance(mapping.get("mappings"), list):
         raise SystemExit("PRECHECK ERROR: identifier_sources.json has an unexpected structure")
 
-    fast = {item.casefold() for item in read_list("public_sources.txt")}
-    nightly = {item.casefold() for item in read_list("source_catalog.txt")}
+    catalog = read_json("partners_catalog.json")
+    if not isinstance(catalog.get("entities"), list):
+        raise SystemExit("PRECHECK ERROR: partners_catalog.json has an unexpected structure")
+
+    for path, key in (
+        ("source_health.json", "sources"),
+        ("source_stats.json", "sources"),
+        ("unknown_timer_samples.json", "samples"),
+    ):
+        value = read_json(path)
+        if key not in value:
+            raise SystemExit(f"PRECHECK ERROR: {path} is missing key {key}")
+
+    fast_values = [
+        data_store.clean_username(line.split("#", 1)[0])
+        for line in (ROOT / "public_sources.txt").read_text(encoding="utf-8").splitlines()
+        if data_store.clean_username(line.split("#", 1)[0])
+    ]
+    nightly_values = [
+        data_store.clean_username(line.split("#", 1)[0])
+        for line in (ROOT / "source_catalog.txt").read_text(encoding="utf-8").splitlines()
+        if data_store.clean_username(line.split("#", 1)[0])
+    ]
+    fast = {
+        item.casefold()
+        for item in data_store.operational_sources(fast_values, "fast")
+    }
+    nightly = {
+        item.casefold()
+        for item in data_store.operational_sources(nightly_values, "nightly")
+    }
     overlap = sorted(fast & nightly)
     if overlap:
         raise SystemExit(

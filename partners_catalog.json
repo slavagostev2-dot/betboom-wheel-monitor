@@ -1,0 +1,608 @@
+{
+  "version": 1,
+  "updated_at": "2026-07-13",
+  "policy": {
+    "fast": "подтверждённая история колёс, ставочный/дополнительный канал партнёра, активное колесо или сборщик-сигнал",
+    "nightly": "официальный партнёр/канал или подтверждённый альтернативный канал без регулярных колёс",
+    "disabled": "публично подтверждённый бывший партнёр или нерелевантный источник",
+    "conservative_removal": true
+  },
+  "entities": [
+    {
+      "name": "BetBoom",
+      "relationship": "official_brand",
+      "verification": "official_naming_and_public_channel",
+      "channels": [
+        {
+          "username": "betboomru",
+          "type": "main",
+          "scan_mode": "nightly"
+        },
+        {
+          "username": "betboom_esports",
+          "type": "esports",
+          "scan_mode": "nightly"
+        },
+        {
+          "username": "betboom_esports_cs",
+          "type": "esports_cs2",
+          "scan_mode": "nightly"
+        },
+        {
+          "username": "betboomstreamersbattle",
+          "type": "tournament",
+          "scan_mode": "nightly"
+        },
+        {
+          "username": "blast_betboom",
+          "type": "campaign_or_tournament",
+          "scan_mode": "nightly"
+        }
+      ],
+      "notes": "Официальные и тематические каналы бренда; проверяются ночью, пока не подтверждена регулярная публикация колёс."
+    },
+    {
+      "name": "BetBoom Team",
+      "relationship": "official_team",
+      "verification": "official_telegram_description",
+      "channels": [
+        {
+          "username": "betboomteam",
+          "type": "main_dota2",
+          "scan_mode": "nightly"
+        },
+        {
+          "username": "betboomteamcs2",
+          "type": "cs2",
+          "scan_mode": "nightly"
+        }
+      ],
+      "notes": "Официальная киберспортивная организация BetBoom Team."
+    },
+    {
+      "name": "Mechanogun / Zoner",
+      "relationship": "wheel_affiliate_history",
+      "verification": "confirmed_freestream_history",
+      "channels": [
+        {
+          "username": "mechanogun",
+          "type": "main",
+          "scan_mode": "fast"
+        }
+      ],
+      "notes": "Формальный статус амбассадора не заявляется без публичного подтверждения."
+    },
+    {
+      "name": "Dyrachyo",
+      "relationship": "wheel_affiliate_history",
+      "verification": "confirmed_freestream_history",
+      "channels": [
+        {
+          "username": "dyrachyo",
+          "type": "main",
+          "scan_mode": "fast"
+        }
+      ],
+      "notes": "Формальный статус амбассадора не заявляется без публичного подтверждения."
+    },
+    {
+      "name": "PAPA",
+      "relationship": "wheel_affiliate_history",
+      "verification": "confirmed_freestream_history",
+      "channels": [
+        {
+          "username": "PAPAdota2",
+          "type": "main",
+          "scan_mode": "fast"
+        }
+      ],
+      "notes": "Формальный статус амбассадора не заявляется без публичного подтверждения."
+    },
+    {
+      "name": "Solo",
+      "relationship": "wheel_affiliate_history",
+      "verification": "confirmed_freestream_history",
+      "channels": [
+        {
+          "username": "solo_q_q",
+          "type": "main",
+          "scan_mode": "fast"
+        }
+      ],
+      "notes": "Формальный статус амбассадора не заявляется без публичного подтверждения."
+    },
+    {
+      "name": "Nix",
+      "relationship": "wheel_affiliate_history",
+      "verification": "confirmed_freestream_history",
+      "channels": [
+        {
+          "username": "nixtalk",
+          "type": "main",
+          "scan_mode": "fast"
+        }
+      ],
+      "notes": "Формальный статус амбассадора не заявляется без публичного подтверждения."
+    },
+    {
+      "name": "Bolt",
+      "relationship": "wheel_affiliate_history",
+      "verification": "confirmed_freestream_history",
+      "channels": [
+        {
+          "username": "boltcast",
+          "type": "main",
+          "scan_mode": "fast"
+        }
+      ],
+      "notes": "Формальный статус амбассадора не заявляется без публичного подтверждения."
+    },
+    {
+      "name": "Aunkere",
+      "relationship": "wheel_affiliate_history",
+      "verification": "confirmed_freestream_history",
+      "channels": [
+        {
+          "username": "aunkereEZ",
+          "type": "main",
+          "scan_mode": "fast"
+        },
+        {
+          "username": "aunkeretg",
+          "type": "secondary_or_betting",
+          "scan_mode": "fast",
+          "priority_reason": "betting_or_secondary_channel_requested_for_fast_monitoring"
+        }
+      ],
+      "notes": "Формальный статус амбассадора не заявляется без публичного подтверждения."
+    },
+    {
+      "name": "Staya",
+      "relationship": "wheel_affiliate_history",
+      "verification": "confirmed_freestream_history",
+      "channels": [
+        {
+          "username": "obshakstaya",
+          "type": "main",
+          "scan_mode": "fast"
+        }
+      ],
+      "notes": "Формальный статус амбассадора не заявляется без публичного подтверждения."
+    },
+    {
+      "name": "Adam",
+      "relationship": "wheel_affiliate_history",
+      "verification": "confirmed_freestream_history",
+      "channels": [
+        {
+          "username": "AdamStaya",
+          "type": "main",
+          "scan_mode": "fast"
+        }
+      ],
+      "notes": "Формальный статус амбассадора не заявляется без публичного подтверждения."
+    },
+    {
+      "name": "Neret",
+      "relationship": "wheel_affiliate_history",
+      "verification": "confirmed_freestream_history",
+      "channels": [
+        {
+          "username": "NeretCast",
+          "type": "main",
+          "scan_mode": "fast"
+        }
+      ],
+      "notes": "Формальный статус амбассадора не заявляется без публичного подтверждения."
+    },
+    {
+      "name": "Stray",
+      "relationship": "wheel_affiliate_history",
+      "verification": "confirmed_freestream_history",
+      "channels": [
+        {
+          "username": "StrayDungeon228",
+          "type": "main",
+          "scan_mode": "fast"
+        }
+      ],
+      "notes": "Формальный статус амбассадора не заявляется без публичного подтверждения."
+    },
+    {
+      "name": "Shoke",
+      "relationship": "wheel_affiliate_history",
+      "verification": "confirmed_freestream_history",
+      "channels": [
+        {
+          "username": "shoketg",
+          "type": "main",
+          "scan_mode": "fast"
+        }
+      ],
+      "notes": "Формальный статус амбассадора не заявляется без публичного подтверждения."
+    },
+    {
+      "name": "OverDrive / ihuntnoobs",
+      "relationship": "wheel_affiliate_history",
+      "verification": "confirmed_freestream_history",
+      "channels": [
+        {
+          "username": "ihuntnoobs",
+          "type": "main",
+          "scan_mode": "fast"
+        }
+      ],
+      "notes": "Формальный статус амбассадора не заявляется без публичного подтверждения."
+    },
+    {
+      "name": "Deko",
+      "relationship": "wheel_affiliate_history",
+      "verification": "confirmed_freestream_history",
+      "channels": [
+        {
+          "username": "dekocs",
+          "type": "main",
+          "scan_mode": "fast"
+        },
+        {
+          "username": "dekocsoff",
+          "type": "secondary_or_betting",
+          "scan_mode": "fast",
+          "priority_reason": "betting_or_secondary_channel_requested_for_fast_monitoring"
+        }
+      ],
+      "notes": "Формальный статус амбассадора не заявляется без публичного подтверждения."
+    },
+    {
+      "name": "MAGER",
+      "relationship": "wheel_affiliate_history",
+      "verification": "confirmed_freestream_history",
+      "channels": [
+        {
+          "username": "mAger_de_nuke",
+          "type": "main",
+          "scan_mode": "fast"
+        }
+      ],
+      "notes": "Формальный статус амбассадора не заявляется без публичного подтверждения."
+    },
+    {
+      "name": "CTOM",
+      "relationship": "wheel_affiliate_history",
+      "verification": "confirmed_freestream_history",
+      "channels": [
+        {
+          "username": "meowbettt",
+          "type": "main",
+          "scan_mode": "fast"
+        },
+        {
+          "username": "ct0mislove",
+          "type": "secondary_or_betting",
+          "scan_mode": "fast",
+          "priority_reason": "betting_or_secondary_channel_requested_for_fast_monitoring"
+        }
+      ],
+      "notes": "Формальный статус амбассадора не заявляется без публичного подтверждения."
+    },
+    {
+      "name": "AcooL",
+      "relationship": "wheel_affiliate_history",
+      "verification": "confirmed_freestream_history",
+      "channels": [
+        {
+          "username": "acoolbazarit",
+          "type": "main",
+          "scan_mode": "fast"
+        }
+      ],
+      "notes": "Формальный статус амбассадора не заявляется без публичного подтверждения."
+    },
+    {
+      "name": "Chopper",
+      "relationship": "wheel_affiliate_history",
+      "verification": "confirmed_freestream_history",
+      "channels": [
+        {
+          "username": "chopperis",
+          "type": "main",
+          "scan_mode": "fast"
+        }
+      ],
+      "notes": "Формальный статус амбассадора не заявляется без публичного подтверждения."
+    },
+    {
+      "name": "Hooch",
+      "relationship": "wheel_affiliate_history",
+      "verification": "confirmed_freestream_history",
+      "channels": [
+        {
+          "username": "hoochcs2",
+          "type": "main",
+          "scan_mode": "fast"
+        }
+      ],
+      "notes": "Формальный статус амбассадора не заявляется без публичного подтверждения."
+    },
+    {
+      "name": "Lolly",
+      "relationship": "wheel_affiliate_history",
+      "verification": "confirmed_freestream_history",
+      "channels": [
+        {
+          "username": "whylollycrry",
+          "type": "main",
+          "scan_mode": "fast"
+        }
+      ],
+      "notes": "Формальный статус амбассадора не заявляется без публичного подтверждения."
+    },
+    {
+      "name": "Avice",
+      "relationship": "wheel_affiliate_history",
+      "verification": "confirmed_freestream_history",
+      "channels": [
+        {
+          "username": "aviciixd",
+          "type": "main",
+          "scan_mode": "fast"
+        }
+      ],
+      "notes": "Формальный статус амбассадора не заявляется без публичного подтверждения."
+    },
+    {
+      "name": "Blindzone",
+      "relationship": "wheel_affiliate_history",
+      "verification": "confirmed_freestream_history",
+      "channels": [
+        {
+          "username": "Blindzonexbet",
+          "type": "main",
+          "scan_mode": "fast"
+        },
+        {
+          "username": "blindzonexgod",
+          "type": "secondary_or_betting",
+          "scan_mode": "fast",
+          "priority_reason": "betting_or_secondary_channel_requested_for_fast_monitoring"
+        }
+      ],
+      "notes": "Формальный статус амбассадора не заявляется без публичного подтверждения."
+    },
+    {
+      "name": "Dayneez",
+      "relationship": "wheel_affiliate_history",
+      "verification": "confirmed_freestream_history",
+      "channels": [
+        {
+          "username": "DayneezBet",
+          "type": "main",
+          "scan_mode": "fast"
+        },
+        {
+          "username": "dayneZz",
+          "type": "secondary_or_betting",
+          "scan_mode": "fast",
+          "priority_reason": "betting_or_secondary_channel_requested_for_fast_monitoring"
+        }
+      ],
+      "notes": "Формальный статус амбассадора не заявляется без публичного подтверждения."
+    },
+    {
+      "name": "Danila Gorilla",
+      "relationship": "wheel_affiliate_history",
+      "verification": "confirmed_freestream_history",
+      "channels": [
+        {
+          "username": "danila_gorilla",
+          "type": "main",
+          "scan_mode": "fast"
+        },
+        {
+          "username": "gorilla_armor",
+          "type": "secondary_or_betting",
+          "scan_mode": "fast"
+        }
+      ],
+      "notes": "Формальный статус амбассадора не заявляется без публичного подтверждения."
+    },
+    {
+      "name": "KRAT",
+      "relationship": "wheel_affiliate_history",
+      "verification": "confirmed_freestream_history",
+      "channels": [
+        {
+          "username": "KRATtv",
+          "type": "main",
+          "scan_mode": "fast"
+        }
+      ],
+      "notes": "Формальный статус амбассадора не заявляется без публичного подтверждения."
+    },
+    {
+      "name": "Shadowkek",
+      "relationship": "confirmed_ambassador",
+      "verification": "public_award_2025_and_wheel_history",
+      "channels": [
+        {
+          "username": "shadowkekw",
+          "type": "main",
+          "scan_mode": "fast"
+        },
+        {
+          "username": "burdakekw",
+          "type": "secondary_or_betting",
+          "scan_mode": "fast"
+        }
+      ],
+      "notes": "Публично указан как представитель BetBoom в премии 2025."
+    },
+    {
+      "name": "Relaxcis",
+      "relationship": "wheel_affiliate_history",
+      "verification": "confirmed_freestream_history",
+      "channels": [
+        {
+          "username": "relaxcis",
+          "type": "main",
+          "scan_mode": "fast"
+        },
+        {
+          "username": "RelaxCisBet",
+          "type": "secondary_or_betting",
+          "scan_mode": "fast"
+        }
+      ],
+      "notes": "Формальный статус амбассадора не заявляется без публичного подтверждения."
+    },
+    {
+      "name": "KZ Mantis",
+      "relationship": "wheel_affiliate_recent",
+      "verification": "recent_freestream_post_detected",
+      "channels": [
+        {
+          "username": "kzmantis",
+          "type": "main",
+          "scan_mode": "fast"
+        }
+      ],
+      "notes": "Канал оставлен из-за подтверждённой публикации колеса; формальный статус партнёра не утверждается."
+    },
+    {
+      "name": "Smurf Gigachad",
+      "relationship": "wheel_affiliate_recent",
+      "verification": "recent_freestream_post_detected",
+      "channels": [
+        {
+          "username": "smurf_gigachad",
+          "type": "main",
+          "scan_mode": "fast"
+        }
+      ],
+      "notes": "Канал оставлен из-за подтверждённой публикации колеса; формальный статус партнёра не утверждается."
+    },
+    {
+      "name": "PandaFX",
+      "relationship": "wheel_affiliate_recent",
+      "verification": "recent_freestream_post_detected",
+      "channels": [
+        {
+          "username": "pandafx",
+          "type": "main",
+          "scan_mode": "fast"
+        }
+      ],
+      "notes": "Канал оставлен из-за подтверждённой публикации колеса; формальный статус партнёра не утверждается."
+    },
+    {
+      "name": "GShikaryan",
+      "relationship": "wheel_affiliate_recent",
+      "verification": "recent_freestream_post_detected",
+      "channels": [
+        {
+          "username": "gshikaryan",
+          "type": "main",
+          "scan_mode": "fast"
+        }
+      ],
+      "notes": "Канал оставлен из-за подтверждённой публикации колеса; формальный статус партнёра не утверждается."
+    },
+    {
+      "name": "ZZoneRM",
+      "relationship": "wheel_affiliate_recent",
+      "verification": "recent_freestream_post_detected",
+      "channels": [
+        {
+          "username": "ZZoneRM",
+          "type": "main",
+          "scan_mode": "fast"
+        }
+      ],
+      "notes": "Канал оставлен из-за подтверждённой публикации колеса; формальный статус партнёра не утверждается."
+    },
+    {
+      "name": "YBN Fedor",
+      "relationship": "wheel_affiliate_recent",
+      "verification": "recent_freestream_post_detected",
+      "channels": [
+        {
+          "username": "YBNFedor",
+          "type": "main",
+          "scan_mode": "nightly"
+        }
+      ],
+      "notes": "Канал оставлен из-за подтверждённой публикации колеса; формальный статус партнёра не утверждается."
+    },
+    {
+      "name": "Risen",
+      "relationship": "wheel_affiliate_recent",
+      "verification": "recent_freestream_post_detected",
+      "channels": [
+        {
+          "username": "risenhaha",
+          "type": "main",
+          "scan_mode": "nightly"
+        }
+      ],
+      "notes": "Канал оставлен из-за подтверждённой публикации колеса; формальный статус партнёра не утверждается."
+    }
+  ],
+  "collectors": [
+    {
+      "username": "homakolesa",
+      "name": "Сборщик колёс",
+      "scan_mode": "fast"
+    },
+    {
+      "username": "narodCast",
+      "name": "Публичный чат/сборщик",
+      "scan_mode": "fast"
+    },
+    {
+      "username": "dartwager",
+      "name": "Публичный чат/сборщик",
+      "scan_mode": "fast"
+    },
+    {
+      "username": "frixa_betboom",
+      "name": "Публичный сборщик BetBoom",
+      "scan_mode": "fast"
+    },
+    {
+      "username": "amam0610",
+      "name": "Публичный сборщик",
+      "scan_mode": "fast"
+    },
+    {
+      "username": "gazazor",
+      "name": "Газазор — чат со ссылками",
+      "scan_mode": "fast"
+    },
+    {
+      "username": "kolesaBB",
+      "name": "Колёса BB — публичный сборщик ссылок",
+      "scan_mode": "fast",
+      "verification": "recent_zonertg3_wheel_reported_by_owner"
+    }
+  ],
+  "excluded": [
+    {
+      "name": "Buster",
+      "channels": [],
+      "verification": "public_switch_to_winline_2024",
+      "reason": "Бывший амбассадор BetBoom; с 2024 года публично связан с другим букмекером."
+    }
+  ],
+  "unverified_organizations": [
+    {
+      "name": "Team Spirit",
+      "relationship": "official_partner_organization",
+      "reason": "Партнёрство подтверждено публично, но Telegram-username не добавлен без ручной проверки."
+    },
+    {
+      "name": "FISSURE",
+      "relationship": "general_partner_or_operator",
+      "reason": "Связь с BetBoom подтверждена публично, но Telegram-username не добавлен без ручной проверки."
+    }
+  ]
+}
