@@ -1,0 +1,62 @@
+name: Monitor BetBoom wheels
+
+on:
+  workflow_dispatch:
+  schedule:
+    # GitHub Actions supports a minimum scheduled interval of five minutes.
+    # The offset avoids the busiest minute at the top of each hour.
+    - cron: "3-58/5 * * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: betboom-wheel-monitor
+  cancel-in-progress: false
+
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+    timeout-minutes: 7
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install dependencies
+        run: python -m pip install -r requirements.txt
+
+      - name: Run monitor
+        env:
+          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+          BOT_CHAT_ID: ${{ secrets.BOT_CHAT_ID }}
+          DISPLAY_TIMEZONE: Asia/Barnaul
+          REQUEST_TIMEOUT_SECONDS: "20"
+          KNOWN_BATCH_SIZE: "10"
+          URL_DEDUP_MINUTES: "60"
+          KNOWN_ACTIVE_ALERT_COOLDOWN_HOURS: "6"
+          MANUAL_RUN: ${{ github.event_name == 'workflow_dispatch' }}
+        run: python monitor.py
+
+      - name: Save monitor state
+        shell: bash
+        run: |
+          if git diff --quiet -- state.json; then
+            echo "State did not change."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add state.json
+          git commit -m "Update monitor state [skip ci]"
+          git pull --rebase origin "${GITHUB_REF_NAME}"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
