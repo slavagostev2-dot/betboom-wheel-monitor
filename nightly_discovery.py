@@ -159,8 +159,6 @@ def main() -> int:
     active = unique(monitor.read_list(ACTIVE_PATH))
     active_keys = {item.casefold() for item in active}
     catalog = unique(monitor.read_list(CATALOG_PATH))
-
-    # The two lists must never overlap. The fast list always wins.
     catalog = [item for item in catalog if item.casefold() not in active_keys]
 
     discovery = load_discovery_state()
@@ -171,7 +169,10 @@ def main() -> int:
     promoted: list[str] = []
     notifications = 0
     duplicate_wheels = 0
+    inactive_wheels = 0
+    unconfirmed_wheels = 0
     errors: list[str] = []
+    monitor_state_changed = False
 
     for username in list(catalog):
         checked_at = monitor.now_utc().isoformat()
@@ -205,25 +206,11 @@ def main() -> int:
             if message.date >= cutoff
         ]
         latest = max(wheel_items, key=lambda item: item[0].date, default=None)
-        discovery["sources"][username] = {
-            "checked_at": checked_at,
-            "status": "ok",
-            "messages_checked": len(messages),
-            "wheel_links_found": len(wheel_items),
-            "recent_wheel_links": len(recent_items),
-            "latest_wheel_at": latest[0].date.isoformat() if latest else None,
-        }
 
-        if not recent_items:
-            continue
+        qualified: list[tuple[monitor.Message, str, datetime | None, str]] = []
+        source_inactive = 0
+        source_unconfirmed = 0
 
-        if username.casefold() not in active_keys:
-            active.append(username)
-            active_keys.add(username.casefold())
-            promoted.append(username)
-
-        # Notify immediately during the nightly check. This is also the fallback
-        # if a later git push of the promoted source fails.
         for message, link in sorted(recent_items, key=lambda item: item[0].date):
             key = monitor.wheel_key(link)
             if key in discovery["notified_wheels"] or monitor.is_suppressed(
@@ -232,8 +219,60 @@ def main() -> int:
                 duplicate_wheels += 1
                 continue
 
-            deadline, method = monitor.resolve_deadline(message, link)
-            monitor.notify_new_link(message, link, deadline, method, mappings)
+            should_notify, deadline, method, status = monitor.assess_new_wheel(
+                message, link
+            )
+            if not should_notify:
+                monitor.remember_filtered(
+                    monitor_state,
+                    link,
+                    method,
+                    inactive=status == "inactive",
+                )
+                monitor_state_changed = True
+                if status == "inactive":
+                    inactive_wheels += 1
+                    source_inactive += 1
+                else:
+                    unconfirmed_wheels += 1
+                    source_unconfirmed += 1
+                continue
+
+            qualified.append((message, link, deadline, method))
+
+        discovery["sources"][username] = {
+            "checked_at": checked_at,
+            "status": "ok",
+            "messages_checked": len(messages),
+            "wheel_links_found": len(wheel_items),
+            "recent_wheel_links": len(recent_items),
+            "active_wheel_links": len(qualified),
+            "inactive_wheel_links": source_inactive,
+            "unconfirmed_wheel_links": source_unconfirmed,
+            "latest_wheel_at": latest[0].date.isoformat() if latest else None,
+        }
+
+        if not qualified:
+            continue
+
+        if username.casefold() not in active_keys:
+            active.append(username)
+            active_keys.add(username.casefold())
+            promoted.append(username)
+
+        for message, link, deadline, method in qualified:
+            key = monitor.wheel_key(link)
+            try:
+                monitor.notify_new_link(message, link, deadline, method, mappings)
+            except Exception as exc:
+                errors.append(
+                    f"@{username} message {message.message_id}: "
+                    f"notification failed: {type(exc).__name__}: {exc}"
+                )
+                continue
+
+            monitor.remember_alert(monitor_state, link, deadline)
+            monitor_state_changed = True
             discovery["notified_wheels"][key] = {
                 "identifier": monitor.wheel_identifier(link),
                 "url": monitor.normalize_url(link),
@@ -256,8 +295,11 @@ def main() -> int:
         CATALOG_PATH,
         catalog,
         "# Ночной каталог: только дополнительные Telegram-каналы-кандидаты.\n"
-        "# Он не дублирует быстрый список. При свежем колесе источник переносится автоматически.",
+        "# Канал переносится в быстрый список только после подтверждения активного колеса.",
     )
+
+    if monitor_state_changed:
+        monitor.save_state(monitor_state)
 
     discovery["last_run_at"] = monitor.now_utc().isoformat()
     discovery["catalog_size"] = len(catalog)
@@ -265,12 +307,15 @@ def main() -> int:
     discovery["promoted"] = promoted
     discovery["notifications"] = notifications
     discovery["duplicate_wheels"] = duplicate_wheels
+    discovery["inactive_wheels"] = inactive_wheels
+    discovery["unconfirmed_wheels"] = unconfirmed_wheels
     discovery["error_count"] = len(errors)
     save_discovery_state(discovery)
 
     print(
         f"Catalog: {len(catalog)}; active: {len(active)}; "
         f"promoted: {len(promoted)}; notifications: {notifications}; "
+        f"inactive: {inactive_wheels}; unconfirmed: {unconfirmed_wheels}; "
         f"duplicates: {duplicate_wheels}; errors: {len(errors)}"
     )
     for error in errors[:40]:
@@ -282,7 +327,9 @@ def main() -> int:
             "✅ <b>Ночная проверка завершена</b>\n\n"
             f"Кандидатов осталось: {len(catalog)}\n"
             f"Перенесено в быстрый список: {html.escape(promoted_text)}\n"
-            f"Новых уведомлений: {notifications}\n"
+            f"Новых активных уведомлений: {notifications}\n"
+            f"Неактивных колёс отброшено: {inactive_wheels}\n"
+            f"Неподтверждённых отброшено: {unconfirmed_wheels}\n"
             f"Повторов подавлено: {duplicate_wheels}\n"
             f"Ошибок: {len(errors)}"
         )

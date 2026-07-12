@@ -50,6 +50,36 @@ MANUAL_RUN = os.getenv("MANUAL_RUN", "").strip().lower() in {
     "on",
 }
 
+NOTIFICATION_KEY_VERSION = 5
+MAX_NEW_POST_AGE_MINUTES = max(
+    5, int(os.getenv("MAX_NEW_POST_AGE_MINUTES", "360"))
+)
+FRESH_UNKNOWN_POST_MINUTES = max(
+    0, int(os.getenv("FRESH_UNKNOWN_POST_MINUTES", "20"))
+)
+
+INACTIVE_PAGE_PHRASES = (
+    "пока ждёшь следующий запуск",
+    "пока ждешь следующий запуск",
+    "следующий запуск, заглядывай",
+    "розыгрыш завершен",
+    "розыгрыш завершён",
+    "колесо завершено",
+    "акция завершена",
+    "время участия истекло",
+    "прием участников завершен",
+    "приём участников завершён",
+    "ссылка недействительна",
+)
+
+ACTIVE_PAGE_PHRASES = (
+    "до прокрутки",
+    "до запуска колеса",
+    "до старта колеса",
+    "участвовать в колесе",
+    "крутить колесо",
+)
+
 USER_AGENT = (
     "Mozilla/5.0 (X11; Linux x86_64) "
     "AppleWebKit/537.36 (KHTML, like Gecko) "
@@ -132,6 +162,13 @@ class Message:
     date: datetime
     text: str
     message_url: str
+
+
+@dataclass(frozen=True)
+class WheelInspection:
+    status: str
+    deadline: datetime | None
+    method: str
 
 
 def now_utc() -> datetime:
@@ -547,8 +584,8 @@ def json_deadline_from_soup(soup: BeautifulSoup, reference: datetime) -> datetim
     return None
 
 
-def page_deadline(link: str) -> tuple[datetime | None, str]:
-    """Open only a newly discovered link once; old identifiers are never polled."""
+def inspect_wheel_page(link: str) -> WheelInspection:
+    """Open a newly discovered wheel once and classify its current state."""
     try:
         response = request_with_retries(
             "GET",
@@ -558,50 +595,133 @@ def page_deadline(link: str) -> tuple[datetime | None, str]:
             headers={"User-Agent": USER_AGENT},
             allow_redirects=True,
         )
+    except requests.RequestException as exc:
+        return WheelInspection(
+            "error", None, f"страница колеса недоступна: {type(exc).__name__}"
+        )
+
+    if response.status_code in {404, 410}:
+        return WheelInspection(
+            "inactive", None, f"страница колеса вернула HTTP {response.status_code}"
+        )
+    try:
         response.raise_for_status()
     except requests.RequestException as exc:
-        return None, f"страница колеса недоступна: {type(exc).__name__}"
+        return WheelInspection(
+            "error", None, f"ошибка страницы колеса: {type(exc).__name__}"
+        )
 
     reference = now_utc()
     raw_html = html.unescape(response.text)
     soup = BeautifulSoup(response.text, "html.parser")
     visible = soup.get_text("\n", strip=True)
+    combined_lower = f"{visible}\n{raw_html}".casefold()
+
+    for phrase in INACTIVE_PAGE_PHRASES:
+        if phrase.casefold() in combined_lower:
+            return WheelInspection(
+                "inactive", None, f"страница завершена: найдено «{phrase}»"
+            )
+
     deadline = countdown_deadline(visible, reference) or countdown_deadline(
         raw_html, reference
     )
     if deadline:
-        return deadline, "таймер на странице колеса"
+        if deadline <= reference:
+            return WheelInspection("inactive", deadline, "таймер на странице уже истёк")
+        return WheelInspection("active", deadline, "таймер на странице колеса")
 
     deadline = json_deadline_from_soup(soup, reference)
     if deadline:
-        return deadline, "таймер в JSON-данных страницы"
+        if deadline <= reference:
+            return WheelInspection("inactive", deadline, "таймер в JSON уже истёк")
+        return WheelInspection("active", deadline, "таймер в JSON-данных страницы")
 
     for node in soup.select("[data-end], [data-deadline], [data-expires], [datetime]"):
         for attr in ("data-end", "data-deadline", "data-expires", "datetime"):
             raw_value = str(node.get(attr) or "").strip()
             if raw_value and (deadline := parse_page_timestamp(raw_value)):
-                return deadline, f"атрибут {attr} на странице"
+                if deadline <= reference:
+                    return WheelInspection(
+                        "inactive", deadline, f"атрибут {attr}: время уже истекло"
+                    )
+                return WheelInspection(
+                    "active", deadline, f"атрибут {attr} на странице"
+                )
 
     for match in TIMESTAMP_FIELD_RE.finditer(raw_html):
         deadline = parse_page_timestamp(match.group(1))
         if deadline:
-            return deadline, "время окончания в данных страницы"
+            if deadline <= reference:
+                return WheelInspection(
+                    "inactive", deadline, "время окончания в данных страницы уже истекло"
+                )
+            return WheelInspection(
+                "active", deadline, "время окончания в данных страницы"
+            )
 
-    return None, "страница открылась, но таймер не найден"
+    for phrase in ACTIVE_PAGE_PHRASES:
+        if phrase.casefold() in combined_lower:
+            return WheelInspection(
+                "active", None, f"страница активна: найдено «{phrase}»"
+            )
+
+    return WheelInspection(
+        "unknown", None, "страница открылась, но активность не подтверждена"
+    )
+
+
+def page_deadline(link: str) -> tuple[datetime | None, str]:
+    inspection = inspect_wheel_page(link)
+    return inspection.deadline, inspection.method
 
 
 def resolve_deadline(message: Message, link: str) -> tuple[datetime | None, str]:
     post_value, post_method = infer_deadline(message.text, message.date)
+    inspection = inspect_wheel_page(link)
+    if inspection.deadline:
+        return inspection.deadline, inspection.method
     if post_value:
         return post_value, post_method
+    return None, f"{post_method}; {inspection.method}"
 
-    # The BetBoom page is opened only once, and only for a newly discovered URL.
-    # Historical identifiers such as /freestream/shoke are never polled.
-    page_value, page_method = page_deadline(link)
-    if page_value:
-        return page_value, page_method
-    return None, f"{post_method}; {page_method}"
 
+def message_age(message: Message) -> timedelta:
+    return max(timedelta(0), now_utc() - message.date.astimezone(UTC))
+
+
+def assess_new_wheel(
+    message: Message,
+    link: str,
+) -> tuple[bool, datetime | None, str, str]:
+    post_deadline, post_method = infer_deadline(message.text, message.date)
+    inspection = inspect_wheel_page(link)
+
+    if inspection.status == "inactive":
+        return False, inspection.deadline, inspection.method, "inactive"
+
+    if inspection.status == "active":
+        deadline = inspection.deadline
+        if deadline is None and post_deadline and post_deadline > now_utc():
+            deadline = post_deadline
+        return True, deadline, inspection.method, "active"
+
+    if post_deadline and post_deadline > now_utc():
+        return True, post_deadline, post_method, "telegram_deadline"
+
+    if (
+        FRESH_UNKNOWN_POST_MINUTES > 0
+        and message_age(message)
+        <= timedelta(minutes=FRESH_UNKNOWN_POST_MINUTES)
+    ):
+        return (
+            True,
+            None,
+            f"свежий Telegram-пост; {inspection.method}",
+            "fresh_unconfirmed",
+        )
+
+    return False, None, inspection.method, "unconfirmed"
 
 def human_remaining(deadline: datetime | None) -> str:
     if deadline is None:
@@ -700,6 +820,25 @@ def remember_alert(state: dict, link: str, deadline: datetime | None) -> None:
     state["url_alerts"][wheel_key(link)] = entry
 
 
+def remember_filtered(
+    state: dict,
+    link: str,
+    reason: str,
+    *,
+    inactive: bool,
+) -> None:
+    checked_at = now_utc()
+    suppress_for = timedelta(days=7) if inactive else timedelta(hours=1)
+    state["url_alerts"][wheel_key(link)] = {
+        "identifier": wheel_identifier(link),
+        "url": normalize_url(link),
+        "alerted_at": checked_at.isoformat(),
+        "suppress_until": (checked_at + suppress_for).isoformat(),
+        "status": "inactive" if inactive else "unconfirmed",
+        "reason": reason[:300],
+    }
+
+
 def notify_new_link(
     message: Message,
     link: str,
@@ -795,10 +934,42 @@ def main() -> int:
     seen: dict[str, str] = state["seen"]
 
     messages_by_source, errors = fetch_all_sources(sources)
+
+    if state.get("notification_key_version") != NOTIFICATION_KEY_VERSION:
+        stamp = now_utc().isoformat()
+        baseline_items = 0
+        for source, messages in messages_by_source.items():
+            for message in messages:
+                for link in extract_links(message.text):
+                    key = notification_key(message, link)
+                    if key not in seen:
+                        seen[key] = stamp
+                        baseline_items += 1
+            initialized.add(source)
+        state["initialized_sources"] = sorted(initialized)
+        state["notification_key_version"] = NOTIFICATION_KEY_VERSION
+        state["last_run_kind"] = "baseline"
+        state["last_run_summary"] = {
+            "sources": len(sources),
+            "reachable_sources": len(messages_by_source),
+            "baseline_items": baseline_items,
+            "source_errors": len(errors),
+        }
+        save_state(state)
+        print(
+            f"Baseline initialized: sources={len(sources)}; "
+            f"reachable={len(messages_by_source)}; items={baseline_items}; "
+            f"errors={len(errors)}"
+        )
+        return 0
+
     found = 0
     duplicates = 0
     initialized_now = 0
     send_errors = 0
+    stale_skipped = 0
+    inactive_skipped = 0
+    unconfirmed_skipped = 0
     changed = False
 
     for source in sources:
@@ -827,13 +998,34 @@ def main() -> int:
             if key in seen:
                 continue
 
+            if message_age(message) > timedelta(minutes=MAX_NEW_POST_AGE_MINUTES):
+                seen[key] = now_utc().isoformat()
+                stale_skipped += 1
+                changed = True
+                continue
+
             if is_suppressed(state, link):
                 seen[key] = now_utc().isoformat()
                 duplicates += 1
                 changed = True
                 continue
 
-            deadline, method = resolve_deadline(message, link)
+            should_notify, deadline, method, status = assess_new_wheel(message, link)
+            if not should_notify:
+                seen[key] = now_utc().isoformat()
+                remember_filtered(
+                    state,
+                    link,
+                    method,
+                    inactive=status == "inactive",
+                )
+                if status == "inactive":
+                    inactive_skipped += 1
+                else:
+                    unconfirmed_skipped += 1
+                changed = True
+                continue
+
             try:
                 notify_new_link(message, link, deadline, method, mappings)
             except Exception as exc:
@@ -850,6 +1042,7 @@ def main() -> int:
             changed = True
 
     state["initialized_sources"] = sorted(initialized)
+    state["notification_key_version"] = NOTIFICATION_KEY_VERSION
 
     summary = {
         "sources": len(sources),
@@ -857,6 +1050,9 @@ def main() -> int:
         "initialized_now": initialized_now,
         "new_links": found,
         "duplicates_suppressed": duplicates,
+        "stale_skipped": stale_skipped,
+        "inactive_skipped": inactive_skipped,
+        "unconfirmed_skipped": unconfirmed_skipped,
         "source_errors": len(errors),
         "notification_errors": send_errors,
     }
@@ -886,8 +1082,10 @@ def main() -> int:
                 "🤖 <b>Автоматический монитор работает</b>\n\n"
                 f"Telegram-источников: {len(sources)}\n"
                 f"Доступно сейчас: {len(messages_by_source)}\n"
-                f"Новых колёс в этой проверке: {found}\n"
-                f"Подавлено повторов: {duplicates}\n"
+                f"Новых активных колёс: {found}\n"
+                f"Неактивных отброшено: {inactive_skipped}\n"
+                f"Старых публикаций отброшено: {stale_skipped}\n"
+                f"Повторов подавлено: {duplicates}\n"
                 f"Ошибок источников: {len(errors)}\n\n"
                 "Следующая проверка — примерно через 5 минут."
             )
@@ -901,7 +1099,9 @@ def main() -> int:
 
     print(
         f"Sources: {len(sources)}; reachable: {len(messages_by_source)}; "
-        f"initialized now: {initialized_now}; new links: {found}; "
+        f"initialized now: {initialized_now}; new active links: {found}; "
+        f"inactive skipped: {inactive_skipped}; stale skipped: {stale_skipped}; "
+        f"unconfirmed skipped: {unconfirmed_skipped}; "
         f"duplicates suppressed: {duplicates}; errors: {len(errors)}"
     )
     for error in errors[:30]:
@@ -912,10 +1112,12 @@ def main() -> int:
             "✅ <b>Ручная проверка завершена</b>\n\n"
             f"Telegram-источников: {len(sources)}\n"
             f"Доступно: {len(messages_by_source)}\n"
-            f"Новых ссылок: {found}\n"
-            f"Подавлено повторов: {duplicates}\n"
-            f"Ошибок: {len(errors)}\n\n"
-            "Старые ссылки отдельно не проверяются."
+            f"Новых активных колёс: {found}\n"
+            f"Неактивных отброшено: {inactive_skipped}\n"
+            f"Старых публикаций отброшено: {stale_skipped}\n"
+            f"Неподтверждённых отброшено: {unconfirmed_skipped}\n"
+            f"Повторов подавлено: {duplicates}\n"
+            f"Ошибок: {len(errors)}"
         )
 
     return 0

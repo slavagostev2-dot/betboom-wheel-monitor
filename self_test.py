@@ -34,6 +34,46 @@ def main() -> None:
     )
     assert deadline == published + timedelta(minutes=15)
 
+    class FakeResponse:
+        status_code = 200
+        text = (
+            "<html><body>Пока ждёшь следующий запуск, "
+            "заглядывай в другие акции</body></html>"
+        )
+
+        def raise_for_status(self) -> None:
+            return None
+
+    original_request = monitor.request_with_retries
+    monitor.request_with_retries = lambda *args, **kwargs: FakeResponse()
+    try:
+        inspection = monitor.inspect_wheel_page(
+            "https://betboom.ru/freestream/old-wheel"
+        )
+        assert inspection.status == "inactive"
+    finally:
+        monitor.request_with_retries = original_request
+
+    old_message = monitor.Message(
+        source="test",
+        message_id=1,
+        date=monitor.now_utc() - timedelta(hours=12),
+        text="https://betboom.ru/freestream/old-wheel",
+        message_url="https://t.me/test/1",
+    )
+    original_inspection = monitor.inspect_wheel_page
+    monitor.inspect_wheel_page = lambda link: monitor.WheelInspection(
+        "unknown", None, "activity not confirmed"
+    )
+    try:
+        should_notify, _, _, status = monitor.assess_new_wheel(
+            old_message, "https://betboom.ru/freestream/old-wheel"
+        )
+        assert not should_notify
+        assert status == "unconfirmed"
+    finally:
+        monitor.inspect_wheel_page = original_inspection
+
     quick = {item.casefold() for item in monitor.read_list(ROOT / "public_sources.txt")}
     nightly = {item.casefold() for item in monitor.read_list(ROOT / "source_catalog.txt")}
     assert not quick.intersection(nightly), "Быстрый и ночной списки пересекаются"
