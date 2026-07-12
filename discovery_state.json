@@ -1,10 +1,112 @@
 {
-  "active_size": 41,
-  "catalog_size": 14,
+  "active_size": 47,
+  "catalog_size": 10,
   "duplicate_wheels": 0,
   "error_count": 0,
+  "health_sources": {
+    "YBNFedor": {
+      "checks": 1,
+      "consecutive_empty": 0,
+      "consecutive_errors": 0,
+      "last_checked_at": "2026-07-12T23:34:55.618117+00:00",
+      "last_messages_count": 55,
+      "last_success_at": "2026-07-12T23:34:55.618117+00:00",
+      "status": "ok",
+      "successful_checks": 1
+    },
+    "betboom_esports": {
+      "checks": 1,
+      "consecutive_empty": 0,
+      "consecutive_errors": 0,
+      "last_checked_at": "2026-07-12T23:35:11.009071+00:00",
+      "last_messages_count": 76,
+      "last_success_at": "2026-07-12T23:35:11.009071+00:00",
+      "status": "ok",
+      "successful_checks": 1
+    },
+    "betboom_esports_cs": {
+      "checks": 1,
+      "consecutive_empty": 0,
+      "consecutive_errors": 0,
+      "last_checked_at": "2026-07-12T23:35:13.770659+00:00",
+      "last_messages_count": 80,
+      "last_success_at": "2026-07-12T23:35:13.770659+00:00",
+      "status": "ok",
+      "successful_checks": 1
+    },
+    "betboomru": {
+      "checks": 1,
+      "consecutive_empty": 0,
+      "consecutive_errors": 0,
+      "last_checked_at": "2026-07-12T23:35:03.840001+00:00",
+      "last_messages_count": 80,
+      "last_success_at": "2026-07-12T23:35:03.840001+00:00",
+      "status": "ok",
+      "successful_checks": 1
+    },
+    "betboomstreamersbattle": {
+      "checks": 1,
+      "consecutive_empty": 0,
+      "consecutive_errors": 0,
+      "last_checked_at": "2026-07-12T23:35:07.531356+00:00",
+      "last_messages_count": 61,
+      "last_success_at": "2026-07-12T23:35:07.531356+00:00",
+      "status": "ok",
+      "successful_checks": 1
+    },
+    "betboomteam": {
+      "checks": 1,
+      "consecutive_empty": 0,
+      "consecutive_errors": 0,
+      "last_checked_at": "2026-07-12T23:35:18.988245+00:00",
+      "last_messages_count": 71,
+      "last_success_at": "2026-07-12T23:35:18.988245+00:00",
+      "status": "ok",
+      "successful_checks": 1
+    },
+    "betboomteamcs2": {
+      "checks": 1,
+      "consecutive_empty": 0,
+      "consecutive_errors": 0,
+      "last_checked_at": "2026-07-12T23:35:21.726878+00:00",
+      "last_messages_count": 64,
+      "last_success_at": "2026-07-12T23:35:21.726878+00:00",
+      "status": "ok",
+      "successful_checks": 1
+    },
+    "blast_betboom": {
+      "checks": 1,
+      "consecutive_empty": 0,
+      "consecutive_errors": 0,
+      "last_checked_at": "2026-07-12T23:35:16.332973+00:00",
+      "last_messages_count": 74,
+      "last_success_at": "2026-07-12T23:35:16.332973+00:00",
+      "status": "ok",
+      "successful_checks": 1
+    },
+    "pandafx2": {
+      "checks": 1,
+      "consecutive_empty": 0,
+      "consecutive_errors": 0,
+      "last_checked_at": "2026-07-12T23:34:58.657710+00:00",
+      "last_messages_count": 75,
+      "last_success_at": "2026-07-12T23:34:58.657710+00:00",
+      "status": "ok",
+      "successful_checks": 1
+    },
+    "risenhaha": {
+      "checks": 1,
+      "consecutive_empty": 0,
+      "consecutive_errors": 0,
+      "last_checked_at": "2026-07-12T23:35:00.801245+00:00",
+      "last_messages_count": 77,
+      "last_success_at": "2026-07-12T23:35:00.801245+00:00",
+      "status": "ok",
+      "successful_checks": 1
+    }
+  },
   "inactive_wheels": 0,
-  "last_run_at": "2026-07-12T18:32:41.688345+00:00",
+  "last_run_at": "2026-07-12T23:35:21.728626+00:00",
   "notifications": 0,
   "notified_wheels": {
     "mantis1": {
@@ -58,13 +160,14 @@
     }
   },
   "promoted": [],
+  "quarantined_skipped": 0,
   "sources": {
     "YBNFedor": {
       "active_wheel_links": 0,
-      "checked_at": "2026-07-12T18:32:09.891257+00:00",
+      "checked_at": "2026-07-12T23:34:52.140520+00:00",
       "inactive_wheel_links": 0,
       "latest_wheel_at": "2026-06-29T16:15:16+00:00",
-      "messages_checked": 58,
+      "messages_checked": 55,
       "recent_wheel_links": 0,
       "status": "ok",
       "unconfirmed_wheel_links": 0,
@@ -91,7 +194,7 @@
     },
     "betboom_esports": {
       "active_wheel_links": 0,
-      "checked_at": "2026-07-12T18:32:28.629562+00:00",
+      "checked_at": "2026-07-12T23:35:07.532098+00:00",
       "inactive_wheel_links": 0,
       "latest_wheel_at": null,
       "messages_checked": 76,
@@ -102,7 +205,7 @@
     },
     "betboom_esports_cs": {
       "active_wheel_links": 0,
-      "checked_at": "2026-07-12T18:32:32.144750+00:00",
+      "checked_at": "2026-07-12T23:35:11.010041+00:00",
       "inactive_wheel_links": 0,
       "latest_wheel_at": null,
       "messages_checked": 80,
@@ -113,7 +216,7 @@
     },
     "betboomru": {
       "active_wheel_links": 0,
-      "checked_at": "2026-07-12T18:32:21.412472+00:00",
+      "checked_at": "2026-07-12T23:35:00.802317+00:00",
       "inactive_wheel_links": 0,
       "latest_wheel_at": null,
       "messages_checked": 80,
@@ -124,10 +227,10 @@
     },
     "betboomstreamersbattle": {
       "active_wheel_links": 0,
-      "checked_at": "2026-07-12T18:32:25.062725+00:00",
+      "checked_at": "2026-07-12T23:35:03.841290+00:00",
       "inactive_wheel_links": 0,
       "latest_wheel_at": null,
-      "messages_checked": 60,
+      "messages_checked": 61,
       "recent_wheel_links": 0,
       "status": "ok",
       "unconfirmed_wheel_links": 0,
@@ -135,7 +238,7 @@
     },
     "betboomteam": {
       "active_wheel_links": 0,
-      "checked_at": "2026-07-12T18:32:38.806996+00:00",
+      "checked_at": "2026-07-12T23:35:16.333751+00:00",
       "inactive_wheel_links": 0,
       "latest_wheel_at": null,
       "messages_checked": 71,
@@ -144,9 +247,20 @@
       "unconfirmed_wheel_links": 0,
       "wheel_links_found": 0
     },
+    "betboomteamcs2": {
+      "active_wheel_links": 0,
+      "checked_at": "2026-07-12T23:35:18.988911+00:00",
+      "inactive_wheel_links": 0,
+      "latest_wheel_at": null,
+      "messages_checked": 64,
+      "recent_wheel_links": 0,
+      "status": "ok",
+      "unconfirmed_wheel_links": 0,
+      "wheel_links_found": 0
+    },
     "blast_betboom": {
       "active_wheel_links": 0,
-      "checked_at": "2026-07-12T18:32:35.629314+00:00",
+      "checked_at": "2026-07-12T23:35:13.771659+00:00",
       "inactive_wheel_links": 0,
       "latest_wheel_at": null,
       "messages_checked": 74,
@@ -225,7 +339,7 @@
     },
     "pandafx2": {
       "active_wheel_links": 0,
-      "checked_at": "2026-07-12T18:32:12.947946+00:00",
+      "checked_at": "2026-07-12T23:34:55.619005+00:00",
       "inactive_wheel_links": 0,
       "latest_wheel_at": null,
       "messages_checked": 75,
@@ -236,10 +350,10 @@
     },
     "risenhaha": {
       "active_wheel_links": 0,
-      "checked_at": "2026-07-12T18:32:16.009365+00:00",
+      "checked_at": "2026-07-12T23:34:58.658133+00:00",
       "inactive_wheel_links": 0,
       "latest_wheel_at": "2026-07-09T15:54:40+00:00",
-      "messages_checked": 78,
+      "messages_checked": 77,
       "recent_wheel_links": 0,
       "status": "ok",
       "unconfirmed_wheel_links": 0,
@@ -254,6 +368,131 @@
       "wheel_links_found": 5
     }
   },
+  "stats_daily": {
+    "2026-07-13": {
+      "sources": {
+        "YBNFedor": {
+          "checks": 1,
+          "messages_scanned": 55,
+          "successful_checks": 1
+        },
+        "betboom_esports": {
+          "checks": 1,
+          "messages_scanned": 76,
+          "successful_checks": 1
+        },
+        "betboom_esports_cs": {
+          "checks": 1,
+          "messages_scanned": 80,
+          "successful_checks": 1
+        },
+        "betboomru": {
+          "checks": 1,
+          "messages_scanned": 80,
+          "successful_checks": 1
+        },
+        "betboomstreamersbattle": {
+          "checks": 1,
+          "messages_scanned": 61,
+          "successful_checks": 1
+        },
+        "betboomteam": {
+          "checks": 1,
+          "messages_scanned": 71,
+          "successful_checks": 1
+        },
+        "betboomteamcs2": {
+          "checks": 1,
+          "messages_scanned": 64,
+          "successful_checks": 1
+        },
+        "blast_betboom": {
+          "checks": 1,
+          "messages_scanned": 74,
+          "successful_checks": 1
+        },
+        "pandafx2": {
+          "checks": 1,
+          "messages_scanned": 75,
+          "successful_checks": 1
+        },
+        "risenhaha": {
+          "checks": 1,
+          "messages_scanned": 77,
+          "successful_checks": 1
+        }
+      },
+      "totals": {
+        "checks": 10,
+        "messages_scanned": 713,
+        "successful_checks": 10
+      }
+    }
+  },
+  "stats_sources": {
+    "YBNFedor": {
+      "checks": 1,
+      "last_updated_at": "2026-07-12T23:34:55.618200+00:00",
+      "messages_scanned": 55,
+      "successful_checks": 1
+    },
+    "betboom_esports": {
+      "checks": 1,
+      "last_updated_at": "2026-07-12T23:35:11.009109+00:00",
+      "messages_scanned": 76,
+      "successful_checks": 1
+    },
+    "betboom_esports_cs": {
+      "checks": 1,
+      "last_updated_at": "2026-07-12T23:35:13.770697+00:00",
+      "messages_scanned": 80,
+      "successful_checks": 1
+    },
+    "betboomru": {
+      "checks": 1,
+      "last_updated_at": "2026-07-12T23:35:03.840037+00:00",
+      "messages_scanned": 80,
+      "successful_checks": 1
+    },
+    "betboomstreamersbattle": {
+      "checks": 1,
+      "last_updated_at": "2026-07-12T23:35:07.531395+00:00",
+      "messages_scanned": 61,
+      "successful_checks": 1
+    },
+    "betboomteam": {
+      "checks": 1,
+      "last_updated_at": "2026-07-12T23:35:18.988282+00:00",
+      "messages_scanned": 71,
+      "successful_checks": 1
+    },
+    "betboomteamcs2": {
+      "checks": 1,
+      "last_updated_at": "2026-07-12T23:35:21.726915+00:00",
+      "messages_scanned": 64,
+      "successful_checks": 1
+    },
+    "blast_betboom": {
+      "checks": 1,
+      "last_updated_at": "2026-07-12T23:35:16.333009+00:00",
+      "messages_scanned": 74,
+      "successful_checks": 1
+    },
+    "pandafx2": {
+      "checks": 1,
+      "last_updated_at": "2026-07-12T23:34:58.657748+00:00",
+      "messages_scanned": 75,
+      "successful_checks": 1
+    },
+    "risenhaha": {
+      "checks": 1,
+      "last_updated_at": "2026-07-12T23:35:00.801292+00:00",
+      "messages_scanned": 77,
+      "successful_checks": 1
+    }
+  },
   "unconfirmed_wheels": 0,
+  "unknown_timer_samples": [],
+  "unknown_timer_samples_added": 0,
   "version": 1
 }
