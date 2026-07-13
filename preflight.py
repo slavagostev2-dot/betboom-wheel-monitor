@@ -40,10 +40,19 @@ def main() -> None:
             "process_bot_feedback",
             "def process_active_wheels",
             "def active_wheels_text",
+            "def maybe_send_source_inactivity_report",
             "✅ Участвую",
         ),
     )
-    require_text("monitor_data.py", ("def load_health", "def load_stats", "def operational_sources"))
+    require_text(
+        "monitor_data.py",
+        (
+            "def load_health",
+            "def load_stats",
+            "def operational_sources",
+            "def sources_without_recent_wheels",
+        ),
+    )
     require_text("nightly_discovery.py", ("import monitor", "def main()"))
     require_text("daily_report.py", ("Ежедневный отчёт", "def main()"))
     require_text("telegram_monitor.py", ("from monitor import main", "raise SystemExit(main())"))

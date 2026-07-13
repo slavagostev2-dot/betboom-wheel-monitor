@@ -123,10 +123,9 @@ def main() -> None:
     assert "🎡 Открыть колесо" in labels
     assert "✅ Участвую" in labels
     assert "📋 Активные колёса" in labels
-    assert "🔄 Проверить" in labels
-    assert "✅ Активно" in labels
-    assert "🚫 Неактивно" in labels
-    assert "🕒 Нет времени" in labels
+    assert "📨 Пост" in labels
+    for removed_label in ("🔄 Проверить", "✅ Активно", "🚫 Неактивно", "🕒 Нет времени"):
+        assert removed_label not in labels
     assert markup_state["button_contexts"]
 
     context = next(iter(markup_state["button_contexts"].values()))
@@ -240,6 +239,31 @@ def main() -> None:
     assert data_store.mark_unique_wheel_post(stats, "test", key, "pending-wheel")
     assert not data_store.mark_unique_wheel_post(stats, "test", key, "pending-wheel")
 
+    inactivity_now = datetime(2026, 7, 20, 12, 0, tzinfo=monitor.UTC)
+    inactivity_stats = {"version": 1, "sources": {}, "daily": {}}
+    data_store.record_source_check_stats(
+        inactivity_stats,
+        "quiet_channel",
+        "ok",
+        at=inactivity_now - timedelta(days=8),
+    )
+    rows = data_store.sources_without_recent_wheels(
+        inactivity_stats, ["quiet_channel"], minimum_days=7, at=inactivity_now
+    )
+    assert rows and rows[0][0] == "quiet_channel"
+    data_store.set_stat_timestamp(
+        inactivity_stats,
+        "quiet_channel",
+        "last_wheel_post_at",
+        inactivity_now - timedelta(days=2),
+    )
+    assert not data_store.sources_without_recent_wheels(
+        inactivity_stats, ["quiet_channel"], minimum_days=7, at=inactivity_now
+    )
+
+    report_text = monitor.source_inactivity_report_text(rows)
+    assert "quiet_channel" in report_text
+    assert "Ничего не перенесено автоматически" in report_text
 
     timezone_stats = {"version": 1, "sources": {}, "daily": {}}
     data_store.increment_stat(

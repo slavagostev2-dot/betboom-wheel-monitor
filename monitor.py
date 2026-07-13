@@ -56,6 +56,10 @@ UNKNOWN_REMINDER_INTERVAL_MINUTES = max(
 ACTIVE_WHEEL_UNKNOWN_HOURS = max(
     6, int(os.getenv("ACTIVE_WHEEL_UNKNOWN_HOURS", "48"))
 )
+SOURCE_INACTIVITY_DAYS = max(1, int(os.getenv("SOURCE_INACTIVITY_DAYS", "7")))
+SOURCE_INACTIVITY_REPORT_DAYS = max(
+    1, int(os.getenv("SOURCE_INACTIVITY_REPORT_DAYS", "7"))
+)
 BOT_COMMANDS_VERSION = 1
 AUTO_RUN = os.getenv("AUTO_RUN", "").strip().lower() in {
     "1",
@@ -265,6 +269,7 @@ def load_state() -> dict:
     state.setdefault("active_wheels", {})
     state.setdefault("participating_wheels", {})
     state.setdefault("bot_commands_version", 0)
+    state.setdefault("last_source_inactivity_report_at", None)
 
     # Migrate old link-keyed formats to one global key per wheel identifier.
     migrated_alerts: dict[str, dict] = {}
@@ -1299,15 +1304,7 @@ def wheel_reply_markup(
                 {"text": participation_text, "callback_data": f"bb:{participation_action}:{token}"},
                 {"text": "📋 Активные колёса", "callback_data": "bb:l:active"},
             ],
-            [
-                {"text": "📨 Пост", "url": message.message_url},
-                {"text": "🔄 Проверить", "callback_data": f"bb:c:{token}"},
-            ],
-            [
-                {"text": "✅ Активно", "callback_data": f"bb:a:{token}"},
-                {"text": "🚫 Неактивно", "callback_data": f"bb:i:{token}"},
-                {"text": "🕒 Нет времени", "callback_data": f"bb:t:{token}"},
-            ],
+            [{"text": "📨 Пост", "url": message.message_url}],
         ]
     }
 
@@ -1328,10 +1325,6 @@ def process_bot_feedback(
         "callbacks": 0,
         "participating": 0,
         "lists": 0,
-        "active": 0,
-        "inactive": 0,
-        "timer": 0,
-        "recheck": 0,
     }
     if not BOT_FEEDBACK_ENABLED:
         return result
@@ -1416,57 +1409,8 @@ def process_bot_feedback(
                     answer = "Участие уже было отмечено." if already else "Участие отмечено. Напоминаний по этому колесу больше не будет."
                 elif action == "n":
                     answer = "Участие уже отмечено."
-                elif action == "c":
-                    if isinstance(pending_entry, dict):
-                        pending_entry["last_checked_at"] = (now_utc() - timedelta(hours=1)).isoformat()
-                    result["recheck"] += 1
-                    data_store.increment_stat(stats, source, "manual_rechecks")
-                    answer = "Повторная проверка поставлена в очередь."
-                elif action == "a":
-                    state.setdefault("manual_overrides", {})[wheel] = {
-                        "status": "active",
-                        "set_at": now_utc().isoformat(),
-                        "expires_at": (now_utc() + timedelta(hours=6)).isoformat(),
-                    }
-                    if isinstance(pending_entry, dict):
-                        pending_entry["last_checked_at"] = (now_utc() - timedelta(hours=1)).isoformat()
-                    result["active"] += 1
-                    data_store.increment_stat(stats, source, "manual_active_marks")
-                    answer = "Отмечено активным; уведомление будет обработано."
-                elif action == "i":
-                    state.setdefault("manual_overrides", {})[wheel] = {
-                        "status": "inactive",
-                        "set_at": now_utc().isoformat(),
-                        "expires_at": (now_utc() + timedelta(hours=24)).isoformat(),
-                    }
-                    if post_key:
-                        state.get("pending_posts", {}).pop(post_key, None)
-                        state.setdefault("seen", {})[post_key] = now_utc().isoformat()
-                    state.get("active_wheels", {}).pop(wheel, None)
-                    url = str(context.get("url") or "")
-                    if url:
-                        remember_filtered(state, url, "отмечено кнопкой бота", inactive=True)
-                    result["inactive"] += 1
-                    data_store.increment_stat(stats, source, "manual_inactive_marks")
-                    answer = "Отмечено неактивным; повторные уведомления подавлены."
-                elif action == "t":
-                    added = data_store.record_unknown_timer_sample(
-                        unknown_samples,
-                        source=source,
-                        message_id=int(context.get("message_id", 0)),
-                        message_url=str(context.get("message_url") or ""),
-                        wheel_url=str(context.get("url") or ""),
-                        wheel_identifier=str(context.get("identifier") or ""),
-                        status=str(context.get("status") or "unknown"),
-                        method=str(context.get("method") or "manual feedback"),
-                        telegram_text=str(context.get("message_text") or ""),
-                        page_excerpt=str(context.get("page_excerpt") or ""),
-                        reason="manual_timer_feedback",
-                    )
-                    if added:
-                        data_store.increment_stat(stats, source, "unknown_timer_samples")
-                    result["timer"] += 1
-                    answer = "Пример сохранён для доработки парсера."
+                elif action in {"c", "a", "i", "t"}:
+                    answer = "Эта кнопка больше не используется."
                 else:
                     answer = "Неизвестная команда."
         if query_id:
@@ -1704,19 +1648,12 @@ def notify_new_link(
     identifier_raw = wheel_identifier(link)
     identifier = html.escape(identifier_raw)
     published = message.date.astimezone(DISPLAY_TZ)
-    related = related_sources(identifier_raw, mappings)
-    related_line = ""
-    if related:
-        related_line = "Связанные каналы: " + ", ".join(
-            f"@{html.escape(source)}" for source in related
-        ) + "\n"
 
     send_message(
         "🎡 <b>Новое колесо BetBoom</b>\n\n"
         f"Источник: <a href=\"{html.escape(message.message_url, quote=True)}\">"
         f"@{html.escape(message.source)}</a>\n"
         f"Идентификатор: <code>{identifier}</code>\n"
-        f"{related_line}"
         f"Пост: {published:%d.%m.%Y %H:%M}\n"
         f"⏳ До прокрутки: <b>{html.escape(human_remaining(deadline))}</b>\n"
         f"Определение времени: {html.escape(method)}",
@@ -1746,18 +1683,11 @@ def notify_activation(
     identifier_raw = wheel_identifier(link)
     identifier = html.escape(identifier_raw)
     published = message.date.astimezone(DISPLAY_TZ)
-    related = related_sources(identifier_raw, mappings)
-    related_line = ""
-    if related:
-        related_line = "Связанные каналы: " + ", ".join(
-            f"@{html.escape(source)}" for source in related
-        ) + "\n"
     send_message(
         "✅ <b>Колесо BetBoom стало активно</b>\n\n"
         f"Источник: <a href=\"{html.escape(message.message_url, quote=True)}\">"
         f"@{html.escape(message.source)}</a>\n"
         f"Идентификатор: <code>{identifier}</code>\n"
-        f"{related_line}"
         f"Пост: {published:%d.%m.%Y %H:%M}\n"
         f"⏳ До прокрутки: <b>{html.escape(human_remaining(deadline))}</b>\n"
         f"Подтверждение: {html.escape(method)}",
@@ -1858,6 +1788,64 @@ def automatic_status_due(state: dict) -> bool:
         return False
     previous = parse_datetime(state.get("last_automatic_status_at"))
     return not previous or now_utc() - previous >= timedelta(hours=STATUS_REPORT_HOURS)
+
+
+def source_inactivity_report_due(
+    state: dict, current: datetime | None = None
+) -> bool:
+    if not AUTO_RUN:
+        return False
+    current = current or now_utc()
+    previous = parse_datetime(state.get("last_source_inactivity_report_at"))
+    return not previous or current - previous >= timedelta(
+        days=SOURCE_INACTIVITY_REPORT_DAYS
+    )
+
+
+def source_inactivity_report_text(
+    rows: list[tuple[str, dict, int]],
+) -> str:
+    lines = [
+        f"📭 <b>За {SOURCE_INACTIVITY_DAYS} дней колёса не обнаружены</b>",
+        "",
+        "Каналы из быстрой проверки:",
+    ]
+    for index, (source, entry, days) in enumerate(rows, 1):
+        last_wheel = parse_datetime(entry.get("last_wheel_post_at"))
+        if last_wheel:
+            detail = f"последнее колесо: {last_wheel.astimezone(DISPLAY_TZ):%d.%m.%Y}"
+        else:
+            detail = "колёс не было с начала наблюдения"
+        lines.append(
+            f"{index}. <code>@{html.escape(source)}</code> — {days} дн.; {detail}"
+        )
+    lines.extend(
+        [
+            "",
+            "Ничего не перенесено автоматически. Каналы остаются в быстрой проверке.",
+        ]
+    )
+    return "\n".join(lines)[:4000]
+
+
+def maybe_send_source_inactivity_report(
+    state: dict, stats: dict, sources: list[str]
+) -> dict[str, int | bool]:
+    result: dict[str, int | bool] = {"sent": False, "count": 0, "changed": False}
+    current = now_utc()
+    if not source_inactivity_report_due(state, current):
+        return result
+    rows = data_store.sources_without_recent_wheels(
+        stats, sources, minimum_days=SOURCE_INACTIVITY_DAYS, at=current
+    )
+    result["count"] = len(rows)
+    if not rows:
+        return result
+    send_message(source_inactivity_report_text(rows))
+    state["last_source_inactivity_report_at"] = current.isoformat()
+    result["sent"] = True
+    result["changed"] = True
+    return result
 
 
 def main() -> int:
@@ -2258,6 +2246,14 @@ def main() -> int:
     state["initialized_sources"] = sorted(initialized)
     state["notification_key_version"] = NOTIFICATION_KEY_VERSION
 
+    try:
+        inactivity_summary = maybe_send_source_inactivity_report(state, stats, sources)
+    except Exception as exc:
+        inactivity_summary = {"sent": False, "count": 0, "changed": False}
+        errors.append(f"source inactivity report failed: {type(exc).__name__}: {exc}")
+    if inactivity_summary.get("changed"):
+        changed = True
+
     summary = {
         "sources": len(sources),
         "checked_sources": len(checked_sources),
@@ -2277,6 +2273,7 @@ def main() -> int:
         "notification_errors": send_errors,
         "callbacks": callback_summary,
         "reminders": reminder_summary,
+        "source_inactivity": inactivity_summary,
         "active_wheels": len(state.get("active_wheels", {})),
     }
 

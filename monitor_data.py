@@ -410,18 +410,55 @@ def set_stat_timestamp(
 
 
 def record_source_check_stats(
-    data: dict[str, Any], source: str, status: str, messages_count: int = 0
+    data: dict[str, Any],
+    source: str,
+    status: str,
+    messages_count: int = 0,
+    at: datetime | None = None,
 ) -> None:
-    increment_stat(data, source, "checks")
+    at = at or now_utc()
+    source_entry = data.setdefault("sources", {}).setdefault(source, {})
+    source_entry.setdefault("first_checked_at", at.isoformat())
+    source_entry["last_checked_at"] = at.isoformat()
+    increment_stat(data, source, "checks", at=at)
     if status == "ok":
-        increment_stat(data, source, "successful_checks")
-        increment_stat(data, source, "messages_scanned", max(0, messages_count))
+        increment_stat(data, source, "successful_checks", at=at)
+        increment_stat(
+            data, source, "messages_scanned", max(0, messages_count), at=at
+        )
     elif status == "empty":
-        increment_stat(data, source, "empty_checks")
+        increment_stat(data, source, "empty_checks", at=at)
     elif status == "quarantined_skip":
-        increment_stat(data, source, "quarantine_skips")
+        increment_stat(data, source, "quarantine_skips", at=at)
     else:
-        increment_stat(data, source, "errors")
+        increment_stat(data, source, "errors", at=at)
+
+
+def sources_without_recent_wheels(
+    data: dict[str, Any],
+    sources: list[str],
+    minimum_days: int = 7,
+    at: datetime | None = None,
+) -> list[tuple[str, dict[str, Any], int]]:
+    at = at or now_utc()
+    threshold = timedelta(days=max(1, minimum_days))
+    result: list[tuple[str, dict[str, Any], int]] = []
+    source_rows = data.get("sources", {})
+    for source in sources:
+        entry = source_rows.get(source, {}) if isinstance(source_rows, dict) else {}
+        if not isinstance(entry, dict):
+            continue
+        first_checked = parse_datetime(entry.get("first_checked_at"))
+        if first_checked is None:
+            continue
+        last_wheel = parse_datetime(entry.get("last_wheel_post_at"))
+        reference = last_wheel or first_checked
+        elapsed = at - reference
+        if elapsed < threshold:
+            continue
+        days = max(minimum_days, int(elapsed.total_seconds() // 86400))
+        result.append((source, entry, days))
+    return sorted(result, key=lambda item: (-item[2], item[0].casefold()))
 
 
 def mark_unique_wheel_post(
