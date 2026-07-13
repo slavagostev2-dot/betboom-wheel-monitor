@@ -121,7 +121,14 @@
   "last_source_inactivity_report_at": null,
   "manual_overrides": {},
   "notification_key_version": 8,
-  "participating_wheels": {},
+  "participating_wheels": {
+    "zonertg4": {
+      "expires_at": "2026-07-15T14:33:46.518306+00:00",
+      "identifier": "zonertg4",
+      "marked_at": "2026-07-13T14:33:46.518294+00:00",
+      "url": "https://betboom.ru/freestream/zonertg4"
+    }
+  },
   "pending_posts": {
     "4d57bd418e1db4697d60f3d61409d4dfd579a396b08dcbd543315d3c4ada8e06": {
       "expires_at": "2026-07-14T08:18:32.202642+00:00",
