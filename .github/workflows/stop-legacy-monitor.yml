@@ -20,5 +20,5 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 2
     steps:
-      - name: Confirm replacement
-        run: echo "Legacy monitor concurrency group replaced by BB V.G."
+      - name: Confirm BB V.G. replacement
+        run: echo "Legacy monitor stopped; BB V.G. runtime is active."
