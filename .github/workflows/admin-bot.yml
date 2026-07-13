@@ -76,7 +76,19 @@ jobs:
           python admin_panel_runtime_v11.py --self-test
           python admin_panel_runtime_v12.py --self-test
           python admin_panel_runtime_v13.py --self-test
-          python admin_panel_runtime_v14.py --self-test
+          python - <<'PY'
+          from admin_panel_runtime_v14 import TelegramPanelRuntimeV14
+
+          rows = TelegramPanelRuntimeV14.compact_menu_rows(True)
+          callbacks = [button.get("callback_data") for row in rows for button in row]
+          assert "page:active" in callbacks
+          assert "page:more" in callbacks
+          assert TelegramPanelRuntimeV14.source_mode_name("nightly") == "Ночное наблюдение"
+          constants = TelegramPanelRuntimeV14.show_active.__code__.co_consts
+          assert "🟡 прокрутка впереди" not in constants
+          assert "✅ Участие отмечено" in constants
+          print("admin_panel_runtime_v14 compact panel validation passed")
+          PY
           python -m json.tool bot_access.json >/dev/null
           python -m json.tool candidate_moderation.json >/dev/null
           python -m json.tool miniapp_deployment.json >/dev/null
