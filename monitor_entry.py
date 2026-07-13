@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import html
+import json
 from datetime import timedelta
 
 import monitor
@@ -11,6 +12,44 @@ notification_router.install(monitor)
 _original_assess_new = monitor.assess_new_wheel
 _original_assess_pending = monitor.assess_pending_wheel
 _original_process_active_wheels = monitor.process_active_wheels
+
+
+def sync_demoted_sources_to_nightly() -> list[str]:
+    """Retain every historical source outside the current primary list at night."""
+    active = monitor.read_list(monitor.SOURCES_PATH)
+    active_keys = {value.casefold() for value in active}
+    catalog = monitor.read_list(monitor.CATALOG_PATH)
+    catalog_keys = {value.casefold() for value in catalog}
+
+    stats_path = monitor.ROOT / "source_stats.json"
+    try:
+        payload = json.loads(stats_path.read_text(encoding="utf-8"))
+    except (FileNotFoundError, json.JSONDecodeError):
+        return []
+    sources = payload.get("sources", {}) if isinstance(payload, dict) else {}
+    if not isinstance(sources, dict):
+        return []
+
+    added: list[str] = []
+    for source in sources:
+        clean = str(source).strip().lstrip("@")
+        key = clean.casefold()
+        if not clean or key in active_keys or key in catalog_keys:
+            continue
+        catalog.append(clean)
+        catalog_keys.add(key)
+        added.append(clean)
+
+    if added:
+        monitor.CATALOG_PATH.write_text(
+            "# Ночная проверка: резервные источники и каналы без найденных колёс.\n"
+            "# Возврат в основную проверку выполняется только администратором.\n\n"
+            + "\n".join(catalog)
+            + "\n",
+            encoding="utf-8",
+        )
+        print(f"Moved {len(added)} historical sources into nightly monitoring.")
+    return added
 
 
 def _notification_first(message, result):
@@ -89,4 +128,5 @@ monitor.assess_pending_wheel = assess_pending_notification_first
 monitor.process_active_wheels = process_active_wheels_with_draw_alert
 
 if __name__ == "__main__":
+    sync_demoted_sources_to_nightly()
     raise SystemExit(monitor.main())
