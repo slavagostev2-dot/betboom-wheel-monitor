@@ -111,6 +111,7 @@ jobs:
           runtime_files=(
             state.json discovery_state.json source_health.json source_stats.json
             unknown_timer_samples.json public_sources.txt source_catalog.txt
+            monitor_status.json
           )
 
           shift_end=$(( $(date +%s) + 19800 ))
@@ -122,10 +123,57 @@ jobs:
             started_at=$(date +%s)
             echo "=== Check $iteration at $(date -u +%FT%TZ) ==="
 
-            python monitor_entry.py 2>&1 | tee monitor-run.log || echo "Monitor iteration failed; the loop will retry."
+            iteration_ok=true
+            python monitor_entry.py 2>&1 | tee monitor-run.log || iteration_ok=false
+            if [[ "$iteration_ok" != "true" ]]; then
+              echo "Monitor iteration failed; the loop will retry."
+            fi
+
+            ITERATION="$iteration" ITERATION_OK="$iteration_ok" GITHUB_RUN_ID_VALUE="${GITHUB_RUN_ID:-}" python - <<'PY'
+          import json
+          import os
+          from datetime import datetime, timezone
+          from pathlib import Path
+
+          now = datetime.now(timezone.utc)
+          try:
+              state = json.loads(Path("state.json").read_text(encoding="utf-8"))
+          except Exception:
+              state = {}
+          try:
+              stats = json.loads(Path("source_stats.json").read_text(encoding="utf-8"))
+          except Exception:
+              stats = {}
+
+          summary = state.get("last_run_summary", {}) if isinstance(state, dict) else {}
+          source_rows = stats.get("sources", {}) if isinstance(stats, dict) else {}
+          checks_total = sum(
+              int(entry.get("checks", 0) or 0)
+              for entry in source_rows.values()
+              if isinstance(entry, dict)
+          ) if isinstance(source_rows, dict) else 0
+
+          payload = {
+              "version": 1,
+              "status": "running" if os.environ.get("ITERATION_OK") == "true" else "iteration_error",
+              "run_id": os.environ.get("GITHUB_RUN_ID_VALUE", ""),
+              "iteration": int(os.environ.get("ITERATION", "0") or 0),
+              "last_iteration_at": now.isoformat(),
+              "checked_sources": int(summary.get("checked_sources", 0) or 0) if isinstance(summary, dict) else 0,
+              "reachable_sources": int(summary.get("reachable_sources", 0) or 0) if isinstance(summary, dict) else 0,
+              "source_errors": int(summary.get("source_errors", 0) or 0) if isinstance(summary, dict) else 0,
+              "checks_total": checks_total,
+          }
+          Path("monitor_status.json").write_text(
+              json.dumps(payload, ensure_ascii=False, indent=2, sort_keys=True) + "\n",
+              encoding="utf-8",
+          )
+          PY
 
             now_ts=$(date +%s)
-            if [[ "$CONTINUOUS" != "true" ]] || (( last_commit_at == 0 || now_ts - last_commit_at >= 3600 || now_ts >= shift_end )); then
+            # Persist immediately after startup, then every 15 minutes. This keeps
+            # Telegram statistics fresh without creating a commit after every check.
+            if [[ "$CONTINUOUS" != "true" ]] || (( last_commit_at == 0 || now_ts - last_commit_at >= 900 || now_ts >= shift_end )); then
               if ! git diff --quiet -- "${runtime_files[@]}"; then
                 git add "${runtime_files[@]}"
                 git commit -m "Update monitor runtime data [skip ci]" || true
