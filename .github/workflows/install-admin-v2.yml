@@ -1,0 +1,43 @@
+name: Install Telegram Panel v2
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "install_admin_v2.py"
+      - ".admin_v2_payload/**"
+      - ".github/workflows/install-admin-v2.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: install-telegram-panel-v2
+  cancel-in-progress: true
+
+jobs:
+  install:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Install source
+        run: |
+          python install_admin_v2.py
+          python -m py_compile admin_panel_v2.py
+          python admin_panel_v2.py --self-test
+
+      - name: Save installed panel
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add admin_panel_v2.py
+          git commit -m "Install Telegram panel v2 [skip ci]" || true
+          git pull --rebase origin main
+          git push origin HEAD:main
