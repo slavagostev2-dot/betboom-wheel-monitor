@@ -1,45 +1,8 @@
 {
   "activation_alerts": {},
-  "active_wheels": {
-    "vovapainufc": {
-      "expires_at": "2026-07-20T19:19:18.362487+00:00",
-      "first_notified_at": "2026-07-13T08:18:32.202642+00:00",
-      "identifier": "vovapainufc",
-      "last_checked_at": "2026-07-13T19:19:18.364413+00:00",
-      "last_notification_at": "2026-07-13T19:16:55.408993+00:00",
-      "last_unknown_reminder_at": "2026-07-20T19:19:18.362456+00:00",
-      "manual_time_waiting_since": "2026-07-13T19:19:18.362456+00:00",
-      "message_date": "2026-07-13T08:14:39+00:00",
-      "message_id": 71729,
-      "message_text": "КОЛЕСО ФРИБЕТОВ\n❤️\nhttps://betboom.ru/freestream/vovapainufc\nhttps://t.me/amam0610\nhttps://t.me/amam0610/71729\nhttps://betboom.ru/freestream/vovapainufc",
-      "message_url": "https://t.me/amam0610/71729",
-      "method": "состояние определяется пользователями BB V.G.",
-      "needs_manual_time": true,
-      "page_excerpt": "",
-      "page_status": "unknown",
-      "participating": false,
-      "source": "amam0610",
-      "status": "unknown",
-      "url": "https://betboom.ru/freestream/vovapainufc"
-    }
-  },
+  "active_wheels": {},
   "bot_commands_version": 1,
   "button_contexts": {
-    "4d57bd418e1db4": {
-      "created_at": "2026-07-13T19:16:55.409067+00:00",
-      "identifier": "vovapainufc",
-      "message_date": "2026-07-13T08:14:39+00:00",
-      "message_id": 71729,
-      "message_text": "КОЛЕСО ФРИБЕТОВ\n❤️\nhttps://betboom.ru/freestream/vovapainufc\nhttps://t.me/amam0610\nhttps://t.me/amam0610/71729\nhttps://betboom.ru/freestream/vovapainufc",
-      "message_url": "https://t.me/amam0610/71729",
-      "method": "состояние определяется пользователями BB V.G.",
-      "page_excerpt": "",
-      "post_key": "4d57bd418e1db4697d60f3d61409d4dfd579a396b08dcbd543315d3c4ada8e06",
-      "source": "amam0610",
-      "status": "reminder_unknown",
-      "url": "https://betboom.ru/freestream/vovapainufc",
-      "wheel_key": "vovapainufc"
-    },
     "f7f544ff714d91": {
       "created_at": "2026-07-13T08:03:34.248298+00:00",
       "identifier": "zonertg4",
@@ -66,7 +29,14 @@
     }
   },
   "health": {},
-  "inactive_wheels": {},
+  "inactive_wheels": {
+    "vovapainufc": {
+      "expires_at": "2026-08-12T19:21:10.359474+00:00",
+      "identifier": "vovapainufc",
+      "marked_at": "2026-07-13T19:21:10.359474+00:00",
+      "marked_by": "7178093128"
+    }
+  },
   "initialized_sources": [
     "AdamStaya",
     "Blindzonexbet",
@@ -178,6 +148,7 @@
     "unknown_timer_samples_added": 0
   },
   "last_source_inactivity_report_at": null,
+  "manual_deadlines": {},
   "manual_overrides": {},
   "notification_key_version": 8,
   "participating_wheels": {
@@ -425,12 +396,6 @@
       "identifier": "staya",
       "suppress_until": "2026-07-13T18:21:23.777412+00:00",
       "url": "https://betboom.ru/freestream/staya"
-    },
-    "vovapainufc": {
-      "alerted_at": "2026-07-12T18:21:26.735733+00:00",
-      "identifier": "vovapainufc",
-      "suppress_until": "2026-07-13T18:21:26.735733+00:00",
-      "url": "https://betboom.ru/freestream/vovapainufc"
     },
     "zonertg1": {
       "alerted_at": "2026-07-12T18:21:17.104937+00:00",
