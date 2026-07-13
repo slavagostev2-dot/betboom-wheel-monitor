@@ -51,7 +51,7 @@ jobs:
       - name: Save intelligence state
         shell: bash
         run: |
-          if git diff --quiet -- intelligence_state.json; then
+          if [[ -z "$(git status --porcelain -- intelligence_state.json)" ]]; then
             echo "Intelligence data did not change."
             exit 0
           fi
