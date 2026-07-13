@@ -1,0 +1,16 @@
+{
+  "ranking": [],
+  "sources": {},
+  "updated_at": null,
+  "version": 1,
+  "weights": {
+    "admin_confirmed": 40,
+    "admin_inactive": -45,
+    "first_publication": 8,
+    "invalid_or_stale": -10,
+    "time_correct": 8,
+    "time_wrong": -6,
+    "valid_link": 5
+  },
+  "wheels": {}
+}

@@ -1,0 +1,55 @@
+name: BB V.G. v22 checks
+
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: Install dependencies
+        run: python -m pip install -r requirements.txt
+      - name: Compile Python modules
+        run: python -m py_compile admin_action_v2.py admin_panel_runtime_v22.py admin_panel_v22_access.py admin_panel_v22_callbacks.py admin_panel_v22_views.py bbvg_monitor_features.py bbvg_monitor_main.py nightly_discovery_entry.py notification_router_v2.py source_registry.py source_reputation.py
+      - name: Test notification routing
+        run: python notification_router_v2.py
+      - name: Test source reputation
+        run: python source_reputation.py
+      - name: Test administrator actions
+        run: python admin_action_v2.py --self-test
+      - name: Test Telegram panel v22
+        id: panel_test
+        continue-on-error: true
+        shell: bash
+        run: |
+          set -o pipefail
+          python admin_panel_runtime_v22.py --self-test 2>&1 | tee panel-test.log
+      - name: Upload panel test diagnostics
+        if: ${{ steps.panel_test.outcome == 'failure' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: panel-test-diagnostics
+          path: panel-test.log
+          retention-days: 1
+      - name: Stop on panel test failure
+        if: ${{ steps.panel_test.outcome == 'failure' }}
+        run: exit 1
+      - name: Test unified source registry
+        run: python source_registry.py
+      - name: Validate JSON data
+        run: |
+          python -m json.tool source_registry.json >/dev/null
+          python -m json.tool source_reputation.json >/dev/null
+      - name: Validate Mini App JavaScript
+        run: node --check docs/bbvg-v6.js
