@@ -17,8 +17,10 @@ on:
       - "admin_panel_runtime_v8.py"
       - "admin_panel_runtime_v9.py"
       - "admin_panel_runtime_v10.py"
+      - "admin_panel_runtime_v11.py"
       - "candidate_moderation.json"
       - "intelligence_state.json"
+      - "miniapp_deployment.json"
       - "requirements.txt"
       - ".github/workflows/admin-bot.yml"
   workflow_dispatch:
@@ -60,7 +62,7 @@ jobs:
           BOT_CHAT_ID: ${{ secrets.BOT_CHAT_ID }}
           ADMIN_USER_ID: ${{ secrets.ADMIN_USER_ID }}
         run: |
-          python -m py_compile admin_bot.py admin_runtime.py admin_panel_v2.py admin_panel_runtime_v2.py admin_panel_runtime_v3.py admin_panel_runtime_v4.py admin_panel_runtime_v5.py admin_panel_runtime_v6.py admin_panel_runtime_v7.py admin_panel_runtime_v8.py admin_panel_runtime_v9.py admin_panel_runtime_v10.py
+          python -m py_compile admin_bot.py admin_runtime.py admin_panel_v2.py admin_panel_runtime_v2.py admin_panel_runtime_v3.py admin_panel_runtime_v4.py admin_panel_runtime_v5.py admin_panel_runtime_v6.py admin_panel_runtime_v7.py admin_panel_runtime_v8.py admin_panel_runtime_v9.py admin_panel_runtime_v10.py admin_panel_runtime_v11.py
           python admin_panel_runtime_v3.py --self-test
           python admin_panel_runtime_v4.py --self-test
           python admin_panel_runtime_v5.py --self-test
@@ -69,8 +71,10 @@ jobs:
           python admin_panel_runtime_v8.py --self-test
           python admin_panel_runtime_v9.py --self-test
           python admin_panel_runtime_v10.py --self-test
+          python admin_panel_runtime_v11.py --self-test
           python -m json.tool bot_access.json >/dev/null
           python -m json.tool candidate_moderation.json >/dev/null
+          python -m json.tool miniapp_deployment.json >/dev/null
 
       - name: Record panel status
         shell: bash
@@ -87,7 +91,7 @@ jobs:
               "run_id": os.environ.get("GITHUB_RUN_ID", ""),
               "run_attempt": os.environ.get("GITHUB_RUN_ATTEMPT", ""),
               "event": os.environ.get("GITHUB_EVENT_NAME", ""),
-              "version": 10,
+              "version": 11,
           }
           with open("admin_panel_status.json", "w", encoding="utf-8") as stream:
               json.dump(value, stream, ensure_ascii=False, indent=2, sort_keys=True)
@@ -115,7 +119,7 @@ jobs:
           ADMIN_CACHE_SECONDS: "20"
           SOURCE_INACTIVITY_DAYS: "7"
           SOURCE_INACTIVITY_REPORT_DAYS: "7"
-        run: python admin_panel_runtime_v10.py
+        run: python admin_panel_runtime_v11.py
 
       - name: Start next control-center shift
         if: ${{ success() }}
