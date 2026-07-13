@@ -1,0 +1,15 @@
+{
+  "admins": [],
+  "blocked_users": [],
+  "notification_recipients": [],
+  "owner_id": "",
+  "settings": {
+    "daily_reports": true,
+    "public_panel": true,
+    "service_notifications": true,
+    "weekly_reports": true,
+    "wheel_notifications": true
+  },
+  "users": {},
+  "version": 2
+}
