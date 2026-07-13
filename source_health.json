@@ -1,564 +1,564 @@
 {
   "sources": {
     "AdamStaya": {
-      "checks": 200,
+      "checks": 204,
       "consecutive_empty": 0,
       "consecutive_errors": 0,
-      "last_checked_at": "2026-07-13T18:18:44.139515+00:00",
+      "last_checked_at": "2026-07-13T18:38:45.335134+00:00",
       "last_messages_count": 19,
-      "last_success_at": "2026-07-13T18:18:44.139515+00:00",
+      "last_success_at": "2026-07-13T18:38:45.335134+00:00",
       "status": "ok",
-      "successful_checks": 200
+      "successful_checks": 204
     },
     "Blindzonexbet": {
-      "checks": 200,
+      "checks": 204,
       "consecutive_empty": 0,
       "consecutive_errors": 0,
-      "last_checked_at": "2026-07-13T18:18:44.139698+00:00",
+      "last_checked_at": "2026-07-13T18:38:45.335319+00:00",
       "last_messages_count": 20,
-      "last_success_at": "2026-07-13T18:18:44.139698+00:00",
+      "last_success_at": "2026-07-13T18:38:45.335319+00:00",
       "status": "ok",
-      "successful_checks": 200
+      "successful_checks": 204
     },
     "Breakevens": {
-      "checks": 1,
+      "checks": 5,
       "consecutive_empty": 0,
       "consecutive_errors": 0,
-      "last_checked_at": "2026-07-13T18:18:44.140090+00:00",
+      "last_checked_at": "2026-07-13T18:38:45.335670+00:00",
       "last_messages_count": 19,
-      "last_success_at": "2026-07-13T18:18:44.140090+00:00",
+      "last_success_at": "2026-07-13T18:38:45.335670+00:00",
       "status": "ok",
-      "successful_checks": 1
+      "successful_checks": 5
     },
     "DayneezBet": {
-      "checks": 200,
+      "checks": 204,
       "consecutive_empty": 0,
       "consecutive_errors": 0,
-      "last_checked_at": "2026-07-13T18:18:44.139712+00:00",
+      "last_checked_at": "2026-07-13T18:38:45.335332+00:00",
       "last_messages_count": 20,
-      "last_success_at": "2026-07-13T18:18:44.139712+00:00",
+      "last_success_at": "2026-07-13T18:38:45.335332+00:00",
       "status": "ok",
-      "successful_checks": 200
+      "successful_checks": 204
     },
     "EWC_betboom": {
-      "checks": 1,
+      "checks": 5,
       "consecutive_empty": 0,
       "consecutive_errors": 0,
-      "last_checked_at": "2026-07-13T18:18:44.140128+00:00",
+      "last_checked_at": "2026-07-13T18:38:45.335709+00:00",
       "last_messages_count": 19,
-      "last_success_at": "2026-07-13T18:18:44.140128+00:00",
+      "last_success_at": "2026-07-13T18:38:45.335709+00:00",
       "status": "ok",
-      "successful_checks": 1
+      "successful_checks": 5
     },
     "False9Jersey": {
-      "checks": 1,
+      "checks": 5,
       "consecutive_empty": 0,
       "consecutive_errors": 0,
-      "last_checked_at": "2026-07-13T18:18:44.140102+00:00",
+      "last_checked_at": "2026-07-13T18:38:45.335683+00:00",
       "last_messages_count": 7,
-      "last_success_at": "2026-07-13T18:18:44.140102+00:00",
+      "last_success_at": "2026-07-13T18:38:45.335683+00:00",
       "status": "ok",
-      "successful_checks": 1
+      "successful_checks": 5
     },
     "KRATtv": {
-      "checks": 200,
+      "checks": 204,
       "consecutive_empty": 0,
       "consecutive_errors": 0,
-      "last_checked_at": "2026-07-13T18:18:44.139750+00:00",
+      "last_checked_at": "2026-07-13T18:38:45.335373+00:00",
       "last_messages_count": 16,
-      "last_success_at": "2026-07-13T18:18:44.139750+00:00",
+      "last_success_at": "2026-07-13T18:38:45.335373+00:00",
       "status": "ok",
-      "successful_checks": 200
+      "successful_checks": 204
     },
     "NeretCast": {
-      "checks": 200,
+      "checks": 204,
       "consecutive_empty": 0,
       "consecutive_errors": 0,
-      "last_checked_at": "2026-07-13T18:18:44.139529+00:00",
+      "last_checked_at": "2026-07-13T18:38:45.335149+00:00",
       "last_messages_count": 11,
-      "last_success_at": "2026-07-13T18:18:44.139529+00:00",
+      "last_success_at": "2026-07-13T18:38:45.335149+00:00",
       "status": "ok",
-      "successful_checks": 200
+      "successful_checks": 204
     },
     "PAPAdota2": {
-      "checks": 200,
+      "checks": 204,
       "consecutive_empty": 0,
       "consecutive_errors": 0,
-      "last_checked_at": "2026-07-13T18:18:44.139420+00:00",
+      "last_checked_at": "2026-07-13T18:38:45.335042+00:00",
       "last_messages_count": 20,
-      "last_success_at": "2026-07-13T18:18:44.139420+00:00",
+      "last_success_at": "2026-07-13T18:38:45.335042+00:00",
       "status": "ok",
-      "successful_checks": 200
+      "successful_checks": 204
     },
     "RelaxCisBet": {
-      "checks": 200,
+      "checks": 204,
       "consecutive_empty": 0,
       "consecutive_errors": 0,
-      "last_checked_at": "2026-07-13T18:18:44.139804+00:00",
+      "last_checked_at": "2026-07-13T18:38:45.335427+00:00",
       "last_messages_count": 19,
-      "last_success_at": "2026-07-13T18:18:44.139804+00:00",
+      "last_success_at": "2026-07-13T18:38:45.335427+00:00",
       "status": "ok",
-      "successful_checks": 200
+      "successful_checks": 204
     },
     "StrayDungeon228": {
-      "checks": 200,
+      "checks": 204,
       "consecutive_empty": 0,
       "consecutive_errors": 0,
-      "last_checked_at": "2026-07-13T18:18:44.139544+00:00",
+      "last_checked_at": "2026-07-13T18:38:45.335163+00:00",
       "last_messages_count": 19,
-      "last_success_at": "2026-07-13T18:18:44.139544+00:00",
+      "last_success_at": "2026-07-13T18:38:45.335163+00:00",
       "status": "ok",
-      "successful_checks": 200
+      "successful_checks": 204
     },
     "ZZoneRM": {
-      "checks": 200,
+      "checks": 204,
       "consecutive_empty": 0,
       "consecutive_errors": 0,
-      "last_checked_at": "2026-07-13T18:18:44.139915+00:00",
-      "last_messages_count": 12,
-      "last_success_at": "2026-07-13T18:18:44.139915+00:00",
+      "last_checked_at": "2026-07-13T18:38:45.335492+00:00",
+      "last_messages_count": 13,
+      "last_success_at": "2026-07-13T18:38:45.335492+00:00",
       "status": "ok",
-      "successful_checks": 200
+      "successful_checks": 204
     },
     "acoolbazarit": {
-      "checks": 200,
+      "checks": 204,
       "consecutive_empty": 0,
       "consecutive_errors": 0,
-      "last_checked_at": "2026-07-13T18:18:44.139629+00:00",
+      "last_checked_at": "2026-07-13T18:38:45.335248+00:00",
       "last_messages_count": 20,
-      "last_success_at": "2026-07-13T18:18:44.139629+00:00",
+      "last_success_at": "2026-07-13T18:38:45.335248+00:00",
       "status": "ok",
-      "successful_checks": 200
+      "successful_checks": 204
     },
     "amam0610": {
-      "checks": 200,
+      "checks": 204,
       "consecutive_empty": 0,
       "consecutive_errors": 0,
-      "last_checked_at": "2026-07-13T18:18:44.140036+00:00",
+      "last_checked_at": "2026-07-13T18:38:45.335612+00:00",
       "last_messages_count": 20,
-      "last_success_at": "2026-07-13T18:18:44.140036+00:00",
+      "last_success_at": "2026-07-13T18:38:45.335612+00:00",
       "status": "ok",
-      "successful_checks": 200
+      "successful_checks": 204
     },
     "artemkef": {
-      "checks": 1,
+      "checks": 5,
       "consecutive_empty": 0,
       "consecutive_errors": 0,
-      "last_checked_at": "2026-07-13T18:18:44.140062+00:00",
+      "last_checked_at": "2026-07-13T18:38:45.335644+00:00",
       "last_messages_count": 20,
-      "last_success_at": "2026-07-13T18:18:44.140062+00:00",
+      "last_success_at": "2026-07-13T18:38:45.335644+00:00",
       "status": "ok",
-      "successful_checks": 1
+      "successful_checks": 5
     },
     "aunkereEZ": {
-      "checks": 200,
+      "checks": 204,
       "consecutive_empty": 0,
       "consecutive_errors": 0,
-      "last_checked_at": "2026-07-13T18:18:44.139486+00:00",
+      "last_checked_at": "2026-07-13T18:38:45.335105+00:00",
       "last_messages_count": 17,
-      "last_success_at": "2026-07-13T18:18:44.139486+00:00",
+      "last_success_at": "2026-07-13T18:38:45.335105+00:00",
       "status": "ok",
-      "successful_checks": 200
+      "successful_checks": 204
     },
     "aunkeretg": {
-      "checks": 200,
+      "checks": 204,
       "consecutive_empty": 0,
       "consecutive_errors": 0,
-      "last_checked_at": "2026-07-13T18:18:44.139928+00:00",
+      "last_checked_at": "2026-07-13T18:38:45.335505+00:00",
       "last_messages_count": 20,
-      "last_success_at": "2026-07-13T18:18:44.139928+00:00",
+      "last_success_at": "2026-07-13T18:38:45.335505+00:00",
       "status": "ok",
-      "successful_checks": 200
+      "successful_checks": 204
     },
     "aviciixd": {
-      "checks": 200,
+      "checks": 204,
       "consecutive_empty": 0,
       "consecutive_errors": 0,
-      "last_checked_at": "2026-07-13T18:18:44.139684+00:00",
+      "last_checked_at": "2026-07-13T18:38:45.335304+00:00",
       "last_messages_count": 20,
-      "last_success_at": "2026-07-13T18:18:44.139684+00:00",
+      "last_success_at": "2026-07-13T18:38:45.335304+00:00",
       "status": "ok",
-      "successful_checks": 200
+      "successful_checks": 204
     },
     "bbteamcs2": {
-      "checks": 1,
+      "checks": 5,
       "consecutive_empty": 0,
       "consecutive_errors": 0,
-      "last_checked_at": "2026-07-13T18:18:44.140077+00:00",
+      "last_checked_at": "2026-07-13T18:38:45.335658+00:00",
       "last_messages_count": 2,
-      "last_success_at": "2026-07-13T18:18:44.140077+00:00",
+      "last_success_at": "2026-07-13T18:38:45.335658+00:00",
       "status": "ok",
-      "successful_checks": 1
+      "successful_checks": 5
     },
     "blindzonexgod": {
-      "checks": 200,
+      "checks": 204,
       "consecutive_empty": 0,
       "consecutive_errors": 0,
-      "last_checked_at": "2026-07-13T18:18:44.139967+00:00",
+      "last_checked_at": "2026-07-13T18:38:45.335545+00:00",
       "last_messages_count": 18,
-      "last_success_at": "2026-07-13T18:18:44.139967+00:00",
+      "last_success_at": "2026-07-13T18:38:45.335545+00:00",
       "status": "ok",
-      "successful_checks": 200
+      "successful_checks": 204
     },
     "boltcast": {
-      "checks": 200,
+      "checks": 204,
       "consecutive_empty": 0,
       "consecutive_errors": 0,
-      "last_checked_at": "2026-07-13T18:18:44.139471+00:00",
+      "last_checked_at": "2026-07-13T18:38:45.335090+00:00",
       "last_messages_count": 18,
-      "last_success_at": "2026-07-13T18:18:44.139471+00:00",
+      "last_success_at": "2026-07-13T18:38:45.335090+00:00",
       "status": "ok",
-      "successful_checks": 200
+      "successful_checks": 204
     },
     "burdakekw": {
-      "checks": 200,
+      "checks": 204,
       "consecutive_empty": 0,
       "consecutive_errors": 0,
-      "last_checked_at": "2026-07-13T18:18:44.139778+00:00",
+      "last_checked_at": "2026-07-13T18:38:45.335400+00:00",
       "last_messages_count": 20,
-      "last_success_at": "2026-07-13T18:18:44.139778+00:00",
+      "last_success_at": "2026-07-13T18:38:45.335400+00:00",
       "status": "ok",
-      "successful_checks": 200
+      "successful_checks": 204
     },
     "chopperis": {
-      "checks": 200,
+      "checks": 204,
       "consecutive_empty": 0,
       "consecutive_errors": 0,
-      "last_checked_at": "2026-07-13T18:18:44.139643+00:00",
+      "last_checked_at": "2026-07-13T18:38:45.335262+00:00",
       "last_messages_count": 20,
-      "last_success_at": "2026-07-13T18:18:44.139643+00:00",
+      "last_success_at": "2026-07-13T18:38:45.335262+00:00",
       "status": "ok",
-      "successful_checks": 200
+      "successful_checks": 204
     },
     "ct0mislove": {
-      "checks": 200,
+      "checks": 204,
       "consecutive_empty": 0,
       "consecutive_errors": 0,
-      "last_checked_at": "2026-07-13T18:18:44.139954+00:00",
+      "last_checked_at": "2026-07-13T18:38:45.335532+00:00",
       "last_messages_count": 18,
-      "last_success_at": "2026-07-13T18:18:44.139954+00:00",
+      "last_success_at": "2026-07-13T18:38:45.335532+00:00",
       "status": "ok",
-      "successful_checks": 200
+      "successful_checks": 204
     },
     "danila_gorilla": {
-      "checks": 200,
+      "checks": 204,
       "consecutive_empty": 0,
       "consecutive_errors": 0,
-      "last_checked_at": "2026-07-13T18:18:44.139724+00:00",
+      "last_checked_at": "2026-07-13T18:38:45.335346+00:00",
       "last_messages_count": 15,
-      "last_success_at": "2026-07-13T18:18:44.139724+00:00",
+      "last_success_at": "2026-07-13T18:38:45.335346+00:00",
       "status": "ok",
-      "successful_checks": 200
+      "successful_checks": 204
     },
     "dartwager": {
-      "checks": 200,
+      "checks": 204,
       "consecutive_empty": 0,
       "consecutive_errors": 0,
-      "last_checked_at": "2026-07-13T18:18:44.140019+00:00",
+      "last_checked_at": "2026-07-13T18:38:45.335599+00:00",
       "last_messages_count": 19,
-      "last_success_at": "2026-07-13T18:18:44.140019+00:00",
+      "last_success_at": "2026-07-13T18:38:45.335599+00:00",
       "status": "ok",
-      "successful_checks": 200
+      "successful_checks": 204
     },
     "dayneZz": {
-      "checks": 200,
+      "checks": 204,
       "consecutive_empty": 0,
       "consecutive_errors": 0,
-      "last_checked_at": "2026-07-13T18:18:44.139980+00:00",
+      "last_checked_at": "2026-07-13T18:38:45.335558+00:00",
       "last_messages_count": 20,
-      "last_success_at": "2026-07-13T18:18:44.139980+00:00",
+      "last_success_at": "2026-07-13T18:38:45.335558+00:00",
       "status": "ok",
-      "successful_checks": 200
+      "successful_checks": 204
     },
     "dekocs": {
-      "checks": 200,
+      "checks": 204,
       "consecutive_empty": 0,
       "consecutive_errors": 0,
-      "last_checked_at": "2026-07-13T18:18:44.139588+00:00",
+      "last_checked_at": "2026-07-13T18:38:45.335205+00:00",
       "last_messages_count": 20,
-      "last_success_at": "2026-07-13T18:18:44.139588+00:00",
+      "last_success_at": "2026-07-13T18:38:45.335205+00:00",
       "status": "ok",
-      "successful_checks": 200
+      "successful_checks": 204
     },
     "dekocsoff": {
-      "checks": 200,
+      "checks": 204,
       "consecutive_empty": 0,
       "consecutive_errors": 0,
-      "last_checked_at": "2026-07-13T18:18:44.139941+00:00",
+      "last_checked_at": "2026-07-13T18:38:45.335519+00:00",
       "last_messages_count": 20,
-      "last_success_at": "2026-07-13T18:18:44.139941+00:00",
+      "last_success_at": "2026-07-13T18:38:45.335519+00:00",
       "status": "ok",
-      "successful_checks": 200
+      "successful_checks": 204
     },
     "dyrachyo": {
-      "checks": 200,
+      "checks": 204,
       "consecutive_empty": 0,
       "consecutive_errors": 0,
-      "last_checked_at": "2026-07-13T18:18:44.139397+00:00",
+      "last_checked_at": "2026-07-13T18:38:45.335021+00:00",
       "last_messages_count": 7,
-      "last_success_at": "2026-07-13T18:18:44.139397+00:00",
+      "last_success_at": "2026-07-13T18:38:45.335021+00:00",
       "status": "ok",
-      "successful_checks": 200
+      "successful_checks": 204
     },
     "gorilla_armor": {
-      "checks": 200,
+      "checks": 204,
       "consecutive_empty": 0,
       "consecutive_errors": 0,
-      "last_checked_at": "2026-07-13T18:18:44.139737+00:00",
+      "last_checked_at": "2026-07-13T18:38:45.335360+00:00",
       "last_messages_count": 11,
-      "last_success_at": "2026-07-13T18:18:44.139737+00:00",
+      "last_success_at": "2026-07-13T18:38:45.335360+00:00",
       "status": "ok",
-      "successful_checks": 200
+      "successful_checks": 204
     },
     "gshikaryan": {
-      "checks": 200,
+      "checks": 204,
       "consecutive_empty": 0,
       "consecutive_errors": 0,
-      "last_checked_at": "2026-07-13T18:18:44.139902+00:00",
+      "last_checked_at": "2026-07-13T18:38:45.335479+00:00",
       "last_messages_count": 20,
-      "last_success_at": "2026-07-13T18:18:44.139902+00:00",
+      "last_success_at": "2026-07-13T18:38:45.335479+00:00",
       "status": "ok",
-      "successful_checks": 200
+      "successful_checks": 204
     },
     "homakolesa": {
-      "checks": 200,
+      "checks": 204,
       "consecutive_empty": 0,
       "consecutive_errors": 0,
-      "last_checked_at": "2026-07-13T18:18:44.139993+00:00",
+      "last_checked_at": "2026-07-13T18:38:45.335571+00:00",
       "last_messages_count": 20,
-      "last_success_at": "2026-07-13T18:18:44.139993+00:00",
+      "last_success_at": "2026-07-13T18:38:45.335571+00:00",
       "status": "ok",
-      "successful_checks": 200
+      "successful_checks": 204
     },
     "hoochcs2": {
-      "checks": 200,
+      "checks": 204,
       "consecutive_empty": 0,
       "consecutive_errors": 0,
-      "last_checked_at": "2026-07-13T18:18:44.139656+00:00",
+      "last_checked_at": "2026-07-13T18:38:45.335276+00:00",
       "last_messages_count": 20,
-      "last_success_at": "2026-07-13T18:18:44.139656+00:00",
+      "last_success_at": "2026-07-13T18:38:45.335276+00:00",
       "status": "ok",
-      "successful_checks": 200
+      "successful_checks": 204
     },
     "ihuntnoobs": {
-      "checks": 200,
+      "checks": 204,
       "consecutive_empty": 0,
       "consecutive_errors": 0,
-      "last_checked_at": "2026-07-13T18:18:44.139574+00:00",
+      "last_checked_at": "2026-07-13T18:38:45.335191+00:00",
       "last_messages_count": 20,
-      "last_success_at": "2026-07-13T18:18:44.139574+00:00",
+      "last_success_at": "2026-07-13T18:38:45.335191+00:00",
       "status": "ok",
-      "successful_checks": 200
+      "successful_checks": 204
     },
     "kiritych1": {
-      "checks": 1,
+      "checks": 5,
       "consecutive_empty": 0,
       "consecutive_errors": 0,
-      "last_checked_at": "2026-07-13T18:18:44.140140+00:00",
+      "last_checked_at": "2026-07-13T18:38:45.335722+00:00",
       "last_messages_count": 20,
-      "last_success_at": "2026-07-13T18:18:44.140140+00:00",
+      "last_success_at": "2026-07-13T18:38:45.335722+00:00",
       "status": "ok",
-      "successful_checks": 1
+      "successful_checks": 5
     },
     "kolesaBB": {
-      "checks": 200,
+      "checks": 204,
       "consecutive_empty": 0,
       "consecutive_errors": 0,
-      "last_checked_at": "2026-07-13T18:18:44.140050+00:00",
+      "last_checked_at": "2026-07-13T18:38:45.335626+00:00",
       "last_messages_count": 20,
-      "last_success_at": "2026-07-13T18:18:44.140050+00:00",
+      "last_success_at": "2026-07-13T18:38:45.335626+00:00",
       "status": "ok",
-      "successful_checks": 200
+      "successful_checks": 204
     },
     "kzmantis": {
-      "checks": 200,
+      "checks": 204,
       "consecutive_empty": 0,
       "consecutive_errors": 0,
-      "last_checked_at": "2026-07-13T18:18:44.139817+00:00",
+      "last_checked_at": "2026-07-13T18:38:45.335440+00:00",
       "last_messages_count": 19,
-      "last_success_at": "2026-07-13T18:18:44.139817+00:00",
+      "last_success_at": "2026-07-13T18:38:45.335440+00:00",
       "status": "ok",
-      "successful_checks": 200
+      "successful_checks": 204
     },
     "ladlda": {
-      "checks": 1,
+      "checks": 5,
       "consecutive_empty": 0,
       "consecutive_errors": 0,
-      "last_checked_at": "2026-07-13T18:18:44.140153+00:00",
+      "last_checked_at": "2026-07-13T18:38:45.335735+00:00",
       "last_messages_count": 8,
-      "last_success_at": "2026-07-13T18:18:44.140153+00:00",
+      "last_success_at": "2026-07-13T18:38:45.335735+00:00",
       "status": "ok",
-      "successful_checks": 1
+      "successful_checks": 5
     },
     "lukawahouse": {
-      "checks": 1,
+      "checks": 5,
       "consecutive_empty": 0,
       "consecutive_errors": 0,
-      "last_checked_at": "2026-07-13T18:18:44.140165+00:00",
+      "last_checked_at": "2026-07-13T18:38:45.335748+00:00",
       "last_messages_count": 11,
-      "last_success_at": "2026-07-13T18:18:44.140165+00:00",
+      "last_success_at": "2026-07-13T18:38:45.335748+00:00",
       "status": "ok",
-      "successful_checks": 1
+      "successful_checks": 5
     },
     "mAger_de_nuke": {
-      "checks": 200,
+      "checks": 204,
       "consecutive_empty": 0,
       "consecutive_errors": 0,
-      "last_checked_at": "2026-07-13T18:18:44.139602+00:00",
+      "last_checked_at": "2026-07-13T18:38:45.335220+00:00",
       "last_messages_count": 13,
-      "last_success_at": "2026-07-13T18:18:44.139602+00:00",
+      "last_success_at": "2026-07-13T18:38:45.335220+00:00",
       "status": "ok",
-      "successful_checks": 200
+      "successful_checks": 204
     },
     "magnojezking": {
-      "checks": 1,
+      "checks": 5,
       "consecutive_empty": 0,
       "consecutive_errors": 0,
-      "last_checked_at": "2026-07-13T18:18:44.140178+00:00",
+      "last_checked_at": "2026-07-13T18:38:45.335760+00:00",
       "last_messages_count": 20,
-      "last_success_at": "2026-07-13T18:18:44.140178+00:00",
+      "last_success_at": "2026-07-13T18:38:45.335760+00:00",
       "status": "ok",
-      "successful_checks": 1
+      "successful_checks": 5
     },
     "mechanogun": {
-      "checks": 200,
+      "checks": 204,
       "consecutive_empty": 0,
       "consecutive_errors": 0,
-      "last_checked_at": "2026-07-13T18:18:44.139335+00:00",
+      "last_checked_at": "2026-07-13T18:38:45.334960+00:00",
       "last_messages_count": 20,
-      "last_success_at": "2026-07-13T18:18:44.139335+00:00",
+      "last_success_at": "2026-07-13T18:38:45.334960+00:00",
       "status": "ok",
-      "successful_checks": 200
+      "successful_checks": 204
     },
     "meowbettt": {
-      "checks": 200,
+      "checks": 204,
       "consecutive_empty": 0,
       "consecutive_errors": 0,
-      "last_checked_at": "2026-07-13T18:18:44.139616+00:00",
+      "last_checked_at": "2026-07-13T18:38:45.335234+00:00",
       "last_messages_count": 19,
-      "last_success_at": "2026-07-13T18:18:44.139616+00:00",
+      "last_success_at": "2026-07-13T18:38:45.335234+00:00",
       "status": "ok",
-      "successful_checks": 200
+      "successful_checks": 204
     },
     "narodCast": {
-      "checks": 200,
+      "checks": 204,
       "consecutive_empty": 0,
       "consecutive_errors": 0,
-      "last_checked_at": "2026-07-13T18:18:44.140007+00:00",
+      "last_checked_at": "2026-07-13T18:38:45.335584+00:00",
       "last_messages_count": 20,
-      "last_success_at": "2026-07-13T18:18:44.140007+00:00",
+      "last_success_at": "2026-07-13T18:38:45.335584+00:00",
       "status": "ok",
-      "successful_checks": 200
+      "successful_checks": 204
     },
     "nixtalk": {
-      "checks": 200,
+      "checks": 204,
       "consecutive_empty": 0,
       "consecutive_errors": 0,
-      "last_checked_at": "2026-07-13T18:18:44.139454+00:00",
+      "last_checked_at": "2026-07-13T18:38:45.335075+00:00",
       "last_messages_count": 20,
-      "last_success_at": "2026-07-13T18:18:44.139454+00:00",
+      "last_success_at": "2026-07-13T18:38:45.335075+00:00",
       "status": "ok",
-      "successful_checks": 200
+      "successful_checks": 204
     },
     "obshakstaya": {
-      "checks": 200,
+      "checks": 204,
       "consecutive_empty": 0,
       "consecutive_errors": 0,
-      "last_checked_at": "2026-07-13T18:18:44.139501+00:00",
+      "last_checked_at": "2026-07-13T18:38:45.335119+00:00",
       "last_messages_count": 20,
-      "last_success_at": "2026-07-13T18:18:44.139501+00:00",
+      "last_success_at": "2026-07-13T18:38:45.335119+00:00",
       "status": "ok",
-      "successful_checks": 200
+      "successful_checks": 204
     },
     "pandafx": {
-      "checks": 200,
+      "checks": 204,
       "consecutive_empty": 0,
       "consecutive_errors": 0,
-      "last_checked_at": "2026-07-13T18:18:44.139882+00:00",
+      "last_checked_at": "2026-07-13T18:38:45.335467+00:00",
       "last_messages_count": 20,
-      "last_success_at": "2026-07-13T18:18:44.139882+00:00",
+      "last_success_at": "2026-07-13T18:38:45.335467+00:00",
       "status": "ok",
-      "successful_checks": 200
+      "successful_checks": 204
     },
     "relaxcis": {
-      "checks": 200,
+      "checks": 204,
       "consecutive_empty": 0,
       "consecutive_errors": 0,
-      "last_checked_at": "2026-07-13T18:18:44.139790+00:00",
+      "last_checked_at": "2026-07-13T18:38:45.335414+00:00",
       "last_messages_count": 19,
-      "last_success_at": "2026-07-13T18:18:44.139790+00:00",
+      "last_success_at": "2026-07-13T18:38:45.335414+00:00",
       "status": "ok",
-      "successful_checks": 200
+      "successful_checks": 204
     },
     "shadowkekw": {
-      "checks": 200,
+      "checks": 204,
       "consecutive_empty": 0,
       "consecutive_errors": 0,
-      "last_checked_at": "2026-07-13T18:18:44.139764+00:00",
+      "last_checked_at": "2026-07-13T18:38:45.335386+00:00",
       "last_messages_count": 13,
-      "last_success_at": "2026-07-13T18:18:44.139764+00:00",
+      "last_success_at": "2026-07-13T18:38:45.335386+00:00",
       "status": "ok",
-      "successful_checks": 200
+      "successful_checks": 204
     },
     "shoketg": {
-      "checks": 200,
+      "checks": 204,
       "consecutive_empty": 0,
       "consecutive_errors": 0,
-      "last_checked_at": "2026-07-13T18:18:44.139559+00:00",
+      "last_checked_at": "2026-07-13T18:38:45.335176+00:00",
       "last_messages_count": 20,
-      "last_success_at": "2026-07-13T18:18:44.139559+00:00",
+      "last_success_at": "2026-07-13T18:38:45.335176+00:00",
       "status": "ok",
-      "successful_checks": 200
+      "successful_checks": 204
     },
     "smurf_gigachad": {
-      "checks": 200,
+      "checks": 204,
       "consecutive_empty": 0,
       "consecutive_errors": 0,
-      "last_checked_at": "2026-07-13T18:18:44.139860+00:00",
+      "last_checked_at": "2026-07-13T18:38:45.335453+00:00",
       "last_messages_count": 20,
-      "last_success_at": "2026-07-13T18:18:44.139860+00:00",
+      "last_success_at": "2026-07-13T18:38:45.335453+00:00",
       "status": "ok",
-      "successful_checks": 200
+      "successful_checks": 204
     },
     "solo_q_q": {
-      "checks": 200,
+      "checks": 204,
       "consecutive_empty": 0,
       "consecutive_errors": 0,
-      "last_checked_at": "2026-07-13T18:18:44.139438+00:00",
+      "last_checked_at": "2026-07-13T18:38:45.335058+00:00",
       "last_messages_count": 20,
-      "last_success_at": "2026-07-13T18:18:44.139438+00:00",
+      "last_success_at": "2026-07-13T18:38:45.335058+00:00",
       "status": "ok",
-      "successful_checks": 200
+      "successful_checks": 204
     },
     "starie_seniory": {
-      "checks": 1,
+      "checks": 5,
       "consecutive_empty": 0,
       "consecutive_errors": 0,
-      "last_checked_at": "2026-07-13T18:18:44.140190+00:00",
+      "last_checked_at": "2026-07-13T18:38:45.335773+00:00",
       "last_messages_count": 20,
-      "last_success_at": "2026-07-13T18:18:44.140190+00:00",
+      "last_success_at": "2026-07-13T18:38:45.335773+00:00",
       "status": "ok",
-      "successful_checks": 1
+      "successful_checks": 5
     },
     "whylollycrry": {
-      "checks": 200,
+      "checks": 204,
       "consecutive_empty": 0,
       "consecutive_errors": 0,
-      "last_checked_at": "2026-07-13T18:18:44.139670+00:00",
+      "last_checked_at": "2026-07-13T18:38:45.335290+00:00",
       "last_messages_count": 13,
-      "last_success_at": "2026-07-13T18:18:44.139670+00:00",
+      "last_success_at": "2026-07-13T18:38:45.335290+00:00",
       "status": "ok",
-      "successful_checks": 200
+      "successful_checks": 204
     },
     "zortelad": {
-      "checks": 1,
+      "checks": 5,
       "consecutive_empty": 0,
       "consecutive_errors": 0,
-      "last_checked_at": "2026-07-13T18:18:44.140115+00:00",
+      "last_checked_at": "2026-07-13T18:38:45.335696+00:00",
       "last_messages_count": 18,
-      "last_success_at": "2026-07-13T18:18:44.140115+00:00",
+      "last_success_at": "2026-07-13T18:38:45.335696+00:00",
       "status": "ok",
-      "successful_checks": 1
+      "successful_checks": 5
     }
   },
   "version": 1
