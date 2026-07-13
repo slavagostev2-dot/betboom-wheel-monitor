@@ -53,6 +53,7 @@ jobs:
           node-version: "20"
 
       - name: Build Mini App runtime config
+        id: runtime
         if: steps.credentials.outputs.configured == 'true'
         shell: bash
         run: |
@@ -82,6 +83,7 @@ jobs:
           PY
 
       - name: Validate Mini App
+        id: validate
         if: steps.credentials.outputs.configured == 'true'
         shell: bash
         run: |
@@ -127,6 +129,7 @@ jobs:
             --production-branch main || true
 
       - name: Deploy Mini App
+        id: publish
         if: steps.credentials.outputs.configured == 'true'
         shell: bash
         run: |
@@ -136,7 +139,7 @@ jobs:
             --commit-hash "$GITHUB_SHA"
 
       - name: Record deployment status
-        if: steps.credentials.outputs.configured == 'true'
+        if: steps.publish.outcome == 'success'
         shell: bash
         run: |
           python - <<'PY'
@@ -160,6 +163,41 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add miniapp_deployment.json
           git commit -m "Record Cloudflare Mini App deployment [skip ci]" || true
+          git pull --rebase origin main
+          git push origin HEAD:main
+
+      - name: Record deployment diagnostics
+        if: always()
+        env:
+          CREDENTIALS: ${{ steps.credentials.outputs.configured }}
+          RUNTIME_OUTCOME: ${{ steps.runtime.outcome }}
+          VALIDATE_OUTCOME: ${{ steps.validate.outcome }}
+          PUBLISH_OUTCOME: ${{ steps.publish.outcome }}
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          from datetime import datetime, timezone
+
+          value = {
+              "checked_at": datetime.now(timezone.utc).isoformat(),
+              "commit": os.environ.get("GITHUB_SHA", ""),
+              "run_id": os.environ.get("GITHUB_RUN_ID", ""),
+              "credentials_configured": os.environ.get("CREDENTIALS", "") == "true",
+              "runtime_config": os.environ.get("RUNTIME_OUTCOME", "unknown"),
+              "validation": os.environ.get("VALIDATE_OUTCOME", "unknown"),
+              "publication": os.environ.get("PUBLISH_OUTCOME", "unknown"),
+          }
+          with open("miniapp_deploy_runtime.json", "w", encoding="utf-8") as stream:
+              json.dump(value, stream, ensure_ascii=False, indent=2, sort_keys=True)
+              stream.write("\n")
+          PY
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add miniapp_deploy_runtime.json
+          git commit -m "Record Mini App deployment diagnostics [skip ci]" || true
           git pull --rebase origin main
           git push origin HEAD:main
 
