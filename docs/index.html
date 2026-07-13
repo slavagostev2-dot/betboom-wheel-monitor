@@ -2,36 +2,83 @@
 <html lang="ru">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="theme-color" content="#111827">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+  <meta name="theme-color" content="#0a0b0e">
+  <meta name="color-scheme" content="dark light">
+  <meta name="description" content="BetBoom Monitor — действующие колёса, статистика и источники в Telegram">
   <title>BetBoom Monitor</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css?v=2.0.0">
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
 <body>
-  <main id="app">
-    <header class="topbar">
-      <div>
-        <div class="eyebrow">BetBoom Monitor</div>
-        <h1>Колёса и статистика</h1>
-      </div>
-      <button id="refreshBtn" class="icon-btn" aria-label="Обновить">↻</button>
+  <div id="app" class="app-shell">
+    <header class="app-header">
+      <button id="profileButton" class="user-chip" type="button" aria-label="Открыть профиль">
+        <span id="userAvatar" class="avatar" aria-hidden="true">BB</span>
+        <span class="user-copy">
+          <strong id="userName">BetBoom Monitor</strong>
+          <small id="connectionText">Подключение…</small>
+        </span>
+      </button>
+      <button id="refreshButton" class="icon-button" type="button" aria-label="Обновить данные" title="Обновить">
+        <span class="refresh-icon" aria-hidden="true">↻</span>
+      </button>
     </header>
 
-    <section id="status" class="status-card">Загрузка данных…</section>
+    <div id="pullIndicator" class="pull-indicator" aria-hidden="true">Потяните для обновления</div>
 
-    <nav class="tabs" aria-label="Разделы">
-      <button class="tab active" data-tab="wheels">Колёса</button>
-      <button class="tab" data-tab="stats">Статистика</button>
-      <button class="tab" data-tab="sources">Источники</button>
-      <button class="tab" data-tab="ranking">Рейтинг</button>
+    <main id="pageContainer" class="page-container" aria-live="polite">
+      <section id="page-home" class="page active" data-page="home"></section>
+      <section id="page-wheels" class="page" data-page="wheels"></section>
+      <section id="page-stats" class="page" data-page="stats"></section>
+      <section id="page-sources" class="page" data-page="sources"></section>
+      <section id="page-profile" class="page" data-page="profile"></section>
+    </main>
+
+    <nav class="bottom-nav" aria-label="Основная навигация">
+      <button class="nav-item active" type="button" data-route="home" aria-label="Главная">
+        <span class="nav-icon" aria-hidden="true">⌂</span>
+        <span>Главная</span>
+      </button>
+      <button class="nav-item" type="button" data-route="wheels" aria-label="Колёса">
+        <span class="nav-icon" aria-hidden="true">◉</span>
+        <span>Колёса</span>
+        <span id="wheelNavBadge" class="nav-badge hidden">0</span>
+      </button>
+      <button class="nav-item" type="button" data-route="stats" aria-label="Статистика">
+        <span class="nav-icon" aria-hidden="true">▥</span>
+        <span>Статистика</span>
+      </button>
+      <button class="nav-item" type="button" data-route="sources" aria-label="Источники">
+        <span class="nav-icon" aria-hidden="true">◌</span>
+        <span>Источники</span>
+      </button>
+      <button class="nav-item" type="button" data-route="profile" aria-label="Профиль">
+        <span class="nav-icon" aria-hidden="true">◎</span>
+        <span>Профиль</span>
+      </button>
     </nav>
+  </div>
 
-    <section id="wheels" class="panel active"></section>
-    <section id="stats" class="panel"></section>
-    <section id="sources" class="panel"></section>
-    <section id="ranking" class="panel"></section>
-  </main>
-  <script src="app.js"></script>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <dialog id="detailsDialog" class="details-dialog">
+    <button id="closeDialog" class="dialog-close" type="button" aria-label="Закрыть">×</button>
+    <div id="dialogContent"></div>
+  </dialog>
+
+  <div id="loadingOverlay" class="loading-overlay">
+    <div class="brand-loader">
+      <div class="loader-mark">BB</div>
+      <strong>BetBoom Monitor</strong>
+      <span>Загружаем актуальные данные</span>
+      <div class="loader-line"><i></i></div>
+    </div>
+  </div>
+
+  <noscript>Для работы приложения требуется JavaScript.</noscript>
+  <script src="app.js?v=2.0.0"></script>
 </body>
 </html>
