@@ -6,6 +6,7 @@ on:
     branches: [main]
     paths:
       - "admin_bot.py"
+      - "admin_action.py"
       - "admin_runtime.py"
       - "admin_panel_v2.py"
       - "admin_panel_runtime_v2.py"
@@ -70,7 +71,8 @@ jobs:
           BOT_CHAT_ID: ${{ secrets.BOT_CHAT_ID }}
           ADMIN_USER_ID: ${{ secrets.ADMIN_USER_ID }}
         run: |
-          python -m py_compile admin_bot.py admin_runtime.py admin_panel_v2.py admin_panel_runtime_v2.py admin_panel_runtime_v3.py admin_panel_runtime_v4.py admin_panel_runtime_v5.py admin_panel_runtime_v6.py admin_panel_runtime_v7.py admin_panel_runtime_v8.py admin_panel_runtime_v9.py admin_panel_runtime_v10.py admin_panel_runtime_v11.py admin_panel_runtime_v12.py admin_panel_runtime_v13.py admin_panel_runtime_v14.py admin_panel_runtime_v15.py admin_panel_runtime_v16.py admin_panel_runtime_v17.py admin_panel_runtime_v18.py admin_panel_runtime_v19.py admin_panel_runtime_v20.py
+          python -m py_compile admin_bot.py admin_action.py admin_runtime.py admin_panel_v2.py admin_panel_runtime_v2.py admin_panel_runtime_v3.py admin_panel_runtime_v4.py admin_panel_runtime_v5.py admin_panel_runtime_v6.py admin_panel_runtime_v7.py admin_panel_runtime_v8.py admin_panel_runtime_v9.py admin_panel_runtime_v10.py admin_panel_runtime_v11.py admin_panel_runtime_v12.py admin_panel_runtime_v13.py admin_panel_runtime_v14.py admin_panel_runtime_v15.py admin_panel_runtime_v16.py admin_panel_runtime_v17.py admin_panel_runtime_v18.py admin_panel_runtime_v19.py admin_panel_runtime_v20.py
+          python admin_action.py --self-test
           python admin_panel_runtime_v3.py --self-test
           python admin_panel_runtime_v4.py --self-test
           python admin_panel_runtime_v5.py --self-test
