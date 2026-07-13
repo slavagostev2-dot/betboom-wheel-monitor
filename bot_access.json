@@ -1,8 +1,10 @@
 {
   "admins": [],
   "blocked_users": [],
-  "notification_recipients": [],
-  "owner_id": "",
+  "notification_recipients": [
+    "7178093128"
+  ],
+  "owner_id": "7178093128",
   "settings": {
     "daily_reports": true,
     "public_panel": true,
@@ -10,6 +12,16 @@
     "weekly_reports": true,
     "wheel_notifications": true
   },
-  "users": {},
+  "users": {
+    "7178093128": {
+      "chat_id": "7178093128",
+      "first_name": "Руслан",
+      "first_seen_at": "2026-07-13T12:19:24.722496+00:00",
+      "id": "7178093128",
+      "last_name": "",
+      "last_seen_at": "2026-07-13T12:19:24.722496+00:00",
+      "username": "ttobbby"
+    }
+  },
   "version": 2
 }
