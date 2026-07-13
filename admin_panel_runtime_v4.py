@@ -56,6 +56,20 @@ class TelegramPanelRuntimeV4(TelegramPanelRuntimeV3):
     def _entry_key(key: str, entry: dict[str, Any]) -> str:
         return str(entry.get("identifier") or key).casefold()
 
+    def _restore_telegram_deadline(self, item: dict[str, Any]) -> datetime | None:
+        stored = self.parse_dt(item.get("deadline"))
+        if stored:
+            return stored
+        message_date = self.parse_dt(item.get("message_date"))
+        text = str(item.get("message_text") or "")
+        if not message_date or not text:
+            return None
+        inferred, method = monitor.infer_deadline(text, message_date)
+        if inferred:
+            item["deadline"] = inferred.isoformat()
+            item["deadline_method"] = method
+        return inferred
+
     def _inspect_entry(self, item: dict[str, Any]) -> tuple[str, Any]:
         url = str(item.get("url") or "")
         if not url:
@@ -88,6 +102,9 @@ class TelegramPanelRuntimeV4(TelegramPanelRuntimeV3):
             combined.setdefault(identity, item)
 
         now = datetime.now(UTC)
+        for item in combined.values():
+            self._restore_telegram_deadline(item)
+
         results: dict[str, tuple[str, Any]] = {}
         inspectable = {key: item for key, item in combined.items() if item.get("url")}
         with ThreadPoolExecutor(max_workers=min(6, max(1, len(inspectable)))) as pool:
@@ -108,10 +125,11 @@ class TelegramPanelRuntimeV4(TelegramPanelRuntimeV3):
                 if inspection and inspection.deadline:
                     item["deadline"] = inspection.deadline.isoformat()
             elif deadline and deadline > now:
+                # Telegram may provide a reliable future draw time even when the
+                # public BetBoom HTML does not expose its client-rendered button.
                 item["_live_state"] = "scheduled"
             else:
                 first_seen = self.parse_dt(item.get("first_seen_at") or item.get("message_date"))
-                # A page without an participation button is only shown briefly while the site may be updating.
                 if not first_seen or now - first_seen > timedelta(minutes=30):
                     continue
                 item["_live_state"] = "checking"
@@ -137,7 +155,7 @@ class TelegramPanelRuntimeV4(TelegramPanelRuntimeV3):
         if not items:
             self.send(
                 "🔥 <b>Действующих колёс сейчас нет.</b>\n\n"
-                "Колёса без кнопки участия и с истёкшим временем в этот список не попадают.",
+                "В список попадают колёса с открытым участием или будущим временем прокрутки.",
                 reply_markup=self.with_nav([[{"text": "🔄 Обновить", "callback_data": "page:active"}]]),
             )
             return
@@ -151,10 +169,10 @@ class TelegramPanelRuntimeV4(TelegramPanelRuntimeV3):
             deadline = self.parse_dt(item.get("deadline"))
             live_state = str(item.get("_live_state") or "checking")
             status_text = {
-                "active": "🟢 участие открыто",
-                "scheduled": "🟡 время подтверждено",
-                "checking": "🟠 проверяем страницу",
-            }.get(live_state, "🟠 проверяем страницу")
+                "active": "🟢 Участие открыто",
+                "scheduled": "🟡 Прокрутка ещё впереди",
+                "checking": "🟠 Проверяем страницу",
+            }.get(live_state, "🟠 Проверяем страницу")
             joined = identifier.casefold() in participating or key.casefold() in participating
             time_text = self.remaining(deadline) if deadline else "время прокрутки не указано"
             lines.extend(
@@ -162,9 +180,9 @@ class TelegramPanelRuntimeV4(TelegramPanelRuntimeV3):
                     "",
                     f"<b>{index}. {html.escape(identifier)}</b>",
                     status_text,
-                    f"⏳ {html.escape(time_text)}",
-                    f"📡 @{html.escape(source)}",
-                    f"🙋 {'✅ участвую' if joined else '❌ не участвую'}",
+                    f"⏳ До прокрутки: {html.escape(time_text)}",
+                    f"📡 Источник: @{html.escape(source)}",
+                    f"🙋 Участие: {'✅ отмечено' if joined else '❌ не отмечено'}",
                 ]
             )
             row: list[dict[str, str]] = []
@@ -188,6 +206,11 @@ def self_test() -> None:
     bot = TelegramPanelRuntimeV4()
     assert len(ADMIN_KEYBOARD_V4["keyboard"]) == 5
     assert "⚙️ Настройки" in str(ADMIN_KEYBOARD_V4)
+    sample = {
+        "message_date": "2026-07-13T08:01:29+00:00",
+        "message_text": "ИТОГИ ЧЕРЕЗ 10 ЧАСОВ",
+    }
+    assert bot._restore_telegram_deadline(sample) is not None
     print("admin_panel_runtime_v4 self-test passed")
 
 
