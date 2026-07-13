@@ -1,0 +1,28 @@
+.bottom-nav.five-items{grid-template-columns:repeat(5,minmax(0,1fr))}
+.bottom-nav.five-items .nav-item{font-size:10px;gap:3px;padding-inline:2px}
+.bottom-nav.five-items .nav-item svg{width:20px;height:20px}
+.source-summary-grid,.detail-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:14px 0}
+.source-summary-grid article,.detail-grid article{background:linear-gradient(145deg,rgba(111,58,255,.13),rgba(14,13,20,.92));border:1px solid rgba(151,110,255,.18);border-radius:16px;padding:14px}
+.source-summary-grid strong,.detail-grid strong{display:block;font-size:22px;line-height:1.1}
+.source-summary-grid span,.detail-grid span{display:block;color:var(--muted,#9d98aa);font-size:12px;margin-top:5px}
+.source-list .source-row{align-items:flex-start}
+.source-status{flex:0 0 auto;max-width:112px;text-align:right;font-size:11px;line-height:1.25;padding-top:3px}
+.source-status.available{color:#8ce7b2}.source-status.unavailable{color:#ff919c}.source-status.not_checked{color:#ffd276}
+.rating-value{display:flex;flex-direction:column;align-items:flex-end;gap:3px;min-width:52px}
+.rating-value b{font-size:15px}.rating-value small{font-size:11px;color:var(--muted,#9d98aa)}
+.rating-legend{display:grid;gap:9px;margin-top:12px}
+.rating-legend span{display:flex;align-items:center;gap:10px;color:var(--muted,#a39ead);font-size:13px}
+.rating-legend b{min-width:36px;color:#cbb8ff}
+.source-detail-status{font-weight:700}
+.source-reason{margin:12px 0}
+.source-reason p{margin:7px 0 0;color:var(--muted,#a39ead);line-height:1.45}
+.history-list{display:grid;gap:8px;margin:12px 0 18px}
+.history-list article{display:grid;grid-template-columns:46px 1fr;gap:4px 10px;padding:11px 12px;border:1px solid rgba(151,110,255,.15);border-radius:14px;background:rgba(10,9,15,.75)}
+.history-list b{grid-row:1/3;font-size:15px}
+.history-list b.positive{color:#86e9ad}.history-list b.negative{color:#ff8f9b}
+.history-list span{font-size:13px;line-height:1.35}
+.history-list small{color:var(--muted,#918b9d);font-size:11px}
+@media(max-width:380px){
+  .bottom-nav.five-items .nav-item span{font-size:9px}
+  .source-status{max-width:92px}
+}
