@@ -41,6 +41,20 @@
       "telegram_excerpt": "https://betboom.ru/freestream/zonertg4?utm_content=zoner&utm_source=freestream https://t.me/kolesaBB https://t.me/kolesaBB/107",
       "wheel_identifier": "zonertg4",
       "wheel_url": "https://betboom.ru/freestream/zonertg4"
+    },
+    {
+      "captured_at": "2026-07-13T11:33:24.668564+00:00",
+      "fingerprint": "dd8156d2cd991bdeb93d2f281f3a6f579b505fdc7dad6fa9b2d995c1bbc44c99",
+      "message_id": 107,
+      "message_url": "https://t.me/kolesaBB/107",
+      "method": "страница открылась, но активность не подтверждена",
+      "page_excerpt": "Букмекерская контора BetBoom - ставки на спорт онлайн в России!",
+      "reason": "pending_recheck",
+      "source": "kolesaBB",
+      "status": "unknown",
+      "telegram_excerpt": "https://betboom.ru/freestream/zonertg4?utm_content=zoner&utm_source=freestream https://t.me/kolesaBB https://t.me/kolesaBB/107",
+      "wheel_identifier": "zonertg4",
+      "wheel_url": "https://betboom.ru/freestream/zonertg4"
     }
   ],
   "version": 1
