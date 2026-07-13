@@ -1,0 +1,58 @@
+name: Maintain source monitoring tiers
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "47 20 * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: betboom-source-tier-maintenance
+  cancel-in-progress: false
+
+jobs:
+  maintain:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Check maintenance script
+        run: python -m py_compile source_tier_maintenance.py
+
+      - name: Evaluate seven-day source activity
+        env:
+          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+          BOT_CHAT_ID: ${{ secrets.BOT_CHAT_ID }}
+          SOURCE_AUTO_DEMOTION_DAYS: "7"
+          SOURCE_AUTO_DEMOTION_MIN_COVERAGE_DAYS: "6"
+          SOURCE_AUTO_DEMOTION_MIN_CHECKS: "100"
+          SOURCE_AUTO_DEMOTION_MAX_CHECK_AGE_HOURS: "2"
+        run: python source_tier_maintenance.py
+
+      - name: Save source tier changes
+        shell: bash
+        run: |
+          files=(public_sources.txt source_catalog.txt source_tier_state.json)
+          if git diff --quiet -- "${files[@]}"; then
+            echo "Source tiers did not change."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add "${files[@]}"
+          git commit -m "Maintain source monitoring tiers [skip ci]"
+          git pull --rebase origin main
+          git push origin HEAD:main
