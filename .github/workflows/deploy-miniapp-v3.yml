@@ -101,6 +101,7 @@ jobs:
           now = datetime.now(timezone.utc).isoformat()
           deployment = {
               "status": "deployed",
+              "version": 3,
               "provider": "cloudflare-pages",
               "url": os.environ["APP_URL"],
               "deployed_at": now,
@@ -108,6 +109,7 @@ jobs:
           }
           runtime = {
               "status": "success",
+              "version": 3,
               "checked_at": now,
               "run_id": os.environ.get("GITHUB_RUN_ID", ""),
               "commit": os.environ.get("GITHUB_SHA", ""),
