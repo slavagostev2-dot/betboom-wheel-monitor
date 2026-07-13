@@ -38,10 +38,12 @@ jobs:
 
       - name: Check project files
         run: |
-          python -m py_compile monitor.py monitor_data.py nightly_discovery.py daily_report.py
+          python -m py_compile monitor.py monitor_data.py nightly_discovery.py nightly_discovery_entry.py daily_report.py notification_router.py
+          python notification_router.py
+          python -m json.tool bot_access.json >/dev/null
           python self_test.py
 
-      - name: Scan nightly source catalog
+      - name: Scan reserve source catalog
         env:
           BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
           BOT_CHAT_ID: ${{ secrets.BOT_CHAT_ID }}
@@ -55,7 +57,7 @@ jobs:
           QUARANTINE_EMPTY_THRESHOLD: "4"
           QUARANTINE_RECHECK_HOURS: "6"
           MANUAL_RUN: ${{ github.event_name == 'workflow_dispatch' }}
-        run: python nightly_discovery.py
+        run: python nightly_discovery_entry.py
 
       - name: Save discovery, health and statistics
         shell: bash
