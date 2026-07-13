@@ -3,7 +3,7 @@ from __future__ import annotations
 import html
 from typing import Any
 
-from admin_panel_runtime_v21 import BRAND_NAME
+from admin_panel_runtime_v20 import BRAND_NAME
 
 
 class TelegramPanelViewsV22Mixin:
