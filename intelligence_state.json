@@ -1,0 +1,809 @@
+{
+  "candidates": {
+    "artemkef": {
+      "discovered_from": [
+        "risenhaha"
+      ],
+      "evidence": [
+        {
+          "from": "risenhaha",
+          "message_url": "https://t.me/risenhaha/8125",
+          "method": "упоминание или ссылка Telegram",
+          "published_at": "2026-07-11T21:27:50+00:00"
+        },
+        {
+          "from": "risenhaha",
+          "message_url": "https://t.me/risenhaha/8127",
+          "method": "упоминание или ссылка Telegram",
+          "published_at": "2026-07-11T22:58:41+00:00"
+        },
+        {
+          "from": "risenhaha",
+          "message_url": "https://t.me/risenhaha/8128",
+          "method": "упоминание или ссылка Telegram",
+          "published_at": "2026-07-12T00:36:12+00:00"
+        },
+        {
+          "from": "risenhaha",
+          "message_url": "https://t.me/risenhaha/8130",
+          "method": "упоминание или ссылка Telegram",
+          "published_at": "2026-07-12T02:55:14+00:00"
+        },
+        {
+          "from": "risenhaha",
+          "message_url": "https://t.me/risenhaha/8133",
+          "method": "упоминание или ссылка Telegram",
+          "published_at": "2026-07-12T03:48:28+00:00"
+        },
+        {
+          "from": "risenhaha",
+          "message_url": "https://t.me/risenhaha/8138",
+          "method": "упоминание или ссылка Telegram",
+          "published_at": "2026-07-12T16:00:31+00:00"
+        }
+      ],
+      "first_discovered_at": "2026-07-13T15:54:27.957766+00:00",
+      "last_discovered_at": "2026-07-13T15:54:27.957763+00:00",
+      "last_verified_at": "2026-07-13T15:54:28.458168+00:00",
+      "latest_wheel_at": null,
+      "mention_count": 6,
+      "messages_checked": 20,
+      "public": true,
+      "sample_wheels": [],
+      "score": 33,
+      "source": "artemkef",
+      "status": "ok",
+      "wheel_links_found": 0
+    },
+    "bb_forecast_bot": {
+      "discovered_from": [
+        "blast_betboom"
+      ],
+      "evidence": [
+        {
+          "from": "blast_betboom",
+          "message_url": "https://t.me/blast_betboom/4509",
+          "method": "упоминание или ссылка Telegram",
+          "published_at": "2026-07-13T15:45:20+00:00"
+        }
+      ],
+      "first_discovered_at": "2026-07-13T15:54:30.799981+00:00",
+      "last_discovered_at": "2026-07-13T15:54:30.799977+00:00",
+      "last_verified_at": "2026-07-13T15:54:31.171759+00:00",
+      "latest_wheel_at": null,
+      "mention_count": 1,
+      "messages_checked": 0,
+      "public": false,
+      "sample_wheels": [],
+      "score": 0,
+      "source": "BB_Forecast_Bot",
+      "status": "empty",
+      "wheel_links_found": 0
+    },
+    "bbteamcs2": {
+      "discovered_from": [
+        "betboomteamcs2"
+      ],
+      "evidence": [
+        {
+          "from": "betboomteamcs2",
+          "message_url": "https://t.me/betboomteamcs2/2574",
+          "method": "упоминание или ссылка Telegram",
+          "published_at": "2026-07-09T12:11:06+00:00"
+        },
+        {
+          "from": "betboomteamcs2",
+          "message_url": "https://t.me/betboomteamcs2/2584",
+          "method": "упоминание или ссылка Telegram",
+          "published_at": "2026-07-11T12:06:04+00:00"
+        }
+      ],
+      "first_discovered_at": "2026-07-13T15:54:28.829922+00:00",
+      "last_discovered_at": "2026-07-13T15:54:28.829918+00:00",
+      "last_verified_at": "2026-07-13T15:54:29.147702+00:00",
+      "latest_wheel_at": null,
+      "mention_count": 2,
+      "messages_checked": 2,
+      "public": true,
+      "sample_wheels": [],
+      "score": 21,
+      "source": "bbteamcs2",
+      "status": "ok",
+      "wheel_links_found": 0
+    },
+    "blinkcx": {
+      "discovered_from": [
+        "mechanogun"
+      ],
+      "evidence": [
+        {
+          "from": "mechanogun",
+          "message_url": "https://t.me/mechanogun/35597",
+          "method": "упоминание или ссылка Telegram",
+          "published_at": "2026-07-11T18:00:24+00:00"
+        }
+      ],
+      "first_discovered_at": "2026-07-13T15:54:31.171787+00:00",
+      "last_discovered_at": "2026-07-13T15:54:31.171783+00:00",
+      "last_verified_at": "2026-07-13T15:54:31.553024+00:00",
+      "latest_wheel_at": null,
+      "mention_count": 1,
+      "messages_checked": 0,
+      "public": false,
+      "sample_wheels": [],
+      "score": 0,
+      "source": "blinkcx",
+      "status": "empty",
+      "wheel_links_found": 0
+    },
+    "bombom_qp": {
+      "discovered_from": [
+        "mechanogun"
+      ],
+      "evidence": [
+        {
+          "from": "mechanogun",
+          "message_url": "https://t.me/mechanogun/35597",
+          "method": "упоминание или ссылка Telegram",
+          "published_at": "2026-07-11T18:00:24+00:00"
+        }
+      ],
+      "first_discovered_at": "2026-07-13T15:54:31.553053+00:00",
+      "last_discovered_at": "2026-07-13T15:54:31.553049+00:00",
+      "last_verified_at": "2026-07-13T15:54:31.921035+00:00",
+      "latest_wheel_at": null,
+      "mention_count": 1,
+      "messages_checked": 0,
+      "public": false,
+      "sample_wheels": [],
+      "score": 0,
+      "source": "bombom_qp",
+      "status": "empty",
+      "wheel_links_found": 0
+    },
+    "breakevens": {
+      "discovered_from": [
+        "gshikaryan"
+      ],
+      "evidence": [
+        {
+          "from": "gshikaryan",
+          "message_url": "https://t.me/GShikaryan/6038",
+          "method": "упоминание или ссылка Telegram",
+          "published_at": "2026-07-11T13:48:43+00:00"
+        },
+        {
+          "from": "gshikaryan",
+          "message_url": "https://t.me/GShikaryan/6047",
+          "method": "упоминание или ссылка Telegram",
+          "published_at": "2026-07-12T17:00:12+00:00"
+        }
+      ],
+      "first_discovered_at": "2026-07-13T15:54:29.147729+00:00",
+      "last_discovered_at": "2026-07-13T15:54:29.147725+00:00",
+      "last_verified_at": "2026-07-13T15:54:29.774328+00:00",
+      "latest_wheel_at": null,
+      "mention_count": 2,
+      "messages_checked": 19,
+      "public": true,
+      "sample_wheels": [],
+      "score": 21,
+      "source": "Breakevens",
+      "status": "ok",
+      "wheel_links_found": 0
+    },
+    "celest1al_v0id": {
+      "discovered_from": [
+        "mechanogun"
+      ],
+      "evidence": [
+        {
+          "from": "mechanogun",
+          "message_url": "https://t.me/mechanogun/35597",
+          "method": "упоминание или ссылка Telegram",
+          "published_at": "2026-07-11T18:00:24+00:00"
+        }
+      ],
+      "first_discovered_at": "2026-07-13T15:54:31.921062+00:00",
+      "last_discovered_at": "2026-07-13T15:54:31.921059+00:00",
+      "last_verified_at": "2026-07-13T15:54:32.291676+00:00",
+      "latest_wheel_at": null,
+      "mention_count": 1,
+      "messages_checked": 0,
+      "public": false,
+      "sample_wheels": [],
+      "score": 0,
+      "source": "celest1al_v0id",
+      "status": "empty",
+      "wheel_links_found": 0
+    },
+    "concubot": {
+      "discovered_from": [
+        "amam0610"
+      ],
+      "evidence": [
+        {
+          "from": "amam0610",
+          "message_url": "https://t.me/amam0610/71725",
+          "method": "упоминание или ссылка Telegram",
+          "published_at": "2026-07-12T22:58:22+00:00"
+        }
+      ],
+      "first_discovered_at": "2026-07-13T15:54:32.291706+00:00",
+      "last_discovered_at": "2026-07-13T15:54:32.291702+00:00",
+      "last_verified_at": "2026-07-13T15:54:32.671704+00:00",
+      "latest_wheel_at": null,
+      "mention_count": 1,
+      "messages_checked": 0,
+      "public": false,
+      "sample_wheels": [],
+      "score": 0,
+      "source": "concubot",
+      "status": "empty",
+      "wheel_links_found": 0
+    },
+    "ewc_betboom": {
+      "discovered_from": [
+        "blast_betboom"
+      ],
+      "evidence": [
+        {
+          "from": "blast_betboom",
+          "message_url": "https://t.me/blast_betboom/4495",
+          "method": "упоминание или ссылка Telegram",
+          "published_at": "2026-07-12T18:07:30+00:00"
+        }
+      ],
+      "first_discovered_at": "2026-07-13T15:54:32.671733+00:00",
+      "last_discovered_at": "2026-07-13T15:54:32.671729+00:00",
+      "last_verified_at": "2026-07-13T15:54:33.113594+00:00",
+      "latest_wheel_at": null,
+      "mention_count": 1,
+      "messages_checked": 19,
+      "public": true,
+      "sample_wheels": [],
+      "score": 18,
+      "source": "EWC_betboom",
+      "status": "ok",
+      "wheel_links_found": 0
+    },
+    "false9jersey": {
+      "discovered_from": [
+        "gshikaryan"
+      ],
+      "evidence": [
+        {
+          "from": "gshikaryan",
+          "message_url": "https://t.me/GShikaryan/6038",
+          "method": "упоминание или ссылка Telegram",
+          "published_at": "2026-07-11T13:48:43+00:00"
+        },
+        {
+          "from": "gshikaryan",
+          "message_url": "https://t.me/GShikaryan/6047",
+          "method": "упоминание или ссылка Telegram",
+          "published_at": "2026-07-12T17:00:12+00:00"
+        }
+      ],
+      "first_discovered_at": "2026-07-13T15:54:29.774357+00:00",
+      "last_discovered_at": "2026-07-13T15:54:29.774353+00:00",
+      "last_verified_at": "2026-07-13T15:54:30.291691+00:00",
+      "latest_wheel_at": null,
+      "mention_count": 2,
+      "messages_checked": 7,
+      "public": true,
+      "sample_wheels": [],
+      "score": 21,
+      "source": "False9Jersey",
+      "status": "ok",
+      "wheel_links_found": 0
+    },
+    "frik009": {
+      "discovered_from": [
+        "amam0610"
+      ],
+      "evidence": [
+        {
+          "from": "amam0610",
+          "message_url": "https://t.me/amam0610/71725",
+          "method": "упоминание или ссылка Telegram",
+          "published_at": "2026-07-12T22:58:22+00:00"
+        }
+      ],
+      "first_discovered_at": "2026-07-13T15:54:33.113648+00:00",
+      "last_discovered_at": "2026-07-13T15:54:33.113644+00:00",
+      "last_verified_at": "2026-07-13T15:54:33.499088+00:00",
+      "latest_wheel_at": null,
+      "mention_count": 1,
+      "messages_checked": 0,
+      "public": false,
+      "sample_wheels": [],
+      "score": 0,
+      "source": "FRIK009",
+      "status": "empty",
+      "wheel_links_found": 0
+    },
+    "kiritych1": {
+      "discovered_from": [
+        "betboomteam"
+      ],
+      "evidence": [
+        {
+          "from": "betboomteam",
+          "message_url": "https://t.me/betboomteam/6713",
+          "method": "упоминание или ссылка Telegram",
+          "published_at": "2026-07-13T15:43:41+00:00"
+        }
+      ],
+      "first_discovered_at": "2026-07-13T15:54:33.499118+00:00",
+      "last_discovered_at": "2026-07-13T15:54:33.499114+00:00",
+      "last_verified_at": "2026-07-13T15:54:34.023882+00:00",
+      "latest_wheel_at": null,
+      "mention_count": 1,
+      "messages_checked": 20,
+      "public": true,
+      "sample_wheels": [],
+      "score": 18,
+      "source": "kiritych1",
+      "status": "ok",
+      "wheel_links_found": 0
+    },
+    "ladlda": {
+      "discovered_from": [
+        "pandafx2"
+      ],
+      "evidence": [
+        {
+          "from": "pandafx2",
+          "message_url": "https://t.me/pandafx2/915",
+          "method": "упоминание или ссылка Telegram",
+          "published_at": "2026-03-16T12:50:02+00:00"
+        }
+      ],
+      "first_discovered_at": "2026-07-13T15:54:34.023910+00:00",
+      "last_discovered_at": "2026-07-13T15:54:34.023906+00:00",
+      "last_verified_at": "2026-07-13T15:54:34.601940+00:00",
+      "latest_wheel_at": null,
+      "mention_count": 1,
+      "messages_checked": 8,
+      "public": true,
+      "sample_wheels": [],
+      "score": 18,
+      "source": "ladlda",
+      "status": "ok",
+      "wheel_links_found": 0
+    },
+    "lukawahouse": {
+      "discovered_from": [
+        "betboomteam"
+      ],
+      "evidence": [
+        {
+          "from": "betboomteam",
+          "message_url": "https://t.me/betboomteam/6710",
+          "method": "упоминание или ссылка Telegram",
+          "published_at": "2026-07-12T16:25:00+00:00"
+        }
+      ],
+      "first_discovered_at": "2026-07-13T15:54:34.601967+00:00",
+      "last_discovered_at": "2026-07-13T15:54:34.601963+00:00",
+      "last_verified_at": "2026-07-13T15:54:35.164028+00:00",
+      "latest_wheel_at": null,
+      "mention_count": 1,
+      "messages_checked": 11,
+      "public": true,
+      "sample_wheels": [],
+      "score": 18,
+      "source": "lukawahouse",
+      "status": "ok",
+      "wheel_links_found": 0
+    },
+    "magnojezking": {
+      "discovered_from": [
+        "betboomteamcs2"
+      ],
+      "evidence": [
+        {
+          "from": "betboomteamcs2",
+          "message_url": "https://t.me/betboomteamcs2/2570",
+          "method": "упоминание или ссылка Telegram",
+          "published_at": "2026-07-08T08:32:59+00:00"
+        }
+      ],
+      "first_discovered_at": "2026-07-13T15:54:35.164056+00:00",
+      "last_discovered_at": "2026-07-13T15:54:35.164052+00:00",
+      "last_verified_at": "2026-07-13T15:54:35.782134+00:00",
+      "latest_wheel_at": null,
+      "mention_count": 1,
+      "messages_checked": 20,
+      "public": true,
+      "sample_wheels": [],
+      "score": 18,
+      "source": "magnojezking",
+      "status": "ok",
+      "wheel_links_found": 0
+    },
+    "meowlike8": {
+      "discovered_from": [
+        "mechanogun"
+      ],
+      "evidence": [
+        {
+          "from": "mechanogun",
+          "message_url": "https://t.me/mechanogun/35597",
+          "method": "упоминание или ссылка Telegram",
+          "published_at": "2026-07-11T18:00:24+00:00"
+        }
+      ],
+      "first_discovered_at": "2026-07-13T15:54:35.782160+00:00",
+      "last_discovered_at": "2026-07-13T15:54:35.782157+00:00",
+      "last_verified_at": "2026-07-13T15:54:36.170525+00:00",
+      "latest_wheel_at": null,
+      "mention_count": 1,
+      "messages_checked": 0,
+      "public": false,
+      "sample_wheels": [],
+      "score": 0,
+      "source": "meowlike8",
+      "status": "empty",
+      "wheel_links_found": 0
+    },
+    "randomized": {
+      "discovered_from": [
+        "gshikaryan",
+        "mechanogun"
+      ],
+      "evidence": [
+        {
+          "from": "mechanogun",
+          "message_url": "https://t.me/mechanogun/35588",
+          "method": "упоминание или ссылка Telegram",
+          "published_at": "2026-07-10T18:00:02+00:00"
+        },
+        {
+          "from": "mechanogun",
+          "message_url": "https://t.me/mechanogun/35597",
+          "method": "упоминание или ссылка Telegram",
+          "published_at": "2026-07-11T18:00:24+00:00"
+        },
+        {
+          "from": "gshikaryan",
+          "message_url": "https://t.me/GShikaryan/6047",
+          "method": "упоминание или ссылка Telegram",
+          "published_at": "2026-07-12T17:00:12+00:00"
+        }
+      ],
+      "first_discovered_at": "2026-07-13T15:54:28.458205+00:00",
+      "last_discovered_at": "2026-07-13T15:54:28.458200+00:00",
+      "last_verified_at": "2026-07-13T15:54:28.829891+00:00",
+      "latest_wheel_at": null,
+      "mention_count": 3,
+      "messages_checked": 0,
+      "public": false,
+      "sample_wheels": [],
+      "score": 4,
+      "source": "Randomized",
+      "status": "empty",
+      "wheel_links_found": 0
+    },
+    "starie_seniory": {
+      "discovered_from": [
+        "pandafx2"
+      ],
+      "evidence": [
+        {
+          "from": "pandafx2",
+          "message_url": "https://t.me/pandafx2/923",
+          "method": "упоминание или ссылка Telegram",
+          "published_at": "2026-04-12T18:40:50+00:00"
+        }
+      ],
+      "first_discovered_at": "2026-07-13T15:54:36.170552+00:00",
+      "last_discovered_at": "2026-07-13T15:54:36.170548+00:00",
+      "last_verified_at": "2026-07-13T15:54:37.245364+00:00",
+      "latest_wheel_at": null,
+      "mention_count": 1,
+      "messages_checked": 20,
+      "public": true,
+      "sample_wheels": [],
+      "score": 18,
+      "source": "starie_seniory",
+      "status": "ok",
+      "wheel_links_found": 0
+    },
+    "straydungeon228": {
+      "discovered_from": [
+        "YBNFedor"
+      ],
+      "evidence": [
+        {
+          "from": "YBNFedor",
+          "message_url": "https://t.me/YBNFedor/3942",
+          "method": "упоминание или ссылка Telegram",
+          "published_at": "2026-07-11T15:33:26+00:00"
+        }
+      ],
+      "first_discovered_at": "2026-07-13T15:54:37.245393+00:00",
+      "last_discovered_at": "2026-07-13T15:54:37.245390+00:00",
+      "last_verified_at": "2026-07-13T15:54:37.792886+00:00",
+      "latest_wheel_at": null,
+      "mention_count": 1,
+      "messages_checked": 19,
+      "public": true,
+      "sample_wheels": [],
+      "score": 18,
+      "source": "StrayDungeon228",
+      "status": "ok",
+      "wheel_links_found": 0
+    },
+    "vaskis": {
+      "discovered_from": [
+        "mechanogun"
+      ],
+      "evidence": [
+        {
+          "from": "mechanogun",
+          "message_url": "https://t.me/mechanogun/35597",
+          "method": "упоминание или ссылка Telegram",
+          "published_at": "2026-07-11T18:00:24+00:00"
+        }
+      ],
+      "first_discovered_at": "2026-07-13T15:54:37.792913+00:00",
+      "last_discovered_at": "2026-07-13T15:54:37.792909+00:00",
+      "last_verified_at": "2026-07-13T15:54:38.166042+00:00",
+      "latest_wheel_at": null,
+      "mention_count": 1,
+      "messages_checked": 0,
+      "public": false,
+      "sample_wheels": [],
+      "score": 0,
+      "source": "vaskis",
+      "status": "empty",
+      "wheel_links_found": 0
+    },
+    "wfasq": {
+      "discovered_from": [
+        "mechanogun"
+      ],
+      "evidence": [
+        {
+          "from": "mechanogun",
+          "message_url": "https://t.me/mechanogun/35597",
+          "method": "упоминание или ссылка Telegram",
+          "published_at": "2026-07-11T18:00:24+00:00"
+        }
+      ],
+      "first_discovered_at": "2026-07-13T15:54:38.166077+00:00",
+      "last_discovered_at": "2026-07-13T15:54:38.166073+00:00",
+      "last_verified_at": "2026-07-13T15:54:38.535108+00:00",
+      "latest_wheel_at": null,
+      "mention_count": 1,
+      "messages_checked": 0,
+      "public": false,
+      "sample_wheels": [],
+      "score": 0,
+      "source": "Wfasq",
+      "status": "empty",
+      "wheel_links_found": 0
+    },
+    "zortelad": {
+      "discovered_from": [
+        "betboomteamcs2"
+      ],
+      "evidence": [
+        {
+          "from": "betboomteamcs2",
+          "message_url": "https://t.me/betboomteamcs2/2564",
+          "method": "упоминание или ссылка Telegram",
+          "published_at": "2026-07-06T13:21:58+00:00"
+        },
+        {
+          "from": "betboomteamcs2",
+          "message_url": "https://t.me/betboomteamcs2/2565",
+          "method": "упоминание или ссылка Telegram",
+          "published_at": "2026-07-06T13:26:05+00:00"
+        }
+      ],
+      "first_discovered_at": "2026-07-13T15:54:30.291726+00:00",
+      "last_discovered_at": "2026-07-13T15:54:30.291722+00:00",
+      "last_verified_at": "2026-07-13T15:54:30.799953+00:00",
+      "latest_wheel_at": null,
+      "mention_count": 2,
+      "messages_checked": 18,
+      "public": true,
+      "sample_wheels": [],
+      "score": 21,
+      "source": "zortelad",
+      "status": "ok",
+      "wheel_links_found": 0
+    }
+  },
+  "edges": {
+    "amam0610->concubot": {
+      "count": 1,
+      "first_seen_at": "2026-07-13T15:54:19.914749+00:00",
+      "from": "amam0610",
+      "last_seen_at": "2026-07-13T15:54:19.914751+00:00",
+      "to": "concubot"
+    },
+    "amam0610->frik009": {
+      "count": 1,
+      "first_seen_at": "2026-07-13T15:54:19.914735+00:00",
+      "from": "amam0610",
+      "last_seen_at": "2026-07-13T15:54:19.914742+00:00",
+      "to": "FRIK009"
+    },
+    "betboomteam->kiritych1": {
+      "count": 1,
+      "first_seen_at": "2026-07-13T15:54:27.394498+00:00",
+      "from": "betboomteam",
+      "last_seen_at": "2026-07-13T15:54:27.394501+00:00",
+      "to": "kiritych1"
+    },
+    "betboomteam->lukawahouse": {
+      "count": 1,
+      "first_seen_at": "2026-07-13T15:54:27.394434+00:00",
+      "from": "betboomteam",
+      "last_seen_at": "2026-07-13T15:54:27.394441+00:00",
+      "to": "lukawahouse"
+    },
+    "betboomteamcs2->bbteamcs2": {
+      "count": 2,
+      "first_seen_at": "2026-07-13T15:54:27.957625+00:00",
+      "from": "betboomteamcs2",
+      "last_seen_at": "2026-07-13T15:54:27.957721+00:00",
+      "to": "bbteamcs2"
+    },
+    "betboomteamcs2->magnojezking": {
+      "count": 1,
+      "first_seen_at": "2026-07-13T15:54:27.957513+00:00",
+      "from": "betboomteamcs2",
+      "last_seen_at": "2026-07-13T15:54:27.957517+00:00",
+      "to": "magnojezking"
+    },
+    "betboomteamcs2->zortelad": {
+      "count": 2,
+      "first_seen_at": "2026-07-13T15:54:27.957380+00:00",
+      "from": "betboomteamcs2",
+      "last_seen_at": "2026-07-13T15:54:27.957406+00:00",
+      "to": "zortelad"
+    },
+    "blast_betboom->bb_forecast_bot": {
+      "count": 1,
+      "first_seen_at": "2026-07-13T15:54:24.510214+00:00",
+      "from": "blast_betboom",
+      "last_seen_at": "2026-07-13T15:54:24.510216+00:00",
+      "to": "BB_Forecast_Bot"
+    },
+    "blast_betboom->ewc_betboom": {
+      "count": 1,
+      "first_seen_at": "2026-07-13T15:54:24.510096+00:00",
+      "from": "blast_betboom",
+      "last_seen_at": "2026-07-13T15:54:24.510102+00:00",
+      "to": "EWC_betboom"
+    },
+    "gshikaryan->breakevens": {
+      "count": 2,
+      "first_seen_at": "2026-07-13T15:54:18.705317+00:00",
+      "from": "gshikaryan",
+      "last_seen_at": "2026-07-13T15:54:18.705544+00:00",
+      "to": "Breakevens"
+    },
+    "gshikaryan->false9jersey": {
+      "count": 2,
+      "first_seen_at": "2026-07-13T15:54:18.705303+00:00",
+      "from": "gshikaryan",
+      "last_seen_at": "2026-07-13T15:54:18.705537+00:00",
+      "to": "False9Jersey"
+    },
+    "gshikaryan->randomized": {
+      "count": 1,
+      "first_seen_at": "2026-07-13T15:54:18.705528+00:00",
+      "from": "gshikaryan",
+      "last_seen_at": "2026-07-13T15:54:18.705530+00:00",
+      "to": "Randomized"
+    },
+    "mechanogun->blinkcx": {
+      "count": 1,
+      "first_seen_at": "2026-07-13T15:54:16.269573+00:00",
+      "from": "mechanogun",
+      "last_seen_at": "2026-07-13T15:54:16.269576+00:00",
+      "to": "blinkcx"
+    },
+    "mechanogun->bombom_qp": {
+      "count": 1,
+      "first_seen_at": "2026-07-13T15:54:16.269652+00:00",
+      "from": "mechanogun",
+      "last_seen_at": "2026-07-13T15:54:16.269654+00:00",
+      "to": "bombom_qp"
+    },
+    "mechanogun->celest1al_v0id": {
+      "count": 1,
+      "first_seen_at": "2026-07-13T15:54:16.269582+00:00",
+      "from": "mechanogun",
+      "last_seen_at": "2026-07-13T15:54:16.269585+00:00",
+      "to": "celest1al_v0id"
+    },
+    "mechanogun->meowlike8": {
+      "count": 1,
+      "first_seen_at": "2026-07-13T15:54:16.269589+00:00",
+      "from": "mechanogun",
+      "last_seen_at": "2026-07-13T15:54:16.269591+00:00",
+      "to": "meowlike8"
+    },
+    "mechanogun->randomized": {
+      "count": 2,
+      "first_seen_at": "2026-07-13T15:54:16.269433+00:00",
+      "from": "mechanogun",
+      "last_seen_at": "2026-07-13T15:54:16.269646+00:00",
+      "to": "Randomized"
+    },
+    "mechanogun->vaskis": {
+      "count": 1,
+      "first_seen_at": "2026-07-13T15:54:16.269596+00:00",
+      "from": "mechanogun",
+      "last_seen_at": "2026-07-13T15:54:16.269627+00:00",
+      "to": "vaskis"
+    },
+    "mechanogun->wfasq": {
+      "count": 1,
+      "first_seen_at": "2026-07-13T15:54:16.269634+00:00",
+      "from": "mechanogun",
+      "last_seen_at": "2026-07-13T15:54:16.269636+00:00",
+      "to": "Wfasq"
+    },
+    "pandafx2->ladlda": {
+      "count": 1,
+      "first_seen_at": "2026-07-13T15:54:21.776361+00:00",
+      "from": "pandafx2",
+      "last_seen_at": "2026-07-13T15:54:21.776368+00:00",
+      "to": "ladlda"
+    },
+    "pandafx2->starie_seniory": {
+      "count": 1,
+      "first_seen_at": "2026-07-13T15:54:21.776423+00:00",
+      "from": "pandafx2",
+      "last_seen_at": "2026-07-13T15:54:21.776426+00:00",
+      "to": "starie_seniory"
+    },
+    "risenhaha->artemkef": {
+      "count": 6,
+      "first_seen_at": "2026-07-13T15:54:20.693583+00:00",
+      "from": "risenhaha",
+      "last_seen_at": "2026-07-13T15:54:20.693915+00:00",
+      "to": "artemkef"
+    },
+    "ybnfedor->straydungeon228": {
+      "count": 1,
+      "first_seen_at": "2026-07-13T15:54:21.199996+00:00",
+      "from": "YBNFedor",
+      "last_seen_at": "2026-07-13T15:54:21.200003+00:00",
+      "to": "StrayDungeon228"
+    }
+  },
+  "last_errors": [],
+  "last_run_at": "2026-07-13T15:54:38.535129+00:00",
+  "last_run_summary": {
+    "errors": 0,
+    "known_sources": 18,
+    "references_found": 33,
+    "sources_scanned": 18,
+    "strong_candidates": 0,
+    "unique_candidates": 22,
+    "verified_candidates": 22
+  },
+  "runs": [
+    {
+      "at": "2026-07-13T15:54:38.535146+00:00",
+      "errors": 0,
+      "known_sources": 18,
+      "references_found": 33,
+      "sources_scanned": 18,
+      "strong_candidates": 0,
+      "unique_candidates": 22,
+      "verified_candidates": 22
+    }
+  ],
+  "updated_at": "2026-07-13T15:54:38.535150+00:00",
+  "version": 1
+}
