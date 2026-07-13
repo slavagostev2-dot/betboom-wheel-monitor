@@ -1,12 +1,13 @@
 'use strict';
 
-const CACHE='bb-vg-v4';
+const CACHE='bb-vg-v4.0.1';
 const SHELL=[
   './',
   './index.html',
-  './styles.css?v=4.0.0',
-  './app.js?v=4.0.0',
-  './runtime-config.js?v=4.0.0',
+  './styles.css?v=4.0.1',
+  './app.js?v=4.0.1',
+  './bbvg-controls.js?v=1.0.0',
+  './runtime-config.js?v=4.0.1',
   './manifest.webmanifest',
   './icon.svg',
   './splash.svg'
