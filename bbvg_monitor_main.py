@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from datetime import timedelta
 
+import bbvg_monitor_features as features
 import bbvg_monitor_runtime as runtime
 
 
@@ -9,7 +10,7 @@ monitor = runtime.monitor
 _original_recover_deadline = runtime.base_runtime._recover_deadline
 _original_markup = monitor.wheel_reply_markup
 _original_process_active = monitor.process_active_wheels
-_original_send_message = monitor.send_message
+_routed_send_message = None
 
 
 def recover_deadline_manual_first(state: dict, key: str, entry: dict):
@@ -62,7 +63,7 @@ def branded_send_message(text: str, url=None, reply_markup=None):
         for line in value.splitlines()
         if not line.startswith("Ожидают активности:")
     )
-    return _original_send_message(value, url=url, reply_markup=reply_markup)
+    return _routed_send_message(value, url=url, reply_markup=reply_markup)
 
 
 def process_active_without_unknown_time_spam(state: dict, stats: dict):
@@ -95,6 +96,11 @@ def process_active_without_unknown_time_spam(state: dict, stats: dict):
 runtime.base_runtime._recover_deadline = recover_deadline_manual_first
 monitor.wheel_reply_markup = wheel_markup_with_direct_key
 monitor.process_active_wheels = process_active_without_unknown_time_spam
+
+# Install the v22 source history, reputation and notification split after all
+# previous runtime layers so it wraps the final production behavior.
+features.install_fast(runtime)
+_routed_send_message = monitor.send_message
 monitor.send_message = branded_send_message
 
 
