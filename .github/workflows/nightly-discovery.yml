@@ -1,6 +1,14 @@
 name: Nightly Telegram source discovery
 
 on:
+  push:
+    branches: [main]
+    paths:
+      - "nightly_discovery.py"
+      - "nightly_discovery_entry.py"
+      - "public_sources.txt"
+      - "source_catalog.txt"
+      - ".github/workflows/nightly-discovery.yml"
   workflow_dispatch:
   schedule:
     - cron: "27 20 * * *"
