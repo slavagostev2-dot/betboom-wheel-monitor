@@ -781,16 +781,47 @@
       "to": "StrayDungeon228"
     }
   },
-  "last_errors": [],
-  "last_run_at": "2026-07-13T15:54:38.535129+00:00",
+  "last_errors": [
+    "@mechanogun: ConnectionError",
+    "@dyrachyo: ConnectionError",
+    "@PAPAdota2: ConnectionError",
+    "@solo_q_q: ConnectionError",
+    "@nixtalk: ConnectionError",
+    "@boltcast: ConnectionError",
+    "@aunkereEZ: ConnectionError",
+    "@obshakstaya: ConnectionError",
+    "@AdamStaya: ConnectionError",
+    "@NeretCast: ConnectionError",
+    "@StrayDungeon228: ConnectionError",
+    "@shoketg: ConnectionError",
+    "@ihuntnoobs: ConnectionError",
+    "@dekocs: ConnectionError",
+    "@mAger_de_nuke: ConnectionError",
+    "@meowbettt: ConnectionError",
+    "@acoolbazarit: ConnectionError",
+    "@chopperis: ConnectionError",
+    "@hoochcs2: ConnectionError",
+    "@whylollycrry: ConnectionError",
+    "@aviciixd: ConnectionError",
+    "@Blindzonexbet: ConnectionError",
+    "@DayneezBet: ConnectionError",
+    "@danila_gorilla: ConnectionError",
+    "@gorilla_armor: ConnectionError",
+    "@KRATtv: ConnectionError",
+    "@shadowkekw: ConnectionError",
+    "@burdakekw: ConnectionError",
+    "@relaxcis: ConnectionError",
+    "@RelaxCisBet: ConnectionError"
+  ],
+  "last_run_at": "2026-07-13T21:33:10.197576+00:00",
   "last_run_summary": {
-    "errors": 0,
-    "known_sources": 18,
-    "references_found": 33,
-    "sources_scanned": 18,
+    "errors": 66,
+    "known_sources": 66,
+    "references_found": 0,
+    "sources_scanned": 0,
     "strong_candidates": 0,
-    "unique_candidates": 22,
-    "verified_candidates": 22
+    "unique_candidates": 0,
+    "verified_candidates": 0
   },
   "runs": [
     {
@@ -802,8 +833,18 @@
       "strong_candidates": 0,
       "unique_candidates": 22,
       "verified_candidates": 22
+    },
+    {
+      "at": "2026-07-13T21:33:10.197605+00:00",
+      "errors": 66,
+      "known_sources": 66,
+      "references_found": 0,
+      "sources_scanned": 0,
+      "strong_candidates": 0,
+      "unique_candidates": 0,
+      "verified_candidates": 0
     }
   ],
-  "updated_at": "2026-07-13T15:54:38.535150+00:00",
+  "updated_at": "2026-07-13T21:33:10.197610+00:00",
   "version": 1
 }
