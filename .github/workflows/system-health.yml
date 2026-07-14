@@ -22,6 +22,17 @@ on:
       - "partners_catalog.json"
       - ".github/workflows/system-health.yml"
   workflow_dispatch:
+  # Re-run after the state-producing workflows finish so the consolidated
+  # snapshot is based on their fresh results instead of the pre-run files.
+  workflow_run:
+    workflows:
+      - "BB V.G. wheel monitor"
+      - "BB V.G. live 66-source monitor"
+      - "Telegram candidate discovery"
+      - "Telegram source intelligence"
+      - "Telegram transport checks"
+    types: [completed]
+    branches: [main]
   schedule:
     - cron: "7,22,37,52 * * * *"
 
@@ -30,7 +41,7 @@ permissions:
 
 concurrency:
   group: bb-vg-system-health
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   health:
