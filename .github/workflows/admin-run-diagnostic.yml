@@ -1,0 +1,26 @@
+name: Temporary admin run diagnostic
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - ".github/workflows/admin-run-diagnostic.yml"
+
+permissions:
+  actions: read
+  contents: read
+
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: List production control-center runs
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh run list \
+            --repo "${{ github.repository }}" \
+            --workflow admin-bot.yml \
+            --limit 10 \
+            --json databaseId,headSha,status,conclusion,event,createdAt,updatedAt,displayTitle,url
