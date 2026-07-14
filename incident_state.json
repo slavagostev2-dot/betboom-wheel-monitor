@@ -1,7 +1,35 @@
 {
-  "active_count": 0,
-  "incidents": {},
-  "sequence": 0,
+  "active_count": 1,
+  "incidents": {
+    "system_checks:monitor_source_count:05defcc6c0898ea6": {
+      "detail": "В последней итерации проверено 56 из 66.",
+      "first_seen_at": "2026-07-14T03:10:51.892284+00:00",
+      "key": "system_checks:monitor_source_count:05defcc6c0898ea6",
+      "kind": "monitor_source_count",
+      "last_seen_at": "2026-07-14T03:10:51.892284+00:00",
+      "metadata": {},
+      "occurrences": 1,
+      "open_notification_pending": false,
+      "open_notified_at": "2026-07-14T03:10:52.219845+00:00",
+      "opened_sequence": 1,
+      "scope": "system_checks",
+      "severity": "critical",
+      "status": "active",
+      "subject": "",
+      "title": "Основной монитор проверяет не все источники"
+    }
+  },
+  "last_change_at": "2026-07-14T03:10:51.892284+00:00",
+  "last_reconcile_at": "2026-07-14T03:10:51.892284+00:00",
+  "last_reconcile_scope": "system_checks",
+  "last_summary": {
+    "active": 1,
+    "new_notification_count": 1,
+    "recovery_notification_count": 0,
+    "scope": "system_checks"
+  },
+  "sequence": 1,
   "status": "initializing",
+  "updated_at": "2026-07-14T03:10:52.219866+00:00",
   "version": 1
 }

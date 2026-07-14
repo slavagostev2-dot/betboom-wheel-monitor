@@ -1,7 +1,79 @@
 {
-  "active_incidents": 0,
-  "finding_count": 0,
+  "active_incidents": 1,
+  "bot_api": {
+    "ok": true,
+    "username": "slava_wheel_monitor_bot"
+  },
+  "checked_at": "2026-07-14T03:10:50.990764+00:00",
+  "finding_count": 1,
+  "findings": [
+    {
+      "detail": "В последней итерации проверено 56 из 66.",
+      "kind": "monitor_source_count",
+      "severity": "critical",
+      "subject": "",
+      "title": "Основной монитор проверяет не все источники"
+    }
+  ],
+  "incident_delivery": {
+    "open_sent": true,
+    "opened": 1,
+    "resolved": 0,
+    "resolved_sent": false
+  },
+  "incident_sequence": 1,
+  "inventory": {
+    "configured": 66,
+    "domain": "telegram.me",
+    "duplicates": 0,
+    "expected": 66,
+    "nightly": 0,
+    "operational": 66
+  },
+  "monitor": {
+    "brand": "BB V.G.",
+    "checked_sources": 56,
+    "checks_delta": 56,
+    "checks_total": 10299,
+    "consecutive_failures": 0,
+    "consecutive_no_progress": 0,
+    "iteration": 4,
+    "last_failure_at": "2026-07-14T02:44:12.395838+00:00",
+    "last_iteration_at": "2026-07-14T03:02:19.347945+00:00",
+    "last_iteration_duration_seconds": 19,
+    "last_iteration_exit_code": 0,
+    "last_process_heartbeat_at": "2026-07-14T03:02:19.347945+00:00",
+    "last_successful_checks_total": 10299,
+    "last_successful_iteration_at": "2026-07-14T03:02:19.347945+00:00",
+    "pending_wheels": 0,
+    "reachable_sources": 56,
+    "restart_recommended": false,
+    "run_id": "29301894863",
+    "run_started_at": "2026-07-14T02:46:59.429195+00:00",
+    "source_errors": 0,
+    "stats_counter_reset": false,
+    "status": "running",
+    "version": 3
+  },
+  "monitor_age_minutes": 8,
+  "notification_routing": {
+    "admin_recipients": [
+      "7178093128"
+    ],
+    "error_category": "admin",
+    "user_recipients": [
+      "7178093128",
+      "801600922"
+    ]
+  },
   "primary_telegram_domain": "telegram.me",
-  "status": "initializing",
+  "status": "degraded",
+  "telegram_web": {
+    "final_url": "https://telegram.me/s/mechanogun",
+    "html_messages_detected": true,
+    "source": "mechanogun",
+    "status_code": 200,
+    "url": "https://telegram.me/s/mechanogun"
+  },
   "version": 1
 }
