@@ -9,7 +9,10 @@ from pathlib import Path
 
 import monitor
 import monitor_data as data_store
+import monitor_resilience
 
+
+monitor_resilience.install(monitor)
 
 ROOT = Path(__file__).resolve().parent
 ACTIVE_PATH = ROOT / "public_sources.txt"
@@ -143,11 +146,8 @@ def unique(values: list[str]) -> list[str]:
     return result
 
 
-def write_sources(path: Path, values: list[str], header: str) -> None:
-    path.write_text(
-        header.rstrip() + "\n\n" + "\n".join(unique(values)) + "\n",
-        encoding="utf-8",
-    )
+def notification_key(message: monitor.Message, link: str) -> str:
+    return f"{message.source.casefold()}:{message.message_id}:{monitor.wheel_key(link)}"
 
 
 def main() -> int:
@@ -157,257 +157,90 @@ def main() -> int:
         print(str(exc), file=sys.stderr)
         return 2
 
-    active = unique(data_store.operational_sources(monitor.read_list(ACTIVE_PATH), "fast"))
-    active_keys = {item.casefold() for item in active}
-    catalog = unique(data_store.operational_sources(monitor.read_list(CATALOG_PATH), "nightly"))
-    catalog = [item for item in catalog if item.casefold() not in active_keys]
+    state = load_discovery_state()
+    health = data_store.load_health()
+    stats = data_store.load_stats()
+    primary_sources = data_store.operational_sources(monitor.read_list(ACTIVE_PATH), "fast")
+    catalog_sources = data_store.operational_sources(monitor.read_list(CATALOG_PATH), "nightly")
+    sources = unique(catalog_sources)
+    primary_keys = {value.casefold() for value in primary_sources}
+    sources = [value for value in sources if value.casefold() not in primary_keys]
 
-    discovery = load_discovery_state()
-    monitor_state = monitor.load_state()
-    # Nightly runtime is stored inside discovery_state.json. This avoids
-    # merge conflicts with the long-running five-minute monitor, which owns
-    # source_health.json, source_stats.json and unknown_timer_samples.json.
-    health = {
-        "version": 1,
-        "sources": discovery.setdefault("health_sources", {}),
-    }
-    stats = {
-        "version": 1,
-        "sources": discovery.setdefault("stats_sources", {}),
-        "daily": discovery.setdefault("stats_daily", {}),
-    }
-    unknown_samples = {
-        "version": 1,
-        "samples": discovery.setdefault("unknown_timer_samples", []),
-    }
-    mappings = monitor.load_identifier_sources()
     cutoff = monitor.now_utc() - timedelta(hours=LOOKBACK_HOURS)
+    checked = 0
+    errors = 0
+    new_wheels = 0
+    source_rows = state.setdefault("sources", {})
 
-    promoted: list[str] = []
-    notifications = 0
-    duplicate_wheels = 0
-    inactive_wheels = 0
-    unconfirmed_wheels = 0
-    quarantined_skipped = 0
-    unknown_samples_added = 0
-    errors: list[str] = []
-
-    for username in list(catalog):
-        checked_at = monitor.now_utc().isoformat()
-        if not data_store.source_due_for_check(health, username):
-            quarantined_skipped += 1
-            data_store.record_source_check_stats(stats, username, "quarantined_skip")
-            discovery["sources"][username] = {
-                "checked_at": checked_at,
-                "status": "quarantined",
-            }
-            continue
-
+    for source in sources:
+        checked += 1
+        source_row = source_rows.setdefault(source, {})
+        source_row["last_checked_at"] = monitor.now_utc().isoformat()
         try:
-            messages = fetch_public_channel_history(username)
+            messages = fetch_public_channel_history(source)
         except Exception as exc:
+            errors += 1
             detail = f"{type(exc).__name__}: {exc}"
-            quarantined = data_store.record_source_problem(
-                health, username, "error", detail
-            )
-            data_store.record_source_check_stats(stats, username, "error")
-            errors.append(
-                f"@{username}: {detail}" + ("; quarantined" if quarantined else "")
-            )
-            discovery["sources"][username] = {
-                "checked_at": checked_at,
-                "status": "quarantined" if quarantined else "error",
-                "error": detail[:500],
-            }
+            source_row["status"] = "error"
+            source_row["last_error"] = detail[:500]
+            data_store.record_source_problem(health, source, "error", detail)
+            data_store.record_source_check_stats(stats, source, "error")
             continue
 
-        if not messages:
-            quarantined = data_store.record_source_problem(
-                health, username, "empty", "no public messages found"
-            )
-            data_store.record_source_check_stats(stats, username, "empty")
-            errors.append(
-                f"@{username}: no public messages found"
-                + ("; quarantined" if quarantined else "")
-            )
-            discovery["sources"][username] = {
-                "checked_at": checked_at,
-                "status": "quarantined" if quarantined else "empty",
-            }
-            continue
+        source_row["status"] = "ok"
+        source_row["last_messages_count"] = len(messages)
+        source_row.pop("last_error", None)
+        data_store.record_source_success(health, source, len(messages))
+        data_store.record_source_check_stats(stats, source, "ok", len(messages))
 
-        data_store.record_source_success(health, username, len(messages))
-        data_store.record_source_check_stats(stats, username, "ok", len(messages))
-
-        wheel_items = [
-            (message, link)
-            for message in messages
-            for link in monitor.extract_links(message.text)
-        ]
-        recent_items = [
-            (message, link)
-            for message, link in wheel_items
-            if message.date >= cutoff
-        ]
-        latest = max(wheel_items, key=lambda item: item[0].date, default=None)
-
-        qualified: list[
-            tuple[monitor.Message, str, monitor.WheelAssessment]
-        ] = []
-        source_inactive = 0
-        source_unconfirmed = 0
-
-        for message, link in sorted(recent_items, key=lambda item: item[0].date):
-            post_key = monitor.notification_key(message, link)
-            if post_key in discovery["notified_wheels"]:
-                duplicate_wheels += 1
-                data_store.increment_stat(stats, username, "duplicates_suppressed")
+        for message in messages:
+            if message.date.astimezone(monitor.UTC) < cutoff:
                 continue
-
-            data_store.mark_unique_wheel_post(
-                stats, username, post_key, monitor.wheel_key(link)
-            )
-            assessment = monitor.assess_pending_wheel(
-                message, link, monitor_state
-            )
-            if monitor.maybe_record_unknown_sample(
-                unknown_samples,
-                stats,
-                message,
-                link,
-                assessment,
-                reason="nightly_discovery",
-            ):
-                unknown_samples_added += 1
-
-            # Nightly promotion is deliberately stricter than the fast monitor:
-            # only a page-confirmed active wheel (button/timer/manual override) can
-            # move a channel into the five-minute list. A Telegram time alone is
-            # recorded as unconfirmed to avoid promoting stale announcement posts.
-            if not assessment.should_notify or assessment.status != "active":
-                if assessment.status == "inactive":
-                    inactive_wheels += 1
-                    source_inactive += 1
-                    data_store.increment_stat(stats, username, "inactive_checks")
-                else:
-                    unconfirmed_wheels += 1
-                    source_unconfirmed += 1
-                    data_store.increment_stat(stats, username, "unconfirmed_checks")
-                continue
-
-            if monitor.is_activation_suppressed(monitor_state, link):
-                duplicate_wheels += 1
-                data_store.increment_stat(stats, username, "duplicates_suppressed")
-                continue
-
-            qualified.append((message, link, assessment))
-
-        discovery["sources"][username] = {
-            "checked_at": checked_at,
-            "status": "ok",
-            "messages_checked": len(messages),
-            "wheel_links_found": len(wheel_items),
-            "recent_wheel_links": len(recent_items),
-            "active_wheel_links": len(qualified),
-            "inactive_wheel_links": source_inactive,
-            "unconfirmed_wheel_links": source_unconfirmed,
-            "latest_wheel_at": latest[0].date.isoformat() if latest else None,
-        }
-
-        if not qualified:
-            continue
-
-        if username.casefold() not in active_keys:
-            active.append(username)
-            active_keys.add(username.casefold())
-            promoted.append(username)
-
-        for message, link, assessment in qualified:
-            post_key = monitor.notification_key(message, link)
-            try:
+            for link in monitor.extract_links(message.text):
+                key = notification_key(message, link)
+                if key in state["notified_wheels"]:
+                    continue
+                assessment = monitor.assess_new_wheel(message, link)
+                if not assessment.should_notify:
+                    continue
                 monitor.notify_new_link(
                     message,
                     link,
                     assessment.deadline,
                     assessment.method,
-                    mappings,
-                    None,
-                    assessment.page_excerpt,
+                    monitor.load_identifier_sources(),
                 )
-            except Exception as exc:
-                errors.append(
-                    f"@{username} message {message.message_id}: "
-                    f"notification failed: {type(exc).__name__}: {exc}"
-                )
-                continue
+                state["notified_wheels"][key] = {
+                    "notified_at": monitor.now_utc().isoformat(),
+                    "source": source,
+                    "message_url": message.message_url,
+                    "url": monitor.normalize_url(link),
+                }
+                data_store.mark_unique_wheel_post(stats, source, key, monitor.wheel_key(link))
+                new_wheels += 1
 
-            data_store.increment_stat(stats, username, "activation_sent")
-            data_store.set_stat_timestamp(stats, username, "last_activation_at")
-            discovery["notified_wheels"][post_key] = {
-                "identifier": monitor.wheel_identifier(link),
-                "url": monitor.normalize_url(link),
-                "source": username,
-                "message_url": message.message_url,
-                "notified_at": monitor.now_utc().isoformat(),
-            }
-            notifications += 1
-
-    promoted_keys = {item.casefold() for item in promoted}
-    catalog = [item for item in catalog if item.casefold() not in promoted_keys]
-
-    write_sources(
-        ACTIVE_PATH,
-        active,
-        "# Быстрый мониторинг: подтверждённые публичные Telegram-источники.\n"
-        "# Проверяется примерно каждые 5 минут. Старые ссылки отдельно не опрашиваются.",
-    )
-    write_sources(
-        CATALOG_PATH,
-        catalog,
-        "# Ночной каталог: партнёры, альтернативные каналы и кандидаты.\n"
-        "# Источник не удаляется при сбое: после серии ошибок он попадает в карантин.",
-    )
-
-    discovery["last_run_at"] = monitor.now_utc().isoformat()
-    discovery["catalog_size"] = len(catalog)
-    discovery["active_size"] = len(active)
-    discovery["promoted"] = promoted
-    discovery["notifications"] = notifications
-    discovery["duplicate_wheels"] = duplicate_wheels
-    discovery["inactive_wheels"] = inactive_wheels
-    discovery["unconfirmed_wheels"] = unconfirmed_wheels
-    discovery["quarantined_skipped"] = quarantined_skipped
-    discovery["unknown_timer_samples_added"] = unknown_samples_added
-    discovery["error_count"] = len(errors)
-    data_store.prune_stats(stats)
-    discovery["health_sources"] = health.get("sources", {})
-    discovery["stats_sources"] = stats.get("sources", {})
-    discovery["stats_daily"] = stats.get("daily", {})
-    discovery["unknown_timer_samples"] = unknown_samples.get("samples", [])
-    save_discovery_state(discovery)
+    state["last_run_at"] = monitor.now_utc().isoformat()
+    state["last_run_summary"] = {
+        "sources": len(sources),
+        "checked": checked,
+        "errors": errors,
+        "new_wheels": new_wheels,
+    }
+    save_discovery_state(state)
+    data_store.save_health(health)
+    data_store.save_stats(stats)
 
     print(
-        f"Catalog: {len(catalog)}; active: {len(active)}; "
-        f"promoted: {len(promoted)}; notifications: {notifications}; "
-        f"inactive: {inactive_wheels}; unconfirmed: {unconfirmed_wheels}; "
-        f"quarantined: {quarantined_skipped}; unknown samples: {unknown_samples_added}; "
-        f"duplicates: {duplicate_wheels}; errors: {len(errors)}"
+        f"Nightly sources: {len(sources)}; checked: {checked}; "
+        f"errors: {errors}; new wheels: {new_wheels}"
     )
-    for error in errors[:40]:
-        print(f"WARNING {error}")
-
     if MANUAL_RUN:
-        promoted_text = ", ".join(f"@{item}" for item in promoted) or "нет"
         monitor.send_message(
-            "✅ <b>Ночная проверка завершена</b>\n\n"
-            f"Кандидатов осталось: {len(catalog)}\n"
-            f"Перенесено в быстрый список: {html.escape(promoted_text)}\n"
-            f"Новых активных уведомлений: {notifications}\n"
-            f"Неактивных колёс отброшено: {inactive_wheels}\n"
-            f"Неподтверждённых отброшено: {unconfirmed_wheels}\n"
-            f"Источников в карантине: {quarantined_skipped}\n"
-            f"Повторов подавлено: {duplicate_wheels}\n"
-            f"Ошибок: {len(errors)}"
+            "🌙 <b>Ночная проверка завершена</b>\n\n"
+            f"Источников: {len(sources)}\n"
+            f"Проверено: {checked}\n"
+            f"Ошибок: {errors}\n"
+            f"Новых колёс: {new_wheels}"
         )
     return 0
 
