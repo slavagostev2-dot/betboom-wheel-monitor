@@ -23,7 +23,7 @@
     "source_health": "ok",
     "telegram_transport": "ok"
   },
-  "checked_at": "2026-07-14T21:36:21.879893+00:00",
+  "checked_at": "2026-07-14T21:40:44.030439+00:00",
   "discovery": {
     "active_size": 72,
     "candidate_count": 176,
@@ -117,7 +117,7 @@
     "status": "running",
     "version": 3
   },
-  "monitor_age_minutes": 3,
+  "monitor_age_minutes": 8,
   "notification_routing": {
     "admin_kinds": {
       "admin_requests": [
