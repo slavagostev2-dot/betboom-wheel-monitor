@@ -47,6 +47,16 @@
         "PAPAdota2"
       ]
     },
+    "solotg": {
+      "actor": "admin",
+      "day": "2026-07-14",
+      "decided_at": "2026-07-14T14:07:35.075969+00:00",
+      "decision": "confirmed",
+      "sources": [
+        "amam0610",
+        "kolesaBB"
+      ]
+    },
     "zonertg5": {
       "actor": "admin",
       "day": "2026-07-14",
@@ -421,6 +431,7 @@
           "successful_checks": 11
         },
         "amam0610": {
+          "admin_confirmed_wheels": 1,
           "checks": 138,
           "messages_scanned": 2629,
           "successful_checks": 138,
@@ -593,6 +604,7 @@
           "successful_checks": 138
         },
         "kolesaBB": {
+          "admin_confirmed_wheels": 1,
           "checks": 138,
           "messages_scanned": 1868,
           "successful_checks": 138,
@@ -723,7 +735,7 @@
         }
       },
       "totals": {
-        "admin_confirmed_wheels": 6,
+        "admin_confirmed_wheels": 7,
         "admin_rejected_wheels": 1,
         "checks": 9007,
         "draw_time_alerts": 1,
@@ -810,7 +822,7 @@
       "first_checked_at": "2026-07-13T10:45:44.607811+00:00",
       "last_checked_at": "2026-07-14T14:06:44.934304+00:00",
       "last_transport_outage_at": "2026-07-14T02:39:35.575804+00:00",
-      "last_updated_at": "2026-07-14T14:07:13.181371+00:00",
+      "last_updated_at": "2026-07-14T14:07:35.075969+00:00",
       "last_wheel_post_at": "2026-07-14T11:12:45.350909+00:00",
       "messages_scanned": 6020,
       "preliminary_sent": 1,
@@ -834,7 +846,7 @@
       "checks": 11,
       "first_checked_at": "2026-07-14T12:59:56.741483+00:00",
       "last_checked_at": "2026-07-14T14:06:44.935022+00:00",
-      "last_updated_at": "2026-07-14T14:07:13.181371+00:00",
+      "last_updated_at": "2026-07-14T14:07:35.075969+00:00",
       "messages_scanned": 198,
       "quality_decisions": {
         "neret": 40
@@ -849,7 +861,7 @@
       "first_checked_at": "2026-07-13T10:45:44.607586+00:00",
       "last_checked_at": "2026-07-14T14:06:44.934000+00:00",
       "last_transport_outage_at": "2026-07-14T02:39:35.575692+00:00",
-      "last_updated_at": "2026-07-14T14:07:13.181371+00:00",
+      "last_updated_at": "2026-07-14T14:07:35.075969+00:00",
       "last_wheel_post_at": "2026-07-14T13:49:34.675637+00:00",
       "messages_scanned": 3399,
       "preliminary_sent": 1,
@@ -876,7 +888,7 @@
       "first_checked_at": "2026-07-13T10:45:44.607478+00:00",
       "last_checked_at": "2026-07-14T14:06:44.933864+00:00",
       "last_transport_outage_at": "2026-07-14T02:39:35.575641+00:00",
-      "last_updated_at": "2026-07-14T14:07:13.181371+00:00",
+      "last_updated_at": "2026-07-14T14:07:35.075969+00:00",
       "last_wheel_post_at": "2026-07-14T14:00:49.116337+00:00",
       "messages_scanned": 6438,
       "preliminary_sent": 1,
@@ -931,7 +943,7 @@
       "first_checked_at": "2026-07-13T10:45:44.607934+00:00",
       "last_checked_at": "2026-07-14T14:06:44.934463+00:00",
       "last_transport_outage_at": "2026-07-14T02:39:35.575860+00:00",
-      "last_updated_at": "2026-07-14T14:07:13.181371+00:00",
+      "last_updated_at": "2026-07-14T14:07:35.075969+00:00",
       "last_wheel_post_at": "2026-07-14T10:03:21.387131+00:00",
       "messages_scanned": 5521,
       "preliminary_sent": 1,
@@ -971,14 +983,19 @@
       "successful_checks": 11
     },
     "amam0610": {
+      "admin_confirmed_wheels": 1,
       "checks": 337,
       "first_checked_at": "2026-07-13T10:45:44.608055+00:00",
       "inactive_checks": 1,
       "last_checked_at": "2026-07-14T14:06:44.934616+00:00",
       "last_transport_outage_at": "2026-07-14T02:39:35.575916+00:00",
-      "last_updated_at": "2026-07-14T14:06:44.934616+00:00",
+      "last_updated_at": "2026-07-14T14:07:35.075969+00:00",
       "last_wheel_post_at": "2026-07-13T08:18:32.041427+00:00",
       "messages_scanned": 6609,
+      "quality_decisions": {
+        "solotg": 40
+      },
+      "quality_score": 40,
       "recent_post_keys": {
         "4d57bd418e1db4697d60f3d61409d4dfd579a396b08dcbd543315d3c4ada8e06": {
           "seen_at": "2026-07-13T08:18:32.041411+00:00",
@@ -1115,7 +1132,7 @@
       "first_checked_at": "2026-07-13T10:45:44.607526+00:00",
       "last_checked_at": "2026-07-14T14:06:44.933926+00:00",
       "last_transport_outage_at": "2026-07-14T02:39:35.575664+00:00",
-      "last_updated_at": "2026-07-14T14:07:13.181371+00:00",
+      "last_updated_at": "2026-07-14T14:07:35.075969+00:00",
       "last_wheel_post_at": "2026-07-14T10:47:42.601701+00:00",
       "messages_scanned": 6199,
       "preliminary_sent": 1,
@@ -1290,7 +1307,7 @@
       "checks": 8,
       "first_checked_at": "2026-07-14T13:29:47.638317+00:00",
       "last_checked_at": "2026-07-14T14:06:44.935056+00:00",
-      "last_updated_at": "2026-07-14T14:07:13.181371+00:00",
+      "last_updated_at": "2026-07-14T14:07:35.075969+00:00",
       "last_wheel_post_at": "2026-07-14T14:00:53.958853+00:00",
       "messages_scanned": 152,
       "preliminary_sent": 1,
@@ -1320,14 +1337,19 @@
       "transport_outages": 2
     },
     "kolesaBB": {
+      "admin_confirmed_wheels": 1,
       "checks": 337,
       "first_checked_at": "2026-07-13T10:45:44.608068+00:00",
       "inactive_checks": 1,
       "last_checked_at": "2026-07-14T14:06:44.934633+00:00",
       "last_transport_outage_at": "2026-07-14T02:39:35.575922+00:00",
-      "last_updated_at": "2026-07-14T14:06:44.934633+00:00",
+      "last_updated_at": "2026-07-14T14:07:35.075969+00:00",
       "last_wheel_post_at": "2026-07-13T10:45:45.476848+00:00",
       "messages_scanned": 5848,
+      "quality_decisions": {
+        "solotg": 40
+      },
+      "quality_score": 40,
       "recent_post_keys": {
         "b2a307e2097efff617d7252d89789064685150eb810c3a824f3d1211b34ef861": {
           "seen_at": "2026-07-13T10:45:45.476834+00:00",
@@ -1405,7 +1427,7 @@
       "first_checked_at": "2026-07-13T10:45:44.607420+00:00",
       "last_checked_at": "2026-07-14T14:06:44.933795+00:00",
       "last_transport_outage_at": "2026-07-14T02:39:35.575614+00:00",
-      "last_updated_at": "2026-07-14T14:07:13.181371+00:00",
+      "last_updated_at": "2026-07-14T14:07:35.075969+00:00",
       "last_wheel_post_at": "2026-07-14T14:00:48.688431+00:00",
       "messages_scanned": 6720,
       "preliminary_sent": 2,
@@ -1450,7 +1472,7 @@
       "first_checked_at": "2026-07-13T10:45:44.608029+00:00",
       "last_checked_at": "2026-07-14T14:06:44.934582+00:00",
       "last_transport_outage_at": "2026-07-14T02:39:35.575904+00:00",
-      "last_updated_at": "2026-07-14T14:07:13.181371+00:00",
+      "last_updated_at": "2026-07-14T14:07:35.075969+00:00",
       "messages_scanned": 6740,
       "quality_decisions": {
         "bolt": 40
