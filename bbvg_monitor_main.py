@@ -4,11 +4,14 @@ from datetime import timedelta
 from typing import Any
 
 import bbvg_monitor_runtime as runtime
+import bot_notification_state
+import notification_router
 import rating_policy
 import telegram_transport
 
 
 monitor = runtime.monitor
+notification_router.load_config = bot_notification_state.load_config
 telegram_transport.install(monitor)
 _original_recover_deadline = runtime.base_runtime._recover_deadline
 _original_markup = monitor.wheel_reply_markup
