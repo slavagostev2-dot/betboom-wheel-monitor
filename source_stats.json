@@ -10,6 +10,15 @@
         "narodCast"
       ]
     },
+    "cct1": {
+      "actor": "admin",
+      "day": "2026-07-14",
+      "decided_at": "2026-07-14T14:05:32.883078+00:00",
+      "decision": "confirmed",
+      "sources": [
+        "jestercast"
+      ]
+    },
     "krat": {
       "actor": "admin",
       "day": "2026-07-14",
@@ -559,6 +568,7 @@
           "successful_checks": 137
         },
         "jestercast": {
+          "admin_confirmed_wheels": 1,
           "checks": 7,
           "messages_scanned": 133,
           "preliminary_sent": 1,
@@ -703,7 +713,7 @@
         }
       },
       "totals": {
-        "admin_confirmed_wheels": 6,
+        "admin_confirmed_wheels": 5,
         "admin_rejected_wheels": 1,
         "checks": 8937,
         "draw_time_alerts": 1,
@@ -790,7 +800,7 @@
       "first_checked_at": "2026-07-13T10:45:44.607811+00:00",
       "last_checked_at": "2026-07-14T14:00:48.669597+00:00",
       "last_transport_outage_at": "2026-07-14T02:39:35.575804+00:00",
-      "last_updated_at": "2026-07-14T14:00:48.669597+00:00",
+      "last_updated_at": "2026-07-14T14:05:32.883078+00:00",
       "last_wheel_post_at": "2026-07-14T11:12:45.350909+00:00",
       "messages_scanned": 6004,
       "preliminary_sent": 1,
@@ -814,7 +824,7 @@
       "checks": 10,
       "first_checked_at": "2026-07-14T12:59:56.741483+00:00",
       "last_checked_at": "2026-07-14T14:00:48.670349+00:00",
-      "last_updated_at": "2026-07-14T14:00:48.670349+00:00",
+      "last_updated_at": "2026-07-14T14:05:32.883078+00:00",
       "messages_scanned": 180,
       "quality_decisions": {
         "neret": 40
@@ -829,7 +839,7 @@
       "first_checked_at": "2026-07-13T10:45:44.607586+00:00",
       "last_checked_at": "2026-07-14T14:00:48.669307+00:00",
       "last_transport_outage_at": "2026-07-14T02:39:35.575692+00:00",
-      "last_updated_at": "2026-07-14T14:00:48.669307+00:00",
+      "last_updated_at": "2026-07-14T14:05:32.883078+00:00",
       "last_wheel_post_at": "2026-07-14T13:49:34.675637+00:00",
       "messages_scanned": 3389,
       "preliminary_sent": 1,
@@ -906,7 +916,7 @@
       "first_checked_at": "2026-07-13T10:45:44.607934+00:00",
       "last_checked_at": "2026-07-14T14:00:48.669756+00:00",
       "last_transport_outage_at": "2026-07-14T02:39:35.575860+00:00",
-      "last_updated_at": "2026-07-14T14:00:48.669756+00:00",
+      "last_updated_at": "2026-07-14T14:05:32.883078+00:00",
       "last_wheel_post_at": "2026-07-14T10:03:21.387131+00:00",
       "messages_scanned": 5501,
       "preliminary_sent": 1,
@@ -1090,7 +1100,7 @@
       "first_checked_at": "2026-07-13T10:45:44.607526+00:00",
       "last_checked_at": "2026-07-14T14:00:48.669231+00:00",
       "last_transport_outage_at": "2026-07-14T02:39:35.575664+00:00",
-      "last_updated_at": "2026-07-14T14:00:48.669231+00:00",
+      "last_updated_at": "2026-07-14T14:05:32.883078+00:00",
       "last_wheel_post_at": "2026-07-14T10:47:42.601701+00:00",
       "messages_scanned": 6183,
       "preliminary_sent": 1,
@@ -1261,13 +1271,18 @@
       "transport_outages": 2
     },
     "jestercast": {
+      "admin_confirmed_wheels": 1,
       "checks": 7,
       "first_checked_at": "2026-07-14T13:29:47.638317+00:00",
       "last_checked_at": "2026-07-14T14:00:48.670383+00:00",
-      "last_updated_at": "2026-07-14T14:00:56.318482+00:00",
+      "last_updated_at": "2026-07-14T14:05:32.883078+00:00",
       "last_wheel_post_at": "2026-07-14T14:00:53.958853+00:00",
       "messages_scanned": 133,
       "preliminary_sent": 1,
+      "quality_decisions": {
+        "cct1": 40
+      },
+      "quality_score": 40,
       "recent_post_keys": {
         "105fd5e22b560edd7a6829bb33548ae5f140652138d934f93bf256911f0ce6ef": {
           "seen_at": "2026-07-14T14:00:53.958836+00:00",
@@ -1375,7 +1390,7 @@
       "first_checked_at": "2026-07-13T10:45:44.607420+00:00",
       "last_checked_at": "2026-07-14T14:00:48.669102+00:00",
       "last_transport_outage_at": "2026-07-14T02:39:35.575614+00:00",
-      "last_updated_at": "2026-07-14T14:00:48.688420+00:00",
+      "last_updated_at": "2026-07-14T14:05:32.883078+00:00",
       "last_wheel_post_at": "2026-07-14T14:00:48.688431+00:00",
       "messages_scanned": 6700,
       "preliminary_sent": 2,
@@ -1420,7 +1435,7 @@
       "first_checked_at": "2026-07-13T10:45:44.608029+00:00",
       "last_checked_at": "2026-07-14T14:00:48.669879+00:00",
       "last_transport_outage_at": "2026-07-14T02:39:35.575904+00:00",
-      "last_updated_at": "2026-07-14T14:00:48.669879+00:00",
+      "last_updated_at": "2026-07-14T14:05:32.883078+00:00",
       "messages_scanned": 6720,
       "quality_decisions": {
         "bolt": 40
