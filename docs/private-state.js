@@ -90,23 +90,43 @@
     if(key==='settings'&&privateState.ready)privateState.saveSettings(value);
   };
 
+  function normalizedSettings(value){
+    if(!value||typeof value!=='object')return{};
+    return Object.fromEntries(Object.entries(value).map(([key,item])=>{
+      if(item==='true')return[key,true];
+      if(item==='false')return[key,false];
+      const numeric=typeof item==='string'&&item.trim()!==''?Number(item):NaN;
+      return[key,Number.isFinite(numeric)?numeric:item];
+    }));
+  }
+
+  async function waitForInitialLoad(){
+    for(let attempt=0;attempt<100;attempt+=1){
+      const shell=document.querySelector('#app');
+      if(app.lastSync||shell?.hidden===false)return;
+      await new Promise(resolve=>setTimeout(resolve,100));
+    }
+  }
+
   async function hydrate(){
     if(!apiUrl||!initData)return;
     try{
-      const payload=await privateState.request('/v1/session',{method:'POST'});
+      const session=privateState.request('/v1/session',{method:'POST'});
+      await waitForInitialLoad();
+      const payload=await session;
       const state=payload?.state||{};
       app.joined=new Set(Array.isArray(state.joined)?state.joined.map(value=>String(value).toLowerCase()):[]);
       app.participationHistory=new Set(Array.isArray(state.participationHistory)?state.participationHistory.map(value=>String(value).toLowerCase()):[]);
       app.joined.forEach(value=>app.participationHistory.add(value));
       privateState.hiddenWheels=new Set(Array.isArray(state.hiddenWheels)?state.hiddenWheels.map(value=>String(value).toLowerCase()):[]);
       if(state.settings&&typeof state.settings==='object'){
-        app.settings={...app.settings,...state.settings};
+        app.settings={...app.settings,...normalizedSettings(state.settings)};
         baseStoreSet('settings',app.settings);
         applyTheme();
       }
       privateState.ready=true;
       privateState.emit();
-      if(app.lastSync)renderAll();
+      renderAll();
     }catch(error){
       console.warn('Private state session:',error);
       toast('Личные данные временно не синхронизированы');
