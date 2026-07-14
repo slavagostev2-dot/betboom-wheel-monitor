@@ -1,13 +1,13 @@
 {
   "version": 2,
-  "updated_at": "2026-07-13",
+  "updated_at": "2026-07-14",
   "policy": {
     "partner": "если в собственном канале человека подтверждённо публиковалось колесо BetBoom, источник считается партнёрским",
     "collector": "канал или чат, который собирает и перепубликовывает колёса разных авторов; партнёром конкретного колеса не считается",
-    "fast": "партнёрский источник с историей колёс, дополнительный канал партнёра или подтверждённый сборщик-сигнал",
-    "nightly": "официальный или кандидатный источник без необходимости пятиминутной проверки",
+    "fast": "все 66 утверждённых источников проверяются постоянно через telegram.me",
+    "nightly": "используется только для поиска новых кандидатов, но не для известных 66 источников",
     "disabled": "бывший партнёр или нерелевантный источник",
-    "catalog_scope": "все источники быстрой и ночной баз, а также отдельные сборщики, исключённые и неразмеченные организации",
+    "catalog_scope": "единая постоянная база из 66 источников и отдельные новые кандидаты",
     "conservative_removal": true
   },
   "entities": [
@@ -19,27 +19,27 @@
         {
           "username": "betboomru",
           "type": "main",
-          "scan_mode": "nightly"
+          "scan_mode": "fast"
         },
         {
           "username": "betboom_esports",
           "type": "esports",
-          "scan_mode": "nightly"
+          "scan_mode": "fast"
         },
         {
           "username": "betboom_esports_cs",
           "type": "esports_cs2",
-          "scan_mode": "nightly"
+          "scan_mode": "fast"
         },
         {
           "username": "betboomstreamersbattle",
           "type": "tournament",
-          "scan_mode": "nightly"
+          "scan_mode": "fast"
         },
         {
           "username": "blast_betboom",
           "type": "campaign_or_tournament",
-          "scan_mode": "nightly"
+          "scan_mode": "fast"
         }
       ],
       "notes": "Официальные и тематические каналы бренда; проверяются ночью, пока не подтверждена регулярная публикация колёс."
@@ -52,12 +52,12 @@
         {
           "username": "betboomteam",
           "type": "main_dota2",
-          "scan_mode": "nightly"
+          "scan_mode": "fast"
         },
         {
           "username": "betboomteamcs2",
           "type": "cs2",
-          "scan_mode": "nightly"
+          "scan_mode": "fast"
         }
       ],
       "notes": "Официальная киберспортивная организация BetBoom Team."
@@ -497,7 +497,7 @@
         {
           "username": "pandafx2",
           "type": "secondary",
-          "scan_mode": "nightly"
+          "scan_mode": "fast"
         }
       ],
       "notes": "Партнёр BetBoom по подтверждённой публикации колеса в собственном канале."
@@ -536,7 +536,7 @@
         {
           "username": "YBNFedor",
           "type": "main",
-          "scan_mode": "nightly"
+          "scan_mode": "fast"
         }
       ],
       "notes": "Партнёр BetBoom по подтверждённой публикации колеса в собственном канале."
@@ -549,7 +549,7 @@
         {
           "username": "risenhaha",
           "type": "main",
-          "scan_mode": "nightly"
+          "scan_mode": "fast"
         }
       ],
       "notes": "Партнёр BetBoom по подтверждённой публикации колеса в собственном канале."
