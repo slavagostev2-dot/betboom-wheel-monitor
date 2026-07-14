@@ -90,3 +90,5 @@ jobs:
             fi
           done
           exit 1
+
+# Triggered after all 66 sources were migrated to permanent telegram.me monitoring.
