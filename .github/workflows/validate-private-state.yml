@@ -1,0 +1,96 @@
+name: Validate private state migration
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "state_api/**"
+      - "private_state.py"
+      - "migrate_private_state.py"
+      - "sitecustomize.py"
+      - "admin_panel_runtime_v23.py"
+      - "docs/**"
+      - "bot_access.json"
+      - ".github/workflows/state-api.yml"
+      - ".github/workflows/migrate-private-state.yml"
+      - ".github/workflows/cloudflare-pages.yml"
+      - ".github/workflows/admin-bot.yml"
+      - ".github/workflows/validate-private-state.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      BOT_TOKEN: "test-token"
+      BOT_CHAT_ID: "1"
+      ADMIN_USER_ID: "1"
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Install Python dependencies
+        run: python -m pip install -r requirements.txt
+
+      - name: Check JavaScript syntax
+        run: |
+          node --check state_api/src/index.js
+          node --check docs/app.js
+          node --check docs/private-state.js
+          node --check docs/bbvg-controls.js
+          node --check docs/v22-overrides.js
+          node --check docs/runtime-config.js
+
+      - name: Check Python runtime
+        run: |
+          python -m py_compile private_state.py migrate_private_state.py sitecustomize.py admin_panel_runtime_v23.py
+          python admin_panel_runtime_v22.py --self-test
+          python admin_panel_runtime_v23.py --self-test
+          python migrate_private_state.py --check
+
+      - name: Validate migration invariants
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          access = json.loads(Path('bot_access.json').read_text(encoding='utf-8'))
+          assert access.get('users') == {}, 'Public bot_access.json still contains users'
+          assert not access.get('owner_id'), 'Public bot_access.json still contains owner_id'
+          assert access.get('admins') == [], 'Public bot_access.json still contains admins'
+          assert access.get('notification_recipients') == [], 'Public bot_access.json still contains recipients'
+
+          worker = Path('state_api/src/index.js').read_text(encoding='utf-8')
+          miniapp = Path('docs/private-state.js').read_text(encoding='utf-8')
+          controls = Path('docs/bbvg-controls.js').read_text(encoding='utf-8')
+          panel = Path('admin_panel_runtime_v23.py').read_text(encoding='utf-8')
+          html = Path('docs/index.html').read_text(encoding='utf-8')
+
+          for marker in ('WebAppData', 'auth_date', '/v1/session', '/v1/source-requests'):
+              assert marker in worker, f'Missing Worker marker: {marker}'
+          for marker in ('/v1/me/participation', '/v1/me/hidden', '/v1/source-requests'):
+              assert marker in miniapp, f'Missing Mini App API marker: {marker}'
+          assert 'Система работает' not in controls
+          assert 'Данные временно обновляются с задержкой' in controls
+          assert 'private_state.save_access' in panel
+          assert 'private-state.js?v=1.0.0' in html
+          print('Private state migration invariants passed')
+          PY
