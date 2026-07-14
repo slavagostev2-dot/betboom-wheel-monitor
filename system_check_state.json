@@ -23,7 +23,7 @@
     "source_health": "ok",
     "telegram_transport": "ok"
   },
-  "checked_at": "2026-07-14T14:00:50.620908+00:00",
+  "checked_at": "2026-07-14T14:06:11.740886+00:00",
   "discovery": {
     "active_size": 70,
     "candidate_count": 163,
@@ -96,28 +96,28 @@
     "brand": "BB V.G.",
     "checked_sources": 70,
     "checks_delta": 70,
-    "checks_total": 17822,
+    "checks_total": 17892,
     "consecutive_failures": 0,
     "consecutive_no_progress": 0,
     "iteration": 1,
     "last_failure_at": "2026-07-14T02:44:12.395838+00:00",
-    "last_iteration_at": "2026-07-14T13:53:00.157431+00:00",
-    "last_iteration_duration_seconds": 5,
+    "last_iteration_at": "2026-07-14T14:00:56.419133+00:00",
+    "last_iteration_duration_seconds": 13,
     "last_iteration_exit_code": 0,
-    "last_process_heartbeat_at": "2026-07-14T13:53:00.157431+00:00",
-    "last_successful_checks_total": 17822,
-    "last_successful_iteration_at": "2026-07-14T13:53:00.157431+00:00",
+    "last_process_heartbeat_at": "2026-07-14T14:00:56.419133+00:00",
+    "last_successful_checks_total": 17892,
+    "last_successful_iteration_at": "2026-07-14T14:00:56.419133+00:00",
     "pending_wheels": 0,
     "reachable_sources": 70,
     "restart_recommended": false,
-    "run_id": "29338335421",
-    "run_started_at": "2026-07-14T13:52:55.715049+00:00",
+    "run_id": "29338907415",
+    "run_started_at": "2026-07-14T14:00:43.770307+00:00",
     "source_errors": 0,
     "stats_counter_reset": false,
     "status": "running",
     "version": 3
   },
-  "monitor_age_minutes": 7,
+  "monitor_age_minutes": 5,
   "notification_routing": {
     "admin_kinds": {
       "admin_requests": [
@@ -159,10 +159,10 @@
   },
   "primary_telegram_domain": "telegram.me",
   "rating_consistency": {
-    "administrator_decisions": 5,
+    "administrator_decisions": 6,
     "inactive_wheel_leaks": [],
     "policy": "additive_only_v1",
-    "rated_sources": 7,
+    "rated_sources": 8,
     "score_mismatches": []
   },
   "source_health_summary": {
