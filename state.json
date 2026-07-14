@@ -47,22 +47,24 @@
     },
     "neret": {
       "button_token": "86bc22b95fa5d6",
-      "expires_at": "2026-07-21T13:49:36.423105+00:00",
+      "deadline": "2026-07-14T20:20:50.184084+00:00",
+      "deadline_source": "manual",
+      "expires_at": "2026-07-14T20:50:50.184084+00:00",
       "first_notified_at": "2026-07-14T13:49:36.422364+00:00",
       "identifier": "neret",
-      "last_checked_at": "2026-07-14T13:49:36.423101+00:00",
+      "last_checked_at": "2026-07-14T13:50:50.933786+00:00",
       "last_notification_at": "2026-07-14T13:49:36.423042+00:00",
       "message_date": "2026-07-14T11:32:44+00:00",
       "message_id": 3909,
       "message_text": "ЗАЛЕТАЙ НА КОЛЕСО ФРИБЕТОВ: 10 000 РАЗЫГРАЮ\n💎\n💎\n💎\nКЛИКАЙ ДЛЯ УЧАСТИЯ\nКЛИКАЙ ДЛЯ УЧАСТИЯ\nКЛИКАЙ ДЛЯ УЧАСТИЯ\nВСЁ ПОКАЗЫВАЮ НА СТРИМЕ:\nhttps://www.twitch.tv/neret17\nhttps://www.twitch.tv/neret17\nhttps://www.twitch.tv/neret17\nЕсли не зареган на BetBoom:\nhttps://cyberbb.ru/tw/neret\nИТОГИ В КОНЦЕ СТРИМА\n❗️\n❗️\n❗️\nhttps://telegram.me/NeretCast\nhttps://telegram.me/NeretCast/3909\nhttps://betboom.ru/freestream/neret\nhttps://www.twitch.tv/neret17\nhttps://cyberbb.ru/tw/neret",
       "message_url": "https://telegram.me/NeretCast/3909",
-      "method": "свежий Telegram-пост; страница открылась, но активность не подтверждена",
-      "needs_manual_time": true,
+      "method": "время вручную указано администратором BB V.G.",
+      "needs_manual_time": false,
       "page_excerpt": "",
       "page_status": "fresh_unconfirmed",
       "participating": false,
       "source": "NeretCast",
-      "status": "manual_time_required",
+      "status": "scheduled",
       "url": "https://betboom.ru/freestream/neret"
     },
     "zonertg5": {
@@ -309,7 +311,12 @@
     "unknown_timer_samples_added": 0
   },
   "last_source_inactivity_report_at": null,
-  "manual_deadlines": {},
+  "manual_deadlines": {
+    "neret": {
+      "deadline": "2026-07-14T20:20:50.184084+00:00",
+      "updated_at": "2026-07-14T13:50:50.933805+00:00"
+    }
+  },
   "manual_overrides": {},
   "notification_key_version": 8,
   "participating_wheels": {
