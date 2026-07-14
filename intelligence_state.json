@@ -13,8 +13,8 @@
         }
       ],
       "first_discovered_at": "2026-07-14T04:04:13.195153+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824201+00:00",
-      "last_verified_at": "2026-07-14T11:41:23.824206+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.878417+00:00",
+      "last_verified_at": "2026-07-14T16:38:56.878421+00:00",
       "latest_wheel_at": null,
       "mention_count": 1,
       "messages_checked": 0,
@@ -57,6 +57,31 @@
       "status": "ok",
       "wheel_links_found": 1
     },
+    "adekvattv": {
+      "discovered_from": [
+        "adekvatik"
+      ],
+      "evidence": [
+        {
+          "from": "adekvatik",
+          "message_url": "https://telegram.me/adekvatik/4441",
+          "method": "упоминание или ссылка Telegram",
+          "published_at": "2026-07-14T10:28:50+00:00"
+        }
+      ],
+      "first_discovered_at": "2026-07-14T16:38:56.878430+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.878428+00:00",
+      "last_verified_at": "2026-07-14T16:38:56.878433+00:00",
+      "latest_wheel_at": null,
+      "mention_count": 1,
+      "messages_checked": 0,
+      "public": false,
+      "sample_wheels": [],
+      "score": 0,
+      "source": "AdekvatTV",
+      "status": "empty",
+      "wheel_links_found": 0
+    },
     "akitostar": {
       "discovered_from": [
         "shoketg"
@@ -70,8 +95,8 @@
         }
       ],
       "first_discovered_at": "2026-07-14T04:04:13.195163+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824220+00:00",
-      "last_verified_at": "2026-07-14T11:41:23.824224+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.878439+00:00",
+      "last_verified_at": "2026-07-14T16:38:56.878444+00:00",
       "latest_wheel_at": null,
       "mention_count": 1,
       "messages_checked": 0,
@@ -95,8 +120,8 @@
         }
       ],
       "first_discovered_at": "2026-07-14T04:04:13.195171+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824230+00:00",
-      "last_verified_at": "2026-07-14T11:41:23.824235+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.878450+00:00",
+      "last_verified_at": "2026-07-14T16:38:56.878454+00:00",
       "latest_wheel_at": null,
       "mention_count": 1,
       "messages_checked": 19,
@@ -120,8 +145,8 @@
         }
       ],
       "first_discovered_at": "2026-07-14T04:04:13.195180+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824240+00:00",
-      "last_verified_at": "2026-07-14T11:41:23.824244+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.878460+00:00",
+      "last_verified_at": "2026-07-14T16:38:56.878464+00:00",
       "latest_wheel_at": null,
       "mention_count": 1,
       "messages_checked": 0,
@@ -145,8 +170,8 @@
         }
       ],
       "first_discovered_at": "2026-07-14T04:04:13.195189+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824250+00:00",
-      "last_verified_at": "2026-07-14T11:41:23.824254+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.878471+00:00",
+      "last_verified_at": "2026-07-14T16:38:56.878499+00:00",
       "latest_wheel_at": null,
       "mention_count": 1,
       "messages_checked": 0,
@@ -159,19 +184,19 @@
     },
     "arszeeqq": {
       "discovered_from": [
-        "blast_betboom"
+        "adekvatik"
       ],
       "evidence": [
         {
-          "from": "blast_betboom",
-          "message_url": "https://telegram.me/blast_betboom/4523",
+          "from": "adekvatik",
+          "message_url": "https://telegram.me/adekvatik/4441",
           "method": "упоминание или ссылка Telegram",
-          "published_at": "2026-07-14T10:02:30+00:00"
+          "published_at": "2026-07-14T10:28:50+00:00"
         }
       ],
       "first_discovered_at": "2026-07-14T11:41:23.824262+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824260+00:00",
-      "last_verified_at": "2026-07-14T11:41:23.824264+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.878510+00:00",
+      "last_verified_at": "2026-07-14T16:38:56.878515+00:00",
       "latest_wheel_at": null,
       "mention_count": 1,
       "messages_checked": 20,
@@ -250,8 +275,8 @@
         }
       ],
       "first_discovered_at": "2026-07-14T04:04:13.195199+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824269+00:00",
-      "last_verified_at": "2026-07-14T11:41:23.824273+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.878521+00:00",
+      "last_verified_at": "2026-07-14T16:38:56.878525+00:00",
       "latest_wheel_at": null,
       "mention_count": 1,
       "messages_checked": 20,
@@ -318,6 +343,31 @@
       "status": "ok",
       "wheel_links_found": 0
     },
+    "beardserklife": {
+      "discovered_from": [
+        "betboomru"
+      ],
+      "evidence": [
+        {
+          "from": "betboomru",
+          "message_url": "https://telegram.me/betboom/9096",
+          "method": "упоминание или ссылка Telegram",
+          "published_at": "2026-07-14T15:25:44+00:00"
+        }
+      ],
+      "first_discovered_at": "2026-07-14T16:38:56.878534+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.878532+00:00",
+      "last_verified_at": "2026-07-14T16:38:56.878536+00:00",
+      "latest_wheel_at": null,
+      "mention_count": 1,
+      "messages_checked": 20,
+      "public": true,
+      "sample_wheels": [],
+      "score": 18,
+      "source": "beardserklife",
+      "status": "ok",
+      "wheel_links_found": 0
+    },
     "betbisttv": {
       "discovered_from": [
         "narodCast"
@@ -331,11 +381,11 @@
         }
       ],
       "first_discovered_at": "2026-07-14T04:04:13.195207+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824279+00:00",
-      "last_verified_at": "2026-07-14T11:41:23.824283+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.878542+00:00",
+      "last_verified_at": "2026-07-14T16:38:56.878546+00:00",
       "latest_wheel_at": null,
       "mention_count": 1,
-      "messages_checked": 14,
+      "messages_checked": 12,
       "public": true,
       "sample_wheels": [],
       "score": 18,
@@ -345,6 +395,7 @@
     },
     "betboom_baza": {
       "discovered_from": [
+        "adekvatik",
         "dyrachyo",
         "solo_q_q"
       ],
@@ -366,17 +417,23 @@
           "message_url": "https://telegram.me/solo_q_q/1568",
           "method": "упоминание или ссылка Telegram",
           "published_at": "2026-07-10T09:37:57+00:00"
+        },
+        {
+          "from": "adekvatik",
+          "message_url": "https://telegram.me/adekvatik/4425",
+          "method": "упоминание или ссылка Telegram",
+          "published_at": "2026-07-08T14:12:36+00:00"
         }
       ],
       "first_discovered_at": "2026-07-14T04:04:13.195081+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.823989+00:00",
-      "last_verified_at": "2026-07-14T11:41:23.823994+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.878221+00:00",
+      "last_verified_at": "2026-07-14T16:38:56.878226+00:00",
       "latest_wheel_at": null,
-      "mention_count": 3,
+      "mention_count": 4,
       "messages_checked": 20,
       "public": true,
       "sample_wheels": [],
-      "score": 34,
+      "score": 47,
       "source": "betboom_baza",
       "status": "ok",
       "wheel_links_found": 0
@@ -388,27 +445,58 @@
       "evidence": [
         {
           "from": "blast_betboom",
-          "message_url": "https://telegram.me/blast_betboom/4522",
+          "message_url": "https://telegram.me/blast_betboom/4554",
           "method": "упоминание или ссылка Telegram",
-          "published_at": "2026-07-14T09:33:00+00:00"
+          "published_at": "2026-07-14T14:21:56+00:00"
         },
         {
           "from": "blast_betboom",
-          "message_url": "https://telegram.me/blast_betboom/4523",
+          "message_url": "https://telegram.me/blast_betboom/4559",
           "method": "упоминание или ссылка Telegram",
-          "published_at": "2026-07-14T10:02:30+00:00"
+          "published_at": "2026-07-14T14:42:25+00:00"
+        },
+        {
+          "from": "blast_betboom",
+          "message_url": "https://telegram.me/blast_betboom/4567",
+          "method": "упоминание или ссылка Telegram",
+          "published_at": "2026-07-14T15:55:10+00:00"
         }
       ],
       "first_discovered_at": "2026-07-14T11:41:23.824059+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824057+00:00",
-      "last_verified_at": "2026-07-14T11:41:23.824061+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.878236+00:00",
+      "last_verified_at": "2026-07-14T16:38:56.878241+00:00",
       "latest_wheel_at": null,
-      "mention_count": 2,
+      "mention_count": 3,
       "messages_checked": 1,
       "public": true,
       "sample_wheels": [],
-      "score": 21,
+      "score": 24,
       "source": "BetBoomEsports",
+      "status": "ok",
+      "wheel_links_found": 0
+    },
+    "betcity": {
+      "discovered_from": [
+        "Breakevens"
+      ],
+      "evidence": [
+        {
+          "from": "Breakevens",
+          "message_url": "https://telegram.me/breakevens/48837",
+          "method": "упоминание или ссылка Telegram",
+          "published_at": "2026-07-14T13:03:54+00:00"
+        }
+      ],
+      "first_discovered_at": "2026-07-14T16:38:56.878554+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.878552+00:00",
+      "last_verified_at": "2026-07-14T16:38:56.878557+00:00",
+      "latest_wheel_at": null,
+      "mention_count": 1,
+      "messages_checked": 18,
+      "public": true,
+      "sample_wheels": [],
+      "score": 18,
+      "source": "betcity",
       "status": "ok",
       "wheel_links_found": 0
     },
@@ -417,12 +505,6 @@
         "dartwager"
       ],
       "evidence": [
-        {
-          "from": "dartwager",
-          "message_url": "https://telegram.me/dartwager/3764",
-          "method": "упоминание или ссылка Telegram",
-          "published_at": "2026-07-10T14:19:41+00:00"
-        },
         {
           "from": "dartwager",
           "message_url": "https://telegram.me/dartwager/3766",
@@ -437,14 +519,14 @@
         }
       ],
       "first_discovered_at": "2026-07-14T04:04:13.195091+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824003+00:00",
-      "last_verified_at": "2026-07-14T11:41:23.824007+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.878362+00:00",
+      "last_verified_at": "2026-07-14T16:38:56.878366+00:00",
       "latest_wheel_at": null,
-      "mention_count": 3,
+      "mention_count": 2,
       "messages_checked": 20,
       "public": true,
       "sample_wheels": [],
-      "score": 24,
+      "score": 21,
       "source": "bettingmedialeague",
       "status": "ok",
       "wheel_links_found": 0
@@ -462,8 +544,8 @@
         }
       ],
       "first_discovered_at": "2026-07-14T04:04:13.195217+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824289+00:00",
-      "last_verified_at": "2026-07-14T11:41:23.824293+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.878563+00:00",
+      "last_verified_at": "2026-07-14T16:38:56.878567+00:00",
       "latest_wheel_at": null,
       "mention_count": 1,
       "messages_checked": 0,
@@ -487,8 +569,8 @@
         }
       ],
       "first_discovered_at": "2026-07-14T04:04:13.195226+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824298+00:00",
-      "last_verified_at": "2026-07-14T11:41:23.824302+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.878573+00:00",
+      "last_verified_at": "2026-07-14T16:38:56.878577+00:00",
       "latest_wheel_at": null,
       "mention_count": 1,
       "messages_checked": 0,
@@ -537,8 +619,8 @@
         }
       ],
       "first_discovered_at": "2026-07-14T04:04:13.195237+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824308+00:00",
-      "last_verified_at": "2026-07-14T11:41:23.824311+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.878583+00:00",
+      "last_verified_at": "2026-07-14T16:38:56.878587+00:00",
       "latest_wheel_at": null,
       "mention_count": 1,
       "messages_checked": 0,
@@ -587,8 +669,8 @@
         }
       ],
       "first_discovered_at": "2026-07-14T04:04:13.195247+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824316+00:00",
-      "last_verified_at": "2026-07-14T11:41:23.824320+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.878593+00:00",
+      "last_verified_at": "2026-07-14T16:38:56.878597+00:00",
       "latest_wheel_at": null,
       "mention_count": 1,
       "messages_checked": 0,
@@ -693,8 +775,8 @@
         }
       ],
       "first_discovered_at": "2026-07-14T04:04:13.195265+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824325+00:00",
-      "last_verified_at": "2026-07-14T11:41:23.824329+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.878604+00:00",
+      "last_verified_at": "2026-07-14T16:38:56.878608+00:00",
       "latest_wheel_at": null,
       "mention_count": 1,
       "messages_checked": 18,
@@ -718,8 +800,8 @@
         }
       ],
       "first_discovered_at": "2026-07-14T04:04:13.195274+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824334+00:00",
-      "last_verified_at": "2026-07-14T11:41:23.824338+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.878614+00:00",
+      "last_verified_at": "2026-07-14T16:38:56.878618+00:00",
       "latest_wheel_at": null,
       "mention_count": 1,
       "messages_checked": 0,
@@ -746,13 +828,19 @@
           "message_url": "https://telegram.me/chopperis/1684",
           "method": "упоминание или ссылка Telegram",
           "published_at": "2026-07-14T09:14:25+00:00"
+        },
+        {
+          "from": "chopperis",
+          "message_url": "https://telegram.me/chopperis/1688",
+          "method": "упоминание или ссылка Telegram",
+          "published_at": "2026-07-14T13:16:21+00:00"
         }
       ],
       "first_discovered_at": "2026-07-14T04:04:13.195284+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824067+00:00",
-      "last_verified_at": "2026-07-14T11:41:23.824071+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.878248+00:00",
+      "last_verified_at": "2026-07-14T16:38:56.878253+00:00",
       "latest_wheel_at": null,
-      "mention_count": 2,
+      "mention_count": 3,
       "messages_checked": 0,
       "public": false,
       "sample_wheels": [],
@@ -777,17 +865,23 @@
           "message_url": "https://telegram.me/chopperis/1684",
           "method": "упоминание или ссылка Telegram",
           "published_at": "2026-07-14T09:14:25+00:00"
+        },
+        {
+          "from": "chopperis",
+          "message_url": "https://telegram.me/chopperis/1688",
+          "method": "упоминание или ссылка Telegram",
+          "published_at": "2026-07-14T13:16:21+00:00"
         }
       ],
       "first_discovered_at": "2026-07-14T04:04:13.195293+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824078+00:00",
-      "last_verified_at": "2026-07-14T11:41:23.824083+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.878261+00:00",
+      "last_verified_at": "2026-07-14T16:38:56.878265+00:00",
       "latest_wheel_at": null,
-      "mention_count": 2,
+      "mention_count": 3,
       "messages_checked": 7,
       "public": true,
       "sample_wheels": [],
-      "score": 21,
+      "score": 24,
       "source": "chopperinho",
       "status": "ok",
       "wheel_links_found": 0
@@ -808,13 +902,19 @@
           "message_url": "https://telegram.me/chopperis/1684",
           "method": "упоминание или ссылка Telegram",
           "published_at": "2026-07-14T09:14:25+00:00"
+        },
+        {
+          "from": "chopperis",
+          "message_url": "https://telegram.me/chopperis/1688",
+          "method": "упоминание или ссылка Telegram",
+          "published_at": "2026-07-14T13:16:21+00:00"
         }
       ],
       "first_discovered_at": "2026-07-14T04:04:13.195302+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824089+00:00",
-      "last_verified_at": "2026-07-14T11:41:23.824093+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.878271+00:00",
+      "last_verified_at": "2026-07-14T16:38:56.878275+00:00",
       "latest_wheel_at": null,
-      "mention_count": 2,
+      "mention_count": 3,
       "messages_checked": 0,
       "public": false,
       "sample_wheels": [],
@@ -839,13 +939,19 @@
           "message_url": "https://telegram.me/chopperis/1684",
           "method": "упоминание или ссылка Telegram",
           "published_at": "2026-07-14T09:14:25+00:00"
+        },
+        {
+          "from": "chopperis",
+          "message_url": "https://telegram.me/chopperis/1688",
+          "method": "упоминание или ссылка Telegram",
+          "published_at": "2026-07-14T13:16:21+00:00"
         }
       ],
       "first_discovered_at": "2026-07-14T04:04:13.195310+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824099+00:00",
-      "last_verified_at": "2026-07-14T11:41:23.824102+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.878281+00:00",
+      "last_verified_at": "2026-07-14T16:38:56.878285+00:00",
       "latest_wheel_at": null,
-      "mention_count": 2,
+      "mention_count": 3,
       "messages_checked": 0,
       "public": false,
       "sample_wheels": [],
@@ -867,8 +973,8 @@
         }
       ],
       "first_discovered_at": "2026-07-14T04:04:13.195319+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824343+00:00",
-      "last_verified_at": "2026-07-14T11:41:23.824347+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.878623+00:00",
+      "last_verified_at": "2026-07-14T16:38:56.878627+00:00",
       "latest_wheel_at": null,
       "mention_count": 1,
       "messages_checked": 0,
@@ -917,8 +1023,8 @@
         }
       ],
       "first_discovered_at": "2026-07-14T04:04:13.195327+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824352+00:00",
-      "last_verified_at": "2026-07-14T11:41:23.824356+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.878633+00:00",
+      "last_verified_at": "2026-07-14T16:38:56.878638+00:00",
       "latest_wheel_at": null,
       "mention_count": 1,
       "messages_checked": 0,
@@ -942,8 +1048,8 @@
         }
       ],
       "first_discovered_at": "2026-07-14T04:04:13.195335+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824361+00:00",
-      "last_verified_at": "2026-07-14T11:41:23.824365+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.878642+00:00",
+      "last_verified_at": "2026-07-14T16:38:56.878647+00:00",
       "latest_wheel_at": null,
       "mention_count": 1,
       "messages_checked": 0,
@@ -967,8 +1073,8 @@
         }
       ],
       "first_discovered_at": "2026-07-14T04:04:13.195344+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824370+00:00",
-      "last_verified_at": "2026-07-14T11:41:23.824374+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.878652+00:00",
+      "last_verified_at": "2026-07-14T16:38:56.878656+00:00",
       "latest_wheel_at": null,
       "mention_count": 1,
       "messages_checked": 0,
@@ -992,8 +1098,8 @@
         }
       ],
       "first_discovered_at": "2026-07-14T04:04:13.195353+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824380+00:00",
-      "last_verified_at": "2026-07-14T11:41:23.824384+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.878662+00:00",
+      "last_verified_at": "2026-07-14T16:38:56.878666+00:00",
       "latest_wheel_at": null,
       "mention_count": 1,
       "messages_checked": 20,
@@ -1017,8 +1123,8 @@
         }
       ],
       "first_discovered_at": "2026-07-14T04:04:13.195362+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824389+00:00",
-      "last_verified_at": "2026-07-14T11:41:23.824393+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.878671+00:00",
+      "last_verified_at": "2026-07-14T16:38:56.878675+00:00",
       "latest_wheel_at": null,
       "mention_count": 1,
       "messages_checked": 0,
@@ -1042,8 +1148,8 @@
         }
       ],
       "first_discovered_at": "2026-07-14T04:04:13.195371+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824398+00:00",
-      "last_verified_at": "2026-07-14T11:41:23.824402+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.878680+00:00",
+      "last_verified_at": "2026-07-14T16:38:56.878685+00:00",
       "latest_wheel_at": null,
       "mention_count": 1,
       "messages_checked": 0,
@@ -1092,8 +1198,8 @@
         }
       ],
       "first_discovered_at": "2026-07-14T04:04:13.195388+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824408+00:00",
-      "last_verified_at": "2026-07-14T11:41:23.824412+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.878690+00:00",
+      "last_verified_at": "2026-07-14T16:38:56.878694+00:00",
       "latest_wheel_at": null,
       "mention_count": 1,
       "messages_checked": 0,
@@ -1123,8 +1229,8 @@
         }
       ],
       "first_discovered_at": "2026-07-14T04:04:13.195109+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824108+00:00",
-      "last_verified_at": "2026-07-14T11:41:23.824112+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.878373+00:00",
+      "last_verified_at": "2026-07-14T16:38:56.878378+00:00",
       "latest_wheel_at": null,
       "mention_count": 2,
       "messages_checked": 19,
@@ -1148,8 +1254,8 @@
         }
       ],
       "first_discovered_at": "2026-07-14T04:04:13.195396+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824417+00:00",
-      "last_verified_at": "2026-07-14T11:41:23.824422+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.878699+00:00",
+      "last_verified_at": "2026-07-14T16:38:56.878703+00:00",
       "latest_wheel_at": null,
       "mention_count": 1,
       "messages_checked": 0,
@@ -1273,8 +1379,8 @@
         }
       ],
       "first_discovered_at": "2026-07-14T04:04:13.195429+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824426+00:00",
-      "last_verified_at": "2026-07-14T11:41:23.824430+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.878709+00:00",
+      "last_verified_at": "2026-07-14T16:38:56.878713+00:00",
       "latest_wheel_at": null,
       "mention_count": 1,
       "messages_checked": 0,
@@ -1329,8 +1435,8 @@
         }
       ],
       "first_discovered_at": "2026-07-14T04:04:13.195437+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824435+00:00",
-      "last_verified_at": "2026-07-14T11:41:23.824440+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.878718+00:00",
+      "last_verified_at": "2026-07-14T16:38:56.878723+00:00",
       "latest_wheel_at": null,
       "mention_count": 1,
       "messages_checked": 0,
@@ -1354,8 +1460,8 @@
         }
       ],
       "first_discovered_at": "2026-07-14T04:04:13.195445+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824445+00:00",
-      "last_verified_at": "2026-07-14T11:41:23.824449+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.878728+00:00",
+      "last_verified_at": "2026-07-14T16:38:56.878732+00:00",
       "latest_wheel_at": null,
       "mention_count": 1,
       "messages_checked": 0,
@@ -1404,8 +1510,8 @@
         }
       ],
       "first_discovered_at": "2026-07-14T04:04:13.195454+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824462+00:00",
-      "last_verified_at": "2026-07-14T11:41:23.824466+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.878738+00:00",
+      "last_verified_at": "2026-07-14T16:38:56.878742+00:00",
       "latest_wheel_at": null,
       "mention_count": 1,
       "messages_checked": 0,
@@ -1429,8 +1535,8 @@
         }
       ],
       "first_discovered_at": "2026-07-14T04:04:13.195462+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824472+00:00",
-      "last_verified_at": "2026-07-14T11:41:23.824476+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.878747+00:00",
+      "last_verified_at": "2026-07-14T16:38:56.878751+00:00",
       "latest_wheel_at": null,
       "mention_count": 1,
       "messages_checked": 19,
@@ -1454,8 +1560,8 @@
         }
       ],
       "first_discovered_at": "2026-07-14T11:41:23.824482+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824480+00:00",
-      "last_verified_at": "2026-07-14T11:41:23.824484+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.878756+00:00",
+      "last_verified_at": "2026-07-14T16:38:56.878761+00:00",
       "latest_wheel_at": null,
       "mention_count": 1,
       "messages_checked": 15,
@@ -1479,8 +1585,8 @@
         }
       ],
       "first_discovered_at": "2026-07-14T04:04:13.195470+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824489+00:00",
-      "last_verified_at": "2026-07-14T11:41:23.824493+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.878765+00:00",
+      "last_verified_at": "2026-07-14T16:38:56.878770+00:00",
       "latest_wheel_at": null,
       "mention_count": 1,
       "messages_checked": 16,
@@ -1504,8 +1610,8 @@
         }
       ],
       "first_discovered_at": "2026-07-14T04:04:13.195478+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824498+00:00",
-      "last_verified_at": "2026-07-14T11:41:23.824502+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.878774+00:00",
+      "last_verified_at": "2026-07-14T16:38:56.878778+00:00",
       "latest_wheel_at": null,
       "mention_count": 1,
       "messages_checked": 0,
@@ -1529,8 +1635,8 @@
         }
       ],
       "first_discovered_at": "2026-07-14T11:41:23.824509+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824507+00:00",
-      "last_verified_at": "2026-07-14T11:41:23.824511+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.878783+00:00",
+      "last_verified_at": "2026-07-14T16:38:56.878788+00:00",
       "latest_wheel_at": null,
       "mention_count": 1,
       "messages_checked": 20,
@@ -1554,8 +1660,8 @@
         }
       ],
       "first_discovered_at": "2026-07-14T04:04:13.195487+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824516+00:00",
-      "last_verified_at": "2026-07-14T11:41:23.824519+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.878793+00:00",
+      "last_verified_at": "2026-07-14T16:38:56.878797+00:00",
       "latest_wheel_at": null,
       "mention_count": 1,
       "messages_checked": 0,
@@ -1579,8 +1685,8 @@
         }
       ],
       "first_discovered_at": "2026-07-14T04:04:13.195495+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824524+00:00",
-      "last_verified_at": "2026-07-14T11:41:23.824528+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.878802+00:00",
+      "last_verified_at": "2026-07-14T16:38:56.878806+00:00",
       "latest_wheel_at": null,
       "mention_count": 1,
       "messages_checked": 0,
@@ -1629,8 +1735,8 @@
         }
       ],
       "first_discovered_at": "2026-07-14T11:41:23.824534+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824532+00:00",
-      "last_verified_at": "2026-07-14T11:41:23.824536+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.878811+00:00",
+      "last_verified_at": "2026-07-14T16:38:56.878815+00:00",
       "latest_wheel_at": null,
       "mention_count": 1,
       "messages_checked": 0,
@@ -1654,8 +1760,8 @@
         }
       ],
       "first_discovered_at": "2026-07-14T04:04:13.195504+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824541+00:00",
-      "last_verified_at": "2026-07-14T11:41:23.824545+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.878820+00:00",
+      "last_verified_at": "2026-07-14T16:38:56.878824+00:00",
       "latest_wheel_at": null,
       "mention_count": 1,
       "messages_checked": 0,
@@ -1691,6 +1797,31 @@
       "status": "ok",
       "wheel_links_found": 0
     },
+    "gromozekacs": {
+      "discovered_from": [
+        "blast_betboom"
+      ],
+      "evidence": [
+        {
+          "from": "blast_betboom",
+          "message_url": "https://telegram.me/blast_betboom/4563",
+          "method": "упоминание или ссылка Telegram",
+          "published_at": "2026-07-14T15:30:08+00:00"
+        }
+      ],
+      "first_discovered_at": "2026-07-14T16:38:56.878832+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.878830+00:00",
+      "last_verified_at": "2026-07-14T16:38:56.878834+00:00",
+      "latest_wheel_at": null,
+      "mention_count": 1,
+      "messages_checked": 18,
+      "public": true,
+      "sample_wheels": [],
+      "score": 18,
+      "source": "GromoZekaCS",
+      "status": "ok",
+      "wheel_links_found": 0
+    },
     "happyzerg11": {
       "discovered_from": [
         "EWC_betboom"
@@ -1704,8 +1835,8 @@
         }
       ],
       "first_discovered_at": "2026-07-14T11:41:23.824552+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824550+00:00",
-      "last_verified_at": "2026-07-14T11:41:23.824554+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.878839+00:00",
+      "last_verified_at": "2026-07-14T16:38:56.878843+00:00",
       "latest_wheel_at": null,
       "mention_count": 1,
       "messages_checked": 18,
@@ -1729,7 +1860,7 @@
         }
       ],
       "first_discovered_at": "2026-07-14T04:04:13.195521+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824558+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.878849+00:00",
       "last_verified_at": "2026-07-14T07:51:40.893551+00:00",
       "latest_wheel_at": null,
       "mention_count": 1,
@@ -1754,7 +1885,7 @@
         }
       ],
       "first_discovered_at": "2026-07-14T04:04:13.195529+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824566+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.878857+00:00",
       "last_verified_at": "2026-07-14T07:51:40.893561+00:00",
       "latest_wheel_at": null,
       "mention_count": 1,
@@ -1779,7 +1910,7 @@
         }
       ],
       "first_discovered_at": "2026-07-14T04:04:13.195537+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824573+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.878864+00:00",
       "last_verified_at": "2026-07-14T07:51:40.893570+00:00",
       "latest_wheel_at": null,
       "mention_count": 1,
@@ -1804,7 +1935,7 @@
         }
       ],
       "first_discovered_at": "2026-07-14T04:04:13.195545+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824580+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.878871+00:00",
       "last_verified_at": "2026-07-14T07:51:40.893579+00:00",
       "latest_wheel_at": null,
       "mention_count": 1,
@@ -1834,6 +1965,24 @@
       "score": 13,
       "source": "InmateooGroup"
     },
+    "jesteryouknow": {
+      "discovered_from": [
+        "jestercast"
+      ],
+      "evidence": [
+        {
+          "from": "jestercast",
+          "message_url": "https://telegram.me/jestercast/1512",
+          "method": "упоминание или ссылка Telegram",
+          "published_at": "2026-07-13T12:52:03+00:00"
+        }
+      ],
+      "first_discovered_at": "2026-07-14T16:38:56.878880+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.878878+00:00",
+      "mention_count": 1,
+      "score": 13,
+      "source": "jesteryouknow"
+    },
     "jetnizestream": {
       "discovered_from": [
         "gorilla_armor"
@@ -1847,7 +1996,7 @@
         }
       ],
       "first_discovered_at": "2026-07-14T04:04:13.195554+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824593+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.878885+00:00",
       "last_verified_at": "2026-07-14T07:51:40.893589+00:00",
       "latest_wheel_at": null,
       "mention_count": 1,
@@ -1872,7 +2021,7 @@
         }
       ],
       "first_discovered_at": "2026-07-14T04:04:13.195563+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824600+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.878892+00:00",
       "last_verified_at": "2026-07-14T07:51:40.893599+00:00",
       "latest_wheel_at": null,
       "mention_count": 1,
@@ -1897,7 +2046,7 @@
         }
       ],
       "first_discovered_at": "2026-07-14T04:04:13.195571+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824607+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.878898+00:00",
       "last_verified_at": "2026-07-14T07:51:40.893642+00:00",
       "latest_wheel_at": null,
       "mention_count": 1,
@@ -1922,10 +2071,28 @@
         }
       ],
       "first_discovered_at": "2026-07-14T11:41:23.824616+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824614+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.878905+00:00",
       "mention_count": 1,
       "score": 13,
       "source": "KeysieCloud"
+    },
+    "kfnik": {
+      "discovered_from": [
+        "betboomru"
+      ],
+      "evidence": [
+        {
+          "from": "betboomru",
+          "message_url": "https://telegram.me/betboom/9096",
+          "method": "упоминание или ссылка Telegram",
+          "published_at": "2026-07-14T15:25:44+00:00"
+        }
+      ],
+      "first_discovered_at": "2026-07-14T16:38:56.878914+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.878912+00:00",
+      "mention_count": 1,
+      "score": 13,
+      "source": "KFNik"
     },
     "kiraenn": {
       "discovered_from": [
@@ -1940,7 +2107,7 @@
         }
       ],
       "first_discovered_at": "2026-07-14T04:04:13.195118+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824621+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.878919+00:00",
       "last_verified_at": "2026-07-14T07:51:40.893086+00:00",
       "latest_wheel_at": null,
       "mention_count": 1,
@@ -1990,7 +2157,7 @@
         }
       ],
       "first_discovered_at": "2026-07-14T04:04:13.195578+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824629+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.878926+00:00",
       "mention_count": 1,
       "score": 13,
       "source": "KOMkANDR_I"
@@ -2008,7 +2175,7 @@
         }
       ],
       "first_discovered_at": "2026-07-14T04:04:13.195584+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824637+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.878933+00:00",
       "mention_count": 1,
       "score": 13,
       "source": "kostrann"
@@ -2044,7 +2211,7 @@
         }
       ],
       "first_discovered_at": "2026-07-14T04:04:13.195598+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824651+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.878940+00:00",
       "mention_count": 1,
       "score": 13,
       "source": "kyousukekyousuke"
@@ -2087,7 +2254,7 @@
         }
       ],
       "first_discovered_at": "2026-07-14T04:04:13.195604+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824658+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.878947+00:00",
       "mention_count": 1,
       "score": 13,
       "source": "lhfphf"
@@ -2105,7 +2272,7 @@
         }
       ],
       "first_discovered_at": "2026-07-14T04:04:13.195611+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824665+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.878954+00:00",
       "mention_count": 1,
       "score": 13,
       "source": "LifeForSurf"
@@ -2123,7 +2290,7 @@
         }
       ],
       "first_discovered_at": "2026-07-14T04:04:13.195616+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824672+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.878960+00:00",
       "mention_count": 1,
       "score": 13,
       "source": "lol_BaraQ"
@@ -2141,7 +2308,7 @@
         }
       ],
       "first_discovered_at": "2026-07-14T04:04:13.195622+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824678+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.878967+00:00",
       "mention_count": 1,
       "score": 13,
       "source": "LORDGUNDONE"
@@ -2159,7 +2326,7 @@
         }
       ],
       "first_discovered_at": "2026-07-14T04:04:13.195628+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824685+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.878973+00:00",
       "mention_count": 1,
       "score": 13,
       "source": "lovsomam"
@@ -2177,7 +2344,7 @@
         }
       ],
       "first_discovered_at": "2026-07-14T04:04:13.195634+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824692+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.878980+00:00",
       "mention_count": 1,
       "score": 13,
       "source": "lrxnmy"
@@ -2220,7 +2387,7 @@
         }
       ],
       "first_discovered_at": "2026-07-14T04:04:13.195640+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824698+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.878986+00:00",
       "mention_count": 1,
       "score": 13,
       "source": "m3traNeoChat"
@@ -2318,6 +2485,24 @@
       "status": "ok",
       "wheel_links_found": 0
     },
+    "mariomax11": {
+      "discovered_from": [
+        "MARIOMAXTV"
+      ],
+      "evidence": [
+        {
+          "from": "MARIOMAXTV",
+          "message_url": "https://telegram.me/MARIOMAXTV/2905",
+          "method": "упоминание или ссылка Telegram",
+          "published_at": "2026-07-12T12:03:52+00:00"
+        }
+      ],
+      "first_discovered_at": "2026-07-14T16:38:56.878995+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.878993+00:00",
+      "mention_count": 1,
+      "score": 13,
+      "source": "MaRiOMaX11"
+    },
     "mariomaxtv": {
       "discovered_from": [
         "narodCast",
@@ -2370,7 +2555,7 @@
         }
       ],
       "first_discovered_at": "2026-07-14T04:04:13.195652+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824705+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.879000+00:00",
       "mention_count": 1,
       "score": 13,
       "source": "mash1nkaaa"
@@ -2395,8 +2580,8 @@
         }
       ],
       "first_discovered_at": "2026-07-14T11:41:23.824038+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824036+00:00",
-      "last_verified_at": "2026-07-14T11:41:23.824041+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.878339+00:00",
+      "last_verified_at": "2026-07-14T16:38:56.878344+00:00",
       "latest_wheel_at": null,
       "mention_count": 2,
       "messages_checked": 0,
@@ -2452,8 +2637,8 @@
         }
       ],
       "first_discovered_at": "2026-07-14T04:04:13.195658+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824047+00:00",
-      "last_verified_at": "2026-07-14T11:41:23.824051+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.878351+00:00",
+      "last_verified_at": "2026-07-14T16:38:56.878355+00:00",
       "latest_wheel_at": null,
       "mention_count": 2,
       "messages_checked": 0,
@@ -2477,7 +2662,7 @@
         }
       ],
       "first_discovered_at": "2026-07-14T04:38:47.957747+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824712+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.879007+00:00",
       "mention_count": 1,
       "score": 13,
       "source": "misvika"
@@ -2513,7 +2698,7 @@
         }
       ],
       "first_discovered_at": "2026-07-14T04:04:13.195671+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824719+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.879014+00:00",
       "mention_count": 1,
       "score": 13,
       "source": "nenavizhy_vac_vcex"
@@ -2531,7 +2716,7 @@
         }
       ],
       "first_discovered_at": "2026-07-14T04:04:13.195677+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824725+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.879021+00:00",
       "mention_count": 1,
       "score": 13,
       "source": "nigov5"
@@ -2549,7 +2734,7 @@
         }
       ],
       "first_discovered_at": "2026-07-14T11:41:23.824733+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824732+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.879028+00:00",
       "mention_count": 1,
       "score": 13,
       "source": "nomanzx"
@@ -2567,7 +2752,7 @@
         }
       ],
       "first_discovered_at": "2026-07-14T04:04:13.195683+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824738+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.879034+00:00",
       "mention_count": 1,
       "score": 13,
       "source": "notgambling_bot"
@@ -2579,24 +2764,6 @@
       "evidence": [
         {
           "from": "PAPAdota2",
-          "message_url": "https://telegram.me/PAPAdota2/12097",
-          "method": "упоминание или ссылка Telegram",
-          "published_at": "2026-07-11T13:30:27+00:00"
-        },
-        {
-          "from": "PAPAdota2",
-          "message_url": "https://telegram.me/PAPAdota2/12098",
-          "method": "упоминание или ссылка Telegram",
-          "published_at": "2026-07-11T13:53:45+00:00"
-        },
-        {
-          "from": "PAPAdota2",
-          "message_url": "https://telegram.me/PAPAdota2/12104",
-          "method": "упоминание или ссылка Telegram",
-          "published_at": "2026-07-12T09:12:02+00:00"
-        },
-        {
-          "from": "PAPAdota2",
           "message_url": "https://telegram.me/PAPAdota2/12112",
           "method": "упоминание или ссылка Telegram",
           "published_at": "2026-07-13T09:37:30+00:00"
@@ -2606,13 +2773,19 @@
           "message_url": "https://telegram.me/PAPAdota2/12117",
           "method": "упоминание или ссылка Telegram",
           "published_at": "2026-07-14T10:40:52+00:00"
+        },
+        {
+          "from": "PAPAdota2",
+          "message_url": "https://telegram.me/PAPAdota2/12129",
+          "method": "упоминание или ссылка Telegram",
+          "published_at": "2026-07-14T16:28:09+00:00"
         }
       ],
       "first_discovered_at": "2026-07-14T04:04:13.195071+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.823974+00:00",
-      "last_verified_at": "2026-07-14T11:41:23.823979+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.878291+00:00",
+      "last_verified_at": "2026-07-14T16:38:56.878296+00:00",
       "latest_wheel_at": null,
-      "mention_count": 5,
+      "mention_count": 3,
       "messages_checked": 0,
       "public": false,
       "sample_wheels": [],
@@ -2634,7 +2807,7 @@
         }
       ],
       "first_discovered_at": "2026-07-14T11:41:23.824747+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824745+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.879041+00:00",
       "mention_count": 1,
       "score": 13,
       "source": "okkosport"
@@ -2652,7 +2825,7 @@
         }
       ],
       "first_discovered_at": "2026-07-14T11:41:23.824753+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824751+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.879048+00:00",
       "mention_count": 1,
       "score": 13,
       "source": "olezhekk"
@@ -2673,17 +2846,23 @@
           "message_url": "https://telegram.me/ihuntnoobs/5054",
           "method": "упоминание или ссылка Telegram",
           "published_at": "2026-07-09T11:50:13+00:00"
+        },
+        {
+          "from": "ihuntnoobs",
+          "message_url": "https://telegram.me/ihuntnoobs/5067",
+          "method": "упоминание или ссылка Telegram",
+          "published_at": "2026-07-14T16:32:54+00:00"
         }
       ],
       "first_discovered_at": "2026-07-14T04:04:13.195127+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824118+00:00",
-      "last_verified_at": "2026-07-14T11:41:23.824122+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.878304+00:00",
+      "last_verified_at": "2026-07-14T16:38:56.878308+00:00",
       "latest_wheel_at": null,
-      "mention_count": 2,
+      "mention_count": 3,
       "messages_checked": 20,
       "public": true,
       "sample_wheels": [],
-      "score": 21,
+      "score": 24,
       "source": "overdrivebet",
       "status": "ok",
       "wheel_links_found": 0
@@ -2701,7 +2880,7 @@
         }
       ],
       "first_discovered_at": "2026-07-14T04:04:13.195689+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824757+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.879054+00:00",
       "mention_count": 1,
       "score": 13,
       "source": "paradiseqwe"
@@ -2719,7 +2898,7 @@
         }
       ],
       "first_discovered_at": "2026-07-14T04:04:13.195696+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824764+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.879060+00:00",
       "mention_count": 1,
       "score": 13,
       "source": "pashabashu"
@@ -2737,7 +2916,7 @@
         }
       ],
       "first_discovered_at": "2026-07-14T04:04:13.195702+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824771+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.879067+00:00",
       "mention_count": 1,
       "score": 13,
       "source": "PASHUT1N"
@@ -2755,7 +2934,7 @@
         }
       ],
       "first_discovered_at": "2026-07-14T04:04:13.195708+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824777+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.879073+00:00",
       "mention_count": 1,
       "score": 13,
       "source": "Procrastinator_r"
@@ -2773,7 +2952,7 @@
         }
       ],
       "first_discovered_at": "2026-07-14T04:04:13.195714+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824783+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.879080+00:00",
       "mention_count": 1,
       "score": 13,
       "source": "Puhlyaw"
@@ -2791,7 +2970,7 @@
         }
       ],
       "first_discovered_at": "2026-07-14T04:04:13.195719+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824790+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.879087+00:00",
       "mention_count": 1,
       "score": 13,
       "source": "quebraresperanza"
@@ -2809,7 +2988,7 @@
         }
       ],
       "first_discovered_at": "2026-07-14T04:04:13.195726+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824797+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.879093+00:00",
       "mention_count": 1,
       "score": 13,
       "source": "Ramzesasd"
@@ -2839,8 +3018,8 @@
         }
       ],
       "first_discovered_at": "2026-07-14T04:04:13.195100+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824014+00:00",
-      "last_verified_at": "2026-07-14T11:41:23.824018+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.878316+00:00",
+      "last_verified_at": "2026-07-14T16:38:56.878320+00:00",
       "latest_wheel_at": null,
       "mention_count": 3,
       "messages_checked": 0,
@@ -2864,7 +3043,7 @@
         }
       ],
       "first_discovered_at": "2026-07-14T04:04:13.195732+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824803+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.879099+00:00",
       "mention_count": 1,
       "score": 13,
       "source": "randombeast_bot"
@@ -2882,7 +3061,7 @@
         }
       ],
       "first_discovered_at": "2026-07-14T04:04:13.195738+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824810+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.879106+00:00",
       "mention_count": 1,
       "score": 13,
       "source": "RandomGodBot"
@@ -2938,7 +3117,7 @@
         }
       ],
       "first_discovered_at": "2026-07-14T04:04:13.195744+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824816+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.879112+00:00",
       "mention_count": 1,
       "score": 13,
       "source": "Razganov"
@@ -2974,7 +3153,7 @@
         }
       ],
       "first_discovered_at": "2026-07-14T04:04:13.195756+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824824+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.879118+00:00",
       "mention_count": 1,
       "score": 13,
       "source": "retakenews"
@@ -2992,7 +3171,7 @@
         }
       ],
       "first_discovered_at": "2026-07-14T04:04:13.195762+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824830+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.879125+00:00",
       "mention_count": 1,
       "score": 13,
       "source": "ripKENCHIK"
@@ -3010,7 +3189,7 @@
         }
       ],
       "first_discovered_at": "2026-07-14T11:41:23.824839+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824837+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.879131+00:00",
       "mention_count": 1,
       "score": 13,
       "source": "rpetroff"
@@ -3028,7 +3207,7 @@
         }
       ],
       "first_discovered_at": "2026-07-14T04:04:13.195768+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824843+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.879137+00:00",
       "mention_count": 1,
       "score": 13,
       "source": "sadulla_sultanov"
@@ -3046,7 +3225,7 @@
         }
       ],
       "first_discovered_at": "2026-07-14T04:04:13.195774+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824850+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.879143+00:00",
       "mention_count": 1,
       "score": 13,
       "source": "SashkaDestroyer"
@@ -3100,7 +3279,7 @@
         }
       ],
       "first_discovered_at": "2026-07-14T04:04:13.195793+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824863+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.879150+00:00",
       "mention_count": 1,
       "score": 13,
       "source": "sayurri_001"
@@ -3136,7 +3315,7 @@
         }
       ],
       "first_discovered_at": "2026-07-14T04:04:13.195805+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824876+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.879156+00:00",
       "mention_count": 1,
       "score": 13,
       "source": "shalashshpui"
@@ -3196,8 +3375,8 @@
         }
       ],
       "first_discovered_at": "2026-07-14T04:04:13.195047+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.823904+00:00",
-      "last_verified_at": "2026-07-14T11:41:23.823933+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.878202+00:00",
+      "last_verified_at": "2026-07-14T16:38:56.878208+00:00",
       "latest_wheel_at": null,
       "mention_count": 20,
       "messages_checked": 20,
@@ -3221,7 +3400,7 @@
         }
       ],
       "first_discovered_at": "2026-07-14T04:04:13.195811+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824883+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.879162+00:00",
       "mention_count": 1,
       "score": 13,
       "source": "solaris1337"
@@ -3245,8 +3424,8 @@
         }
       ],
       "first_discovered_at": "2026-07-14T04:04:13.195817+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824127+00:00",
-      "last_verified_at": "2026-07-14T11:41:23.824132+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.878384+00:00",
+      "last_verified_at": "2026-07-14T16:38:56.878388+00:00",
       "latest_wheel_at": null,
       "mention_count": 2,
       "messages_checked": 20,
@@ -3270,7 +3449,7 @@
         }
       ],
       "first_discovered_at": "2026-07-14T04:04:13.195823+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824889+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.879169+00:00",
       "mention_count": 1,
       "score": 13,
       "source": "SoloDota322"
@@ -3288,7 +3467,7 @@
         }
       ],
       "first_discovered_at": "2026-07-14T04:04:13.195829+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824896+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.879176+00:00",
       "mention_count": 1,
       "score": 13,
       "source": "sony9sha_aa"
@@ -3325,26 +3504,20 @@
       "evidence": [
         {
           "from": "dartwager",
-          "message_url": "https://telegram.me/dartwager/3763",
-          "method": "упоминание или ссылка Telegram",
-          "published_at": "2026-07-10T12:33:48+00:00"
-        },
-        {
-          "from": "dartwager",
           "message_url": "https://telegram.me/dartwager/3781",
           "method": "упоминание или ссылка Telegram",
           "published_at": "2026-07-14T09:01:12+00:00"
         }
       ],
       "first_discovered_at": "2026-07-14T04:04:13.195835+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824138+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.879183+00:00",
       "last_verified_at": "2026-07-14T11:41:23.824163+00:00",
       "latest_wheel_at": null,
-      "mention_count": 2,
+      "mention_count": 1,
       "messages_checked": 20,
       "public": true,
       "sample_wheels": [],
-      "score": 21,
+      "score": 18,
       "source": "stavka_tv",
       "status": "ok",
       "wheel_links_found": 0
@@ -3362,7 +3535,7 @@
         }
       ],
       "first_discovered_at": "2026-07-14T04:04:13.195841+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824903+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.879190+00:00",
       "mention_count": 1,
       "score": 13,
       "source": "Stepstro"
@@ -3380,7 +3553,7 @@
         }
       ],
       "first_discovered_at": "2026-07-14T04:04:13.195847+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824909+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.879196+00:00",
       "mention_count": 1,
       "score": 13,
       "source": "Sticklex"
@@ -3426,13 +3599,19 @@
           "message_url": "https://telegram.me/StrayDungeon228/5115",
           "method": "упоминание или ссылка Telegram",
           "published_at": "2026-07-14T08:03:08+00:00"
+        },
+        {
+          "from": "StrayDungeon228",
+          "message_url": "https://telegram.me/StrayDungeon228/5116",
+          "method": "упоминание или ссылка Telegram",
+          "published_at": "2026-07-14T13:02:00+00:00"
         }
       ],
       "first_discovered_at": "2026-07-14T04:04:13.195853+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824171+00:00",
-      "last_verified_at": "2026-07-14T11:41:23.824176+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.878328+00:00",
+      "last_verified_at": "2026-07-14T16:38:56.878332+00:00",
       "latest_wheel_at": null,
-      "mention_count": 2,
+      "mention_count": 3,
       "messages_checked": 0,
       "public": false,
       "sample_wheels": [],
@@ -3454,7 +3633,7 @@
         }
       ],
       "first_discovered_at": "2026-07-14T04:04:13.195136+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824916+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.879203+00:00",
       "last_verified_at": "2026-07-14T07:51:40.893106+00:00",
       "latest_wheel_at": null,
       "mention_count": 1,
@@ -3479,7 +3658,7 @@
         }
       ],
       "first_discovered_at": "2026-07-14T04:04:13.195859+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824924+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.879209+00:00",
       "mention_count": 1,
       "score": 13,
       "source": "SUBOkick_bot"
@@ -3497,7 +3676,7 @@
         }
       ],
       "first_discovered_at": "2026-07-14T04:04:13.195865+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824930+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.879216+00:00",
       "mention_count": 1,
       "score": 13,
       "source": "Suslik200623"
@@ -3515,7 +3694,7 @@
         }
       ],
       "first_discovered_at": "2026-07-14T11:41:23.824938+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824937+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.879222+00:00",
       "mention_count": 1,
       "score": 13,
       "source": "Sweetsosquahub"
@@ -3533,7 +3712,7 @@
         }
       ],
       "first_discovered_at": "2026-07-14T04:04:13.195870+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824943+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.879229+00:00",
       "mention_count": 1,
       "score": 13,
       "source": "The_vip_0"
@@ -3557,8 +3736,8 @@
         }
       ],
       "first_discovered_at": "2026-07-14T04:04:13.195144+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824181+00:00",
-      "last_verified_at": "2026-07-14T11:41:23.824185+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.878395+00:00",
+      "last_verified_at": "2026-07-14T16:38:56.878399+00:00",
       "latest_wheel_at": null,
       "mention_count": 2,
       "messages_checked": 0,
@@ -3582,7 +3761,7 @@
         }
       ],
       "first_discovered_at": "2026-07-14T04:04:13.195877+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824949+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.879235+00:00",
       "mention_count": 1,
       "score": 13,
       "source": "timasiik"
@@ -3590,30 +3769,14 @@
     "tribute": {
       "discovered_from": [
         "boltcast",
+        "jestercast",
         "KRATtv",
         "mAger_de_nuke",
+        "MARIOMAXTV",
         "NeretCast",
         "PAPAdota2"
       ],
       "evidence": [
-        {
-          "from": "PAPAdota2",
-          "message_url": "https://telegram.me/PAPAdota2/12099",
-          "method": "упоминание или ссылка Telegram",
-          "published_at": "2026-07-11T14:56:04+00:00"
-        },
-        {
-          "from": "PAPAdota2",
-          "message_url": "https://telegram.me/PAPAdota2/12102",
-          "method": "упоминание или ссылка Telegram",
-          "published_at": "2026-07-11T20:40:18+00:00"
-        },
-        {
-          "from": "PAPAdota2",
-          "message_url": "https://telegram.me/PAPAdota2/12103",
-          "method": "упоминание или ссылка Telegram",
-          "published_at": "2026-07-12T00:55:56+00:00"
-        },
         {
           "from": "PAPAdota2",
           "message_url": "https://telegram.me/PAPAdota2/12111",
@@ -3627,29 +3790,47 @@
           "published_at": "2026-07-13T17:49:52+00:00"
         },
         {
-          "from": "boltcast",
-          "message_url": "https://telegram.me/boltcast/6337",
+          "from": "PAPAdota2",
+          "message_url": "https://telegram.me/PAPAdota2/12120",
           "method": "упоминание или ссылка Telegram",
-          "published_at": "2026-07-11T13:39:20+00:00"
+          "published_at": "2026-07-14T12:37:17+00:00"
+        },
+        {
+          "from": "PAPAdota2",
+          "message_url": "https://telegram.me/PAPAdota2/12123",
+          "method": "упоминание или ссылка Telegram",
+          "published_at": "2026-07-14T13:52:10+00:00"
+        },
+        {
+          "from": "PAPAdota2",
+          "message_url": "https://telegram.me/PAPAdota2/12126",
+          "method": "упоминание или ссылка Telegram",
+          "published_at": "2026-07-14T15:17:19+00:00"
+        },
+        {
+          "from": "PAPAdota2",
+          "message_url": "https://telegram.me/PAPAdota2/12127",
+          "method": "упоминание или ссылка Telegram",
+          "published_at": "2026-07-14T15:57:03+00:00"
         },
         {
           "from": "boltcast",
-          "message_url": "https://telegram.me/boltcast/6342",
+          "message_url": "https://telegram.me/boltcast/6349",
           "method": "упоминание или ссылка Telegram",
-          "published_at": "2026-07-12T10:19:58+00:00"
+          "published_at": "2026-07-12T15:08:12+00:00"
         },
         {
           "from": "boltcast",
-          "message_url": "https://telegram.me/boltcast/6344",
+          "message_url": "https://telegram.me/boltcast/6352",
           "method": "упоминание или ссылка Telegram",
-          "published_at": "2026-07-12T10:36:14+00:00"
+          "published_at": "2026-07-13T12:38:48+00:00"
         }
       ],
       "first_discovered_at": "2026-07-14T04:04:13.195022+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.823956+00:00",
-      "last_verified_at": "2026-07-14T11:41:23.823962+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.878161+00:00",
+      "last_verified_at": "2026-07-14T16:38:56.878183+00:00",
       "latest_wheel_at": null,
-      "mention_count": 16,
+      "mention_count": 26,
       "messages_checked": 0,
       "public": false,
       "sample_wheels": [],
@@ -3671,7 +3852,7 @@
         }
       ],
       "first_discovered_at": "2026-07-14T04:04:13.195882+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824956+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.879241+00:00",
       "mention_count": 1,
       "score": 13,
       "source": "tylkonaprzod"
@@ -3689,7 +3870,7 @@
         }
       ],
       "first_discovered_at": "2026-07-14T04:04:13.195888+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824963+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.879247+00:00",
       "mention_count": 1,
       "score": 13,
       "source": "unna_med"
@@ -3707,7 +3888,7 @@
         }
       ],
       "first_discovered_at": "2026-07-14T04:04:13.195894+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824970+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.879253+00:00",
       "mention_count": 1,
       "score": 13,
       "source": "uurfrnd"
@@ -3768,7 +3949,7 @@
         }
       ],
       "first_discovered_at": "2026-07-14T04:04:13.195900+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824983+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.879260+00:00",
       "mention_count": 1,
       "score": 13,
       "source": "vertigoxgod"
@@ -3804,7 +3985,7 @@
         }
       ],
       "first_discovered_at": "2026-07-14T04:04:13.195912+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824989+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.879266+00:00",
       "mention_count": 1,
       "score": 13,
       "source": "Wershka20"
@@ -3847,7 +4028,7 @@
         }
       ],
       "first_discovered_at": "2026-07-14T04:04:13.195918+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824996+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.879273+00:00",
       "mention_count": 1,
       "score": 13,
       "source": "Wh1te_List_Bot"
@@ -3865,7 +4046,7 @@
         }
       ],
       "first_discovered_at": "2026-07-14T04:04:13.195924+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.825003+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.879279+00:00",
       "mention_count": 1,
       "score": 13,
       "source": "whoamitof"
@@ -3883,7 +4064,7 @@
         }
       ],
       "first_discovered_at": "2026-07-14T11:41:23.825012+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.825010+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.879285+00:00",
       "mention_count": 1,
       "score": 13,
       "source": "whylollybet"
@@ -3901,7 +4082,7 @@
         }
       ],
       "first_discovered_at": "2026-07-14T04:04:13.195930+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.825016+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.879292+00:00",
       "mention_count": 1,
       "score": 13,
       "source": "wonderbelkaML"
@@ -3919,7 +4100,7 @@
         }
       ],
       "first_discovered_at": "2026-07-14T04:04:13.195935+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.825023+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.879299+00:00",
       "mention_count": 1,
       "score": 13,
       "source": "WorldEditlol"
@@ -3943,8 +4124,8 @@
         }
       ],
       "first_discovered_at": "2026-07-14T04:04:13.195941+00:00",
-      "last_discovered_at": "2026-07-14T11:41:23.824191+00:00",
-      "last_verified_at": "2026-07-14T11:41:23.824195+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.878406+00:00",
+      "last_verified_at": "2026-07-14T16:38:56.878411+00:00",
       "latest_wheel_at": null,
       "mention_count": 2,
       "messages_checked": 20,
@@ -3954,6 +4135,24 @@
       "source": "XDZachQ",
       "status": "ok",
       "wheel_links_found": 0
+    },
+    "xoma_cs": {
+      "discovered_from": [
+        "blast_betboom"
+      ],
+      "evidence": [
+        {
+          "from": "blast_betboom",
+          "message_url": "https://telegram.me/blast_betboom/4563",
+          "method": "упоминание или ссылка Telegram",
+          "published_at": "2026-07-14T15:30:08+00:00"
+        }
+      ],
+      "first_discovered_at": "2026-07-14T16:38:56.879307+00:00",
+      "last_discovered_at": "2026-07-14T16:38:56.879305+00:00",
+      "mention_count": 1,
+      "score": 13,
+      "source": "Xoma_cs"
     },
     "zortelad": {
       "discovered_from": [
@@ -3989,11 +4188,32 @@
   },
   "edges": {
     "adamstaya->dedadam": {
-      "count": 5,
+      "count": 6,
       "first_seen_at": "2026-07-14T04:04:09.828229+00:00",
       "from": "AdamStaya",
-      "last_seen_at": "2026-07-14T11:41:20.403748+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.491612+00:00",
       "to": "DedAdam"
+    },
+    "adekvatik->adekvattv": {
+      "count": 1,
+      "first_seen_at": "2026-07-14T16:38:53.513783+00:00",
+      "from": "adekvatik",
+      "last_seen_at": "2026-07-14T16:38:53.513785+00:00",
+      "to": "AdekvatTV"
+    },
+    "adekvatik->arszeeqq": {
+      "count": 1,
+      "first_seen_at": "2026-07-14T16:38:53.513790+00:00",
+      "from": "adekvatik",
+      "last_seen_at": "2026-07-14T16:38:53.513792+00:00",
+      "to": "arszeeqq"
+    },
+    "adekvatik->betboom_baza": {
+      "count": 1,
+      "first_seen_at": "2026-07-14T16:38:53.513073+00:00",
+      "from": "adekvatik",
+      "last_seen_at": "2026-07-14T16:38:53.513075+00:00",
+      "to": "betboom_baza"
     },
     "amam0610->concubot": {
       "count": 1,
@@ -4010,31 +4230,45 @@
       "to": "FRIK009"
     },
     "aunkereez->forgottentimeline": {
-      "count": 5,
+      "count": 6,
       "first_seen_at": "2026-07-14T04:04:09.827719+00:00",
       "from": "aunkereEZ",
-      "last_seen_at": "2026-07-14T11:41:20.403255+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.491047+00:00",
       "to": "ForgottenTimeline"
     },
     "bbteamcs2->stepstro": {
-      "count": 5,
+      "count": 6,
       "first_seen_at": "2026-07-14T04:04:09.845687+00:00",
       "from": "bbteamcs2",
-      "last_seen_at": "2026-07-14T11:41:20.420671+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.508775+00:00",
       "to": "Stepstro"
     },
     "betboom_esports->sweetsosquahub": {
-      "count": 1,
+      "count": 2,
       "first_seen_at": "2026-07-14T11:41:20.419371+00:00",
       "from": "betboom_esports",
-      "last_seen_at": "2026-07-14T11:41:20.419373+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.507385+00:00",
       "to": "Sweetsosquahub"
     },
-    "betboomru->okkosport": {
+    "betboomru->beardserklife": {
       "count": 1,
+      "first_seen_at": "2026-07-14T16:38:53.506869+00:00",
+      "from": "betboomru",
+      "last_seen_at": "2026-07-14T16:38:53.506871+00:00",
+      "to": "beardserklife"
+    },
+    "betboomru->kfnik": {
+      "count": 1,
+      "first_seen_at": "2026-07-14T16:38:53.506862+00:00",
+      "from": "betboomru",
+      "last_seen_at": "2026-07-14T16:38:53.506864+00:00",
+      "to": "KFNik"
+    },
+    "betboomru->okkosport": {
+      "count": 2,
       "first_seen_at": "2026-07-14T11:41:20.418796+00:00",
       "from": "betboomru",
-      "last_seen_at": "2026-07-14T11:41:20.418798+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.506772+00:00",
       "to": "okkosport"
     },
     "betboomteam->kiritych1": {
@@ -4094,10 +4328,10 @@
       "to": "BB_Forecast_Bot"
     },
     "blast_betboom->betboomesports": {
-      "count": 2,
+      "count": 5,
       "first_seen_at": "2026-07-14T11:41:20.419804+00:00",
       "from": "blast_betboom",
-      "last_seen_at": "2026-07-14T11:41:20.419891+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.508023+00:00",
       "to": "BetBoomEsports"
     },
     "blast_betboom->ewc_betboom": {
@@ -4114,6 +4348,13 @@
       "last_seen_at": "2026-07-14T11:41:20.419858+00:00",
       "to": "fishmandota2"
     },
+    "blast_betboom->gromozekacs": {
+      "count": 1,
+      "first_seen_at": "2026-07-14T16:38:53.507943+00:00",
+      "from": "blast_betboom",
+      "last_seen_at": "2026-07-14T16:38:53.507945+00:00",
+      "to": "GromoZekaCS"
+    },
     "blast_betboom->inmateoogroup": {
       "count": 1,
       "first_seen_at": "2026-07-14T11:41:20.419883+00:00",
@@ -4128,25 +4369,32 @@
       "last_seen_at": "2026-07-14T11:41:20.419865+00:00",
       "to": "vasilisaSN"
     },
+    "blast_betboom->xoma_cs": {
+      "count": 1,
+      "first_seen_at": "2026-07-14T16:38:53.507950+00:00",
+      "from": "blast_betboom",
+      "last_seen_at": "2026-07-14T16:38:53.507952+00:00",
+      "to": "Xoma_cs"
+    },
     "blindzonexgod->blindzoned": {
-      "count": 5,
+      "count": 6,
       "first_seen_at": "2026-07-14T04:04:09.838863+00:00",
       "from": "blindzonexgod",
-      "last_seen_at": "2026-07-14T11:41:20.413957+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.501824+00:00",
       "to": "Blindzoned"
     },
     "blindzonexgod->dmitrokalinin": {
-      "count": 5,
+      "count": 6,
       "first_seen_at": "2026-07-14T04:04:09.838878+00:00",
       "from": "blindzonexgod",
-      "last_seen_at": "2026-07-14T11:41:20.413964+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.501831+00:00",
       "to": "dmitrokalinin"
     },
     "blindzonexgod->wh1te_list_bot": {
-      "count": 5,
+      "count": 6,
       "first_seen_at": "2026-07-14T04:04:09.838870+00:00",
       "from": "blindzonexgod",
-      "last_seen_at": "2026-07-14T11:41:20.413972+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.501818+00:00",
       "to": "Wh1te_List_Bot"
     },
     "boltcast->sec0ndbreath": {
@@ -4157,11 +4405,18 @@
       "to": "Sec0ndBreath"
     },
     "boltcast->tribute": {
-      "count": 29,
+      "count": 35,
       "first_seen_at": "2026-07-14T04:04:09.827141+00:00",
       "from": "boltcast",
-      "last_seen_at": "2026-07-14T11:41:20.403046+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.490948+00:00",
       "to": "tribute"
+    },
+    "breakevens->betcity": {
+      "count": 1,
+      "first_seen_at": "2026-07-14T16:38:53.509895+00:00",
+      "from": "Breakevens",
+      "last_seen_at": "2026-07-14T16:38:53.509897+00:00",
+      "to": "betcity"
     },
     "chopperis->cakestreampage": {
       "count": 4,
@@ -4171,31 +4426,31 @@
       "to": "cakestreampage"
     },
     "chopperis->chopper": {
-      "count": 6,
+      "count": 9,
       "first_seen_at": "2026-07-14T04:04:09.832221+00:00",
       "from": "chopperis",
-      "last_seen_at": "2026-07-14T11:41:20.407538+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.495295+00:00",
       "to": "chopper"
     },
     "chopperis->chopperinho": {
-      "count": 6,
+      "count": 9,
       "first_seen_at": "2026-07-14T04:04:09.832228+00:00",
       "from": "chopperis",
-      "last_seen_at": "2026-07-14T11:41:20.407556+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.495279+00:00",
       "to": "chopperinho"
     },
     "chopperis->chopperinhoo": {
-      "count": 6,
+      "count": 9,
       "first_seen_at": "2026-07-14T04:04:09.832234+00:00",
       "from": "chopperis",
-      "last_seen_at": "2026-07-14T11:41:20.407550+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.495290+00:00",
       "to": "chopperinhoo"
     },
     "chopperis->chopperstreammoments": {
-      "count": 6,
+      "count": 9,
       "first_seen_at": "2026-07-14T04:04:09.832212+00:00",
       "from": "chopperis",
-      "last_seen_at": "2026-07-14T11:41:20.407544+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.495285+00:00",
       "to": "chopperstreammoments"
     },
     "chopperis->dmitrylebwa": {
@@ -4234,220 +4489,220 @@
       "to": "VooDooSh_Stream"
     },
     "ct0mislove->sayurri_001": {
-      "count": 5,
+      "count": 6,
       "first_seen_at": "2026-07-14T04:04:09.838257+00:00",
       "from": "ct0mislove",
-      "last_seen_at": "2026-07-14T11:41:20.413427+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.501301+00:00",
       "to": "sayurri_001"
     },
     "dartwager->bettingmedialeague": {
-      "count": 15,
+      "count": 17,
       "first_seen_at": "2026-07-14T04:04:09.841366+00:00",
       "from": "dartwager",
-      "last_seen_at": "2026-07-14T11:41:20.416596+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.504327+00:00",
       "to": "bettingmedialeague"
     },
     "dartwager->fonbetesports": {
-      "count": 1,
+      "count": 2,
       "first_seen_at": "2026-07-14T11:41:20.416977+00:00",
       "from": "dartwager",
-      "last_seen_at": "2026-07-14T11:41:20.416980+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.504726+00:00",
       "to": "fonbetesports"
     },
     "dartwager->stavka_tv": {
-      "count": 6,
+      "count": 7,
       "first_seen_at": "2026-07-14T04:04:09.841258+00:00",
       "from": "dartwager",
-      "last_seen_at": "2026-07-14T11:41:20.417028+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.504777+00:00",
       "to": "stavka_tv"
     },
     "dayneezbet->media_karl": {
-      "count": 1,
+      "count": 2,
       "first_seen_at": "2026-07-14T11:41:20.409106+00:00",
       "from": "DayneezBet",
-      "last_seen_at": "2026-07-14T11:41:20.409108+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.496897+00:00",
       "to": "media_karl"
     },
     "daynezz->media_karl": {
-      "count": 1,
+      "count": 2,
       "first_seen_at": "2026-07-14T11:41:20.414393+00:00",
       "from": "dayneZz",
-      "last_seen_at": "2026-07-14T11:41:20.414395+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.502231+00:00",
       "to": "media_karl"
     },
     "dyrachyo->betboom_baza": {
-      "count": 5,
+      "count": 6,
       "first_seen_at": "2026-07-14T04:04:09.825260+00:00",
       "from": "dyrachyo",
-      "last_seen_at": "2026-07-14T11:41:20.400857+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.488824+00:00",
       "to": "betboom_baza"
     },
     "dyrachyo->dyrachyobets": {
-      "count": 10,
+      "count": 12,
       "first_seen_at": "2026-07-14T04:04:09.825339+00:00",
       "from": "dyrachyo",
-      "last_seen_at": "2026-07-14T11:41:20.400957+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.488920+00:00",
       "to": "dyrachyobets"
     },
     "dyrachyo->sony9sha_aa": {
-      "count": 5,
+      "count": 6,
       "first_seen_at": "2026-07-14T04:04:09.825312+00:00",
       "from": "dyrachyo",
-      "last_seen_at": "2026-07-14T11:41:20.400901+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.488864+00:00",
       "to": "sony9sha_aa"
     },
     "ewc_betboom->alex_white_official": {
-      "count": 5,
+      "count": 6,
       "first_seen_at": "2026-07-14T04:04:09.847474+00:00",
       "from": "EWC_betboom",
-      "last_seen_at": "2026-07-14T11:41:20.422408+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.510606+00:00",
       "to": "alex_white_official"
     },
     "ewc_betboom->chiilstreeamml": {
-      "count": 5,
+      "count": 6,
       "first_seen_at": "2026-07-14T04:04:09.847481+00:00",
       "from": "EWC_betboom",
-      "last_seen_at": "2026-07-14T11:41:20.422430+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.510632+00:00",
       "to": "chiilstreeamML"
     },
     "ewc_betboom->danzelpodval": {
-      "count": 5,
+      "count": 6,
       "first_seen_at": "2026-07-14T04:04:09.847435+00:00",
       "from": "EWC_betboom",
-      "last_seen_at": "2026-07-14T11:41:20.422450+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.510586+00:00",
       "to": "danzelpodval"
     },
     "ewc_betboom->flashynthen1ght": {
-      "count": 1,
+      "count": 2,
       "first_seen_at": "2026-07-14T11:41:20.422750+00:00",
       "from": "EWC_betboom",
-      "last_seen_at": "2026-07-14T11:41:20.422752+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.510900+00:00",
       "to": "flashynthen1ght"
     },
     "ewc_betboom->happyzerg11": {
-      "count": 1,
+      "count": 2,
       "first_seen_at": "2026-07-14T11:41:20.422713+00:00",
       "from": "EWC_betboom",
-      "last_seen_at": "2026-07-14T11:41:20.422716+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.510894+00:00",
       "to": "happyzerg11"
     },
     "ewc_betboom->kdh440cast": {
-      "count": 5,
+      "count": 6,
       "first_seen_at": "2026-07-14T04:04:09.847495+00:00",
       "from": "EWC_betboom",
-      "last_seen_at": "2026-07-14T11:41:20.422401+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.510593+00:00",
       "to": "kdh440cast"
     },
     "ewc_betboom->keysiecloud": {
-      "count": 1,
+      "count": 2,
       "first_seen_at": "2026-07-14T11:41:20.422727+00:00",
       "from": "EWC_betboom",
-      "last_seen_at": "2026-07-14T11:41:20.422729+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.510912+00:00",
       "to": "KeysieCloud"
     },
     "ewc_betboom->kiraenn": {
-      "count": 9,
+      "count": 10,
       "first_seen_at": "2026-07-14T04:04:09.847317+00:00",
       "from": "EWC_betboom",
-      "last_seen_at": "2026-07-14T11:41:20.422637+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.510807+00:00",
       "to": "kiraenn"
     },
     "ewc_betboom->lifeforsurf": {
-      "count": 5,
+      "count": 6,
       "first_seen_at": "2026-07-14T04:04:09.847449+00:00",
       "from": "EWC_betboom",
-      "last_seen_at": "2026-07-14T11:41:20.422437+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.510573+00:00",
       "to": "LifeForSurf"
     },
     "ewc_betboom->mash1nkaaa": {
-      "count": 5,
+      "count": 6,
       "first_seen_at": "2026-07-14T04:04:09.847468+00:00",
       "from": "EWC_betboom",
-      "last_seen_at": "2026-07-14T11:41:20.422456+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.510579+00:00",
       "to": "mash1nkaaa"
     },
     "ewc_betboom->nomanzx": {
-      "count": 1,
+      "count": 2,
       "first_seen_at": "2026-07-14T11:41:20.422740+00:00",
       "from": "EWC_betboom",
-      "last_seen_at": "2026-07-14T11:41:20.422746+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.510906+00:00",
       "to": "nomanzx"
     },
     "ewc_betboom->rpetroff": {
-      "count": 1,
+      "count": 2,
       "first_seen_at": "2026-07-14T11:41:20.422733+00:00",
       "from": "EWC_betboom",
-      "last_seen_at": "2026-07-14T11:41:20.422735+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.510881+00:00",
       "to": "rpetroff"
     },
     "ewc_betboom->sashkadestroyer": {
-      "count": 5,
+      "count": 6,
       "first_seen_at": "2026-07-14T04:04:09.847455+00:00",
       "from": "EWC_betboom",
-      "last_seen_at": "2026-07-14T11:41:20.422463+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.510625+00:00",
       "to": "SashkaDestroyer"
     },
     "ewc_betboom->shalashshpui": {
-      "count": 5,
+      "count": 6,
       "first_seen_at": "2026-07-14T04:04:09.847488+00:00",
       "from": "EWC_betboom",
-      "last_seen_at": "2026-07-14T11:41:20.422416+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.510619+00:00",
       "to": "shalashshpui"
     },
     "ewc_betboom->streamrosstg": {
-      "count": 9,
+      "count": 10,
       "first_seen_at": "2026-07-14T04:04:09.847309+00:00",
       "from": "EWC_betboom",
-      "last_seen_at": "2026-07-14T11:41:20.422644+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.510813+00:00",
       "to": "streamrosstg"
     },
     "ewc_betboom->wonderbelkaml": {
-      "count": 5,
+      "count": 6,
       "first_seen_at": "2026-07-14T04:04:09.847462+00:00",
       "from": "EWC_betboom",
-      "last_seen_at": "2026-07-14T11:41:20.422423+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.510612+00:00",
       "to": "wonderbelkaML"
     },
     "ewc_betboom->xdzachq": {
-      "count": 6,
+      "count": 8,
       "first_seen_at": "2026-07-14T04:04:09.847442+00:00",
       "from": "EWC_betboom",
-      "last_seen_at": "2026-07-14T11:41:20.422722+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.510887+00:00",
       "to": "XDZachQ"
     },
     "false9jersey->false9shopbot": {
-      "count": 5,
+      "count": 6,
       "first_seen_at": "2026-07-14T04:04:09.847071+00:00",
       "from": "False9Jersey",
-      "last_seen_at": "2026-07-14T11:41:20.422099+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.510308+00:00",
       "to": "false9shopBot"
     },
     "false9jersey->thekassir": {
-      "count": 10,
+      "count": 12,
       "first_seen_at": "2026-07-14T04:04:09.846788+00:00",
       "from": "False9Jersey",
-      "last_seen_at": "2026-07-14T11:41:20.422092+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.510301+00:00",
       "to": "thekassir"
     },
     "gorilla_armor->flamebaker": {
-      "count": 5,
+      "count": 6,
       "first_seen_at": "2026-07-14T04:04:09.834303+00:00",
       "from": "gorilla_armor",
-      "last_seen_at": "2026-07-14T11:41:20.409530+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.497285+00:00",
       "to": "flamebaker"
     },
     "gorilla_armor->jetnizestream": {
-      "count": 5,
+      "count": 6,
       "first_seen_at": "2026-07-14T04:04:09.834312+00:00",
       "from": "gorilla_armor",
-      "last_seen_at": "2026-07-14T11:41:20.409537+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.497299+00:00",
       "to": "jetnizestream"
     },
     "gorilla_armor->pashut1n": {
-      "count": 5,
+      "count": 6,
       "first_seen_at": "2026-07-14T04:04:09.834319+00:00",
       "from": "gorilla_armor",
-      "last_seen_at": "2026-07-14T11:41:20.409544+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.497292+00:00",
       "to": "PASHUT1N"
     },
     "gshikaryan->breakevens": {
@@ -4472,46 +4727,60 @@
       "to": "Randomized"
     },
     "homakolesa->fenixinon83": {
-      "count": 5,
+      "count": 6,
       "first_seen_at": "2026-07-14T04:04:09.839345+00:00",
       "from": "homakolesa",
-      "last_seen_at": "2026-07-14T11:41:20.414488+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.502325+00:00",
       "to": "fenixinon83"
     },
     "homakolesa->notgambling_bot": {
-      "count": 5,
+      "count": 6,
       "first_seen_at": "2026-07-14T04:04:09.839556+00:00",
       "from": "homakolesa",
-      "last_seen_at": "2026-07-14T11:41:20.414697+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.502549+00:00",
       "to": "notgambling_bot"
     },
     "homakolesa->quebraresperanza": {
-      "count": 5,
+      "count": 6,
       "first_seen_at": "2026-07-14T04:04:09.839379+00:00",
       "from": "homakolesa",
-      "last_seen_at": "2026-07-14T11:41:20.414521+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.502357+00:00",
       "to": "quebraresperanza"
     },
     "homakolesa->randomgodbot": {
-      "count": 5,
+      "count": 6,
       "first_seen_at": "2026-07-14T04:04:09.839353+00:00",
       "from": "homakolesa",
-      "last_seen_at": "2026-07-14T11:41:20.414496+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.502333+00:00",
       "to": "RandomGodBot"
     },
     "homakolesa->subokick_bot": {
-      "count": 5,
+      "count": 6,
       "first_seen_at": "2026-07-14T04:04:09.839633+00:00",
       "from": "homakolesa",
-      "last_seen_at": "2026-07-14T11:41:20.414773+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.502628+00:00",
       "to": "SUBOkick_bot"
     },
     "ihuntnoobs->overdrivebet": {
-      "count": 10,
+      "count": 13,
       "first_seen_at": "2026-07-14T04:04:09.830341+00:00",
       "from": "ihuntnoobs",
-      "last_seen_at": "2026-07-14T11:41:20.406160+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.493871+00:00",
       "to": "overdrivebet"
+    },
+    "jestercast->jesteryouknow": {
+      "count": 1,
+      "first_seen_at": "2026-07-14T16:38:53.513956+00:00",
+      "from": "jestercast",
+      "last_seen_at": "2026-07-14T16:38:53.513958+00:00",
+      "to": "jesteryouknow"
+    },
+    "jestercast->tribute": {
+      "count": 2,
+      "first_seen_at": "2026-07-14T16:38:53.514035+00:00",
+      "from": "jestercast",
+      "last_seen_at": "2026-07-14T16:38:53.514144+00:00",
+      "to": "tribute"
     },
     "krattv->kratonchick": {
       "count": 5,
@@ -4521,31 +4790,45 @@
       "to": "kratonchick"
     },
     "krattv->tribute": {
-      "count": 14,
+      "count": 17,
       "first_seen_at": "2026-07-14T04:04:09.834441+00:00",
       "from": "KRATtv",
-      "last_seen_at": "2026-07-14T11:41:20.409809+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.497621+00:00",
       "to": "tribute"
     },
     "m3traneostream->metraneo": {
-      "count": 1,
+      "count": 2,
       "first_seen_at": "2026-07-14T11:41:20.424586+00:00",
       "from": "m3traNeoStream",
-      "last_seen_at": "2026-07-14T11:41:20.424588+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.512538+00:00",
       "to": "METRANEO"
     },
     "m3traneostream->misvika": {
-      "count": 4,
+      "count": 5,
       "first_seen_at": "2026-07-14T04:38:44.065251+00:00",
       "from": "m3traNeoStream",
-      "last_seen_at": "2026-07-14T11:41:20.424401+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.512344+00:00",
       "to": "misvika"
     },
     "mager_de_nuke->tribute": {
-      "count": 5,
+      "count": 6,
       "first_seen_at": "2026-07-14T04:04:09.831337+00:00",
       "from": "mAger_de_nuke",
-      "last_seen_at": "2026-07-14T11:41:20.406747+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.494405+00:00",
+      "to": "tribute"
+    },
+    "mariomaxtv->mariomax11": {
+      "count": 1,
+      "first_seen_at": "2026-07-14T16:38:53.512848+00:00",
+      "from": "MARIOMAXTV",
+      "last_seen_at": "2026-07-14T16:38:53.512850+00:00",
+      "to": "MaRiOMaX11"
+    },
+    "mariomaxtv->tribute": {
+      "count": 5,
+      "first_seen_at": "2026-07-14T16:38:53.512594+00:00",
+      "from": "MARIOMAXTV",
+      "last_seen_at": "2026-07-14T16:38:53.512810+00:00",
       "to": "tribute"
     },
     "mechanogun->blinkcx": {
@@ -4598,17 +4881,17 @@
       "to": "Wfasq"
     },
     "narodcast->betbisttv": {
-      "count": 5,
+      "count": 6,
       "first_seen_at": "2026-07-14T04:04:09.840067+00:00",
       "from": "narodCast",
-      "last_seen_at": "2026-07-14T11:41:20.415175+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.503033+00:00",
       "to": "betbistTV"
     },
     "narodcast->m3traneochat": {
-      "count": 5,
+      "count": 6,
       "first_seen_at": "2026-07-14T04:04:09.840745+00:00",
       "from": "narodCast",
-      "last_seen_at": "2026-07-14T11:41:20.415792+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.503679+00:00",
       "to": "m3traNeoChat"
     },
     "narodcast->m3traneostream": {
@@ -4626,17 +4909,17 @@
       "to": "MARIOMAXTV"
     },
     "narodcast->metraneo": {
-      "count": 5,
+      "count": 6,
       "first_seen_at": "2026-07-14T04:04:09.839958+00:00",
       "from": "narodCast",
-      "last_seen_at": "2026-07-14T11:41:20.415088+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.502960+00:00",
       "to": "METRANEO"
     },
     "narodcast->random": {
-      "count": 15,
+      "count": 18,
       "first_seen_at": "2026-07-14T04:04:09.840486+00:00",
       "from": "narodCast",
-      "last_seen_at": "2026-07-14T11:41:20.415991+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.503879+00:00",
       "to": "Random"
     },
     "neretcast->mariomaxtv": {
@@ -4654,17 +4937,17 @@
       "to": "Saylor17"
     },
     "neretcast->tribute": {
-      "count": 19,
+      "count": 22,
       "first_seen_at": "2026-07-14T04:04:09.828586+00:00",
       "from": "NeretCast",
-      "last_seen_at": "2026-07-14T11:41:20.404397+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.492115+00:00",
       "to": "tribute"
     },
     "obshakstaya->gazazor": {
-      "count": 1,
+      "count": 2,
       "first_seen_at": "2026-07-14T11:41:20.403675+00:00",
       "from": "obshakstaya",
-      "last_seen_at": "2026-07-14T11:41:20.403677+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.491458+00:00",
       "to": "gazazor"
     },
     "pandafx2->ladlda": {
@@ -4682,17 +4965,17 @@
       "to": "starie_seniory"
     },
     "papadota2->nuko1au": {
-      "count": 25,
+      "count": 28,
       "first_seen_at": "2026-07-14T04:04:09.825478+00:00",
       "from": "PAPAdota2",
-      "last_seen_at": "2026-07-14T11:41:20.401606+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.489594+00:00",
       "to": "nuko1au"
     },
     "papadota2->tribute": {
-      "count": 32,
+      "count": 38,
       "first_seen_at": "2026-07-14T04:04:09.825421+00:00",
       "from": "PAPAdota2",
-      "last_seen_at": "2026-07-14T11:41:20.401541+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.489538+00:00",
       "to": "tribute"
     },
     "risenhaha->artemkef": {
@@ -4703,444 +4986,444 @@
       "to": "artemkef"
     },
     "shoketg->a1binosw": {
-      "count": 5,
+      "count": 6,
       "first_seen_at": "2026-07-14T04:04:09.829976+00:00",
       "from": "shoketg",
-      "last_seen_at": "2026-07-14T11:41:20.405474+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.493231+00:00",
       "to": "A1binosw"
     },
     "shoketg->akitostar": {
-      "count": 5,
+      "count": 6,
       "first_seen_at": "2026-07-14T04:04:09.830124+00:00",
       "from": "shoketg",
-      "last_seen_at": "2026-07-14T11:41:20.405502+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.493016+00:00",
       "to": "akitostar"
     },
     "shoketg->amibka": {
-      "count": 5,
+      "count": 6,
       "first_seen_at": "2026-07-14T04:04:09.830106+00:00",
       "from": "shoketg",
-      "last_seen_at": "2026-07-14T11:41:20.405546+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.493040+00:00",
       "to": "Amibka"
     },
     "shoketg->ansnakie": {
-      "count": 5,
+      "count": 6,
       "first_seen_at": "2026-07-14T04:04:09.830093+00:00",
       "from": "shoketg",
-      "last_seen_at": "2026-07-14T11:41:20.405521+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.493250+00:00",
       "to": "ansnakie"
     },
     "shoketg->blessedsorrento": {
-      "count": 5,
+      "count": 6,
       "first_seen_at": "2026-07-14T04:04:09.829904+00:00",
       "from": "shoketg",
-      "last_seen_at": "2026-07-14T11:41:20.405462+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.493146+00:00",
       "to": "blessedsorrento"
     },
     "shoketg->bodikua7": {
-      "count": 5,
+      "count": 6,
       "first_seen_at": "2026-07-14T04:04:09.830030+00:00",
       "from": "shoketg",
-      "last_seen_at": "2026-07-14T11:41:20.405662+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.492987+00:00",
       "to": "bodikUa7"
     },
     "shoketg->br0jii": {
-      "count": 5,
+      "count": 6,
       "first_seen_at": "2026-07-14T04:04:09.829982+00:00",
       "from": "shoketg",
-      "last_seen_at": "2026-07-14T11:41:20.405566+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.493139+00:00",
       "to": "Br0jii"
     },
     "shoketg->chipsekihh": {
-      "count": 5,
+      "count": 6,
       "first_seen_at": "2026-07-14T04:04:09.830100+00:00",
       "from": "shoketg",
-      "last_seen_at": "2026-07-14T11:41:20.405429+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.493193+00:00",
       "to": "chipsekihh"
     },
     "shoketg->code9_0": {
-      "count": 5,
+      "count": 6,
       "first_seen_at": "2026-07-14T04:04:09.829886+00:00",
       "from": "shoketg",
-      "last_seen_at": "2026-07-14T11:41:20.405527+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.493237+00:00",
       "to": "code9_0"
     },
     "shoketg->conquerbs": {
-      "count": 5,
+      "count": 6,
       "first_seen_at": "2026-07-14T04:04:09.829970+00:00",
       "from": "shoketg",
-      "last_seen_at": "2026-07-14T11:41:20.405514+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.493112+00:00",
       "to": "Conquerbs"
     },
     "shoketg->d4lv1337": {
-      "count": 5,
+      "count": 6,
       "first_seen_at": "2026-07-14T04:04:09.830112+00:00",
       "from": "shoketg",
-      "last_seen_at": "2026-07-14T11:41:20.405481+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.493225+00:00",
       "to": "d4lv1337"
     },
     "shoketg->daaaais": {
-      "count": 5,
+      "count": 6,
       "first_seen_at": "2026-07-14T04:04:09.829893+00:00",
       "from": "shoketg",
-      "last_seen_at": "2026-07-14T11:41:20.405436+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.493314+00:00",
       "to": "daaaais"
     },
     "shoketg->dr4ce_1": {
-      "count": 5,
+      "count": 6,
       "first_seen_at": "2026-07-14T04:04:09.829847+00:00",
       "from": "shoketg",
-      "last_seen_at": "2026-07-14T11:41:20.405361+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.493200+00:00",
       "to": "DR4ce_1"
     },
     "shoketg->eshberebek": {
-      "count": 5,
+      "count": 6,
       "first_seen_at": "2026-07-14T04:04:09.829957+00:00",
       "from": "shoketg",
-      "last_seen_at": "2026-07-14T11:41:20.405682+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.493186+00:00",
       "to": "EshBereBek"
     },
     "shoketg->exploidtier": {
-      "count": 5,
+      "count": 6,
       "first_seen_at": "2026-07-14T04:04:09.830059+00:00",
       "from": "shoketg",
-      "last_seen_at": "2026-07-14T11:41:20.405583+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.493288+00:00",
       "to": "ExploidTier"
     },
     "shoketg->fl0wyyof": {
-      "count": 5,
+      "count": 6,
       "first_seen_at": "2026-07-14T04:04:09.829781+00:00",
       "from": "shoketg",
-      "last_seen_at": "2026-07-14T11:41:20.405423+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.493213+00:00",
       "to": "fl0wyyof"
     },
     "shoketg->folklore2101": {
-      "count": 5,
+      "count": 6,
       "first_seen_at": "2026-07-14T04:04:09.829808+00:00",
       "from": "shoketg",
-      "last_seen_at": "2026-07-14T11:41:20.405508+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.493106+00:00",
       "to": "folklore2101"
     },
     "shoketg->fr1zm": {
-      "count": 5,
+      "count": 6,
       "first_seen_at": "2026-07-14T04:04:09.830016+00:00",
       "from": "shoketg",
-      "last_seen_at": "2026-07-14T11:41:20.405488+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.493167+00:00",
       "to": "fr1zm"
     },
     "shoketg->glebanese": {
-      "count": 5,
+      "count": 6,
       "first_seen_at": "2026-07-14T04:04:09.829788+00:00",
       "from": "shoketg",
-      "last_seen_at": "2026-07-14T11:41:20.405559+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.493080+00:00",
       "to": "glebanese"
     },
     "shoketg->healmic": {
-      "count": 5,
+      "count": 6,
       "first_seen_at": "2026-07-14T04:04:09.829822+00:00",
       "from": "shoketg",
-      "last_seen_at": "2026-07-14T11:41:20.405468+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.492994+00:00",
       "to": "healMic"
     },
     "shoketg->holaqas": {
-      "count": 5,
+      "count": 6,
       "first_seen_at": "2026-07-14T04:04:09.830067+00:00",
       "from": "shoketg",
-      "last_seen_at": "2026-07-14T11:41:20.405649+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.493086+00:00",
       "to": "holaqas"
     },
     "shoketg->ifrenzyz": {
-      "count": 5,
+      "count": 6,
       "first_seen_at": "2026-07-14T04:04:09.829866+00:00",
       "from": "shoketg",
-      "last_seen_at": "2026-07-14T11:41:20.405533+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.493027+00:00",
       "to": "iFrenzYz"
     },
     "shoketg->ilyasigma5252": {
-      "count": 5,
+      "count": 6,
       "first_seen_at": "2026-07-14T04:04:09.829964+00:00",
       "from": "shoketg",
-      "last_seen_at": "2026-07-14T11:41:20.405443+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.493256+00:00",
       "to": "ilyasigma5252"
     },
     "shoketg->k1ries4ka": {
-      "count": 5,
+      "count": 6,
       "first_seen_at": "2026-07-14T04:04:09.830087+00:00",
       "from": "shoketg",
-      "last_seen_at": "2026-07-14T11:41:20.405449+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.493093+00:00",
       "to": "K1ries4ka"
     },
     "shoketg->komkandr_i": {
-      "count": 5,
+      "count": 6,
       "first_seen_at": "2026-07-14T04:04:09.829873+00:00",
       "from": "shoketg",
-      "last_seen_at": "2026-07-14T11:41:20.405623+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.493002+00:00",
       "to": "KOMkANDR_I"
     },
     "shoketg->kostrann": {
-      "count": 5,
+      "count": 6,
       "first_seen_at": "2026-07-14T04:04:09.829910+00:00",
       "from": "shoketg",
-      "last_seen_at": "2026-07-14T11:41:20.405353+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.493054+00:00",
       "to": "kostrann"
     },
     "shoketg->kyousukekyousuke": {
-      "count": 5,
+      "count": 6,
       "first_seen_at": "2026-07-14T04:04:09.829841+00:00",
       "from": "shoketg",
-      "last_seen_at": "2026-07-14T11:41:20.405403+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.493126+00:00",
       "to": "kyousukekyousuke"
     },
     "shoketg->lhfphf": {
-      "count": 5,
+      "count": 6,
       "first_seen_at": "2026-07-14T04:04:09.830130+00:00",
       "from": "shoketg",
-      "last_seen_at": "2026-07-14T11:41:20.405589+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.493119+00:00",
       "to": "lhfphf"
     },
     "shoketg->lol_baraq": {
-      "count": 5,
+      "count": 6,
       "first_seen_at": "2026-07-14T04:04:09.829802+00:00",
       "from": "shoketg",
-      "last_seen_at": "2026-07-14T11:41:20.405616+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.493099+00:00",
       "to": "lol_BaraQ"
     },
     "shoketg->lordgundone": {
-      "count": 5,
+      "count": 6,
       "first_seen_at": "2026-07-14T04:04:09.829815+00:00",
       "from": "shoketg",
-      "last_seen_at": "2026-07-14T11:41:20.405610+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.493009+00:00",
       "to": "LORDGUNDONE"
     },
     "shoketg->lovsomam": {
-      "count": 5,
+      "count": 6,
       "first_seen_at": "2026-07-14T04:04:09.829828+00:00",
       "from": "shoketg",
-      "last_seen_at": "2026-07-14T11:41:20.405391+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.493073+00:00",
       "to": "lovsomam"
     },
     "shoketg->lrxnmy": {
-      "count": 5,
+      "count": 6,
       "first_seen_at": "2026-07-14T04:04:09.830081+00:00",
       "from": "shoketg",
-      "last_seen_at": "2026-07-14T11:41:20.405655+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.493294+00:00",
       "to": "lrxnmy"
     },
     "shoketg->nenavizhy_vac_vcex": {
-      "count": 5,
+      "count": 6,
       "first_seen_at": "2026-07-14T04:04:09.829853+00:00",
       "from": "shoketg",
-      "last_seen_at": "2026-07-14T11:41:20.405384+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.493270+00:00",
       "to": "nenavizhy_vac_vcex"
     },
     "shoketg->nigov5": {
-      "count": 5,
+      "count": 6,
       "first_seen_at": "2026-07-14T04:04:09.829944+00:00",
       "from": "shoketg",
-      "last_seen_at": "2026-07-14T11:41:20.405636+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.493180+00:00",
       "to": "nigov5"
     },
     "shoketg->paradiseqwe": {
-      "count": 5,
+      "count": 6,
       "first_seen_at": "2026-07-14T04:04:09.829766+00:00",
       "from": "shoketg",
-      "last_seen_at": "2026-07-14T11:41:20.405573+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.493133+00:00",
       "to": "paradiseqwe"
     },
     "shoketg->procrastinator_r": {
-      "count": 5,
+      "count": 6,
       "first_seen_at": "2026-07-14T04:04:09.830074+00:00",
       "from": "shoketg",
-      "last_seen_at": "2026-07-14T11:41:20.405495+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.493276+00:00",
       "to": "Procrastinator_r"
     },
     "shoketg->puhlyaw": {
-      "count": 5,
+      "count": 6,
       "first_seen_at": "2026-07-14T04:04:09.829774+00:00",
       "from": "shoketg",
-      "last_seen_at": "2026-07-14T11:41:20.405553+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.493034+00:00",
       "to": "Puhlyaw"
     },
     "shoketg->razganov": {
-      "count": 5,
+      "count": 6,
       "first_seen_at": "2026-07-14T04:04:09.830024+00:00",
       "from": "shoketg",
-      "last_seen_at": "2026-07-14T11:41:20.405346+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.493300+00:00",
       "to": "Razganov"
     },
     "shoketg->retakenews": {
-      "count": 5,
+      "count": 6,
       "first_seen_at": "2026-07-14T04:04:09.829559+00:00",
       "from": "shoketg",
-      "last_seen_at": "2026-07-14T11:41:20.405133+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.492796+00:00",
       "to": "retakenews"
     },
     "shoketg->ripkenchik": {
-      "count": 5,
+      "count": 6,
       "first_seen_at": "2026-07-14T04:04:09.830118+00:00",
       "from": "shoketg",
-      "last_seen_at": "2026-07-14T11:41:20.405603+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.493263+00:00",
       "to": "ripKENCHIK"
     },
     "shoketg->sadulla_sultanov": {
-      "count": 5,
+      "count": 6,
       "first_seen_at": "2026-07-14T04:04:09.829834+00:00",
       "from": "shoketg",
-      "last_seen_at": "2026-07-14T11:41:20.405410+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.493219+00:00",
       "to": "sadulla_sultanov"
     },
     "shoketg->shoke": {
-      "count": 100,
+      "count": 120,
       "first_seen_at": "2026-07-14T04:04:09.829345+00:00",
       "from": "shoketg",
-      "last_seen_at": "2026-07-14T11:41:20.405786+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.493421+00:00",
       "to": "shoke"
     },
     "shoketg->solaris1337": {
-      "count": 5,
+      "count": 6,
       "first_seen_at": "2026-07-14T04:04:09.829795+00:00",
       "from": "shoketg",
-      "last_seen_at": "2026-07-14T11:41:20.405368+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.493173+00:00",
       "to": "solaris1337"
     },
     "shoketg->sticklex": {
-      "count": 5,
+      "count": 6,
       "first_seen_at": "2026-07-14T04:04:09.829925+00:00",
       "from": "shoketg",
-      "last_seen_at": "2026-07-14T11:41:20.405676+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.493206+00:00",
       "to": "Sticklex"
     },
     "shoketg->suslik200623": {
-      "count": 5,
+      "count": 6,
       "first_seen_at": "2026-07-14T04:04:09.829918+00:00",
       "from": "shoketg",
-      "last_seen_at": "2026-07-14T11:41:20.405397+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.493060+00:00",
       "to": "Suslik200623"
     },
     "shoketg->the_vip_0": {
-      "count": 5,
+      "count": 6,
       "first_seen_at": "2026-07-14T04:04:09.830053+00:00",
       "from": "shoketg",
-      "last_seen_at": "2026-07-14T11:41:20.405630+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.493047+00:00",
       "to": "The_vip_0"
     },
     "shoketg->timasiik": {
-      "count": 5,
+      "count": 6,
       "first_seen_at": "2026-07-14T04:04:09.829951+00:00",
       "from": "shoketg",
-      "last_seen_at": "2026-07-14T11:41:20.405668+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.493320+00:00",
       "to": "timasiik"
     },
     "shoketg->tylkonaprzod": {
-      "count": 5,
+      "count": 6,
       "first_seen_at": "2026-07-14T04:04:09.829859+00:00",
       "from": "shoketg",
-      "last_seen_at": "2026-07-14T11:41:20.405455+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.493067+00:00",
       "to": "tylkonaprzod"
     },
     "shoketg->unna_med": {
-      "count": 5,
+      "count": 6,
       "first_seen_at": "2026-07-14T04:04:09.830047+00:00",
       "from": "shoketg",
-      "last_seen_at": "2026-07-14T11:41:20.405376+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.493307+00:00",
       "to": "unna_med"
     },
     "shoketg->uurfrnd": {
-      "count": 5,
+      "count": 6,
       "first_seen_at": "2026-07-14T04:04:09.829880+00:00",
       "from": "shoketg",
-      "last_seen_at": "2026-07-14T11:41:20.405643+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.493244+00:00",
       "to": "uurfrnd"
     },
     "shoketg->vertigoxgod": {
-      "count": 5,
+      "count": 6,
       "first_seen_at": "2026-07-14T04:04:09.830041+00:00",
       "from": "shoketg",
-      "last_seen_at": "2026-07-14T11:41:20.405597+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.493153+00:00",
       "to": "vertigoxgod"
     },
     "shoketg->wershka20": {
-      "count": 5,
+      "count": 6,
       "first_seen_at": "2026-07-14T04:04:09.829938+00:00",
       "from": "shoketg",
-      "last_seen_at": "2026-07-14T11:41:20.405417+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.493282+00:00",
       "to": "Wershka20"
     },
     "shoketg->whoamitof": {
-      "count": 5,
+      "count": 6,
       "first_seen_at": "2026-07-14T04:04:09.829931+00:00",
       "from": "shoketg",
-      "last_seen_at": "2026-07-14T11:41:20.405540+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.493161+00:00",
       "to": "whoamitof"
     },
     "solo_q_q->ayukifunpage": {
-      "count": 5,
+      "count": 6,
       "first_seen_at": "2026-07-14T04:04:09.826372+00:00",
       "from": "solo_q_q",
-      "last_seen_at": "2026-07-14T11:41:20.401905+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.489817+00:00",
       "to": "ayukifunpage"
     },
     "solo_q_q->betboom_baza": {
-      "count": 10,
+      "count": 12,
       "first_seen_at": "2026-07-14T04:04:09.826194+00:00",
       "from": "solo_q_q",
-      "last_seen_at": "2026-07-14T11:41:20.402050+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.489954+00:00",
       "to": "betboom_baza"
     },
     "solo_q_q->flouzer666": {
-      "count": 5,
+      "count": 6,
       "first_seen_at": "2026-07-14T04:04:09.826364+00:00",
       "from": "solo_q_q",
-      "last_seen_at": "2026-07-14T11:41:20.401919+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.489810+00:00",
       "to": "flouzer666"
     },
     "solo_q_q->pashabashu": {
-      "count": 5,
+      "count": 6,
       "first_seen_at": "2026-07-14T04:04:09.826296+00:00",
       "from": "solo_q_q",
-      "last_seen_at": "2026-07-14T11:41:20.401840+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.489745+00:00",
       "to": "pashabashu"
     },
     "solo_q_q->ramzesasd": {
-      "count": 5,
+      "count": 6,
       "first_seen_at": "2026-07-14T04:04:09.826405+00:00",
       "from": "solo_q_q",
-      "last_seen_at": "2026-07-14T11:41:20.401945+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.489849+00:00",
       "to": "Ramzesasd"
     },
     "solo_q_q->randombeast_bot": {
-      "count": 5,
+      "count": 6,
       "first_seen_at": "2026-07-14T04:04:09.826522+00:00",
       "from": "solo_q_q",
-      "last_seen_at": "2026-07-14T11:41:20.402064+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.489968+00:00",
       "to": "randombeast_bot"
     },
     "solo_q_q->solo322": {
-      "count": 6,
+      "count": 8,
       "first_seen_at": "2026-07-14T04:04:09.826515+00:00",
       "from": "solo_q_q",
-      "last_seen_at": "2026-07-14T11:41:20.402191+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.490074+00:00",
       "to": "solo322"
     },
     "solo_q_q->solodota322": {
-      "count": 5,
+      "count": 6,
       "first_seen_at": "2026-07-14T04:04:09.826617+00:00",
       "from": "solo_q_q",
-      "last_seen_at": "2026-07-14T11:41:20.402170+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.490053+00:00",
       "to": "SoloDota322"
     },
     "solo_q_q->worldeditlol": {
-      "count": 5,
+      "count": 6,
       "first_seen_at": "2026-07-14T04:04:09.826378+00:00",
       "from": "solo_q_q",
-      "last_seen_at": "2026-07-14T11:41:20.401913+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.489825+00:00",
       "to": "WorldEditlol"
     },
     "straydungeon228->straypredictorbot": {
-      "count": 6,
+      "count": 9,
       "first_seen_at": "2026-07-14T04:04:09.829253+00:00",
       "from": "StrayDungeon228",
-      "last_seen_at": "2026-07-14T11:41:20.404931+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.492593+00:00",
       "to": "StrayPredictorBot"
     },
     "whylollycrry->betboom_baza": {
@@ -5172,10 +5455,10 @@
       "to": "mugretnug"
     },
     "whylollycrry->olezhekk": {
-      "count": 1,
+      "count": 2,
       "first_seen_at": "2026-07-14T11:41:20.408042+00:00",
       "from": "whylollycrry",
-      "last_seen_at": "2026-07-14T11:41:20.408044+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.495794+00:00",
       "to": "olezhekk"
     },
     "whylollycrry->satir_ilya": {
@@ -5186,10 +5469,10 @@
       "to": "satir_Ilya"
     },
     "whylollycrry->whylollybet": {
-      "count": 1,
+      "count": 2,
       "first_seen_at": "2026-07-14T11:41:20.408087+00:00",
       "from": "whylollycrry",
-      "last_seen_at": "2026-07-14T11:41:20.408089+00:00",
+      "last_seen_at": "2026-07-14T16:38:53.495840+00:00",
       "to": "whylollybet"
     },
     "ybnfedor->straydungeon228": {
@@ -5201,14 +5484,14 @@
     }
   },
   "last_errors": [],
-  "last_run_at": "2026-07-14T11:41:23.825028+00:00",
+  "last_run_at": "2026-07-14T16:38:56.879315+00:00",
   "last_run_summary": {
     "empty_sources": 0,
     "error_types": {},
     "errors": 0,
-    "known_sources": 67,
-    "references_found": 189,
-    "sources_scanned": 67,
+    "known_sources": 70,
+    "references_found": 202,
+    "sources_scanned": 70,
     "strong_candidates": 0,
     "telegram_domain": "telegram.me",
     "unique_candidates": 130,
@@ -5330,9 +5613,23 @@
       "unique_candidates": 130,
       "verified_candidates": 60,
       "workers": 12
+    },
+    {
+      "at": "2026-07-14T16:38:56.879342+00:00",
+      "empty_sources": 0,
+      "error_types": {},
+      "errors": 0,
+      "known_sources": 70,
+      "references_found": 202,
+      "sources_scanned": 70,
+      "strong_candidates": 0,
+      "telegram_domain": "telegram.me",
+      "unique_candidates": 130,
+      "verified_candidates": 60,
+      "workers": 12
     }
   ],
   "telegram_domain": "telegram.me",
-  "updated_at": "2026-07-14T11:41:23.825057+00:00",
+  "updated_at": "2026-07-14T16:38:56.879346+00:00",
   "version": 1
 }
