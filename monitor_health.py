@@ -114,7 +114,11 @@ def record_iteration(
     counter_reset = checks_total < previous_checks
     checks_delta = checks_total - previous_checks if not counter_reset else checks_total
     process_ok = exit_code == 0
-    made_progress = checks_delta > 0 and snapshot["checked_sources"] > 0
+    made_progress = (
+        checks_delta > 0
+        and snapshot["checked_sources"] > 0
+        and snapshot["reachable_sources"] > 0
+    )
     healthy = process_ok and made_progress
 
     consecutive_failures = (
@@ -136,9 +140,12 @@ def record_iteration(
             else "iteration_error"
         )
         reason = f"monitor process exit code {exit_code}"
+    elif snapshot["checked_sources"] > 0 and snapshot["reachable_sources"] == 0:
+        status = "transport_outage"
+        reason = "iteration completed but no Telegram source was reachable"
     elif not made_progress:
         status = "no_progress"
-        reason = "iteration finished but source check counters did not advance"
+        reason = "iteration finished but successful source progress was not recorded"
     else:
         status = "running"
         reason = ""
