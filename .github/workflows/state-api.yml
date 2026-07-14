@@ -6,7 +6,10 @@ on:
     paths:
       - "state_api/**"
       - "private_state.py"
+      - "sitecustomize.py"
       - "admin_panel_runtime_v22.py"
+      - "bot_access.json"
+      - "source_requests.json"
       - ".github/workflows/state-api.yml"
   workflow_dispatch:
 
@@ -37,7 +40,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: main
-          fetch-depth: 2
+          fetch-depth: 0
 
       - name: Check required secrets
         shell: bash
@@ -183,35 +186,53 @@ jobs:
           import urllib.request
           from pathlib import Path
 
-          def read_json(path, default):
+          def read_json_text(raw, default):
               try:
-                  value = json.loads(Path(path).read_text(encoding='utf-8'))
-              except Exception:
-                  return default
-              return value if isinstance(value, dict) else default
-
-          def parent_json(path, default):
-              try:
-                  raw = subprocess.check_output(
-                      ['git', 'show', f'HEAD^:{path}'], stderr=subprocess.DEVNULL
-                  ).decode('utf-8')
                   value = json.loads(raw)
               except Exception:
                   return default
               return value if isinstance(value, dict) else default
 
-          access = read_json('bot_access.json', {})
-          if not access.get('users'):
-              previous = parent_json('bot_access.json', {})
-              if previous.get('users'):
-                  access = previous
+          def working_json(path, default):
+              try:
+                  return read_json_text(Path(path).read_text(encoding='utf-8'), default)
+              except Exception:
+                  return default
 
-          requests_state = read_json('source_requests.json', {'version': 1, 'requests': {}})
-          if not requests_state.get('requests'):
-              previous = parent_json('source_requests.json', {'version': 1, 'requests': {}})
-              if previous.get('requests'):
-                  requests_state = previous
+          def history_json(path, predicate, default):
+              current = working_json(path, default)
+              if predicate(current):
+                  return current
+              try:
+                  commits = subprocess.check_output(
+                      ['git', 'log', '--format=%H', '--', path],
+                      stderr=subprocess.DEVNULL,
+                  ).decode('utf-8').splitlines()
+              except Exception:
+                  commits = []
+              for commit in commits:
+                  try:
+                      raw = subprocess.check_output(
+                          ['git', 'show', f'{commit}:{path}'],
+                          stderr=subprocess.DEVNULL,
+                      ).decode('utf-8')
+                  except Exception:
+                      continue
+                  value = read_json_text(raw, default)
+                  if predicate(value):
+                      return value
+              return default
 
+          access = history_json(
+              'bot_access.json',
+              lambda value: bool(value.get('users')),
+              {},
+          )
+          requests_state = history_json(
+              'source_requests.json',
+              lambda value: bool(value.get('requests')),
+              {'version': 1, 'requests': {}},
+          )
           base = os.environ['WORKER_URL'].rstrip('/')
           token = os.environ['BOT_TOKEN']
 
@@ -228,16 +249,18 @@ jobs:
               with urllib.request.urlopen(request, timeout=30) as response:
                   payload = json.load(response)
               if payload.get('ok') is False:
-                  raise RuntimeError(payload)
+                  raise RuntimeError(payload.get('error') or 'Migration rejected')
 
           if access.get('users'):
               put('/v1/admin/access', access)
-              print(f"Migrated {len(access.get('users') or {})} users")
+              print(f"Migrated {len(access.get('users') or {})} user records")
           else:
-              print('No legacy users found; access migration skipped')
+              print('No legacy user records found; access migration skipped')
           if requests_state.get('requests'):
               put('/v1/admin/source-requests', requests_state)
-              print(f"Migrated {len(requests_state.get('requests') or {})} source requests")
+              print(f"Migrated {len(requests_state.get('requests') or {})} source request records")
+          else:
+              print('No legacy source requests found')
           PY
 
       - name: Record private state deployment
@@ -267,17 +290,23 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add private_state_deployment.json
-          git commit -m "Record private state API deployment [skip ci]" || exit 0
-          for attempt in 1 2 3; do
-            if git push origin HEAD:main; then
-              exit 0
-            fi
-            git pull --rebase origin main || { git rebase --abort || true; exit 1; }
-          done
-          exit 1
+          if git commit -m "Record private state API deployment [skip ci]"; then
+            for attempt in 1 2 3; do
+              if git push origin HEAD:main; then
+                exit 0
+              fi
+              git pull --rebase origin main || { git rebase --abort || true; exit 1; }
+            done
+            exit 1
+          fi
 
-      - name: Redeploy Mini App with API URL
+      - name: Restart state consumers
         if: ${{ success() }}
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh workflow run cloudflare-pages.yml --ref main
+        shell: bash
+        run: |
+          set -euo pipefail
+          gh workflow run cloudflare-pages.yml --ref main
+          gh workflow run admin-bot.yml --ref main
+          gh workflow run monitor.yml --ref main -f continuous=true
