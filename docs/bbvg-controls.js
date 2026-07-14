@@ -21,10 +21,15 @@
   function systemFreshness(){
     const system=app.data.system||{};
     const checked=date(system.checked_at||system.generated_at||system.updated_at||system.last_check_at);
-    const status=String(system.status||system.overall_status||'').toLowerCase();
-    const delayedStatus=['failure','failed','error','degraded','stale','delayed'].some(value=>status.includes(value));
+    const diagnostic=String(system.gpt_diagnostic_snapshot?.status||system.status||system.overall_status||'').toLowerCase();
+    const delayedStatus=['failure','failed','error','degraded','stale','delayed'].some(value=>diagnostic.includes(value));
+    const failedCheck=Object.values(system.check_matrix||{}).some(value=>{
+      const normalized=String(value||'').toLowerCase();
+      return normalized&&!['ok','success','healthy','running'].includes(normalized);
+    });
+    const activeIncidents=Number(system.active_incidents||0)>0;
     const ageMinutes=checked?Math.max(0,Math.floor((Date.now()-checked.getTime())/60000)):null;
-    const delayed=delayedStatus||ageMinutes===null||ageMinutes>30;
+    const delayed=delayedStatus||failedCheck||activeIncidents||ageMinutes===null||ageMinutes>30;
     if(delayed)return{delayed:true,text:'Данные временно обновляются с задержкой'};
     if(ageMinutes<1)return{delayed:false,text:'Данные обновлены только что'};
     return{delayed:false,text:`Данные обновлены ${ageMinutes} мин. назад`};
@@ -54,9 +59,10 @@
     const visible=wheelFilter==='mine'?all.filter(isJoined):all;
     const mine=all.filter(isJoined).length;
     const freshness=systemFreshness();
+    const dotStyle=freshness.delayed?'filter:grayscale(1);opacity:.72;box-shadow:none':'';
     $('#page-home').innerHTML=`
       <article class="overview">
-        <div class="system-line ${freshness.delayed?'delayed':''}"><span class="system-dot"></span>${esc(freshness.text)}</div>
+        <div class="system-line ${freshness.delayed?'delayed':''}"><span class="system-dot" style="${dotStyle}"></span>${esc(freshness.text)}</div>
         <div class="overview-copy">Мониторинг актуальных данных</div>
         <div class="metrics">
           <article class="metric"><strong>${all.length}</strong><span>Активные колёса</span></article>
