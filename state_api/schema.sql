@@ -29,6 +29,7 @@ CREATE TABLE IF NOT EXISTS wheel_participation (
   wheel_key TEXT NOT NULL,
   joined_at TEXT NOT NULL,
   active INTEGER NOT NULL DEFAULT 1,
+  data_json TEXT NOT NULL DEFAULT '{}',
   PRIMARY KEY (user_id, wheel_key)
 );
 
@@ -38,6 +39,7 @@ CREATE TABLE IF NOT EXISTS hidden_wheels (
   hidden_at TEXT NOT NULL,
   expires_at TEXT,
   active INTEGER NOT NULL DEFAULT 1,
+  data_json TEXT NOT NULL DEFAULT '{}',
   PRIMARY KEY (user_id, wheel_key)
 );
 
