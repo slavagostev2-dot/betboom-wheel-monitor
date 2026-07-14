@@ -136,11 +136,12 @@
     },
     "zonertg5": {
       "button_token": "3c239f1f5c095a",
-      "deadline": "2026-07-14T17:53:45+00:00",
-      "expires_at": "2026-07-14T18:23:45+00:00",
+      "deadline": "2026-07-14T17:53:52.309134+00:00",
+      "deadline_source": "manual",
+      "expires_at": "2026-07-14T18:23:52.309134+00:00",
       "first_notified_at": "2026-07-14T07:58:38.558718+00:00",
       "identifier": "zonertg5",
-      "last_checked_at": "2026-07-14T14:06:40.529875+00:00",
+      "last_checked_at": "2026-07-14T14:06:53.068764+00:00",
       "last_notification_at": "2026-07-14T14:00:49.115712+00:00",
       "last_unknown_reminder_at": "2026-07-21T14:06:40.527499+00:00",
       "manual_time_waiting_since": "2026-07-14T14:06:40.527499+00:00",
@@ -148,14 +149,14 @@
       "message_id": 35606,
       "message_text": "ЗАЛЕТАЙ НА КОЛЕСО ФРИБЕТОВ:\nКЛИКАЙ ДЛЯ УЧАСТИЯ\nКЛИКАЙ ДЛЯ УЧАСТИЯ\nКЛИКАЙ ДЛЯ УЧАСТИЯ\n10 ПО 1000 20 ПО 500\nИТОГИ ЧЕРЕЗ 10 ЧАСОВ\nhttps://telegram.me/mechanogun\nhttps://telegram.me/mechanogun/35606\nhttps://betboom.ru/freestream/zonertg5?utm_content=zoner&utm_source=freestream",
       "message_url": "https://telegram.me/mechanogun/35606",
-      "method": "состояние определяется пользователями BB V.G.",
-      "needs_manual_time": true,
+      "method": "время вручную указано администратором BB V.G.",
+      "needs_manual_time": false,
       "page_excerpt": "Букмекерская контора BetBoom - ставки на спорт онлайн в России!",
       "page_status": "telegram_deadline",
       "participating": true,
       "participating_at": "2026-07-14T12:38:59.638098+00:00",
       "source": "mechanogun",
-      "status": "unknown",
+      "status": "scheduled",
       "url": "https://betboom.ru/freestream/zonertg5"
     }
   },
@@ -433,6 +434,10 @@
     "papa": {
       "deadline": "2026-07-14T19:51:06.643371+00:00",
       "updated_at": "2026-07-14T14:06:07.198822+00:00"
+    },
+    "zonertg5": {
+      "deadline": "2026-07-14T17:53:52.309134+00:00",
+      "updated_at": "2026-07-14T14:06:53.068785+00:00"
     }
   },
   "manual_overrides": {},
@@ -463,8 +468,8 @@
       "url": "https://betboom.ru/freestream/neret"
     },
     "zonertg5": {
-      "deadline": "2026-07-14T17:53:45+00:00",
-      "expires_at": "2026-07-14T18:23:45+00:00",
+      "deadline": "2026-07-14T17:53:52.309134+00:00",
+      "expires_at": "2026-07-14T18:23:52.309134+00:00",
       "identifier": "zonertg5",
       "marked_at": "2026-07-14T12:38:59.638067+00:00",
       "url": "https://betboom.ru/freestream/zonertg5"
