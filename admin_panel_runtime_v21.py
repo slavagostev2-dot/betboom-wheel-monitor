@@ -43,6 +43,25 @@ class TelegramPanelRuntimeV21(TelegramPanelRuntimeV20):
             self.notify_owner_about_new_user(user_id)
         return role
 
+    def handle_update(self, update: dict[str, Any]) -> None:
+        membership = update.get("my_chat_member") if isinstance(update, dict) else None
+        if isinstance(membership, dict):
+            chat = membership.get("chat")
+            sender = membership.get("from")
+            new_member = membership.get("new_chat_member")
+            status = str(new_member.get("status") or "") if isinstance(new_member, dict) else ""
+            if (
+                isinstance(chat, dict)
+                and str(chat.get("type") or "") == "private"
+                and isinstance(sender, dict)
+                and not sender.get("is_bot")
+                and status not in {"left", "kicked"}
+            ):
+                self.set_context(chat.get("id"), sender.get("id"))
+                self.register_user({"chat": chat, "from": sender})
+            return
+        super().handle_update(update)
+
     def notify_owner_about_new_user(self, user_id: str) -> None:
         access = self.load_access()
         owner_id = str(access.get("owner_id") or "")
@@ -391,6 +410,18 @@ def self_test() -> None:
     assert load_calls[-1] is False and True in load_calls
     assert sent and "Известных пользователей: 2" in sent[-1][0]
     assert "🔄 Обновить список" in str(sent[-1][1].get("reply_markup"))
+    member_bot = TelegramPanelRuntimeV21()
+    registered: list[dict[str, Any]] = []
+    member_bot.set_context = lambda chat_id, user_id: None  # type: ignore[method-assign]
+    member_bot.register_user = lambda message: registered.append(message) or "user"  # type: ignore[method-assign]
+    member_bot.handle_update({
+        "my_chat_member": {
+            "chat": {"id": 303, "type": "private"},
+            "from": {"id": 303, "first_name": "Тест", "is_bot": False},
+            "new_chat_member": {"status": "member"},
+        }
+    })
+    assert registered and registered[0]["from"]["id"] == 303
     print("admin_panel_runtime_v21 current UI self-test passed")
 
 
