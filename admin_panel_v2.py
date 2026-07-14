@@ -833,6 +833,7 @@ class TelegramPanelV2(RuntimeAdminBot):
             rows.append([{"text": f"{self.bool_mark(enabled)} {name[:24]}", "callback_data": f"recipient:{user_id}"}])
         if not rows:
             lines.append("Пользователи ещё не запускали бота.")
+        rows.append([{"text": "🔄 Обновить список", "callback_data": "page:recipients"}])
         self.send("\n".join(lines), reply_markup=self.with_nav(rows))
 
     def show_access(self) -> None:
@@ -850,6 +851,7 @@ class TelegramPanelV2(RuntimeAdminBot):
             name = str(record.get("first_name") or record.get("username") or user_id) if isinstance(record, dict) else str(user_id)
             lines.append(f"• {html.escape(name)} — {self.role_name(role)} — <code>{html.escape(str(user_id))}</code>")
             rows.append([{"text": f"{name[:20]} · {self.role_name(role)}", "callback_data": f"page:user:{user_id}"}])
+        rows.append([{"text": "🔄 Обновить список", "callback_data": "page:access"}])
         rows.append([{"text": "➕ Добавить администратора по ID", "callback_data": "access:add_admin"}])
         self.send("\n".join(lines), reply_markup=self.with_nav(rows))
 
