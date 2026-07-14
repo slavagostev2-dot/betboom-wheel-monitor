@@ -1,5 +1,5 @@
 {
-  "active_incidents": 0,
+  "active_incidents": 1,
   "automation_state": {
     "source_tier_last_run_at": "2026-07-14T04:40:11.599460+00:00",
     "source_tier_policy": "seven_day_dynamic_primary_and_nightly",
@@ -16,14 +16,14 @@
     "automations": "ok",
     "discovery": "ok",
     "inventory": "ok",
-    "miniapp": "ok",
+    "miniapp": "failed",
     "monitor": "ok",
     "notifications": "ok",
     "ratings": "ok",
     "source_health": "ok",
     "telegram_transport": "ok"
   },
-  "checked_at": "2026-07-14T06:32:27.600408+00:00",
+  "checked_at": "2026-07-14T09:19:39.182284+00:00",
   "discovery": {
     "active_size": 67,
     "candidate_count": 145,
@@ -32,13 +32,13 @@
     "discovery_last_run_at": "2026-07-14T04:40:55.901580+00:00",
     "domain": "telegram.me",
     "intelligence_domain": "telegram.me",
-    "intelligence_last_run_at": "2026-07-14T04:41:03.365618+00:00",
+    "intelligence_last_run_at": "2026-07-14T07:51:40.894071+00:00",
     "intelligence_summary": {
       "empty_sources": 0,
       "error_types": {},
       "errors": 0,
       "known_sources": 67,
-      "references_found": 177,
+      "references_found": 176,
       "sources_scanned": 67,
       "strong_candidates": 0,
       "telegram_domain": "telegram.me",
@@ -60,24 +60,32 @@
     "legacy_url_offenders": [],
     "primary": "telegram.me"
   },
-  "finding_count": 0,
-  "findings": [],
+  "finding_count": 1,
+  "findings": [
+    {
+      "detail": "app=5.10.0, assets=['5.11.0', '5.11.0'].",
+      "kind": "miniapp_cache_version",
+      "severity": "critical",
+      "subject": "",
+      "title": "Версии ресурсов Mini App не совпадают"
+    }
+  ],
   "gpt_diagnostic_snapshot": {
-    "active_incidents": 0,
+    "active_incidents": 1,
     "checked_sources": 67,
     "configured_sources": 67,
     "domain": "telegram.me",
     "reachable_sources": 67,
     "single_source": "system_check_state.json",
-    "status": "ok"
+    "status": "degraded"
   },
   "incident_delivery": {
-    "digest_sent": false,
-    "messages_attempted": 0,
-    "opened": 0,
+    "digest_sent": true,
+    "messages_attempted": 1,
+    "opened": 1,
     "resolved": 0
   },
-  "incident_sequence": 8,
+  "incident_sequence": 9,
   "inventory": {
     "configured": 67,
     "domain": "telegram.me",
@@ -89,8 +97,8 @@
   },
   "miniapp": {
     "asset_versions": [
-      "5.10.0",
-      "5.10.0"
+      "5.11.0",
+      "5.11.0"
     ],
     "deployment_status": "deployed",
     "deployment_url": "https://slavagostev2-betboom-monitor.pages.dev/",
@@ -110,28 +118,28 @@
     "brand": "BB V.G.",
     "checked_sources": 67,
     "checks_delta": 67,
-    "checks_total": 12103,
+    "checks_total": 14381,
     "consecutive_failures": 0,
     "consecutive_no_progress": 0,
     "iteration": 4,
     "last_failure_at": "2026-07-14T02:44:12.395838+00:00",
-    "last_iteration_at": "2026-07-14T06:31:11.193122+00:00",
+    "last_iteration_at": "2026-07-14T09:12:35.880450+00:00",
     "last_iteration_duration_seconds": 4,
     "last_iteration_exit_code": 0,
-    "last_process_heartbeat_at": "2026-07-14T06:31:11.193122+00:00",
-    "last_successful_checks_total": 12103,
-    "last_successful_iteration_at": "2026-07-14T06:31:11.193122+00:00",
+    "last_process_heartbeat_at": "2026-07-14T09:12:35.880450+00:00",
+    "last_successful_checks_total": 14381,
+    "last_successful_iteration_at": "2026-07-14T09:12:35.880450+00:00",
     "pending_wheels": 0,
     "reachable_sources": 67,
     "restart_recommended": false,
-    "run_id": "29310837548",
-    "run_started_at": "2026-07-14T06:16:05.490091+00:00",
+    "run_id": "29319896517",
+    "run_started_at": "2026-07-14T08:57:30.522065+00:00",
     "source_errors": 0,
     "stats_counter_reset": false,
     "status": "running",
     "version": 3
   },
-  "monitor_age_minutes": 1,
+  "monitor_age_minutes": 7,
   "notification_routing": {
     "admin_kinds": {
       "admin_requests": [
@@ -192,7 +200,7 @@
       "tls": 0
     }
   },
-  "status": "ok",
+  "status": "degraded",
   "telegram_web": {
     "final_url": "https://telegram.me/s/mechanogun",
     "html_messages_detected": true,
