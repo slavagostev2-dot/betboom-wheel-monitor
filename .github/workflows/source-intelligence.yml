@@ -36,17 +36,21 @@ jobs:
 
       - name: Check intelligence module
         run: |
-          python -m py_compile monitor.py monitor_data.py nightly_discovery.py source_intelligence.py
+          python -m py_compile monitor.py monitor_data.py nightly_discovery.py source_intelligence.py source_intelligence_entry.py telegram_transport.py notification_router.py
+          python telegram_transport.py
           python self_test.py
 
       - name: Scan Telegram source network
         env:
+          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+          BOT_CHAT_ID: ${{ secrets.BOT_CHAT_ID }}
+          TELEGRAM_WEB_DOMAIN: telegram.me
           DISPLAY_TIMEZONE: Asia/Barnaul
           REQUEST_TIMEOUT_SECONDS: "15"
-          INTELLIGENCE_SOURCE_LIMIT: "70"
-          INTELLIGENCE_CANDIDATE_LIMIT: "100"
-          INTELLIGENCE_VERIFY_LIMIT: "40"
-        run: python source_intelligence.py
+          INTELLIGENCE_SOURCE_LIMIT: "100"
+          INTELLIGENCE_CANDIDATE_LIMIT: "150"
+          INTELLIGENCE_VERIFY_LIMIT: "60"
+        run: python source_intelligence_entry.py
 
       - name: Save intelligence state
         shell: bash
