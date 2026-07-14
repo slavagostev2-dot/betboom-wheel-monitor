@@ -130,7 +130,8 @@
       "needs_manual_time": true,
       "page_excerpt": "",
       "page_status": "fresh_unconfirmed",
-      "participating": false,
+      "participating": true,
+      "participating_at": "2026-07-14T16:54:33.353295+00:00",
       "source": "artemkef",
       "status": "unknown",
       "url": "https://betboom.ru/freestream/risen"
@@ -518,6 +519,12 @@
       "identifier": "papa",
       "marked_at": "2026-07-14T14:07:13.181332+00:00",
       "url": "https://betboom.ru/freestream/papa"
+    },
+    "risen": {
+      "expires_at": "2026-07-16T16:54:33.353285+00:00",
+      "identifier": "risen",
+      "marked_at": "2026-07-14T16:54:33.353269+00:00",
+      "url": "https://betboom.ru/freestream/risen"
     },
     "zonertg5": {
       "deadline": "2026-07-14T17:53:52.309134+00:00",
