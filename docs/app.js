@@ -1,6 +1,6 @@
 'use strict';
 
-const VERSION='4.0.0';
+const VERSION='5.1.0';
 const BRAND='BB V.G.';
 const REPO='slavagostev2-dot/betboom-wheel-monitor';
 const ORIGINS=[
@@ -19,7 +19,7 @@ const app={
   lastSync:null,
   data:{state:{},stats:{daily:{},sources:{}},primary:[],nightly:[]},
   joined:new Set(),
-  settings:{autoRefresh:true,haptics:true}
+  settings:{autoRefresh:true,haptics:true,lightTheme:false}
 };
 
 const esc=value=>String(value??'').replace(/[&<>"']/g,char=>({
@@ -56,9 +56,31 @@ function toast(text){
 function haptic(type='light'){
   if(!app.settings.haptics||!tg?.HapticFeedback)return;
   try{
-    if(['success','warning','error'].includes(type))tg.HapticFeedback.notificationOccurred(type);
-    else tg.HapticFeedback.impactOccurred(type);
+    if(type==='selection')tg.HapticFeedback.selectionChanged?.();
+    else if(['success','warning','error'].includes(type))tg.HapticFeedback.notificationOccurred?.(type);
+    else tg.HapticFeedback.impactOccurred?.(type);
   }catch{}
+}
+
+const THEME_COLORS={
+  dark:{header:'#08080c',background:'#08080c',bottom:'#0c0b11'},
+  light:{header:'#f8f5fb',background:'#f4f1f8',bottom:'#faf8fc'}
+};
+function applyTheme(){
+  const light=app.settings.lightTheme===true;
+  const theme=light?'light':'dark';
+  const colors=THEME_COLORS[theme];
+  const root=document.documentElement;
+  root.dataset.theme=theme;
+  root.classList.toggle('light-theme',light);
+  root.style.colorScheme=theme;
+  $('#app')?.classList.toggle('light-theme',light);
+  document.querySelector('meta[name="theme-color"]')?.setAttribute('content',colors.background);
+  try{
+    tg?.setHeaderColor?.(colors.header);
+    tg?.setBackgroundColor?.(colors.background);
+    tg?.setBottomBarColor?.(colors.bottom);
+  }catch(error){console.warn('Telegram theme:',error)}
 }
 
 const store={
@@ -85,9 +107,8 @@ function setupTelegram(){
   try{
     tg.ready();
     tg.expand();
-    tg.setHeaderColor?.('#08080c');
-    tg.setBackgroundColor?.('#08080c');
-    tg.setBottomBarColor?.('#0c0b11');
+    tg.disableVerticalSwipes?.();
+    applyTheme();
   }catch(error){console.warn(error)}
 }
 
@@ -97,7 +118,15 @@ async function loadUser(){
     store.get('settings',app.settings)
   ]);
   app.joined=new Set(Array.isArray(joined)?joined.map(item=>String(item).toLowerCase()):[]);
-  app.settings={autoRefresh:settings?.autoRefresh!==false,haptics:settings?.haptics!==false};
+  let legacyLightTheme=false;
+  try{legacyLightTheme=localStorage.getItem('bbvg:appearance')==='light'}catch{}
+  app.settings={
+    autoRefresh:settings?.autoRefresh!==false,
+    haptics:settings?.haptics!==false,
+    lightTheme:typeof settings?.lightTheme==='boolean'?settings.lightTheme:legacyLightTheme
+  };
+  store.set('settings',app.settings);
+  applyTheme();
 }
 
 async function fetchOne(path,type='json'){
@@ -323,6 +352,7 @@ function renderProfile(){
     <section class="section"><div class="section-head"><h2 class="section-title">Настройки</h2></div><article class="card">
       <div class="setting"><div class="setting-copy"><strong>Автообновление</strong><small>Обновлять данные раз в минуту</small></div><button class="switch ${app.settings.autoRefresh?'on':''}" type="button" data-setting="autoRefresh" aria-label="Автообновление"></button></div>
       <div class="setting"><div class="setting-copy"><strong>Тактильный отклик</strong><small>Подтверждать действия вибрацией</small></div><button class="switch ${app.settings.haptics?'on':''}" type="button" data-setting="haptics" aria-label="Тактильный отклик"></button></div>
+      <div class="setting"><div class="setting-copy"><strong>Светлая тема</strong><small>Светлый фон и тёмный текст</small></div><button class="switch ${app.settings.lightTheme?'on':''}" type="button" data-setting="lightTheme" aria-label="Светлая тема" aria-pressed="${app.settings.lightTheme}"></button></div>
       <div class="setting"><div class="setting-copy"><strong>Версия приложения</strong><small>${BRAND}</small></div><span class="muted">${VERSION}</span></div>
     </article></section>`;
 }
@@ -394,27 +424,33 @@ function renderFatal(){$('#page-home').innerHTML='<div class="empty">Не уда
 function bindEvents(){
   document.addEventListener('click',event=>{
     const routeButton=event.target.closest('[data-route]');
-    if(routeButton){route(routeButton.dataset.route);return}
+    if(routeButton){route(routeButton.dataset.route);haptic('selection');return}
     const actionButton=event.target.closest('[data-action]');
     if(actionButton){
       const action=actionButton.dataset.action;
       if(action==='join')toggleJoined(actionButton.dataset.id);
-      else if(action==='open-url')openUrl(actionButton.dataset.url);
-      else if(action==='source-info')showSourceInfo(actionButton.dataset.source);
-      else if(action==='close-dialog')closeDialog();
+      else if(action==='open-url'){haptic('light');openUrl(actionButton.dataset.url)}
+      else if(action==='source-info'){haptic('selection');showSourceInfo(actionButton.dataset.source)}
+      else if(action==='close-dialog'){haptic('selection');closeDialog()}
+      else haptic('selection');
       return;
     }
     const day=event.target.closest('[data-days]');
-    if(day){app.days=Number(day.dataset.days)||7;renderStats();return}
+    if(day){app.days=Number(day.dataset.days)||7;renderStats();haptic('selection');return}
     const mode=event.target.closest('[data-source-mode]');
-    if(mode){app.sourceMode=mode.dataset.sourceMode;renderSources();return}
+    if(mode){app.sourceMode=mode.dataset.sourceMode;renderSources();haptic('selection');return}
     const setting=event.target.closest('[data-setting]');
     if(setting){
       const key=setting.dataset.setting;
+      if(!Object.prototype.hasOwnProperty.call(app.settings,key))return;
+      const wasHapticsEnabled=app.settings.haptics;
+      if(key==='haptics'&&wasHapticsEnabled)haptic('selection');
       app.settings[key]=!app.settings[key];
       store.set('settings',app.settings);
+      if(key==='lightTheme')applyTheme();
       renderProfile();
-      haptic('light');
+      if(key==='haptics'&&app.settings.haptics)haptic('success');
+      else if(key!=='haptics')haptic('selection');
     }
   });
   document.addEventListener('submit',event=>{
@@ -443,6 +479,6 @@ async function init(){
   setInterval(updateTimers,1000);
   setInterval(()=>{if(app.settings.autoRefresh&&document.visibilityState==='visible')loadData(true)},60000);
   document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&app.settings.autoRefresh)loadData(true)});
-  if('serviceWorker'in navigator)navigator.serviceWorker.register('./service-worker.js').catch(console.warn);
+  if('serviceWorker'in navigator)navigator.serviceWorker.register('./service-worker.js?v=5.1.0').catch(console.warn);
 }
 init();

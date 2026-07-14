@@ -112,7 +112,8 @@
       <section id="profileSettings" class="section"><h2 class="section-title">Настройки</h2><article class="card">
         <div class="setting"><div class="setting-copy"><strong>Автообновление</strong><small>Обновлять данные автоматически</small></div><button class="switch ${app.settings.autoRefresh?'on':''}" data-setting="autoRefresh"></button></div>
         <div class="setting"><div class="setting-copy"><strong>Тактильный отклик</strong><small>Вибрация при действиях</small></div><button class="switch ${app.settings.haptics?'on':''}" data-setting="haptics"></button></div>
-        <div class="setting"><div class="setting-copy"><strong>Версия приложения</strong><small>${BRAND}</small></div><span class="row-value">5.0.0</span></div>
+        <div class="setting"><div class="setting-copy"><strong>Светлая тема</strong><small>Светлый фон и тёмный текст</small></div><button class="switch ${app.settings.lightTheme?'on':''}" data-setting="lightTheme" aria-label="Светлая тема" aria-pressed="${app.settings.lightTheme}"></button></div>
+        <div class="setting"><div class="setting-copy"><strong>Версия приложения</strong><small>${BRAND}</small></div><span class="row-value">${VERSION}</span></div>
       </article></section>`;
     updateTimers();
   };
@@ -139,7 +140,7 @@
     if(action==='toggle-ranks'){showAllRanks=!showAllRanks;renderStats();return}
     if(action==='toggle-marks'){showAllMarks=!showAllMarks;renderProfile();return}
     const choice=event.target.closest('[data-ui-choice]')?.dataset.uiChoice;
-    if(choice){const [type,value]=choice.split(':');if(type==='wheel'){wheelFilter=value;renderHome()}if(type==='source'){sourceFilter=value;renderSources()}closeDialog()}
+    if(choice){const [type,value]=choice.split(':');if(type==='wheel'){wheelFilter=value;renderHome()}if(type==='source'){sourceFilter=value;renderSources()}haptic('selection');closeDialog()}
   },true);
 
   store.get('hiddenWheels',[]).then(values=>{
