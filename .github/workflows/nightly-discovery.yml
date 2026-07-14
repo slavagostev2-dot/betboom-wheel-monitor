@@ -74,12 +74,14 @@ jobs:
         run: python nightly_discovery_entry.py
 
       - name: Save discovery state
+        id: save
         shell: bash
         run: |
           set -euo pipefail
           files=(public_sources.txt source_catalog.txt discovery_state.json)
           if git diff --quiet -- "${files[@]}"; then
             echo "Discovery data did not change."
+            echo "changed=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
 
@@ -90,6 +92,7 @@ jobs:
 
           for attempt in 1 2 3; do
             if git push origin "HEAD:${GITHUB_REF_NAME:-main}"; then
+              echo "changed=true" >> "$GITHUB_OUTPUT"
               exit 0
             fi
             echo "Discovery push attempt ${attempt} failed; rebasing before retry."
@@ -99,3 +102,10 @@ jobs:
             fi
           done
           exit 1
+
+      - name: Restart primary monitor after promotion
+        if: steps.save.outputs.changed == 'true'
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run monitor.yml --ref main -f continuous=true

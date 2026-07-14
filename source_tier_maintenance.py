@@ -63,7 +63,11 @@ def write_list(path: Path, values: list[str], header: str) -> None:
         if clean and key not in seen:
             unique.append(clean)
             seen.add(key)
-    path.write_text(header.rstrip() + "\n\n" + "\n".join(unique) + "\n", encoding="utf-8")
+    body = "\n".join(unique)
+    path.write_text(
+        header.rstrip() + ("\n\n" + body if body else "") + "\n",
+        encoding="utf-8",
+    )
 
 
 def source_record(sources: dict[str, Any], source: str) -> dict[str, Any]:
@@ -186,6 +190,22 @@ def main() -> int:
         if eligible:
             candidates.append(source)
 
+    moved_keys = {value.casefold() for value in candidates}
+    primary_after = [value for value in primary if value.casefold() not in moved_keys]
+    nightly_after = nightly + [value for value in candidates if value.casefold() not in nightly_keys]
+    write_list(
+        PRIMARY_PATH,
+        primary_after,
+        "# Основной мониторинг: источники с колёсами за последние 7 дней.\n"
+        "# Проверяется примерно каждые 5 минут через telegram.me.",
+    )
+    write_list(
+        NIGHTLY_PATH,
+        nightly_after,
+        "# Ночной мониторинг: утверждённые источники без колёс 7 дней.\n"
+        "# При обнаружении нового активного колеса источник автоматически возвращается в основной режим.",
+    )
+
     state = {
         "version": 1,
         "last_run_at": now.isoformat(),
@@ -196,18 +216,19 @@ def main() -> int:
             "maximum_last_check_age_hours": MAX_LAST_CHECK_AGE_HOURS,
         },
         "primary_before": len(primary),
-        "policy": "all_configured_sources_remain_permanent",
-        "primary_after": len(primary),
-        "nightly_after": len(nightly),
-        "moved_to_nightly": [],
-        "inactive_candidates_kept_permanent": candidates,
+        "policy": "seven_day_dynamic_primary_and_nightly",
+        "primary_after": len(primary_after),
+        "nightly_after": len(nightly_after),
+        "total_after": len({value.casefold() for value in primary_after + nightly_after}),
+        "moved_to_nightly": candidates,
         "reasons": reasons,
     }
     STATE_PATH.write_text(json.dumps(state, ensure_ascii=False, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     print(
-        f"Permanent sources: {len(primary)}; nightly candidates: {len(nightly)}; "
-        f"inactive but retained: {len(candidates)}"
+        f"Primary sources: {len(primary_after)}; nightly sources: {len(nightly_after)}; "
+        f"moved after {INACTIVITY_DAYS} days: {len(candidates)}"
     )
+    send_notification(candidates)
     return 0
 
 

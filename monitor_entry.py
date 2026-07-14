@@ -28,6 +28,7 @@ _COLLECTOR_SOURCES = {
     if str(value).strip()
 }
 _CANONICAL_MESSAGES: dict[str, monitor.Message] = {}
+_WHEEL_PUBLICATIONS: dict[str, list[dict]] = {}
 
 
 def _mapped_sources(identifier: str) -> set[str]:
@@ -65,6 +66,7 @@ def fetch_all_sources_with_originals(sources):
                 candidates.setdefault(monitor.wheel_key(link), []).append(message)
 
     _CANONICAL_MESSAGES.clear()
+    _WHEEL_PUBLICATIONS.clear()
     for key, rows in candidates.items():
         if not rows:
             continue
@@ -79,6 +81,19 @@ def fetch_all_sources_with_originals(sources):
         _CANONICAL_MESSAGES[key] = min(
             rows,
             key=lambda message: _message_rank(message, identifier),
+        )
+        publications: dict[tuple[str, int], dict] = {}
+        for row in rows:
+            marker = (row.source.casefold(), row.message_id)
+            publications[marker] = {
+                "source": row.source,
+                "message_id": row.message_id,
+                "message_date": row.date.astimezone(monitor.UTC).isoformat(),
+                "message_url": row.message_url,
+            }
+        _WHEEL_PUBLICATIONS[key] = sorted(
+            publications.values(),
+            key=lambda item: (str(item.get("message_date") or ""), str(item.get("source") or "").casefold()),
         )
 
     # Most wheel posts contain one identifier. Replacing reposts with the
@@ -227,6 +242,19 @@ def _apply_origin(entry: dict, origin: dict) -> bool:
     return changed
 
 
+def _persist_publications(state: dict, key: str, fallback: dict | None = None) -> None:
+    rows = list(_WHEEL_PUBLICATIONS.get(key, []))
+    if not rows and isinstance(fallback, dict) and fallback.get("source"):
+        rows = [{
+            "source": str(fallback.get("source") or ""),
+            "message_id": int(fallback.get("message_id", 0) or 0),
+            "message_date": str(fallback.get("message_date") or fallback.get("created_at") or ""),
+            "message_url": str(fallback.get("message_url") or ""),
+        }]
+    if rows:
+        state.setdefault("wheel_publications", {})[key] = rows
+
+
 def _recover_deadline(state, key, entry):
     origin = _best_origin_record(state, key, entry)
     deadline = _deadline_from_record(origin)
@@ -248,6 +276,7 @@ def mark_participating_with_tracking(state, context):
     key = _record_wheel_key(context)
     if not key:
         return
+    _persist_publications(state, key, context)
     current = monitor.now_utc()
     canonical = _CANONICAL_MESSAGES.get(key)
     if canonical is not None:

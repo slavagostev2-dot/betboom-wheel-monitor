@@ -46,7 +46,7 @@
         <div class="system-line"><span class="system-dot"></span>Система работает</div>
         <div class="overview-copy">Мониторинг в реальном времени</div>
         <div class="metrics">
-          <article class="metric"><strong>${all.length}</strong><span>Действующих колёс</span></article>
+          <article class="metric"><strong>${all.length}</strong><span>Активные колёса</span></article>
           <article class="metric"><strong>${mine}</strong><span>Моих отметок</span></article>
         </div>
       </article>
@@ -62,6 +62,7 @@
 
   renderStats=function(){
     const total=totals(app.days);
+    const confirmed=Number(adminRatingsActive()?(total.admin_confirmed_wheels||0):(total.activation_sent||0));
     const ranks=ranking();
     const shown=showAllRanks?ranks:ranks.slice(0,5);
     $('#page-stats').innerHTML=`
@@ -70,17 +71,18 @@
         ${metricWithDelta(iconSvg.scan,compact(total.checks),'Проверок источников')}
         ${metricWithDelta(iconSvg.message,compact(total.messages_scanned),'Просмотрено сообщений')}
         ${metricWithDelta(iconSvg.wheel,num(total.wheel_posts),'Постов с колёсами')}
-        ${metricWithDelta(iconSvg.check,num(total.activation_sent),'Активных подтверждено')}
+        ${metricWithDelta(iconSvg.check,num(confirmed),'Активные колёса')}
       </div>
-      <section class="section"><article class="card chart-card"><div class="section-head"><h2 class="section-title">Активность за ${app.days===1?'сегодня':`${app.days} дней`}</h2></div>${chart(app.days)}</article></section>
+      ${app.days===1?'':`<section class="section"><article class="card chart-card"><div class="section-head"><h2 class="section-title">Активные колёса за ${app.days} дней</h2><span class="chart-total">${num(confirmed)}</span></div>${chart(app.days)}</article></section>`}
       <section class="section"><div class="section-head"><h2 class="section-title">Топ источников</h2>${ranks.length>5?`<button class="text-button" data-action="toggle-ranks">${showAllRanks?'Свернуть':'Смотреть все'}</button>`:''}</div><article class="card">${shown.map(rankRow).join('')||'<div class="empty">Рейтинг ещё формируется.</div>'}</article></section>`;
   };
 
   function visibleSources(){
-    const list=app.sourceMode==='nightly'?app.data.nightly:app.data.primary;
+    const list=[...new Map([...app.data.primary,...app.data.nightly].map(item=>[item.toLowerCase(),item])).values()];
     const query=app.query.trim().toLowerCase();
     return list.filter(name=>(!query||name.toLowerCase().includes(query))&&(sourceFilter!=='wheels'||Number(sourceStats(name)?.wheel_posts||0)>0));
   }
+  window.bbvgVisibleSources=visibleSources;
 
   renderSources=function(){
     const rows=visibleSources();
@@ -92,7 +94,6 @@
         <p>Отправьте username канала или чата для проверки модератором.</p>
         <div class="form-row"><input id="sourceRequestInput" class="input" type="text" autocomplete="off" maxlength="33" placeholder="https://telegram.me/имя_канала"><button class="form-button" type="submit">Отправить на проверку</button></div>
       </form>
-      <div class="tabs section"><button class="chip ${app.sourceMode==='primary'?'active':''}" data-source-mode="primary">Основные</button><button class="chip ${app.sourceMode==='nightly'?'active':''}" data-source-mode="nightly">Ночное наблюдение</button></div>
       <div class="search-row"><input id="sourceSearch" class="search" type="search" autocomplete="off" placeholder="Поиск источника" value="${esc(app.query)}"><button class="square-button" data-action="source-filter" aria-label="Фильтр">${filterIcon}</button></div>
       <article class="card">${rows.slice(0,100).map(sourceRow).join('')||'<div class="empty">Источники не найдены.</div>'}</article>
       <article class="card" style="margin-top:10px"><p class="muted" style="margin:0">После отправки заявки администратор получит запрос на модерацию. О результате бот пришлёт уведомление.</p></article>`;
@@ -104,14 +105,14 @@
     const photo=safeUrl(user?.photo_url)||'icon.svg';
     const marks=activeWheels().filter(isJoined);
     const shown=showAllMarks?marks:marks.slice(0,3);
-    const sources=app.data.primary.length+app.data.nightly.length;
+    const active=activeWheels();
     $('#page-profile').innerHTML=`
       <article class="card profile-head">
         <img src="${esc(photo)}" alt=""><div class="profile-copy"><strong>${esc(name||'Пользователь')}</strong><span>${user?.username?`@${esc(user.username)}`:'Telegram Mini App'}</span></div>
-        <div class="profile-stats"><div class="profile-stat"><strong>${app.joined.size}</strong><span>Отметок</span></div><div class="profile-stat"><strong>${marks.length}</strong><span>Активных</span></div><div class="profile-stat"><strong>${sources}</strong><span>Источников</span></div></div>
+        <div class="profile-stats"><div class="profile-stat"><strong>${app.participationHistory.size}</strong><span>Всего участий</span></div><div class="profile-stat"><strong>${active.length}</strong><span>Активные колёса</span></div><div class="profile-stat"><strong>${marks.length}</strong><span>Моих отметок</span></div></div>
       </article>
       <section class="section"><div class="section-head"><div class="section-tools"><h2 class="section-title">Мои отметки</h2><span class="count-pill">${marks.length}</span></div>${marks.length>3?`<button class="text-button" data-action="toggle-marks">${showAllMarks?'Свернуть':'Смотреть все'}</button>`:''}</div><div>${shown.map(enhancedWheelCard).join('')||'<div class="empty">Вы пока не отметили участие в действующих колёсах.</div>'}</div></section>
-      <section id="profileSettings" class="section"><h2 class="section-title">Настройки</h2><article class="card">
+      <section id="profileSettings" class="section profile-settings"><h2 class="section-title">Настройки</h2><article class="card">
         <div class="setting"><div class="setting-copy"><strong>Автообновление</strong><small>Обновлять данные автоматически</small></div><button class="switch ${app.settings.autoRefresh?'on':''}" data-setting="autoRefresh"></button></div>
         <div class="setting"><div class="setting-copy"><strong>Тактильный отклик</strong><small>Вибрация при действиях</small></div><button class="switch ${app.settings.haptics?'on':''}" data-setting="haptics"></button></div>
         <div class="setting"><div class="setting-copy"><strong>Светлая тема</strong><small>Светлый фон и тёмный текст</small></div><button class="switch ${app.settings.lightTheme?'on':''}" data-setting="lightTheme" aria-label="Светлая тема" aria-pressed="${app.settings.lightTheme}"></button></div>

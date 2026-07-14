@@ -1,6 +1,6 @@
 'use strict';
 
-const VERSION='5.4.0';
+const VERSION='5.5.0';
 const BRAND='BB V.G.';
 const REPO='slavagostev2-dot/betboom-wheel-monitor';
 const ORIGINS=[
@@ -19,6 +19,7 @@ const app={
   lastSync:null,
   data:{state:{},stats:{daily:{},sources:{}},health:{sources:{}},transport:{},system:{},primary:[],nightly:[]},
   joined:new Set(),
+  participationHistory:new Set(),
   settings:{autoRefresh:true,haptics:true,lightTheme:true,themeVersion:2}
 };
 
@@ -119,11 +120,15 @@ function setupTelegram(){
 }
 
 async function loadUser(){
-  const [joined,settings]=await Promise.all([
+  const [joined,history,settings]=await Promise.all([
     store.get('joined',[]),
+    store.get('participationHistory',[]),
     store.get('settings',app.settings)
   ]);
   app.joined=new Set(Array.isArray(joined)?joined.map(item=>String(item).toLowerCase()):[]);
+  app.participationHistory=new Set(Array.isArray(history)?history.map(item=>String(item).toLowerCase()):[]);
+  app.joined.forEach(item=>app.participationHistory.add(item));
+  store.set('participationHistory',[...app.participationHistory]);
   let legacyLightTheme=false;
   try{legacyLightTheme=localStorage.getItem('bbvg:appearance')==='light'}catch{}
   const migrateTheme=Number(settings?.themeVersion||0)<2;
@@ -206,6 +211,8 @@ async function toggleJoined(id){
     toast('Отметка участия снята');
   }else{
     app.joined.add(key);
+    app.participationHistory.add(key);
+    store.set('participationHistory',[...app.participationHistory]);
     toast('Участие отмечено');
     haptic('success');
   }
@@ -230,6 +237,7 @@ function totals(days){
   }
   return result;
 }
+const adminRatingsActive=()=>Boolean(app.data.stats?.admin_wheel_decisions&&Object.keys(app.data.stats.admin_wheel_decisions).length);
 function sourceStats(name){
   const key=Object.keys(app.data.stats?.sources||{}).find(item=>item.toLowerCase()===String(name).toLowerCase());
   return key?app.data.stats.sources[key]:{};
@@ -239,10 +247,11 @@ function sourceHealth(name){
   return key?app.data.health.sources[key]:{};
 }
 function sourceOverview(){
-  const total=app.data.primary.length;
+  const all=[...new Map([...app.data.primary,...app.data.nightly].map(item=>[item.toLowerCase(),item])).values()];
+  const total=all.length;
   const health=app.data.health?.sources||{};
-  const checkedFromHealth=app.data.primary.filter(name=>Boolean(sourceHealth(name)?.last_checked_at)).length;
-  const reachableFromHealth=app.data.primary.filter(name=>sourceHealth(name)?.status==='ok').length;
+  const checkedFromHealth=all.filter(name=>Boolean(sourceHealth(name)?.last_checked_at)).length;
+  const reachableFromHealth=all.filter(name=>sourceHealth(name)?.status==='ok').length;
   const transport=app.data.transport||{};
   const checked=Number(transport.accounted_sources??checkedFromHealth);
   const reachable=Number(transport.reachable_sources??reachableFromHealth);
@@ -250,17 +259,17 @@ function sourceOverview(){
 }
 function ranking(){
   return Object.entries(app.data.stats?.sources||{})
-    .map(([source,row])=>({source,wheels:Number(row?.wheel_posts||0),activations:Number(row?.activation_sent||0)}))
-    .filter(item=>item.wheels>0)
-    .sort((a,b)=>b.wheels-a.wheels||b.activations-a.activations||a.source.localeCompare(b.source));
+    .map(([source,row])=>({source,score:Number(row?.quality_score||0),confirmed:Number(row?.admin_confirmed_wheels||0)}))
+    .filter(item=>item.score!==0||item.confirmed>0)
+    .sort((a,b)=>b.score-a.score||b.confirmed-a.confirmed||a.source.localeCompare(b.source));
 }
 
 const iconSvg={
-  wheel:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="2"/><path d="M12 4v4m0 8v4M4 12h4m8 0h4M6.3 6.3l2.8 2.8m5.8 5.8 2.8 2.8m0-11.4-2.8 2.8m-5.8 5.8-2.8 2.8"/></svg>',
-  check:'<svg viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/><circle cx="12" cy="12" r="9"/></svg>',
-  scan:'<svg viewBox="0 0 24 24"><path d="M4 8V5a1 1 0 0 1 1-1h3m8 0h3a1 1 0 0 1 1 1v3m0 8v3a1 1 0 0 1-1 1h-3m-8 0H5a1 1 0 0 1-1-1v-3"/><path d="M8 12h8"/></svg>',
-  message:'<svg viewBox="0 0 24 24"><path d="M5 5h14a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H9l-5 3V7a2 2 0 0 1 2-2z"/></svg>',
-  link:'<svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.1.1l2-2a5 5 0 0 0-7.1-7.1l-1.1 1.1M14 11a5 5 0 0 0-7.1-.1l-2 2A5 5 0 0 0 12 20l1.1-1.1"/></svg>'
+  wheel:'<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.25"/><circle cx="12" cy="12" r="2"/><path d="M12 3.75v5m0 6.5v5M3.75 12h5m6.5 0h5M6.17 6.17l3.54 3.54m4.58 4.58 3.54 3.54m0-11.66-3.54 3.54m-4.58 4.58-3.54 3.54"/></svg>',
+  check:'<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="m7.5 12.2 3 3 6-6.4"/></svg>',
+  scan:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 4H5a1 1 0 0 0-1 1v3m12-4h3a1 1 0 0 1 1 1v3m0 8v3a1 1 0 0 1-1 1h-3M8 20H5a1 1 0 0 1-1-1v-3M7.5 12h9"/></svg>',
+  message:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5.5 5h13A2.5 2.5 0 0 1 21 7.5v7a2.5 2.5 0 0 1-2.5 2.5H9l-5 3V7.5A2.5 2.5 0 0 1 6.5 5Z"/></svg>',
+  link:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.5 14.5 14.5 9M8.2 16.8l-1.1 1.1a4 4 0 0 1-5.7-5.7l3-3a4 4 0 0 1 5.7 0m5.7-2 1.1-1.1a4 4 0 0 1 5.7 5.7l-3 3a4 4 0 0 1-5.7 0"/></svg>'
 };
 
 function wheelCard(wheel){
@@ -294,7 +303,7 @@ function renderHome(){
     <article class="overview">
       <div class="overview-copy"><small>${BRAND}</small><strong>Монитор колёс и источников</strong></div>
       <div class="metrics">
-        <article class="metric"><strong>${wheels.length}</strong><span>Действующих колёс</span></article>
+        <article class="metric"><strong>${wheels.length}</strong><span>Активные колёса</span></article>
         <article class="metric"><strong>${mine}</strong><span>Моих отметок</span></article>
       </div>
     </article>
@@ -305,19 +314,20 @@ function renderHome(){
 }
 
 function chart(days){
-  const count=days===30?14:Math.max(1,days);
+  const count=Math.max(1,days);
   const rows=[];
   for(let index=count-1;index>=0;index--){
     const current=new Date();
     current.setDate(current.getDate()-index);
     const key=`${current.getFullYear()}-${String(current.getMonth()+1).padStart(2,'0')}-${String(current.getDate()).padStart(2,'0')}`;
-    rows.push({date:current,value:Number(app.data.stats?.daily?.[key]?.totals?.checks||0)});
+    const day=app.data.stats?.daily?.[key]?.totals||{};
+    rows.push({date:current,value:Number(adminRatingsActive()?(day.admin_confirmed_wheels||0):(day.activation_sent||0))});
   }
   const max=Math.max(1,...rows.map(item=>item.value));
-  return `<div class="chart">${rows.map(item=>`<div class="bar-col"><div class="bar-wrap"><i class="bar" style="height:${Math.max(item.value?5:2,Math.round(item.value/max*100))}%"></i></div><span class="bar-label">${item.date.toLocaleDateString('ru-RU',{day:'2-digit',month:'2-digit'})}</span></div>`).join('')}</div>`;
+  return `<div class="chart chart-${days}" style="--chart-columns:${count}">${rows.map((item,index)=>`<div class="bar-col"><div class="bar-wrap"><span class="bar-value">${num(item.value)}</span><i class="bar" style="height:${Math.max(item.value?7:2,Math.round(item.value/max*88))}%"></i></div><span class="bar-label ${days===30&&index%5!==0&&index!==rows.length-1?'label-hidden':''}">${item.date.toLocaleDateString('ru-RU',{day:'2-digit',month:'2-digit'})}</span></div>`).join('')}</div>`;
 }
 function rankRow(item,index){
-  return `<button class="rank-row" type="button" data-action="source-info" data-source="${esc(item.source)}"><span class="rank-num">${index+1}</span><span class="source-mark">${esc(initials(item.source))}</span><span class="row-copy"><strong>@${esc(item.source)}</strong><small>Подтверждённых активаций: ${num(item.activations)}</small></span><span class="row-value">${num(item.wheels)}</span></button>`;
+  return `<button class="rank-row" type="button" data-action="source-info" data-source="${esc(item.source)}"><span class="rank-num">${index+1}</span><span class="source-mark">${esc(initials(item.source))}</span><span class="row-copy"><strong>@${esc(item.source)}</strong></span><span class="row-value">${num(item.score)} <small>оч.</small></span></button>`;
 }
 function metricCard(icon,value,label){
   return `<article class="metric"><span class="metric-icon">${icon}</span><strong>${value}</strong><span>${label}</span></article>`;
@@ -325,6 +335,7 @@ function metricCard(icon,value,label){
 
 function renderStats(){
   const total=totals(app.days);
+  const confirmed=Number(adminRatingsActive()?(total.admin_confirmed_wheels||0):(total.activation_sent||0));
   $('#page-stats').innerHTML=`
     <h1 class="page-title">Статистика</h1>
     <p class="page-subtitle">Результаты работы ${BRAND}</p>
@@ -333,14 +344,14 @@ function renderStats(){
       ${metricCard(iconSvg.scan,compact(total.checks),'Проверок источников')}
       ${metricCard(iconSvg.message,compact(total.messages_scanned),'Просмотрено сообщений')}
       ${metricCard(iconSvg.wheel,num(total.wheel_posts),'Постов с колёсами')}
-      ${metricCard(iconSvg.check,num(total.activation_sent),'Активных подтверждено')}
+      ${metricCard(iconSvg.check,num(confirmed),'Активные колёса')}
     </div>
-    <section class="section"><article class="card"><div class="section-head"><h2 class="section-title">Активность</h2><span class="muted">${app.days===1?'Сегодня':`${app.days} дней`}</span></div>${chart(app.days)}</article></section>
+    ${app.days===1?'':`<section class="section"><article class="card chart-card"><div class="section-head"><h2 class="section-title">Активные колёса за ${app.days} дней</h2><span class="chart-total">${num(confirmed)}</span></div>${chart(app.days)}</article></section>`}
     <section class="section"><div class="section-head"><h2 class="section-title">Топ источников</h2></div><article class="card">${ranking().slice(0,15).map(rankRow).join('')||'<div class="empty">Рейтинг ещё формируется.</div>'}</article></section>`;
 }
 
 function filteredSources(){
-  const list=app.sourceMode==='nightly'?app.data.nightly:app.data.primary;
+  const list=[...new Map([...app.data.primary,...app.data.nightly].map(item=>[item.toLowerCase(),item])).values()];
   const query=app.query.trim().toLowerCase();
   return query?list.filter(item=>item.toLowerCase().includes(query)):list;
 }
@@ -359,10 +370,9 @@ function renderSources(){
     <p class="page-subtitle">Каналы, которые проверяет ${BRAND}</p>
     <form id="sourceRequestForm" class="source-form">
       <div class="source-form-head"><span class="source-form-icon">${iconSvg.link}</span><h2>Предложить источник</h2></div>
-      <p>Отправьте username публичного канала. Бот проверит его, а администратор выберет основную или ночную проверку.</p>
+      <p>Отправьте username публичного канала. Бот проверит его, а администратор примет решение.</p>
       <div class="form-row"><input id="sourceRequestInput" class="input" type="text" inputmode="text" autocomplete="off" maxlength="33" placeholder="username канала"><button class="form-button" type="submit">Отправить</button></div>
     </form>
-    <div class="tabs section"><button class="chip ${app.sourceMode==='primary'?'active':''}" type="button" data-source-mode="primary">Основные ${app.data.primary.length}</button><button class="chip ${app.sourceMode==='nightly'?'active':''}" type="button" data-source-mode="nightly">Ночное наблюдение ${app.data.nightly.length}</button></div>
     <input id="sourceSearch" class="search" type="search" autocomplete="off" placeholder="Поиск по username" value="${esc(app.query)}">
     <article class="card">${rows.slice(0,100).map(sourceRow).join('')||'<div class="empty">Источники не найдены.</div>'}</article>`;
 }
@@ -443,14 +453,12 @@ async function submitSourceRequest(raw){
 }
 
 function showSourceInfo(source){
-  const primary=app.data.primary.some(item=>item.toLowerCase()===source.toLowerCase());
-  const mode=primary?'Основная проверка':'Ночное наблюдение';
   const stats=sourceStats(source);
   const wheels=Number(stats?.wheel_posts||0);
-  const activations=Number(stats?.activation_sent||0);
+  const score=Number(stats?.quality_score||0);
   const health=sourceHealth(source);
   const reason=health?.status==='ok'?'источник доступен':String(health?.failure_reason||health?.last_error||health?.status||'ещё не проверен');
-  showDialog(`<h2>@${esc(source)}</h2><p>${esc(mode)}</p><article class="card"><div class="setting"><div class="setting-copy"><strong>Состояние</strong><small>${esc(reason)}</small></div><span class="row-value">${health?.status==='ok'?'✓':'!'}</span></div><div class="setting"><div class="setting-copy"><strong>Последняя проверка</strong><small>${esc(health?.last_checked_at||'нет данных')}</small></div></div><div class="setting"><div class="setting-copy"><strong>Постов с колёсами</strong><small>За всё накопленное время</small></div><span class="row-value">${num(wheels)}</span></div><div class="setting"><div class="setting-copy"><strong>Подтверждённых активаций</strong><small>Успешно подтверждено монитором</small></div><span class="row-value">${num(activations)}</span></div></article><div class="actions"><button class="button primary" data-action="open-url" data-url="https://telegram.me/${esc(source)}">Открыть Telegram</button><button class="button secondary" data-action="close-dialog">Закрыть</button></div>`);
+  showDialog(`<h2>@${esc(source)}</h2><article class="card"><div class="setting"><div class="setting-copy"><strong>Состояние</strong><small>${esc(reason)}</small></div><span class="row-value">${health?.status==='ok'?'✓':'!'}</span></div><div class="setting"><div class="setting-copy"><strong>Последняя проверка</strong><small>${esc(health?.last_checked_at||'нет данных')}</small></div></div><div class="setting"><div class="setting-copy"><strong>Постов с колёсами</strong><small>За всё накопленное время</small></div><span class="row-value">${num(wheels)}</span></div><div class="setting"><div class="setting-copy"><strong>Очки рейтинга</strong><small>По решениям администратора</small></div><span class="row-value">${num(score)}</span></div></article><div class="actions"><button class="button primary" data-action="open-url" data-url="https://telegram.me/${esc(source)}">Открыть Telegram</button><button class="button secondary" data-action="close-dialog">Закрыть</button></div>`);
 }
 function showDialog(html){const dialog=$('#dialog');$('#dialogBody').innerHTML=html;dialog.showModal?.()}
 function closeDialog(){$('#dialog').close?.()}
@@ -499,7 +507,8 @@ function bindEvents(){
     if(event.target.id==='sourceSearch'){
       app.query=event.target.value;
       const card=event.target.nextElementSibling;
-      card.innerHTML=filteredSources().slice(0,100).map(sourceRow).join('')||'<div class="empty">Источники не найдены.</div>';
+      const rows=typeof window.bbvgVisibleSources==='function'?window.bbvgVisibleSources():filteredSources();
+      card.innerHTML=rows.slice(0,100).map(sourceRow).join('')||'<div class="empty">Источники не найдены.</div>';
     }
   });
   $('#refreshButton').addEventListener('click',()=>loadData(false));

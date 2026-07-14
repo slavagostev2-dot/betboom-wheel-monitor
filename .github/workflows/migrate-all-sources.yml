@@ -1,4 +1,4 @@
-name: Migrate all 66 sources to permanent monitoring
+name: Verify all 66 sources use telegram.me
 
 on:
   push:
@@ -24,10 +24,9 @@ jobs:
           ref: main
           fetch-depth: 0
 
-      - name: Move every configured source to permanent monitoring
+      - name: Verify approved source pool and transport domain
         run: |
           python - <<'PY'
-          import json
           from pathlib import Path
 
           def read_sources(path):
@@ -40,71 +39,18 @@ jobs:
                       result.append(value)
               return result
 
-          sources = read_sources("public_sources.txt")
-          if len(sources) != 66:
-              raise SystemExit(f"Expected 66 sources, found {len(sources)}")
-          source_keys = {value.casefold() for value in sources}
-
-          path = Path("partners_catalog.json")
-          catalog = json.loads(path.read_text(encoding="utf-8"))
-          changed = 0
-          for entity in catalog.get("entities", []):
-              if not isinstance(entity, dict):
-                  continue
-              channels = entity.get("channels", [])
-              configured_here = False
-              for channel in channels:
-                  if not isinstance(channel, dict):
-                      continue
-                  username = str(channel.get("username") or "").strip().lstrip("@")
-                  if username.casefold() in source_keys:
-                      configured_here = True
-                      if channel.get("scan_mode") != "fast":
-                          channel["scan_mode"] = "fast"
-                          changed += 1
-              if configured_here:
-                  notes = str(entity.get("notes") or "")
-                  replacements = (
-                      ("проверяются ночью, пока не подтверждена регулярная публикация колёс", "проверяются постоянно через telegram.me"),
-                      ("проверяются ночью", "проверяются постоянно через telegram.me"),
-                      ("ночной проверки", "постоянной проверки через telegram.me"),
-                  )
-                  for old, new in replacements:
-                      notes = notes.replace(old, new)
-                  entity["notes"] = notes
-          for collector in catalog.get("collectors", []):
-              if not isinstance(collector, dict):
-                  continue
-              username = str(collector.get("username") or "").strip().lstrip("@")
-              if username.casefold() in source_keys:
-                  collector["scan_mode"] = "fast"
-
-          policy = catalog.setdefault("policy", {})
-          policy["fast"] = "все 66 утверждённых источников проверяются постоянно через telegram.me"
-          policy["nightly"] = "используется только для поиска новых кандидатов, но не для известных 66 источников"
-          policy["catalog_scope"] = "единая постоянная база из 66 источников и отдельные новые кандидаты"
-          catalog["updated_at"] = "2026-07-14"
-          path.write_text(json.dumps(catalog, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-
-          Path("source_catalog.txt").write_text(
-              "# Кандидаты, найденные автоматически и ещё не утверждённые администратором.\n"
-              "# Все 66 известных источников находятся в public_sources.txt и проверяются постоянно через telegram.me.\n",
-              encoding="utf-8",
+          primary = read_sources("public_sources.txt")
+          nightly = read_sources("source_catalog.txt")
+          approved = {value.casefold() for value in primary + nightly}
+          if len(approved) < 66:
+              raise SystemExit(f"Expected at least 66 approved sources, found {len(approved)}")
+          if {value.casefold() for value in primary} & {value.casefold() for value in nightly}:
+              raise SystemExit("Primary and nightly tiers overlap")
+          runtime = "\n".join(
+              Path(name).read_text(encoding="utf-8")
+              for name in ("monitor.py", "nightly_discovery.py", "source_intelligence.py")
           )
-          print(f"Permanent sources: {len(sources)}; scan modes changed: {changed}")
+          if "https://t.me/" in runtime:
+              raise SystemExit("Blocked Telegram domain remains in runtime")
+          print(f"Approved sources: {len(approved)}; primary: {len(primary)}; nightly: {len(nightly)}")
           PY
-
-      - name: Save permanent source policy
-        run: |
-          set -euo pipefail
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add partners_catalog.json source_catalog.txt
-          git commit -m "Finish permanent telegram.me source migration [skip ci]" || exit 0
-          for attempt in 1 2 3; do
-            if git push origin HEAD:main; then
-              exit 0
-            fi
-            git pull --rebase origin main || { git rebase --abort || true; exit 1; }
-          done
-          exit 1

@@ -148,6 +148,12 @@ def flatten_partner_channels(catalog: dict[str, Any] | None = None) -> dict[str,
 
 
 def operational_sources(values: list[str], mode: str) -> list[str]:
+    """Return enabled sources from the requested operational text list.
+
+    The two text files are the live tier assignment. Catalog metadata describes
+    a source, but must not pin it to a tier: otherwise an automatic seven-day
+    move would be silently undone on the next monitor iteration.
+    """
     metadata = flatten_partner_channels()
     result: list[str] = []
     seen: set[str] = set()
@@ -160,21 +166,8 @@ def operational_sources(values: list[str], mode: str) -> list[str]:
         info = metadata.get(key)
         if info and info.get("scan_mode") == "disabled":
             continue
-        # A catalogued channel belongs to exactly one operational list.
-        # This also cleans stale promotions left in the opposite text file.
-        configured_mode = str(info.get("scan_mode") or "") if info else ""
-        if configured_mode in {"fast", "nightly"} and configured_mode != mode:
-            continue
         if key not in seen:
             seen.add(key)
-            result.append(username)
-
-    for info in metadata.values():
-        if info.get("scan_mode") != mode:
-            continue
-        username = clean_username(info.get("username"))
-        if username and username.casefold() not in seen:
-            seen.add(username.casefold())
             result.append(username)
     return result
 
@@ -535,14 +528,112 @@ def top_sources(data: dict[str, Any], limit: int = 5) -> list[tuple[str, int, di
     for source, entry in data.get("sources", {}).items():
         if not isinstance(entry, dict):
             continue
-        score = (
-            int(entry.get("activation_sent", 0)) * 4
-            + int(entry.get("preliminary_sent", 0)) * 2
-            + int(entry.get("wheel_posts", 0))
-        )
+        score = int(entry.get("quality_score", 0) or 0)
         if score:
             ranked.append((source, score, entry))
     return sorted(ranked, key=lambda item: (-item[1], item[0].casefold()))[:limit]
+
+
+def _stats_day(at: datetime) -> str:
+    return at.astimezone(STATS_TIMEZONE).date().isoformat()
+
+
+def record_admin_wheel_decision(
+    data: dict[str, Any],
+    *,
+    wheel_key: str,
+    sources: list[str],
+    decision: str,
+    actor: str = "admin",
+    at: datetime | None = None,
+) -> bool:
+    """Persist one idempotent administrator verdict and rebuild rating fields."""
+    normalized = str(wheel_key or "").strip().casefold()
+    if not normalized or decision not in {"confirmed", "inactive"}:
+        raise ValueError("invalid administrator wheel decision")
+    at = at or now_utc()
+    clean_sources = sorted(
+        {clean_username(value) for value in sources if clean_username(value)},
+        key=str.casefold,
+    )
+    decisions = data.setdefault("admin_wheel_decisions", {})
+    previous = decisions.get(normalized)
+    if not clean_sources and isinstance(previous, dict):
+        clean_sources = sorted(
+            {clean_username(value) for value in previous.get("sources", []) if clean_username(value)},
+            key=str.casefold,
+        )
+    previous_decision = str(previous.get("decision") or "") if isinstance(previous, dict) else ""
+    previous_sources = {
+        clean_username(value).casefold()
+        for value in (previous.get("sources", []) if isinstance(previous, dict) else [])
+        if clean_username(value)
+    }
+    current_sources = {value.casefold() for value in clean_sources}
+    changed = previous_decision != decision or previous_sources != current_sources
+    if not changed:
+        return False
+
+    decisions[normalized] = {
+        "decision": decision,
+        "sources": clean_sources,
+        "decided_at": at.isoformat(),
+        "day": _stats_day(at),
+        "actor": str(actor or "admin"),
+    }
+
+    # Remove only derived administrator fields. Automatic monitoring counters
+    # remain untouched.
+    for entry in data.setdefault("sources", {}).values():
+        if not isinstance(entry, dict):
+            continue
+        entry.pop("admin_confirmed_wheels", None)
+        entry.pop("admin_rejected_wheels", None)
+        entry.pop("quality_score", None)
+        entry.pop("quality_decisions", None)
+    for daily_entry in data.setdefault("daily", {}).values():
+        if not isinstance(daily_entry, dict):
+            continue
+        totals = daily_entry.setdefault("totals", {})
+        totals.pop("admin_confirmed_wheels", None)
+        totals.pop("admin_rejected_wheels", None)
+        for entry in daily_entry.setdefault("sources", {}).values():
+            if isinstance(entry, dict):
+                entry.pop("admin_confirmed_wheels", None)
+                entry.pop("admin_rejected_wheels", None)
+
+    for decided_wheel, record in decisions.items():
+        if not isinstance(record, dict):
+            continue
+        verdict = str(record.get("decision") or "")
+        if verdict not in {"confirmed", "inactive"}:
+            continue
+        metric = "admin_confirmed_wheels" if verdict == "confirmed" else "admin_rejected_wheels"
+        points = 40 if verdict == "confirmed" else -45
+        day = str(record.get("day") or "")
+        if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", day):
+            decided_at = parse_datetime(record.get("decided_at")) or at
+            day = _stats_day(decided_at)
+            record["day"] = day
+        daily_entry = data["daily"].setdefault(day, {"sources": {}, "totals": {}})
+        daily_entry.setdefault("totals", {})[metric] = int(
+            daily_entry["totals"].get(metric, 0)
+        ) + 1
+        for source in record.get("sources", []):
+            source_name = clean_username(source)
+            if not source_name:
+                continue
+            source_entry = data["sources"].setdefault(source_name, {})
+            source_entry[metric] = int(source_entry.get(metric, 0)) + 1
+            source_entry["quality_decisions"] = source_entry.get("quality_decisions", {})
+            source_entry["quality_decisions"][decided_wheel] = points
+            source_entry["quality_score"] = sum(
+                int(value or 0) for value in source_entry["quality_decisions"].values()
+            )
+            source_entry["last_updated_at"] = at.isoformat()
+            source_day = daily_entry.setdefault("sources", {}).setdefault(source_name, {})
+            source_day[metric] = int(source_day.get(metric, 0)) + 1
+    return True
 
 
 def _sanitize_excerpt(value: str, limit: int = 900) -> str:

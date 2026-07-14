@@ -41,7 +41,7 @@ jobs:
       - name: Install dependencies
         run: python -m pip install -r requirements.txt
 
-      - name: Validate 66-source runtime
+      - name: Validate dynamic 66-source pool
         env:
           TELEGRAM_WEB_DOMAIN: telegram.me
           EXPECTED_SOURCE_COUNT: "66"
@@ -56,12 +56,14 @@ jobs:
           import monitor
           import monitor_data
           from pathlib import Path
-          sources = monitor.read_list(Path("public_sources.txt"))
-          assert len(sources) == 66
-          assert len(monitor_data.operational_sources(sources, "fast")) == 66
+          primary = monitor_data.operational_sources(monitor.read_list(Path("public_sources.txt")), "fast")
+          nightly = monitor_data.operational_sources(monitor.read_list(Path("source_catalog.txt")), "nightly")
+          assert len({value.casefold() for value in primary + nightly}) >= 66
+          assert not {value.casefold() for value in primary} & {value.casefold() for value in nightly}
+          assert primary
           assert runtime.monitor.fetch_all_sources.__module__ == "telegram_transport"
           assert runtime.monitor.TELEGRAM_WEB_DOMAIN == "telegram.me"
-          print("Live 66-source runtime validation passed")
+          print("Live dynamic source runtime validation passed")
           PY
 
       - name: Run continuous 66-source monitor

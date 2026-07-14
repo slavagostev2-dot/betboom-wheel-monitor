@@ -122,7 +122,7 @@ def main() -> None:
     require_text("telegram_monitor.py", ("from monitor import main", "raise SystemExit(main())"))
     require_text("self_test.py", ("import monitor", "def main()"))
     require_text("public_sources.txt", ("narodCast", "kolesaBB", "betboomteamcs2"))
-    require_text("source_catalog.txt", ("Кандидаты", "Все 66 известных источников"))
+    require_text("source_catalog.txt", ("Ночной мониторинг", "7 дней"))
     require_text(".github/workflows/daily-report.yml", ("BB V.G. daily report", "daily_report.py"))
 
     active_domain_files = (
@@ -148,6 +148,8 @@ def main() -> None:
         "docs/app.js",
         (
             "lightTheme",
+            "participationHistory",
+            "adminRatingsActive",
             "HapticFeedback",
             "setHeaderColor",
             "setBackgroundColor",
@@ -155,7 +157,16 @@ def main() -> None:
             "openNotificationSettings",
         ),
     )
-    require_text("docs/bbvg-controls.js", ("data-action=\"notifications\"",))
+    require_text(
+        "docs/bbvg-controls.js",
+        (
+            "data-action=\"notifications\"",
+            "app.days===1?'':",
+            "Активные колёса",
+            "Всего участий",
+        ),
+    )
+    require_text("docs/styles.css", ("--chart-columns", ".theme-moon", ".profile-settings"))
     if "serviceWorker.register" in (ROOT / "docs/app.js").read_text(encoding="utf-8"):
         raise SystemExit("PRECHECK ERROR: stale Mini App service worker registration returned")
 
@@ -178,13 +189,14 @@ def main() -> None:
 
     configured_values = source_values("public_sources.txt")
     nightly_values = source_values("source_catalog.txt")
-    configured_keys = [item.casefold() for item in configured_values]
-    if len(configured_values) != EXPECTED_SOURCE_COUNT:
+    all_values = configured_values + nightly_values
+    configured_keys = [item.casefold() for item in all_values]
+    if len(set(configured_keys)) < EXPECTED_SOURCE_COUNT:
         raise SystemExit(
-            f"PRECHECK ERROR: expected {EXPECTED_SOURCE_COUNT} configured sources, found {len(configured_values)}"
+            f"PRECHECK ERROR: expected at least {EXPECTED_SOURCE_COUNT} approved sources across both tiers, found {len(set(configured_keys))}"
         )
-    if len(set(configured_keys)) != EXPECTED_SOURCE_COUNT:
-        raise SystemExit("PRECHECK ERROR: public_sources.txt contains duplicate sources")
+    if len(configured_keys) != len(set(configured_keys)):
+        raise SystemExit("PRECHECK ERROR: source tiers contain duplicate or overlapping sources")
 
     fast = {
         item.casefold()
@@ -194,41 +206,32 @@ def main() -> None:
         item.casefold()
         for item in data_store.operational_sources(nightly_values, "nightly")
     }
-    if len(fast) != EXPECTED_SOURCE_COUNT:
+    approved = fast | nightly
+    if len(approved) < EXPECTED_SOURCE_COUNT:
         raise SystemExit(
-            f"PRECHECK ERROR: all {EXPECTED_SOURCE_COUNT} sources must be in permanent monitoring; operational={len(fast)}"
+            f"PRECHECK ERROR: operational source union must contain at least {EXPECTED_SOURCE_COUNT}; found {len(approved)}"
         )
-    if nightly:
-        raise SystemExit(
-            "PRECHECK ERROR: known sources must not remain night-only: " + ", ".join(sorted(nightly))
-        )
+    if fast & nightly:
+        raise SystemExit("PRECHECK ERROR: primary and nightly source tiers overlap")
 
     forbidden = {"frixa_betboom", "gazazor"}
-    stale = sorted(fast & forbidden)
+    stale = sorted(approved & forbidden)
     if stale:
         raise SystemExit("PRECHECK ERROR: removed sources are still operational: " + ", ".join(stale))
-    if "narodcast" not in fast:
-        raise SystemExit("PRECHECK ERROR: narodCast must remain in the permanent list")
+    if "narodcast" not in approved:
+        raise SystemExit("PRECHECK ERROR: narodCast must remain in the approved source pool")
 
     metadata = data_store.flatten_partner_channels(catalog)
     narod = metadata.get("narodcast", {})
     if narod.get("relationship") != "betboom_partner":
         raise SystemExit("PRECHECK ERROR: narodCast must be classified as a partner source")
-    configured_metadata = [metadata.get(source.casefold(), {}) for source in configured_values]
-    wrong_modes = [
-        configured_values[index]
-        for index, info in enumerate(configured_metadata)
-        if info and info.get("scan_mode") not in {"fast", ""}
-    ]
-    if wrong_modes:
-        raise SystemExit(
-            "PRECHECK ERROR: sources are still filtered from permanent monitoring: "
-            + ", ".join(wrong_modes)
-        )
     if any(info.get("relationship") == "confirmed_ambassador" for info in metadata.values()):
         raise SystemExit("PRECHECK ERROR: confirmed_ambassador classification is obsolete")
 
-    print("BB V.G. preflight checks passed: 66 permanent telegram.me sources.")
+    print(
+        f"BB V.G. preflight checks passed: {len(approved)} approved telegram.me sources "
+        f"({len(fast)} primary, {len(nightly)} nightly)."
+    )
 
 
 if __name__ == "__main__":

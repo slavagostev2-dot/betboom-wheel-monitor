@@ -599,16 +599,14 @@ class AdminBot:
         )
         status = str(health.get("status") or discovery.get("status") or "нет данных")
         wheels = self.counter(stats, "wheel_posts") or self.counter(discovery, "wheel_links_found")
-        activations = self.counter(stats, "activation_sent")
-        reliability = round(activations * 100 / wheels) if wheels else 0
+        score = int(stats.get("quality_score", 0) or 0)
         text = (
             f"📡 <b>@{html.escape(source)}</b>\n\n"
             f"Режим: <b>{html.escape(mode)}</b>\n"
             f"Статус: {html.escape(status)}\n"
             f"Проверок: {self.counter(stats, 'checks')}\n"
             f"Постов с колёсами: {wheels}\n"
-            f"Подтверждённых активаций: {activations}\n"
-            f"Надёжность по активациям: {reliability}%\n"
+            f"Очки рейтинга: {score}\n"
             f"Последнее колесо: {self.fmt_dt(stats.get('last_wheel_post_at') or discovery.get('latest_wheel_at'))}\n"
             f"Последняя проверка: {self.fmt_dt(health.get('last_checked_at') or discovery.get('checked_at'))}\n"
         )
@@ -634,24 +632,21 @@ class AdminBot:
 
     def show_ranking(self) -> None:
         snap = self.snapshot(force=True)
-        rows: list[tuple[str, int, int, int]] = []
+        rows: list[tuple[str, int]] = []
         for source, entry in self.merged_source_stats(snap).items():
-            wheels = self.counter(entry, "wheel_posts")
-            activations = self.counter(entry, "activation_sent")
-            reliability = round(activations * 100 / wheels) if wheels else 0
-            if wheels:
-                rows.append((source, wheels, activations, reliability))
-        rows.sort(key=lambda item: (-item[1], -item[2], item[0].casefold()))
+            score = int(entry.get("quality_score", 0) or 0)
+            if score:
+                rows.append((source, score))
+        rows.sort(key=lambda item: (-item[1], item[0].casefold()))
         lines = ["🏆 <b>Рейтинг каналов</b>", ""]
         medals = ["🥇", "🥈", "🥉"]
-        for index, (source, wheels, activations, reliability) in enumerate(rows[:15], 1):
+        for index, (source, score) in enumerate(rows[:15], 1):
             mark = medals[index - 1] if index <= 3 else f"{index}."
             lines.append(
-                f"{mark} <b>@{html.escape(source)}</b> — постов {wheels}, "
-                f"активаций {activations}, {reliability}%"
+                f"{mark} <b>@{html.escape(source)}</b> — <b>{score} оч.</b>"
             )
         if not rows:
-            lines.append("Статистика колёс ещё накапливается.")
+            lines.append("Рейтинг появится после решения администратора по колесу.")
         self.send(
             "\n".join(lines),
             reply_markup={

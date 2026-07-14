@@ -171,8 +171,7 @@ class TelegramPanelRuntimeV14(TelegramPanelRuntimeV13):
             health.get("failure_reason") or health.get("last_error") or ""
         ).strip()
         wheels = self.counter(stats, "wheel_posts") or self.counter(discovery, "wheel_links_found")
-        activations = self.counter(stats, "activation_sent")
-        reliability = round(activations * 100 / wheels) if wheels else 0
+        score = int(stats.get("quality_score", 0) or 0)
         reason_line = (
             f"Причина: {html.escape(failure_reason[:180])}\n" if failure_reason else ""
         )
@@ -183,8 +182,7 @@ class TelegramPanelRuntimeV14(TelegramPanelRuntimeV13):
             f"{reason_line}"
             f"Проверок: {self.counter(stats, 'checks')}\n"
             f"Постов с колёсами: {wheels}\n"
-            f"Подтверждённых активаций: {activations}\n"
-            f"Надёжность: {reliability}%\n"
+            f"Очки рейтинга: {score}\n"
             f"Последнее колесо: {self.fmt_dt(stats.get('last_wheel_post_at') or discovery.get('latest_wheel_at'))}\n"
             f"Последняя проверка: {self.fmt_dt(health.get('last_checked_at') or discovery.get('checked_at'))}"
         )

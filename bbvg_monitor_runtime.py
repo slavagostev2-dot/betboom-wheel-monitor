@@ -175,6 +175,12 @@ def remember_without_pending(
         return
 
     canonical = base_runtime._CANONICAL_MESSAGES.get(key, message)
+    base_runtime._persist_publications(state, key, {
+        "source": canonical.source,
+        "message_id": canonical.message_id,
+        "message_date": canonical.date.astimezone(monitor.UTC).isoformat(),
+        "message_url": canonical.message_url,
+    })
     deadline, deadline_method = monitor.infer_deadline(canonical.text, canonical.date)
     stored_status = "scheduled" if deadline else "manual_time_required"
     method = deadline_method if deadline else reason

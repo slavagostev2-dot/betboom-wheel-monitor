@@ -61,7 +61,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          files=(state.json source_health.json)
+          files=(state.json source_health.json source_stats.json)
           if git diff --quiet -- "${files[@]}"; then
             echo "No state changes to commit."
             exit 0

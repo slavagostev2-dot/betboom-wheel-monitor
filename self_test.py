@@ -210,19 +210,19 @@ def main() -> None:
             monitor.read_list(ROOT / "source_catalog.txt"), "nightly"
         )
     }
-    assert len(quick) == 66, "Все 66 утверждённых источников должны проверяться постоянно"
-    assert not nightly, "Известные источники не должны переноситься в ночную проверку"
+    approved = quick | nightly
+    assert len(approved) >= 66, "В основном и ночном режимах должны оставаться как минимум 66 утверждённых источников"
     assert not quick.intersection(nightly), "Быстрый и ночной списки пересекаются"
-    assert "kolesabb" in quick
-    assert "homakolesa" in quick
-    assert "narodcast" in quick
-    assert "frixa_betboom" not in quick
-    assert "gazazor" not in quick
-    assert "dartwager" in quick
-    assert "amam0610" in quick
-    assert "aunkeretg" in quick
-    assert "dekocsoff" in quick
-    assert "ct0mislove" in quick
+    assert "kolesabb" in approved
+    assert "homakolesa" in approved
+    assert "narodcast" in approved
+    assert "frixa_betboom" not in approved
+    assert "gazazor" not in approved
+    assert "dartwager" in approved
+    assert "amam0610" in approved
+    assert "aunkeretg" in approved
+    assert "dekocsoff" in approved
+    assert "ct0mislove" in approved
     assert "blindzonexgod" in quick
     assert "daynezz" in quick
     assert monitor.NEW_SOURCE_CATCHUP_MINUTES >= 0
@@ -265,7 +265,7 @@ def main() -> None:
 
     report_text = monitor.source_inactivity_report_text(rows)
     assert "quiet_channel" in report_text
-    assert "Ничего не перенесено автоматически" in report_text
+    assert "ночной режим" in report_text
 
     timezone_stats = {"version": 1, "sources": {}, "daily": {}}
     data_store.increment_stat(

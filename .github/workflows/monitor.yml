@@ -99,9 +99,11 @@ jobs:
           assert runtime.monitor.TELEGRAM_WEB_DOMAIN == "telegram.me"
           state = {"inactive_wheels": {}, "pending_posts": {}, "active_wheels": {}}
           assert runtime.runtime._inactive_entry(state, "test") is None
-          sources = monitor.read_list(Path("public_sources.txt"))
-          assert len(sources) == 66, len(sources)
-          assert len(monitor_data.operational_sources(sources, "fast")) == 66
+          primary = monitor_data.operational_sources(monitor.read_list(Path("public_sources.txt")), "fast")
+          nightly = monitor_data.operational_sources(monitor.read_list(Path("source_catalog.txt")), "nightly")
+          assert len({value.casefold() for value in primary + nightly}) >= 66
+          assert not {value.casefold() for value in primary} & {value.casefold() for value in nightly}
+          assert primary
           print("BB V.G. monitor runtime validation passed")
           PY
           python -m json.tool identifier_sources.json >/dev/null

@@ -64,6 +64,48 @@ class TelegramPanelRuntimeV20(TelegramPanelRuntimeV19):
         record["hidden_wheels"] = hidden
         self.save_access("Hide inactive wheel for Telegram user [skip ci]")
 
+    def _personal_participating_wheels(self) -> set[str]:
+        access = self.load_access()
+        record = access.get("users", {}).get(str(self.current_user_id or ""))
+        if not isinstance(record, dict):
+            return set()
+        raw = record.get("participating_wheels")
+        if isinstance(raw, list):
+            return {str(value).casefold() for value in raw if str(value)}
+        if isinstance(raw, dict):
+            return {str(value).casefold() for value in raw if str(value)}
+        return set()
+
+    def mark_personal_participation(self, key: str) -> None:
+        normalized = str(key or "").casefold()
+        if not normalized or not self.current_user_id:
+            raise ValueError("Колесо или пользователь не определены")
+        access = self.load_access(force=True)
+        users = access.setdefault("users", {})
+        record = users.get(str(self.current_user_id))
+        if not isinstance(record, dict):
+            record = {
+                "id": str(self.current_user_id),
+                "chat_id": str(self.current_chat_id or self.current_user_id),
+            }
+            users[str(self.current_user_id)] = record
+        joined = self._personal_participating_wheels()
+        joined.add(normalized)
+        record["participating_wheels"] = {
+            value: {"joined_at": datetime.now(UTC).isoformat()}
+            for value in sorted(joined)
+        }
+        self.save_access(f"Save personal wheel participation for {self.current_user_id} [skip ci]")
+
+    def _joined_wheel_keys(self, snap: Any) -> set[str]:
+        if not self.is_admin():
+            return self._personal_participating_wheels()
+        return {
+            str(key).casefold()
+            for key, entry in snap.state.get("participating_wheels", {}).items()
+            if isinstance(entry, dict)
+        }
+
     def _collect_current_wheels(self) -> list[dict[str, Any]]:
         snap = self.snapshot()
         now = datetime.now(UTC)
@@ -106,11 +148,7 @@ class TelegramPanelRuntimeV20(TelegramPanelRuntimeV19):
     def show_active(self) -> None:
         items = self._collect_current_wheels()
         snap = self.snapshot()
-        participating = {
-            str(key).casefold()
-            for key, entry in snap.state.get("participating_wheels", {}).items()
-            if isinstance(entry, dict)
-        }
+        participating = self._joined_wheel_keys(snap)
         if not items:
             self.send(
                 f"🔥 <b>{BRAND_NAME}: активных колёс сейчас нет.</b>",
@@ -365,13 +403,25 @@ class TelegramPanelRuntimeV20(TelegramPanelRuntimeV19):
                 return
             if data.startswith("bb:p:"):
                 token = data.split(":", 2)[2]
-                self.dispatch_admin_action("participate_token", token)
-                self.answer(query_id, "Участие отмечается")
+                if self.is_admin():
+                    self.dispatch_admin_action("participate_token", token)
+                    self.answer(query_id, "Колесо подтверждается для всех")
+                else:
+                    context = self.snapshot().state.get("button_contexts", {}).get(token)
+                    if not isinstance(context, dict):
+                        raise ValueError("Контекст кнопки устарел")
+                    key = str(context.get("wheel_key") or context.get("identifier") or "").casefold()
+                    self.mark_personal_participation(key)
+                    self.answer(query_id, "Ваше участие отмечено")
                 return
             if data.startswith("wheel:part:"):
                 key = data.split(":", 2)[2]
-                self.dispatch_admin_action("participate_wheel", key)
-                self.answer(query_id, "Участие отмечается")
+                if self.is_admin():
+                    self.dispatch_admin_action("participate_wheel", key)
+                    self.answer(query_id, "Колесо подтверждается для всех")
+                else:
+                    self.mark_personal_participation(key)
+                    self.answer(query_id, "Ваше участие отмечено")
                 return
             if data.startswith("bb:n:"):
                 self.answer(query_id, "Участие уже отмечено")
@@ -381,10 +431,11 @@ class TelegramPanelRuntimeV20(TelegramPanelRuntimeV19):
             self.answer(query_id, "Доступно только администратору")
         except Exception as exc:
             print(f"ERROR BB V.G. callback {data}: {type(exc).__name__}: {exc}")
-            self.answer(query_id, "Ошибка выполнения")
-            self.send(
-                f"⚠️ Не удалось выполнить действие: <code>{html.escape(type(exc).__name__)}</code>."
-            )
+            self.answer(query_id, "Не удалось выполнить действие")
+            if self.is_admin():
+                self.send(
+                    f"⚠️ Не удалось выполнить действие: <code>{html.escape(type(exc).__name__)}</code>."
+                )
 
     def render_page(self, page: str) -> None:
         if page == "pending":

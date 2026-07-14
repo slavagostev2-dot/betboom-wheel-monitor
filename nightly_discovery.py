@@ -150,8 +150,9 @@ def unique(values: list[str]) -> list[str]:
 
 
 def write_sources(path: Path, values: list[str], header: str) -> None:
+    body = "\n".join(unique(values))
     path.write_text(
-        header.rstrip() + "\n\n" + "\n".join(unique(values)) + "\n",
+        header.rstrip() + ("\n\n" + body if body else "") + "\n",
         encoding="utf-8",
     )
 

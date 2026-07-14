@@ -669,16 +669,14 @@ class TelegramPanelV2(RuntimeAdminBot):
         )
         raw_status = str(health.get("status") or discovery.get("status") or "unknown")
         wheels = self.counter(stats, "wheel_posts") or self.counter(discovery, "wheel_links_found")
-        activations = self.counter(stats, "activation_sent")
-        reliability = round(activations * 100 / wheels) if wheels else 0
+        score = int(stats.get("quality_score", 0) or 0)
         text = (
             f"📡 <b>@{html.escape(source)}</b>\n\n"
             f"Проверяется: <b>{mode}</b>\n"
             f"Состояние: {html.escape(self.source_status_name(raw_status))}\n"
             f"Проверок: {self.counter(stats, 'checks')}\n"
             f"Постов с колёсами: {wheels}\n"
-            f"Подтверждённых активаций: {activations}\n"
-            f"Надёжность: {reliability}%\n"
+            f"Очки рейтинга: {score}\n"
             f"Последнее колесо: {self.fmt_dt(stats.get('last_wheel_post_at') or discovery.get('latest_wheel_at'))}\n"
             f"Последняя проверка: {self.fmt_dt(health.get('last_checked_at') or discovery.get('checked_at'))}"
         )
@@ -698,23 +696,21 @@ class TelegramPanelV2(RuntimeAdminBot):
 
     def show_ranking(self) -> None:
         snap = self.snapshot()
-        rows: list[tuple[str, int, int, int]] = []
+        rows: list[tuple[str, int]] = []
         for source, entry in self.merged_source_stats(snap).items():
-            wheels = self.counter(entry, "wheel_posts")
-            activations = self.counter(entry, "activation_sent")
-            if wheels:
-                rows.append((source, wheels, activations, round(activations * 100 / wheels)))
-        rows.sort(key=lambda item: (-item[1], -item[2], item[0].casefold()))
+            score = int(entry.get("quality_score", 0) or 0)
+            if score:
+                rows.append((source, score))
+        rows.sort(key=lambda item: (-item[1], item[0].casefold()))
         lines = ["🏆 <b>Рейтинг каналов</b>", ""]
         medals = ["🥇", "🥈", "🥉"]
-        for index, (source, wheels, activations, reliability) in enumerate(rows[:15], 1):
+        for index, (source, score) in enumerate(rows[:15], 1):
             mark = medals[index - 1] if index <= 3 else f"{index}."
             lines.append(
-                f"{mark} <b>@{html.escape(source)}</b> — колёс {wheels}, "
-                f"подтверждено {activations}, надёжность {reliability}%"
+                f"{mark} <b>@{html.escape(source)}</b> — <b>{score} оч.</b>"
             )
         if not rows:
-            lines.append("Статистика ещё накапливается.")
+            lines.append("Рейтинг появится после решения администратора по колесу.")
         self.send("\n".join(lines), reply_markup=self.with_nav([
             [{"text": "🔄 Обновить данные", "callback_data": "refresh:ranking"}]
         ]))

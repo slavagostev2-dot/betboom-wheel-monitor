@@ -34,7 +34,7 @@ jobs:
       - name: Install dependencies
         run: python -m pip install -r requirements.txt
 
-      - name: Validate permanent source policy
+      - name: Validate approved source pool
         env:
           TELEGRAM_WEB_DOMAIN: telegram.me
           EXPECTED_SOURCE_COUNT: "66"
@@ -89,10 +89,15 @@ jobs:
           import os
           from datetime import datetime, timezone
           status = json.load(open("monitor_status.json", encoding="utf-8"))
+          primary = [
+              line.split("#", 1)[0].strip().lstrip("@")
+              for line in open("public_sources.txt", encoding="utf-8")
+              if line.split("#", 1)[0].strip()
+          ]
           value = {
               "checked_at": datetime.now(timezone.utc).isoformat(),
               "run_id": os.environ.get("GITHUB_RUN_ID", ""),
-              "status": "success" if status.get("status") == "running" and status.get("checked_sources") == 66 else "failure",
+              "status": "success" if status.get("status") == "running" and status.get("checked_sources") == len(primary) else "failure",
               "monitor_status": status,
           }
           with open("activation_runtime_state.json", "w", encoding="utf-8") as stream:

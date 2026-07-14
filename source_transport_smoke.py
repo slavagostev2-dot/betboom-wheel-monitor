@@ -17,12 +17,15 @@ UTC = timezone.utc
 
 def main() -> int:
     monitor = runtime.monitor
-    configured = monitor.read_list(ROOT / "public_sources.txt")
-    sources = data_store.operational_sources(configured, "fast")
+    primary = monitor.read_list(ROOT / "public_sources.txt")
+    nightly = monitor.read_list(ROOT / "source_catalog.txt")
+    sources = data_store.operational_sources(primary, "fast")
+    sources += data_store.operational_sources(nightly, "nightly")
+    configured = primary + nightly
     started = time.monotonic()
     checked_at = datetime.now(UTC).isoformat()
 
-    if len(configured) != EXPECTED or len(sources) != EXPECTED:
+    if len(configured) < EXPECTED or len(sources) < EXPECTED or len({value.casefold() for value in sources}) != len(sources):
         payload = {
             "status": "failure",
             "checked_at": checked_at,
@@ -49,12 +52,14 @@ def main() -> int:
     }
     payload = {
         "version": 1,
-        "status": "success" if len(accounted) == EXPECTED and not missing else "failure",
+        "status": "success" if len(accounted) == len(sources) and not missing else "failure",
         "checked_at": checked_at,
         "domain": telegram_transport.PRIMARY_DOMAIN,
         "expected_sources": EXPECTED,
         "configured_sources": len(configured),
         "operational_sources": len(sources),
+        "primary_sources": len(primary),
+        "nightly_sources": len(nightly),
         "accounted_sources": len(accounted),
         "reachable_sources": len(messages_by_source),
         "empty_sources": len(empty),

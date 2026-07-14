@@ -13,6 +13,7 @@ import monitor
 ROOT = Path(__file__).resolve().parent
 STATE_PATH = ROOT / "state.json"
 HEALTH_PATH = ROOT / "source_health.json"
+STATS_PATH = ROOT / "source_stats.json"
 
 
 def load_json(path: Path, default: dict[str, Any]) -> dict[str, Any]:
@@ -87,6 +88,28 @@ def wheel_context(state: dict[str, Any], key: str) -> dict[str, Any] | None:
                 "message_text": str(pending.get("message_text") or ""),
             }
     return None
+
+
+def wheel_sources(state: dict[str, Any], key: str, context: dict[str, Any] | None = None) -> list[str]:
+    normalized = normalized_wheel_key(key)
+    result: list[str] = []
+    rows = state.get("wheel_publications", {}).get(normalized, [])
+    if isinstance(rows, list):
+        result.extend(
+            str(row.get("source") or "")
+            for row in rows
+            if isinstance(row, dict)
+        )
+    if isinstance(context, dict):
+        result.append(str(context.get("source") or ""))
+    seen: set[str] = set()
+    unique: list[str] = []
+    for value in result:
+        clean = value.strip().lstrip("@")
+        if clean and clean.casefold() not in seen:
+            seen.add(clean.casefold())
+            unique.append(clean)
+    return unique
 
 
 def split_action_value(value: str) -> tuple[str, str]:
@@ -187,6 +210,7 @@ def mark_globally_inactive(state: dict[str, Any], key: str, actor: str) -> int:
 def apply_action(
     state: dict[str, Any],
     health: dict[str, Any],
+    stats: dict[str, Any],
     action: str,
     value: str,
 ) -> dict[str, Any]:
@@ -195,6 +219,7 @@ def apply_action(
         "value": value,
         "state_changed": False,
         "health_changed": False,
+        "stats_changed": False,
         "detail": "",
     }
     if action == "participate_token":
@@ -202,6 +227,14 @@ def apply_action(
         if not isinstance(context, dict):
             raise ValueError("Контекст кнопки не найден или устарел")
         monitor.mark_participating(state, context)
+        key = record_wheel_key(context)
+        result["stats_changed"] = monitor.data_store.record_admin_wheel_decision(
+            stats,
+            wheel_key=key,
+            sources=wheel_sources(state, key, context),
+            decision="confirmed",
+            actor="admin",
+        )
         result["state_changed"] = True
         result["detail"] = "Участие отмечено"
     elif action == "participate_wheel":
@@ -209,6 +242,13 @@ def apply_action(
         if context is None:
             raise ValueError("Колесо не найдено")
         monitor.mark_participating(state, context)
+        result["stats_changed"] = monitor.data_store.record_admin_wheel_decision(
+            stats,
+            wheel_key=normalized_wheel_key(value),
+            sources=wheel_sources(state, value, context),
+            decision="confirmed",
+            actor="admin",
+        )
         result["state_changed"] = True
         result["detail"] = "Участие отмечено"
     elif action == "set_deadline":
@@ -218,6 +258,14 @@ def apply_action(
         result["detail"] = "Время прокрутки установлено вручную"
     elif action == "mark_inactive_global":
         key, actor = split_action_value(value)
+        context = wheel_context(state, key)
+        result["stats_changed"] = monitor.data_store.record_admin_wheel_decision(
+            stats,
+            wheel_key=normalized_wheel_key(key),
+            sources=wheel_sources(state, key, context),
+            decision="inactive",
+            actor=actor or "admin",
+        )
         removed = mark_globally_inactive(state, key, actor)
         result["state_changed"] = True
         result["detail"] = f"Колесо удалено для всех; очищено записей: {removed}"
@@ -275,11 +323,14 @@ def apply_action(
 def run_action(action: str, value: str) -> dict[str, Any]:
     state = load_json(STATE_PATH, {})
     health = load_json(HEALTH_PATH, {"version": 1, "sources": {}})
-    result = apply_action(state, health, action, value)
+    stats = load_json(STATS_PATH, {"version": 1, "sources": {}, "daily": {}})
+    result = apply_action(state, health, stats, action, value)
     if result["state_changed"]:
         save_json(STATE_PATH, state)
     if result["health_changed"]:
         save_json(HEALTH_PATH, health)
+    if result.get("stats_changed"):
+        save_json(STATS_PATH, stats)
     return result
 
 
@@ -289,6 +340,7 @@ def self_test() -> None:
             "wheel1": {
                 "identifier": "wheel1",
                 "url": "https://betboom.ru/freestream/wheel1",
+                "source": "test_source",
             }
         },
         "participating_wheels": {},
@@ -297,6 +349,7 @@ def self_test() -> None:
                 "wheel_key": "wheel1",
                 "identifier": "wheel1",
                 "url": "https://betboom.ru/freestream/wheel1",
+                "source": "test_source",
             }
         },
         "pending_posts": {},
@@ -310,16 +363,19 @@ def self_test() -> None:
             }
         }
     }
-    result = apply_action(state, health, "participate_token", "token1")
+    stats = {"version": 1, "sources": {}, "daily": {}}
+    result = apply_action(state, health, stats, "participate_token", "token1")
     assert result["state_changed"] and "wheel1" in state["participating_wheels"]
+    assert stats["sources"] and next(iter(stats["sources"].values()))["quality_score"] == 40
     future = (monitor.now_utc() + timedelta(hours=2)).isoformat()
-    result = apply_action(state, health, "set_deadline", f"wheel1|{future}")
+    result = apply_action(state, health, stats, "set_deadline", f"wheel1|{future}")
     assert result["state_changed"] and state["active_wheels"]["wheel1"]["deadline_source"] == "manual"
-    result = apply_action(state, health, "clear_quarantine", "bad")
+    result = apply_action(state, health, stats, "clear_quarantine", "bad")
     assert result["health_changed"] and health["sources"]["bad"]["status"] == "ok"
-    result = apply_action(state, health, "mark_inactive_global", "wheel1|123")
+    result = apply_action(state, health, stats, "mark_inactive_global", "wheel1|123")
     assert result["state_changed"] and "wheel1" in state["inactive_wheels"]
     assert "wheel1" not in state["active_wheels"]
+    assert next(iter(stats["sources"].values()))["quality_score"] == -45
     print("BB V.G. admin action self-test passed")
 
 

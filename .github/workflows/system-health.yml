@@ -110,4 +110,4 @@ jobs:
           done
           exit 1
 
-# Triggered after all 66 sources were migrated to permanent telegram.me monitoring.
+# Centralized checks for the 66-source pool and its dynamic monitoring tiers.

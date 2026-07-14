@@ -5,13 +5,12 @@
     "minimum_coverage_days": 6,
     "minimum_successful_checks": 100
   },
-  "inactive_candidates_kept_permanent": [],
-  "last_run_at": "2026-07-14T03:45:24.101285+00:00",
+  "last_run_at": "2026-07-14T04:37:16.335557+00:00",
   "moved_to_nightly": [],
   "nightly_after": 0,
-  "policy": "all_configured_sources_remain_permanent",
-  "primary_after": 66,
-  "primary_before": 66,
+  "policy": "seven_day_dynamic_primary_and_nightly",
+  "primary_after": 67,
+  "primary_before": 67,
   "reasons": {
     "AdamStaya": "ещё не прошло 7 полных дней наблюдения",
     "Blindzonexbet": "ещё не прошло 7 полных дней наблюдения",
@@ -61,6 +60,7 @@
     "kzmantis": "ещё не прошло 7 полных дней наблюдения",
     "ladlda": "ещё не прошло 7 полных дней наблюдения",
     "lukawahouse": "ещё не прошло 7 полных дней наблюдения",
+    "m3traNeoStream": "ещё не прошло 7 полных дней наблюдения",
     "mAger_de_nuke": "ещё не прошло 7 полных дней наблюдения",
     "magnojezking": "ещё не прошло 7 полных дней наблюдения",
     "mechanogun": "ещё не прошло 7 полных дней наблюдения",
@@ -80,5 +80,6 @@
     "whylollycrry": "ещё не прошло 7 полных дней наблюдения",
     "zortelad": "ещё не прошло 7 полных дней наблюдения"
   },
+  "total_after": 67,
   "version": 1
 }

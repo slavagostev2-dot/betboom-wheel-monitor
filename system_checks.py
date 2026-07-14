@@ -21,6 +21,10 @@ ROOT = Path(__file__).resolve().parent
 STATUS_PATH = ROOT / "monitor_status.json"
 HEALTH_PATH = ROOT / "source_health.json"
 CHECK_STATE_PATH = ROOT / "system_check_state.json"
+SOURCE_TIER_STATE_PATH = ROOT / "source_tier_state.json"
+SOURCE_TRANSPORT_STATE_PATH = ROOT / "source_transport_state.json"
+SOURCE_STATS_PATH = ROOT / "source_stats.json"
+RUNTIME_STATE_PATH = ROOT / "state.json"
 PUBLIC_SOURCES_PATH = ROOT / "public_sources.txt"
 NIGHTLY_SOURCES_PATH = ROOT / "source_catalog.txt"
 DISCOVERY_PATH = ROOT / "discovery_state.json"
@@ -28,6 +32,8 @@ INTELLIGENCE_PATH = ROOT / "intelligence_state.json"
 MINIAPP_DEPLOYMENT_PATH = ROOT / "miniapp_deployment.json"
 MINIAPP_INDEX_PATH = ROOT / "docs" / "index.html"
 MINIAPP_APP_PATH = ROOT / "docs" / "app.js"
+MINIAPP_CONTROLS_PATH = ROOT / "docs" / "bbvg-controls.js"
+MINIAPP_STYLES_PATH = ROOT / "docs" / "styles.css"
 ACTIVE_DOMAIN_FILES = (
     ROOT / "monitor.py",
     ROOT / "nightly_discovery.py",
@@ -117,34 +123,31 @@ def check_inventory(details: dict[str, Any], findings: list[dict[str, Any]]) -> 
     configured = unique_sources(PUBLIC_SOURCES_PATH)
     nightly = unique_sources(NIGHTLY_SOURCES_PATH)
     operational = data_store.operational_sources(configured, "fast")
-    duplicates = len(configured) - len({source.casefold() for source in configured})
+    operational_nightly = data_store.operational_sources(nightly, "nightly")
+    all_keys = [source.casefold() for source in operational + operational_nightly]
+    duplicates = len(all_keys) - len(set(all_keys))
     details["inventory"] = {
         "expected": EXPECTED_SOURCE_COUNT,
         "configured": len(configured),
         "operational": len(operational),
         "nightly": len(nightly),
+        "total": len(set(all_keys)),
         "duplicates": duplicates,
         "domain": telegram_transport.PRIMARY_DOMAIN,
     }
-    if len(configured) != EXPECTED_SOURCE_COUNT:
+    if len(set(all_keys)) < EXPECTED_SOURCE_COUNT:
         findings.append(finding(
             "source_inventory",
             "Неверное количество источников",
-            f"Ожидалось {EXPECTED_SOURCE_COUNT}, в public_sources.txt найдено {len(configured)}.",
+            f"Ожидалось не меньше {EXPECTED_SOURCE_COUNT} в общем пуле, найдено {len(set(all_keys))}.",
             severity="critical",
         ))
-    if len(operational) != EXPECTED_SOURCE_COUNT:
+    if not operational:
         findings.append(finding(
             "source_policy",
-            "Не все источники включены в постоянную проверку",
-            f"Постоянно проверяется {len(operational)} из {EXPECTED_SOURCE_COUNT}; ночная/внутренняя фильтрация должна быть отключена.",
+            "Основной мониторинг остался без источников",
+            "Все утверждённые источники оказались в ночном режиме.",
             severity="critical",
-        ))
-    if nightly:
-        findings.append(finding(
-            "nightly_sources_remaining",
-            "Остались источники в отдельной ночной базе",
-            f"В source_catalog.txt осталось {len(nightly)} источников: {', '.join('@' + item for item in nightly[:12])}.",
         ))
     if duplicates:
         findings.append(finding(
@@ -155,7 +158,8 @@ def check_inventory(details: dict[str, Any], findings: list[dict[str, Any]]) -> 
 
 
 def check_telegram_web(details: dict[str, Any], findings: list[dict[str, Any]]) -> None:
-    probe_source = unique_sources(PUBLIC_SOURCES_PATH)[0] if unique_sources(PUBLIC_SOURCES_PATH) else "telegram"
+    candidates = unique_sources(PUBLIC_SOURCES_PATH) + unique_sources(NIGHTLY_SOURCES_PATH)
+    probe_source = candidates[0] if candidates else "telegram"
     url = telegram_transport.public_source_url(probe_source)
     result: dict[str, Any] = {"source": probe_source, "url": url}
     try:
@@ -269,11 +273,12 @@ def check_monitor_runtime(details: dict[str, Any], findings: list[dict[str, Any]
     checked = int(status.get("checked_sources", 0) or 0) if isinstance(status, dict) else 0
     reachable = int(status.get("reachable_sources", 0) or 0) if isinstance(status, dict) else 0
     source_errors = int(status.get("source_errors", 0) or 0) if isinstance(status, dict) else 0
-    if checked and checked != EXPECTED_SOURCE_COUNT:
+    expected_primary = len(data_store.operational_sources(unique_sources(PUBLIC_SOURCES_PATH), "fast"))
+    if checked and checked < expected_primary:
         findings.append(finding(
             "monitor_source_count",
             "Основной монитор проверяет не все источники",
-            f"В последней итерации проверено {checked} из {EXPECTED_SOURCE_COUNT}.",
+            f"В последней итерации проверено {checked} из {expected_primary} источников основного режима.",
             severity="critical",
         ))
     if checked and reachable == 0:
@@ -299,7 +304,7 @@ def check_monitor_runtime(details: dict[str, Any], findings: list[dict[str, Any]
 def check_source_health(details: dict[str, Any], findings: list[dict[str, Any]]) -> None:
     health = load_json(HEALTH_PATH, {})
     sources = health.get("sources") if isinstance(health, dict) and isinstance(health.get("sources"), dict) else {}
-    configured = unique_sources(PUBLIC_SOURCES_PATH)
+    configured = unique_sources(PUBLIC_SOURCES_PATH) + unique_sources(NIGHTLY_SOURCES_PATH)
     configured_keys = {source.casefold(): source for source in configured}
     statuses: dict[str, int] = {}
     problem_sources: list[str] = []
@@ -378,7 +383,7 @@ def check_source_health(details: dict[str, Any], findings: list[dict[str, Any]])
         findings.append(finding(
             "sources_quarantined",
             "Источники попали в карантин",
-            f"В карантине: {quarantined}. Источники остаются в постоянном списке и будут перепроверяться.",
+            f"В карантине: {quarantined}. Источники остаются в общем пуле и будут перепроверяться.",
         ))
 
 
@@ -411,11 +416,12 @@ def check_discovery_runtime(details: dict[str, Any], findings: list[dict[str, An
             f"Ожидался {telegram_transport.PRIMARY_DOMAIN}, записано {summary['intelligence_domain'] or 'нет данных'}.",
             severity="critical",
         ))
-    if summary["active_size"] not in {0, EXPECTED_SOURCE_COUNT}:
+    discovered_pool = summary["active_size"] + summary["catalog_size"]
+    if discovered_pool and discovered_pool < EXPECTED_SOURCE_COUNT:
         findings.append(finding(
             "discovery_inventory",
-            "Разведка видит не все постоянные источники",
-            f"В состоянии поиска записано {summary['active_size']} из {EXPECTED_SOURCE_COUNT}.",
+            "Ночная проверка видит не весь утверждённый пул",
+            f"В состоянии поиска записано {discovered_pool}, ожидается не меньше {EXPECTED_SOURCE_COUNT}.",
         ))
     intelligence_summary = summary["intelligence_summary"]
     scanned = int(intelligence_summary.get("sources_scanned", 0) or 0)
@@ -471,6 +477,8 @@ def check_miniapp_release(details: dict[str, Any], findings: list[dict[str, Any]
     try:
         index = MINIAPP_INDEX_PATH.read_text(encoding="utf-8")
         app_source = MINIAPP_APP_PATH.read_text(encoding="utf-8")
+        controls_source = MINIAPP_CONTROLS_PATH.read_text(encoding="utf-8")
+        styles_source = MINIAPP_STYLES_PATH.read_text(encoding="utf-8")
     except OSError as exc:
         details["miniapp"] = {"ok": False, "error": str(exc)}
         findings.append(finding(
@@ -487,6 +495,10 @@ def check_miniapp_release(details: dict[str, Any], findings: list[dict[str, Any]
         "light_theme": all(marker in app_source for marker in ("lightTheme", "applyTheme", "setHeaderColor", "setBackgroundColor", "setBottomBarColor")),
         "haptics": "HapticFeedback" in app_source and "app.settings.haptics" in app_source,
         "unified_notifications": "data-action=\"notifications\"" in app_source or "data-action=\"notifications\"" in (ROOT / "docs" / "bbvg-controls.js").read_text(encoding="utf-8"),
+        "unified_sources": "[...app.data.primary,...app.data.nightly]" in controls_source and "data-source-mode=\"nightly\"" not in controls_source,
+        "admin_ratings": "adminRatingsActive" in app_source and "quality_score" in app_source,
+        "responsive_charts": "--chart-columns" in styles_source and ".chart-30" in styles_source,
+        "participation_history": "participationHistory" in app_source and "Всего участий" in controls_source,
     }
     url = str(deployment.get("url") or "") if isinstance(deployment, dict) else ""
     details["miniapp"] = {
@@ -562,6 +574,102 @@ def check_notification_routing(details: dict[str, Any], findings: list[dict[str,
                 ))
 
 
+def check_automation_state(details: dict[str, Any], findings: list[dict[str, Any]]) -> None:
+    tier = load_json(SOURCE_TIER_STATE_PATH, {})
+    transport = load_json(SOURCE_TRANSPORT_STATE_PATH, {})
+    tier_at = parse_datetime(tier.get("last_run_at") if isinstance(tier, dict) else None)
+    transport_at = parse_datetime(transport.get("checked_at") if isinstance(transport, dict) else None)
+    details["automation_state"] = {
+        "source_tier_policy": tier.get("policy") if isinstance(tier, dict) else None,
+        "source_tier_last_run_at": tier.get("last_run_at") if isinstance(tier, dict) else None,
+        "transport_status": transport.get("status") if isinstance(transport, dict) else None,
+        "transport_checked_at": transport.get("checked_at") if isinstance(transport, dict) else None,
+        "transport_domain": transport.get("domain") if isinstance(transport, dict) else None,
+        "transport_accounted_sources": transport.get("accounted_sources") if isinstance(transport, dict) else None,
+    }
+    if tier.get("policy") != "seven_day_dynamic_primary_and_nightly":
+        findings.append(finding(
+            "source_tier_policy_stale",
+            "Не включён автоматический ночной режим источников",
+            "Состояние обслуживания не подтверждает перенос после 7 полных дней без колёс.",
+            severity="critical",
+        ))
+    if tier_at is None or now_utc() - tier_at > timedelta(hours=36):
+        findings.append(finding(
+            "source_tier_maintenance_stale",
+            "Давно не запускалось обслуживание режимов источников",
+            "Нет свежего запуска за последние 36 часов.",
+        ))
+    if (
+        transport.get("status") != "success"
+        or transport.get("domain") != telegram_transport.PRIMARY_DOMAIN
+        or int(transport.get("accounted_sources", 0) or 0) < EXPECTED_SOURCE_COUNT
+    ):
+        findings.append(finding(
+            "source_transport_smoke",
+            "Полная транспортная проверка 66 источников не подтверждена",
+            f"status={transport.get('status')}; domain={transport.get('domain')}; accounted={transport.get('accounted_sources')}.",
+            severity="critical",
+        ))
+    if transport_at is None or now_utc() - transport_at > timedelta(hours=36):
+        findings.append(finding(
+            "source_transport_stale",
+            "Давно не выполнялась полная проверка 66 источников",
+            "Нет свежего транспортного прогона за последние 36 часов.",
+        ))
+
+
+def check_rating_consistency(details: dict[str, Any], findings: list[dict[str, Any]]) -> None:
+    stats = load_json(SOURCE_STATS_PATH, {})
+    state = load_json(RUNTIME_STATE_PATH, {})
+    decisions = stats.get("admin_wheel_decisions") if isinstance(stats, dict) else {}
+    decisions = decisions if isinstance(decisions, dict) else {}
+    expected: dict[str, int] = {}
+    inactive_decisions: list[str] = []
+    for wheel, entry in decisions.items():
+        if not isinstance(entry, dict):
+            continue
+        verdict = str(entry.get("decision") or "")
+        points = 40 if verdict == "confirmed" else -45 if verdict == "inactive" else 0
+        if verdict == "inactive":
+            inactive_decisions.append(str(wheel).casefold())
+        for source in entry.get("sources", []):
+            key = str(source).casefold()
+            if key:
+                expected[key] = expected.get(key, 0) + points
+    actual = {
+        str(source).casefold(): int(entry.get("quality_score", 0) or 0)
+        for source, entry in stats.get("sources", {}).items()
+        if isinstance(entry, dict) and (entry.get("quality_score") is not None)
+    }
+    mismatches = sorted(
+        key for key in set(expected) | set(actual) if expected.get(key, 0) != actual.get(key, 0)
+    )
+    active_keys = {str(key).casefold() for key in state.get("active_wheels", {})}
+    participating_keys = {str(key).casefold() for key in state.get("participating_wheels", {})}
+    inactive_leaks = sorted(set(inactive_decisions) & (active_keys | participating_keys))
+    details["rating_consistency"] = {
+        "administrator_decisions": len(decisions),
+        "rated_sources": len(expected),
+        "score_mismatches": mismatches[:30],
+        "inactive_wheel_leaks": inactive_leaks[:30],
+    }
+    if mismatches:
+        findings.append(finding(
+            "rating_score_mismatch",
+            "Рейтинг источников не совпадает с решениями администратора",
+            f"Несовпадения: {', '.join('@' + item for item in mismatches[:15])}.",
+            severity="critical",
+        ))
+    if inactive_leaks:
+        findings.append(finding(
+            "inactive_wheel_leak",
+            "Неактивное колесо осталось в пользовательских списках",
+            f"Колёса: {', '.join(inactive_leaks[:15])}.",
+            severity="critical",
+        ))
+
+
 def deliver_pending_notifications(state: dict[str, Any], details: dict[str, Any]) -> None:
     opened = incident_manager.pending_open(state)
     resolved = incident_manager.pending_resolved(state)
@@ -605,6 +713,8 @@ def main() -> int:
     check_domain_compliance(details, findings)
     check_miniapp_release(details, findings)
     check_notification_routing(details, findings)
+    check_automation_state(details, findings)
+    check_rating_consistency(details, findings)
     state = incident_manager.reconcile(findings, scope=SCOPE)
     details["active_incidents"] = int(state.get("active_count", 0) or 0)
     details["incident_sequence"] = int(state.get("sequence", 0) or 0)
@@ -616,7 +726,7 @@ def main() -> int:
         "single_source": "system_check_state.json",
         "status": details["status"],
         "domain": telegram_transport.PRIMARY_DOMAIN,
-        "configured_sources": details.get("inventory", {}).get("configured", 0),
+        "configured_sources": details.get("inventory", {}).get("total", 0),
         "checked_sources": details.get("monitor", {}).get("checked_sources", 0),
         "reachable_sources": details.get("monitor", {}).get("reachable_sources", 0),
         "active_incidents": details["active_incidents"],
@@ -629,6 +739,8 @@ def main() -> int:
         "discovery": "ok" if not any(str(item["kind"]).startswith("discovery_") for item in findings) else "failed",
         "miniapp": "ok" if not any(str(item["kind"]).startswith("miniapp_") for item in findings) else "failed",
         "notifications": "ok" if not any(item["kind"] in {"notification_routing", "non_admin_error_recipient"} for item in findings) else "failed",
+        "automations": "ok" if not any(str(item["kind"]).startswith("source_tier_") or str(item["kind"]).startswith("source_transport_") for item in findings) else "failed",
+        "ratings": "ok" if not any(item["kind"] in {"rating_score_mismatch", "inactive_wheel_leak"} for item in findings) else "failed",
     }
     save_json(CHECK_STATE_PATH, details)
     print(
