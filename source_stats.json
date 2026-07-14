@@ -56,6 +56,16 @@
         "PAPAdota2"
       ]
     },
+    "risen": {
+      "actor": "admin",
+      "day": "2026-07-14",
+      "decided_at": "2026-07-14T16:54:33.353318+00:00",
+      "decision": "confirmed",
+      "sources": [
+        "artemkef",
+        "risenhaha"
+      ]
+    },
     "solo": {
       "actor": "admin",
       "day": "2026-07-14",
@@ -460,6 +470,7 @@
           "wheel_posts": 1
         },
         "artemkef": {
+          "admin_confirmed_wheels": 1,
           "checks": 167,
           "messages_scanned": 3340,
           "successful_checks": 167,
@@ -718,6 +729,7 @@
           "successful_checks": 167
         },
         "risenhaha": {
+          "admin_confirmed_wheels": 1,
           "checks": 143,
           "messages_scanned": 2717,
           "preliminary_sent": 1,
@@ -764,7 +776,7 @@
         }
       },
       "totals": {
-        "admin_confirmed_wheels": 12,
+        "admin_confirmed_wheels": 10,
         "admin_rejected_wheels": 1,
         "checks": 11037,
         "draw_time_alerts": 3,
@@ -851,7 +863,7 @@
       "first_checked_at": "2026-07-13T10:45:44.607811+00:00",
       "last_checked_at": "2026-07-14T16:54:14.539590+00:00",
       "last_transport_outage_at": "2026-07-14T02:39:35.575804+00:00",
-      "last_updated_at": "2026-07-14T16:54:14.539590+00:00",
+      "last_updated_at": "2026-07-14T16:54:33.353318+00:00",
       "last_wheel_post_at": "2026-07-14T11:12:45.350909+00:00",
       "messages_scanned": 6484,
       "preliminary_sent": 1,
@@ -875,7 +887,7 @@
       "checks": 40,
       "first_checked_at": "2026-07-14T12:59:56.741483+00:00",
       "last_checked_at": "2026-07-14T16:54:14.540346+00:00",
-      "last_updated_at": "2026-07-14T16:54:14.540346+00:00",
+      "last_updated_at": "2026-07-14T16:54:33.353318+00:00",
       "messages_scanned": 720,
       "quality_decisions": {
         "neret": 40
@@ -890,7 +902,7 @@
       "first_checked_at": "2026-07-13T10:45:44.607586+00:00",
       "last_checked_at": "2026-07-14T16:54:14.539291+00:00",
       "last_transport_outage_at": "2026-07-14T02:39:35.575692+00:00",
-      "last_updated_at": "2026-07-14T16:54:14.539291+00:00",
+      "last_updated_at": "2026-07-14T16:54:33.353318+00:00",
       "last_wheel_post_at": "2026-07-14T13:49:34.675637+00:00",
       "messages_scanned": 3708,
       "preliminary_sent": 1,
@@ -917,7 +929,7 @@
       "first_checked_at": "2026-07-13T10:45:44.607478+00:00",
       "last_checked_at": "2026-07-14T16:54:14.539154+00:00",
       "last_transport_outage_at": "2026-07-14T02:39:35.575641+00:00",
-      "last_updated_at": "2026-07-14T16:54:14.539154+00:00",
+      "last_updated_at": "2026-07-14T16:54:33.353318+00:00",
       "last_wheel_post_at": "2026-07-14T14:00:49.116337+00:00",
       "messages_scanned": 6923,
       "preliminary_sent": 1,
@@ -972,7 +984,7 @@
       "first_checked_at": "2026-07-13T10:45:44.607934+00:00",
       "last_checked_at": "2026-07-14T16:54:14.539749+00:00",
       "last_transport_outage_at": "2026-07-14T02:39:35.575860+00:00",
-      "last_updated_at": "2026-07-14T16:54:14.539749+00:00",
+      "last_updated_at": "2026-07-14T16:54:33.353318+00:00",
       "last_wheel_post_at": "2026-07-14T10:03:21.387131+00:00",
       "messages_scanned": 6101,
       "preliminary_sent": 1,
@@ -1018,7 +1030,7 @@
       "inactive_checks": 1,
       "last_checked_at": "2026-07-14T16:54:14.539905+00:00",
       "last_transport_outage_at": "2026-07-14T02:39:35.575916+00:00",
-      "last_updated_at": "2026-07-14T16:54:14.539905+00:00",
+      "last_updated_at": "2026-07-14T16:54:33.353318+00:00",
       "last_wheel_post_at": "2026-07-14T14:33:13.484900+00:00",
       "messages_scanned": 7189,
       "preliminary_sent": 1,
@@ -1045,12 +1057,17 @@
       "wheel_posts": 1
     },
     "artemkef": {
+      "admin_confirmed_wheels": 1,
       "checks": 167,
       "first_checked_at": "2026-07-13T18:18:44.140066+00:00",
       "last_checked_at": "2026-07-14T16:54:14.540111+00:00",
       "last_transport_outage_at": "2026-07-14T02:39:35.575928+00:00",
-      "last_updated_at": "2026-07-14T16:54:14.540111+00:00",
+      "last_updated_at": "2026-07-14T16:54:33.353318+00:00",
       "messages_scanned": 3340,
+      "quality_decisions": {
+        "risen": 40
+      },
+      "quality_score": 40,
       "successful_checks": 167,
       "transport_outages": 2,
       "unknown_timer_samples": 1
@@ -1169,7 +1186,7 @@
       "first_checked_at": "2026-07-13T10:45:44.607526+00:00",
       "last_checked_at": "2026-07-14T16:54:14.539215+00:00",
       "last_transport_outage_at": "2026-07-14T02:39:35.575664+00:00",
-      "last_updated_at": "2026-07-14T16:54:14.539215+00:00",
+      "last_updated_at": "2026-07-14T16:54:33.353318+00:00",
       "last_wheel_post_at": "2026-07-14T10:47:42.601701+00:00",
       "messages_scanned": 6663,
       "preliminary_sent": 1,
@@ -1344,7 +1361,7 @@
       "checks": 37,
       "first_checked_at": "2026-07-14T13:29:47.638317+00:00",
       "last_checked_at": "2026-07-14T16:54:14.540389+00:00",
-      "last_updated_at": "2026-07-14T16:54:14.540389+00:00",
+      "last_updated_at": "2026-07-14T16:54:33.353318+00:00",
       "last_wheel_post_at": "2026-07-14T14:00:53.958853+00:00",
       "messages_scanned": 703,
       "preliminary_sent": 1,
@@ -1381,7 +1398,7 @@
       "inactive_checks": 1,
       "last_checked_at": "2026-07-14T16:54:14.539922+00:00",
       "last_transport_outage_at": "2026-07-14T02:39:35.575922+00:00",
-      "last_updated_at": "2026-07-14T16:54:14.539922+00:00",
+      "last_updated_at": "2026-07-14T16:54:33.353318+00:00",
       "last_wheel_post_at": "2026-07-14T15:21:21.862384+00:00",
       "messages_scanned": 6204,
       "preliminary_sent": 1,
@@ -1472,7 +1489,7 @@
       "first_checked_at": "2026-07-13T10:45:44.607420+00:00",
       "last_checked_at": "2026-07-14T16:54:14.539085+00:00",
       "last_transport_outage_at": "2026-07-14T02:39:35.575614+00:00",
-      "last_updated_at": "2026-07-14T16:54:14.539085+00:00",
+      "last_updated_at": "2026-07-14T16:54:33.353318+00:00",
       "last_wheel_post_at": "2026-07-14T14:00:48.688431+00:00",
       "messages_scanned": 7300,
       "preliminary_sent": 2,
@@ -1517,7 +1534,7 @@
       "first_checked_at": "2026-07-13T10:45:44.608029+00:00",
       "last_checked_at": "2026-07-14T16:54:14.539870+00:00",
       "last_transport_outage_at": "2026-07-14T02:39:35.575904+00:00",
-      "last_updated_at": "2026-07-14T16:54:14.539870+00:00",
+      "last_updated_at": "2026-07-14T16:54:33.353318+00:00",
       "messages_scanned": 7320,
       "quality_decisions": {
         "bolt": 40
@@ -1577,13 +1594,18 @@
       "transport_outages": 2
     },
     "risenhaha": {
+      "admin_confirmed_wheels": 1,
       "checks": 143,
       "first_checked_at": "2026-07-14T03:22:29.313877+00:00",
       "last_checked_at": "2026-07-14T16:54:14.539941+00:00",
-      "last_updated_at": "2026-07-14T16:54:14.539941+00:00",
+      "last_updated_at": "2026-07-14T16:54:33.353318+00:00",
       "last_wheel_post_at": "2026-07-14T16:32:52.961209+00:00",
       "messages_scanned": 2717,
       "preliminary_sent": 1,
+      "quality_decisions": {
+        "risen": 40
+      },
+      "quality_score": 40,
       "recent_post_keys": {
         "78c73b619786b2ad32bf086aef4c82d7010a0a6225c2050a286e72c2e8e64663": {
           "seen_at": "2026-07-14T16:32:52.961184+00:00",
