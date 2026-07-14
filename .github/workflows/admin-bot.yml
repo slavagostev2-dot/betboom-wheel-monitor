@@ -11,6 +11,7 @@ on:
       - "admin_runtime.py"
       - "admin_panel_v2.py"
       - "admin_panel_runtime_v25.py"
+      - "admin_panel_runtime_v26.py"
       - "bot_private_state.py"
       - "bot_private_state.enc.json"
       - "bot_notification_state.py"
@@ -62,12 +63,13 @@ jobs:
           python -m py_compile \
             admin_bot.py admin_action.py admin_action_v2.py admin_runtime.py \
             admin_panel_v2.py admin_panel_runtime_v22.py admin_panel_runtime_v25.py \
-            bot_private_state.py bot_notification_state.py \
+            admin_panel_runtime_v26.py bot_private_state.py bot_notification_state.py \
             migrate_bot_private_state.py rating_policy.py
           python bot_private_state.py
           python migrate_bot_private_state.py --check
           python admin_action_v2.py --self-test
           python admin_panel_runtime_v25.py --self-test
+          python admin_panel_runtime_v26.py --self-test
           python -m json.tool candidate_moderation.json >/dev/null
 
       - name: Restore and seal Telegram bot users
@@ -113,7 +115,7 @@ jobs:
               "run_id": os.environ.get("GITHUB_RUN_ID", ""),
               "run_attempt": os.environ.get("GITHUB_RUN_ATTEMPT", ""),
               "event": os.environ.get("GITHUB_EVENT_NAME", ""),
-              "version": 25,
+              "version": 26,
               "storage": "encrypted_bot_state",
               "miniapp": "archived",
           }
@@ -150,7 +152,7 @@ jobs:
           ADMIN_CACHE_SECONDS: "20"
           SOURCE_INACTIVITY_DAYS: "7"
           SOURCE_INACTIVITY_REPORT_DAYS: "7"
-        run: python admin_panel_runtime_v25.py
+        run: python admin_panel_runtime_v26.py
 
       - name: Start next control-center shift
         if: ${{ always() }}
