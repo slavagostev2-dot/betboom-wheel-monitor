@@ -15,45 +15,6 @@ permissions:
   contents: read
 
 jobs:
-  probe-requested-source:
-    runs-on: ubuntu-latest
-    timeout-minutes: 5
-    steps:
-      - name: Read @jestercast public preview
-        run: |
-          python - <<'PY'
-          import html
-          import json
-          import re
-          import urllib.request
-
-          request = urllib.request.Request(
-              "https://telegram.me/s/jestercast",
-              headers={"User-Agent": "Mozilla/5.0"},
-          )
-          page = urllib.request.urlopen(request, timeout=30).read().decode("utf-8", "replace")
-          posts = list(re.finditer(r'data-post="(jestercast/\d+)"', page))
-          rows = []
-          for index, match in enumerate(posts):
-              end = posts[index + 1].start() if index + 1 < len(posts) else len(page)
-              segment = html.unescape(page[match.start():end])
-              links = sorted(set(re.findall(
-                  r'https?://(?:www\.)?betboom\.ru/freestream/[A-Za-z0-9._~-]+',
-                  segment,
-                  flags=re.I,
-              )))
-              if not links:
-                  continue
-              date = re.search(r'<time[^>]+datetime="([^"]+)"', segment)
-              rows.append({
-                  "post": match.group(1),
-                  "date": date.group(1) if date else "",
-                  "links": links,
-              })
-          print("JESTERCAST_WHEEL_POSTS=" + json.dumps(rows, ensure_ascii=False))
-          assert rows, "@jestercast has no BetBoom wheel links in the public preview"
-          PY
-
   validate:
     runs-on: ubuntu-latest
     timeout-minutes: 10
