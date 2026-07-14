@@ -5,6 +5,8 @@ on:
   push:
     branches: [main]
     paths:
+      - "monitor_health.py"
+      - ".github/workflows/monitor.yml"
       - ".github/workflows/monitor-watchdog.yml"
   workflow_dispatch:
   schedule:
@@ -29,56 +31,45 @@ jobs:
         with:
           ref: main
 
-      - name: Check BB V.G. monitor freshness
-        id: freshness
-        shell: bash
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Check monitor progress and freshness
+        id: health
         run: |
-          python - <<'PY'
-          import json
-          import os
-          from datetime import datetime, timezone, timedelta
-          from pathlib import Path
+          python monitor_health.py check \
+            --max-age-minutes 30 \
+            --max-success-age-minutes 30 \
+            --max-consecutive-failures 2 \
+            --max-consecutive-no-progress 2
 
-          threshold = timedelta(minutes=45)
-          latest = None
-          reason = "нет файла статистики"
-          try:
-              payload = json.loads(Path("source_stats.json").read_text(encoding="utf-8"))
-              sources = payload.get("sources", {}) if isinstance(payload, dict) else {}
-              for entry in sources.values():
-                  if not isinstance(entry, dict):
-                      continue
-                  raw = entry.get("last_checked_at") or entry.get("last_updated_at")
-                  if not raw:
-                      continue
-                  try:
-                      value = datetime.fromisoformat(str(raw).replace("Z", "+00:00"))
-                  except ValueError:
-                      continue
-                  if value.tzinfo is None:
-                      value = value.replace(tzinfo=timezone.utc)
-                  value = value.astimezone(timezone.utc)
-                  if latest is None or value > latest:
-                      latest = value
-          except Exception as exc:
-              reason = f"ошибка чтения статистики: {type(exc).__name__}"
-
-          now = datetime.now(timezone.utc)
-          stale = latest is None or now - latest > threshold
-          if latest is not None:
-              reason = f"последняя проверка {latest.isoformat()}, возраст {now - latest}"
-          print(reason)
-          with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as output:
-              output.write(f"stale={'true' if stale else 'false'}\n")
-              output.write(f"latest={latest.isoformat() if latest else ''}\n")
-          PY
-
-      - name: Queue BB V.G. recovery when stale
-        if: ${{ steps.freshness.outputs.stale == 'true' }}
+      - name: Queue non-destructive recovery
+        if: ${{ steps.health.outputs.stale == 'true' }}
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh workflow run monitor.yml --ref main -f continuous=true
+        shell: bash
+        run: |
+          set -euo pipefail
+          queued=$(gh run list \
+            --workflow monitor.yml \
+            --status queued \
+            --limit 20 \
+            --json databaseId \
+            --jq 'length')
 
-      - name: Report healthy BB V.G. monitor
-        if: ${{ steps.freshness.outputs.stale != 'true' }}
-        run: echo "BB V.G. runtime data is fresh; recovery is not required."
+          if (( queued > 0 )); then
+            echo "A recovery monitor run is already queued."
+            exit 0
+          fi
+
+          echo "Queueing recovery without cancelling the current process: ${{ steps.health.outputs.reason }}"
+          gh workflow run monitor.yml --ref main -f continuous=true
+
+      - name: Report healthy monitor
+        if: ${{ steps.health.outputs.stale != 'true' }}
+        run: |
+          echo "BB V.G. runtime is healthy."
+          echo "Status: ${{ steps.health.outputs.status }}"
+          echo "Checks total: ${{ steps.health.outputs.checks_total }}"
