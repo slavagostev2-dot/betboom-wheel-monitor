@@ -58,7 +58,7 @@ CREATE TABLE IF NOT EXISTS source_requests (
   source TEXT NOT NULL,
   status TEXT NOT NULL DEFAULT 'pending',
   created_at TEXT NOT NULL,
-  requester_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  requester_id TEXT NOT NULL,
   requester_chat_id TEXT NOT NULL,
   requester_name TEXT NOT NULL DEFAULT '',
   requester_username TEXT NOT NULL DEFAULT '',
