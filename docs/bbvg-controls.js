@@ -100,15 +100,11 @@
   };
 
   renderProfile=function(){
-    const user=currentUser();
-    const name=user?[user.first_name,user.last_name].filter(Boolean).join(' '):'Пользователь';
-    const photo=safeUrl(user?.photo_url)||'icon.svg';
     const marks=activeWheels().filter(isJoined);
     const shown=showAllMarks?marks:marks.slice(0,3);
     const active=activeWheels();
     $('#page-profile').innerHTML=`
-      <article class="card profile-head">
-        <img src="${esc(photo)}" alt=""><div class="profile-copy"><strong>${esc(name||'Пользователь')}</strong><span>${user?.username?`@${esc(user.username)}`:'Telegram Mini App'}</span></div>
+      <article class="card profile-summary">
         <div class="profile-stats"><div class="profile-stat"><strong>${app.participationHistory.size}</strong><span>Всего участий</span></div><div class="profile-stat"><strong>${active.length}</strong><span>Активные колёса</span></div><div class="profile-stat"><strong>${marks.length}</strong><span>Моих отметок</span></div></div>
       </article>
       <section class="section"><div class="section-head"><div class="section-tools"><h2 class="section-title">Мои отметки</h2><span class="count-pill">${marks.length}</span></div>${marks.length>3?`<button class="text-button" data-action="toggle-marks">${showAllMarks?'Свернуть':'Смотреть все'}</button>`:''}</div><div>${shown.map(enhancedWheelCard).join('')||'<div class="empty">Вы пока не отметили участие в действующих колёсах.</div>'}</div></section>
