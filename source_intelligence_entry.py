@@ -1,0 +1,36 @@
+from __future__ import annotations
+
+import monitor
+import nightly_discovery
+import notification_router
+import telegram_transport
+
+notification_router.install(monitor)
+telegram_transport.install(monitor)
+
+_original_fetch_page = nightly_discovery.fetch_public_channel_page
+
+
+def fetch_page_on_primary_domain(username: str, before: int | None = None):
+    messages = _original_fetch_page(username, before)
+    return [
+        monitor.Message(
+            source=message.source,
+            message_id=message.message_id,
+            date=message.date,
+            text=telegram_transport.rewrite_telegram_text(message.text),
+            message_url=telegram_transport.public_message_url(
+                message.source or username, message.message_id
+            ),
+        )
+        for message in messages
+    ]
+
+
+nightly_discovery.fetch_public_channel_page = fetch_page_on_primary_domain
+
+import source_intelligence  # noqa: E402
+
+
+if __name__ == "__main__":
+    raise SystemExit(source_intelligence.main())
