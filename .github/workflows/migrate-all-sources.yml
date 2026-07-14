@@ -1,0 +1,96 @@
+name: Migrate all 66 sources to permanent monitoring
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/migrate-all-sources.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: bb-vg-source-policy-migration
+  cancel-in-progress: false
+
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Move every configured source to permanent monitoring
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          def read_sources(path):
+              result = []
+              seen = set()
+              for raw in Path(path).read_text(encoding="utf-8").splitlines():
+                  value = raw.split("#", 1)[0].strip().lstrip("@")
+                  if value and value.casefold() not in seen:
+                      seen.add(value.casefold())
+                      result.append(value)
+              return result
+
+          sources = read_sources("public_sources.txt")
+          if len(sources) != 66:
+              raise SystemExit(f"Expected 66 sources, found {len(sources)}")
+          source_keys = {value.casefold() for value in sources}
+
+          path = Path("partners_catalog.json")
+          catalog = json.loads(path.read_text(encoding="utf-8"))
+          changed = 0
+          for entity in catalog.get("entities", []):
+              if not isinstance(entity, dict):
+                  continue
+              for channel in entity.get("channels", []):
+                  if not isinstance(channel, dict):
+                      continue
+                  username = str(channel.get("username") or "").strip().lstrip("@")
+                  if username.casefold() in source_keys and channel.get("scan_mode") != "fast":
+                      channel["scan_mode"] = "fast"
+                      changed += 1
+          for collector in catalog.get("collectors", []):
+              if not isinstance(collector, dict):
+                  continue
+              username = str(collector.get("username") or "").strip().lstrip("@")
+              if username.casefold() in source_keys:
+                  collector["scan_mode"] = "fast"
+
+          policy = catalog.setdefault("policy", {})
+          policy["fast"] = "все 66 утверждённых источников проверяются постоянно через telegram.me"
+          policy["nightly"] = "используется только для поиска новых кандидатов, но не для известных 66 источников"
+          policy["catalog_scope"] = "единая постоянная база из 66 источников и отдельные новые кандидаты"
+          catalog["updated_at"] = "2026-07-14"
+          path.write_text(json.dumps(catalog, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+          Path("source_catalog.txt").write_text(
+              "# Кандидаты, найденные автоматически и ещё не утверждённые администратором.\n"
+              "# Все 66 известных источников находятся в public_sources.txt и проверяются постоянно.\n",
+              encoding="utf-8",
+          )
+          print(f"Permanent sources: {len(sources)}; scan modes changed: {changed}")
+          PY
+
+      - name: Save permanent source policy
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add partners_catalog.json source_catalog.txt
+          git commit -m "Move all 66 sources to permanent telegram.me monitoring [skip ci]" || exit 0
+          for attempt in 1 2 3; do
+            if git push origin HEAD:main; then
+              exit 0
+            fi
+            git pull --rebase origin main || { git rebase --abort || true; exit 1; }
+          done
+          exit 1
