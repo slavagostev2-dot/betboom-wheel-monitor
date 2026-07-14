@@ -23,7 +23,7 @@
     "source_health": "ok",
     "telegram_transport": "ok"
   },
-  "checked_at": "2026-07-14T13:49:37.043294+00:00",
+  "checked_at": "2026-07-14T14:00:33.271024+00:00",
   "discovery": {
     "active_size": 70,
     "candidate_count": 163,
@@ -96,28 +96,28 @@
     "brand": "BB V.G.",
     "checked_sources": 70,
     "checks_delta": 70,
-    "checks_total": 17612,
+    "checks_total": 17822,
     "consecutive_failures": 0,
     "consecutive_no_progress": 0,
     "iteration": 1,
     "last_failure_at": "2026-07-14T02:44:12.395838+00:00",
-    "last_iteration_at": "2026-07-14T13:42:57.855548+00:00",
+    "last_iteration_at": "2026-07-14T13:53:00.157431+00:00",
     "last_iteration_duration_seconds": 5,
     "last_iteration_exit_code": 0,
-    "last_process_heartbeat_at": "2026-07-14T13:42:57.855548+00:00",
-    "last_successful_checks_total": 17612,
-    "last_successful_iteration_at": "2026-07-14T13:42:57.855548+00:00",
+    "last_process_heartbeat_at": "2026-07-14T13:53:00.157431+00:00",
+    "last_successful_checks_total": 17822,
+    "last_successful_iteration_at": "2026-07-14T13:53:00.157431+00:00",
     "pending_wheels": 0,
     "reachable_sources": 70,
     "restart_recommended": false,
-    "run_id": "29337588301",
-    "run_started_at": "2026-07-14T13:42:52.467751+00:00",
+    "run_id": "29338335421",
+    "run_started_at": "2026-07-14T13:52:55.715049+00:00",
     "source_errors": 0,
     "stats_counter_reset": false,
     "status": "running",
     "version": 3
   },
-  "monitor_age_minutes": 6,
+  "monitor_age_minutes": 7,
   "notification_routing": {
     "admin_kinds": {
       "admin_requests": [
@@ -159,10 +159,10 @@
   },
   "primary_telegram_domain": "telegram.me",
   "rating_consistency": {
-    "administrator_decisions": 4,
+    "administrator_decisions": 5,
     "inactive_wheel_leaks": [],
     "policy": "additive_only_v1",
-    "rated_sources": 5,
+    "rated_sources": 7,
     "score_mismatches": []
   },
   "source_health_summary": {
