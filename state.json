@@ -7,7 +7,7 @@
       "expires_at": "2026-07-14T18:23:45+00:00",
       "first_notified_at": "2026-07-14T07:58:38.558718+00:00",
       "identifier": "zonertg5",
-      "last_checked_at": "2026-07-14T08:21:45.065453+00:00",
+      "last_checked_at": "2026-07-14T08:36:46.452394+00:00",
       "last_notification_at": "2026-07-14T07:58:38.558879+00:00",
       "message_date": "2026-07-14T07:53:45+00:00",
       "message_id": 35606,
@@ -149,17 +149,17 @@
     "zortelad"
   ],
   "last_automatic_status_at": "2026-07-14T06:26:10.855880+00:00",
-  "last_heartbeat_at": "2026-07-14T02:34:34.181513+00:00",
+  "last_heartbeat_at": "2026-07-14T08:36:50.038148+00:00",
   "last_run_kind": "schedule",
   "last_run_summary": {
     "activation_sent": 0,
-    "active_wheels": 0,
+    "active_wheels": 1,
     "callbacks": {
       "callbacks": 0,
       "lists": 0,
       "participating": 0
     },
-    "checked_sources": 56,
+    "checked_sources": 67,
     "duplicates_suppressed": 0,
     "inactive_waiting": 0,
     "initialized_now": 0,
@@ -168,23 +168,23 @@
     "pending_total": 0,
     "preliminary_sent": 0,
     "quarantined_skipped": 0,
-    "reachable_sources": 0,
+    "reachable_sources": 67,
     "reminders": {
-      "changed": false,
+      "changed": true,
       "draw_alerts": 0,
       "known_reminders": 0,
       "pending_total": 0,
       "removed": 0,
-      "tracked": 0,
+      "tracked": 1,
       "unknown_reminders": 0
     },
-    "source_errors": 56,
+    "source_errors": 0,
     "source_inactivity": {
       "changed": false,
       "count": 0,
       "sent": false
     },
-    "sources": 56,
+    "sources": 67,
     "stale_skipped": 0,
     "unconfirmed_waiting": 0,
     "unknown_timer_samples_added": 0
