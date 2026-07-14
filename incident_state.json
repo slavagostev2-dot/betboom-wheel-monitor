@@ -1,5 +1,5 @@
 {
-  "active_count": 0,
+  "active_count": 2,
   "incidents": {
     "system_checks:discovery_scan_failure:763d64204869a56e": {
       "detail": "Просканировано 0 из 66; ошибок 66. Поиск должен выполняться через telegram.me.",
@@ -65,23 +65,21 @@
       "title": "Mini App открывается не с актуального домена"
     },
     "system_checks:monitor_source_count:05defcc6c0898ea6": {
-      "detail": "В последней итерации проверено 56 из 66.",
+      "detail": "В последней итерации проверено 69 из 70 источников основного режима.",
       "first_seen_at": "2026-07-14T03:10:51.892284+00:00",
       "key": "system_checks:monitor_source_count:05defcc6c0898ea6",
       "kind": "monitor_source_count",
-      "last_seen_at": "2026-07-14T04:04:11.018046+00:00",
+      "last_seen_at": "2026-07-14T13:29:26.504862+00:00",
       "metadata": {},
-      "occurrences": 1,
+      "occurrences": 2,
       "open_notification_pending": false,
-      "open_notified_at": "2026-07-14T03:10:52.219845+00:00",
-      "opened_sequence": 1,
-      "resolution_notification_pending": false,
+      "open_notified_at": "2026-07-14T13:29:26.801854+00:00",
+      "opened_sequence": 11,
       "resolution_notified_at": "2026-07-14T04:04:11.343428+00:00",
-      "resolved_at": "2026-07-14T04:04:11.018046+00:00",
       "resolved_sequence": 4,
       "scope": "system_checks",
       "severity": "critical",
-      "status": "resolved",
+      "status": "active",
       "subject": "",
       "title": "Основной монитор проверяет не все источники"
     },
@@ -105,19 +103,36 @@
       "status": "resolved",
       "subject": "",
       "title": "Основной монитор давно не обновлялся"
+    },
+    "system_checks:source_health_missing:d94ad276a135da04": {
+      "detail": "Нет записей для 1 источников: @jestercast.",
+      "first_seen_at": "2026-07-14T13:29:26.504862+00:00",
+      "key": "system_checks:source_health_missing:d94ad276a135da04",
+      "kind": "source_health_missing",
+      "last_seen_at": "2026-07-14T13:29:26.504862+00:00",
+      "metadata": {},
+      "occurrences": 1,
+      "open_notification_pending": false,
+      "open_notified_at": "2026-07-14T13:29:26.801854+00:00",
+      "opened_sequence": 12,
+      "scope": "system_checks",
+      "severity": "warning",
+      "status": "active",
+      "subject": "",
+      "title": "Не для всех источников есть данные здоровья"
     }
   },
-  "last_change_at": "2026-07-14T11:41:41.941991+00:00",
-  "last_reconcile_at": "2026-07-14T11:51:20.193119+00:00",
+  "last_change_at": "2026-07-14T13:29:26.504862+00:00",
+  "last_reconcile_at": "2026-07-14T13:29:26.504862+00:00",
   "last_reconcile_scope": "system_checks",
   "last_summary": {
-    "active": 0,
-    "new_notification_count": 0,
+    "active": 2,
+    "new_notification_count": 2,
     "recovery_notification_count": 0,
     "scope": "system_checks"
   },
-  "sequence": 10,
+  "sequence": 12,
   "status": "initializing",
-  "updated_at": "2026-07-14T11:51:20.193158+00:00",
+  "updated_at": "2026-07-14T13:29:26.801890+00:00",
   "version": 1
 }

@@ -1,5 +1,5 @@
 {
-  "active_incidents": 0,
+  "active_incidents": 2,
   "automation_state": {
     "source_tier_last_run_at": "2026-07-14T04:40:11.599460+00:00",
     "source_tier_policy": "seven_day_dynamic_primary_and_nightly",
@@ -17,13 +17,13 @@
     "discovery": "ok",
     "inventory": "ok",
     "miniapp": "ok",
-    "monitor": "ok",
+    "monitor": "failed",
     "notifications": "ok",
     "ratings": "ok",
-    "source_health": "ok",
+    "source_health": "failed",
     "telegram_transport": "ok"
   },
-  "checked_at": "2026-07-14T11:51:18.961480+00:00",
+  "checked_at": "2026-07-14T13:29:25.700332+00:00",
   "discovery": {
     "active_size": 67,
     "candidate_count": 163,
@@ -60,32 +60,47 @@
     "legacy_url_offenders": [],
     "primary": "telegram.me"
   },
-  "finding_count": 0,
-  "findings": [],
+  "finding_count": 2,
+  "findings": [
+    {
+      "detail": "В последней итерации проверено 69 из 70 источников основного режима.",
+      "kind": "monitor_source_count",
+      "severity": "critical",
+      "subject": "",
+      "title": "Основной монитор проверяет не все источники"
+    },
+    {
+      "detail": "Нет записей для 1 источников: @jestercast.",
+      "kind": "source_health_missing",
+      "severity": "warning",
+      "subject": "",
+      "title": "Не для всех источников есть данные здоровья"
+    }
+  ],
   "gpt_diagnostic_snapshot": {
-    "active_incidents": 0,
-    "checked_sources": 67,
-    "configured_sources": 67,
+    "active_incidents": 2,
+    "checked_sources": 69,
+    "configured_sources": 70,
     "domain": "telegram.me",
-    "reachable_sources": 67,
+    "reachable_sources": 69,
     "single_source": "system_check_state.json",
-    "status": "ok"
+    "status": "degraded"
   },
   "incident_delivery": {
-    "digest_sent": false,
-    "messages_attempted": 0,
-    "opened": 0,
+    "digest_sent": true,
+    "messages_attempted": 1,
+    "opened": 2,
     "resolved": 0
   },
-  "incident_sequence": 10,
+  "incident_sequence": 12,
   "inventory": {
-    "configured": 67,
+    "configured": 70,
     "domain": "telegram.me",
     "duplicates": 0,
     "expected": 66,
     "nightly": 0,
-    "operational": 67,
-    "total": 67
+    "operational": 70,
+    "total": 70
   },
   "miniapp": {
     "checked": false,
@@ -94,30 +109,30 @@
   },
   "monitor": {
     "brand": "BB V.G.",
-    "checked_sources": 67,
-    "checks_delta": 67,
-    "checks_total": 16324,
+    "checked_sources": 69,
+    "checks_delta": 69,
+    "checks_total": 17402,
     "consecutive_failures": 0,
     "consecutive_no_progress": 0,
-    "iteration": 1,
+    "iteration": 7,
     "last_failure_at": "2026-07-14T02:44:12.395838+00:00",
-    "last_iteration_at": "2026-07-14T11:44:50.144261+00:00",
-    "last_iteration_duration_seconds": 5,
+    "last_iteration_at": "2026-07-14T13:09:57.251728+00:00",
+    "last_iteration_duration_seconds": 4,
     "last_iteration_exit_code": 0,
-    "last_process_heartbeat_at": "2026-07-14T11:44:50.144261+00:00",
-    "last_successful_checks_total": 16324,
-    "last_successful_iteration_at": "2026-07-14T11:44:50.144261+00:00",
+    "last_process_heartbeat_at": "2026-07-14T13:09:57.251728+00:00",
+    "last_successful_checks_total": 17402,
+    "last_successful_iteration_at": "2026-07-14T13:09:57.251728+00:00",
     "pending_wheels": 0,
-    "reachable_sources": 67,
+    "reachable_sources": 69,
     "restart_recommended": false,
-    "run_id": "29329956701",
-    "run_started_at": "2026-07-14T11:44:45.271610+00:00",
+    "run_id": "29333335050",
+    "run_started_at": "2026-07-14T12:39:50.216811+00:00",
     "source_errors": 0,
     "stats_counter_reset": false,
     "status": "running",
     "version": 3
   },
-  "monitor_age_minutes": 6,
+  "monitor_age_minutes": 19,
   "notification_routing": {
     "admin_kinds": {
       "admin_requests": [
@@ -144,31 +159,37 @@
         "7178093128"
       ],
       "wheels": [
+        "1059267719",
         "7178093128",
-        "801600922"
+        "801600922",
+        "906643757"
       ]
     },
     "user_recipients": [
+      "1059267719",
       "7178093128",
-      "801600922"
+      "801600922",
+      "906643757"
     ]
   },
   "primary_telegram_domain": "telegram.me",
   "rating_consistency": {
-    "administrator_decisions": 0,
+    "administrator_decisions": 4,
     "inactive_wheel_leaks": [],
     "policy": "additive_only_v1",
-    "rated_sources": 0,
+    "rated_sources": 5,
     "score_mismatches": []
   },
   "source_health_summary": {
-    "configured_records": 67,
-    "missing_sources": [],
+    "configured_records": 69,
+    "missing_sources": [
+      "jestercast"
+    ],
     "problem_details": [],
     "problem_sources": [],
-    "records": 67,
+    "records": 69,
     "statuses": {
-      "ok": 67
+      "ok": 69
     },
     "transport_failure_types": {
       "dns": 0,
@@ -179,7 +200,7 @@
       "tls": 0
     }
   },
-  "status": "ok",
+  "status": "degraded",
   "telegram_web": {
     "final_url": "https://telegram.me/s/mechanogun",
     "html_messages_detected": true,
