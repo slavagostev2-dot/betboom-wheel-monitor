@@ -64,6 +64,10 @@ def public_message_url(source: str, message_id: int) -> str:
     return f"https://{PRIMARY_DOMAIN}/{clean_username(source)}/{int(message_id)}"
 
 
+def profile_url(source: str) -> str:
+    return f"https://{PRIMARY_DOMAIN}/{clean_username(source)}"
+
+
 def rewrite_telegram_url(value: str) -> str:
     raw = str(value or "")
     try:
@@ -395,6 +399,7 @@ def self_test() -> None:
     assert public_source_url("@test") == f"https://{PRIMARY_DOMAIN}/s/test"
     assert public_source_url("test", 100).endswith("/s/test?before=100")
     assert public_message_url("test", 7) == f"https://{PRIMARY_DOMAIN}/test/7"
+    assert profile_url("@test") == f"https://{PRIMARY_DOMAIN}/test"
     assert rewrite_telegram_url("https://t.me/s/test") == f"https://{PRIMARY_DOMAIN}/s/test"
     assert "t.me/" not in rewrite_telegram_text("https://t.me/test/1").replace("telegram.me/", "")
     assert is_transient_transport_error("NameResolutionError: failed to resolve")

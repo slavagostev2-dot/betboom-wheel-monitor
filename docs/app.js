@@ -1,6 +1,6 @@
 'use strict';
 
-const VERSION='5.1.0';
+const VERSION='5.4.0';
 const BRAND='BB V.G.';
 const REPO='slavagostev2-dot/betboom-wheel-monitor';
 const ORIGINS=[
@@ -17,9 +17,9 @@ const app={
   query:'',
   loading:false,
   lastSync:null,
-  data:{state:{},stats:{daily:{},sources:{}},primary:[],nightly:[]},
+  data:{state:{},stats:{daily:{},sources:{}},health:{sources:{}},transport:{},system:{},primary:[],nightly:[]},
   joined:new Set(),
-  settings:{autoRefresh:true,haptics:true,lightTheme:false}
+  settings:{autoRefresh:true,haptics:true,lightTheme:true,themeVersion:2}
 };
 
 const esc=value=>String(value??'').replace(/[&<>"']/g,char=>({
@@ -75,6 +75,12 @@ function applyTheme(){
   root.classList.toggle('light-theme',light);
   root.style.colorScheme=theme;
   $('#app')?.classList.toggle('light-theme',light);
+  const themeButton=$('#themeButton');
+  if(themeButton){
+    themeButton.classList.toggle('active',light);
+    themeButton.setAttribute('aria-pressed',String(light));
+    themeButton.setAttribute('aria-label',light?'Включить тёмную тему':'Включить светлую тему');
+  }
   document.querySelector('meta[name="theme-color"]')?.setAttribute('content',colors.background);
   try{
     tg?.setHeaderColor?.(colors.header);
@@ -120,10 +126,12 @@ async function loadUser(){
   app.joined=new Set(Array.isArray(joined)?joined.map(item=>String(item).toLowerCase()):[]);
   let legacyLightTheme=false;
   try{legacyLightTheme=localStorage.getItem('bbvg:appearance')==='light'}catch{}
+  const migrateTheme=Number(settings?.themeVersion||0)<2;
   app.settings={
     autoRefresh:settings?.autoRefresh!==false,
     haptics:settings?.haptics!==false,
-    lightTheme:typeof settings?.lightTheme==='boolean'?settings.lightTheme:legacyLightTheme
+    lightTheme:migrateTheme?true:(typeof settings?.lightTheme==='boolean'?settings.lightTheme:legacyLightTheme),
+    themeVersion:2
   };
   store.set('settings',app.settings);
   applyTheme();
@@ -149,13 +157,16 @@ async function loadData(quiet=false){
   app.loading=true;
   $('#refreshButton').classList.add('loading');
   try{
-    const [state,stats,primaryText,nightlyText]=await Promise.all([
+    const [state,stats,health,transport,system,primaryText,nightlyText]=await Promise.all([
       fetchOne('state.json'),
       fetchOne('source_stats.json'),
+      fetchOne('source_health.json').catch(()=>({sources:{}})),
+      fetchOne('source_transport_state.json').catch(()=>({})),
+      fetchOne('system_check_state.json').catch(()=>({})),
       fetchOne('public_sources.txt','text'),
       fetchOne('source_catalog.txt','text')
     ]);
-    app.data={state,stats,primary:parseList(primaryText),nightly:parseList(nightlyText)};
+    app.data={state,stats,health,transport,system,primary:parseList(primaryText),nightly:parseList(nightlyText)};
     app.lastSync=new Date();
     renderAll();
     if(!quiet){toast('Данные обновлены');haptic('success')}
@@ -222,6 +233,20 @@ function totals(days){
 function sourceStats(name){
   const key=Object.keys(app.data.stats?.sources||{}).find(item=>item.toLowerCase()===String(name).toLowerCase());
   return key?app.data.stats.sources[key]:{};
+}
+function sourceHealth(name){
+  const key=Object.keys(app.data.health?.sources||{}).find(item=>item.toLowerCase()===String(name).toLowerCase());
+  return key?app.data.health.sources[key]:{};
+}
+function sourceOverview(){
+  const total=app.data.primary.length;
+  const health=app.data.health?.sources||{};
+  const checkedFromHealth=app.data.primary.filter(name=>Boolean(sourceHealth(name)?.last_checked_at)).length;
+  const reachableFromHealth=app.data.primary.filter(name=>sourceHealth(name)?.status==='ok').length;
+  const transport=app.data.transport||{};
+  const checked=Number(transport.accounted_sources??checkedFromHealth);
+  const reachable=Number(transport.reachable_sources??reachableFromHealth);
+  return {total,checked,reachable,unavailable:Math.max(0,total-reachable)};
 }
 function ranking(){
   return Object.entries(app.data.stats?.sources||{})
@@ -321,8 +346,11 @@ function filteredSources(){
 }
 function sourceRow(name){
   const stats=sourceStats(name);
+  const health=sourceHealth(name);
   const wheels=Number(stats?.wheel_posts||0);
-  return `<button class="source-row" type="button" data-action="source-info" data-source="${esc(name)}"><span class="source-mark">${esc(initials(name))}</span><span class="row-copy"><strong>@${esc(name)}</strong><small>${wheels?`Постов с колёсами: ${num(wheels)}`:'Статистика ещё формируется'}</small></span><span class="source-status">Активен</span></button>`;
+  const reason=String(health?.failure_reason||health?.last_error||'');
+  const status=health?.status==='ok'?'Доступен':health?.status?(reason||health.status):'Ожидает проверки';
+  return `<button class="source-row" type="button" data-action="source-info" data-source="${esc(name)}"><span class="source-mark">${esc(initials(name))}</span><span class="row-copy"><strong>@${esc(name)}</strong><small>${esc(status)}${wheels?` · колёс: ${num(wheels)}`:''}</small></span><span class="source-status">${health?.status==='ok'?'✓':'!'}</span></button>`;
 }
 function renderSources(){
   const rows=filteredSources();
@@ -370,7 +398,7 @@ function updateTimers(){$$('[data-deadline]').forEach(element=>element.textConte
 function openUrl(value){
   const url=safeUrl(value);
   if(!url)return;
-  try{url.includes('t.me/')?tg?.openTelegramLink?.(url):tg?.openLink?.(url,{try_instant_view:false})}catch{}
+  try{tg?.openLink?.(url,{try_instant_view:false})}catch{}
   if(!tg)window.open(url,'_blank','noopener');
 }
 
@@ -382,7 +410,12 @@ function botUsername(){
   if(value)try{localStorage.setItem('bbvg:botUsername',value)}catch{}
   return value;
 }
-function normalizeSource(value){return String(value||'').trim().replace(/^https?:\/\/t\.me\//i,'').replace(/^@/,'').split(/[/?#]/)[0]}
+function openNotificationSettings(){
+  const bot=botUsername();
+  if(!bot){toast('Откройте настройки уведомлений в боте');return}
+  openUrl(`https://telegram.me/${encodeURIComponent(bot)}?start=notifications`);
+}
+function normalizeSource(value){return String(value||'').trim().replace(/^https?:\/\/(?:www\.)?(?:telegram\.me|t\.me)\//i,'').replace(/^@/,'').split(/[/?#]/)[0]}
 function knownSource(username){const key=username.toLowerCase();return app.data.primary.some(item=>item.toLowerCase()===key)||app.data.nightly.some(item=>item.toLowerCase()===key)}
 async function submitSourceRequest(raw){
   const username=normalizeSource(raw);
@@ -390,10 +423,10 @@ async function submitSourceRequest(raw){
   if(knownSource(username)){toast('Этот источник уже проверяется');return}
   const bot=botUsername();
   if(bot){
-    const link=`https://t.me/${encodeURIComponent(bot)}?start=source_${encodeURIComponent(username)}`;
+    const link=`https://telegram.me/${encodeURIComponent(bot)}?start=source_${encodeURIComponent(username)}`;
     toast('Открываю запрос в боте');
     haptic('success');
-    try{tg?.openTelegramLink?.(link)}catch{}
+    try{tg?.openLink?.(link,{try_instant_view:false})}catch{}
     if(!tg)window.open(link,'_blank','noopener');
     return;
   }
@@ -415,7 +448,9 @@ function showSourceInfo(source){
   const stats=sourceStats(source);
   const wheels=Number(stats?.wheel_posts||0);
   const activations=Number(stats?.activation_sent||0);
-  showDialog(`<h2>@${esc(source)}</h2><p>${esc(mode)}</p><article class="card"><div class="setting"><div class="setting-copy"><strong>Постов с колёсами</strong><small>За всё накопленное время</small></div><span class="row-value">${num(wheels)}</span></div><div class="setting"><div class="setting-copy"><strong>Подтверждённых активаций</strong><small>Успешно подтверждено монитором</small></div><span class="row-value">${num(activations)}</span></div></article><div class="actions"><button class="button primary" data-action="open-url" data-url="https://t.me/${esc(source)}">Открыть Telegram</button><button class="button secondary" data-action="close-dialog">Закрыть</button></div>`);
+  const health=sourceHealth(source);
+  const reason=health?.status==='ok'?'источник доступен':String(health?.failure_reason||health?.last_error||health?.status||'ещё не проверен');
+  showDialog(`<h2>@${esc(source)}</h2><p>${esc(mode)}</p><article class="card"><div class="setting"><div class="setting-copy"><strong>Состояние</strong><small>${esc(reason)}</small></div><span class="row-value">${health?.status==='ok'?'✓':'!'}</span></div><div class="setting"><div class="setting-copy"><strong>Последняя проверка</strong><small>${esc(health?.last_checked_at||'нет данных')}</small></div></div><div class="setting"><div class="setting-copy"><strong>Постов с колёсами</strong><small>За всё накопленное время</small></div><span class="row-value">${num(wheels)}</span></div><div class="setting"><div class="setting-copy"><strong>Подтверждённых активаций</strong><small>Успешно подтверждено монитором</small></div><span class="row-value">${num(activations)}</span></div></article><div class="actions"><button class="button primary" data-action="open-url" data-url="https://telegram.me/${esc(source)}">Открыть Telegram</button><button class="button secondary" data-action="close-dialog">Закрыть</button></div>`);
 }
 function showDialog(html){const dialog=$('#dialog');$('#dialogBody').innerHTML=html;dialog.showModal?.()}
 function closeDialog(){$('#dialog').close?.()}
@@ -431,6 +466,7 @@ function bindEvents(){
       if(action==='join')toggleJoined(actionButton.dataset.id);
       else if(action==='open-url'){haptic('light');openUrl(actionButton.dataset.url)}
       else if(action==='source-info'){haptic('selection');showSourceInfo(actionButton.dataset.source)}
+      else if(action==='notifications'){haptic('selection');openNotificationSettings()}
       else if(action==='close-dialog'){haptic('selection');closeDialog()}
       else haptic('selection');
       return;
@@ -467,6 +503,14 @@ function bindEvents(){
     }
   });
   $('#refreshButton').addEventListener('click',()=>loadData(false));
+  $('#themeButton')?.addEventListener('click',()=>{
+    app.settings.lightTheme=!app.settings.lightTheme;
+    app.settings.themeVersion=2;
+    store.set('settings',app.settings);
+    applyTheme();
+    renderProfile();
+    haptic('selection');
+  });
   $('#dialog').addEventListener('click',event=>{if(event.target===$('#dialog'))closeDialog()});
 }
 
@@ -479,6 +523,11 @@ async function init(){
   setInterval(updateTimers,1000);
   setInterval(()=>{if(app.settings.autoRefresh&&document.visibilityState==='visible')loadData(true)},60000);
   document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&app.settings.autoRefresh)loadData(true)});
-  if('serviceWorker'in navigator)navigator.serviceWorker.register('./service-worker.js?v=5.1.0').catch(console.warn);
+  if('serviceWorker'in navigator){
+    navigator.serviceWorker.getRegistrations().then(items=>Promise.all(items.map(item=>item.unregister()))).catch(console.warn);
+  }
+  if('caches'in window){
+    caches.keys().then(keys=>Promise.all(keys.filter(key=>key.startsWith('bb-vg-')).map(key=>caches.delete(key)))).catch(console.warn);
+  }
 }
 init();

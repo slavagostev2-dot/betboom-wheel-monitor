@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any, Iterable
@@ -10,6 +11,7 @@ ROOT = Path(__file__).resolve().parent
 STATE_PATH = ROOT / "incident_state.json"
 UTC = timezone.utc
 RESOLVED_RETENTION_DAYS = 30
+REOPEN_COOLDOWN_HOURS = max(1, int(os.getenv("INCIDENT_REOPEN_COOLDOWN_HOURS", "6")))
 
 
 def now_utc() -> datetime:
@@ -114,7 +116,18 @@ def reconcile(findings: Iterable[dict[str, Any]], *, scope: str) -> dict[str, An
         if not was_active:
             state["sequence"] = int(state.get("sequence", 0) or 0) + 1
             entry["opened_sequence"] = state["sequence"]
-            entry["open_notification_pending"] = True
+            previous_notice = parse_datetime(previous.get("open_notified_at"))
+            reopened_too_soon = bool(
+                previous.get("status") == "resolved"
+                and previous_notice is not None
+                and now_utc() - previous_notice < timedelta(hours=REOPEN_COOLDOWN_HOURS)
+            )
+            entry["open_notification_pending"] = not reopened_too_soon
+            if reopened_too_soon:
+                entry["reopen_notification_suppressed_at"] = current_time
+                entry["reopen_notification_suppressed_until"] = (
+                    previous_notice + timedelta(hours=REOPEN_COOLDOWN_HOURS)
+                ).isoformat()
             entry.pop("open_notified_at", None)
             changed = True
         elif any(previous.get(name) != entry.get(name) for name in ("severity", "title", "detail", "metadata")):
@@ -222,10 +235,35 @@ def format_resolved_message(entries: list[dict[str, Any]]) -> str:
     return "\n".join(lines)[:4000]
 
 
+def format_digest_message(
+    opened: list[dict[str, Any]], resolved: list[dict[str, Any]]
+) -> str:
+    lines = ["🛠 <b>BB V.G.: единая сводка диагностики</b>", ""]
+    if opened:
+        lines.append("<b>Новые сбои</b>")
+        for index, entry in enumerate(opened[:10], 1):
+            lines.append(f"{index}. <b>{entry.get('title', 'Сбой')}</b>")
+            detail = str(entry.get("detail") or "").strip()
+            if detail:
+                lines.append(detail[:420])
+    if resolved:
+        if opened:
+            lines.append("")
+        lines.append("<b>Восстановлено</b>")
+        for index, entry in enumerate(resolved[:10], 1):
+            lines.append(f"{index}. {entry.get('title', 'Сбой устранён')}")
+    lines.extend([
+        "",
+        "Повторы подавляются: по одному сообщению на инцидент до восстановления.",
+    ])
+    return "\n".join(lines)[:4000]
+
+
 def self_test() -> None:
     assert incident_key("system", "dns", "telegram.me") == incident_key("system", "dns", "TELEGRAM.ME")
     finding = normalize_finding({"scope": "test", "kind": "dns", "title": "DNS"})
     assert finding["key"].startswith("test:dns:")
+    assert "единая сводка" in format_digest_message([finding], []).casefold()
     print("incident_manager self-test passed")
 
 

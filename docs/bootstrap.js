@@ -16,7 +16,9 @@ async function initMiniApp() {
   });
 
   if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('./service-worker.js').catch(error => console.warn('Service worker:', error));
+    navigator.serviceWorker.getRegistrations()
+      .then(items => Promise.all(items.map(item => item.unregister())))
+      .catch(error => console.warn('Service worker cleanup:', error));
   }
 }
 

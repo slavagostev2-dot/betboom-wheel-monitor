@@ -14,6 +14,7 @@ from bs4 import BeautifulSoup
 import admin_bot as legacy
 from admin_panel_runtime_v16 import TelegramPanelRuntimeV16
 from admin_panel_v2 import BLOCKED_SOURCES, USERNAME_RE, WHEEL_LINK_RE
+import telegram_transport
 
 UTC = timezone.utc
 SOURCE_REQUESTS_PATH = "source_requests.json"
@@ -84,9 +85,18 @@ class TelegramPanelRuntimeV17(TelegramPanelRuntimeV16):
 
     def moderator_chat_ids(self) -> list[str]:
         access = self.load_access(force=True)
-        values = set(str(x) for x in access.get("notification_recipients", []) if str(x))
-        values.update(str(x) for x in access.get("admins", []) if str(x))
-        for value in (access.get("owner_id"), legacy.ADMIN_USER_ID, legacy.BOT_CHAT_ID):
+        # Moderation requests must never leak to ordinary notification recipients.
+        admin_ids = {
+            str(access.get("owner_id") or ""),
+            *{str(x) for x in access.get("admins", []) if str(x)},
+        }
+        users = access.get("users") if isinstance(access.get("users"), dict) else {}
+        values = {
+            str((users.get(user_id) or {}).get("chat_id") or user_id)
+            for user_id in admin_ids
+            if user_id
+        }
+        for value in (legacy.ADMIN_USER_ID,):
             if str(value or ""):
                 values.add(str(value))
         return sorted(values)
@@ -106,7 +116,7 @@ class TelegramPanelRuntimeV17(TelegramPanelRuntimeV16):
         return full or "Пользователь"
 
     def inspect_source(self, source: str) -> dict[str, Any]:
-        url = f"https://t.me/s/{source}"
+        url = telegram_transport.public_source_url(source)
         try:
             response = self.http.get(
                 url,
@@ -176,7 +186,7 @@ class TelegramPanelRuntimeV17(TelegramPanelRuntimeV16):
             text += "\n\n<b>Примеры ссылок</b>\n" + sample
         markup = {
             "inline_keyboard": [
-                [{"text": "Открыть канал", "url": f"https://t.me/{source}"}],
+                [{"text": "Открыть канал", "url": telegram_transport.profile_url(source)}],
                 [
                     {"text": "⚡ В основные", "callback_data": f"sr:fast:{request_id}"},
                     {"text": "🌙 В ночное наблюдение", "callback_data": f"sr:nightly:{request_id}"},
@@ -358,7 +368,7 @@ class TelegramPanelRuntimeV17(TelegramPanelRuntimeV16):
                 f"Канал: <b>@{html.escape(source)}</b>\n"
                 f"Решение: <b>{html.escape(decision)}</b>\n"
                 f"Обработал Telegram ID: <code>{html.escape(str(self.current_user_id or ''))}</code>",
-                reply_markup={"inline_keyboard": [[{"text": "Открыть канал", "url": f"https://t.me/{source}"}]]},
+                reply_markup={"inline_keyboard": [[{"text": "Открыть канал", "url": telegram_transport.profile_url(source)}]]},
             )
         except PermissionError:
             self.answer(query_id, "Недостаточно прав")

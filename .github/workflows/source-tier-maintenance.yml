@@ -1,4 +1,4 @@
-name: Maintain source monitoring tiers
+name: Audit permanent source monitoring
 
 on:
   workflow_dispatch:
@@ -33,7 +33,7 @@ jobs:
       - name: Check maintenance script
         run: python -m py_compile source_tier_maintenance.py
 
-      - name: Evaluate seven-day source activity
+      - name: Audit seven-day source activity without moving sources
         env:
           BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
           BOT_CHAT_ID: ${{ secrets.BOT_CHAT_ID }}
@@ -43,12 +43,12 @@ jobs:
           SOURCE_AUTO_DEMOTION_MAX_CHECK_AGE_HOURS: "2"
         run: python source_tier_maintenance.py
 
-      - name: Save source tier changes
+      - name: Save source activity audit
         id: save
         shell: bash
         run: |
           set -euo pipefail
-          files=(public_sources.txt source_catalog.txt source_tier_state.json)
+          files=(source_tier_state.json)
           if git diff --quiet -- "${files[@]}"; then
             echo "Source tiers did not change."
             echo "changed=false" >> "$GITHUB_OUTPUT"
@@ -58,7 +58,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add "${files[@]}"
-          git commit -m "Maintain source monitoring tiers [skip ci]"
+          git commit -m "Audit permanent source activity [skip ci]"
 
           for attempt in 1 2 3; do
             if git push origin HEAD:main; then
@@ -72,10 +72,3 @@ jobs:
             fi
           done
           exit 1
-
-      - name: Queue monitor reload with updated source lists
-        if: ${{ steps.save.outputs.changed == 'true' }}
-        continue-on-error: true
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: gh workflow run monitor.yml --ref main -f continuous=true

@@ -167,13 +167,20 @@ class TelegramPanelRuntimeV14(TelegramPanelRuntimeV13):
             "Ночное наблюдение" if source.casefold() in nightly_set else "Не включён"
         )
         raw_status = str(health.get("status") or discovery.get("status") or "unknown")
+        failure_reason = str(
+            health.get("failure_reason") or health.get("last_error") or ""
+        ).strip()
         wheels = self.counter(stats, "wheel_posts") or self.counter(discovery, "wheel_links_found")
         activations = self.counter(stats, "activation_sent")
         reliability = round(activations * 100 / wheels) if wheels else 0
+        reason_line = (
+            f"Причина: {html.escape(failure_reason[:180])}\n" if failure_reason else ""
+        )
         text = (
             f"📡 <b>@{html.escape(source)}</b>\n\n"
             f"Проверяется: <b>{mode}</b>\n"
             f"Состояние: {html.escape(self.source_status_name(raw_status))}\n"
+            f"{reason_line}"
             f"Проверок: {self.counter(stats, 'checks')}\n"
             f"Постов с колёсами: {wheels}\n"
             f"Подтверждённых активаций: {activations}\n"
@@ -181,7 +188,7 @@ class TelegramPanelRuntimeV14(TelegramPanelRuntimeV13):
             f"Последнее колесо: {self.fmt_dt(stats.get('last_wheel_post_at') or discovery.get('latest_wheel_at'))}\n"
             f"Последняя проверка: {self.fmt_dt(health.get('last_checked_at') or discovery.get('checked_at'))}"
         )
-        rows: list[list[dict[str, Any]]] = [[{"text": "Открыть Telegram", "url": f"https://t.me/{source}"}]]
+        rows: list[list[dict[str, Any]]] = [[{"text": "Открыть Telegram", "url": f"https://telegram.me/{source}"}]]
         if self.is_admin():
             move: list[dict[str, str]] = []
             if mode != "Основная проверка":

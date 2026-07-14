@@ -310,7 +310,7 @@ def request_with_retries(
 def fetch_public_channel(username: str) -> list[Message]:
     response = request_with_retries(
         "GET",
-        f"https://t.me/s/{username}",
+        f"https://telegram.me/s/{username}",
         timeout=REQUEST_TIMEOUT,
         headers={"User-Agent": USER_AGENT},
         allow_redirects=True,
@@ -359,7 +359,7 @@ def fetch_public_channel(username: str) -> list[Message]:
                 message_id=message_id,
                 date=date,
                 text="\n".join(dict.fromkeys(part for part in parts if part)),
-                message_url=f"https://t.me/{source or username}/{message_id}",
+                message_url=f"https://telegram.me/{source or username}/{message_id}",
             )
         )
     return sorted(result, key=lambda item: item.message_id)

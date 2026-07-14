@@ -125,6 +125,40 @@ def main() -> None:
     require_text("source_catalog.txt", ("Кандидаты", "Все 66 известных источников"))
     require_text(".github/workflows/daily-report.yml", ("BB V.G. daily report", "daily_report.py"))
 
+    active_domain_files = (
+        "monitor.py",
+        "nightly_discovery.py",
+        "admin_panel_runtime_v17.py",
+        "admin_panel_runtime_v21.py",
+        "docs/app.js",
+        "docs/bbvg-controls.js",
+        "docs/views-secondary.js",
+    )
+    legacy_domain_files = [
+        path
+        for path in active_domain_files
+        if "https://t.me/" in (ROOT / path).read_text(encoding="utf-8")
+    ]
+    if legacy_domain_files:
+        raise SystemExit(
+            "PRECHECK ERROR: blocked Telegram domain remains in runtime: "
+            + ", ".join(legacy_domain_files)
+        )
+    require_text(
+        "docs/app.js",
+        (
+            "lightTheme",
+            "HapticFeedback",
+            "setHeaderColor",
+            "setBackgroundColor",
+            "setBottomBarColor",
+            "openNotificationSettings",
+        ),
+    )
+    require_text("docs/bbvg-controls.js", ("data-action=\"notifications\"",))
+    if "serviceWorker.register" in (ROOT / "docs/app.js").read_text(encoding="utf-8"):
+        raise SystemExit("PRECHECK ERROR: stale Mini App service worker registration returned")
+
     mapping = read_json("identifier_sources.json")
     if not isinstance(mapping.get("mappings"), list):
         raise SystemExit("PRECHECK ERROR: identifier_sources.json has an unexpected structure")

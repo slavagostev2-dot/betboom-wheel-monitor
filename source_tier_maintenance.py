@@ -127,14 +127,19 @@ def eligible_for_nightly(payload: dict[str, Any], source: str, now: datetime) ->
 
 def notification_recipients() -> list[str]:
     access = read_json(ACCESS_PATH, {})
-    settings = access.get("settings", {}) if isinstance(access.get("settings"), dict) else {}
-    if settings.get("service_notifications") is False:
-        return []
-    raw = access.get("notification_recipients", [])
-    if isinstance(raw, list):
-        result = sorted({str(value) for value in raw if str(value)})
-        if result:
-            return result
+    users = access.get("users", {}) if isinstance(access.get("users"), dict) else {}
+    admin_ids = {
+        str(value)
+        for value in [access.get("owner_id"), *access.get("admins", [])]
+        if str(value or "")
+    }
+    result = {
+        str(users.get(user_id, {}).get("chat_id") or user_id)
+        for user_id in admin_ids
+        if isinstance(users.get(user_id, {}), dict)
+    }
+    if result:
+        return sorted(result)
     fallback = str(os.getenv("BOT_CHAT_ID", "")).strip()
     return [fallback] if fallback else []
 
@@ -173,32 +178,13 @@ def main() -> int:
     nightly_keys = {value.casefold() for value in nightly}
     payload = read_json(STATS_PATH, {"sources": {}, "daily": {}})
 
-    retained: list[str] = []
-    moved: list[str] = []
+    candidates: list[str] = []
     reasons: dict[str, str] = {}
     for source in primary:
         eligible, reason = eligible_for_nightly(payload, source, now)
         reasons[source] = reason
-        if not eligible:
-            retained.append(source)
-            continue
-        moved.append(source)
-        if source.casefold() not in nightly_keys:
-            nightly.append(source)
-            nightly_keys.add(source.casefold())
-
-    write_list(
-        PRIMARY_PATH,
-        retained,
-        "# Основная проверка: источники с активным недельным наблюдением.\n"
-        "# Перенос в ночную выполняется только после 7 полных дней без новых колёс.",
-    )
-    write_list(
-        NIGHTLY_PATH,
-        nightly,
-        "# Ночная проверка: резервные источники и кандидаты.\n"
-        "# Возврат в основную проверку выполняется администратором.",
-    )
+        if eligible:
+            candidates.append(source)
 
     state = {
         "version": 1,
@@ -210,14 +196,18 @@ def main() -> int:
             "maximum_last_check_age_hours": MAX_LAST_CHECK_AGE_HOURS,
         },
         "primary_before": len(primary),
-        "primary_after": len(retained),
+        "policy": "all_configured_sources_remain_permanent",
+        "primary_after": len(primary),
         "nightly_after": len(nightly),
-        "moved_to_nightly": moved,
+        "moved_to_nightly": [],
+        "inactive_candidates_kept_permanent": candidates,
         "reasons": reasons,
     }
     STATE_PATH.write_text(json.dumps(state, ensure_ascii=False, indent=2, sort_keys=True) + "\n", encoding="utf-8")
-    print(f"Primary: {len(primary)} -> {len(retained)}; nightly: {len(nightly)}; moved: {len(moved)}")
-    send_notification(moved)
+    print(
+        f"Permanent sources: {len(primary)}; nightly candidates: {len(nightly)}; "
+        f"inactive but retained: {len(candidates)}"
+    )
     return 0
 
 

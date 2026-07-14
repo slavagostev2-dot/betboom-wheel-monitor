@@ -9,6 +9,7 @@ from pathlib import Path
 
 import monitor
 import monitor_data as data_store
+import telegram_transport
 
 
 ROOT = Path(__file__).resolve().parent
@@ -29,16 +30,17 @@ MANUAL_RUN = os.getenv("MANUAL_RUN", "").strip().lower() in {
 def fetch_public_channel_page(
     username: str,
     before: int | None = None,
+    *,
+    attempts: int = 2,
+    timeout: int | None = None,
 ) -> list[monitor.Message]:
-    url = f"https://t.me/s/{username}"
-    if before is not None:
-        url += f"?before={before}"
+    url = telegram_transport.public_source_url(username, before)
 
     response = monitor.request_with_retries(
         "GET",
         url,
-        attempts=2,
-        timeout=monitor.REQUEST_TIMEOUT,
+        attempts=max(1, attempts),
+        timeout=timeout or monitor.REQUEST_TIMEOUT,
         headers={"User-Agent": monitor.USER_AGENT},
         allow_redirects=True,
     )
@@ -82,8 +84,12 @@ def fetch_public_channel_page(
                 source=source or username,
                 message_id=message_id,
                 date=date,
-                text="\n".join(dict.fromkeys(part for part in parts if part)),
-                message_url=f"https://t.me/{source or username}/{message_id}",
+                text=telegram_transport.rewrite_telegram_text(
+                    "\n".join(dict.fromkeys(part for part in parts if part))
+                ),
+                message_url=telegram_transport.public_message_url(
+                    source or username, message_id
+                ),
             )
         )
     return sorted(result, key=lambda item: item.message_id)

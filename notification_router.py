@@ -1,10 +1,13 @@
 from __future__ import annotations
 
 import copy
+import hashlib
 import html
 import json
 import os
 import re
+import threading
+import time
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -19,11 +22,31 @@ WHEEL_URL_RE = re.compile(
 )
 
 USER_NOTIFICATION_MARKERS = (
+    "новое колесо betboom",
+    "колесо betboom стало активно",
     "колесо betboom подтверждено администратором",
     "напоминание о колесе betboom",
     "время прокрутки колеса наступило",
     "активные колёса",
 )
+
+ADMIN_NOTIFICATION_MARKERS = (
+    "ошибка",
+    "сбой",
+    "не смог проверить",
+    "недоступ",
+    "восстановлена",
+    "служебн",
+    "диагност",
+)
+
+USER_NOTIFICATION_KINDS = {"wheels", "daily_reports", "weekly_reports"}
+ADMIN_NOTIFICATION_KINDS = {"admin_system", "admin_sources", "admin_requests"}
+DELIVERY_DEDUP_SECONDS = max(
+    300, int(os.getenv("NOTIFICATION_DEDUP_SECONDS", "86400"))
+)
+_delivered: dict[str, float] = {}
+_delivery_lock = threading.Lock()
 
 
 def load_config() -> tuple[dict[str, Any], bool]:
@@ -34,9 +57,32 @@ def load_config() -> tuple[dict[str, Any], bool]:
     return (value if isinstance(value, dict) else {}), True
 
 
-def classify(text: str) -> str:
+def notification_kind(text: str) -> str:
     lowered = html.unescape(str(text or "")).casefold()
-    return "user" if any(marker in lowered for marker in USER_NOTIFICATION_MARKERS) else "admin"
+    if "ежедневный отчёт" in lowered or "ежедневная сводка" in lowered:
+        return "daily_reports"
+    if "недельный отчёт" in lowered or "недельная сводка" in lowered:
+        return "weekly_reports"
+    if "запрос пользователя" in lowered and "источник" in lowered:
+        return "admin_requests"
+    source_failure = any(marker in lowered for marker in (
+        "ошибок источников",
+        "источник недоступен",
+        "источников недоступна",
+        "проблемы источников",
+        "не смог проверить источник",
+    ))
+    if any(marker in lowered for marker in ADMIN_NOTIFICATION_MARKERS):
+        return "admin_sources" if source_failure else "admin_system"
+    if any(marker in lowered for marker in USER_NOTIFICATION_MARKERS):
+        return "wheels"
+    if source_failure:
+        return "admin_sources"
+    return "admin_system"
+
+
+def classify(text: str) -> str:
+    return "user" if notification_kind(text) in USER_NOTIFICATION_KINDS else "admin"
 
 
 def user_notifications_enabled(config: dict[str, Any]) -> bool:
@@ -82,17 +128,52 @@ def is_admin_chat(config: dict[str, Any], chat_id: str) -> bool:
     return str(chat_id) in {chat_for_user(config, user_id) for user_id in admin_user_ids(config)}
 
 
+def preference_enabled(
+    config: dict[str, Any], user_id: str, record: dict[str, Any], kind: str
+) -> bool:
+    admin = user_id in admin_user_ids(config)
+    if kind in ADMIN_NOTIFICATION_KINDS and not admin:
+        return False
+    raw = record.get("notification_preferences")
+    if isinstance(raw, dict) and kind in raw:
+        return bool(raw[kind])
+    settings = config.get("settings") if isinstance(config.get("settings"), dict) else {}
+    if kind == "wheels":
+        enabled = record.get("notifications_enabled")
+        if enabled is not None:
+            return bool(enabled)
+        legacy = {str(value) for value in config.get("notification_recipients", [])}
+        chat_id = str(record.get("chat_id") or user_id)
+        return chat_id in legacy if legacy else bool(settings.get("wheel_notifications", True))
+    if kind in {"daily_reports", "weekly_reports"}:
+        return admin and bool(settings.get(kind, True))
+    return admin
+
+
 def recipients(config: dict[str, Any], config_exists: bool, category: str) -> list[str]:
-    if category == "admin":
-        result = {
-            chat_for_user(config, user_id)
-            for user_id in admin_user_ids(config)
-            if chat_for_user(config, user_id)
-        }
+    kind = {"admin": "admin_system", "user": "wheels"}.get(category, category)
+    users = config.get("users") if isinstance(config.get("users"), dict) else {}
+    if kind in ADMIN_NOTIFICATION_KINDS:
+        result: set[str] = set()
+        for user_id in admin_user_ids(config):
+            raw = users.get(user_id)
+            record = raw if isinstance(raw, dict) else {}
+            if not preference_enabled(config, user_id, record, kind):
+                continue
+            chat_id = chat_for_user(config, user_id)
+            if chat_id:
+                result.add(chat_id)
         if result:
             return sorted(result)
-    elif user_notifications_enabled(config):
-        users = config.get("users") if isinstance(config.get("users"), dict) else {}
+    elif kind in USER_NOTIFICATION_KINDS:
+        settings = config.get("settings") if isinstance(config.get("settings"), dict) else {}
+        globally_enabled = (
+            user_notifications_enabled(config)
+            if kind == "wheels"
+            else bool(settings.get(kind, True))
+        )
+        if not globally_enabled:
+            return []
         legacy = {
             str(value)
             for value in config.get("notification_recipients", [])
@@ -103,20 +184,40 @@ def recipients(config: dict[str, Any], config_exists: bool, category: str) -> li
             if not isinstance(record, dict):
                 continue
             chat_id = str(record.get("chat_id") or user_id)
-            enabled = record.get("notifications_enabled")
-            if enabled is None:
-                enabled = not legacy or chat_id in legacy
-            if bool(enabled):
+            if preference_enabled(config, str(user_id), record, kind):
                 result.add(chat_id)
         if result:
             return sorted(result)
-        if not users and legacy:
+        if kind == "wheels" and not users and legacy:
             return sorted(legacy)
 
     fallback = str(os.getenv("BOT_CHAT_ID", "")).strip()
     if fallback and not config_exists:
         return [fallback]
     return []
+
+
+def delivery_key(chat_id: str, kind: str, text: str, url: str | None) -> str:
+    raw = "\x1f".join([str(chat_id), str(kind), str(text), str(url or "")])
+    return hashlib.sha256(raw.encode("utf-8")).hexdigest()
+
+
+def duplicate_delivery(key: str) -> bool:
+    current = time.monotonic()
+    with _delivery_lock:
+        expired = [
+            item
+            for item, seen_at in _delivered.items()
+            if current - seen_at > DELIVERY_DEDUP_SECONDS
+        ]
+        for item in expired:
+            _delivered.pop(item, None)
+        return key in _delivered
+
+
+def remember_delivery(key: str) -> None:
+    with _delivery_lock:
+        _delivered[key] = time.monotonic()
 
 
 def wheel_key_from_message(text: str, url: str | None, reply_markup: dict | None) -> str:
@@ -208,10 +309,14 @@ def install(monitor_module: Any) -> None:
     ) -> dict:
         config, exists = load_config()
         category = classify(text)
-        targets = recipients(config, exists, category)
+        kind = notification_kind(text)
+        targets = recipients(config, exists, kind)
         if not targets:
-            print(f"Notification has no recipients: {category}")
-            return {"ok": True, "result": {"suppressed": True, "category": category}}
+            print(f"Notification has no recipients: {kind}")
+            return {
+                "ok": True,
+                "result": {"suppressed": True, "category": category, "kind": kind},
+            }
 
         key = wheel_key_from_message(text, url, reply_markup)
         result: dict[str, Any] = {"ok": True, "result": {"sent": 0}}
@@ -221,6 +326,10 @@ def install(monitor_module: Any) -> None:
         for chat_id in targets:
             admin = is_admin_chat(config, chat_id)
             if category == "user" and hidden_for_chat(config, chat_id, key):
+                skipped += 1
+                continue
+            dedup_key = delivery_key(chat_id, kind, text, url)
+            if duplicate_delivery(dedup_key):
                 skipped += 1
                 continue
             payload: dict[str, Any] = {
@@ -240,6 +349,7 @@ def install(monitor_module: Any) -> None:
                 response = monitor_module.telegram_api("sendMessage", payload)
                 result = response
                 sent += 1
+                remember_delivery(dedup_key)
             except Exception as exc:
                 errors.append(f"{chat_id}:{type(exc).__name__}")
                 print(f"WARNING notification target {chat_id}: {type(exc).__name__}: {exc}")
@@ -251,6 +361,7 @@ def install(monitor_module: Any) -> None:
         result["result"]["sent"] = sent
         result["result"]["hidden_skipped"] = skipped
         result["result"]["category"] = category
+        result["result"]["kind"] = kind
         return result
 
     monitor_module.send_message = routed_send_message
@@ -262,18 +373,35 @@ def self_test() -> None:
         "owner_id": "1",
         "admins": ["2"],
         "notification_recipients": ["1", "3"],
-        "settings": {"wheel_notifications": True},
+        "settings": {
+            "notifications": True,
+            "daily_reports": True,
+            "weekly_reports": True,
+        },
         "users": {
             "1": {"chat_id": "1"},
             "2": {"chat_id": "2", "notifications_enabled": False},
-            "3": {"chat_id": "3", "notifications_enabled": True},
+            "3": {
+                "chat_id": "3",
+                "notifications_enabled": True,
+                "notification_preferences": {"admin_system": True},
+            },
         },
     }
     assert recipients(config, True, "admin") == ["1", "2"]
     assert recipients(config, True, "user") == ["1", "3"]
-    assert classify("🎡 Новое колесо BetBoom") == "admin"
+    assert recipients(config, True, "admin_system") == ["1", "2"]
+    assert "3" not in recipients(config, True, "admin_system")
+    assert classify("🎡 Новое колесо BetBoom") == "user"
     assert classify("✅ Колесо BetBoom подтверждено администратором") == "user"
     assert classify("⚠️ BB V.G. не смог проверить источник") == "admin"
+    assert classify("⚠️ Ошибка в списке «Активные колёса»") == "admin"
+    assert notification_kind("📊 Ежедневный отчёт BB V.G.") == "daily_reports"
+    assert notification_kind("📨 Запрос пользователя на добавление источника") == "admin_requests"
+    key = delivery_key("1", "admin_system", "failure", None)
+    assert not duplicate_delivery(key)
+    remember_delivery(key)
+    assert duplicate_delivery(key)
     user_markup = markup_for_chat(
         {"inline_keyboard": [[{"text": "Время", "callback_data": "bb:t:test"}, {"text": "Неактивное", "callback_data": "bb:x:test"}]]},
         admin=False,

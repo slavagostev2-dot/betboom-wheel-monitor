@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import os
+import re
 import ssl
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
@@ -22,9 +23,24 @@ HEALTH_PATH = ROOT / "source_health.json"
 CHECK_STATE_PATH = ROOT / "system_check_state.json"
 PUBLIC_SOURCES_PATH = ROOT / "public_sources.txt"
 NIGHTLY_SOURCES_PATH = ROOT / "source_catalog.txt"
+DISCOVERY_PATH = ROOT / "discovery_state.json"
+INTELLIGENCE_PATH = ROOT / "intelligence_state.json"
+MINIAPP_DEPLOYMENT_PATH = ROOT / "miniapp_deployment.json"
+MINIAPP_INDEX_PATH = ROOT / "docs" / "index.html"
+MINIAPP_APP_PATH = ROOT / "docs" / "app.js"
+ACTIVE_DOMAIN_FILES = (
+    ROOT / "monitor.py",
+    ROOT / "nightly_discovery.py",
+    ROOT / "admin_panel_runtime_v17.py",
+    ROOT / "admin_panel_runtime_v21.py",
+    ROOT / "docs" / "app.js",
+    ROOT / "docs" / "bbvg-controls.js",
+    ROOT / "docs" / "views-secondary.js",
+)
 UTC = timezone.utc
 EXPECTED_SOURCE_COUNT = max(1, int(os.getenv("EXPECTED_SOURCE_COUNT", "66")))
 MONITOR_MAX_AGE_MINUTES = max(5, int(os.getenv("MONITOR_MAX_AGE_MINUTES", "20")))
+DISCOVERY_MAX_AGE_HOURS = max(6, int(os.getenv("DISCOVERY_MAX_AGE_HOURS", "48")))
 SCOPE = "system_checks"
 
 notification_router.install(monitor)
@@ -280,14 +296,250 @@ def check_monitor_runtime(details: dict[str, Any], findings: list[dict[str, Any]
         ))
 
 
+def check_source_health(details: dict[str, Any], findings: list[dict[str, Any]]) -> None:
+    health = load_json(HEALTH_PATH, {})
+    sources = health.get("sources") if isinstance(health, dict) and isinstance(health.get("sources"), dict) else {}
+    configured = unique_sources(PUBLIC_SOURCES_PATH)
+    configured_keys = {source.casefold(): source for source in configured}
+    statuses: dict[str, int] = {}
+    problem_sources: list[str] = []
+    problem_details: list[dict[str, str]] = []
+    transport_buckets = {
+        "dns": 0,
+        "tls": 0,
+        "timeout": 0,
+        "http": 0,
+        "empty_or_html": 0,
+        "other": 0,
+    }
+    for source, entry in sources.items():
+        if not isinstance(entry, dict) or source.casefold() not in configured_keys:
+            continue
+        status = str(entry.get("status") or "unknown").casefold()
+        statuses[status] = statuses.get(status, 0) + 1
+        if status in {"ok", "unknown"}:
+            continue
+        problem_sources.append(str(source))
+        failure_code = str(entry.get("failure_code") or "").strip()
+        failure_reason = str(entry.get("failure_reason") or "").strip()
+        if not failure_code or not failure_reason:
+            failure_code, failure_reason = data_store.classify_source_problem(
+                "empty" if status == "empty" else "error",
+                str(entry.get("last_error") or entry.get("last_transport_error") or ""),
+            )
+        problem_details.append({
+            "source": str(source),
+            "status": status,
+            "failure_code": failure_code,
+            "reason": failure_reason,
+        })
+        findings.append(finding(
+            f"source_{failure_code}",
+            f"Источник @{source} не проверяется",
+            failure_reason,
+            severity="critical" if status == "quarantined" else "warning",
+            subject=str(source),
+        ))
+        error = str(entry.get("last_error") or entry.get("last_transport_error") or "").casefold()
+        if "resolve" in error or "dns" in error or "name or service" in error:
+            transport_buckets["dns"] += 1
+        elif "certificate" in error or "ssl" in error or "tls" in error:
+            transport_buckets["tls"] += 1
+        elif "timeout" in error:
+            transport_buckets["timeout"] += 1
+        elif "http" in error or "status" in error:
+            transport_buckets["http"] += 1
+        elif status in {"empty", "html_changed"}:
+            transport_buckets["empty_or_html"] += 1
+        else:
+            transport_buckets["other"] += 1
+    missing = [
+        source
+        for key, source in configured_keys.items()
+        if not any(str(existing).casefold() == key for existing in sources)
+    ]
+    details["source_health_summary"] = {
+        "records": len(sources),
+        "configured_records": len(configured) - len(missing),
+        "statuses": statuses,
+        "problem_sources": problem_sources[:30],
+        "problem_details": problem_details[:66],
+        "transport_failure_types": transport_buckets,
+        "missing_sources": missing,
+    }
+    if missing:
+        findings.append(finding(
+            "source_health_missing",
+            "Не для всех источников есть данные здоровья",
+            f"Нет записей для {len(missing)} источников: {', '.join('@' + item for item in missing[:15])}.",
+        ))
+    quarantined = statuses.get("quarantined", 0)
+    if quarantined:
+        findings.append(finding(
+            "sources_quarantined",
+            "Источники попали в карантин",
+            f"В карантине: {quarantined}. Источники остаются в постоянном списке и будут перепроверяться.",
+        ))
+
+
+def check_discovery_runtime(details: dict[str, Any], findings: list[dict[str, Any]]) -> None:
+    discovery = load_json(DISCOVERY_PATH, {})
+    intelligence = load_json(INTELLIGENCE_PATH, {})
+    summary: dict[str, Any] = {
+        "domain": discovery.get("telegram_domain") if isinstance(discovery, dict) else None,
+        "active_size": int(discovery.get("active_size", 0) or 0) if isinstance(discovery, dict) else 0,
+        "catalog_size": int(discovery.get("catalog_size", 0) or 0) if isinstance(discovery, dict) else 0,
+        "discovery_errors": int(discovery.get("error_count", 0) or 0) if isinstance(discovery, dict) else 0,
+        "discovery_last_run_at": discovery.get("last_run_at") if isinstance(discovery, dict) else None,
+        "intelligence_last_run_at": intelligence.get("last_run_at") if isinstance(intelligence, dict) else None,
+        "intelligence_domain": intelligence.get("telegram_domain") if isinstance(intelligence, dict) else None,
+        "candidate_count": len(intelligence.get("candidates", {})) if isinstance(intelligence, dict) and isinstance(intelligence.get("candidates"), dict) else 0,
+        "intelligence_summary": intelligence.get("last_run_summary", {}) if isinstance(intelligence, dict) and isinstance(intelligence.get("last_run_summary"), dict) else {},
+    }
+    details["discovery"] = summary
+    if summary["domain"] != telegram_transport.PRIMARY_DOMAIN:
+        findings.append(finding(
+            "discovery_domain",
+            "Поиск источников использует неверный домен",
+            f"Ожидался {telegram_transport.PRIMARY_DOMAIN}, записано {summary['domain'] or 'нет данных'}.",
+            severity="critical",
+        ))
+    if summary["intelligence_domain"] != telegram_transport.PRIMARY_DOMAIN:
+        findings.append(finding(
+            "intelligence_domain",
+            "Разведка новых источников использует неверный домен",
+            f"Ожидался {telegram_transport.PRIMARY_DOMAIN}, записано {summary['intelligence_domain'] or 'нет данных'}.",
+            severity="critical",
+        ))
+    if summary["active_size"] not in {0, EXPECTED_SOURCE_COUNT}:
+        findings.append(finding(
+            "discovery_inventory",
+            "Разведка видит не все постоянные источники",
+            f"В состоянии поиска записано {summary['active_size']} из {EXPECTED_SOURCE_COUNT}.",
+        ))
+    intelligence_summary = summary["intelligence_summary"]
+    scanned = int(intelligence_summary.get("sources_scanned", 0) or 0)
+    intelligence_errors = int(intelligence_summary.get("errors", 0) or 0)
+    if intelligence_errors or (intelligence_summary and scanned < EXPECTED_SOURCE_COUNT):
+        findings.append(finding(
+            "discovery_scan_failure",
+            "Поиск новых источников не смог просканировать базу",
+            f"Просканировано {scanned} из {EXPECTED_SOURCE_COUNT}; ошибок {intelligence_errors}. "
+            f"Поиск должен выполняться через {telegram_transport.PRIMARY_DOMAIN}.",
+            severity="critical",
+        ))
+    for label, raw in (
+        ("поиск кандидатов", summary["discovery_last_run_at"]),
+        ("разведка упоминаний", summary["intelligence_last_run_at"]),
+    ):
+        timestamp = parse_datetime(raw)
+        if timestamp is None or now_utc() - timestamp > timedelta(hours=DISCOVERY_MAX_AGE_HOURS):
+            age_text = "нет времени запуска" if timestamp is None else f"старше {DISCOVERY_MAX_AGE_HOURS} ч."
+            findings.append(finding(
+                f"discovery_stale_{label.split()[0]}",
+                f"Давно не обновлялся {label}",
+                age_text,
+            ))
+
+
+def check_domain_compliance(details: dict[str, Any], findings: list[dict[str, Any]]) -> None:
+    offenders: list[str] = []
+    for path in ACTIVE_DOMAIN_FILES:
+        try:
+            text = path.read_text(encoding="utf-8")
+        except OSError:
+            offenders.append(f"{path.relative_to(ROOT)}: отсутствует")
+            continue
+        if "https://t.me/" in text:
+            offenders.append(str(path.relative_to(ROOT)))
+    details["domain_compliance"] = {
+        "primary": telegram_transport.PRIMARY_DOMAIN,
+        "checked_files": [str(path.relative_to(ROOT)) for path in ACTIVE_DOMAIN_FILES],
+        "legacy_url_offenders": offenders,
+    }
+    if offenders:
+        findings.append(finding(
+            "legacy_domain_in_runtime",
+            "В рабочем коде остались ссылки на заблокированный домен",
+            ", ".join(offenders),
+            severity="critical",
+        ))
+
+
+def check_miniapp_release(details: dict[str, Any], findings: list[dict[str, Any]]) -> None:
+    deployment = load_json(MINIAPP_DEPLOYMENT_PATH, {})
+    try:
+        index = MINIAPP_INDEX_PATH.read_text(encoding="utf-8")
+        app_source = MINIAPP_APP_PATH.read_text(encoding="utf-8")
+    except OSError as exc:
+        details["miniapp"] = {"ok": False, "error": str(exc)}
+        findings.append(finding(
+            "miniapp_files_missing",
+            "Не найдены файлы Mini App",
+            str(exc),
+            severity="critical",
+        ))
+        return
+    version_match = re.search(r"const VERSION='([^']+)'", app_source)
+    version = version_match.group(1) if version_match else ""
+    assets = re.findall(r"(?:app\.js|styles\.css)\?v=([0-9.]+)", index)
+    features = {
+        "light_theme": all(marker in app_source for marker in ("lightTheme", "applyTheme", "setHeaderColor", "setBackgroundColor", "setBottomBarColor")),
+        "haptics": "HapticFeedback" in app_source and "app.settings.haptics" in app_source,
+        "unified_notifications": "data-action=\"notifications\"" in app_source or "data-action=\"notifications\"" in (ROOT / "docs" / "bbvg-controls.js").read_text(encoding="utf-8"),
+    }
+    url = str(deployment.get("url") or "") if isinstance(deployment, dict) else ""
+    details["miniapp"] = {
+        "version": version,
+        "asset_versions": assets,
+        "deployment_status": deployment.get("status") if isinstance(deployment, dict) else None,
+        "deployment_url": url,
+        "features": features,
+    }
+    if not version or not assets or any(asset != version for asset in assets):
+        findings.append(finding(
+            "miniapp_cache_version",
+            "Версии ресурсов Mini App не совпадают",
+            f"app={version or 'не найдена'}, assets={assets or 'не найдены'}.",
+            severity="critical",
+        ))
+    missing = [name for name, enabled in features.items() if not enabled]
+    if missing:
+        findings.append(finding(
+            "miniapp_features",
+            "В Mini App отсутствуют обязательные функции",
+            ", ".join(missing),
+            severity="critical",
+        ))
+    if deployment.get("status") != "deployed" or not url.startswith("https://slavagostev2-betboom-monitor.pages.dev/"):
+        findings.append(finding(
+            "miniapp_deployment",
+            "Mini App открывается не с актуального домена",
+            f"status={deployment.get('status')}; url={url or 'не задан'}.",
+            severity="critical",
+        ))
+
+
 def check_notification_routing(details: dict[str, Any], findings: list[dict[str, Any]]) -> None:
     config, exists = notification_router.load_config()
     admins = notification_router.recipients(config, exists, "admin")
     users = notification_router.recipients(config, exists, "user")
+    admin_kinds = {
+        kind: notification_router.recipients(config, exists, kind)
+        for kind in sorted(notification_router.ADMIN_NOTIFICATION_KINDS)
+    }
+    user_kinds = {
+        kind: notification_router.recipients(config, exists, kind)
+        for kind in sorted(notification_router.USER_NOTIFICATION_KINDS)
+    }
     details["notification_routing"] = {
         "admin_recipients": admins,
         "user_recipients": users,
+        "admin_kinds": admin_kinds,
+        "user_kinds": user_kinds,
         "error_category": notification_router.classify("⚠️ Ошибка BB V.G."),
+        "error_kind": notification_router.notification_kind("⚠️ Ошибка BB V.G."),
+        "duplicate_window_seconds": notification_router.DELIVERY_DEDUP_SECONDS,
     }
     if notification_router.classify("⚠️ Ошибка BB V.G.") != "admin":
         findings.append(finding(
@@ -297,38 +549,43 @@ def check_notification_routing(details: dict[str, Any], findings: list[dict[str,
             severity="critical",
         ))
     admin_ids = notification_router.admin_user_ids(config)
-    for chat_id in admins:
-        user_id, _ = notification_router.user_for_chat(config, chat_id)
-        if user_id and user_id not in admin_ids:
-            findings.append(finding(
-                "non_admin_error_recipient",
-                "Обычный пользователь включён в получателей ошибок",
-                f"Chat ID {chat_id} не имеет роли администратора.",
-                severity="critical",
-                subject=chat_id,
-            ))
+    for kind, targets in admin_kinds.items():
+        for chat_id in targets:
+            user_id, _ = notification_router.user_for_chat(config, chat_id)
+            if user_id and user_id not in admin_ids:
+                findings.append(finding(
+                    "non_admin_error_recipient",
+                    "Обычный пользователь включён в получателей ошибок",
+                    f"Chat ID {chat_id} не имеет роли администратора, категория {kind}.",
+                    severity="critical",
+                    subject=chat_id,
+                ))
 
 
 def deliver_pending_notifications(state: dict[str, Any], details: dict[str, Any]) -> None:
     opened = incident_manager.pending_open(state)
     resolved = incident_manager.pending_resolved(state)
-    delivery = {"opened": len(opened), "resolved": len(resolved), "open_sent": False, "resolved_sent": False}
-    if opened:
+    delivery = {
+        "opened": len(opened),
+        "resolved": len(resolved),
+        "digest_sent": False,
+        "messages_attempted": 1 if opened or resolved else 0,
+    }
+    if opened or resolved:
         try:
-            monitor.send_message(incident_manager.format_open_message(opened))
+            monitor.send_message(incident_manager.format_digest_message(opened, resolved))
         except Exception as exc:
-            delivery["open_error"] = f"{type(exc).__name__}: {exc}"[:1000]
+            delivery["error"] = f"{type(exc).__name__}: {exc}"[:1000]
         else:
-            incident_manager.mark_notified([str(entry.get("key")) for entry in opened], "open")
-            delivery["open_sent"] = True
-    if resolved:
-        try:
-            monitor.send_message(incident_manager.format_resolved_message(resolved))
-        except Exception as exc:
-            delivery["resolved_error"] = f"{type(exc).__name__}: {exc}"[:1000]
-        else:
-            incident_manager.mark_notified([str(entry.get("key")) for entry in resolved], "resolved")
-            delivery["resolved_sent"] = True
+            if opened:
+                incident_manager.mark_notified(
+                    [str(entry.get("key")) for entry in opened], "open"
+                )
+            if resolved:
+                incident_manager.mark_notified(
+                    [str(entry.get("key")) for entry in resolved], "resolved"
+                )
+            delivery["digest_sent"] = True
     details["incident_delivery"] = delivery
 
 
@@ -343,6 +600,10 @@ def main() -> int:
     check_telegram_web(details, findings)
     check_bot_api(details, findings)
     check_monitor_runtime(details, findings)
+    check_source_health(details, findings)
+    check_discovery_runtime(details, findings)
+    check_domain_compliance(details, findings)
+    check_miniapp_release(details, findings)
     check_notification_routing(details, findings)
     state = incident_manager.reconcile(findings, scope=SCOPE)
     details["active_incidents"] = int(state.get("active_count", 0) or 0)
@@ -351,6 +612,24 @@ def main() -> int:
     details["status"] = "ok" if not findings else "degraded"
     details["finding_count"] = len(findings)
     details["findings"] = findings
+    details["gpt_diagnostic_snapshot"] = {
+        "single_source": "system_check_state.json",
+        "status": details["status"],
+        "domain": telegram_transport.PRIMARY_DOMAIN,
+        "configured_sources": details.get("inventory", {}).get("configured", 0),
+        "checked_sources": details.get("monitor", {}).get("checked_sources", 0),
+        "reachable_sources": details.get("monitor", {}).get("reachable_sources", 0),
+        "active_incidents": details["active_incidents"],
+    }
+    details["check_matrix"] = {
+        "inventory": "ok" if not any(item["kind"] in {"source_inventory", "source_policy", "source_duplicates"} for item in findings) else "failed",
+        "telegram_transport": "ok" if not any(str(item["kind"]).startswith("telegram_") or item["kind"] == "legacy_domain_redirect" for item in findings) else "failed",
+        "monitor": "ok" if not any(str(item["kind"]).startswith("monitor_") or item["kind"] in {"all_sources_unreachable", "partial_source_failure"} for item in findings) else "failed",
+        "source_health": "ok" if not any(str(item["kind"]).startswith("source_") or item["kind"] == "sources_quarantined" for item in findings) else "failed",
+        "discovery": "ok" if not any(str(item["kind"]).startswith("discovery_") for item in findings) else "failed",
+        "miniapp": "ok" if not any(str(item["kind"]).startswith("miniapp_") for item in findings) else "failed",
+        "notifications": "ok" if not any(item["kind"] in {"notification_routing", "non_admin_error_recipient"} for item in findings) else "failed",
+    }
     save_json(CHECK_STATE_PATH, details)
     print(
         f"BB V.G. system checks: status={details['status']}; "
@@ -363,6 +642,7 @@ def self_test() -> None:
     assert classify_transport_error(requests.exceptions.SSLError("certificate"))[0] == "telegram_tls"
     assert classify_transport_error(requests.exceptions.ConnectTimeout("timeout"))[0] == "telegram_timeout"
     assert finding("x", "y", "z")["kind"] == "x"
+    assert data_store.classify_source_problem("error", "HTTP 404")[0] == "removed_or_renamed"
     print("system_checks self-test passed")
 
 

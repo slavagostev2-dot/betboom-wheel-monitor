@@ -27,7 +27,11 @@ SOURCE_INACTIVITY_DAYS = max(1, int(os.getenv("SOURCE_INACTIVITY_DAYS", "7")))
 MONITOR_INTERVAL_MINUTES = max(1, int(os.getenv("MONITOR_INTERVAL_MINUTES", "5")))
 BLOCKED_SOURCES = {"frixa_betboom", "gazazor"}
 USERNAME_RE = re.compile(r"^[A-Za-z][A-Za-z0-9_]{3,31}$")
-POST_URL_RE = re.compile(r"(?:https?://)?t\.me/(?P<source>[A-Za-z][A-Za-z0-9_]{3,31})/(?P<message>\d+)", re.I)
+POST_URL_RE = re.compile(
+    r"(?:https?://)?(?:www\.)?(?:telegram\.me|t\.me)/"
+    r"(?P<source>[A-Za-z][A-Za-z0-9_]{3,31})/(?P<message>\d+)",
+    re.I,
+)
 WHEEL_LINK_RE = re.compile(r"(?:https?://)?(?:www\.)?betboom\.ru/freestream/[A-Za-z0-9._~-]+", re.I)
 
 BTN_STATS = "📊 Статистика"
@@ -78,10 +82,7 @@ COMMANDS = [
 
 DEFAULT_SETTINGS = {
     "public_panel": True,
-    "wheel_notifications": True,
-    "service_notifications": True,
-    "daily_reports": True,
-    "weekly_reports": True,
+    "notifications": True,
 }
 
 
@@ -170,9 +171,15 @@ class TelegramPanelV2(RuntimeAdminBot):
         settings = dict(DEFAULT_SETTINGS)
         raw_settings = result.get("settings")
         if isinstance(raw_settings, dict):
-            for key in DEFAULT_SETTINGS:
-                if key in raw_settings:
-                    settings[key] = bool(raw_settings[key])
+            settings["public_panel"] = bool(
+                raw_settings.get("public_panel", DEFAULT_SETTINGS["public_panel"])
+            )
+            settings["notifications"] = bool(
+                raw_settings.get(
+                    "notifications",
+                    raw_settings.get("wheel_notifications", DEFAULT_SETTINGS["notifications"]),
+                )
+            )
         result["settings"] = settings
         result["version"] = 2
         return result
@@ -238,7 +245,9 @@ class TelegramPanelV2(RuntimeAdminBot):
                 changed = True
         users = access.setdefault("users", {})
         previous = users.get(user_id, {}) if isinstance(users.get(user_id), dict) else {}
+        # Preserve user-scoped state when profile metadata is refreshed.
         record = {
+            **previous,
             "id": user_id,
             "chat_id": chat_id,
             "username": str(sender.get("username") or ""),
@@ -246,6 +255,12 @@ class TelegramPanelV2(RuntimeAdminBot):
             "last_name": str(sender.get("last_name") or ""),
             "last_seen_at": datetime.now(UTC).isoformat(),
             "first_seen_at": str(previous.get("first_seen_at") or datetime.now(UTC).isoformat()),
+            "notifications_enabled": bool(
+                previous.get(
+                    "notifications_enabled",
+                    chat_id in {str(value) for value in access.get("notification_recipients", [])},
+                )
+            ),
         }
         if previous != record:
             users[user_id] = record
@@ -667,7 +682,7 @@ class TelegramPanelV2(RuntimeAdminBot):
             f"Последнее колесо: {self.fmt_dt(stats.get('last_wheel_post_at') or discovery.get('latest_wheel_at'))}\n"
             f"Последняя проверка: {self.fmt_dt(health.get('last_checked_at') or discovery.get('checked_at'))}"
         )
-        rows: list[list[dict[str, str]]] = [[{"text": "Открыть Telegram", "url": f"https://t.me/{source}"}]]
+        rows: list[list[dict[str, str]]] = [[{"text": "Открыть Telegram", "url": f"https://telegram.me/{source}"}]]
         if self.is_admin():
             move: list[dict[str, str]] = []
             if mode != "Основная проверка":
@@ -753,7 +768,11 @@ class TelegramPanelV2(RuntimeAdminBot):
         rows.sort(key=lambda item: (item[1].get("status") != "quarantined", item[0].casefold()))
         lines = [f"⚠️ <b>Источники с проблемами: {len(rows)}</b>", ""]
         for source, entry in rows[:35]:
-            reason = str(entry.get("last_error") or self.source_status_name(str(entry.get("status") or "")))
+            reason = str(
+                entry.get("failure_reason")
+                or entry.get("last_error")
+                or self.source_status_name(str(entry.get("status") or ""))
+            )
             lines.append(f"• @{html.escape(source)} — {html.escape(reason[:90])}")
         if not rows:
             lines.append("Проблемных источников нет.")
@@ -785,20 +804,13 @@ class TelegramPanelV2(RuntimeAdminBot):
         settings = self.load_access().get("settings", {})
         text = (
             "⚙️ <b>Настройки</b>\n\n"
-            f"Уведомления о колёсах: {self.bool_mark(settings['wheel_notifications'])}\n"
-            f"Служебные сообщения: {self.bool_mark(settings['service_notifications'])}\n"
-            f"Ежедневный отчёт: {self.bool_mark(settings['daily_reports'])}\n"
-            f"Недельный отчёт: {self.bool_mark(settings['weekly_reports'])}\n"
+            f"Уведомления пользователям: {self.bool_mark(settings['notifications'])}\n"
+            "Служебные ошибки получают только владелец и администраторы.\n"
             f"Панель для обычных пользователей: {self.bool_mark(settings['public_panel'])}\n"
             f"Проверка основных источников: каждые {MONITOR_INTERVAL_MINUTES} минут"
         )
         rows = [
-            [{"text": f"Колёса {self.bool_mark(settings['wheel_notifications'])}", "callback_data": "setting:wheel_notifications"}],
-            [{"text": f"Служебные сообщения {self.bool_mark(settings['service_notifications'])}", "callback_data": "setting:service_notifications"}],
-            [
-                {"text": f"Ежедневный {self.bool_mark(settings['daily_reports'])}", "callback_data": "setting:daily_reports"},
-                {"text": f"Недельный {self.bool_mark(settings['weekly_reports'])}", "callback_data": "setting:weekly_reports"},
-            ],
+            [{"text": f"Уведомления {self.bool_mark(settings['notifications'])}", "callback_data": "setting:notifications"}],
             [{"text": f"Пользовательская панель {self.bool_mark(settings['public_panel'])}", "callback_data": "setting:public_panel"}],
             [{"text": "🔔 Получатели уведомлений", "callback_data": "page:recipients"}],
         ]
@@ -819,7 +831,7 @@ class TelegramPanelV2(RuntimeAdminBot):
             if not isinstance(record, dict):
                 continue
             chat_id = str(record.get("chat_id") or user_id)
-            enabled = chat_id in recipients
+            enabled = bool(record.get("notifications_enabled", chat_id in recipients))
             name = " ".join(x for x in [str(record.get("first_name") or ""), str(record.get("last_name") or "")] if x).strip() or str(record.get("username") or user_id)
             lines.append(f"{self.bool_mark(enabled)} {html.escape(name)} — <code>{html.escape(user_id)}</code>")
             rows.append([{"text": f"{self.bool_mark(enabled)} {name[:24]}", "callback_data": f"recipient:{user_id}"}])
@@ -854,7 +866,12 @@ class TelegramPanelV2(RuntimeAdminBot):
         role = self.role_for(user_id)
         name = " ".join(x for x in [str(record.get("first_name") or ""), str(record.get("last_name") or "")] if x).strip() or str(record.get("username") or user_id)
         chat_id = str(record.get("chat_id") or user_id)
-        receives = chat_id in {str(x) for x in access.get("notification_recipients", [])}
+        receives = bool(
+            record.get(
+                "notifications_enabled",
+                chat_id in {str(x) for x in access.get("notification_recipients", [])},
+            )
+        )
         text = (
             f"👤 <b>{html.escape(name)}</b>\n\n"
             f"Telegram ID: <code>{html.escape(user_id)}</code>\n"
@@ -890,10 +907,12 @@ class TelegramPanelV2(RuntimeAdminBot):
             raise ValueError("Пользователь сначала должен запустить бота")
         chat_id = str(record.get("chat_id") or user_id)
         recipients = {str(x) for x in access.get("notification_recipients", [])}
-        if chat_id in recipients:
-            recipients.remove(chat_id)
+        enabled = bool(record.get("notifications_enabled", chat_id in recipients))
+        if enabled:
+            recipients.discard(chat_id)
         else:
             recipients.add(chat_id)
+        record["notifications_enabled"] = not enabled
         access["notification_recipients"] = sorted(recipients)
         self.save_access("Update notification recipients [skip ci]")
         self.dispatch("monitor.yml", {"continuous": "true"})
@@ -905,6 +924,15 @@ class TelegramPanelV2(RuntimeAdminBot):
         admins = {str(x) for x in access.get("admins", [])}
         if enabled:
             admins.add(user_id)
+            record = access.get("users", {}).get(user_id)
+            if isinstance(record, dict):
+                chat_id = str(record.get("chat_id") or user_id)
+                record["notifications_enabled"] = True
+                recipients = {
+                    str(value) for value in access.get("notification_recipients", []) if str(value)
+                }
+                recipients.add(chat_id)
+                access["notification_recipients"] = sorted(recipients)
         else:
             admins.discard(user_id)
         admins.discard(str(access.get("owner_id") or ""))
@@ -933,7 +961,7 @@ class TelegramPanelV2(RuntimeAdminBot):
             return
         rows = [
             [{"text": "▶️ Проверить источники сейчас", "callback_data": "control:monitor"}],
-            [{"text": "🔎 Запустить поиск новых источников", "callback_data": "control:nightly"}],
+            [{"text": "🔎 Запустить поиск новых источников", "callback_data": "control:intelligence"}],
             [{"text": "📨 Отправить ежедневный отчёт", "callback_data": "control:daily"}],
             [{"text": "✅ Проверить работу системы", "callback_data": "page:status"}],
             [{"text": "🔍 Почему не пришло колесо?", "callback_data": "page:diagnostic"}],
@@ -948,7 +976,7 @@ class TelegramPanelV2(RuntimeAdminBot):
         text = (
             "🔍 <b>Почему не пришло колесо?</b>\n\n"
             "Отправьте ссылку на конкретный Telegram-пост или username канала.\n\n"
-            "Лучший вариант: <code>https://t.me/channel/123</code>"
+            "Лучший вариант: <code>https://telegram.me/channel/123</code>"
         )
         self.send(text, reply_markup=self.with_nav())
 
@@ -964,7 +992,7 @@ class TelegramPanelV2(RuntimeAdminBot):
         mode = "основная проверка каждые 5 минут" if source.casefold() in primary else (
             "резервная проверка" if source.casefold() in reserve else "не добавлен в мониторинг"
         )
-        url = f"https://t.me/s/{source}"
+        url = f"https://telegram.me/s/{source}"
         response = requests.get(url, headers={"User-Agent": legacy.USER_AGENT if hasattr(legacy, 'USER_AGENT') else 'Mozilla/5.0'}, timeout=legacy.REQUEST_TIMEOUT)
         if response.status_code != 200:
             return f"@{html.escape(source)}: Telegram вернул HTTP {response.status_code}. Режим: {mode}."
@@ -1252,7 +1280,7 @@ class TelegramPanelV2(RuntimeAdminBot):
                 action = data.split(":", 1)[1]
                 workflows = {
                     "monitor": ("monitor.yml", {"continuous": "true"}, "Проверка источников запущена"),
-                    "nightly": ("nightly-discovery.yml", None, "Поиск новых источников запущен"),
+                    "nightly": ("nightly-discovery.yml", None, "Проверка новых кандидатов запущена"),
                     "daily": ("daily-report.yml", None, "Ежедневный отчёт запущен"),
                 }
                 workflow, inputs, answer = workflows[action]
@@ -1347,10 +1375,10 @@ def self_test() -> None:
     assert access["owner_id"] == "123"
     assert access["admins"] == ["456"]
     assert access["settings"]["public_panel"] is False
-    assert access["settings"]["wheel_notifications"] is True
+    assert access["settings"]["notifications"] is True
     assert bot.source_mode_name("primary") == "Основные источники"
     assert bot.source_status_name("quarantined") == "временно приостановлен"
-    assert POST_URL_RE.search("https://t.me/testchan/123")
+    assert POST_URL_RE.search("https://telegram.me/testchan/123")
     assert WHEEL_LINK_RE.search("https://betboom.ru/freestream/test")
     print("admin_panel_v2 self-test passed")
 

@@ -6,13 +6,14 @@ import os
 import re
 import sys
 from collections import defaultdict
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
 import monitor
 import monitor_data as data_store
-from nightly_discovery import fetch_public_channel_page
+import telegram_transport
 
 ROOT = Path(__file__).resolve().parent
 STATE_PATH = ROOT / "intelligence_state.json"
@@ -24,6 +25,7 @@ UTC = timezone.utc
 SOURCE_LIMIT = max(5, int(os.getenv("INTELLIGENCE_SOURCE_LIMIT", "70")))
 CANDIDATE_LIMIT = max(10, int(os.getenv("INTELLIGENCE_CANDIDATE_LIMIT", "100")))
 VERIFY_LIMIT = max(5, int(os.getenv("INTELLIGENCE_VERIFY_LIMIT", "40")))
+INTELLIGENCE_WORKERS = max(2, min(16, int(os.getenv("INTELLIGENCE_WORKERS", "12"))))
 
 USERNAME_RE = re.compile(r"(?<![A-Za-z0-9_])@([A-Za-z][A-Za-z0-9_]{4,31})")
 TME_RE = re.compile(
@@ -108,10 +110,15 @@ def verify_candidate(username: str) -> dict[str, Any]:
         "status": "unknown",
     }
     try:
-        messages = fetch_public_channel_page(username)
+        messages = monitor.fetch_public_channel(username)
     except Exception as exc:
+        failure_code, failure_reason = data_store.classify_source_problem(
+            "error", f"{type(exc).__name__}: {exc}"
+        )
         result["status"] = "error"
         result["error"] = f"{type(exc).__name__}: {exc}"[:300]
+        result["failure_code"] = failure_code
+        result["failure_reason"] = failure_reason
         return result
     if not messages:
         result["status"] = "empty"
@@ -160,12 +167,25 @@ def main() -> int:
     )
     scanned = 0
     errors: list[str] = []
+    error_types: dict[str, int] = defaultdict(int)
 
-    for source in sources[:SOURCE_LIMIT]:
-        try:
-            messages = fetch_public_channel_page(source)
-        except Exception as exc:
-            errors.append(f"@{source}: {type(exc).__name__}")
+    selected_sources = sources[:SOURCE_LIMIT]
+    # Reuse the permanent monitor's resilient batch transport. A systemic
+    # telegram.me outage is retried as one transport incident instead of
+    # degrading 66 channels independently.
+    scan_results, scan_errors, empty_sources = monitor.fetch_all_sources(selected_sources)
+    for source in empty_sources:
+        scan_results[source] = []
+    for source, detail in scan_errors.items():
+        failure_code, failure_reason = data_store.classify_source_problem(
+            "error", detail
+        )
+        error_types[failure_code] += 1
+        errors.append(f"@{source}: {failure_code} — {failure_reason}")
+
+    for source in selected_sources:
+        messages = scan_results.get(source)
+        if messages is None:
             continue
         scanned += 1
         for message in messages:
@@ -199,7 +219,24 @@ def main() -> int:
         key=lambda item: (-int(item["mention_count"]), -len(item["discovered_from"]), str(item["source"]).casefold()),
     )[:CANDIDATE_LIMIT]
 
-    verified = 0
+    verification_results: dict[str, dict[str, Any]] = {}
+    verify_sources = [str(raw["source"]) for raw in ordered[:VERIFY_LIMIT]]
+    with ThreadPoolExecutor(
+        max_workers=min(INTELLIGENCE_WORKERS, max(1, len(verify_sources)))
+    ) as pool:
+        futures = {pool.submit(verify_candidate, source): source for source in verify_sources}
+        for future in as_completed(futures):
+            source = futures[future]
+            try:
+                verification_results[source.casefold()] = future.result()
+            except Exception as exc:
+                verification_results[source.casefold()] = {
+                    "public": False,
+                    "status": "error",
+                    "error": f"{type(exc).__name__}: {exc}"[:300],
+                }
+
+    verified = len(verification_results)
     strong = 0
     for raw in ordered:
         source = str(raw["source"])
@@ -214,16 +251,16 @@ def main() -> int:
             "last_discovered_at": now_iso(),
         })
         entry.setdefault("first_discovered_at", now_iso())
-        if verified < VERIFY_LIMIT:
-            entry.update(verify_candidate(source))
+        if key in verification_results:
+            entry.update(verification_results[key])
             entry["last_verified_at"] = now_iso()
-            verified += 1
         entry["score"] = score_candidate(entry)
         if int(entry["score"]) >= 60:
             strong += 1
         state["candidates"][key] = entry
 
     state["last_run_at"] = now_iso()
+    state["telegram_domain"] = telegram_transport.PRIMARY_DOMAIN
     state["last_run_summary"] = {
         "known_sources": len(sources),
         "sources_scanned": scanned,
@@ -232,6 +269,10 @@ def main() -> int:
         "verified_candidates": verified,
         "strong_candidates": strong,
         "errors": len(errors),
+        "empty_sources": len(empty_sources),
+        "error_types": dict(sorted(error_types.items())),
+        "workers": INTELLIGENCE_WORKERS,
+        "telegram_domain": telegram_transport.PRIMARY_DOMAIN,
     }
     state["last_errors"] = errors[:30]
     state["runs"].append({"at": now_iso(), **state["last_run_summary"]})

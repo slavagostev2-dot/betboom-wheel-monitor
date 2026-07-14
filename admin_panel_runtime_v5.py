@@ -263,7 +263,7 @@ class TelegramPanelRuntimeV5(TelegramPanelRuntimeV4):
             for wheel in recent_wheels:
                 identifier = str(wheel.get("identifier") or "колесо")
                 lines.append(f"• <code>{html.escape(identifier)}</code> — {self.fmt_dt(wheel.get('notified_at'))}")
-        buttons: list[list[dict[str, str]]] = [[{"text": "📨 Открыть канал", "url": f"https://t.me/{source}"}]]
+        buttons: list[list[dict[str, str]]] = [[{"text": "📨 Открыть канал", "url": f"https://telegram.me/{source}"}]]
         if category != "primary":
             buttons.append([{"text": "⚡ Добавить в основную", "callback_data": f"candidate:mode:fast:{source}"}])
         if category != "nightly":

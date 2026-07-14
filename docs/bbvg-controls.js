@@ -84,11 +84,13 @@
 
   renderSources=function(){
     const rows=visibleSources();
+    const overview=sourceOverview();
     $('#page-sources').innerHTML=`
+      <div class="stats-grid"><article class="metric"><strong>${overview.total}</strong><span>Всего источников</span></article><article class="metric"><strong>${overview.checked}</strong><span>Проверено сейчас</span></article><article class="metric"><strong>${overview.reachable}</strong><span>Доступно</span></article><article class="metric"><strong>${overview.unavailable}</strong><span>Недоступно</span></article></div>
       <form id="sourceRequestForm" class="source-form">
         <div class="source-form-head"><span class="source-form-icon">${iconSvg.link}</span><h2>Предложить источник</h2></div>
         <p>Отправьте username канала или чата для проверки модератором.</p>
-        <div class="form-row"><input id="sourceRequestInput" class="input" type="text" autocomplete="off" maxlength="33" placeholder="https://t.me/имя_канала"><button class="form-button" type="submit">Отправить на проверку</button></div>
+        <div class="form-row"><input id="sourceRequestInput" class="input" type="text" autocomplete="off" maxlength="33" placeholder="https://telegram.me/имя_канала"><button class="form-button" type="submit">Отправить на проверку</button></div>
       </form>
       <div class="tabs section"><button class="chip ${app.sourceMode==='primary'?'active':''}" data-source-mode="primary">Основные</button><button class="chip ${app.sourceMode==='nightly'?'active':''}" data-source-mode="nightly">Ночное наблюдение</button></div>
       <div class="search-row"><input id="sourceSearch" class="search" type="search" autocomplete="off" placeholder="Поиск источника" value="${esc(app.query)}"><button class="square-button" data-action="source-filter" aria-label="Фильтр">${filterIcon}</button></div>
@@ -113,6 +115,7 @@
         <div class="setting"><div class="setting-copy"><strong>Автообновление</strong><small>Обновлять данные автоматически</small></div><button class="switch ${app.settings.autoRefresh?'on':''}" data-setting="autoRefresh"></button></div>
         <div class="setting"><div class="setting-copy"><strong>Тактильный отклик</strong><small>Вибрация при действиях</small></div><button class="switch ${app.settings.haptics?'on':''}" data-setting="haptics"></button></div>
         <div class="setting"><div class="setting-copy"><strong>Светлая тема</strong><small>Светлый фон и тёмный текст</small></div><button class="switch ${app.settings.lightTheme?'on':''}" data-setting="lightTheme" aria-label="Светлая тема" aria-pressed="${app.settings.lightTheme}"></button></div>
+        <div class="setting"><div class="setting-copy"><strong>Уведомления</strong><small>Обычные сообщения и настройки по роли</small></div><button class="button secondary" data-action="notifications">Открыть</button></div>
         <div class="setting"><div class="setting-copy"><strong>Версия приложения</strong><small>${BRAND}</small></div><span class="row-value">${VERSION}</span></div>
       </article></section>`;
     updateTimers();

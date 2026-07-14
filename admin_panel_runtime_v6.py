@@ -135,7 +135,7 @@ class TelegramPanelRuntimeV6(TelegramPanelRuntimeV5):
             f"Проверено публичных страниц: {int(summary.get('verified_candidates', 0) or 0)}\n\n"
             f"🆕 Требуют решения: <b>{len(new_rows)}</b>\n"
             f"🎡 С найденными колёсами: <b>{len(wheel_rows)}</b>\n\n"
-            "Разведка ищет каналы через @упоминания и ссылки t.me в публикациях уже известных источников."
+            "Разведка ищет каналы через @упоминания и ссылки telegram.me в публикациях уже известных источников."
         )
         buttons = [
             [{"text": f"🆕 Новые находки ({len(new_rows)})", "callback_data": "intel:list:new:0"}],
@@ -221,7 +221,7 @@ class TelegramPanelRuntimeV6(TelegramPanelRuntimeV5):
             for sample in samples[:5]:
                 if isinstance(sample, dict):
                     lines.append(f"• <code>{html.escape(str(sample.get('identifier') or 'колесо'))}</code> — {self.fmt_dt(sample.get('published_at'))}")
-        buttons: list[list[dict[str, str]]] = [[{"text": "📨 Открыть канал", "url": f"https://t.me/{source}"}]]
+        buttons: list[list[dict[str, str]]] = [[{"text": "📨 Открыть канал", "url": f"https://telegram.me/{source}"}]]
         if item.get("decision") != "known":
             buttons.append([{"text": "⚡ В основную проверку", "callback_data": f"intel:mode:fast:{source}"}])
             buttons.append([{"text": "🌙 В ночное наблюдение", "callback_data": f"intel:mode:nightly:{source}"}])

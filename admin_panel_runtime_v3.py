@@ -259,12 +259,7 @@ class TelegramPanelRuntimeV3(TelegramPanelRuntimeV2):
         settings = self.load_access().get("settings", {})
         interval = int(settings.get("monitor_interval_minutes", 5))
         rows = [
-            [{"text": f"Колёса {self.bool_mark(settings['wheel_notifications'])}", "callback_data": "setting:wheel_notifications"}],
-            [{"text": f"Служебные сообщения {self.bool_mark(settings['service_notifications'])}", "callback_data": "setting:service_notifications"}],
-            [
-                {"text": f"Ежедневный {self.bool_mark(settings['daily_reports'])}", "callback_data": "setting:daily_reports"},
-                {"text": f"Недельный {self.bool_mark(settings['weekly_reports'])}", "callback_data": "setting:weekly_reports"},
-            ],
+            [{"text": f"Уведомления {self.bool_mark(settings['notifications'])}", "callback_data": "setting:notifications"}],
             [{"text": f"Панель пользователей {self.bool_mark(settings['public_panel'])}", "callback_data": "setting:public_panel"}],
             [{"text": "⏱ Интервал проверки", "callback_data": "page:interval"}],
             [{"text": "🔔 Получатели уведомлений", "callback_data": "page:recipients"}],
@@ -273,6 +268,8 @@ class TelegramPanelRuntimeV3(TelegramPanelRuntimeV2):
             rows.append([{"text": "👥 Доступ и администраторы", "callback_data": "page:access"}])
         self.send(
             "⚙️ <b>Настройки</b>\n\n"
+            f"Уведомления пользователям: {self.bool_mark(settings['notifications'])}\n"
+            "Служебные ошибки всегда получают только администраторы.\n"
             f"Интервал основной проверки: <b>{interval} мин.</b>\n"
             "Изменение интервала применяется после автоматического перезапуска монитора.",
             reply_markup=self.with_nav(rows),

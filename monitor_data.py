@@ -299,8 +299,39 @@ def record_source_success(
     entry["consecutive_empty"] = 0
     entry.pop("first_unavailable_at", None)
     entry.pop("last_error", None)
+    entry.pop("last_transport_error", None)
+    entry.pop("last_transport_outage_at", None)
+    entry.pop("failure_code", None)
+    entry.pop("failure_reason", None)
     entry.pop("quarantined_at", None)
     entry.pop("next_recheck_at", None)
+
+
+def classify_source_problem(kind: str, error: str = "") -> tuple[str, str]:
+    """Return a stable machine code and a short Russian explanation."""
+
+    text = str(error or "").casefold()
+    if kind == "empty":
+        return "empty_public_feed", "публичная страница открылась, но сообщений не найдено"
+    if "404" in text or "not found" in text:
+        return "removed_or_renamed", "канал удалён, переименован или username больше не существует"
+    if "401" in text or "403" in text or "private" in text or "forbidden" in text:
+        return "private_or_restricted", "канал закрыт или ограничил публичный доступ"
+    if "451" in text or "blocked" in text:
+        return "access_blocked", "доступ к странице ограничен на стороне Telegram или сети"
+    if "429" in text or "too many requests" in text:
+        return "rate_limited", "Telegram временно ограничил частоту запросов"
+    if "certificate" in text or "ssl" in text or "tls" in text:
+        return "tls_error", "ошибка TLS-сертификата при подключении к telegram.me"
+    if "resolve" in text or "name or service not known" in text or "dns" in text:
+        return "dns_error", "не удалось определить адрес telegram.me через DNS"
+    if "timeout" in text or "timed out" in text:
+        return "timeout", "telegram.me не ответил за отведённое время"
+    if "proxy" in text or "connection" in text or "network" in text:
+        return "network_error", "сетевая ошибка при подключении к telegram.me"
+    if "5" in text and any(code in text for code in ("500", "502", "503", "504")):
+        return "telegram_server_error", "временный сбой сервера Telegram"
+    return "unknown_error", "неизвестная ошибка проверки источника"
 
 
 def record_source_problem(
@@ -319,6 +350,9 @@ def record_source_problem(
     entry.setdefault("first_unavailable_at", at.isoformat())
     if error:
         entry["last_error"] = error[:500]
+    failure_code, failure_reason = classify_source_problem(kind, error)
+    entry["failure_code"] = failure_code
+    entry["failure_reason"] = failure_reason
 
     if kind == "empty":
         entry["consecutive_empty"] = int(entry.get("consecutive_empty", 0)) + 1

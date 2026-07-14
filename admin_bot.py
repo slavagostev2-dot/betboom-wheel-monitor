@@ -613,7 +613,7 @@ class AdminBot:
             f"Последняя проверка: {self.fmt_dt(health.get('last_checked_at') or discovery.get('checked_at'))}\n"
         )
         keyboard: list[list[dict[str, str]]] = [
-            [{"text": "Открыть Telegram", "url": f"https://t.me/{source}"}],
+            [{"text": "Открыть Telegram", "url": f"https://telegram.me/{source}"}],
         ]
         move_row: list[dict[str, str]] = []
         if mode != "FAST":
@@ -848,7 +848,7 @@ class AdminBot:
     def verify_public_source(self, username: str) -> tuple[bool, str]:
         try:
             response = self.http.get(
-                f"https://t.me/s/{username}",
+                f"https://telegram.me/s/{username}",
                 headers={"User-Agent": "Mozilla/5.0"},
                 timeout=REQUEST_TIMEOUT,
             )

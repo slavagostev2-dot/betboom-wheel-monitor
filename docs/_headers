@@ -1,8 +1,14 @@
+/
+  Cache-Control: no-store, max-age=0
+/index.html
+  Cache-Control: no-store, max-age=0
 /*.html
-  Cache-Control: no-cache
+  Cache-Control: no-store, max-age=0
 /*.js
-  Cache-Control: no-cache
+  Cache-Control: no-store, max-age=0
 /styles.css
-  Cache-Control: public, max-age=300
+  Cache-Control: no-store, max-age=0
 /manifest.webmanifest
-  Cache-Control: public, max-age=3600
+  Cache-Control: no-store, max-age=0
+/service-worker.js
+  Cache-Control: no-store, max-age=0

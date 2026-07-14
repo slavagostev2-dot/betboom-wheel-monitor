@@ -8,12 +8,9 @@
   ],
   "owner_id": "7178093128",
   "settings": {
-    "daily_reports": true,
     "monitor_interval_minutes": 5,
-    "public_panel": true,
-    "service_notifications": true,
-    "weekly_reports": true,
-    "wheel_notifications": true
+    "notifications": true,
+    "public_panel": true
   },
   "users": {
     "7178093128": {
@@ -23,6 +20,7 @@
       "id": "7178093128",
       "last_name": "",
       "last_seen_at": "2026-07-13T12:19:24.722496+00:00",
+      "notifications_enabled": true,
       "username": "ttobbby"
     },
     "801600922": {
@@ -32,6 +30,7 @@
       "id": "801600922",
       "last_name": "",
       "last_seen_at": "2026-07-13T19:10:31.884529+00:00",
+      "notifications_enabled": true,
       "username": "gstvvlv"
     }
   },

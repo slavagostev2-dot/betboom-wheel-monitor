@@ -19,6 +19,7 @@ import requests
 from bs4 import BeautifulSoup
 
 import monitor_data as data_store
+import telegram_transport
 
 
 ROOT = Path(__file__).resolve().parent
@@ -456,7 +457,7 @@ def request_with_retries(
 def fetch_public_channel(username: str) -> list[Message]:
     response = request_with_retries(
         "GET",
-        f"https://t.me/s/{username}",
+        telegram_transport.public_source_url(username),
         timeout=REQUEST_TIMEOUT,
         headers={"User-Agent": USER_AGENT},
         allow_redirects=True,
@@ -504,8 +505,12 @@ def fetch_public_channel(username: str) -> list[Message]:
                 source=source or username,
                 message_id=message_id,
                 date=date,
-                text="\n".join(dict.fromkeys(part for part in parts if part)),
-                message_url=f"https://t.me/{source or username}/{message_id}",
+                text=telegram_transport.rewrite_telegram_text(
+                    "\n".join(dict.fromkeys(part for part in parts if part))
+                ),
+                message_url=telegram_transport.public_message_url(
+                    source or username, message_id
+                ),
             )
         )
     return sorted(result, key=lambda item: item.message_id)

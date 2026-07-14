@@ -65,7 +65,7 @@ def main() -> None:
         message_id=77,
         date=monitor.now_utc(),
         text="https://betboom.ru/freestream/pending-wheel",
-        message_url="https://t.me/test/77",
+        message_url="https://telegram.me/test/77",
     )
     link = "https://betboom.ru/freestream/pending-wheel"
     key = monitor.notification_key(message, link)
@@ -162,7 +162,7 @@ def main() -> None:
         unknown,
         source="test",
         message_id=77,
-        message_url="https://t.me/test/77",
+        message_url="https://telegram.me/test/77",
         wheel_url=link,
         wheel_identifier="pending-wheel",
         status="unknown",
@@ -175,7 +175,7 @@ def main() -> None:
         unknown,
         source="test",
         message_id=77,
-        message_url="https://t.me/test/77",
+        message_url="https://telegram.me/test/77",
         wheel_url=link,
         wheel_identifier="pending-wheel",
         status="unknown",
@@ -192,7 +192,7 @@ def main() -> None:
     assert channels["ct0mislove"]["scan_mode"] == "fast"
     assert channels["blindzonexgod"]["scan_mode"] == "fast"
     assert channels["daynezz"]["scan_mode"] == "fast"
-    assert channels["betboomteamcs2"]["scan_mode"] == "nightly"
+    assert channels["betboomteamcs2"]["scan_mode"] == "fast"
     assert channels["narodcast"]["relationship"] == "betboom_partner"
     assert channels["narodcast"]["channel_type"] == "main"
     assert "frixa_betboom" not in channels
@@ -210,6 +210,8 @@ def main() -> None:
             monitor.read_list(ROOT / "source_catalog.txt"), "nightly"
         )
     }
+    assert len(quick) == 66, "Все 66 утверждённых источников должны проверяться постоянно"
+    assert not nightly, "Известные источники не должны переноситься в ночную проверку"
     assert not quick.intersection(nightly), "Быстрый и ночной списки пересекаются"
     assert "kolesabb" in quick
     assert "homakolesa" in quick

@@ -11,8 +11,16 @@ telegram_transport.install(monitor)
 _original_fetch_page = nightly_discovery.fetch_public_channel_page
 
 
-def fetch_page_on_primary_domain(username: str, before: int | None = None):
-    messages = _original_fetch_page(username, before)
+def fetch_page_on_primary_domain(
+    username: str,
+    before: int | None = None,
+    *,
+    attempts: int = 2,
+    timeout: int | None = None,
+):
+    messages = _original_fetch_page(
+        username, before, attempts=attempts, timeout=timeout
+    )
     return [
         monitor.Message(
             source=message.source,

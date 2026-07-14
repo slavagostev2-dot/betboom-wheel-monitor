@@ -114,10 +114,18 @@ jobs:
           found = [value for value in forbidden if value in app]
           if found:
               raise SystemExit(f"Removed Mini App features returned: {', '.join(found)}")
-          required_features = ["sourceRequestForm", "source_request", "active_wheels", "data-route=\"home\""]
+          required_features = [
+              "sourceRequestForm", "source_request", "active_wheels", "data-route=\"home\"",
+              "lightTheme", "HapticFeedback", "setHeaderColor", "setBackgroundColor",
+              "setBottomBarColor", "notifications", "https://telegram.me/",
+          ]
           absent = [value for value in required_features if value not in (app + html)]
           if absent:
               raise SystemExit(f"Required Mini App features are missing: {', '.join(absent)}")
+          if "https://t.me/" in app:
+              raise SystemExit("Blocked legacy Telegram domain returned to Mini App runtime")
+          if "serviceWorker.register" in app:
+              raise SystemExit("Mini App must not restore the stale offline cache")
           print("Mini App validation passed")
           PY
 
