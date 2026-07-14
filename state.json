@@ -7,7 +7,7 @@
       "expires_at": "2026-07-14T20:14:26+00:00",
       "first_notified_at": "2026-07-14T10:47:43.053395+00:00",
       "identifier": "bolt",
-      "last_checked_at": "2026-07-14T16:22:46.236900+00:00",
+      "last_checked_at": "2026-07-14T16:37:48.811019+00:00",
       "last_notification_at": "2026-07-14T10:47:43.053514+00:00",
       "message_date": "2026-07-14T10:44:26+00:00",
       "message_id": 6356,
@@ -29,7 +29,7 @@
       "expires_at": "2026-07-14T20:28:17+00:00",
       "first_notified_at": "2026-07-14T14:00:56.318244+00:00",
       "identifier": "cct1",
-      "last_checked_at": "2026-07-14T16:22:46.236900+00:00",
+      "last_checked_at": "2026-07-14T16:37:48.811019+00:00",
       "last_notification_at": "2026-07-14T14:00:56.318424+00:00",
       "message_date": "2026-07-14T10:58:17+00:00",
       "message_id": 1516,
@@ -51,7 +51,7 @@
       "expires_at": "2026-07-14T20:39:21+00:00",
       "first_notified_at": "2026-07-14T11:12:45.785230+00:00",
       "identifier": "krat",
-      "last_checked_at": "2026-07-14T16:22:46.236900+00:00",
+      "last_checked_at": "2026-07-14T16:37:48.811019+00:00",
       "last_notification_at": "2026-07-14T11:12:45.785345+00:00",
       "message_date": "2026-07-14T11:09:21+00:00",
       "message_id": 10188,
@@ -74,7 +74,7 @@
       "expires_at": "2026-07-14T20:50:50.184084+00:00",
       "first_notified_at": "2026-07-14T13:49:36.422364+00:00",
       "identifier": "neret",
-      "last_checked_at": "2026-07-14T16:22:46.236900+00:00",
+      "last_checked_at": "2026-07-14T16:37:48.811019+00:00",
       "last_notification_at": "2026-07-14T13:49:36.423042+00:00",
       "message_date": "2026-07-14T11:32:44+00:00",
       "message_id": 3909,
@@ -97,7 +97,7 @@
       "expires_at": "2026-07-14T20:21:06.643371+00:00",
       "first_notified_at": "2026-07-14T14:00:51.621291+00:00",
       "identifier": "papa",
-      "last_checked_at": "2026-07-14T16:22:46.236900+00:00",
+      "last_checked_at": "2026-07-14T16:37:48.811019+00:00",
       "last_notification_at": "2026-07-14T14:00:51.622015+00:00",
       "message_date": "2026-07-14T11:14:52+00:00",
       "message_id": 12118,
@@ -113,6 +113,28 @@
       "status": "unknown",
       "url": "https://betboom.ru/freestream/papa"
     },
+    "risen": {
+      "button_token": "78c73b619786b2",
+      "expires_at": "2026-07-21T16:37:48.808882+00:00",
+      "first_notified_at": "2026-07-14T16:32:54.449347+00:00",
+      "identifier": "risen",
+      "last_checked_at": "2026-07-14T16:37:48.811019+00:00",
+      "last_notification_at": "2026-07-14T16:32:54.449623+00:00",
+      "last_unknown_reminder_at": "2026-07-21T16:37:48.808856+00:00",
+      "manual_time_waiting_since": "2026-07-14T16:37:48.808856+00:00",
+      "message_date": "2026-07-14T16:29:58+00:00",
+      "message_id": 1399,
+      "message_text": "этим пальцем запускаю колесо с фрибетами, заходите!\nhttps://betboom.ru/freestream/risen\nhttps://telegram.me/artemkef\nhttps://telegram.me/artemkef/1399\nhttps://betboom.ru/freestream/risen",
+      "message_url": "https://telegram.me/artemkef/1399",
+      "method": "состояние определяется пользователями BB V.G.",
+      "needs_manual_time": true,
+      "page_excerpt": "",
+      "page_status": "fresh_unconfirmed",
+      "participating": false,
+      "source": "artemkef",
+      "status": "unknown",
+      "url": "https://betboom.ru/freestream/risen"
+    },
     "zonertg5": {
       "button_token": "3c239f1f5c095a",
       "deadline": "2026-07-14T17:53:52.309134+00:00",
@@ -120,7 +142,7 @@
       "expires_at": "2026-07-14T18:23:52.309134+00:00",
       "first_notified_at": "2026-07-14T07:58:38.558718+00:00",
       "identifier": "zonertg5",
-      "last_checked_at": "2026-07-14T16:22:46.236900+00:00",
+      "last_checked_at": "2026-07-14T16:37:48.811019+00:00",
       "last_notification_at": "2026-07-14T14:00:49.115712+00:00",
       "last_unknown_reminder_at": "2026-07-21T14:06:40.527499+00:00",
       "manual_time_waiting_since": "2026-07-14T14:06:40.527499+00:00",
@@ -185,6 +207,21 @@
       "status": "preliminary",
       "url": "https://betboom.ru/freestream/dyrachyo",
       "wheel_key": "dyrachyo"
+    },
+    "78c73b619786b2": {
+      "created_at": "2026-07-14T16:32:53.139473+00:00",
+      "identifier": "risen",
+      "message_date": "2026-07-14T16:29:58+00:00",
+      "message_id": 1399,
+      "message_text": "этим пальцем запускаю колесо с фрибетами, заходите!\nhttps://betboom.ru/freestream/risen\nhttps://telegram.me/artemkef\nhttps://telegram.me/artemkef/1399\nhttps://betboom.ru/freestream/risen",
+      "message_url": "https://telegram.me/artemkef/1399",
+      "method": "свежий Telegram-пост; страница открылась, но активность не подтверждена",
+      "page_excerpt": "Букмекерская контора BetBoom - ставки на спорт онлайн в России!",
+      "post_key": "78c73b619786b2ad32bf086aef4c82d7010a0a6225c2050a286e72c2e8e64663",
+      "source": "artemkef",
+      "status": "preliminary",
+      "url": "https://betboom.ru/freestream/risen",
+      "wheel_key": "risen"
     },
     "86bc22b95fa5d6": {
       "created_at": "2026-07-14T13:49:35.156949+00:00",
@@ -544,6 +581,7 @@
     "73b8d665390e754b80d0b3fc241988cf137764ec568d8a21bcdb4af76d4decdb": "2026-07-12T18:21:18.200045+00:00",
     "74cc5642c469241cbefe2c1ffd60ec881114ec481507099bb1668a2c261b934f": "2026-07-12T15:10:04.958830+00:00",
     "753216c4cdbd6405ab467db83241315a264973467af5857b5eed894e3ea22b14": "2026-07-12T19:22:25.149620+00:00",
+    "78c73b619786b2ad32bf086aef4c82d7010a0a6225c2050a286e72c2e8e64663": "2026-07-14T16:32:54.449669+00:00",
     "79fecd77f1ec0e6d8082765413edba53fa79be8b5920cf720dbf0e38c588a630": "2026-07-12T18:26:19.628034+00:00",
     "7a2d4eb58b48e0f1e620dab809f03843b2c7162695831c03a4a79e684176961b": "2026-07-12T18:26:20.897392+00:00",
     "7b1e4eeacb8c3b8a18ce17ddd255e6bb63ea2db9eb9770e74622d330bd442c66": "2026-07-12T15:09:58.068418+00:00",
@@ -694,6 +732,12 @@
       "identifier": "papa",
       "suppress_until": "2026-07-15T14:00:51.621378+00:00",
       "url": "https://betboom.ru/freestream/papa"
+    },
+    "risen": {
+      "alerted_at": "2026-07-14T16:32:54.449418+00:00",
+      "identifier": "risen",
+      "suppress_until": "2026-07-15T16:32:54.449418+00:00",
+      "url": "https://betboom.ru/freestream/risen"
     },
     "shik3": {
       "alerted_at": "2026-07-12T18:26:19.628051+00:00",
@@ -861,6 +905,22 @@
         "message_id": 12118,
         "message_url": "https://telegram.me/PAPAdota2/12118",
         "source": "PAPAdota2"
+      }
+    ],
+    "risen": [
+      {
+        "has_future_deadline": false,
+        "message_date": "2026-07-14T16:29:58+00:00",
+        "message_id": 1399,
+        "message_url": "https://telegram.me/artemkef/1399",
+        "source": "artemkef"
+      },
+      {
+        "has_future_deadline": false,
+        "message_date": "2026-07-14T16:31:29+00:00",
+        "message_id": 8152,
+        "message_url": "https://telegram.me/risenhaha/8152",
+        "source": "risenhaha"
       }
     ],
     "solo": [
