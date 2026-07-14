@@ -166,6 +166,16 @@ def main() -> None:
             "Всего участий",
         ),
     )
+    require_text(
+        "docs/index.html",
+        (
+            'rel="preload" as="image" href="splash-3d.webp',
+            '<div id="splash" class="splash" aria-label="Загрузка BB V.G."><img',
+        ),
+    )
+    splash_art = ROOT / "docs" / "splash-3d.webp"
+    if not splash_art.is_file() or splash_art.stat().st_size < 10_000:
+        raise SystemExit("PRECHECK ERROR: unified Mini App splash artwork is missing or empty")
     require_text("docs/styles.css", ("--chart-columns", ".theme-moon", ".profile-settings"))
     if "serviceWorker.register" in (ROOT / "docs/app.js").read_text(encoding="utf-8"):
         raise SystemExit("PRECHECK ERROR: stale Mini App service worker registration returned")

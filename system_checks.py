@@ -499,6 +499,7 @@ def check_miniapp_release(details: dict[str, Any], findings: list[dict[str, Any]
         "admin_ratings": "adminRatingsActive" in app_source and "quality_score" in app_source,
         "responsive_charts": "--chart-columns" in styles_source and ".chart-30" in styles_source,
         "participation_history": "participationHistory" in app_source and "Всего участий" in controls_source,
+        "single_splash_art": index.count("splash-3d.webp") >= 2 and "splash-progress" not in index,
     }
     url = str(deployment.get("url") or "") if isinstance(deployment, dict) else ""
     details["miniapp"] = {

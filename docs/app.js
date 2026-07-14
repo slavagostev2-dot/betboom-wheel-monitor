@@ -1,6 +1,6 @@
 'use strict';
 
-const VERSION='5.6.0';
+const VERSION='5.7.0';
 const BRAND='BB V.G.';
 const REPO='slavagostev2-dot/betboom-wheel-monitor';
 const ORIGINS=[

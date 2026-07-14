@@ -140,3 +140,7 @@ body{background:var(--bg)}
 :root.light-theme .bottom-nav{background:rgba(252,250,253,.98)}
 :root.light-theme .splash{background:#f6f3f8}
 @media(max-width:380px){.header-actions{gap:6px}.stats-grid{gap:9px}.form-row{grid-template-columns:1fr}.form-button{width:100%}.source-form{margin-top:11px}}
+
+/* BB V.G. 5.7 — one theme-neutral full-frame loading artwork. */
+.splash,:root.light-theme .splash{display:block;padding:0;background:#0c0a12}
+.splash>img{display:block;width:100%;height:100%;object-fit:cover;object-position:center;border:0}
