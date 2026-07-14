@@ -200,6 +200,9 @@ jobs:
           fi
           git add "${files[@]}"
           git commit -m "Record Mini App deployment state [skip ci]"
+          # runtime-config.js is generated only for the deployed artifact. Keep
+          # the checkout clean so a concurrent state commit can be rebased.
+          git stash push --include-untracked -m "cloudflare-runtime-config" -- . || true
           for attempt in 1 2 3; do
             if git push origin HEAD:main; then
               exit 0
