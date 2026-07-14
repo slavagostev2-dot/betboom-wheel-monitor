@@ -13,6 +13,7 @@ on:
       - "admin_panel_runtime_v25.py"
       - "admin_panel_runtime_v26.py"
       - "admin_panel_runtime_v27.py"
+      - "admin_panel_runtime_v28.py"
       - "bot_private_state.py"
       - "bot_private_state.enc.json"
       - "bot_notification_state.py"
@@ -64,21 +65,22 @@ jobs:
           python -m py_compile \
             admin_bot.py admin_action.py admin_action_v2.py admin_runtime.py \
             admin_panel_v2.py admin_panel_runtime_v22.py admin_panel_runtime_v25.py \
-            admin_panel_runtime_v26.py admin_panel_runtime_v27.py \
+            admin_panel_runtime_v26.py admin_panel_runtime_v27.py admin_panel_runtime_v28.py \
             bot_private_state.py bot_notification_state.py \
             migrate_bot_private_state.py rating_policy.py
           python bot_private_state.py
           python migrate_bot_private_state.py --check
           python admin_action_v2.py --self-test
           python admin_panel_runtime_v25.py --self-test
+          python admin_panel_runtime_v28.py --self-test
           python - <<'PY'
           import inspect
           from admin_panel_runtime_v25 import TelegramPanelRuntimeV25
-          from admin_panel_runtime_v27 import TelegramPanelRuntimeV27
+          from admin_panel_runtime_v28 import TelegramPanelRuntimeV28
 
           callbacks = {
               button.get("callback_data")
-              for row in TelegramPanelRuntimeV27.compact_menu_rows(True)
+              for row in TelegramPanelRuntimeV28.compact_menu_rows(True)
               for button in row
           }
           assert callbacks == {
@@ -87,15 +89,18 @@ jobs:
               "page:sources",
               "page:settings",
           }
-          handler = inspect.getsource(TelegramPanelRuntimeV27.handle_callback)
+          handler = inspect.getsource(TelegramPanelRuntimeV28.handle_callback)
           assert "wheel:part:" in handler
           assert "wheel:inactive:" in handler
           assert "participate_wheel" in handler
           assert "mark_inactive_global" in handler
+          persistence = inspect.getsource(TelegramPanelRuntimeV28._apply_admin_action_direct)
+          assert "self.update_file" in persistence
+          assert "git/ref/heads" not in persistence
           sources = inspect.getsource(TelegramPanelRuntimeV25.show_sources)
           assert "page:discovery" in sources
           assert "page:intelligence" in sources
-          print("BB V.G. v27 production callback validation passed")
+          print("BB V.G. v28 production callback validation passed")
           PY
           python -m json.tool candidate_moderation.json >/dev/null
 
@@ -142,7 +147,7 @@ jobs:
               "run_id": os.environ.get("GITHUB_RUN_ID", ""),
               "run_attempt": os.environ.get("GITHUB_RUN_ATTEMPT", ""),
               "event": os.environ.get("GITHUB_EVENT_NAME", ""),
-              "version": 27,
+              "version": 28,
               "storage": "encrypted_bot_state",
               "miniapp": "archived",
           }
@@ -179,7 +184,7 @@ jobs:
           ADMIN_CACHE_SECONDS: "20"
           SOURCE_INACTIVITY_DAYS: "7"
           SOURCE_INACTIVITY_REPORT_DAYS: "7"
-        run: python admin_panel_runtime_v27.py
+        run: python admin_panel_runtime_v28.py
 
       - name: Start next control-center shift
         if: ${{ success() }}
@@ -188,4 +193,4 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: gh workflow run admin-bot.yml --ref main
 
-# v27: direct administrator wheel actions; production validation is identity-independent.
+# v28: administrator wheel actions persist through the GitHub Contents API.
