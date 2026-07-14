@@ -40,7 +40,8 @@ def fetch_page_on_primary_domain(
 nightly_discovery.fetch_public_channel_page = fetch_page_on_primary_domain
 
 import source_intelligence  # noqa: E402
+import source_intelligence_alerts  # noqa: E402
 
 
 if __name__ == "__main__":
-    raise SystemExit(source_intelligence.main())
+    raise SystemExit(source_intelligence_alerts.run(source_intelligence))
