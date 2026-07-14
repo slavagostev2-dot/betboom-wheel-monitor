@@ -1,9 +1,9 @@
 {
   "brand": "BB V.G.",
-  "event": "push",
+  "event": "workflow_dispatch",
   "run_attempt": "1",
-  "run_id": "29301010031",
-  "started_at": "2026-07-14T02:25:30.145836+00:00",
+  "run_id": "29305040147",
+  "started_at": "2026-07-14T04:04:25.330545+00:00",
   "status": "running",
   "version": 21
 }
