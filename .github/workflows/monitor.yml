@@ -40,8 +40,8 @@ permissions:
   actions: write
 
 concurrency:
-  group: ${{ github.event_name == 'push' && format('bb-vg-monitor-validation-{0}', github.sha) || 'bb-vg-monitor-continuous' }}
-  cancel-in-progress: false
+  group: ${{ github.event_name == 'push' && 'bb-vg-monitor-validation' || 'bb-vg-monitor-continuous' }}
+  cancel-in-progress: ${{ github.event_name == 'push' }}
 
 jobs:
   monitor:
@@ -212,4 +212,17 @@ jobs:
         continue-on-error: true
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh workflow run monitor.yml --ref main -f continuous=true
+        shell: bash
+        run: |
+          set -euo pipefail
+          queued=$(gh run list \
+            --workflow monitor.yml \
+            --status queued \
+            --limit 30 \
+            --json databaseId \
+            --jq 'length')
+          if (( queued > 0 )); then
+            echo "A continuous BB V.G. monitor run is already queued."
+            exit 0
+          fi
+          gh workflow run monitor.yml --ref main -f continuous=true
