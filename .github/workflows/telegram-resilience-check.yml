@@ -15,6 +15,19 @@ permissions:
   contents: read
 
 jobs:
+  probe-requested-source:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Read @jestercast public preview
+        run: |
+          set -euo pipefail
+          page="$(curl -fsSL --retry 3 --max-time 30 -A 'Mozilla/5.0' https://telegram.me/s/jestercast)"
+          printf '%s' "$page" | grep -oE 'data-post="jestercast/[0-9]+"' | tail -n 10 || true
+          links="$(printf '%s' "$page" | grep -oE 'https?://(www\.)?betboom\.ru/freestream/[A-Za-z0-9._~-]+' | sort -u || true)"
+          printf 'JESTERCAST_WHEEL_LINKS_BEGIN\n%s\nJESTERCAST_WHEEL_LINKS_END\n' "$links"
+          test -n "$links"
+
   validate:
     runs-on: ubuntu-latest
     timeout-minutes: 10
@@ -45,27 +58,4 @@ jobs:
               "NameResolutionError: Failed to resolve telegram.me"
           )
           print("telegram.me transport integration passed")
-          PY
-      - name: Probe requested source jestercast
-        env:
-          TELEGRAM_WEB_DOMAIN: telegram.me
-        run: |
-          python - <<'PY'
-          import json
-          import monitor
-
-          messages = monitor.fetch_public_channel("jestercast")
-          rows = []
-          for message in messages:
-              links = monitor.extract_links(message.text)
-              if links:
-                  rows.append({
-                      "message_id": message.message_id,
-                      "date": message.date.isoformat(),
-                      "message_url": message.message_url,
-                      "wheel_links": links,
-                      "text": message.text[:700],
-                  })
-          print("JESTERCAST_WHEEL_MESSAGES=" + json.dumps(rows, ensure_ascii=False))
-          assert rows, "@jestercast has no BetBoom wheel links in the public preview"
           PY
