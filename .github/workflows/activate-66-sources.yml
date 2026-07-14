@@ -19,7 +19,7 @@ concurrency:
 jobs:
   activate:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
         with:
@@ -40,7 +40,7 @@ jobs:
           EXPECTED_SOURCE_COUNT: "66"
         run: |
           python preflight.py
-          python -m py_compile source_transport_smoke.py telegram_transport.py bbvg_monitor_main.py
+          python -m py_compile source_transport_smoke.py telegram_transport.py bbvg_monitor_main.py monitor_health.py
 
       - name: Check all 66 sources through telegram.me
         id: smoke
@@ -55,16 +55,70 @@ jobs:
           MANUAL_RUN: "false"
         run: python source_transport_smoke.py
 
-      - name: Save live source transport result
+      - name: Run one full production monitor iteration
+        id: runtime
+        continue-on-error: true
+        env:
+          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+          BOT_CHAT_ID: ${{ secrets.BOT_CHAT_ID }}
+          TELEGRAM_WEB_DOMAIN: telegram.me
+          EXPECTED_SOURCE_COUNT: "66"
+          DISPLAY_TIMEZONE: Asia/Barnaul
+          REQUEST_TIMEOUT_SECONDS: "15"
+          MAX_WORKERS: "16"
+          TRANSPORT_BATCH_ATTEMPTS: "3"
+          BOT_FEEDBACK_ENABLED: "false"
+          AUTO_RUN: "false"
+          MANUAL_RUN: "false"
+          CONTINUOUS: "false"
+        shell: bash
+        run: |
+          set -uo pipefail
+          python monitor_health.py start --run-id "${GITHUB_RUN_ID:-}"
+          started_at=$(date +%s)
+          timeout --signal=TERM --kill-after=30s 600s python bbvg_monitor_main.py 2>&1 | tee activation-monitor.log
+          runtime_exit=${PIPESTATUS[0]}
+          duration=$(( $(date +%s) - started_at ))
+          python monitor_health.py record \
+            --run-id "${GITHUB_RUN_ID:-}" \
+            --iteration 1 \
+            --exit-code "$runtime_exit" \
+            --duration-seconds "$duration"
+          python - <<'PY'
+          import json
+          import os
+          from datetime import datetime, timezone
+          status = json.load(open("monitor_status.json", encoding="utf-8"))
+          value = {
+              "checked_at": datetime.now(timezone.utc).isoformat(),
+              "run_id": os.environ.get("GITHUB_RUN_ID", ""),
+              "status": "success" if status.get("status") == "running" and status.get("checked_sources") == 66 else "failure",
+              "monitor_status": status,
+          }
+          with open("activation_runtime_state.json", "w", encoding="utf-8") as stream:
+              json.dump(value, stream, ensure_ascii=False, indent=2, sort_keys=True)
+              stream.write("\n")
+          print(json.dumps(value, ensure_ascii=False))
+          if value["status"] != "success":
+              raise SystemExit(1)
+          PY
+
+      - name: Save activation results and runtime state
         if: always()
         shell: bash
         run: |
           set -euo pipefail
+          files=(
+            source_transport_state.json activation_runtime_state.json
+            state.json source_health.json source_stats.json
+            unknown_timer_samples.json monitor_status.json
+          )
           test -f source_transport_state.json
+          test -f activation_runtime_state.json
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add source_transport_state.json
-          git commit -m "Record live 66-source telegram.me check [skip ci]" || true
+          git add "${files[@]}"
+          git commit -m "Record verified 66-source production iteration [skip ci]" || true
           for attempt in 1 2 3; do
             if git push origin HEAD:main; then
               exit 0
@@ -76,12 +130,12 @@ jobs:
           done
           exit 1
 
-      - name: Replace continuous monitor with 66-source runtime
-        if: steps.smoke.outcome == 'success'
+      - name: Start dedicated continuous 66-source monitor
+        if: steps.smoke.outcome == 'success' && steps.runtime.outcome == 'success'
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh workflow run monitor.yml --ref main -f continuous=true -f replace=true
+        run: gh workflow run monitor-66-live.yml --ref main
 
-      - name: Fail if live source accounting failed
-        if: steps.smoke.outcome != 'success'
+      - name: Fail if activation verification failed
+        if: steps.smoke.outcome != 'success' || steps.runtime.outcome != 'success'
         run: exit 1
