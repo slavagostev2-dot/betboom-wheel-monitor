@@ -6,6 +6,7 @@ on:
     branches: [main]
     paths:
       - "source_registry.py"
+      - "source_registry.json"
       - "public_sources.txt"
       - "source_catalog.txt"
       - "source_health.json"
