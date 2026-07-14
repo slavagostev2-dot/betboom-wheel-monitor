@@ -52,7 +52,8 @@ class TelegramPanelRuntimeV26(TelegramPanelRuntimeV25):
         return value if isinstance(value, dict) else dict(default)
 
     @staticmethod
-    def _json_text(value: dict[str, Any]) -> str:
+    def _serialize_json(value: dict[str, Any]) -> str:
+        """Serialize a state file without shadowing the inherited JSON parser."""
         return json.dumps(value, ensure_ascii=False, indent=2, sort_keys=True) + "\n"
 
     def _apply_admin_action_direct(self, action: str, value: str) -> dict[str, Any]:
@@ -111,7 +112,7 @@ class TelegramPanelRuntimeV26(TelegramPanelRuntimeV25):
                 blob = self.gh_request(
                     "POST",
                     f"/repos/{legacy.GITHUB_REPOSITORY}/git/blobs",
-                    json_body={"content": self._json_text(payload), "encoding": "utf-8"},
+                    json_body={"content": self._serialize_json(payload), "encoding": "utf-8"},
                     expected=(201,),
                 ).json()
                 tree_entries.append(
@@ -258,6 +259,8 @@ def self_test() -> None:
     assert "page:intelligence" in source_page
 
     panel = TelegramPanelRuntimeV26()
+    assert panel._json_text("{}", {}) == {}, "Inherited JSON parser must keep its two-argument contract"
+    assert '"ok": true' in panel._serialize_json({"ok": True})
     access = panel._bootstrap_access(
         {
             "owner_id": "1",
