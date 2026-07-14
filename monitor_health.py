@@ -10,6 +10,7 @@ from typing import Any
 ROOT = Path(__file__).resolve().parent
 STATUS_PATH = ROOT / "monitor_status.json"
 STATE_PATH = ROOT / "state.json"
+HEALTH_PATH = ROOT / "source_health.json"
 STATS_PATH = ROOT / "source_stats.json"
 UTC = timezone.utc
 RESTART_FAILURE_THRESHOLD = max(1, int(os.getenv("MONITOR_RESTART_FAILURES", "2")))
@@ -49,8 +50,43 @@ def save_json(path: Path, value: dict[str, Any]) -> None:
     temporary.replace(path)
 
 
-def runtime_snapshot() -> dict[str, int]:
+def _latest(*values: object) -> datetime | None:
+    parsed = [item for item in (parse_datetime(value) for value in values) if item]
+    return max(parsed) if parsed else None
+
+
+def source_cycle_counts(health: dict[str, Any], since: datetime) -> tuple[int, int, int]:
+    rows = health.get("sources") if isinstance(health.get("sources"), dict) else {}
+    checked = 0
+    reachable = 0
+    for entry in rows.values():
+        if not isinstance(entry, dict):
+            continue
+        success_at = parse_datetime(entry.get("last_success_at"))
+        problem_at = _latest(
+            entry.get("last_problem_at"),
+            entry.get("last_transport_outage_at"),
+        )
+        event_at = _latest(
+            entry.get("last_checked_at"),
+            entry.get("last_success_at"),
+            entry.get("last_problem_at"),
+            entry.get("last_transport_outage_at"),
+            entry.get("last_updated_at"),
+        )
+        if event_at is None or event_at < since:
+            continue
+        checked += 1
+        if success_at is not None and success_at >= since and (
+            problem_at is None or success_at >= problem_at
+        ):
+            reachable += 1
+    return checked, reachable, max(0, checked - reachable)
+
+
+def runtime_snapshot(*, since: datetime) -> dict[str, int]:
     state = load_json(STATE_PATH)
+    health = load_json(HEALTH_PATH)
     stats = load_json(STATS_PATH)
     summary = (
         state.get("last_run_summary")
@@ -63,10 +99,15 @@ def runtime_snapshot() -> dict[str, int]:
         for entry in sources.values()
         if isinstance(entry, dict)
     )
+    checked, reachable, errors = source_cycle_counts(health, since)
+    if checked == 0:
+        checked = int(summary.get("checked_sources", 0) or 0)
+        reachable = int(summary.get("reachable_sources", 0) or 0)
+        errors = int(summary.get("source_errors", 0) or 0)
     return {
-        "checked_sources": int(summary.get("checked_sources", 0) or 0),
-        "reachable_sources": int(summary.get("reachable_sources", 0) or 0),
-        "source_errors": int(summary.get("source_errors", 0) or 0),
+        "checked_sources": checked,
+        "reachable_sources": reachable,
+        "source_errors": errors,
         "checks_total": checks_total,
         "pending_wheels": len(state.get("pending_posts", {}))
         if isinstance(state.get("pending_posts"), dict)
@@ -84,6 +125,16 @@ def should_restart(consecutive_failures: int, consecutive_no_progress: int) -> b
 def start_run(run_id: str) -> dict[str, Any]:
     current = load_json(STATUS_PATH)
     timestamp = now_utc().isoformat()
+    previous_success = parse_datetime(current.get("last_successful_iteration_at"))
+    previous_iteration = parse_datetime(current.get("last_iteration_at"))
+    if (
+        previous_success is not None
+        and previous_iteration is not None
+        and previous_success == previous_iteration
+        and int(current.get("reachable_sources", 0) or 0) == 0
+    ):
+        current.pop("last_successful_iteration_at", None)
+        current.pop("last_successful_checks_total", None)
     current.update(
         {
             "version": 3,
@@ -107,8 +158,9 @@ def record_iteration(
     duration_seconds: int,
 ) -> dict[str, Any]:
     previous = load_json(STATUS_PATH)
-    snapshot = runtime_snapshot()
     current_time = now_utc()
+    cycle_started = current_time - timedelta(seconds=max(0, duration_seconds) + 10)
+    snapshot = runtime_snapshot(since=cycle_started)
     previous_checks = int(previous.get("checks_total", 0) or 0)
     checks_total = snapshot["checks_total"]
     counter_reset = checks_total < previous_checks
@@ -242,6 +294,15 @@ def self_test() -> None:
     assert not should_restart(0, 0)
     assert should_restart(RESTART_FAILURE_THRESHOLD, 0)
     assert should_restart(0, RESTART_NO_PROGRESS_THRESHOLD)
+    sample = {
+        "sources": {
+            "ok": {"last_success_at": "2026-07-14T00:00:05+00:00"},
+            "bad": {"last_transport_outage_at": "2026-07-14T00:00:06+00:00"},
+        }
+    }
+    assert source_cycle_counts(
+        sample, datetime(2026, 7, 14, tzinfo=UTC)
+    ) == (2, 1, 1)
     print("monitor_health self-test passed")
 
 
