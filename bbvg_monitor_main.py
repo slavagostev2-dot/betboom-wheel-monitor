@@ -156,6 +156,8 @@ monitor.wheel_reply_markup = wheel_markup_with_direct_key
 monitor.process_active_wheels = process_active_without_unknown_time_spam
 monitor.send_message = branded_send_message
 
+# Production refresh: metadata-quality protection enabled for every monitor shift.
+
 
 if __name__ == "__main__":
     raise SystemExit(monitor.main())
