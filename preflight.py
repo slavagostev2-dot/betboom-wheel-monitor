@@ -171,12 +171,17 @@ def main() -> None:
         (
             'rel="preload" as="image" href="splash-3d.webp',
             '<div id="splash" class="splash" aria-label="Загрузка BB V.G."><img',
+            'id="headerAvatar"',
+            'id="headerUserName"',
         ),
     )
     splash_art = ROOT / "docs" / "splash-3d.webp"
     if not splash_art.is_file() or splash_art.stat().st_size < 10_000:
         raise SystemExit("PRECHECK ERROR: unified Mini App splash artwork is missing or empty")
     require_text("docs/styles.css", ("--chart-columns", ".theme-moon", ".profile-settings"))
+    controls_source = (ROOT / "docs/bbvg-controls.js").read_text(encoding="utf-8")
+    if 'data-setting="lightTheme"' in controls_source:
+        raise SystemExit("PRECHECK ERROR: duplicate profile theme switch returned")
     if "serviceWorker.register" in (ROOT / "docs/app.js").read_text(encoding="utf-8"):
         raise SystemExit("PRECHECK ERROR: stale Mini App service worker registration returned")
 
@@ -196,6 +201,10 @@ def main() -> None:
         value = read_json(path)
         if key not in value:
             raise SystemExit(f"PRECHECK ERROR: {path} is missing key {key}")
+
+    stats = read_json("source_stats.json")
+    if stats.get("source_rating_epoch_day") != "2026-07-14":
+        raise SystemExit("PRECHECK ERROR: source rating epoch was not reset")
 
     configured_values = source_values("public_sources.txt")
     nightly_values = source_values("source_catalog.txt")

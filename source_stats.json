@@ -58,8 +58,7 @@
           "messages_scanned": 3980,
           "successful_checks": 199,
           "unconfirmed_checks": 38,
-          "unknown_timer_samples": 4,
-          "wheel_posts": 1
+          "unknown_timer_samples": 4
         },
         "aunkereEZ": {
           "checks": 199,
@@ -162,8 +161,7 @@
           "messages_scanned": 3980,
           "successful_checks": 199,
           "unconfirmed_checks": 9,
-          "unknown_timer_samples": 4,
-          "wheel_posts": 1
+          "unknown_timer_samples": 4
         },
         "kzmantis": {
           "checks": 199,
@@ -180,8 +178,7 @@
           "messages_scanned": 3980,
           "preliminary_sent": 1,
           "successful_checks": 199,
-          "unconfirmed_checks": 42,
-          "wheel_posts": 1
+          "unconfirmed_checks": 42
         },
         "meowbettt": {
           "checks": 199,
@@ -246,8 +243,7 @@
         "preliminary_sent": 1,
         "successful_checks": 8955,
         "unconfirmed_checks": 89,
-        "unknown_timer_samples": 8,
-        "wheel_posts": 3
+        "unknown_timer_samples": 8
       }
     },
     "2026-07-14": {
@@ -781,8 +777,7 @@
       "transport_outages": 2,
       "unconfirmed_checks": 45,
       "unknown_deadline_reminders": 1,
-      "unknown_timer_samples": 4,
-      "wheel_posts": 1
+      "unknown_timer_samples": 4
     },
     "artemkef": {
       "checks": 41,
@@ -1081,8 +1076,7 @@
       "successful_checks": 240,
       "transport_outages": 2,
       "unconfirmed_checks": 9,
-      "unknown_timer_samples": 4,
-      "wheel_posts": 1
+      "unknown_timer_samples": 4
     },
     "kzmantis": {
       "checks": 240,
@@ -1163,8 +1157,7 @@
       "successful_checks": 239,
       "transport_outages": 2,
       "unconfirmed_checks": 49,
-      "unknown_timer_samples": 1,
-      "wheel_posts": 1
+      "unknown_timer_samples": 1
     },
     "meowbettt": {
       "checks": 240,
@@ -1317,5 +1310,7 @@
       "transport_outages": 2
     }
   },
-  "version": 1
+  "version": 1,
+  "source_rating_epoch_day": "2026-07-14",
+  "source_rating_reset_at": "2026-07-14T00:00:00+07:00"
 }

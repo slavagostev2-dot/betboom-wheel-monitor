@@ -276,6 +276,21 @@ def main() -> None:
     )
     assert "2026-07-13" in timezone_stats["daily"]
 
+    legacy_ratings = {
+        "version": 1,
+        "sources": {"test": {"wheel_posts": 3, "quality_score": 40, "last_wheel_post_at": inactivity_now.isoformat()}},
+        "daily": {"2026-07-13": {"sources": {"test": {"wheel_posts": 3}}, "totals": {"wheel_posts": 3}}},
+        "admin_wheel_decisions": {"old-wheel": {"decision": "confirmed"}},
+    }
+    assert data_store.apply_source_rating_epoch(legacy_ratings)
+    assert legacy_ratings["source_rating_epoch_day"] == "2026-07-14"
+    assert "wheel_posts" not in legacy_ratings["sources"]["test"]
+    assert "quality_score" not in legacy_ratings["sources"]["test"]
+    assert "last_wheel_post_at" in legacy_ratings["sources"]["test"]
+    legacy_ratings["sources"]["test"]["wheel_posts"] = 1
+    assert not data_store.apply_source_rating_epoch(legacy_ratings)
+    assert legacy_ratings["sources"]["test"]["wheel_posts"] == 1
+
     project_text = "\n".join(
         path.read_text(encoding="utf-8")
         for path in (

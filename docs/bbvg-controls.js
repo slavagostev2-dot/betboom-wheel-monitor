@@ -115,7 +115,6 @@
       <section id="profileSettings" class="section profile-settings"><h2 class="section-title">Настройки</h2><article class="card">
         <div class="setting"><div class="setting-copy"><strong>Автообновление</strong><small>Обновлять данные автоматически</small></div><button class="switch ${app.settings.autoRefresh?'on':''}" data-setting="autoRefresh"></button></div>
         <div class="setting"><div class="setting-copy"><strong>Тактильный отклик</strong><small>Вибрация при действиях</small></div><button class="switch ${app.settings.haptics?'on':''}" data-setting="haptics"></button></div>
-        <div class="setting"><div class="setting-copy"><strong>Светлая тема</strong><small>Светлый фон и тёмный текст</small></div><button class="switch ${app.settings.lightTheme?'on':''}" data-setting="lightTheme" aria-label="Светлая тема" aria-pressed="${app.settings.lightTheme}"></button></div>
         <div class="setting"><div class="setting-copy"><strong>Уведомления</strong><small>Обычные сообщения и настройки по роли</small></div><button class="button secondary" data-action="notifications">Открыть</button></div>
         <div class="setting"><div class="setting-copy"><strong>Версия приложения</strong><small>${BRAND}</small></div><span class="row-value">${VERSION}</span></div>
       </article></section>`;

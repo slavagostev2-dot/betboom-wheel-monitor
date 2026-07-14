@@ -33,6 +33,15 @@ UNAVAILABLE_REPORT_DAYS = max(
 UNKNOWN_TIMER_LIMIT = max(20, int(os.getenv("UNKNOWN_TIMER_LIMIT", "250")))
 STATS_RETENTION_DAYS = max(30, int(os.getenv("STATS_RETENTION_DAYS", "120")))
 STATS_TIMEZONE = ZoneInfo(os.getenv("DISPLAY_TIMEZONE", "Asia/Barnaul"))
+SOURCE_RATING_EPOCH_DAY = os.getenv("SOURCE_RATING_EPOCH_DAY", "2026-07-14")
+SOURCE_RATING_RESET_FIELDS = (
+    "wheel_posts",
+    "admin_confirmed_wheels",
+    "admin_rejected_wheels",
+    "quality_score",
+    "quality_decisions",
+    "activation_sent",
+)
 
 
 def now_utc() -> datetime:
@@ -394,11 +403,38 @@ def unavailable_sources(
     return sorted(result, key=lambda item: (-item[2], item[0].casefold()))
 
 
+def apply_source_rating_epoch(data: dict[str, Any]) -> bool:
+    """Reset public source wheel/rating counters once at the configured epoch."""
+    if data.get("source_rating_epoch_day") == SOURCE_RATING_EPOCH_DAY:
+        return False
+    data.pop("admin_wheel_decisions", None)
+    for entry in data.setdefault("sources", {}).values():
+        if not isinstance(entry, dict):
+            continue
+        for field in SOURCE_RATING_RESET_FIELDS:
+            entry.pop(field, None)
+    for daily_entry in data.setdefault("daily", {}).values():
+        if not isinstance(daily_entry, dict):
+            continue
+        totals = daily_entry.setdefault("totals", {})
+        for field in SOURCE_RATING_RESET_FIELDS:
+            totals.pop(field, None)
+        for source_entry in daily_entry.setdefault("sources", {}).values():
+            if not isinstance(source_entry, dict):
+                continue
+            for field in SOURCE_RATING_RESET_FIELDS:
+                source_entry.pop(field, None)
+    data["source_rating_epoch_day"] = SOURCE_RATING_EPOCH_DAY
+    data["source_rating_reset_at"] = f"{SOURCE_RATING_EPOCH_DAY}T00:00:00+07:00"
+    return True
+
+
 def load_stats() -> dict[str, Any]:
     data = load_json(SOURCE_STATS_PATH, {"version": 1, "sources": {}, "daily": {}})
     data.setdefault("version", 1)
     data.setdefault("sources", {})
     data.setdefault("daily", {})
+    apply_source_rating_epoch(data)
     prune_unconfigured_runtime_sources(data)
     return data
 

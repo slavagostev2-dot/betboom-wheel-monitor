@@ -1,6 +1,6 @@
 'use strict';
 
-const VERSION='5.7.0';
+const VERSION='5.8.0';
 const BRAND='BB V.G.';
 const REPO='slavagostev2-dot/betboom-wheel-monitor';
 const ORIGINS=[
@@ -119,6 +119,16 @@ function setupTelegram(){
   }catch(error){console.warn(error)}
 }
 
+function renderHeaderProfile(){
+  const user=currentUser();
+  const name=user?[user.first_name,user.last_name].filter(Boolean).join(' '):'';
+  const avatar=safeUrl(user?.photo_url)||'icon.svg';
+  const avatarElement=$('#headerAvatar');
+  if(avatarElement)avatarElement.src=avatar;
+  if($('#headerUserName'))$('#headerUserName').textContent=name||'Пользователь';
+  if($('#headerUserMeta'))$('#headerUserMeta').textContent=user?.username?`@${user.username}`:'Открыть профиль';
+}
+
 async function loadUser(){
   const [joined,history,settings]=await Promise.all([
     store.get('joined',[]),
@@ -140,6 +150,7 @@ async function loadUser(){
   };
   store.set('settings',app.settings);
   applyTheme();
+  renderHeaderProfile();
 }
 
 async function fetchOne(path,type='json'){
@@ -390,7 +401,6 @@ function renderProfile(){
     <section class="section"><div class="section-head"><h2 class="section-title">Настройки</h2></div><article class="card">
       <div class="setting"><div class="setting-copy"><strong>Автообновление</strong><small>Обновлять данные раз в минуту</small></div><button class="switch ${app.settings.autoRefresh?'on':''}" type="button" data-setting="autoRefresh" aria-label="Автообновление"></button></div>
       <div class="setting"><div class="setting-copy"><strong>Тактильный отклик</strong><small>Подтверждать действия вибрацией</small></div><button class="switch ${app.settings.haptics?'on':''}" type="button" data-setting="haptics" aria-label="Тактильный отклик"></button></div>
-      <div class="setting"><div class="setting-copy"><strong>Светлая тема</strong><small>Светлый фон и тёмный текст</small></div><button class="switch ${app.settings.lightTheme?'on':''}" type="button" data-setting="lightTheme" aria-label="Светлая тема" aria-pressed="${app.settings.lightTheme}"></button></div>
       <div class="setting"><div class="setting-copy"><strong>Версия приложения</strong><small>${BRAND}</small></div><span class="muted">${VERSION}</span></div>
     </article></section>`;
 }
@@ -401,7 +411,6 @@ function route(name){
   app.route=name;
   $$('.page').forEach(page=>page.classList.toggle('active',page.dataset.page===name));
   $$('.nav-item').forEach(item=>item.classList.toggle('active',item.dataset.route===name));
-  $('#headerSubtitle').textContent={home:'Актуальные колёса',stats:'Статистика',sources:'Источники',profile:'Профиль'}[name];
   window.scrollTo({top:0,behavior:'smooth'});
 }
 function updateTimers(){$$('[data-deadline]').forEach(element=>element.textContent=timeLeft(element.dataset.deadline))}
@@ -458,7 +467,7 @@ function showSourceInfo(source){
   const score=Number(stats?.quality_score||0);
   const health=sourceHealth(source);
   const reason=health?.status==='ok'?'источник доступен':String(health?.failure_reason||health?.last_error||health?.status||'ещё не проверен');
-  showDialog(`<h2>@${esc(source)}</h2><article class="card"><div class="setting"><div class="setting-copy"><strong>Состояние</strong><small>${esc(reason)}</small></div><span class="row-value">${health?.status==='ok'?'✓':'!'}</span></div><div class="setting"><div class="setting-copy"><strong>Последняя проверка</strong><small>${esc(health?.last_checked_at||'нет данных')}</small></div></div><div class="setting"><div class="setting-copy"><strong>Постов с колёсами</strong><small>За всё накопленное время</small></div><span class="row-value">${num(wheels)}</span></div><div class="setting"><div class="setting-copy"><strong>Очки рейтинга</strong><small>По решениям администратора</small></div><span class="row-value">${num(score)}</span></div></article><div class="actions"><button class="button primary" data-action="open-url" data-url="https://telegram.me/${esc(source)}">Открыть Telegram</button><button class="button secondary" data-action="close-dialog">Закрыть</button></div>`);
+  showDialog(`<h2>@${esc(source)}</h2><article class="card"><div class="setting"><div class="setting-copy"><strong>Состояние</strong><small>${esc(reason)}</small></div><span class="row-value">${health?.status==='ok'?'✓':'!'}</span></div><div class="setting"><div class="setting-copy"><strong>Последняя проверка</strong><small>${esc(health?.last_checked_at||'нет данных')}</small></div></div><div class="setting"><div class="setting-copy"><strong>Постов с колёсами</strong><small>С 14 июля 2026 года</small></div><span class="row-value">${num(wheels)}</span></div><div class="setting"><div class="setting-copy"><strong>Очки рейтинга</strong><small>С 14 июля 2026 года</small></div><span class="row-value">${num(score)}</span></div></article><div class="actions"><button class="button primary" data-action="open-url" data-url="https://telegram.me/${esc(source)}">Открыть Telegram</button><button class="button secondary" data-action="close-dialog">Закрыть</button></div>`);
 }
 function showDialog(html){const dialog=$('#dialog');$('#dialogBody').innerHTML=html;dialog.showModal?.()}
 function closeDialog(){$('#dialog').close?.()}
@@ -525,6 +534,7 @@ function bindEvents(){
 
 async function init(){
   setupTelegram();
+  renderHeaderProfile();
   bindEvents();
   await loadUser();
   await loadData(true);
