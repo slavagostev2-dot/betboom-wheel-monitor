@@ -3,12 +3,12 @@
   "active_wheels": {
     "acool6": {
       "button_token": "a10eadd8fc0ab4",
-      "expires_at": "2026-07-21T20:47:22.815443+00:00",
+      "expires_at": "2026-07-21T21:02:23.627398+00:00",
       "first_notified_at": "2026-07-14T19:57:24.329933+00:00",
       "identifier": "acool6",
-      "last_checked_at": "2026-07-14T20:47:22.819051+00:00",
+      "last_checked_at": "2026-07-14T21:02:23.630998+00:00",
       "last_notification_at": "2026-07-14T19:57:24.330259+00:00",
-      "last_unknown_reminder_at": "2026-07-21T20:47:22.815416+00:00",
+      "last_unknown_reminder_at": "2026-07-21T21:02:23.627371+00:00",
       "manual_time_waiting_since": "2026-07-14T20:02:19.001742+00:00",
       "message_date": "2026-07-14T19:52:58+00:00",
       "message_id": 10015,
@@ -28,12 +28,12 @@
     },
     "adam": {
       "button_token": "3fa237ebea84c7",
-      "expires_at": "2026-07-21T20:47:22.815443+00:00",
+      "expires_at": "2026-07-21T21:02:23.627398+00:00",
       "first_notified_at": "2026-07-14T18:32:15.193992+00:00",
       "identifier": "adam",
-      "last_checked_at": "2026-07-14T20:47:22.819051+00:00",
+      "last_checked_at": "2026-07-14T21:02:23.630998+00:00",
       "last_notification_at": "2026-07-14T18:37:14.397326+00:00",
-      "last_unknown_reminder_at": "2026-07-21T20:47:22.815416+00:00",
+      "last_unknown_reminder_at": "2026-07-21T21:02:23.627371+00:00",
       "manual_time_waiting_since": "2026-07-14T18:37:09.551543+00:00",
       "message_date": "2026-07-14T18:31:02+00:00",
       "message_id": 7998,
@@ -54,12 +54,12 @@
     },
     "aunkere": {
       "button_token": "38b02c07dfcd1c",
-      "expires_at": "2026-07-21T20:47:22.815443+00:00",
+      "expires_at": "2026-07-21T21:02:23.627398+00:00",
       "first_notified_at": "2026-07-14T18:27:13.955396+00:00",
       "identifier": "aunkere",
-      "last_checked_at": "2026-07-14T20:47:22.819051+00:00",
+      "last_checked_at": "2026-07-14T21:02:23.630998+00:00",
       "last_notification_at": "2026-07-14T18:37:14.030055+00:00",
-      "last_unknown_reminder_at": "2026-07-21T20:47:22.815416+00:00",
+      "last_unknown_reminder_at": "2026-07-21T21:02:23.627371+00:00",
       "manual_time_waiting_since": "2026-07-14T18:32:09.589187+00:00",
       "message_date": "2026-07-14T18:23:04+00:00",
       "message_id": 4696,
@@ -81,12 +81,12 @@
     },
     "staya": {
       "button_token": "a50b5d1831d7ff",
-      "expires_at": "2026-07-21T20:47:22.815443+00:00",
+      "expires_at": "2026-07-21T21:02:23.627398+00:00",
       "first_notified_at": "2026-07-14T19:07:19.244074+00:00",
       "identifier": "staya",
-      "last_checked_at": "2026-07-14T20:47:22.819051+00:00",
+      "last_checked_at": "2026-07-14T21:02:23.630998+00:00",
       "last_notification_at": "2026-07-14T20:22:28.037130+00:00",
-      "last_unknown_reminder_at": "2026-07-21T20:47:22.815416+00:00",
+      "last_unknown_reminder_at": "2026-07-21T21:02:23.627371+00:00",
       "manual_time_waiting_since": "2026-07-14T19:12:13.627913+00:00",
       "message_date": "2026-07-14T19:05:49+00:00",
       "message_id": 3318,
@@ -564,14 +564,7 @@
   },
   "manual_overrides": {},
   "notification_key_version": 8,
-  "participating_wheels": {
-    "neret": {
-      "expires_at": "2026-07-14T20:50:50.184084+00:00",
-      "identifier": "neret",
-      "marked_at": "2026-07-14T13:52:24.493901+00:00",
-      "url": "https://betboom.ru/freestream/neret"
-    }
-  },
+  "participating_wheels": {},
   "pending_posts": {},
   "recently_completed_wheels": {
     "bolt": {
@@ -760,6 +753,7 @@
     "c4d75fdd8736b5250d794e4b6f1df424db704f3acf28f67ef222ebf0a76825cc": "2026-07-12T16:26:27.168261+00:00",
     "c520430dc1382a7b7cc2cf7c979846428543d1bfa97189e3920a4ba775ba12e6": "2026-07-12T18:21:17.104918+00:00",
     "c9e7f459dd8b5117cc78351bffd12f73755044222ed4abe0e34cd9c91152cefe": "2026-07-12T19:22:25.149620+00:00",
+    "d185b306d163f18944588e3ccf99dc9af77d8f22c9262b77342296fa1954e79a": "2026-07-14T20:52:27.613491+00:00",
     "d30169b28e9b2c1e142ecb5a7250d7dc9a04906e55e77558bb175a258b378abf": "2026-07-12T15:09:43.809994+00:00",
     "d4fa31f2a589420a8f824bb4bde52b3dfe93db3a76d5b704da796185c36b1a81": "2026-07-12T15:10:05.815332+00:00",
     "d722c5451f3f6fe0c34aefed99af055687887e71397ebbcc6843b9bcf77d8e5f": "2026-07-14T19:52:24.783487+00:00",
@@ -1095,9 +1089,10 @@
     ],
     "papa": [
       {
-        "message_date": "2026-07-14T11:14:52+00:00",
-        "message_id": 12118,
-        "message_url": "https://telegram.me/PAPAdota2/12118",
+        "has_future_deadline": false,
+        "message_date": "2026-07-14T17:36:25+00:00",
+        "message_id": 12131,
+        "message_url": "https://telegram.me/PAPAdota2/12131",
         "source": "PAPAdota2"
       }
     ],
