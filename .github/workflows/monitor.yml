@@ -267,3 +267,5 @@ jobs:
             exit 0
           fi
           gh workflow run monitor.yml --ref main -f continuous=true -f replace=false
+
+# v30: forced refresh after adding verified @jestercast.
