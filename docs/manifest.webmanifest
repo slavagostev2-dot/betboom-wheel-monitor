@@ -2,10 +2,10 @@
   "name": "BB V.G.",
   "short_name": "BB V.G.",
   "description": "Актуальные колёса, статистика и источники",
-  "start_url": "./?release=5.8.0",
+  "start_url": "./?release=5.9.0",
   "display": "standalone",
-  "background_color": "#08080c",
-  "theme_color": "#08080c",
+  "background_color": "#141219",
+  "theme_color": "#141219",
   "lang": "ru",
   "icons": [
     {
