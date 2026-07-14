@@ -97,6 +97,8 @@ jobs:
           REQUEST_TIMEOUT_SECONDS: "15"
           MAX_WORKERS: "12"
           TRANSPORT_BATCH_ATTEMPTS: "3"
+          MONITOR_RESTART_FAILURES: "2"
+          MONITOR_RESTART_NO_PROGRESS: "2"
           UNKNOWN_DEDUP_HOURS: "24"
           DEADLINE_GRACE_MINUTES: "30"
           HEARTBEAT_HOURS: "6"
@@ -171,7 +173,22 @@ jobs:
               --duration-seconds "$duration"
 
             if (( iteration_exit != 0 )); then
-              echo "BB V.G. iteration failed with exit code ${iteration_exit}; status was saved and the loop will retry."
+              echo "BB V.G. iteration failed with exit code ${iteration_exit}; status was saved."
+            fi
+
+            restart_required=$(python - <<'PY'
+          import json
+          try:
+              value = json.load(open("monitor_status.json", encoding="utf-8"))
+          except Exception:
+              value = {}
+          print("true" if value.get("restart_recommended") else "false")
+          PY
+            )
+            if [[ "$restart_required" == "true" ]]; then
+              echo "Repeated failures or missing source progress detected; ending this shift cleanly so the queued replacement can start."
+              push_runtime || true
+              break
             fi
 
             now_ts=$(date +%s)
