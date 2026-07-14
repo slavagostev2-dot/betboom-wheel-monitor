@@ -1,27 +1,88 @@
 {
-  "active_incidents": 1,
+  "active_incidents": 2,
   "bot_api": {
     "ok": true,
     "username": "slava_wheel_monitor_bot"
   },
-  "checked_at": "2026-07-14T03:10:50.990764+00:00",
-  "finding_count": 1,
+  "check_matrix": {
+    "discovery": "failed",
+    "inventory": "ok",
+    "miniapp": "ok",
+    "monitor": "failed",
+    "notifications": "ok",
+    "source_health": "ok",
+    "telegram_transport": "ok"
+  },
+  "checked_at": "2026-07-14T04:04:10.020674+00:00",
+  "discovery": {
+    "active_size": 66,
+    "candidate_count": 22,
+    "catalog_size": 0,
+    "discovery_errors": 0,
+    "discovery_last_run_at": "2026-07-14T03:06:03.147220+00:00",
+    "domain": "telegram.me",
+    "intelligence_domain": "telegram.me",
+    "intelligence_last_run_at": "2026-07-14T03:58:12.623705+00:00",
+    "intelligence_summary": {
+      "error_types": {
+        "timeout": 66
+      },
+      "errors": 66,
+      "known_sources": 66,
+      "references_found": 0,
+      "sources_scanned": 0,
+      "strong_candidates": 0,
+      "telegram_domain": "telegram.me",
+      "unique_candidates": 0,
+      "verified_candidates": 0
+    }
+  },
+  "domain_compliance": {
+    "checked_files": [
+      "monitor.py",
+      "nightly_discovery.py",
+      "admin_panel_runtime_v17.py",
+      "admin_panel_runtime_v21.py",
+      "docs/app.js",
+      "docs/bbvg-controls.js",
+      "docs/views-secondary.js"
+    ],
+    "legacy_url_offenders": [],
+    "primary": "telegram.me"
+  },
+  "finding_count": 2,
   "findings": [
     {
-      "detail": "В последней итерации проверено 56 из 66.",
-      "kind": "monitor_source_count",
+      "detail": "Последняя итерация была 41 минут назад.",
+      "kind": "monitor_stale",
       "severity": "critical",
       "subject": "",
-      "title": "Основной монитор проверяет не все источники"
+      "title": "Основной монитор давно не обновлялся"
+    },
+    {
+      "detail": "Просканировано 0 из 66; ошибок 66. Поиск должен выполняться через telegram.me.",
+      "kind": "discovery_scan_failure",
+      "severity": "critical",
+      "subject": "",
+      "title": "Поиск новых источников не смог просканировать базу"
     }
   ],
-  "incident_delivery": {
-    "open_sent": true,
-    "opened": 1,
-    "resolved": 0,
-    "resolved_sent": false
+  "gpt_diagnostic_snapshot": {
+    "active_incidents": 2,
+    "checked_sources": 66,
+    "configured_sources": 66,
+    "domain": "telegram.me",
+    "reachable_sources": 66,
+    "single_source": "system_check_state.json",
+    "status": "degraded"
   },
-  "incident_sequence": 1,
+  "incident_delivery": {
+    "digest_sent": true,
+    "messages_attempted": 1,
+    "opened": 2,
+    "resolved": 1
+  },
+  "incident_sequence": 4,
   "inventory": {
     "configured": 66,
     "domain": "telegram.me",
@@ -30,43 +91,100 @@
     "nightly": 0,
     "operational": 66
   },
+  "miniapp": {
+    "asset_versions": [
+      "5.4.0",
+      "5.4.0"
+    ],
+    "deployment_status": "deployed",
+    "deployment_url": "https://slavagostev2-betboom-monitor.pages.dev/",
+    "features": {
+      "haptics": true,
+      "light_theme": true,
+      "unified_notifications": true
+    },
+    "version": "5.4.0"
+  },
   "monitor": {
     "brand": "BB V.G.",
-    "checked_sources": 56,
-    "checks_delta": 56,
-    "checks_total": 10299,
+    "checked_sources": 66,
+    "checks_delta": 66,
+    "checks_total": 10365,
     "consecutive_failures": 0,
     "consecutive_no_progress": 0,
-    "iteration": 4,
+    "iteration": 1,
     "last_failure_at": "2026-07-14T02:44:12.395838+00:00",
-    "last_iteration_at": "2026-07-14T03:02:19.347945+00:00",
-    "last_iteration_duration_seconds": 19,
+    "last_iteration_at": "2026-07-14T03:22:29.433046+00:00",
+    "last_iteration_duration_seconds": 4,
     "last_iteration_exit_code": 0,
-    "last_process_heartbeat_at": "2026-07-14T03:02:19.347945+00:00",
-    "last_successful_checks_total": 10299,
-    "last_successful_iteration_at": "2026-07-14T03:02:19.347945+00:00",
+    "last_process_heartbeat_at": "2026-07-14T03:22:29.433046+00:00",
+    "last_successful_checks_total": 10365,
+    "last_successful_iteration_at": "2026-07-14T03:22:29.433046+00:00",
     "pending_wheels": 0,
-    "reachable_sources": 56,
+    "reachable_sources": 66,
     "restart_recommended": false,
-    "run_id": "29301894863",
-    "run_started_at": "2026-07-14T02:46:59.429195+00:00",
+    "run_id": "29303352385",
+    "run_started_at": "2026-07-14T03:22:25.120715+00:00",
     "source_errors": 0,
     "stats_counter_reset": false,
     "status": "running",
     "version": 3
   },
-  "monitor_age_minutes": 8,
+  "monitor_age_minutes": 41,
   "notification_routing": {
+    "admin_kinds": {
+      "admin_requests": [
+        "7178093128"
+      ],
+      "admin_sources": [
+        "7178093128"
+      ],
+      "admin_system": [
+        "7178093128"
+      ]
+    },
     "admin_recipients": [
       "7178093128"
     ],
+    "duplicate_window_seconds": 86400,
     "error_category": "admin",
+    "error_kind": "admin_system",
+    "user_kinds": {
+      "daily_reports": [
+        "7178093128"
+      ],
+      "weekly_reports": [
+        "7178093128"
+      ],
+      "wheels": [
+        "7178093128",
+        "801600922"
+      ]
+    },
     "user_recipients": [
       "7178093128",
       "801600922"
     ]
   },
   "primary_telegram_domain": "telegram.me",
+  "source_health_summary": {
+    "configured_records": 66,
+    "missing_sources": [],
+    "problem_details": [],
+    "problem_sources": [],
+    "records": 66,
+    "statuses": {
+      "ok": 66
+    },
+    "transport_failure_types": {
+      "dns": 0,
+      "empty_or_html": 0,
+      "http": 0,
+      "other": 0,
+      "timeout": 0,
+      "tls": 0
+    }
+  },
   "status": "degraded",
   "telegram_web": {
     "final_url": "https://telegram.me/s/mechanogun",
