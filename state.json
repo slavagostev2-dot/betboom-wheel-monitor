@@ -3,12 +3,12 @@
   "active_wheels": {
     "acool6": {
       "button_token": "a10eadd8fc0ab4",
-      "expires_at": "2026-07-21T20:32:21.142649+00:00",
+      "expires_at": "2026-07-21T20:47:22.815443+00:00",
       "first_notified_at": "2026-07-14T19:57:24.329933+00:00",
       "identifier": "acool6",
-      "last_checked_at": "2026-07-14T20:32:21.146270+00:00",
+      "last_checked_at": "2026-07-14T20:47:22.819051+00:00",
       "last_notification_at": "2026-07-14T19:57:24.330259+00:00",
-      "last_unknown_reminder_at": "2026-07-21T20:32:21.142621+00:00",
+      "last_unknown_reminder_at": "2026-07-21T20:47:22.815416+00:00",
       "manual_time_waiting_since": "2026-07-14T20:02:19.001742+00:00",
       "message_date": "2026-07-14T19:52:58+00:00",
       "message_id": 10015,
@@ -28,12 +28,12 @@
     },
     "adam": {
       "button_token": "3fa237ebea84c7",
-      "expires_at": "2026-07-21T20:32:21.142649+00:00",
+      "expires_at": "2026-07-21T20:47:22.815443+00:00",
       "first_notified_at": "2026-07-14T18:32:15.193992+00:00",
       "identifier": "adam",
-      "last_checked_at": "2026-07-14T20:32:21.146270+00:00",
+      "last_checked_at": "2026-07-14T20:47:22.819051+00:00",
       "last_notification_at": "2026-07-14T18:37:14.397326+00:00",
-      "last_unknown_reminder_at": "2026-07-21T20:32:21.142621+00:00",
+      "last_unknown_reminder_at": "2026-07-21T20:47:22.815416+00:00",
       "manual_time_waiting_since": "2026-07-14T18:37:09.551543+00:00",
       "message_date": "2026-07-14T18:31:02+00:00",
       "message_id": 7998,
@@ -54,12 +54,12 @@
     },
     "aunkere": {
       "button_token": "38b02c07dfcd1c",
-      "expires_at": "2026-07-21T20:32:21.142649+00:00",
+      "expires_at": "2026-07-21T20:47:22.815443+00:00",
       "first_notified_at": "2026-07-14T18:27:13.955396+00:00",
       "identifier": "aunkere",
-      "last_checked_at": "2026-07-14T20:32:21.146270+00:00",
+      "last_checked_at": "2026-07-14T20:47:22.819051+00:00",
       "last_notification_at": "2026-07-14T18:37:14.030055+00:00",
-      "last_unknown_reminder_at": "2026-07-21T20:32:21.142621+00:00",
+      "last_unknown_reminder_at": "2026-07-21T20:47:22.815416+00:00",
       "manual_time_waiting_since": "2026-07-14T18:32:09.589187+00:00",
       "message_date": "2026-07-14T18:23:04+00:00",
       "message_id": 4696,
@@ -81,12 +81,12 @@
     },
     "staya": {
       "button_token": "a50b5d1831d7ff",
-      "expires_at": "2026-07-21T20:32:21.142649+00:00",
+      "expires_at": "2026-07-21T20:47:22.815443+00:00",
       "first_notified_at": "2026-07-14T19:07:19.244074+00:00",
       "identifier": "staya",
-      "last_checked_at": "2026-07-14T20:32:21.146270+00:00",
+      "last_checked_at": "2026-07-14T20:47:22.819051+00:00",
       "last_notification_at": "2026-07-14T20:22:28.037130+00:00",
-      "last_unknown_reminder_at": "2026-07-21T20:32:21.142621+00:00",
+      "last_unknown_reminder_at": "2026-07-21T20:47:22.815416+00:00",
       "manual_time_waiting_since": "2026-07-14T19:12:13.627913+00:00",
       "message_date": "2026-07-14T19:05:49+00:00",
       "message_id": 3318,
@@ -498,17 +498,17 @@
     "zortelad"
   ],
   "last_automatic_status_at": "2026-07-14T18:27:14.317145+00:00",
-  "last_heartbeat_at": "2026-07-14T14:38:13.352283+00:00",
+  "last_heartbeat_at": "2026-07-14T20:42:26.477542+00:00",
   "last_run_kind": "schedule",
   "last_run_summary": {
     "activation_sent": 0,
-    "active_wheels": 8,
+    "active_wheels": 4,
     "callbacks": {
       "callbacks": 0,
       "lists": 0,
       "participating": 0
     },
-    "checked_sources": 70,
+    "checked_sources": 72,
     "duplicates_suppressed": 0,
     "inactive_waiting": 0,
     "initialized_now": 0,
@@ -517,14 +517,15 @@
     "pending_total": 0,
     "preliminary_sent": 0,
     "quarantined_skipped": 0,
-    "reachable_sources": 70,
+    "reachable_sources": 72,
     "reminders": {
       "changed": true,
       "draw_alerts": 0,
+      "final_reminders": 0,
       "known_reminders": 0,
       "pending_total": 0,
       "removed": 0,
-      "tracked": 8,
+      "tracked": 4,
       "unknown_reminders": 0
     },
     "source_errors": 0,
@@ -533,7 +534,7 @@
       "count": 0,
       "sent": false
     },
-    "sources": 70,
+    "sources": 72,
     "stale_skipped": 0,
     "unconfirmed_waiting": 0,
     "unknown_timer_samples_added": 0
@@ -564,12 +565,6 @@
   "manual_overrides": {},
   "notification_key_version": 8,
   "participating_wheels": {
-    "krat": {
-      "expires_at": "2026-07-14T20:39:21+00:00",
-      "identifier": "krat",
-      "marked_at": "2026-07-14T12:39:12.037754+00:00",
-      "url": "https://betboom.ru/freestream/krat"
-    },
     "neret": {
       "expires_at": "2026-07-14T20:50:50.184084+00:00",
       "identifier": "neret",
