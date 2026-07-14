@@ -1,6 +1,6 @@
 'use strict';
 
-const VERSION='5.9.0';
+const VERSION='5.10.0';
 const BRAND='BB V.G.';
 const REPO='slavagostev2-dot/betboom-wheel-monitor';
 const ORIGINS=[
@@ -376,6 +376,7 @@ function sourceRow(name){
 }
 function renderSources(){
   const rows=filteredSources();
+  const totalSources=new Set([...app.data.primary,...app.data.nightly].map(item=>item.toLowerCase())).size;
   $('#page-sources').innerHTML=`
     <h1 class="page-title">Источники</h1>
     <p class="page-subtitle">Каналы, которые проверяет ${BRAND}</p>
@@ -384,6 +385,7 @@ function renderSources(){
       <p>Отправьте username публичного канала. Бот проверит его, а администратор примет решение.</p>
       <div class="form-row"><input id="sourceRequestInput" class="input" type="text" inputmode="text" autocomplete="off" maxlength="33" placeholder="username канала"><button class="form-button" type="submit">Отправить</button></div>
     </form>
+    <div class="source-count-note"><span aria-hidden="true"></span>Источников в базе проверок: <strong>${num(totalSources)}</strong></div>
     <input id="sourceSearch" class="search" type="search" autocomplete="off" placeholder="Поиск по username" value="${esc(app.query)}">
     <article class="card">${rows.slice(0,100).map(sourceRow).join('')||'<div class="empty">Источники не найдены.</div>'}</article>`;
 }
