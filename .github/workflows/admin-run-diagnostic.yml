@@ -15,10 +15,12 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
-      - name: Show failed production control-center log
+      - name: List stabilized production control-center runs
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh run view 29331430769 \
+          gh run list \
             --repo "${{ github.repository }}" \
-            --log-failed
+            --workflow admin-bot.yml \
+            --limit 8 \
+            --json databaseId,headSha,status,conclusion,event,createdAt,updatedAt,displayTitle,url
