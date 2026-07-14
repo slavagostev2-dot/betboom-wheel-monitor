@@ -23,7 +23,7 @@
     "source_health": "ok",
     "telegram_transport": "ok"
   },
-  "checked_at": "2026-07-14T21:40:44.030439+00:00",
+  "checked_at": "2026-07-14T23:03:00.957445+00:00",
   "discovery": {
     "active_size": 72,
     "candidate_count": 176,
@@ -96,17 +96,17 @@
     "brand": "BB V.G.",
     "checked_sources": 72,
     "checks_delta": 72,
-    "checks_total": 24154,
+    "checks_total": 25450,
     "consecutive_failures": 0,
     "consecutive_no_progress": 0,
-    "iteration": 49,
+    "iteration": 67,
     "last_failure_at": "2026-07-14T02:44:12.395838+00:00",
-    "last_iteration_at": "2026-07-14T21:32:31.109302+00:00",
-    "last_iteration_duration_seconds": 5,
+    "last_iteration_at": "2026-07-14T23:02:42.029821+00:00",
+    "last_iteration_duration_seconds": 4,
     "last_iteration_exit_code": 0,
-    "last_process_heartbeat_at": "2026-07-14T21:32:31.109302+00:00",
-    "last_successful_checks_total": 24154,
-    "last_successful_iteration_at": "2026-07-14T21:32:31.109302+00:00",
+    "last_process_heartbeat_at": "2026-07-14T23:02:42.029821+00:00",
+    "last_successful_checks_total": 25450,
+    "last_successful_iteration_at": "2026-07-14T23:02:42.029821+00:00",
     "pending_wheels": 0,
     "reachable_sources": 72,
     "restart_recommended": false,
@@ -117,7 +117,7 @@
     "status": "running",
     "version": 3
   },
-  "monitor_age_minutes": 8,
+  "monitor_age_minutes": 0,
   "notification_routing": {
     "admin_kinds": {
       "admin_requests": [
