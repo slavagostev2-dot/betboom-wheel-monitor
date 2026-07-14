@@ -1,5 +1,15 @@
 {
   "admin_wheel_decisions": {
+    "bolt": {
+      "actor": "admin",
+      "day": "2026-07-14",
+      "decided_at": "2026-07-14T12:39:18.526692+00:00",
+      "decision": "confirmed",
+      "sources": [
+        "boltcast",
+        "narodCast"
+      ]
+    },
     "krat": {
       "actor": "admin",
       "day": "2026-07-14",
@@ -424,6 +434,7 @@
           "successful_checks": 123
         },
         "boltcast": {
+          "admin_confirmed_wheels": 1,
           "checks": 123,
           "errors": 1,
           "messages_scanned": 2190,
@@ -562,6 +573,7 @@
           "successful_checks": 123
         },
         "narodCast": {
+          "admin_confirmed_wheels": 1,
           "checks": 123,
           "messages_scanned": 2460,
           "successful_checks": 123
@@ -637,7 +649,7 @@
         }
       },
       "totals": {
-        "admin_confirmed_wheels": 2,
+        "admin_confirmed_wheels": 3,
         "checks": 7972,
         "draw_time_alerts": 1,
         "errors": 12,
@@ -723,7 +735,7 @@
       "first_checked_at": "2026-07-13T10:45:44.607811+00:00",
       "last_checked_at": "2026-07-14T12:29:56.520991+00:00",
       "last_transport_outage_at": "2026-07-14T02:39:35.575804+00:00",
-      "last_updated_at": "2026-07-14T12:39:12.037805+00:00",
+      "last_updated_at": "2026-07-14T12:39:18.526692+00:00",
       "last_wheel_post_at": "2026-07-14T11:12:45.350909+00:00",
       "messages_scanned": 5780,
       "preliminary_sent": 1,
@@ -963,15 +975,20 @@
       "transport_outages": 2
     },
     "boltcast": {
+      "admin_confirmed_wheels": 1,
       "checks": 322,
       "errors": 1,
       "first_checked_at": "2026-07-13T10:45:44.607526+00:00",
       "last_checked_at": "2026-07-14T12:29:56.520625+00:00",
       "last_transport_outage_at": "2026-07-14T02:39:35.575664+00:00",
-      "last_updated_at": "2026-07-14T12:29:56.520625+00:00",
+      "last_updated_at": "2026-07-14T12:39:18.526692+00:00",
       "last_wheel_post_at": "2026-07-14T10:47:42.601701+00:00",
       "messages_scanned": 5961,
       "preliminary_sent": 1,
+      "quality_decisions": {
+        "bolt": 40
+      },
+      "quality_score": 40,
       "recent_post_keys": {
         "f410a25da7c3c9e7bfbb4ff40e4f06ff6e395bc588adcfe7faa2b908f7fdaf77": {
           "seen_at": "2026-07-14T10:47:42.601687+00:00",
@@ -1220,7 +1237,7 @@
       "first_checked_at": "2026-07-13T10:45:44.607420+00:00",
       "last_checked_at": "2026-07-14T12:29:56.520493+00:00",
       "last_transport_outage_at": "2026-07-14T02:39:35.575614+00:00",
-      "last_updated_at": "2026-07-14T12:39:12.037805+00:00",
+      "last_updated_at": "2026-07-14T12:39:18.526692+00:00",
       "last_wheel_post_at": "2026-07-14T07:58:37.784981+00:00",
       "messages_scanned": 6420,
       "preliminary_sent": 2,
@@ -1256,12 +1273,17 @@
       "transport_outages": 2
     },
     "narodCast": {
+      "admin_confirmed_wheels": 1,
       "checks": 322,
       "first_checked_at": "2026-07-13T10:45:44.608029+00:00",
       "last_checked_at": "2026-07-14T12:29:56.521293+00:00",
       "last_transport_outage_at": "2026-07-14T02:39:35.575904+00:00",
-      "last_updated_at": "2026-07-14T12:29:56.521293+00:00",
+      "last_updated_at": "2026-07-14T12:39:18.526692+00:00",
       "messages_scanned": 6440,
+      "quality_decisions": {
+        "bolt": 40
+      },
+      "quality_score": 40,
       "successful_checks": 322,
       "transport_outages": 2
     },
