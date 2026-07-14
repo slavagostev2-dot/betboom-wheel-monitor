@@ -14,6 +14,7 @@ on:
       - "admin_panel_runtime_v26.py"
       - "admin_panel_runtime_v27.py"
       - "admin_panel_runtime_v28.py"
+      - "admin_panel_runtime_v29.py"
       - "bot_private_state.py"
       - "bot_private_state.enc.json"
       - "bot_notification_state.py"
@@ -66,29 +67,53 @@ jobs:
             admin_bot.py admin_action.py admin_action_v2.py admin_runtime.py \
             admin_panel_v2.py admin_panel_runtime_v22.py admin_panel_runtime_v25.py \
             admin_panel_runtime_v26.py admin_panel_runtime_v27.py admin_panel_runtime_v28.py \
-            bot_private_state.py bot_notification_state.py \
+            admin_panel_runtime_v29.py bot_private_state.py bot_notification_state.py \
             migrate_bot_private_state.py rating_policy.py
           python bot_private_state.py
           python migrate_bot_private_state.py --check
           python admin_action_v2.py --self-test
           python admin_panel_runtime_v25.py --self-test
           python admin_panel_runtime_v28.py --self-test
+          python admin_panel_runtime_v29.py --self-test
           python - <<'PY'
           import inspect
-          from admin_panel_runtime_v25 import TelegramPanelRuntimeV25
           from admin_panel_runtime_v28 import TelegramPanelRuntimeV28
+          from admin_panel_runtime_v29 import TelegramPanelRuntimeV29
 
-          callbacks = {
-              button.get("callback_data")
-              for row in TelegramPanelRuntimeV28.compact_menu_rows(True)
-              for button in row
-          }
-          assert callbacks == {
-              "page:stats:1",
+          def callbacks(rows):
+              return [button.get("callback_data") for row in rows for button in row]
+
+          admin_main = callbacks(TelegramPanelRuntimeV29.compact_menu_rows(True))
+          user_main = callbacks(TelegramPanelRuntimeV29.compact_menu_rows(False))
+          assert len(admin_main) == len(set(admin_main))
+          assert len(user_main) == len(set(user_main))
+          assert set(admin_main) == {
               "page:active",
+              "page:analytics",
               "page:sources",
               "page:settings",
+              "page:control",
           }
+          assert set(user_main) == {
+              "page:active",
+              "page:analytics",
+              "page:sources",
+              "page:settings",
+              "page:status",
+          }
+
+          admin_sources = callbacks(TelegramPanelRuntimeV29.source_menu_rows(True))
+          user_sources = callbacks(TelegramPanelRuntimeV29.source_menu_rows(False))
+          assert len(admin_sources) == len(set(admin_sources))
+          assert len(user_sources) == len(set(user_sources))
+          assert {"page:discovery", "page:intelligence", "source:add"} <= set(admin_sources)
+          assert not {"page:discovery", "page:intelligence", "source:add"} & set(user_sources)
+          assert "source:request_help" in user_sources
+
+          control = callbacks(TelegramPanelRuntimeV29.control_menu_rows())
+          assert len(control) == len(set(control))
+          assert not {"page:discovery", "page:intelligence"} & set(control)
+
           handler = inspect.getsource(TelegramPanelRuntimeV28.handle_callback)
           assert "wheel:part:" in handler
           assert "wheel:inactive:" in handler
@@ -97,10 +122,7 @@ jobs:
           persistence = inspect.getsource(TelegramPanelRuntimeV28._apply_admin_action_direct)
           assert "self.update_file" in persistence
           assert "git/ref/heads" not in persistence
-          sources = inspect.getsource(TelegramPanelRuntimeV25.show_sources)
-          assert "page:discovery" in sources
-          assert "page:intelligence" in sources
-          print("BB V.G. v28 production callback validation passed")
+          print("BB V.G. v29 role-aware menu validation passed")
           PY
           python -m json.tool candidate_moderation.json >/dev/null
 
@@ -147,7 +169,7 @@ jobs:
               "run_id": os.environ.get("GITHUB_RUN_ID", ""),
               "run_attempt": os.environ.get("GITHUB_RUN_ATTEMPT", ""),
               "event": os.environ.get("GITHUB_EVENT_NAME", ""),
-              "version": 28,
+              "version": 29,
               "storage": "encrypted_bot_state",
               "miniapp": "archived",
           }
@@ -184,7 +206,7 @@ jobs:
           ADMIN_CACHE_SECONDS: "20"
           SOURCE_INACTIVITY_DAYS: "7"
           SOURCE_INACTIVITY_REPORT_DAYS: "7"
-        run: python admin_panel_runtime_v28.py
+        run: python admin_panel_runtime_v29.py
 
       - name: Start next control-center shift
         if: ${{ success() }}
@@ -193,4 +215,4 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: gh workflow run admin-bot.yml --ref main
 
-# v28: administrator wheel actions persist through the GitHub Contents API.
+# v29: grouped role-aware menu; administrator-only source tools are hidden from users.
