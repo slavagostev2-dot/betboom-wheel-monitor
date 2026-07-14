@@ -1,7 +1,7 @@
 'use strict';
 
 (()=>{
-  const hiddenWheels=new Set();
+  const hiddenWheels=new Set(window.BBPrivateState?.hiddenWheels||[]);
   let wheelFilter='all';
   let sourceFilter='all';
   let showAllRanks=false;
@@ -16,6 +16,18 @@
 
   function metricWithDelta(icon,value,label){
     return `<article class="metric"><span class="metric-icon">${icon}</span><strong>${value}</strong><span>${label}</span></article>`;
+  }
+
+  function systemFreshness(){
+    const system=app.data.system||{};
+    const checked=date(system.checked_at||system.generated_at||system.updated_at||system.last_check_at);
+    const status=String(system.status||system.overall_status||'').toLowerCase();
+    const delayedStatus=['failure','failed','error','degraded','stale','delayed'].some(value=>status.includes(value));
+    const ageMinutes=checked?Math.max(0,Math.floor((Date.now()-checked.getTime())/60000)):null;
+    const delayed=delayedStatus||ageMinutes===null||ageMinutes>30;
+    if(delayed)return{delayed:true,text:'Данные временно обновляются с задержкой'};
+    if(ageMinutes<1)return{delayed:false,text:'Данные обновлены только что'};
+    return{delayed:false,text:`Данные обновлены ${ageMinutes} мин. назад`};
   }
 
   function enhancedWheelCard(wheel){
@@ -41,10 +53,11 @@
     const all=activeWheels();
     const visible=wheelFilter==='mine'?all.filter(isJoined):all;
     const mine=all.filter(isJoined).length;
+    const freshness=systemFreshness();
     $('#page-home').innerHTML=`
       <article class="overview">
-        <div class="system-line"><span class="system-dot"></span>Система работает</div>
-        <div class="overview-copy">Мониторинг в реальном времени</div>
+        <div class="system-line ${freshness.delayed?'delayed':''}"><span class="system-dot"></span>${esc(freshness.text)}</div>
+        <div class="overview-copy">Мониторинг актуальных данных</div>
         <div class="metrics">
           <article class="metric"><strong>${all.length}</strong><span>Активные колёса</span></article>
           <article class="metric"><strong>${mine}</strong><span>Моих отметок</span></article>
@@ -96,7 +109,7 @@
       <div class="source-count-note"><span aria-hidden="true"></span>Источников в базе проверок: <strong>${num(overview.total)}</strong></div>
       <div class="search-row"><input id="sourceSearch" class="search" type="search" autocomplete="off" placeholder="Поиск источника" value="${esc(app.query)}"><button class="square-button" data-action="source-filter" aria-label="Фильтр">${filterIcon}</button></div>
       <article class="card">${rows.slice(0,100).map(sourceRow).join('')||'<div class="empty">Источники не найдены.</div>'}</article>
-      <article class="card" style="margin-top:10px"><p class="muted" style="margin:0">После отправки заявки администратор получит запрос на модерацию. О результате бот пришлёт уведомление.</p></article>`;
+      <article class="card" style="margin-top:10px"><p class="muted" style="margin:0">Подтверждение показывается только после записи заявки. О решении администратора бот пришлёт уведомление.</p></article>`;
   };
 
   renderProfile=function(){
@@ -125,7 +138,12 @@
     const action=event.target.closest('[data-action]')?.dataset.action;
     if(action==='hide-wheel'){
       const key=String(event.target.closest('[data-action]').dataset.id||'').toLowerCase();
-      if(key){hiddenWheels.add(key);store.set('hiddenWheels',[...hiddenWheels]);toast('Колесо скрыто только у вас');renderHome();renderProfile()}
+      if(key){
+        hiddenWheels.add(key);
+        renderHome();renderProfile();
+        if(window.BBPrivateState?.hideWheel)window.BBPrivateState.hideWheel(key,true);
+        else{store.set('hiddenWheels',[...hiddenWheels]);toast('Колесо скрыто только у вас')}
+      }
       return;
     }
     if(action==='wheel-filter'){
@@ -142,8 +160,16 @@
     if(choice){const [type,value]=choice.split(':');if(type==='wheel'){wheelFilter=value;renderHome()}if(type==='source'){sourceFilter=value;renderSources()}haptic('selection');closeDialog()}
   },true);
 
-  store.get('hiddenWheels',[]).then(values=>{
-    if(Array.isArray(values))values.forEach(value=>{const key=String(value||'').toLowerCase();if(key)hiddenWheels.add(key)});
-    if(app.lastSync){renderHome();renderStats();renderSources();renderProfile()}
-  });
+  if(window.BBPrivateState?.onState){
+    window.BBPrivateState.onState(state=>{
+      hiddenWheels.clear();
+      state.hiddenWheels.forEach(value=>hiddenWheels.add(String(value).toLowerCase()));
+      if(app.lastSync){renderHome();renderStats();renderSources();renderProfile()}
+    });
+  }else{
+    store.get('hiddenWheels',[]).then(values=>{
+      if(Array.isArray(values))values.forEach(value=>{const key=String(value||'').toLowerCase();if(key)hiddenWheels.add(key)});
+      if(app.lastSync){renderHome();renderStats();renderSources();renderProfile()}
+    });
+  }
 })();
