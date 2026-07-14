@@ -19,6 +19,16 @@
         "KRATtv"
       ]
     },
+    "neret": {
+      "actor": "admin",
+      "day": "2026-07-14",
+      "decided_at": "2026-07-14T13:52:24.493946+00:00",
+      "decision": "confirmed",
+      "sources": [
+        "MARIOMAXTV",
+        "NeretCast"
+      ]
+    },
     "zonertg5": {
       "actor": "admin",
       "day": "2026-07-14",
@@ -328,11 +338,13 @@
           "wheel_posts": 1
         },
         "MARIOMAXTV": {
+          "admin_confirmed_wheels": 1,
           "checks": 8,
           "messages_scanned": 144,
           "successful_checks": 8
         },
         "NeretCast": {
+          "admin_confirmed_wheels": 1,
           "checks": 135,
           "errors": 1,
           "messages_scanned": 1531,
@@ -767,7 +779,7 @@
       "first_checked_at": "2026-07-13T10:45:44.607811+00:00",
       "last_checked_at": "2026-07-14T13:51:24.883408+00:00",
       "last_transport_outage_at": "2026-07-14T02:39:35.575804+00:00",
-      "last_updated_at": "2026-07-14T13:51:24.883408+00:00",
+      "last_updated_at": "2026-07-14T13:52:24.493946+00:00",
       "last_wheel_post_at": "2026-07-14T11:12:45.350909+00:00",
       "messages_scanned": 5972,
       "preliminary_sent": 1,
@@ -787,23 +799,33 @@
       "wheel_posts": 1
     },
     "MARIOMAXTV": {
+      "admin_confirmed_wheels": 1,
       "checks": 8,
       "first_checked_at": "2026-07-14T12:59:56.741483+00:00",
       "last_checked_at": "2026-07-14T13:51:24.884135+00:00",
-      "last_updated_at": "2026-07-14T13:51:24.884135+00:00",
+      "last_updated_at": "2026-07-14T13:52:24.493946+00:00",
       "messages_scanned": 144,
+      "quality_decisions": {
+        "neret": 40
+      },
+      "quality_score": 40,
       "successful_checks": 8
     },
     "NeretCast": {
+      "admin_confirmed_wheels": 1,
       "checks": 334,
       "errors": 1,
       "first_checked_at": "2026-07-13T10:45:44.607586+00:00",
       "last_checked_at": "2026-07-14T13:51:24.883122+00:00",
       "last_transport_outage_at": "2026-07-14T02:39:35.575692+00:00",
-      "last_updated_at": "2026-07-14T13:51:24.883122+00:00",
+      "last_updated_at": "2026-07-14T13:52:24.493946+00:00",
       "last_wheel_post_at": "2026-07-14T13:49:34.675637+00:00",
       "messages_scanned": 3369,
       "preliminary_sent": 1,
+      "quality_decisions": {
+        "neret": 40
+      },
+      "quality_score": 40,
       "recent_post_keys": {
         "86bc22b95fa5d63901c01975ed5b6fbe61c48b4a296e4511760993372c75a997": {
           "seen_at": "2026-07-14T13:49:34.675623+00:00",
@@ -862,7 +884,7 @@
       "first_checked_at": "2026-07-13T10:45:44.607934+00:00",
       "last_checked_at": "2026-07-14T13:51:24.883565+00:00",
       "last_transport_outage_at": "2026-07-14T02:39:35.575860+00:00",
-      "last_updated_at": "2026-07-14T13:51:24.883565+00:00",
+      "last_updated_at": "2026-07-14T13:52:24.493946+00:00",
       "last_wheel_post_at": "2026-07-14T10:03:21.387131+00:00",
       "messages_scanned": 5461,
       "preliminary_sent": 1,
@@ -1046,7 +1068,7 @@
       "first_checked_at": "2026-07-13T10:45:44.607526+00:00",
       "last_checked_at": "2026-07-14T13:51:24.883048+00:00",
       "last_transport_outage_at": "2026-07-14T02:39:35.575664+00:00",
-      "last_updated_at": "2026-07-14T13:51:24.883048+00:00",
+      "last_updated_at": "2026-07-14T13:52:24.493946+00:00",
       "last_wheel_post_at": "2026-07-14T10:47:42.601701+00:00",
       "messages_scanned": 6151,
       "preliminary_sent": 1,
@@ -1311,7 +1333,7 @@
       "first_checked_at": "2026-07-13T10:45:44.607420+00:00",
       "last_checked_at": "2026-07-14T13:51:24.882919+00:00",
       "last_transport_outage_at": "2026-07-14T02:39:35.575614+00:00",
-      "last_updated_at": "2026-07-14T13:51:24.882919+00:00",
+      "last_updated_at": "2026-07-14T13:52:24.493946+00:00",
       "last_wheel_post_at": "2026-07-14T07:58:37.784981+00:00",
       "messages_scanned": 6660,
       "preliminary_sent": 2,
@@ -1352,7 +1374,7 @@
       "first_checked_at": "2026-07-13T10:45:44.608029+00:00",
       "last_checked_at": "2026-07-14T13:51:24.883684+00:00",
       "last_transport_outage_at": "2026-07-14T02:39:35.575904+00:00",
-      "last_updated_at": "2026-07-14T13:51:24.883684+00:00",
+      "last_updated_at": "2026-07-14T13:52:24.493946+00:00",
       "messages_scanned": 6680,
       "quality_decisions": {
         "bolt": 40
