@@ -59,7 +59,9 @@ jobs:
           node-version: "22"
 
       - name: Validate Worker source
-        run: node --check state_api/src/index.js
+        run: |
+          node --check state_api/src/index.js
+          node --check state_api/src/entry.js
 
       - name: Resolve or create D1 database
         id: database
@@ -116,7 +118,7 @@ jobs:
 
           config = {
               "name": os.environ["WORKER_NAME"],
-              "main": "src/index.js",
+              "main": "src/entry.js",
               "compatibility_date": "2026-07-14",
               "workers_dev": True,
               "vars": {
