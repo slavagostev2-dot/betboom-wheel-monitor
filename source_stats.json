@@ -47,6 +47,15 @@
         "PAPAdota2"
       ]
     },
+    "solo": {
+      "actor": "admin",
+      "day": "2026-07-14",
+      "decided_at": "2026-07-14T14:49:00.015416+00:00",
+      "decision": "confirmed",
+      "sources": [
+        "amam0610"
+      ]
+    },
     "solotg": {
       "actor": "admin",
       "day": "2026-07-14",
@@ -431,7 +440,7 @@
           "successful_checks": 18
         },
         "amam0610": {
-          "admin_confirmed_wheels": 1,
+          "admin_confirmed_wheels": 2,
           "checks": 145,
           "messages_scanned": 2769,
           "preliminary_sent": 1,
@@ -739,7 +748,7 @@
         }
       },
       "totals": {
-        "admin_confirmed_wheels": 10,
+        "admin_confirmed_wheels": 8,
         "admin_rejected_wheels": 1,
         "checks": 9497,
         "draw_time_alerts": 2,
@@ -826,7 +835,7 @@
       "first_checked_at": "2026-07-13T10:45:44.607811+00:00",
       "last_checked_at": "2026-07-14T14:38:13.326237+00:00",
       "last_transport_outage_at": "2026-07-14T02:39:35.575804+00:00",
-      "last_updated_at": "2026-07-14T14:38:13.326237+00:00",
+      "last_updated_at": "2026-07-14T14:49:00.015416+00:00",
       "last_wheel_post_at": "2026-07-14T11:12:45.350909+00:00",
       "messages_scanned": 6132,
       "preliminary_sent": 1,
@@ -850,7 +859,7 @@
       "checks": 18,
       "first_checked_at": "2026-07-14T12:59:56.741483+00:00",
       "last_checked_at": "2026-07-14T14:38:13.326758+00:00",
-      "last_updated_at": "2026-07-14T14:38:13.326758+00:00",
+      "last_updated_at": "2026-07-14T14:49:00.015416+00:00",
       "messages_scanned": 324,
       "quality_decisions": {
         "neret": 40
@@ -865,7 +874,7 @@
       "first_checked_at": "2026-07-13T10:45:44.607586+00:00",
       "last_checked_at": "2026-07-14T14:38:13.326009+00:00",
       "last_transport_outage_at": "2026-07-14T02:39:35.575692+00:00",
-      "last_updated_at": "2026-07-14T14:38:13.326009+00:00",
+      "last_updated_at": "2026-07-14T14:49:00.015416+00:00",
       "last_wheel_post_at": "2026-07-14T13:49:34.675637+00:00",
       "messages_scanned": 3469,
       "preliminary_sent": 1,
@@ -892,7 +901,7 @@
       "first_checked_at": "2026-07-13T10:45:44.607478+00:00",
       "last_checked_at": "2026-07-14T14:38:13.325908+00:00",
       "last_transport_outage_at": "2026-07-14T02:39:35.575641+00:00",
-      "last_updated_at": "2026-07-14T14:38:13.325908+00:00",
+      "last_updated_at": "2026-07-14T14:49:00.015416+00:00",
       "last_wheel_post_at": "2026-07-14T14:00:49.116337+00:00",
       "messages_scanned": 6557,
       "preliminary_sent": 1,
@@ -947,7 +956,7 @@
       "first_checked_at": "2026-07-13T10:45:44.607934+00:00",
       "last_checked_at": "2026-07-14T14:38:13.326352+00:00",
       "last_transport_outage_at": "2026-07-14T02:39:35.575860+00:00",
-      "last_updated_at": "2026-07-14T14:38:13.326352+00:00",
+      "last_updated_at": "2026-07-14T14:49:00.015416+00:00",
       "last_wheel_post_at": "2026-07-14T10:03:21.387131+00:00",
       "messages_scanned": 5661,
       "preliminary_sent": 1,
@@ -987,20 +996,21 @@
       "successful_checks": 18
     },
     "amam0610": {
-      "admin_confirmed_wheels": 1,
+      "admin_confirmed_wheels": 2,
       "checks": 344,
       "first_checked_at": "2026-07-13T10:45:44.608055+00:00",
       "inactive_checks": 1,
       "last_checked_at": "2026-07-14T14:38:13.326463+00:00",
       "last_transport_outage_at": "2026-07-14T02:39:35.575916+00:00",
-      "last_updated_at": "2026-07-14T14:38:13.326463+00:00",
+      "last_updated_at": "2026-07-14T14:49:00.015416+00:00",
       "last_wheel_post_at": "2026-07-14T14:33:13.484900+00:00",
       "messages_scanned": 6749,
       "preliminary_sent": 1,
       "quality_decisions": {
+        "solo": 40,
         "solotg": 40
       },
-      "quality_score": 40,
+      "quality_score": 80,
       "recent_post_keys": {
         "4d57bd418e1db4697d60f3d61409d4dfd579a396b08dcbd543315d3c4ada8e06": {
           "seen_at": "2026-07-13T08:18:32.041411+00:00",
@@ -1142,7 +1152,7 @@
       "first_checked_at": "2026-07-13T10:45:44.607526+00:00",
       "last_checked_at": "2026-07-14T14:38:13.325954+00:00",
       "last_transport_outage_at": "2026-07-14T02:39:35.575664+00:00",
-      "last_updated_at": "2026-07-14T14:38:13.325954+00:00",
+      "last_updated_at": "2026-07-14T14:49:00.015416+00:00",
       "last_wheel_post_at": "2026-07-14T10:47:42.601701+00:00",
       "messages_scanned": 6311,
       "preliminary_sent": 1,
@@ -1317,7 +1327,7 @@
       "checks": 15,
       "first_checked_at": "2026-07-14T13:29:47.638317+00:00",
       "last_checked_at": "2026-07-14T14:38:13.326781+00:00",
-      "last_updated_at": "2026-07-14T14:38:13.326781+00:00",
+      "last_updated_at": "2026-07-14T14:49:00.015416+00:00",
       "last_wheel_post_at": "2026-07-14T14:00:53.958853+00:00",
       "messages_scanned": 285,
       "preliminary_sent": 1,
@@ -1354,7 +1364,7 @@
       "inactive_checks": 1,
       "last_checked_at": "2026-07-14T14:38:13.326477+00:00",
       "last_transport_outage_at": "2026-07-14T02:39:35.575922+00:00",
-      "last_updated_at": "2026-07-14T14:38:13.326477+00:00",
+      "last_updated_at": "2026-07-14T14:49:00.015416+00:00",
       "last_wheel_post_at": "2026-07-13T10:45:45.476848+00:00",
       "messages_scanned": 5939,
       "quality_decisions": {
@@ -1438,7 +1448,7 @@
       "first_checked_at": "2026-07-13T10:45:44.607420+00:00",
       "last_checked_at": "2026-07-14T14:38:13.325849+00:00",
       "last_transport_outage_at": "2026-07-14T02:39:35.575614+00:00",
-      "last_updated_at": "2026-07-14T14:38:13.325849+00:00",
+      "last_updated_at": "2026-07-14T14:49:00.015416+00:00",
       "last_wheel_post_at": "2026-07-14T14:00:48.688431+00:00",
       "messages_scanned": 6860,
       "preliminary_sent": 2,
@@ -1483,7 +1493,7 @@
       "first_checked_at": "2026-07-13T10:45:44.608029+00:00",
       "last_checked_at": "2026-07-14T14:38:13.326439+00:00",
       "last_transport_outage_at": "2026-07-14T02:39:35.575904+00:00",
-      "last_updated_at": "2026-07-14T14:38:13.326439+00:00",
+      "last_updated_at": "2026-07-14T14:49:00.015416+00:00",
       "messages_scanned": 6880,
       "quality_decisions": {
         "bolt": 40
