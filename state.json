@@ -59,7 +59,8 @@
       "needs_manual_time": false,
       "page_excerpt": "",
       "page_status": "telegram_deadline",
-      "participating": false,
+      "participating": true,
+      "participating_at": "2026-07-14T12:38:59.638098+00:00",
       "source": "mechanogun",
       "status": "unknown",
       "url": "https://betboom.ru/freestream/zonertg5"
@@ -302,7 +303,14 @@
   "manual_deadlines": {},
   "manual_overrides": {},
   "notification_key_version": 8,
-  "participating_wheels": {},
+  "participating_wheels": {
+    "zonertg5": {
+      "expires_at": "2026-07-14T18:23:45+00:00",
+      "identifier": "zonertg5",
+      "marked_at": "2026-07-14T12:38:59.638067+00:00",
+      "url": "https://betboom.ru/freestream/zonertg5"
+    }
+  },
   "pending_posts": {},
   "seen": {
     "012299e0d83138e2bb8a30f9bedc98e45443d27f84571a20a8372b1c96f6ea50": "2026-07-12T18:26:18.034381+00:00",
