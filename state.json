@@ -113,32 +113,6 @@
       "status": "unknown",
       "url": "https://betboom.ru/freestream/papa"
     },
-    "solotg": {
-      "button_token": "b87ccddcb90b30",
-      "deadline": "2026-07-14T14:23:46.533183+00:00",
-      "deadline_source": "manual",
-      "draw_alert_sent_at": "2026-07-14T14:28:09.329651+00:00",
-      "expires_at": "2026-07-14T16:07:47.216339+00:00",
-      "first_notified_at": "2026-07-14T14:00:53.950082+00:00",
-      "identifier": "solotg",
-      "last_checked_at": "2026-07-14T14:38:09.571530+00:00",
-      "last_notification_at": "2026-07-14T14:00:53.950279+00:00",
-      "last_unknown_reminder_at": "2026-07-21T14:06:40.527499+00:00",
-      "manual_time_waiting_since": "2026-07-14T14:06:40.527499+00:00",
-      "message_date": "2026-07-14T13:54:43+00:00",
-      "message_id": 109,
-      "message_text": "https://betboom.ru/freestream/solotg\nhttps://telegram.me/kolesaBB\nhttps://telegram.me/kolesaBB/109",
-      "message_url": "https://telegram.me/kolesaBB/109",
-      "method": "состояние определяется пользователями BB V.G.",
-      "needs_manual_time": false,
-      "page_excerpt": "",
-      "page_status": "fresh_unconfirmed",
-      "participating": true,
-      "participating_at": "2026-07-14T14:07:35.075953+00:00",
-      "source": "kolesaBB",
-      "status": "unknown",
-      "url": "https://betboom.ru/freestream/solotg"
-    },
     "zonertg5": {
       "button_token": "3c239f1f5c095a",
       "deadline": "2026-07-14T17:53:52.309134+00:00",
@@ -227,21 +201,6 @@
       "url": "https://betboom.ru/freestream/krat",
       "wheel_key": "krat"
     },
-    "b87ccddcb90b30": {
-      "created_at": "2026-07-14T14:00:51.839386+00:00",
-      "identifier": "solotg",
-      "message_date": "2026-07-14T13:54:43+00:00",
-      "message_id": 109,
-      "message_text": "https://betboom.ru/freestream/solotg\nhttps://telegram.me/kolesaBB\nhttps://telegram.me/kolesaBB/109",
-      "message_url": "https://telegram.me/kolesaBB/109",
-      "method": "свежий Telegram-пост; страница открылась, но активность не подтверждена",
-      "page_excerpt": "Букмекерская контора BetBoom - ставки на спорт онлайн в России!",
-      "post_key": "b87ccddcb90b30b70b0340169e193dd9bf3cc2a7769d7e0f0dce779f7b886be8",
-      "source": "kolesaBB",
-      "status": "preliminary",
-      "url": "https://betboom.ru/freestream/solotg",
-      "wheel_key": "solotg"
-    },
     "f410a25da7c3c9": {
       "created_at": "2026-07-14T10:47:43.053082+00:00",
       "identifier": "bolt",
@@ -289,13 +248,6 @@
     }
   },
   "completed_wheel_alerts": {
-    "solotg": {
-      "deadline": "2026-07-14T14:23:46.533183+00:00",
-      "identifier": "solotg",
-      "notified_at": "2026-07-14T14:28:09.329651+00:00",
-      "source": "kolesaBB",
-      "url": "https://betboom.ru/freestream/solotg"
-    },
     "zonertg4": {
       "deadline": "2026-07-13T18:01:29+00:00",
       "identifier": "zonertg4",
@@ -312,6 +264,12 @@
       "expires_at": "2026-08-13T14:50:12.266518+00:00",
       "identifier": "solo",
       "marked_at": "2026-07-14T14:50:12.266518+00:00",
+      "marked_by": "7178093128"
+    },
+    "solotg": {
+      "expires_at": "2026-08-13T14:50:27.684132+00:00",
+      "identifier": "solotg",
+      "marked_at": "2026-07-14T14:50:27.684132+00:00",
       "marked_by": "7178093128"
     },
     "vovapainufc": {
@@ -453,10 +411,6 @@
       "deadline": "2026-07-14T19:51:06.643371+00:00",
       "updated_at": "2026-07-14T14:06:07.198822+00:00"
     },
-    "solotg": {
-      "deadline": "2026-07-14T14:23:46.533183+00:00",
-      "updated_at": "2026-07-14T14:07:47.216352+00:00"
-    },
     "zonertg5": {
       "deadline": "2026-07-14T17:53:52.309134+00:00",
       "updated_at": "2026-07-14T14:06:53.068785+00:00"
@@ -494,13 +448,6 @@
       "identifier": "papa",
       "marked_at": "2026-07-14T14:07:13.181332+00:00",
       "url": "https://betboom.ru/freestream/papa"
-    },
-    "solotg": {
-      "deadline": "2026-07-14T14:23:46.533183+00:00",
-      "expires_at": "2026-07-14T16:07:47.216359+00:00",
-      "identifier": "solotg",
-      "marked_at": "2026-07-14T14:07:35.075929+00:00",
-      "url": "https://betboom.ru/freestream/solotg"
     },
     "zonertg5": {
       "deadline": "2026-07-14T17:53:52.309134+00:00",
@@ -759,12 +706,6 @@
       "identifier": "smurf6",
       "suppress_until": "2026-07-13T18:26:18.629281+00:00",
       "url": "https://betboom.ru/freestream/smurf6"
-    },
-    "solotg": {
-      "alerted_at": "2026-07-14T14:00:53.950154+00:00",
-      "identifier": "solotg",
-      "suppress_until": "2026-07-15T14:00:53.950154+00:00",
-      "url": "https://betboom.ru/freestream/solotg"
     },
     "staya": {
       "alerted_at": "2026-07-12T18:21:23.777412+00:00",
