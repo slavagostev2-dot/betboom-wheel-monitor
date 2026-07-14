@@ -10,6 +10,17 @@ REMINDER_MARKERS = (
     "вы ещё не отметили участие",
     "вы еще не отметили участие",
 )
+_GLOBAL_PARTICIPATING: set[str] = set()
+
+
+def set_global_participating(wheel_key: str, participating: bool) -> None:
+    normalized = str(wheel_key or "").casefold()
+    if not normalized:
+        return
+    if participating:
+        _GLOBAL_PARTICIPATING.add(normalized)
+    else:
+        _GLOBAL_PARTICIPATING.discard(normalized)
 
 
 def participating_for_chat(config: dict[str, Any], chat_id: str, wheel_key: str) -> bool:
@@ -32,7 +43,7 @@ def participating_for_chat(config: dict[str, Any], chat_id: str, wheel_key: str)
 
 
 def install(monitor_module: Any, router_module: Any) -> None:
-    """Filter only reminder deliveries, keeping initial wheel alerts unchanged."""
+    """Filter reminder deliveries by each recipient's own participation state."""
 
     if getattr(monitor_module, "_bbvg_personal_reminder_filter_installed", False):
         return
@@ -46,10 +57,17 @@ def install(monitor_module: Any, router_module: Any) -> None:
                 key = router_module.wheel_key_from_message(
                     str(payload.get("text") or ""),
                     None,
-                    payload.get("reply_markup") if isinstance(payload.get("reply_markup"), dict) else None,
+                    payload.get("reply_markup")
+                    if isinstance(payload.get("reply_markup"), dict)
+                    else None,
                 )
                 chat_id = str(payload.get("chat_id") or "")
-                if participating_for_chat(config, chat_id, key):
+                personal = participating_for_chat(config, chat_id, key)
+                global_admin = (
+                    key.casefold() in _GLOBAL_PARTICIPATING
+                    and router_module.is_admin_chat(config, chat_id)
+                )
+                if personal or global_admin:
                     return {
                         "ok": True,
                         "result": {
@@ -67,17 +85,24 @@ def install(monitor_module: Any, router_module: Any) -> None:
 
 def self_test() -> None:
     config = {
+        "owner_id": "1",
+        "admins": [],
         "users": {
-            "1": {
-                "chat_id": "10",
+            "1": {"chat_id": "10", "participating_wheels": {}},
+            "2": {
+                "chat_id": "20",
                 "participating_wheels": {"wheel-a": {"joined_at": "now"}},
             },
-            "2": {"chat_id": "20", "participating_wheels": {}},
-        }
+            "3": {"chat_id": "30", "participating_wheels": {}},
+        },
     }
-    assert participating_for_chat(config, "10", "wheel-a")
-    assert not participating_for_chat(config, "20", "wheel-a")
-    assert not participating_for_chat(config, "10", "wheel-b")
+    assert participating_for_chat(config, "20", "wheel-a")
+    assert not participating_for_chat(config, "30", "wheel-a")
+    assert not participating_for_chat(config, "20", "wheel-b")
+    set_global_participating("wheel-a", True)
+    assert "wheel-a" in _GLOBAL_PARTICIPATING
+    set_global_participating("wheel-a", False)
+    assert "wheel-a" not in _GLOBAL_PARTICIPATING
     print("personal reminder filter self-test passed")
 
 
