@@ -1,35 +1,45 @@
 {
   "active_incidents": 0,
+  "automation_state": {
+    "source_tier_last_run_at": "2026-07-14T04:37:16.335557+00:00",
+    "source_tier_policy": "seven_day_dynamic_primary_and_nightly",
+    "transport_accounted_sources": 67,
+    "transport_checked_at": "2026-07-14T04:38:38.444690+00:00",
+    "transport_domain": "telegram.me",
+    "transport_status": "success"
+  },
   "bot_api": {
     "ok": true,
     "username": "slava_wheel_monitor_bot"
   },
   "check_matrix": {
+    "automations": "ok",
     "discovery": "ok",
     "inventory": "ok",
     "miniapp": "ok",
     "monitor": "ok",
     "notifications": "ok",
+    "ratings": "ok",
     "source_health": "ok",
     "telegram_transport": "ok"
   },
-  "checked_at": "2026-07-14T04:09:27.761236+00:00",
+  "checked_at": "2026-07-14T04:39:06.822192+00:00",
   "discovery": {
-    "active_size": 66,
-    "candidate_count": 144,
+    "active_size": 67,
+    "candidate_count": 145,
     "catalog_size": 0,
     "discovery_errors": 0,
-    "discovery_last_run_at": "2026-07-14T04:04:08.665337+00:00",
+    "discovery_last_run_at": "2026-07-14T04:38:44.590299+00:00",
     "domain": "telegram.me",
     "intelligence_domain": "telegram.me",
-    "intelligence_last_run_at": "2026-07-14T04:04:13.195945+00:00",
+    "intelligence_last_run_at": "2026-07-14T04:38:47.958126+00:00",
     "intelligence_summary": {
       "empty_sources": 0,
       "error_types": {},
       "errors": 0,
-      "known_sources": 66,
-      "references_found": 183,
-      "sources_scanned": 66,
+      "known_sources": 67,
+      "references_found": 177,
+      "sources_scanned": 67,
       "strong_candidates": 0,
       "telegram_domain": "telegram.me",
       "unique_candidates": 122,
@@ -54,68 +64,73 @@
   "findings": [],
   "gpt_diagnostic_snapshot": {
     "active_incidents": 0,
-    "checked_sources": 66,
-    "configured_sources": 66,
+    "checked_sources": 67,
+    "configured_sources": 67,
     "domain": "telegram.me",
-    "reachable_sources": 66,
+    "reachable_sources": 67,
     "single_source": "system_check_state.json",
     "status": "ok"
   },
   "incident_delivery": {
-    "digest_sent": true,
-    "messages_attempted": 1,
+    "digest_sent": false,
+    "messages_attempted": 0,
     "opened": 0,
-    "resolved": 2
+    "resolved": 0
   },
   "incident_sequence": 6,
   "inventory": {
-    "configured": 66,
+    "configured": 67,
     "domain": "telegram.me",
     "duplicates": 0,
     "expected": 66,
     "nightly": 0,
-    "operational": 66
+    "operational": 67,
+    "total": 67
   },
   "miniapp": {
     "asset_versions": [
-      "5.4.0",
-      "5.4.0"
+      "5.5.0",
+      "5.5.0"
     ],
     "deployment_status": "deployed",
     "deployment_url": "https://slavagostev2-betboom-monitor.pages.dev/",
     "features": {
+      "admin_ratings": true,
       "haptics": true,
       "light_theme": true,
-      "unified_notifications": true
+      "participation_history": true,
+      "responsive_charts": true,
+      "unified_notifications": true,
+      "unified_sources": true
     },
-    "version": "5.4.0"
+    "version": "5.5.0"
   },
   "monitor": {
     "brand": "BB V.G.",
-    "checked_sources": 66,
-    "checks_delta": 66,
-    "checks_total": 10431,
+    "checked_sources": 67,
+    "checks_delta": 67,
+    "checks_total": 10897,
     "consecutive_failures": 0,
     "consecutive_no_progress": 0,
     "iteration": 1,
     "last_failure_at": "2026-07-14T02:44:12.395838+00:00",
-    "last_iteration_at": "2026-07-14T04:04:14.961079+00:00",
-    "last_iteration_duration_seconds": 4,
+    "last_iteration_at": "2026-07-14T04:38:45.987861+00:00",
+    "last_iteration_duration_seconds": 3,
     "last_iteration_exit_code": 0,
-    "last_process_heartbeat_at": "2026-07-14T04:04:14.961079+00:00",
-    "last_successful_checks_total": 10431,
-    "last_successful_iteration_at": "2026-07-14T04:04:14.961079+00:00",
+    "last_process_heartbeat_at": "2026-07-14T04:38:45.987861+00:00",
+    "last_successful_checks_total": 10897,
+    "last_successful_iteration_at": "2026-07-14T04:38:45.987861+00:00",
     "pending_wheels": 0,
-    "reachable_sources": 66,
+    "reachable_sources": 67,
     "restart_recommended": false,
-    "run_id": "29305032070",
-    "run_started_at": "2026-07-14T04:04:10.434358+00:00",
+    "run_id": "29306468032",
+    "run_started_at": "2026-07-14T04:38:42.142000+00:00",
     "source_errors": 0,
     "stats_counter_reset": false,
     "status": "running",
     "version": 3
   },
-  "monitor_age_minutes": 5,
+  "monitor_age_minutes": 0,
   "notification_routing": {
     "admin_kinds": {
       "admin_requests": [
@@ -152,14 +167,20 @@
     ]
   },
   "primary_telegram_domain": "telegram.me",
+  "rating_consistency": {
+    "administrator_decisions": 0,
+    "inactive_wheel_leaks": [],
+    "rated_sources": 0,
+    "score_mismatches": []
+  },
   "source_health_summary": {
-    "configured_records": 66,
+    "configured_records": 67,
     "missing_sources": [],
     "problem_details": [],
     "problem_sources": [],
-    "records": 66,
+    "records": 67,
     "statuses": {
-      "ok": 66
+      "ok": 67
     },
     "transport_failure_types": {
       "dns": 0,
