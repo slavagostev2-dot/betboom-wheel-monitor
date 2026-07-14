@@ -10,7 +10,7 @@ on:
       - "admin_action_v2.py"
       - "admin_runtime.py"
       - "admin_panel_v2.py"
-      - "admin_panel_runtime_v*.py"
+      - "admin_panel_runtime_v25.py"
       - "bot_private_state.py"
       - "bot_private_state.enc.json"
       - "bot_notification_state.py"
@@ -61,14 +61,12 @@ jobs:
           set -euo pipefail
           python -m py_compile \
             admin_bot.py admin_action.py admin_action_v2.py admin_runtime.py \
-            admin_panel_v2.py admin_panel_runtime_v22.py admin_panel_runtime_v24.py \
-            admin_panel_runtime_v25.py bot_private_state.py bot_notification_state.py \
+            admin_panel_v2.py admin_panel_runtime_v22.py admin_panel_runtime_v25.py \
+            bot_private_state.py bot_notification_state.py \
             migrate_bot_private_state.py rating_policy.py
           python bot_private_state.py
           python migrate_bot_private_state.py --check
           python admin_action_v2.py --self-test
-          python admin_panel_runtime_v22.py --self-test
-          python admin_panel_runtime_v24.py --self-test
           python admin_panel_runtime_v25.py --self-test
           python -m json.tool candidate_moderation.json >/dev/null
 
@@ -101,11 +99,9 @@ jobs:
           exit 1
 
       - name: Record panel status
-        if: always()
-        continue-on-error: true
         shell: bash
         run: |
-          set -uo pipefail
+          set -euo pipefail
           python - <<'PY'
           import json
           import os
