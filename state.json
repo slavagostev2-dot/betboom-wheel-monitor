@@ -1,14 +1,37 @@
 {
   "activation_alerts": {},
   "active_wheels": {
+    "acool6": {
+      "button_token": "a10eadd8fc0ab4",
+      "expires_at": "2026-07-21T19:57:24.330303+00:00",
+      "first_notified_at": "2026-07-14T19:57:24.329933+00:00",
+      "identifier": "acool6",
+      "last_checked_at": "2026-07-14T19:57:24.330300+00:00",
+      "last_notification_at": "2026-07-14T19:57:24.330259+00:00",
+      "message_date": "2026-07-14T19:52:58+00:00",
+      "message_id": 10015,
+      "message_text": "Колесо фрибетов запустил ГО\nhttps://betboom.ru/freestream/acool6\nhttps://telegram.me/acoolbazarit\nhttps://betboom.ru/freestream/acool6\nhttps://telegram.me/acoolbazarit/10015",
+      "message_url": "https://telegram.me/acoolbazarit/10015",
+      "method": "свежий Telegram-пост; страница открылась, но активность не подтверждена",
+      "needs_manual_time": true,
+      "page_excerpt": "",
+      "page_status": "fresh_unconfirmed",
+      "participating": false,
+      "source": "acoolbazarit",
+      "sources": [
+        "acoolbazarit"
+      ],
+      "status": "manual_time_required",
+      "url": "https://betboom.ru/freestream/acool6"
+    },
     "adam": {
       "button_token": "3fa237ebea84c7",
-      "expires_at": "2026-07-21T19:42:17.229545+00:00",
+      "expires_at": "2026-07-21T19:57:18.753340+00:00",
       "first_notified_at": "2026-07-14T18:32:15.193992+00:00",
       "identifier": "adam",
-      "last_checked_at": "2026-07-14T19:42:17.233218+00:00",
+      "last_checked_at": "2026-07-14T19:57:18.756915+00:00",
       "last_notification_at": "2026-07-14T18:37:14.397326+00:00",
-      "last_unknown_reminder_at": "2026-07-21T19:42:17.229524+00:00",
+      "last_unknown_reminder_at": "2026-07-21T19:57:18.753321+00:00",
       "manual_time_waiting_since": "2026-07-14T18:37:09.551543+00:00",
       "message_date": "2026-07-14T18:31:02+00:00",
       "message_id": 7998,
@@ -29,12 +52,12 @@
     },
     "aunkere": {
       "button_token": "38b02c07dfcd1c",
-      "expires_at": "2026-07-21T19:42:17.229545+00:00",
+      "expires_at": "2026-07-21T19:57:18.753340+00:00",
       "first_notified_at": "2026-07-14T18:27:13.955396+00:00",
       "identifier": "aunkere",
-      "last_checked_at": "2026-07-14T19:42:17.233218+00:00",
+      "last_checked_at": "2026-07-14T19:57:18.756915+00:00",
       "last_notification_at": "2026-07-14T18:37:14.030055+00:00",
-      "last_unknown_reminder_at": "2026-07-21T19:42:17.229524+00:00",
+      "last_unknown_reminder_at": "2026-07-21T19:57:18.753321+00:00",
       "manual_time_waiting_since": "2026-07-14T18:32:09.589187+00:00",
       "message_date": "2026-07-14T18:23:04+00:00",
       "message_id": 4696,
@@ -54,37 +77,15 @@
       "status": "unknown",
       "url": "https://betboom.ru/freestream/aunkere"
     },
-    "bolt": {
-      "button_token": "f410a25da7c3c9",
-      "deadline": "2026-07-14T19:44:26+00:00",
-      "expires_at": "2026-07-14T20:14:26+00:00",
-      "final_reminder_sent_at": "2026-07-14T19:42:16.870357+00:00",
-      "first_notified_at": "2026-07-14T10:47:43.053395+00:00",
-      "identifier": "bolt",
-      "last_checked_at": "2026-07-14T19:42:17.233218+00:00",
-      "last_notification_at": "2026-07-14T19:42:16.870357+00:00",
-      "message_date": "2026-07-14T10:44:26+00:00",
-      "message_id": 6356,
-      "message_text": "ЗАЛЕТАЙ НА КОЛЕСО ФРИБЕТОВ: 20 000 РАЗЫГРАЮ\nКЛИКАЙ ДЛЯ УЧАСТИЯ\nКЛИКАЙ ДЛЯ УЧАСТИЯ\nКЛИКАЙ ДЛЯ УЧАСТИЯ\nВСЁ ПОКАЗЫВАЮ НА СТРИМЕ:\nhttps://www.twitch.tv/bolt_ru\nhttps://www.twitch.tv/bolt_ru\nhttps\n://www.twitch.tv/bolt_ru\nИТОГИ ЧЕРЕЗ 9 ЧАСОВ\nhttps://telegram.me/boltcast\nhttps://telegram.me/boltcast/6356\nhttps://betboom.ru/freestream/bolt\nhttps://www.twitch.tv/bolt_ru",
-      "message_url": "https://telegram.me/boltcast/6356",
-      "method": "состояние определяется пользователями BB V.G.",
-      "needs_manual_time": false,
-      "page_excerpt": "",
-      "page_status": "telegram_deadline",
-      "participating": true,
-      "participating_at": "2026-07-14T12:39:18.526674+00:00",
-      "source": "boltcast",
-      "status": "unknown",
-      "url": "https://betboom.ru/freestream/bolt"
-    },
     "cct1": {
       "button_token": "105fd5e22b560e",
       "deadline": "2026-07-14T19:58:17+00:00",
       "expires_at": "2026-07-14T20:28:17+00:00",
+      "final_reminder_sent_at": "2026-07-14T19:57:18.133313+00:00",
       "first_notified_at": "2026-07-14T14:00:56.318244+00:00",
       "identifier": "cct1",
-      "last_checked_at": "2026-07-14T19:42:17.233218+00:00",
-      "last_notification_at": "2026-07-14T14:00:56.318424+00:00",
+      "last_checked_at": "2026-07-14T19:57:18.756915+00:00",
+      "last_notification_at": "2026-07-14T19:57:18.133313+00:00",
       "message_date": "2026-07-14T10:58:17+00:00",
       "message_id": 1516,
       "message_text": "Быстро вы справились!\nЗАЛЕТАЙ НА КОЛЕСО ФРИБЕТОВ: 5000 РАЗЫГРАЮ\n✅\n✅\n✅\nКЛИКАЙ ДЛЯ УЧАСТИЯ\nКЛИКАЙ ДЛЯ УЧАСТИЯ\nКЛИКАЙ ДЛЯ УЧАСТИЯ\nВСЁ ПОКАЗЫВАЮ НА СТРИМЕ:\nhttps://www.twitch.tv/jester_andrew\nhttps://www.twitch.tv/jester_andrew\nhttps://www.twitch.tv/jester_andrew\nИТОГИ ЧЕРЕЗ 9 ЧАСОВ\nhttps://telegram.me/jestercast\nhttps://telegram.me/jestercast/1516\nhttps://betboom.ru/freestream/cct1\nhttps://www.twitch.tv/jester_andrew",
@@ -105,7 +106,7 @@
       "expires_at": "2026-07-14T20:39:21+00:00",
       "first_notified_at": "2026-07-14T11:12:45.785230+00:00",
       "identifier": "krat",
-      "last_checked_at": "2026-07-14T19:42:17.233218+00:00",
+      "last_checked_at": "2026-07-14T19:57:18.756915+00:00",
       "last_notification_at": "2026-07-14T11:12:45.785345+00:00",
       "message_date": "2026-07-14T11:09:21+00:00",
       "message_id": 10188,
@@ -128,7 +129,7 @@
       "expires_at": "2026-07-14T20:50:50.184084+00:00",
       "first_notified_at": "2026-07-14T13:49:36.422364+00:00",
       "identifier": "neret",
-      "last_checked_at": "2026-07-14T19:42:17.233218+00:00",
+      "last_checked_at": "2026-07-14T19:57:18.756915+00:00",
       "last_notification_at": "2026-07-14T17:37:10.097684+00:00",
       "message_date": "2026-07-14T11:32:44+00:00",
       "message_id": 3909,
@@ -145,38 +146,38 @@
       "status": "unknown",
       "url": "https://betboom.ru/freestream/neret"
     },
-    "papa": {
-      "button_token": "f62d44770527b1",
-      "deadline": "2026-07-14T19:51:06.643371+00:00",
-      "deadline_source": "manual",
-      "expires_at": "2026-07-14T20:21:06.643371+00:00",
-      "first_notified_at": "2026-07-14T14:00:51.621291+00:00",
-      "identifier": "papa",
-      "last_checked_at": "2026-07-14T19:42:17.233218+00:00",
-      "last_notification_at": "2026-07-14T17:16:37.351774+00:00",
-      "message_date": "2026-07-14T11:14:52+00:00",
-      "message_id": 12118,
-      "message_text": "⚡️\nКОЛЕСО ФРИБЕТОВ\nот ПАПАставит\n20000 ФРИБЕТОВ\n✅\nЗаходи по ссылке -\nhttps://betboom.ru/freestream/papa\n✅\nНажимай кнопку\nУчаствовать\nВ концен игрового дня подведу итог!\nКолесо автоматически сделает прокрут\nИ между теми, кто нажал Участвовать разыграются призы!\nДальше, если ты выиграл, в течении 2-3 минут фрибеты будут зачислены на твой аккаунт BetBoom автоматически.\nДля того, чтобы участвовать в раздаче КОЛЕСО ФРИБЕТОВ, нужно обязательно быть зарегистрированным на BetBoom\n(вносить деньги не обязательно)\n❤️\nЗАРЕГИСТРИРОВАТЬСЯ с промокодом PAPA\nhttps://telegram.me/PAPAdota2\nhttps://telegram.me/PAPAdota2/11717\nhttps://telegram.me/PAPAdota2/12118\nhttps://betboom.ru/freestream/papa\nhttps://betboom.ru/link/RfH6hP/?erid=KW2aPRYdr5QoPXHUHGeGkQy9fyYoUK6D9riSDrkrkP7AQkFuvVuxCxDau45JnvhV9",
-      "message_url": "https://telegram.me/PAPAdota2/12118",
-      "metadata_quality": "preserved_timed_publication",
+    "shik4": {
+      "button_token": "d722c5451f3f6f",
+      "deadline": "2026-07-14T20:18:37+00:00",
+      "expires_at": "2026-07-14T21:52:24.783481+00:00",
+      "first_notified_at": "2026-07-14T19:52:24.783194+00:00",
+      "identifier": "shik4",
+      "last_checked_at": "2026-07-14T19:57:18.756915+00:00",
+      "last_notification_at": "2026-07-14T19:52:24.783432+00:00",
+      "message_date": "2026-07-14T19:48:37+00:00",
+      "message_id": 6055,
+      "message_text": "Между таймами, самое то.\n🏆\nКолесо фрибетов от BetBoom для вас\n.\nhttps://betboom.ru/freestream/shik4\nКолесо будет активно следующие полчаса. Ловите бонусы.\n@GShikaryan\nhttps://telegram.me/GShikaryan\nhttps://telegram.me/GShikaryan/6055\nhttps://betboom.ru/freestream/shik4",
+      "message_url": "https://telegram.me/GShikaryan/6055",
       "method": "состояние определяется пользователями BB V.G.",
       "needs_manual_time": false,
-      "page_excerpt": "Букмекерская контора BetBoom - ставки на спорт онлайн в России!",
-      "page_status": "fresh_unconfirmed",
-      "participating": true,
-      "participating_at": "2026-07-14T14:07:13.181357+00:00",
-      "source": "PAPAdota2",
+      "page_excerpt": "",
+      "page_status": "telegram_deadline",
+      "participating": false,
+      "source": "GShikaryan",
+      "sources": [
+        "GShikaryan"
+      ],
       "status": "unknown",
-      "url": "https://betboom.ru/freestream/papa"
+      "url": "https://betboom.ru/freestream/shik4"
     },
     "staya": {
       "button_token": "c1854628934e0b",
-      "expires_at": "2026-07-21T19:42:17.229545+00:00",
+      "expires_at": "2026-07-21T19:57:18.753340+00:00",
       "first_notified_at": "2026-07-14T19:07:19.244074+00:00",
       "identifier": "staya",
-      "last_checked_at": "2026-07-14T19:42:17.233218+00:00",
+      "last_checked_at": "2026-07-14T19:57:18.756915+00:00",
       "last_notification_at": "2026-07-14T19:07:19.244296+00:00",
-      "last_unknown_reminder_at": "2026-07-21T19:42:17.229524+00:00",
+      "last_unknown_reminder_at": "2026-07-21T19:57:18.753321+00:00",
       "manual_time_waiting_since": "2026-07-14T19:12:13.627913+00:00",
       "message_date": "2026-07-14T19:05:49+00:00",
       "message_id": 3318,
@@ -198,17 +199,17 @@
   "bot_commands_version": 1,
   "button_contexts": {
     "105fd5e22b560e": {
-      "created_at": "2026-07-14T14:00:54.345377+00:00",
+      "created_at": "2026-07-14T19:57:18.133402+00:00",
       "identifier": "cct1",
       "message_date": "2026-07-14T10:58:17+00:00",
       "message_id": 1516,
       "message_text": "Быстро вы справились!\nЗАЛЕТАЙ НА КОЛЕСО ФРИБЕТОВ: 5000 РАЗЫГРАЮ\n✅\n✅\n✅\nКЛИКАЙ ДЛЯ УЧАСТИЯ\nКЛИКАЙ ДЛЯ УЧАСТИЯ\nКЛИКАЙ ДЛЯ УЧАСТИЯ\nВСЁ ПОКАЗЫВАЮ НА СТРИМЕ:\nhttps://www.twitch.tv/jester_andrew\nhttps://www.twitch.tv/jester_andrew\nhttps://www.twitch.tv/jester_andrew\nИТОГИ ЧЕРЕЗ 9 ЧАСОВ\nhttps://telegram.me/jestercast\nhttps://telegram.me/jestercast/1516\nhttps://betboom.ru/freestream/cct1\nhttps://www.twitch.tv/jester_andrew",
       "message_url": "https://telegram.me/jestercast/1516",
-      "method": "текст Telegram: относительное время",
-      "page_excerpt": "Букмекерская контора BetBoom - ставки на спорт онлайн в России!",
+      "method": "состояние определяется пользователями BB V.G.",
+      "page_excerpt": "",
       "post_key": "105fd5e22b560edd7a6829bb33548ae5f140652138d934f93bf256911f0ce6ef",
       "source": "jestercast",
-      "status": "preliminary",
+      "status": "final_reminder",
       "url": "https://betboom.ru/freestream/cct1",
       "wheel_key": "cct1"
     },
@@ -317,6 +318,21 @@
       "url": "https://betboom.ru/freestream/krat",
       "wheel_key": "krat"
     },
+    "a10eadd8fc0ab4": {
+      "created_at": "2026-07-14T19:57:23.127490+00:00",
+      "identifier": "acool6",
+      "message_date": "2026-07-14T19:52:58+00:00",
+      "message_id": 10015,
+      "message_text": "Колесо фрибетов запустил ГО\nhttps://betboom.ru/freestream/acool6\nhttps://telegram.me/acoolbazarit\nhttps://betboom.ru/freestream/acool6\nhttps://telegram.me/acoolbazarit/10015",
+      "message_url": "https://telegram.me/acoolbazarit/10015",
+      "method": "свежий Telegram-пост; страница открылась, но активность не подтверждена",
+      "page_excerpt": "Букмекерская контора BetBoom - ставки на спорт онлайн в России!",
+      "post_key": "a10eadd8fc0ab4bf1c2bfa44916c9bb0fffea1bdb186a8d53755cdc2a5144e0f",
+      "source": "acoolbazarit",
+      "status": "preliminary",
+      "url": "https://betboom.ru/freestream/acool6",
+      "wheel_key": "acool6"
+    },
     "c1854628934e0b": {
       "created_at": "2026-07-14T19:07:17.950708+00:00",
       "identifier": "staya",
@@ -331,6 +347,21 @@
       "status": "preliminary",
       "url": "https://betboom.ru/freestream/staya",
       "wheel_key": "staya"
+    },
+    "d722c5451f3f6f": {
+      "created_at": "2026-07-14T19:52:23.570943+00:00",
+      "identifier": "shik4",
+      "message_date": "2026-07-14T19:48:37+00:00",
+      "message_id": 6055,
+      "message_text": "Между таймами, самое то.\n🏆\nКолесо фрибетов от BetBoom для вас\n.\nhttps://betboom.ru/freestream/shik4\nКолесо будет активно следующие полчаса. Ловите бонусы.\n@GShikaryan\nhttps://telegram.me/GShikaryan\nhttps://telegram.me/GShikaryan/6055\nhttps://betboom.ru/freestream/shik4",
+      "message_url": "https://telegram.me/GShikaryan/6055",
+      "method": "текст Telegram: полчаса",
+      "page_excerpt": "Букмекерская контора BetBoom - ставки на спорт онлайн в России!",
+      "post_key": "d722c5451f3f6fe0c34aefed99af055687887e71397ebbcc6843b9bcf77d8e5f",
+      "source": "GShikaryan",
+      "status": "preliminary",
+      "url": "https://betboom.ru/freestream/shik4",
+      "wheel_key": "shik4"
     },
     "f410a25da7c3c9": {
       "created_at": "2026-07-14T19:42:16.870458+00:00",
@@ -348,17 +379,17 @@
       "wheel_key": "bolt"
     },
     "f62d44770527b1": {
-      "created_at": "2026-07-14T14:00:49.495842+00:00",
+      "created_at": "2026-07-14T19:47:17.641236+00:00",
       "identifier": "papa",
       "message_date": "2026-07-14T11:14:52+00:00",
       "message_id": 12118,
       "message_text": "⚡️\nКОЛЕСО ФРИБЕТОВ\nот ПАПАставит\n20000 ФРИБЕТОВ\n✅\nЗаходи по ссылке -\nhttps://betboom.ru/freestream/papa\n✅\nНажимай кнопку\nУчаствовать\nВ концен игрового дня подведу итог!\nКолесо автоматически сделает прокрут\nИ между теми, кто нажал Участвовать разыграются призы!\nДальше, если ты выиграл, в течении 2-3 минут фрибеты будут зачислены на твой аккаунт BetBoom автоматически.\nДля того, чтобы участвовать в раздаче КОЛЕСО ФРИБЕТОВ, нужно обязательно быть зарегистрированным на BetBoom\n(вносить деньги не обязательно)\n❤️\nЗАРЕГИСТРИРОВАТЬСЯ с промокодом PAPA\nhttps://telegram.me/PAPAdota2\nhttps://telegram.me/PAPAdota2/11717\nhttps://telegram.me/PAPAdota2/12118\nhttps://betboom.ru/freestream/papa\nhttps://betboom.ru/link/RfH6hP/?erid=KW2aPRYdr5QoPXHUHGeGkQy9fyYoUK6D9riSDrkrkP7AQkFuvVuxCxDau45JnvhV9",
       "message_url": "https://telegram.me/PAPAdota2/12118",
-      "method": "свежий Telegram-пост; страница открылась, но активность не подтверждена",
+      "method": "состояние определяется пользователями BB V.G.",
       "page_excerpt": "Букмекерская контора BetBoom - ставки на спорт онлайн в России!",
       "post_key": "f62d44770527b1f1a84fae87c317f42c7206d26743aedc26e17e7230624d95c9",
       "source": "PAPAdota2",
-      "status": "preliminary",
+      "status": "final_reminder",
       "url": "https://betboom.ru/freestream/papa",
       "wheel_key": "papa"
     },
@@ -379,12 +410,26 @@
     }
   },
   "completed_wheel_alerts": {
+    "bolt": {
+      "deadline": "2026-07-14T19:44:26+00:00",
+      "identifier": "bolt",
+      "notified_at": "2026-07-14T19:47:18.257854+00:00",
+      "source": "boltcast",
+      "url": "https://betboom.ru/freestream/bolt"
+    },
     "dyrachyo": {
       "deadline": "2026-07-14T15:23:05.668022+00:00",
       "identifier": "dyrachyo",
       "notified_at": "2026-07-14T15:27:42.054096+00:00",
       "source": "kolesaBB",
       "url": "https://betboom.ru/freestream/dyrachyo"
+    },
+    "papa": {
+      "deadline": "2026-07-14T19:51:06.643371+00:00",
+      "identifier": "papa",
+      "notified_at": "2026-07-14T19:52:17.921935+00:00",
+      "source": "PAPAdota2",
+      "url": "https://betboom.ru/freestream/papa"
     },
     "risen": {
       "deadline": "2026-07-14T16:56:48.970209+00:00",
@@ -614,6 +659,27 @@
   },
   "pending_posts": {},
   "recently_completed_wheels": {
+    "bolt": {
+      "deadline": "2026-07-14T19:44:26+00:00",
+      "expires_at": "2026-07-15T19:47:19.500840+00:00",
+      "identifier": "bolt",
+      "removed_at": "2026-07-14T19:47:19.500840+00:00",
+      "sources": [
+        "narodCast",
+        "boltcast"
+      ],
+      "url": "https://betboom.ru/freestream/bolt"
+    },
+    "papa": {
+      "deadline": "2026-07-14T19:51:06.643371+00:00",
+      "expires_at": "2026-07-15T19:52:19.199331+00:00",
+      "identifier": "papa",
+      "removed_at": "2026-07-14T19:52:19.199331+00:00",
+      "sources": [
+        "PAPAdota2"
+      ],
+      "url": "https://betboom.ru/freestream/papa"
+    },
     "risen": {
       "deadline": "2026-07-14T16:56:48.970209+00:00",
       "expires_at": "2026-07-15T17:01:20.738255+00:00",
@@ -714,6 +780,7 @@
     "9923e7f98f5456dc9a50ee0385fd86242b1f18dba172d8214184b090a4feaf28": "2026-07-14T11:12:45.785395+00:00",
     "997d5b6b33d9263a510cb3b3ea28fc879a5d83f132620987ca12032e75aaad66": "2026-07-12T15:09:46.050550+00:00",
     "9f1b7087c70a36f9599f46265dbcf3cbfe95e3f8503cb7050bcc4e8e23b0c251": "2026-07-12T15:09:23.912472+00:00",
+    "a10eadd8fc0ab4bf1c2bfa44916c9bb0fffea1bdb186a8d53755cdc2a5144e0f": "2026-07-14T19:57:24.330308+00:00",
     "a2e9fb9f62e1b2b649e30288fcdba5c026b726149de836012db0ec1aede70405": "2026-07-12T19:22:25.149620+00:00",
     "a41b0d5039bf3d9ce3c762e6961ace7b9bfae111b4c92f18b2ba15363990bca9": "2026-07-12T18:21:26.735714+00:00",
     "a83c6554b193401cc197d686361e0f952191a1ba151f45911c82c29a3e1bb989": "2026-07-14T13:29:47.673053+00:00",
@@ -738,6 +805,7 @@
     "c9e7f459dd8b5117cc78351bffd12f73755044222ed4abe0e34cd9c91152cefe": "2026-07-12T19:22:25.149620+00:00",
     "d30169b28e9b2c1e142ecb5a7250d7dc9a04906e55e77558bb175a258b378abf": "2026-07-12T15:09:43.809994+00:00",
     "d4fa31f2a589420a8f824bb4bde52b3dfe93db3a76d5b704da796185c36b1a81": "2026-07-12T15:10:05.815332+00:00",
+    "d722c5451f3f6fe0c34aefed99af055687887e71397ebbcc6843b9bcf77d8e5f": "2026-07-14T19:52:24.783487+00:00",
     "db568f77183a1f8525c0e666d4acf763f080189b1b790533f7094ce7821a7ce1": "2026-07-12T18:21:25.206458+00:00",
     "e0a8dd6a0e7f5bf946f7164d84869c3a1702f2742d2105608673b2d2941ab003": "2026-07-12T19:22:25.149620+00:00",
     "e48faa6c63aa2de704956cc8b9fe894aceb9a0d0bff18f1b2c610db97b07c2e7": "2026-07-12T15:09:56.683822+00:00",
@@ -755,6 +823,12 @@
   },
   "telegram_update_offset": 398354386,
   "url_alerts": {
+    "acool6": {
+      "alerted_at": "2026-07-14T19:57:24.330039+00:00",
+      "identifier": "acool6",
+      "suppress_until": "2026-07-15T19:57:24.330039+00:00",
+      "url": "https://betboom.ru/freestream/acool6"
+    },
     "adam": {
       "alerted_at": "2026-07-14T18:32:15.194066+00:00",
       "identifier": "adam",
@@ -862,10 +936,10 @@
       "url": "https://betboom.ru/freestream/shik3"
     },
     "shik4": {
-      "alerted_at": "2026-07-12T18:26:20.014184+00:00",
-      "deadline": "2026-07-10T19:21:52+00:00",
+      "alerted_at": "2026-07-14T19:52:24.783265+00:00",
+      "deadline": "2026-07-14T20:18:37+00:00",
       "identifier": "shik4",
-      "suppress_until": "2026-07-12T19:26:20.014184+00:00",
+      "suppress_until": "2026-07-14T20:52:24.783265+00:00",
       "url": "https://betboom.ru/freestream/shik4"
     },
     "shik5": {
@@ -961,6 +1035,15 @@
   },
   "version": 6,
   "wheel_publications": {
+    "acool6": [
+      {
+        "has_future_deadline": false,
+        "message_date": "2026-07-14T19:52:58+00:00",
+        "message_id": 10015,
+        "message_url": "https://telegram.me/acoolbazarit/10015",
+        "source": "acoolbazarit"
+      }
+    ],
     "adam": [
       {
         "has_future_deadline": false,
@@ -1075,6 +1158,15 @@
         "message_id": 8152,
         "message_url": "https://telegram.me/risenhaha/8152",
         "source": "risenhaha"
+      }
+    ],
+    "shik4": [
+      {
+        "has_future_deadline": true,
+        "message_date": "2026-07-14T19:48:37+00:00",
+        "message_id": 6055,
+        "message_url": "https://telegram.me/GShikaryan/6055",
+        "source": "GShikaryan"
       }
     ],
     "solo": [
