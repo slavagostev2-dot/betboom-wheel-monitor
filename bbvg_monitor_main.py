@@ -5,6 +5,7 @@ from typing import Any
 
 import bbvg_monitor_runtime as runtime
 import bot_notification_state
+import notification_navigation
 import notification_router
 import personal_reminder_filter
 import rating_policy
@@ -34,6 +35,11 @@ _original_record_admin_wheel_decision = monitor.data_store.record_admin_wheel_de
 # Error notifications are produced by system_checks.py and deduplicated in
 # incident_state.json. The five-minute worker must not repeat the same warning.
 monitor.all_failed_alert_due = lambda state: False
+
+
+# The continuously running Telegram panel is the only callback consumer. The
+# monitor must not race it for menu and participation button updates.
+monitor.BOT_FEEDBACK_ENABLED = False
 
 
 def load_stats_additive() -> dict[str, Any]:
@@ -159,6 +165,7 @@ monitor.data_store.record_admin_wheel_decision = record_admin_wheel_decision_add
 monitor.wheel_reply_markup = wheel_markup_with_direct_key
 monitor.process_active_wheels = process_active_without_unknown_time_spam
 monitor.send_message = branded_send_message
+notification_navigation.install(monitor)
 wheel_lifecycle_v2.install(monitor)
 personal_reminder_filter.install(monitor, notification_router)
 
