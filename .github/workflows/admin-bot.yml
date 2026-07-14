@@ -35,7 +35,8 @@ on:
       - ".github/workflows/admin-bot.yml"
   workflow_dispatch:
   schedule:
-    - cron: "37 */6 * * *"
+    # Daily fallback. Normal continuity is maintained by the handoff step.
+    - cron: "37 3 * * *"
 
 permissions:
   contents: write
@@ -98,9 +99,10 @@ jobs:
           python -m json.tool source_requests.json >/dev/null
 
       - name: Record panel status
+        continue-on-error: true
         shell: bash
         run: |
-          set -euo pipefail
+          set -uo pipefail
           python - <<'PY'
           import json
           import os
@@ -124,8 +126,18 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add admin_panel_status.json
           git commit -m "Update BB V.G. control center status [skip ci]" || true
-          git pull --rebase origin main
-          git push origin HEAD:main
+
+          for attempt in 1 2 3; do
+            if git push origin HEAD:main; then
+              exit 0
+            fi
+            echo "Panel status push attempt ${attempt} failed; rebasing before retry."
+            if ! git pull --rebase origin main; then
+              git rebase --abort || true
+              exit 1
+            fi
+          done
+          exit 1
 
       - name: Run BB V.G. control center
         env:
@@ -144,7 +156,8 @@ jobs:
         run: python admin_panel_runtime_v21.py
 
       - name: Start next control-center shift
-        if: ${{ success() }}
+        if: ${{ always() }}
+        continue-on-error: true
         env:
           GH_TOKEN: ${{ github.token }}
         run: gh workflow run admin-bot.yml --ref main
