@@ -6,6 +6,7 @@ from pathlib import Path
 import monitor_data as data_store
 
 ROOT = Path(__file__).resolve().parent
+EXPECTED_SOURCE_COUNT = 66
 
 
 def require_text(path: str, markers: tuple[str, ...]) -> None:
@@ -28,6 +29,14 @@ def read_json(path: str) -> dict:
     if not isinstance(value, dict):
         raise SystemExit(f"PRECHECK ERROR: {path} must contain a JSON object")
     return value
+
+
+def source_values(path: str) -> list[str]:
+    return [
+        data_store.clean_username(line.split("#", 1)[0])
+        for line in (ROOT / path).read_text(encoding="utf-8").splitlines()
+        if data_store.clean_username(line.split("#", 1)[0])
+    ]
 
 
 def main() -> None:
@@ -68,7 +77,25 @@ def main() -> None:
         (
             "recover_deadline_manual_first",
             "process_active_without_unknown_time_spam",
+            "telegram_transport",
         ),
+    )
+    require_text(
+        "telegram_transport.py",
+        (
+            'PRIMARY_DOMAIN = os.getenv("TELEGRAM_WEB_DOMAIN", "telegram.me")',
+            "def public_source_url",
+            "def rewrite_telegram_url",
+            "def resolve_primary_ipv4",
+        ),
+    )
+    require_text(
+        "incident_manager.py",
+        ("def reconcile", "open_notification_pending", "resolution_notification_pending"),
+    )
+    require_text(
+        "system_checks.py",
+        ("EXPECTED_SOURCE_COUNT", "check_telegram_web", "check_notification_routing"),
     )
     require_text(
         "monitor_health.py",
@@ -89,11 +116,13 @@ def main() -> None:
         ),
     )
     require_text("nightly_discovery.py", ("import monitor", "def main()"))
+    require_text("nightly_discovery_entry.py", ("telegram_transport.install", "fetch_page_on_primary_domain"))
+    require_text("source_intelligence_entry.py", ("telegram_transport.install", "source_intelligence.main"))
     require_text("daily_report.py", ("Ежедневный отчёт", "BB V.G.", "def main()"))
     require_text("telegram_monitor.py", ("from monitor import main", "raise SystemExit(main())"))
     require_text("self_test.py", ("import monitor", "def main()"))
-    require_text("public_sources.txt", ("narodCast", "kolesaBB"))
-    require_text("source_catalog.txt", ("Ночная проверка",))
+    require_text("public_sources.txt", ("narodCast", "kolesaBB", "betboomteamcs2"))
+    require_text("source_catalog.txt", ("Кандидаты", "Все 66 известных источников"))
     require_text(".github/workflows/daily-report.yml", ("BB V.G. daily report", "daily_report.py"))
 
     mapping = read_json("identifier_sources.json")
@@ -113,45 +142,59 @@ def main() -> None:
         if key not in value:
             raise SystemExit(f"PRECHECK ERROR: {path} is missing key {key}")
 
-    fast_values = [
-        data_store.clean_username(line.split("#", 1)[0])
-        for line in (ROOT / "public_sources.txt").read_text(encoding="utf-8").splitlines()
-        if data_store.clean_username(line.split("#", 1)[0])
-    ]
-    nightly_values = [
-        data_store.clean_username(line.split("#", 1)[0])
-        for line in (ROOT / "source_catalog.txt").read_text(encoding="utf-8").splitlines()
-        if data_store.clean_username(line.split("#", 1)[0])
-    ]
+    configured_values = source_values("public_sources.txt")
+    nightly_values = source_values("source_catalog.txt")
+    configured_keys = [item.casefold() for item in configured_values]
+    if len(configured_values) != EXPECTED_SOURCE_COUNT:
+        raise SystemExit(
+            f"PRECHECK ERROR: expected {EXPECTED_SOURCE_COUNT} configured sources, found {len(configured_values)}"
+        )
+    if len(set(configured_keys)) != EXPECTED_SOURCE_COUNT:
+        raise SystemExit("PRECHECK ERROR: public_sources.txt contains duplicate sources")
+
     fast = {
         item.casefold()
-        for item in data_store.operational_sources(fast_values, "fast")
+        for item in data_store.operational_sources(configured_values, "fast")
     }
     nightly = {
         item.casefold()
         for item in data_store.operational_sources(nightly_values, "nightly")
     }
-    overlap = sorted(fast & nightly)
-    if overlap:
+    if len(fast) != EXPECTED_SOURCE_COUNT:
         raise SystemExit(
-            "PRECHECK ERROR: fast and nightly source lists overlap: " + ", ".join(overlap)
+            f"PRECHECK ERROR: all {EXPECTED_SOURCE_COUNT} sources must be in permanent monitoring; operational={len(fast)}"
+        )
+    if nightly:
+        raise SystemExit(
+            "PRECHECK ERROR: known sources must not remain night-only: " + ", ".join(sorted(nightly))
         )
 
     forbidden = {"frixa_betboom", "gazazor"}
-    stale = sorted((fast | nightly) & forbidden)
+    stale = sorted(fast & forbidden)
     if stale:
         raise SystemExit("PRECHECK ERROR: removed sources are still operational: " + ", ".join(stale))
     if "narodcast" not in fast:
-        raise SystemExit("PRECHECK ERROR: narodCast must remain in the fast list")
+        raise SystemExit("PRECHECK ERROR: narodCast must remain in the permanent list")
 
     metadata = data_store.flatten_partner_channels(catalog)
     narod = metadata.get("narodcast", {})
     if narod.get("relationship") != "betboom_partner":
         raise SystemExit("PRECHECK ERROR: narodCast must be classified as a partner source")
+    configured_metadata = [metadata.get(source.casefold(), {}) for source in configured_values]
+    wrong_modes = [
+        configured_values[index]
+        for index, info in enumerate(configured_metadata)
+        if info and info.get("scan_mode") not in {"fast", ""}
+    ]
+    if wrong_modes:
+        raise SystemExit(
+            "PRECHECK ERROR: sources are still filtered from permanent monitoring: "
+            + ", ".join(wrong_modes)
+        )
     if any(info.get("relationship") == "confirmed_ambassador" for info in metadata.values()):
         raise SystemExit("PRECHECK ERROR: confirmed_ambassador classification is obsolete")
 
-    print("BB V.G. preflight checks passed.")
+    print("BB V.G. preflight checks passed: 66 permanent telegram.me sources.")
 
 
 if __name__ == "__main__":
