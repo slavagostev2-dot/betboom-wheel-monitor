@@ -1,25 +1,160 @@
 name: BB V.G. Control Center
-run-name: BB V.G. control center — recovery handoff
+run-name: BB V.G. control center — ${{ github.event_name }}
 
 on:
   push:
     branches: [main]
     paths:
+      - "admin_bot.py"
+      - "admin_action.py"
+      - "admin_action_v2.py"
+      - "admin_runtime.py"
+      - "admin_panel_v2.py"
+      - "admin_panel_runtime_v25.py"
+      - "bot_private_state.py"
+      - "bot_private_state.enc.json"
+      - "bot_notification_state.py"
+      - "migrate_bot_private_state.py"
+      - "candidate_moderation.json"
+      - "intelligence_state.json"
+      - "requirements.txt"
       - ".github/workflows/admin-bot.yml"
   workflow_dispatch:
+  schedule:
+    - cron: "37 3 * * *"
 
 permissions:
-  contents: read
+  contents: write
+  actions: write
 
 concurrency:
   group: bb-vg-telegram-admin-panel
   cancel-in-progress: true
 
 jobs:
-  recovery-handoff:
+  control-center:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 350
+
     steps:
-      - name: Stop obsolete D1-dependent control-center shifts
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install dependencies
+        run: python -m pip install -r requirements.txt
+
+      - name: Validate bot-only control center
+        env:
+          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+          BOT_CHAT_ID: ${{ secrets.BOT_CHAT_ID }}
+          ADMIN_USER_ID: ${{ secrets.ADMIN_USER_ID }}
         run: |
-          echo "Obsolete v24 shifts stopped. Bot-only v25 deployment is being merged."
+          set -euo pipefail
+          python -m py_compile \
+            admin_bot.py admin_action.py admin_action_v2.py admin_runtime.py \
+            admin_panel_v2.py admin_panel_runtime_v22.py admin_panel_runtime_v25.py \
+            bot_private_state.py bot_notification_state.py \
+            migrate_bot_private_state.py rating_policy.py
+          python bot_private_state.py
+          python migrate_bot_private_state.py --check
+          python admin_action_v2.py --self-test
+          python admin_panel_runtime_v25.py --self-test
+          python -m json.tool candidate_moderation.json >/dev/null
+
+      - name: Restore and seal Telegram bot users
+        env:
+          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+          BOT_CHAT_ID: ${{ secrets.BOT_CHAT_ID }}
+          ADMIN_USER_ID: ${{ secrets.ADMIN_USER_ID }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          python migrate_bot_private_state.py
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet -- bot_private_state.enc.json; then
+            echo "Encrypted Telegram bot state is already current."
+            exit 0
+          fi
+          git add bot_private_state.enc.json
+          git commit -m "Update encrypted Telegram bot state [skip ci]"
+          for attempt in 1 2 3; do
+            if git push origin HEAD:main; then
+              exit 0
+            fi
+            if ! git pull --rebase origin main; then
+              git rebase --abort || true
+              exit 1
+            fi
+          done
+          exit 1
+
+      - name: Record panel status
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          import os
+          from datetime import datetime, timezone
+          value = {
+              "status": "running",
+              "brand": "BB V.G.",
+              "started_at": datetime.now(timezone.utc).isoformat(),
+              "run_id": os.environ.get("GITHUB_RUN_ID", ""),
+              "run_attempt": os.environ.get("GITHUB_RUN_ATTEMPT", ""),
+              "event": os.environ.get("GITHUB_EVENT_NAME", ""),
+              "version": 25,
+              "storage": "encrypted_bot_state",
+              "miniapp": "archived",
+          }
+          with open("admin_panel_status.json", "w", encoding="utf-8") as stream:
+              json.dump(value, stream, ensure_ascii=False, indent=2, sort_keys=True)
+              stream.write("\n")
+          PY
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add admin_panel_status.json
+          git commit -m "Update BB V.G. control center status [skip ci]" || true
+          for attempt in 1 2 3; do
+            if git push origin HEAD:main; then
+              exit 0
+            fi
+            if ! git pull --rebase origin main; then
+              git rebase --abort || true
+              exit 1
+            fi
+          done
+          exit 1
+
+      - name: Run BB V.G. control center
+        env:
+          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+          BOT_CHAT_ID: ${{ secrets.BOT_CHAT_ID }}
+          ADMIN_USER_ID: ${{ secrets.ADMIN_USER_ID }}
+          GITHUB_TOKEN: ${{ github.token }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          GITHUB_BRANCH: main
+          DISPLAY_TIMEZONE: Asia/Barnaul
+          RUN_SECONDS: "19800"
+          REQUEST_TIMEOUT_SECONDS: "20"
+          ADMIN_CACHE_SECONDS: "20"
+          SOURCE_INACTIVITY_DAYS: "7"
+          SOURCE_INACTIVITY_REPORT_DAYS: "7"
+        run: python admin_panel_runtime_v25.py
+
+      - name: Start next control-center shift
+        if: ${{ always() }}
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run admin-bot.yml --ref main
