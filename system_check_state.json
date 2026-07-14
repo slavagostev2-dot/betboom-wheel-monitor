@@ -23,7 +23,7 @@
     "source_health": "ok",
     "telegram_transport": "ok"
   },
-  "checked_at": "2026-07-14T13:31:21.094519+00:00",
+  "checked_at": "2026-07-14T13:42:50.636961+00:00",
   "discovery": {
     "active_size": 70,
     "candidate_count": 163,
@@ -72,10 +72,10 @@
     "status": "ok"
   },
   "incident_delivery": {
-    "digest_sent": true,
-    "messages_attempted": 1,
+    "digest_sent": false,
+    "messages_attempted": 0,
     "opened": 0,
-    "resolved": 1
+    "resolved": 0
   },
   "incident_sequence": 14,
   "inventory": {
@@ -96,28 +96,28 @@
     "brand": "BB V.G.",
     "checked_sources": 70,
     "checks_delta": 70,
-    "checks_total": 17472,
+    "checks_total": 17542,
     "consecutive_failures": 0,
     "consecutive_no_progress": 0,
     "iteration": 1,
     "last_failure_at": "2026-07-14T02:44:12.395838+00:00",
-    "last_iteration_at": "2026-07-14T13:29:47.751983+00:00",
-    "last_iteration_duration_seconds": 5,
+    "last_iteration_at": "2026-07-14T13:31:21.231742+00:00",
+    "last_iteration_duration_seconds": 6,
     "last_iteration_exit_code": 0,
-    "last_process_heartbeat_at": "2026-07-14T13:29:47.751983+00:00",
-    "last_successful_checks_total": 17472,
-    "last_successful_iteration_at": "2026-07-14T13:29:47.751983+00:00",
+    "last_process_heartbeat_at": "2026-07-14T13:31:21.231742+00:00",
+    "last_successful_checks_total": 17542,
+    "last_successful_iteration_at": "2026-07-14T13:31:21.231742+00:00",
     "pending_wheels": 0,
     "reachable_sources": 70,
     "restart_recommended": false,
-    "run_id": "29336553029",
-    "run_started_at": "2026-07-14T13:29:42.261044+00:00",
+    "run_id": "29336782753",
+    "run_started_at": "2026-07-14T13:31:15.978559+00:00",
     "source_errors": 0,
     "stats_counter_reset": false,
     "status": "running",
     "version": 3
   },
-  "monitor_age_minutes": 1,
+  "monitor_age_minutes": 11,
   "notification_routing": {
     "admin_kinds": {
       "admin_requests": [
