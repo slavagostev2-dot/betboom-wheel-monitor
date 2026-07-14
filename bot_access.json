@@ -1,43 +1,13 @@
 {
-  "access_signature": "9e32c3b2240bc69730a85cc6f4b62c3acd1be04a6580e0c796c591e184a7534f",
   "admins": [],
   "blocked_users": [],
-  "notification_recipients": [
-    "7178093128",
-    "801600922"
-  ],
-  "owner_id": "7178093128",
+  "notification_recipients": [],
+  "owner_id": "",
   "settings": {
     "monitor_interval_minutes": 5,
     "notifications": true,
     "public_panel": true
   },
-  "users": {
-    "7178093128": {
-      "chat_id": "7178093128",
-      "first_name": "Руслан",
-      "first_seen_at": "2026-07-13T12:19:24.722496+00:00",
-      "id": "7178093128",
-      "last_name": "",
-      "last_seen_at": "2026-07-13T12:19:24.722496+00:00",
-      "notifications_enabled": true,
-      "username": "ttobbby"
-    },
-    "801600922": {
-      "chat_id": "801600922",
-      "first_name": "Вячеслав",
-      "first_seen_at": "2026-07-13T12:26:24.641917+00:00",
-      "id": "801600922",
-      "last_name": "",
-      "last_seen_at": "2026-07-14T05:51:51.111327+00:00",
-      "notifications_enabled": true,
-      "participating_wheels": {
-        "zonertg5": {
-          "joined_at": "2026-07-14T08:12:55.954902+00:00"
-        }
-      },
-      "username": "gstvvlv"
-    }
-  },
+  "users": {},
   "version": 3
 }
