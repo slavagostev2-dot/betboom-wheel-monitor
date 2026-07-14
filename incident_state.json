@@ -1,5 +1,5 @@
 {
-  "active_count": 0,
+  "active_count": 1,
   "incidents": {
     "system_checks:discovery_scan_failure:763d64204869a56e": {
       "detail": "Просканировано 0 из 66; ошибок 66. Поиск должен выполняться через telegram.me.",
@@ -21,6 +21,23 @@
       "status": "resolved",
       "subject": "",
       "title": "Поиск новых источников не смог просканировать базу"
+    },
+    "system_checks:miniapp_deployment:33e162df1e126e69": {
+      "detail": "status=failed; url=https://slavagostev2-betboom-monitor.pages.dev/.",
+      "first_seen_at": "2026-07-14T05:05:36.457276+00:00",
+      "key": "system_checks:miniapp_deployment:33e162df1e126e69",
+      "kind": "miniapp_deployment",
+      "last_seen_at": "2026-07-14T05:05:36.457276+00:00",
+      "metadata": {},
+      "occurrences": 1,
+      "open_notification_pending": false,
+      "open_notified_at": "2026-07-14T05:05:36.928747+00:00",
+      "opened_sequence": 7,
+      "scope": "system_checks",
+      "severity": "critical",
+      "status": "active",
+      "subject": "",
+      "title": "Mini App открывается не с актуального домена"
     },
     "system_checks:monitor_source_count:05defcc6c0898ea6": {
       "detail": "В последней итерации проверено 56 из 66.",
@@ -65,17 +82,17 @@
       "title": "Основной монитор давно не обновлялся"
     }
   },
-  "last_change_at": "2026-07-14T04:09:29.059306+00:00",
-  "last_reconcile_at": "2026-07-14T04:41:23.110140+00:00",
+  "last_change_at": "2026-07-14T05:05:36.457276+00:00",
+  "last_reconcile_at": "2026-07-14T05:05:36.457276+00:00",
   "last_reconcile_scope": "system_checks",
   "last_summary": {
-    "active": 0,
-    "new_notification_count": 0,
+    "active": 1,
+    "new_notification_count": 1,
     "recovery_notification_count": 0,
     "scope": "system_checks"
   },
-  "sequence": 6,
+  "sequence": 7,
   "status": "initializing",
-  "updated_at": "2026-07-14T04:41:23.110179+00:00",
+  "updated_at": "2026-07-14T05:05:36.928787+00:00",
   "version": 1
 }
