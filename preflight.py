@@ -71,6 +71,15 @@ def main() -> None:
         ),
     )
     require_text(
+        "monitor_health.py",
+        (
+            "def record_iteration",
+            "def health_check",
+            "consecutive_no_progress",
+            "last_successful_iteration_at",
+        ),
+    )
+    require_text(
         "admin_panel_runtime_v20.py",
         (
             "BB V.G.",
