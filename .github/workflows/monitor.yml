@@ -10,6 +10,7 @@ on:
       - "bbvg_monitor_runtime.py"
       - "bbvg_monitor_main.py"
       - "monitor_resilience.py"
+      - "monitor_health.py"
       - "notification_router.py"
       - "bot_access.json"
       - "monitor_data.py"
@@ -24,8 +25,6 @@ on:
       - "self_test.py"
       - "preflight.py"
       - ".github/workflows/monitor.yml"
-      - ".github/workflows/nightly-discovery.yml"
-      - ".github/workflows/daily-report.yml"
   workflow_dispatch:
     inputs:
       continuous:
@@ -34,14 +33,14 @@ on:
         type: boolean
         default: false
   schedule:
-    - cron: "23 */4 * * *"
+    - cron: "23 */6 * * *"
 
 permissions:
   contents: write
   actions: write
 
 concurrency:
-  group: bb-vg-monitor-continuous
+  group: ${{ github.event_name == 'push' && format('bb-vg-monitor-validation-{0}', github.sha) || 'bb-vg-monitor-continuous' }}
   cancel-in-progress: false
 
 jobs:
@@ -70,9 +69,10 @@ jobs:
 
       - name: Check BB V.G. project files
         run: |
-          python -m py_compile monitor.py monitor_entry.py bbvg_monitor_runtime.py bbvg_monitor_main.py monitor_resilience.py notification_router.py monitor_data.py telegram_monitor.py nightly_discovery.py daily_report.py
+          python -m py_compile monitor.py monitor_entry.py bbvg_monitor_runtime.py bbvg_monitor_main.py monitor_resilience.py monitor_health.py notification_router.py monitor_data.py telegram_monitor.py nightly_discovery.py daily_report.py
           python notification_router.py
           python monitor_resilience.py
+          python monitor_health.py --self-test
           python - <<'PY'
           import bbvg_monitor_main as runtime
 
@@ -89,6 +89,7 @@ jobs:
           python self_test.py
 
       - name: Run BB V.G. monitor loop
+        if: ${{ github.event_name != 'push' }}
         env:
           BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
           BOT_CHAT_ID: ${{ secrets.BOT_CHAT_ID }}
@@ -113,7 +114,7 @@ jobs:
           BOT_FEEDBACK_ENABLED: "false"
           MANUAL_RUN: ${{ github.event_name == 'workflow_dispatch' && inputs.continuous != true }}
           AUTO_RUN: ${{ github.event_name != 'workflow_dispatch' || inputs.continuous == true }}
-          CONTINUOUS: ${{ github.event_name == 'push' || github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.continuous == true) }}
+          CONTINUOUS: ${{ github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.continuous == true) }}
         shell: bash
         run: |
           set -uo pipefail
@@ -122,10 +123,33 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
           runtime_files=(
-            state.json discovery_state.json source_health.json source_stats.json
-            unknown_timer_samples.json public_sources.txt source_catalog.txt
-            monitor_status.json
+            state.json source_health.json source_stats.json
+            unknown_timer_samples.json monitor_status.json
           )
+
+          push_runtime() {
+            if git diff --quiet -- "${runtime_files[@]}"; then
+              return 0
+            fi
+
+            git add "${runtime_files[@]}"
+            git commit -m "Update BB V.G. runtime data [skip ci]" || true
+
+            for attempt in 1 2 3; do
+              if git push origin "HEAD:${GITHUB_REF_NAME:-main}"; then
+                return 0
+              fi
+              echo "Runtime push attempt ${attempt} failed; rebasing before retry."
+              if ! git pull --rebase origin "${GITHUB_REF_NAME:-main}"; then
+                git rebase --abort || true
+                echo "Runtime rebase failed; preserving local data for the next retry."
+                return 1
+              fi
+            done
+            return 1
+          }
+
+          python monitor_health.py start --run-id "${GITHUB_RUN_ID:-}"
 
           shift_end=$(( $(date +%s) + 19800 ))
           last_commit_at=0
@@ -136,63 +160,23 @@ jobs:
             started_at=$(date +%s)
             echo "=== BB V.G. check $iteration at $(date -u +%FT%TZ) ==="
 
-            iteration_ok=true
-            timeout --signal=TERM --kill-after=30s 600s python bbvg_monitor_main.py 2>&1 | tee monitor-run.log || iteration_ok=false
-            if [[ "$iteration_ok" != "true" ]]; then
-              echo "BB V.G. monitor iteration failed or exceeded 10 minutes; the loop will save status and retry."
+            timeout --signal=TERM --kill-after=30s 600s python bbvg_monitor_main.py 2>&1 | tee monitor-run.log
+            iteration_exit=${PIPESTATUS[0]}
+            duration=$(( $(date +%s) - started_at ))
+
+            python monitor_health.py record \
+              --run-id "${GITHUB_RUN_ID:-}" \
+              --iteration "$iteration" \
+              --exit-code "$iteration_exit" \
+              --duration-seconds "$duration"
+
+            if (( iteration_exit != 0 )); then
+              echo "BB V.G. iteration failed with exit code ${iteration_exit}; status was saved and the loop will retry."
             fi
-
-            ITERATION="$iteration" ITERATION_OK="$iteration_ok" GITHUB_RUN_ID_VALUE="${GITHUB_RUN_ID:-}" python - <<'PY'
-          import json
-          import os
-          from datetime import datetime, timezone
-          from pathlib import Path
-
-          now = datetime.now(timezone.utc)
-          try:
-              state = json.loads(Path("state.json").read_text(encoding="utf-8"))
-          except Exception:
-              state = {}
-          try:
-              stats = json.loads(Path("source_stats.json").read_text(encoding="utf-8"))
-          except Exception:
-              stats = {}
-
-          summary = state.get("last_run_summary", {}) if isinstance(state, dict) else {}
-          source_rows = stats.get("sources", {}) if isinstance(stats, dict) else {}
-          checks_total = sum(
-              int(entry.get("checks", 0) or 0)
-              for entry in source_rows.values()
-              if isinstance(entry, dict)
-          ) if isinstance(source_rows, dict) else 0
-
-          payload = {
-              "version": 2,
-              "brand": "BB V.G.",
-              "status": "running" if os.environ.get("ITERATION_OK") == "true" else "iteration_error",
-              "run_id": os.environ.get("GITHUB_RUN_ID_VALUE", ""),
-              "iteration": int(os.environ.get("ITERATION", "0") or 0),
-              "last_iteration_at": now.isoformat(),
-              "checked_sources": int(summary.get("checked_sources", 0) or 0) if isinstance(summary, dict) else 0,
-              "reachable_sources": int(summary.get("reachable_sources", 0) or 0) if isinstance(summary, dict) else 0,
-              "source_errors": int(summary.get("source_errors", 0) or 0) if isinstance(summary, dict) else 0,
-              "checks_total": checks_total,
-              "pending_wheels": 0,
-          }
-          Path("monitor_status.json").write_text(
-              json.dumps(payload, ensure_ascii=False, indent=2, sort_keys=True) + "\n",
-              encoding="utf-8",
-          )
-          PY
 
             now_ts=$(date +%s)
             if [[ "$CONTINUOUS" != "true" ]] || (( last_commit_at == 0 || now_ts - last_commit_at >= 900 || now_ts >= shift_end )); then
-              if ! git diff --quiet -- "${runtime_files[@]}"; then
-                git add "${runtime_files[@]}"
-                git commit -m "Update BB V.G. runtime data [skip ci]" || true
-                git pull --rebase origin "${GITHUB_REF_NAME:-main}" || true
-                git push origin "HEAD:${GITHUB_REF_NAME:-main}" || echo "Runtime push failed; will retry later."
-              fi
+              push_runtime || echo "Runtime push is deferred; watchdog will continue checking repository freshness."
               last_commit_at=$now_ts
             fi
 
@@ -212,18 +196,19 @@ jobs:
           PY
             )
 
-            elapsed=$(( $(date +%s) - started_at ))
-            sleep_for=$(( interval_seconds - elapsed ))
+            sleep_for=$(( interval_seconds - duration ))
             if (( sleep_for > 0 )); then
-              echo "Previous check finished in ${elapsed}s. Next check in ${sleep_for}s."
+              echo "Previous check finished in ${duration}s. Next check in ${sleep_for}s."
               sleep "$sleep_for"
             else
-              echo "Previous check took ${elapsed}s; configured interval already elapsed."
+              echo "Previous check took ${duration}s; configured interval already elapsed."
             fi
           done
 
-      - name: Start next continuous shift
-        if: ${{ always() && (github.event_name == 'schedule' || github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.continuous == true)) }}
+          push_runtime || true
+
+      - name: Start or continue continuous monitoring
+        if: ${{ always() && (github.event_name == 'push' || github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.continuous == true)) }}
         continue-on-error: true
         env:
           GH_TOKEN: ${{ github.token }}
