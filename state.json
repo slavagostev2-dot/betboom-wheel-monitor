@@ -1,8 +1,45 @@
 {
   "activation_alerts": {},
-  "active_wheels": {},
+  "active_wheels": {
+    "zonertg5": {
+      "button_token": "26eac472265da6",
+      "deadline": "2026-07-14T17:53:45+00:00",
+      "expires_at": "2026-07-14T18:23:45+00:00",
+      "first_notified_at": "2026-07-14T07:58:38.558718+00:00",
+      "identifier": "zonertg5",
+      "last_checked_at": "2026-07-14T07:58:38.558919+00:00",
+      "last_notification_at": "2026-07-14T07:58:38.558879+00:00",
+      "message_date": "2026-07-14T07:53:45+00:00",
+      "message_id": 35606,
+      "message_text": "ЗАЛЕТАЙ НА КОЛЕСО ФРИБЕТОВ:\nКЛИКАЙ ДЛЯ УЧАСТИЯ\nКЛИКАЙ ДЛЯ УЧАСТИЯ\nКЛИКАЙ ДЛЯ УЧАСТИЯ\n10 ПО 1000 20 ПО 500\nИТОГИ ЧЕРЕЗ 10 ЧАСОВ\nhttps://telegram.me/mechanogun\nhttps://telegram.me/mechanogun/35606\nhttps://betboom.ru/freestream/zonertg5?utm_content=zoner&utm_source=freestream",
+      "message_url": "https://telegram.me/mechanogun/35606",
+      "method": "текст Telegram: относительное время",
+      "needs_manual_time": false,
+      "page_excerpt": "",
+      "page_status": "telegram_deadline",
+      "participating": false,
+      "source": "mechanogun",
+      "status": "scheduled",
+      "url": "https://betboom.ru/freestream/zonertg5"
+    }
+  },
   "bot_commands_version": 1,
   "button_contexts": {
+    "26eac472265da6": {
+      "created_at": "2026-07-14T07:58:37.940015+00:00",
+      "identifier": "zonertg5",
+      "message_date": "2026-07-14T07:53:45+00:00",
+      "message_id": 35606,
+      "message_text": "ЗАЛЕТАЙ НА КОЛЕСО ФРИБЕТОВ:\nКЛИКАЙ ДЛЯ УЧАСТИЯ\nКЛИКАЙ ДЛЯ УЧАСТИЯ\nКЛИКАЙ ДЛЯ УЧАСТИЯ\n10 ПО 1000 20 ПО 500\nИТОГИ ЧЕРЕЗ 10 ЧАСОВ\nhttps://telegram.me/mechanogun\nhttps://telegram.me/mechanogun/35606\nhttps://betboom.ru/freestream/zonertg5?utm_content=zoner&utm_source=freestream",
+      "message_url": "https://telegram.me/mechanogun/35606",
+      "method": "текст Telegram: относительное время",
+      "page_excerpt": "Букмекерская контора BetBoom - ставки на спорт онлайн в России!",
+      "post_key": "26eac472265da6852012bd99c31f8676f998df594758920d75da8d624f87aa73",
+      "source": "mechanogun",
+      "status": "preliminary",
+      "url": "https://betboom.ru/freestream/zonertg5",
+      "wheel_key": "zonertg5"
+    },
     "f7f544ff714d91": {
       "created_at": "2026-07-13T08:03:34.248298+00:00",
       "identifier": "zonertg4",
@@ -177,6 +214,7 @@
     "20f778e1e6ae99fc73ceb9897267976e5e280a9e8b14bffc1b57f535514e1ef8": "2026-07-12T18:21:21.730658+00:00",
     "25bf8fc5dbbdc5f3213d38f3553b89babaea95425328c427b5fffef1cda3d14e": "2026-07-12T18:21:21.162994+00:00",
     "26ccad6d4c8feb686c73bcffcedf7df7f0d56854d08938cadee5ee2e289915a0": "2026-07-12T15:09:13.354384+00:00",
+    "26eac472265da6852012bd99c31f8676f998df594758920d75da8d624f87aa73": "2026-07-14T07:58:38.558929+00:00",
     "2dfb1c4bb70cbefb8bb9c5f399144c79b8b4c2aae3159c140fac8dd9a0ab820d": "2026-07-12T18:21:22.495389+00:00",
     "2f52fc4a44639bbb464c4ca1062cf5ad5096f8bbee6ff393eb58964b78fed703": "2026-07-12T17:14:34.959937+00:00",
     "368f3194050806b90009f9066c96ee020906036e08a45d56b4c92053fd206cea": "2026-07-12T19:22:25.149620+00:00",
@@ -421,6 +459,13 @@
       "suppress_until": "2026-07-13T18:31:29+00:00",
       "url": "https://betboom.ru/freestream/zonertg4"
     },
+    "zonertg5": {
+      "alerted_at": "2026-07-14T07:58:38.558804+00:00",
+      "deadline": "2026-07-14T17:53:45+00:00",
+      "identifier": "zonertg5",
+      "suppress_until": "2026-07-14T18:23:45+00:00",
+      "url": "https://betboom.ru/freestream/zonertg5"
+    },
     "zonertw16": {
       "alerted_at": "2026-07-12T18:21:23.149865+00:00",
       "identifier": "zonertw16",
@@ -434,5 +479,15 @@
       "url": "https://betboom.ru/freestream/zonertw9"
     }
   },
-  "version": 6
+  "version": 6,
+  "wheel_publications": {
+    "zonertg5": [
+      {
+        "message_date": "2026-07-14T07:53:45+00:00",
+        "message_id": 35606,
+        "message_url": "https://telegram.me/mechanogun/35606",
+        "source": "mechanogun"
+      }
+    ]
+  }
 }
