@@ -102,10 +102,9 @@ def install(monitor_module: Any, runtime_module: Any) -> None:
 
     The monitor keeps a single canonical post for notification and deadline
     extraction. This layer retains all other publications so the active list and
-    source rating can credit every channel that found the same wheel. A new
-    event starts after the previous active record has disappeared, preventing
-    publications from an older use of the same freestream identifier from
-    leaking into a later event.
+    source rating can credit every channel that found the same wheel. Duplicate
+    alert checks also persist the newly found source before suppressing a second
+    notification.
     """
 
     base_runtime = runtime_module.base_runtime
@@ -113,6 +112,8 @@ def install(monitor_module: Any, runtime_module: Any) -> None:
         return
 
     original: Callable = base_runtime._persist_publications
+    original_suppressed: Callable = monitor_module.is_suppressed
+    original_activation_suppressed: Callable = monitor_module.is_activation_suppressed
 
     def persist_merged(state: dict, key: str, fallback: dict | None = None) -> None:
         normalized = str(key or "").casefold()
@@ -132,7 +133,22 @@ def install(monitor_module: Any, runtime_module: Any) -> None:
         if isinstance(active, dict):
             active["sources"] = publication_sources(state, normalized, active)
 
+    def persist_before_suppression(state: dict, link: str) -> None:
+        key = monitor_module.wheel_key(link)
+        fallback = state.get("active_wheels", {}).get(key)
+        persist_merged(state, key, fallback if isinstance(fallback, dict) else None)
+
+    def is_suppressed_with_publications(state: dict, link: str) -> bool:
+        persist_before_suppression(state, link)
+        return bool(original_suppressed(state, link))
+
+    def is_activation_suppressed_with_publications(state: dict, link: str) -> bool:
+        persist_before_suppression(state, link)
+        return bool(original_activation_suppressed(state, link))
+
     base_runtime._persist_publications = persist_merged
+    monitor_module.is_suppressed = is_suppressed_with_publications
+    monitor_module.is_activation_suppressed = is_activation_suppressed_with_publications
     base_runtime._bbvg_publication_merge_v2_installed = True
     monitor_module._bbvg_publication_merge_v2_installed = True
 
