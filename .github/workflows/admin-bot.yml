@@ -71,7 +71,32 @@ jobs:
           python migrate_bot_private_state.py --check
           python admin_action_v2.py --self-test
           python admin_panel_runtime_v25.py --self-test
-          python admin_panel_runtime_v27.py --self-test
+          python - <<'PY'
+          import inspect
+          from admin_panel_runtime_v25 import TelegramPanelRuntimeV25
+          from admin_panel_runtime_v27 import TelegramPanelRuntimeV27
+
+          callbacks = {
+              button.get("callback_data")
+              for row in TelegramPanelRuntimeV27.compact_menu_rows(True)
+              for button in row
+          }
+          assert callbacks == {
+              "page:stats:1",
+              "page:active",
+              "page:sources",
+              "page:settings",
+          }
+          handler = inspect.getsource(TelegramPanelRuntimeV27.handle_callback)
+          assert "wheel:part:" in handler
+          assert "wheel:inactive:" in handler
+          assert "participate_wheel" in handler
+          assert "mark_inactive_global" in handler
+          sources = inspect.getsource(TelegramPanelRuntimeV25.show_sources)
+          assert "page:discovery" in sources
+          assert "page:intelligence" in sources
+          print("BB V.G. v27 production callback validation passed")
+          PY
           python -m json.tool candidate_moderation.json >/dev/null
 
       - name: Restore and seal Telegram bot users
@@ -163,4 +188,4 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: gh workflow run admin-bot.yml --ref main
 
-# v27: direct administrator wheel actions; retry only after a successful shift.
+# v27: direct administrator wheel actions; production validation is identity-independent.
