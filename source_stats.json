@@ -1,5 +1,14 @@
 {
   "admin_wheel_decisions": {
+    "krat": {
+      "actor": "admin",
+      "day": "2026-07-14",
+      "decided_at": "2026-07-14T12:39:12.037805+00:00",
+      "decision": "confirmed",
+      "sources": [
+        "KRATtv"
+      ]
+    },
     "zonertg5": {
       "actor": "admin",
       "day": "2026-07-14",
@@ -291,6 +300,7 @@
           "successful_checks": 123
         },
         "KRATtv": {
+          "admin_confirmed_wheels": 1,
           "checks": 123,
           "messages_scanned": 1968,
           "preliminary_sent": 1,
@@ -627,7 +637,7 @@
         }
       },
       "totals": {
-        "admin_confirmed_wheels": 1,
+        "admin_confirmed_wheels": 2,
         "checks": 7972,
         "draw_time_alerts": 1,
         "errors": 12,
@@ -708,14 +718,19 @@
       "transport_outages": 2
     },
     "KRATtv": {
+      "admin_confirmed_wheels": 1,
       "checks": 322,
       "first_checked_at": "2026-07-13T10:45:44.607811+00:00",
       "last_checked_at": "2026-07-14T12:29:56.520991+00:00",
       "last_transport_outage_at": "2026-07-14T02:39:35.575804+00:00",
-      "last_updated_at": "2026-07-14T12:29:56.520991+00:00",
+      "last_updated_at": "2026-07-14T12:39:12.037805+00:00",
       "last_wheel_post_at": "2026-07-14T11:12:45.350909+00:00",
       "messages_scanned": 5780,
       "preliminary_sent": 1,
+      "quality_decisions": {
+        "krat": 40
+      },
+      "quality_score": 40,
       "recent_post_keys": {
         "9923e7f98f5456dc9a50ee0385fd86242b1f18dba172d8214184b090a4feaf28": {
           "seen_at": "2026-07-14T11:12:45.350896+00:00",
@@ -1205,7 +1220,7 @@
       "first_checked_at": "2026-07-13T10:45:44.607420+00:00",
       "last_checked_at": "2026-07-14T12:29:56.520493+00:00",
       "last_transport_outage_at": "2026-07-14T02:39:35.575614+00:00",
-      "last_updated_at": "2026-07-14T12:38:59.638123+00:00",
+      "last_updated_at": "2026-07-14T12:39:12.037805+00:00",
       "last_wheel_post_at": "2026-07-14T07:58:37.784981+00:00",
       "messages_scanned": 6420,
       "preliminary_sent": 2,
