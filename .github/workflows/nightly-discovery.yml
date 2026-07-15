@@ -7,6 +7,8 @@ on:
       - "nightly_discovery.py"
       - "nightly_discovery_entry.py"
       - "telegram_transport.py"
+      - "notification_integrity_v2.py"
+      - "notification_delivery_state.json"
       - "bot_private_state.py"
       - "bot_private_state.enc.json"
       - "bot_notification_state.py"
@@ -51,12 +53,18 @@ jobs:
 
       - name: Check project files
         env:
+          BOT_TOKEN: "test-bot-token"
+          BOT_STATE_KEY: "test-state-key"
+          BOT_CHAT_ID: "1"
           TELEGRAM_WEB_DOMAIN: telegram.me
         run: |
-          python -m py_compile monitor.py monitor_data.py nightly_discovery.py nightly_discovery_entry.py telegram_transport.py daily_report.py notification_router.py bot_private_state.py bot_notification_state.py privacy_retention.py
+          python -m py_compile monitor.py monitor_data.py nightly_discovery.py nightly_discovery_entry.py telegram_transport.py daily_report.py notification_router.py notification_integrity_v2.py bot_private_state.py bot_notification_state.py privacy_retention.py
           python telegram_transport.py
           python notification_router.py
+          python notification_integrity_v2.py --self-test
+          python bot_notification_state.py
           python -m json.tool bot_access.json >/dev/null
+          python -m json.tool notification_delivery_state.json >/dev/null
           python self_test.py
 
       - name: Scan candidate source catalog

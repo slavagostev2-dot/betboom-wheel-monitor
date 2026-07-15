@@ -13,11 +13,14 @@ on:
       - "bot_private_state.py"
       - "bot_private_state.enc.json"
       - "bot_notification_state.py"
+      - "notification_integrity_v2.py"
+      - "notification_delivery_state.json"
       - "privacy_retention.py"
       - "security_audit.py"
       - "migrate_bot_private_state.py"
       - "candidate_moderation.json"
       - "intelligence_state.json"
+      - "CHAPTER_2_RU.md"
       - "requirements.txt"
       - ".github/workflows/admin-bot.yml"
   workflow_dispatch:
@@ -53,7 +56,7 @@ jobs:
       - name: Install dependencies
         run: python -m pip install -r requirements.txt
 
-      - name: Validate v35 control center
+      - name: Validate v36 control center
         env:
           BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
           BOT_STATE_KEY: ${{ secrets.BOT_STATE_KEY }}
@@ -68,9 +71,12 @@ jobs:
             admin_panel_runtime_v27.py admin_panel_runtime_v28.py admin_panel_runtime_v29.py \
             admin_panel_runtime_v30.py admin_panel_runtime_v31.py admin_panel_runtime_v32.py \
             admin_panel_runtime_v33.py admin_panel_runtime_v34.py admin_panel_runtime_v35.py \
-            bot_private_state.py bot_notification_state.py privacy_retention.py security_audit.py \
+            admin_panel_runtime_v36.py bot_private_state.py bot_notification_state.py \
+            notification_integrity_v2.py privacy_retention.py security_audit.py \
             migrate_bot_private_state.py rating_policy.py
           python bot_private_state.py
+          python notification_integrity_v2.py --self-test
+          python bot_notification_state.py
           python privacy_retention.py
           python security_audit.py --current
           python migrate_bot_private_state.py --check
@@ -79,14 +85,17 @@ jobs:
           python admin_panel_runtime_v32.py --self-test
           python admin_panel_runtime_v33.py --self-test
           python admin_panel_runtime_v35.py --self-test
+          python admin_panel_runtime_v36.py --self-test
           python - <<'PY'
           import inspect
-          from admin_panel_runtime_v35 import TelegramPanelRuntimeV35
+          import notification_router
+          from admin_panel_runtime_v36 import TelegramPanelRuntimeV36
 
-          handler = inspect.getsource(TelegramPanelRuntimeV35.handle_callback)
-          persistence = inspect.getsource(TelegramPanelRuntimeV35._save_bot_bundle)
-          detail = inspect.getsource(TelegramPanelRuntimeV35.show_user_detail)
-          normalization = inspect.getsource(TelegramPanelRuntimeV35.normalize_access)
+          handler = inspect.getsource(TelegramPanelRuntimeV36.handle_callback)
+          persistence = inspect.getsource(TelegramPanelRuntimeV36._save_bot_bundle)
+          detail = inspect.getsource(TelegramPanelRuntimeV36.show_user_detail)
+          normalization = inspect.getsource(TelegramPanelRuntimeV36.normalize_access)
+          safe_send = inspect.getsource(TelegramPanelRuntimeV36.safe_text_for_role)
           assert "usernotify:" in handler
           assert "usernotifyall:" in handler
           assert "_load_remote_bundle" in persistence
@@ -94,7 +103,16 @@ jobs:
           assert "Управлять уведомлениями" in detail
           assert "access_signature" in normalization
           assert "result.pop" in normalization
-          print("BB V.G. v35 persistent roles and owner notification controls validated")
+          assert "USER_ACTION_ERROR" in safe_send
+          assert notification_router._bbvg_notification_integrity_v2_installed is True
+          ranking = [
+              button["text"]
+              for row in TelegramPanelRuntimeV36.source_menu_rows(False)
+              for button in row
+              if button.get("callback_data") == "page:ranking"
+          ]
+          assert ranking == ["🏆 Рейтинг источников"]
+          print("BB V.G. v36 chapter 2 notification and rating invariants validated")
           PY
 
       - name: Preserve role fingerprint and migrate state
@@ -123,6 +141,7 @@ jobs:
           print("Role fingerprint captured without printing personal values")
           PY
           python migrate_bot_private_state.py
+          python notification_integrity_v2.py --prune
           python - <<'PY'
           import json
           from pathlib import Path
@@ -140,11 +159,12 @@ jobs:
           PY
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          if git diff --quiet -- bot_private_state.enc.json; then
-            echo "Encrypted Telegram bot state is already current."
+          files=(bot_private_state.enc.json notification_delivery_state.json)
+          if git diff --quiet -- "${files[@]}"; then
+            echo "Encrypted state and delivery ledger are already current."
           else
-            git add bot_private_state.enc.json
-            git commit -m "Migrate encrypted Telegram bot state without role changes [skip ci]"
+            git add "${files[@]}"
+            git commit -m "Migrate BB V.G. private and delivery state [skip ci]"
             for attempt in 1 2 3; do
               if git push origin HEAD:main; then
                 break
@@ -173,11 +193,13 @@ jobs:
               "run_id": os.environ.get("GITHUB_RUN_ID", ""),
               "run_attempt": os.environ.get("GITHUB_RUN_ATTEMPT", ""),
               "event": os.environ.get("GITHUB_EVENT_NAME", ""),
-              "version": 35,
+              "version": 36,
               "storage": "encrypted_bot_state",
               "state_format": encrypted.get("format", "unknown"),
               "state_key_mode": encrypted.get("key_mode", "unknown"),
               "role_persistence": "aes_gcm_three_way_remote_merge",
+              "notification_integrity": "persistent_hmac_delivery_ledger",
+              "source_rating": "administrator_decisions_additive",
               "miniapp": "archived",
           }
           with open("admin_panel_status.json", "w", encoding="utf-8") as stream:
@@ -211,7 +233,7 @@ jobs:
           ADMIN_CACHE_SECONDS: "20"
           SOURCE_INACTIVITY_DAYS: "7"
           SOURCE_INACTIVITY_REPORT_DAYS: "7"
-        run: python admin_panel_runtime_v35.py
+        run: python admin_panel_runtime_v36.py
 
       - name: Start next control-center shift
         if: ${{ success() }}
@@ -220,4 +242,4 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: gh workflow run admin-bot.yml --ref main
 
-# v35: AES-GCM roles without obsolete BOT_TOKEN signatures and owner-managed per-user notifications.
+# v36: chapter 2 persistent notification integrity, role-safe delivery and unified source rating.
