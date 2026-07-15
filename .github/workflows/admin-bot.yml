@@ -20,6 +20,7 @@ on:
       - "notification_router.py"
       - "notification_delivery_state.json"
       - "wheel_publications_v2.py"
+      - "wheel_event_runtime.py"
       - "rating_policy.py"
       - "chapter2_unified_logic.py"
       - "privacy_retention.py"

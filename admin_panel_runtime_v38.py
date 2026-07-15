@@ -191,6 +191,7 @@ class TelegramPanelRuntimeV38(TelegramPanelRuntimeV37):
             identifier = str(item.get("identifier") or item.get("_key") or "колесо")
             key = str(item.get("_key") or identifier).casefold()
             deadline = self.parse_dt(item.get("deadline"))
+            available_at = self.parse_dt(item.get("available_at"))
             joined = identifier.casefold() in participating or key in participating
             sources = self._sources_for_item(snap, key, item)
             shown_sources = sources[:3]
@@ -198,7 +199,12 @@ class TelegramPanelRuntimeV38(TelegramPanelRuntimeV37):
             if len(sources) > len(shown_sources):
                 source_text += f" и ещё {len(sources) - len(shown_sources)}"
             source_text = source_text or "источник неизвестен"
-            timing = self.remaining(deadline) if deadline else "🔴 Время прокрутки неизвестно"
+            if available_at and available_at > datetime.now(UTC):
+                timing = f"🟡 Участие откроется через {self.remaining(available_at)}"
+            elif available_at and item.get("availability_status") == "available":
+                timing = "🟢 Доступно сейчас · 🔴 время прокрутки неизвестно"
+            else:
+                timing = self.remaining(deadline) if deadline else "🔴 Время прокрутки неизвестно"
             joined_text = "✅ участвуете" if joined else "❌ участие не отмечено"
             shown_identifier = identifier if len(identifier) <= 90 else identifier[:87] + "…"
             lines.extend(

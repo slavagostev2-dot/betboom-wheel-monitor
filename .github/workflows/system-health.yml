@@ -14,6 +14,7 @@ on:
       - "chapter2_unified_logic.py"
       - "rating_policy.py"
       - "wheel_publications_v2.py"
+      - "wheel_event_runtime.py"
       - "notification_delivery_state.json"
       - "admin_action_queue.py"
       - "admin_panel_status.json"

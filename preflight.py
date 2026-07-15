@@ -78,7 +78,17 @@ def main() -> None:
             "recover_deadline_manual_first",
             "process_active_without_unknown_time_spam",
             "telegram_transport",
+            "wheel_event_runtime.install",
             "wheel_metadata_quality.install",
+        ),
+    )
+    require_text(
+        "wheel_event_runtime.py",
+        (
+            "infer_availability",
+            "reset_stale_event_state",
+            "recover_recent_events_from_seen",
+            "process_due_availability",
         ),
     )
     require_text(

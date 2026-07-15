@@ -39,6 +39,11 @@ def _normalized_row(row: dict[str, Any]) -> dict[str, Any] | None:
             if "has_future_deadline" in row
             else {}
         ),
+        **(
+            {"has_future_availability": bool(row.get("has_future_availability"))}
+            if "has_future_availability" in row
+            else {}
+        ),
     }
 
 
@@ -70,6 +75,8 @@ def merge_publications(
             previous["message_url"] = row["message_url"]
         if row.get("has_future_deadline"):
             previous["has_future_deadline"] = True
+        if row.get("has_future_availability"):
+            previous["has_future_availability"] = True
 
     return sorted(
         merged.values(),

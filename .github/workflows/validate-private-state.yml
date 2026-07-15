@@ -18,6 +18,7 @@ on:
       - "chapter2_unified_logic.py"
       - "bbvg_monitor_main.py"
       - "recurring_wheel_events.py"
+      - "wheel_event_runtime.py"
       - "wheel_metadata_quality.py"
       - "wheel_publications_v2.py"
       - "wheel_lifecycle_v2.py"
@@ -79,7 +80,7 @@ jobs:
             admin_panel_runtime_v33.py admin_panel_runtime_v34.py admin_panel_runtime_v35.py \
             admin_panel_runtime_v36.py admin_panel_runtime_v37.py admin_panel_runtime_v38.py \
             telegram_ui.py chapter4_acceptance.py \
-            bbvg_monitor_main.py recurring_wheel_events.py \
+            bbvg_monitor_main.py recurring_wheel_events.py wheel_event_runtime.py \
             wheel_metadata_quality.py wheel_publications_v2.py wheel_lifecycle_v2.py \
             personal_reminder_filter.py daily_report.py source_intelligence_alerts.py \
             source_tier_maintenance_v2.py system_checks_v2.py sitecustomize.py

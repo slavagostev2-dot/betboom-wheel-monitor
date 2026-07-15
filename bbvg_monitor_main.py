@@ -15,6 +15,7 @@ import recurring_wheel_events
 import telegram_post_links_v2
 import telegram_transport
 import wheel_lifecycle_v2
+import wheel_event_runtime
 import wheel_metadata_quality
 import wheel_publications_v2
 
@@ -25,6 +26,7 @@ notification_preferences_v2.install(notification_router)
 recurring_wheel_events.install(monitor, runtime.base_runtime)
 telegram_transport.install(monitor)
 telegram_post_links_v2.install(monitor)
+wheel_event_runtime.install(monitor, runtime)
 wheel_metadata_quality.install(monitor, runtime)
 wheel_publications_v2.install(monitor, runtime)
 _original_recover_deadline = runtime.base_runtime._recover_deadline
@@ -76,8 +78,13 @@ def recover_deadline_manual_first(state: dict, key: str, entry: dict):
     normalized = str(key or "").casefold()
     manual = state.get("manual_deadlines", {}).get(normalized)
     if isinstance(manual, dict):
+        updated_at = monitor.parse_datetime(manual.get("updated_at"))
+        message_at = monitor.parse_datetime(entry.get("message_date"))
         deadline = monitor.parse_datetime(manual.get("deadline"))
-        if deadline:
+        same_event = message_at is None or (
+            updated_at is not None and updated_at >= message_at
+        )
+        if deadline and same_event:
             return deadline
     if str(entry.get("deadline_source") or "") == "manual":
         deadline = monitor.parse_datetime(entry.get("deadline"))

@@ -104,6 +104,28 @@ class Chapter4InterfaceTests(unittest.TestCase):
         self.assertIn("page:active:0", str(markup))
         self.assertIn("page:active:2", str(markup))
 
+    def test_scheduled_availability_has_a_clear_active_list_label(self) -> None:
+        panel, captured = self.capture_panel(role="user")
+        available_at = datetime.now(UTC) + timedelta(hours=2)
+        item = {
+            "_key": "risen",
+            "identifier": "risen",
+            "source": "artemkef",
+            "url": "https://betboom.ru/freestream/risen",
+            "available_at": available_at.isoformat(),
+            "availability_status": "scheduled",
+        }
+        snap = self.snapshot()
+        panel._collect_current_wheels = lambda: [item]  # type: ignore[method-assign]
+        panel.snapshot = lambda force=False: snap  # type: ignore[method-assign]
+        panel._joined_wheel_keys = lambda value: set()  # type: ignore[method-assign]
+        panel._sources_for_item = lambda value, key, row: ["artemkef"]  # type: ignore[method-assign]
+        panel._monitor_status = lambda: {}  # type: ignore[method-assign]
+        panel.show_active()
+        text, _ = captured[-1]
+        self.assertIn("🟡 Участие откроется через", text)
+        self.assertNotIn("🔴 Время прокрутки неизвестно", text)
+
     def test_long_wheel_key_uses_a_safe_resolvable_callback(self) -> None:
         panel, captured = self.capture_panel(role="owner")
         key = "ключ:" + "очень-длинный-" * 20

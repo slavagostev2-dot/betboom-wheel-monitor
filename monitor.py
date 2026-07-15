@@ -1083,7 +1083,13 @@ def active_wheels_text(state: dict) -> str:
         identifier = html.escape(identifier_raw)
         source = html.escape(str(entry.get("source") or "неизвестно"))
         deadline = parse_datetime(entry.get("deadline"))
-        timing = human_remaining(deadline) if deadline else "🔴 Время прокрутки неизвестно"
+        available_at = parse_datetime(entry.get("available_at"))
+        if available_at and available_at > now_utc():
+            timing = f"🟡 Участие откроется через {human_remaining(available_at)}"
+        elif available_at and entry.get("availability_status") == "available":
+            timing = "🟢 Доступно сейчас · 🔴 время прокрутки неизвестно"
+        else:
+            timing = human_remaining(deadline) if deadline else "🔴 Время прокрутки неизвестно"
         participation = "✅ участвую" if is_participating(state, identifier_raw) else "❌ не отмечено"
         lines.append(
             f"{index}. <code>{identifier}</code> — {html.escape(timing)} — {participation}\n"

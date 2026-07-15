@@ -11,6 +11,22 @@ def _future_text_deadline(monitor_module: Any, message: Any):
     return deadline
 
 
+def _future_text_availability(monitor_module: Any, message: Any):
+    parser = getattr(monitor_module, "infer_availability", None)
+    if not callable(parser):
+        return None
+    available_at, _ = parser(message.text, message.date)
+    if available_at is None or available_at <= monitor_module.now_utc():
+        return None
+    return available_at
+
+
+def _future_text_event(monitor_module: Any, message: Any):
+    return _future_text_availability(
+        monitor_module, message
+    ) or _future_text_deadline(monitor_module, message)
+
+
 def install(monitor_module: Any, base_runtime: Any) -> None:
     """Choose the best publication for the current wheel event.
 
@@ -38,7 +54,7 @@ def install(monitor_module: Any, base_runtime: Any) -> None:
                     all_candidates.setdefault(key, []).append(message)
                     if (
                         monitor_module.message_age(message) <= window
-                        or _future_text_deadline(monitor_module, message) is not None
+                        or _future_text_event(monitor_module, message) is not None
                     ):
                         event_candidates.setdefault(key, []).append(message)
 
@@ -58,7 +74,7 @@ def install(monitor_module: Any, base_runtime: Any) -> None:
             )
 
             def canonical_rank(message: Any) -> tuple:
-                timed = _future_text_deadline(monitor_module, message) is not None
+                timed = _future_text_event(monitor_module, message) is not None
                 return (
                     0 if timed else 1,
                     *base_runtime._message_rank(message, identifier),
@@ -76,6 +92,10 @@ def install(monitor_module: Any, base_runtime: Any) -> None:
                     "message_date": row.date.astimezone(monitor_module.UTC).isoformat(),
                     "message_url": row.message_url,
                     "has_future_deadline": _future_text_deadline(monitor_module, row) is not None,
+                    "has_future_availability": _future_text_availability(
+                        monitor_module, row
+                    )
+                    is not None,
                 }
             base_runtime._WHEEL_PUBLICATIONS[key] = sorted(
                 publications.values(),

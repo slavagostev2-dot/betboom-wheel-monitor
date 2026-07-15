@@ -48,7 +48,7 @@ jobs:
             chapter2_unified_logic.py \
             test_bot_state_fixture.py migrate_bot_private_state.py notification_preferences_v2.py \
             admin_action_v2.py admin_action_v3.py rating_policy.py bbvg_monitor_main.py \
-            recurring_wheel_events.py wheel_metadata_quality.py wheel_publications_v2.py \
+            recurring_wheel_events.py wheel_event_runtime.py wheel_metadata_quality.py wheel_publications_v2.py \
             wheel_lifecycle_v2.py personal_reminder_filter.py daily_report.py \
             source_intelligence_alerts.py system_checks_v2.py source_tier_maintenance_v2.py
           python bot_private_state.py
@@ -74,6 +74,7 @@ jobs:
           python admin_panel_runtime_v38.py --self-test
           python chapter4_acceptance.py
           python recurring_wheel_events.py
+          python wheel_event_runtime.py
           python wheel_metadata_quality.py
           python wheel_publications_v2.py
           python wheel_lifecycle_v2.py
@@ -118,6 +119,7 @@ jobs:
           assert notification_router._bbvg_notification_integrity_v2_installed is True
           assert bbvg_monitor_main.monitor.data_store.record_admin_wheel_decision.__module__ == "bbvg_monitor_main"
           assert bbvg_monitor_main.monitor._bbvg_wheel_metadata_quality_installed is True
+          assert bbvg_monitor_main.monitor._bbvg_wheel_event_runtime_installed is True
           assert bbvg_monitor_main.monitor._bbvg_publication_merge_v2_installed is True
           assert bbvg_monitor_main.monitor._bbvg_wheel_lifecycle_v2_installed is True
           assert bbvg_monitor_main.monitor._bbvg_personal_reminder_filter_installed is True

@@ -25,6 +25,8 @@ USER_NOTIFICATION_MARKERS = (
     "новое колесо betboom",
     "колесо betboom стало активно",
     "колесо betboom подтверждено администратором",
+    "колесо betboom доступно для участия",
+    "участие откроется позже",
     "напоминание о колесе betboom",
     "время прокрутки колеса наступило",
     "активные колёса",
@@ -293,7 +295,37 @@ def notification_event_identity(
 
     wheel_key = wheel_key_from_message(text, url, reply_markup)
     if wheel_key and (kind == "wheels" or kind.startswith("wheel_")):
-        return f"wheel:{kind}:{wheel_key}"
+        lowered = html.unescape(str(text or "")).casefold()
+        if "доступно для участия" in lowered or "теперь можно принять участие" in lowered:
+            phase = "available"
+        elif "откроется позже" in lowered or "будет доступно через" in lowered:
+            phase = "scheduled"
+        elif "последний шанс" in lowered or "напоминание о колесе" in lowered:
+            phase = "reminder"
+        elif "время прокрутки" in lowered and "наступило" in lowered:
+            phase = "draw"
+        elif "подтверждено администратором" in lowered:
+            phase = "confirmed"
+        elif "стало активно" in lowered:
+            phase = "active"
+        else:
+            phase = "detected"
+        event_token = ""
+        if isinstance(reply_markup, dict):
+            for row in reply_markup.get("inline_keyboard", []):
+                if not isinstance(row, list):
+                    continue
+                for button in row:
+                    if not isinstance(button, dict):
+                        continue
+                    callback = str(button.get("callback_data") or "")
+                    if callback.startswith(("bb:p:", "bb:n:")):
+                        event_token = callback.split(":", 2)[2].casefold()
+                        break
+                if event_token:
+                    break
+        suffix = f":{event_token}" if event_token else ""
+        return f"wheel:{kind}:{wheel_key}:{phase}{suffix}"
     return ""
 
 
@@ -476,7 +508,7 @@ def self_test() -> None:
         "https://betboom.ru/freestream/wheel-a?from=second",
         None,
     )
-    assert first_event == second_event == "wheel:wheels:wheel-a"
+    assert first_event == second_event == "wheel:wheels:wheel-a:detected"
     assert notification_event_identity(
         "wheel_final_reminders",
         "Напоминание о колесе BetBoom\nИдентификатор: <code>wheel-a</code>",
