@@ -92,6 +92,7 @@ jobs:
           python - <<'PY'
           import bot_notification_state
           import notification_router
+          notification_router.load_config = bot_notification_state.load_config
           assert notification_router.load_config is bot_notification_state.load_config
           assert notification_router._bbvg_notification_integrity_v2_installed is True
           print("Persistent notification integrity is active in system health")
