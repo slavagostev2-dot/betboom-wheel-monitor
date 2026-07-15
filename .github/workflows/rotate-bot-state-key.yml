@@ -3,10 +3,6 @@ run-name: Rotate encrypted bot state key
 
 on:
   workflow_dispatch:
-  push:
-    branches: [main]
-    paths:
-      - ".github/rotate-bot-state-key.request"
 
 permissions:
   contents: write
