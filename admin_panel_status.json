@@ -2,13 +2,15 @@
   "brand": "BB V.G.",
   "event": "push",
   "miniapp": "archived",
+  "notification_integrity": "persistent_hmac_delivery_ledger",
   "role_persistence": "aes_gcm_three_way_remote_merge",
   "run_attempt": "1",
-  "run_id": "29386898291",
-  "started_at": "2026-07-15T03:35:49.487965+00:00",
+  "run_id": "29389580129",
+  "source_rating": "administrator_decisions_additive",
+  "started_at": "2026-07-15T04:42:03.764061+00:00",
   "state_format": "bbvg-bot-state-v2",
   "state_key_mode": "dedicated",
   "status": "running",
   "storage": "encrypted_bot_state",
-  "version": 35
+  "version": 36
 }
