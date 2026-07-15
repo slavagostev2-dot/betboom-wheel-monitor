@@ -1,13 +1,34 @@
 {
   "activation_alerts": {},
   "active_wheels": {
+    "papa": {
+      "button_token": "31b6f832ef9a79",
+      "deadline": "2026-07-15T19:11:42+00:00",
+      "expires_at": "2026-07-15T19:41:42+00:00",
+      "first_notified_at": "2026-07-15T11:12:35.524959+00:00",
+      "identifier": "papa",
+      "last_checked_at": "2026-07-15T11:12:35.525014+00:00",
+      "last_notification_at": "2026-07-15T11:12:35.524959+00:00",
+      "message_date": "2026-07-15T11:11:42+00:00",
+      "message_id": 12144,
+      "message_text": "⚡️\nКОЛЕСО ФРИБЕТОВ\nот ПАПАставит\n2️⃣\n0️⃣\n0️⃣\n0️⃣\n0️⃣\nФРИБЕТОВ -\n✅\nЗаходи по ссылке -\nhttps://betboom.ru/freestream/papa\n✅\nНажимай кнопку\nУчаствовать\nЧерез 8 ЧАСОВ\nКолесо автоматически сделает прокрут\nИ между теми, кто нажал Участвовать разыграются призы!\nДальше, если ты выиграл, в течении 2-3 минут фрибеты будут зачислены на твой аккаунт BetBoom автоматически.\nВсё буду показывать и рассказывать на стриме, заходи:\n✨\nhttps://www.twitch.tv/cispapa\n✨\nhttps://www.twitch.tv/cispapa\nДля того, чтобы участвовать в раздаче КОЛЕСО ФРИБЕТОВ, нужно обязательно быть зарегистрированным на BetBoom\n(вносить деньги не обязательно)\n❤️\nЗАРЕГИСТРИРОВАТЬСЯ с промокодом PAPA\nhttps://telegram.me/PAPAdota2\nhttps://telegram.me/PAPAdota2/12022\nhttps://telegram.me/PAPAdota2/12144\nhttps://betboom.ru/freestream/papa\nhttps://www.twitch.tv/cispapa\nhttps://betboom.ru/link/RfH6hP/?erid=KW2aPRYdr5QoPXHUHGeGkQy9fyYoUK6D9riSDrkrkP7AQkFuvVuxCxDau45JnvhV9",
+      "message_url": "https://telegram.me/PAPAdota2/12144",
+      "method": "текст Telegram: относительное время",
+      "needs_manual_time": false,
+      "page_excerpt": "",
+      "page_status": "telegram_deadline",
+      "participating": false,
+      "source": "PAPAdota2",
+      "status": "scheduled",
+      "url": "https://betboom.ru/freestream/papa"
+    },
     "zonertg6": {
       "button_token": "1eaab6cb41f445",
       "deadline": "2026-07-15T20:48:46+00:00",
       "expires_at": "2026-07-15T21:18:46+00:00",
       "first_notified_at": "2026-07-15T10:51:33.022211+00:00",
       "identifier": "zonertg6",
-      "last_checked_at": "2026-07-15T11:09:26.761542+00:00",
+      "last_checked_at": "2026-07-15T11:12:30.913390+00:00",
       "last_notification_at": "2026-07-15T10:51:33.022390+00:00",
       "message_date": "2026-07-15T10:48:46+00:00",
       "message_id": 35609,
@@ -598,6 +619,7 @@
     "26eac472265da6852012bd99c31f8676f998df594758920d75da8d624f87aa73": "2026-07-14T07:58:38.558929+00:00",
     "2dfb1c4bb70cbefb8bb9c5f399144c79b8b4c2aae3159c140fac8dd9a0ab820d": "2026-07-12T18:21:22.495389+00:00",
     "2f52fc4a44639bbb464c4ca1062cf5ad5096f8bbee6ff393eb58964b78fed703": "2026-07-12T17:14:34.959937+00:00",
+    "31b6f832ef9a7936f0f42b3d244f67fe056122171dba41c0aa4fe0a6e4dfe7c6": "2026-07-15T11:12:35.525025+00:00",
     "368f3194050806b90009f9066c96ee020906036e08a45d56b4c92053fd206cea": "2026-07-12T19:22:25.149620+00:00",
     "36f561eb489538365b9f8e9e20688d6913ca8930cfb3aead41ed3ce6da754545": "2026-07-12T18:26:16.728123+00:00",
     "375da067269bc35d23793c9330566396fcfe06971f5db4574c2734d6bfe3ca55": "2026-07-12T19:22:25.149620+00:00",
@@ -913,28 +935,6 @@
   },
   "version": 6,
   "wheel_publications": {
-    "bolt": [
-      {
-        "message_date": "2026-05-30T14:48:44+00:00",
-        "message_id": 11378,
-        "message_url": "https://telegram.me/narodCast/11378",
-        "source": "narodCast"
-      },
-      {
-        "message_date": "2026-07-14T10:44:26+00:00",
-        "message_id": 6356,
-        "message_url": "https://telegram.me/boltcast/6356",
-        "source": "boltcast"
-      }
-    ],
-    "cct1": [
-      {
-        "message_date": "2026-07-14T10:58:17+00:00",
-        "message_id": 1516,
-        "message_url": "https://telegram.me/jestercast/1516",
-        "source": "jestercast"
-      }
-    ],
     "dyrachyo": [
       {
         "has_future_deadline": false,
@@ -944,90 +944,13 @@
         "source": "kolesaBB"
       }
     ],
-    "krat": [
-      {
-        "message_date": "2026-07-14T11:09:21+00:00",
-        "message_id": 10188,
-        "message_url": "https://telegram.me/KRATtv/10188",
-        "source": "KRATtv"
-      }
-    ],
-    "neret": [
-      {
-        "message_date": "2026-07-12T09:18:30+00:00",
-        "message_id": 2901,
-        "message_url": "https://telegram.me/MARIOMAXTV/2901",
-        "source": "MARIOMAXTV"
-      },
-      {
-        "message_date": "2026-07-14T11:32:44+00:00",
-        "message_id": 3909,
-        "message_url": "https://telegram.me/NeretCast/3909",
-        "source": "NeretCast"
-      }
-    ],
     "papa": [
       {
-        "has_future_deadline": false,
-        "message_date": "2026-07-14T17:36:25+00:00",
-        "message_id": 12131,
-        "message_url": "https://telegram.me/PAPAdota2/12131",
-        "source": "PAPAdota2"
-      }
-    ],
-    "risen": [
-      {
-        "has_future_deadline": false,
-        "message_date": "2026-07-14T16:29:58+00:00",
-        "message_id": 1399,
-        "message_url": "https://telegram.me/artemkef/1399",
-        "source": "artemkef"
-      },
-      {
-        "has_future_deadline": false,
-        "message_date": "2026-07-14T16:31:29+00:00",
-        "message_id": 8152,
-        "message_url": "https://telegram.me/risenhaha/8152",
-        "source": "risenhaha"
-      }
-    ],
-    "shik4": [
-      {
         "has_future_deadline": true,
-        "message_date": "2026-07-14T19:48:37+00:00",
-        "message_id": 6055,
-        "message_url": "https://telegram.me/GShikaryan/6055",
-        "source": "GShikaryan"
-      }
-    ],
-    "solo": [
-      {
-        "message_date": "2026-07-14T14:31:10+00:00",
-        "message_id": 71739,
-        "message_url": "https://telegram.me/amam0610/71739",
-        "source": "amam0610"
-      }
-    ],
-    "solotg": [
-      {
-        "message_date": "2026-07-14T13:54:43+00:00",
-        "message_id": 109,
-        "message_url": "https://telegram.me/kolesaBB/109",
-        "source": "kolesaBB"
-      },
-      {
-        "message_date": "2026-07-14T13:57:12+00:00",
-        "message_id": 71736,
-        "message_url": "https://telegram.me/amam0610/71736",
-        "source": "amam0610"
-      }
-    ],
-    "zonertg5": [
-      {
-        "message_date": "2026-07-14T07:53:45+00:00",
-        "message_id": 35606,
-        "message_url": "https://telegram.me/mechanogun/35606",
-        "source": "mechanogun"
+        "message_date": "2026-07-15T11:11:42+00:00",
+        "message_id": 12144,
+        "message_url": "https://telegram.me/PAPAdota2/12144",
+        "source": "PAPAdota2"
       }
     ],
     "zonertg6": [
@@ -1037,14 +960,6 @@
         "message_id": 35609,
         "message_url": "https://telegram.me/mechanogun/35609",
         "source": "mechanogun"
-      }
-    ],
-    "zzone1": [
-      {
-        "message_date": "2026-07-14T10:00:02+00:00",
-        "message_id": 38135,
-        "message_url": "https://telegram.me/ZZoneRM/38135",
-        "source": "ZZoneRM"
       }
     ]
   }
