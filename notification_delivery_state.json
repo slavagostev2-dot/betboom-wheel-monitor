@@ -1,0 +1,6 @@
+{
+  "algorithm": "HMAC-SHA256",
+  "entries": {},
+  "format": "bbvg-notification-delivery-v2",
+  "retention_seconds": 86400
+}
