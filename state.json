@@ -8,7 +8,7 @@
       "expires_at": "2026-07-15T20:46:49+00:00",
       "first_notified_at": "2026-07-15T11:18:42.541588+00:00",
       "identifier": "bolt",
-      "last_checked_at": "2026-07-15T16:38:08.097823+00:00",
+      "last_checked_at": "2026-07-15T16:53:10.225831+00:00",
       "last_notification_at": "2026-07-15T11:18:42.541801+00:00",
       "lifecycle_changed_at": "2026-07-15T15:52:58.892840+00:00",
       "lifecycle_state": "participating",
@@ -29,6 +29,30 @@
       "status": "unknown",
       "url": "https://betboom.ru/freestream/bolt"
     },
+    "ctom07": {
+      "button_token": "fcd1df589cf92e",
+      "expires_at": "2026-07-22T16:53:16.917473+00:00",
+      "first_notified_at": "2026-07-15T16:53:16.916946+00:00",
+      "identifier": "CTOM07",
+      "last_checked_at": "2026-07-15T16:53:16.917469+00:00",
+      "last_notification_at": "2026-07-15T16:53:16.917423+00:00",
+      "message_date": "2026-07-15T16:52:02+00:00",
+      "message_id": 1038,
+      "message_text": "ладно, колесо для рефов по-быстренькому под этот матч\nна 35 минут\nhttps://betboom.ru/freestream/CTOM07\nзаходите! (только рефы)\nBetBoom промокод CTOM до 10000 фрибетов\nhttps://telegram.me/meowbettt\nhttps://betboom.ru/freestream/CTOM07\nhttps://bbsport.site/link/fanVbz//?erid=KW2aPRYdr5QoPXHUemhFMRzEf8uMyTMWx2opN2bMghG3uZk92nYvjmWrPSiKYt59T\nhttps://telegram.me/meowbettt/1038",
+      "message_url": "https://telegram.me/meowbettt/1038",
+      "method": "свежий Telegram-пост; страница открылась, но активность не подтверждена",
+      "needs_manual_time": true,
+      "page_excerpt": "",
+      "page_status": "fresh_unconfirmed",
+      "participating": false,
+      "source": "meowbettt",
+      "sources": [
+        "ct0m",
+        "meowbettt"
+      ],
+      "status": "manual_time_required",
+      "url": "https://betboom.ru/freestream/CTOM07"
+    },
     "neret": {
       "button_token": "c76c303dc93e53",
       "deadline": "2026-07-15T20:15:21.560624+00:00",
@@ -37,7 +61,7 @@
       "expires_at": "2026-07-15T20:45:21.560624+00:00",
       "first_notified_at": "2026-07-15T11:18:42.831939+00:00",
       "identifier": "neret",
-      "last_checked_at": "2026-07-15T16:38:08.097823+00:00",
+      "last_checked_at": "2026-07-15T16:53:10.225831+00:00",
       "last_notification_at": "2026-07-15T14:44:08.658542+00:00",
       "lifecycle_changed_at": "2026-07-15T15:52:58.892840+00:00",
       "lifecycle_state": "participating",
@@ -66,7 +90,7 @@
       "expires_at": "2026-07-15T19:41:42+00:00",
       "first_notified_at": "2026-07-15T14:58:34.802943+00:00",
       "identifier": "papa",
-      "last_checked_at": "2026-07-15T16:38:08.097823+00:00",
+      "last_checked_at": "2026-07-15T16:53:10.225831+00:00",
       "last_notification_at": "2026-07-15T14:58:34.803265+00:00",
       "lifecycle_changed_at": "2026-07-15T15:52:58.892840+00:00",
       "lifecycle_state": "participating",
@@ -94,7 +118,7 @@
       "expires_at": "2026-07-15T21:18:46+00:00",
       "first_notified_at": "2026-07-15T10:51:33.022211+00:00",
       "identifier": "zonertg6",
-      "last_checked_at": "2026-07-15T16:38:08.097823+00:00",
+      "last_checked_at": "2026-07-15T16:53:10.225831+00:00",
       "last_notification_at": "2026-07-15T10:51:33.022390+00:00",
       "lifecycle_changed_at": "2026-07-15T15:52:58.892840+00:00",
       "lifecycle_state": "participating",
@@ -485,6 +509,21 @@
       "status": "preliminary",
       "url": "https://betboom.ru/freestream/zonertg4",
       "wheel_key": "zonertg4"
+    },
+    "fcd1df589cf92e": {
+      "created_at": "2026-07-15T16:53:15.332237+00:00",
+      "identifier": "CTOM07",
+      "message_date": "2026-07-15T16:52:02+00:00",
+      "message_id": 1038,
+      "message_text": "ладно, колесо для рефов по-быстренькому под этот матч\nна 35 минут\nhttps://betboom.ru/freestream/CTOM07\nзаходите! (только рефы)\nBetBoom промокод CTOM до 10000 фрибетов\nhttps://telegram.me/meowbettt\nhttps://betboom.ru/freestream/CTOM07\nhttps://bbsport.site/link/fanVbz//?erid=KW2aPRYdr5QoPXHUemhFMRzEf8uMyTMWx2opN2bMghG3uZk92nYvjmWrPSiKYt59T\nhttps://telegram.me/meowbettt/1038",
+      "message_url": "https://telegram.me/meowbettt/1038",
+      "method": "свежий Telegram-пост; страница открылась, но активность не подтверждена",
+      "page_excerpt": "Букмекерская контора BetBoom - ставки на спорт онлайн в России!",
+      "post_key": "fcd1df589cf92e6c17e0d831049ca6c2a0aab9353a4a22cfa787b71a88931b63",
+      "source": "meowbettt",
+      "status": "preliminary",
+      "url": "https://betboom.ru/freestream/CTOM07",
+      "wheel_key": "ctom07"
     }
   },
   "completed_wheel_alerts": {
@@ -1033,6 +1072,7 @@
     "fb4ba954e407736dea38b26236f0bf90d432a9373c0aeda0a1f9077df971d2a1": "2026-07-12T15:10:04.958829+00:00",
     "fb6247a58e952c95b6c9145ea41984a351e4383932bde9306a3f2000388f9a79": "2026-07-12T15:08:28.238429+00:00",
     "fcc99159509ee2559a3c686e343b31c7c063258c9196279b77b12f61ecd887c4": "2026-07-12T18:21:25.207375+00:00",
+    "fcd1df589cf92e6c17e0d831049ca6c2a0aab9353a4a22cfa787b71a88931b63": "2026-07-15T16:53:16.917477+00:00",
     "fef67b001238e32446563a0eae9670161f9625559100e8e39eaabe6dcba71dad": "2026-07-12T15:09:56.683817+00:00"
   },
   "telegram_update_offset": 398354386,
@@ -1074,6 +1114,12 @@
       "identifier": "cct1",
       "suppress_until": "2026-07-14T20:28:17+00:00",
       "url": "https://betboom.ru/freestream/cct1"
+    },
+    "ctom07": {
+      "alerted_at": "2026-07-15T16:53:16.917029+00:00",
+      "identifier": "CTOM07",
+      "suppress_until": "2026-07-16T16:53:16.917029+00:00",
+      "url": "https://betboom.ru/freestream/CTOM07"
     },
     "dayneez": {
       "alerted_at": "2026-07-12T18:21:21.730675+00:00",
@@ -1270,6 +1316,24 @@
         "message_id": 6375,
         "message_url": "https://telegram.me/boltcast/6375",
         "source": "boltcast"
+      }
+    ],
+    "ctom07": [
+      {
+        "has_future_availability": false,
+        "has_future_deadline": false,
+        "message_date": "2026-07-15T16:51:58+00:00",
+        "message_id": 5439,
+        "message_url": "https://telegram.me/ct0m/5439",
+        "source": "ct0m"
+      },
+      {
+        "has_future_availability": false,
+        "has_future_deadline": false,
+        "message_date": "2026-07-15T16:52:02+00:00",
+        "message_id": 1038,
+        "message_url": "https://telegram.me/meowbettt/1038",
+        "source": "meowbettt"
       }
     ],
     "dyrachyo": [
