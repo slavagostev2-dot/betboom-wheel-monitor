@@ -7,7 +7,7 @@
       "expires_at": "2026-07-15T20:46:49+00:00",
       "first_notified_at": "2026-07-15T11:18:42.541588+00:00",
       "identifier": "bolt",
-      "last_checked_at": "2026-07-15T12:22:09.748928+00:00",
+      "last_checked_at": "2026-07-15T12:40:13.288105+00:00",
       "last_notification_at": "2026-07-15T11:18:42.541801+00:00",
       "message_date": "2026-07-14T10:44:26+00:00",
       "message_id": 6356,
@@ -33,7 +33,7 @@
       "expires_at": "2026-07-15T20:45:21.560624+00:00",
       "first_notified_at": "2026-07-15T11:18:42.831939+00:00",
       "identifier": "neret",
-      "last_checked_at": "2026-07-15T12:22:09.748928+00:00",
+      "last_checked_at": "2026-07-15T12:40:13.288105+00:00",
       "last_notification_at": "2026-07-15T11:18:42.831939+00:00",
       "message_date": "2026-07-14T11:32:44+00:00",
       "message_id": 3909,
@@ -52,34 +52,13 @@
       "status": "unknown",
       "url": "https://betboom.ru/freestream/neret"
     },
-    "risen": {
-      "button_token": "1aac546fc6a9df",
-      "deadline": "2026-07-15T14:17:08+00:00",
-      "expires_at": "2026-07-15T14:47:08+00:00",
-      "first_notified_at": "2026-07-15T12:22:18.303576+00:00",
-      "identifier": "risen",
-      "last_checked_at": "2026-07-15T12:22:18.303620+00:00",
-      "last_notification_at": "2026-07-15T12:22:18.303576+00:00",
-      "message_date": "2026-07-15T12:17:08+00:00",
-      "message_id": 1404,
-      "message_text": "Через 2 часа запущу колесо с фрибетами, пока регайтесь в него\nhttps://betboom.ru/freestream/risen\nhttps://telegram.me/artemkef\nhttps://betboom.ru/freestream/risen\nhttps://telegram.me/artemkef/1404",
-      "message_url": "https://telegram.me/artemkef/1404",
-      "method": "текст Telegram: относительное время",
-      "needs_manual_time": false,
-      "page_excerpt": "",
-      "page_status": "telegram_deadline",
-      "participating": false,
-      "source": "artemkef",
-      "status": "scheduled",
-      "url": "https://betboom.ru/freestream/risen"
-    },
     "zonertg6": {
       "button_token": "1eaab6cb41f445",
       "deadline": "2026-07-15T20:48:46+00:00",
       "expires_at": "2026-07-15T21:18:46+00:00",
       "first_notified_at": "2026-07-15T10:51:33.022211+00:00",
       "identifier": "zonertg6",
-      "last_checked_at": "2026-07-15T12:22:09.748928+00:00",
+      "last_checked_at": "2026-07-15T12:40:13.288105+00:00",
       "last_notification_at": "2026-07-15T10:51:33.022390+00:00",
       "message_date": "2026-07-15T10:48:46+00:00",
       "message_id": 35609,
@@ -99,7 +78,9 @@
       "url": "https://betboom.ru/freestream/zonertg6"
     }
   },
-  "admin_action_attempts": {},
+  "admin_action_attempts": {
+    "bd8a55feb26643a68b7cb2645f922bc4": 2
+  },
   "admin_action_results": {
     "0d2cc8c3bad2460da698950fe3a78cff": {
       "action": "participate_token",
@@ -164,6 +145,13 @@
       "state_changed": true,
       "stats_changed": false,
       "status": "applied"
+    },
+    "bd8a55feb26643a68b7cb2645f922bc4": {
+      "action": "set_deadline",
+      "attempts": 2,
+      "error_type": "ValueError",
+      "last_attempt_at": "2026-07-15T12:40:13.286150+00:00",
+      "status": "failed"
     },
     "e3ff0fc4138748268bc4fddc83c080bd": {
       "action": "participate_token",
