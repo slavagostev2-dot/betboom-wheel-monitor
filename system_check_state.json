@@ -1,7 +1,7 @@
 {
   "active_incidents": 0,
   "automation_state": {
-    "source_tier_last_run_at": "2026-07-14T04:40:11.599460+00:00",
+    "source_tier_last_run_at": "2026-07-14T23:37:06.605671+00:00",
     "source_tier_policy": "seven_day_dynamic_primary_and_nightly",
     "transport_accounted_sources": 67,
     "transport_checked_at": "2026-07-14T04:38:38.444690+00:00",
@@ -23,7 +23,7 @@
     "source_health": "ok",
     "telegram_transport": "ok"
   },
-  "checked_at": "2026-07-14T23:29:22.572168+00:00",
+  "checked_at": "2026-07-15T02:05:41.490003+00:00",
   "discovery": {
     "active_size": 72,
     "candidate_count": 176,
@@ -96,28 +96,28 @@
     "brand": "BB V.G.",
     "checked_sources": 72,
     "checks_delta": 72,
-    "checks_total": 25738,
+    "checks_total": 27970,
     "consecutive_failures": 0,
     "consecutive_no_progress": 0,
-    "iteration": 4,
+    "iteration": 13,
     "last_failure_at": "2026-07-14T02:44:12.395838+00:00",
-    "last_iteration_at": "2026-07-14T23:18:04.207616+00:00",
-    "last_iteration_duration_seconds": 5,
+    "last_iteration_at": "2026-07-15T01:59:00.532917+00:00",
+    "last_iteration_duration_seconds": 4,
     "last_iteration_exit_code": 0,
-    "last_process_heartbeat_at": "2026-07-14T23:18:04.207616+00:00",
-    "last_successful_checks_total": 25738,
-    "last_successful_iteration_at": "2026-07-14T23:18:04.207616+00:00",
+    "last_process_heartbeat_at": "2026-07-15T01:59:00.532917+00:00",
+    "last_successful_checks_total": 27970,
+    "last_successful_iteration_at": "2026-07-15T01:59:00.532917+00:00",
     "pending_wheels": 0,
     "reachable_sources": 72,
     "restart_recommended": false,
-    "run_id": "29374921448",
-    "run_started_at": "2026-07-14T23:02:57.757319+00:00",
+    "run_id": "29380468347",
+    "run_started_at": "2026-07-15T00:58:49.560972+00:00",
     "source_errors": 0,
     "stats_counter_reset": false,
     "status": "running",
     "version": 3
   },
-  "monitor_age_minutes": 11,
+  "monitor_age_minutes": 6,
   "notification_routing": {
     "admin_kinds": {
       "admin_requests": [
@@ -161,10 +161,10 @@
   },
   "primary_telegram_domain": "telegram.me",
   "rating_consistency": {
-    "administrator_decisions": 11,
+    "administrator_decisions": 15,
     "inactive_wheel_leaks": [],
     "policy": "additive_only_v1",
-    "rated_sources": 13,
+    "rated_sources": 17,
     "score_mismatches": []
   },
   "source_health_summary": {
