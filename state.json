@@ -7,7 +7,7 @@
       "expires_at": "2026-07-15T20:46:49+00:00",
       "first_notified_at": "2026-07-15T11:18:42.541588+00:00",
       "identifier": "bolt",
-      "last_checked_at": "2026-07-15T11:45:41.563877+00:00",
+      "last_checked_at": "2026-07-15T11:51:44.514790+00:00",
       "last_notification_at": "2026-07-15T11:18:42.541801+00:00",
       "message_date": "2026-07-14T10:44:26+00:00",
       "message_id": 6356,
@@ -18,7 +18,7 @@
       "page_excerpt": "",
       "page_status": "telegram_deadline",
       "participating": true,
-      "participating_at": "2026-07-15T11:21:35.145254+00:00",
+      "participating_at": "2026-07-15T11:51:44.512736+00:00",
       "source": "boltcast",
       "sources": [
         "boltcast"
@@ -33,7 +33,7 @@
       "expires_at": "2026-07-15T20:45:21.560624+00:00",
       "first_notified_at": "2026-07-15T11:18:42.831939+00:00",
       "identifier": "neret",
-      "last_checked_at": "2026-07-15T11:45:41.563877+00:00",
+      "last_checked_at": "2026-07-15T11:51:44.514790+00:00",
       "last_notification_at": "2026-07-15T11:18:42.831939+00:00",
       "message_date": "2026-07-14T11:32:44+00:00",
       "message_id": 3909,
@@ -59,7 +59,7 @@
       "expires_at": "2026-07-15T13:45:41.561514+00:00",
       "first_notified_at": "2026-07-15T11:42:46.257924+00:00",
       "identifier": "smurf5",
-      "last_checked_at": "2026-07-15T11:45:41.563877+00:00",
+      "last_checked_at": "2026-07-15T11:51:44.514790+00:00",
       "last_notification_at": "2026-07-15T11:42:46.258289+00:00",
       "message_date": "2026-07-15T11:39:48+00:00",
       "message_id": 2115,
@@ -70,7 +70,7 @@
       "page_excerpt": "",
       "page_status": "fresh_unconfirmed",
       "participating": true,
-      "participating_at": "2026-07-15T11:45:41.561644+00:00",
+      "participating_at": "2026-07-15T11:51:44.512127+00:00",
       "source": "smurf_gigachad",
       "sources": [
         "smurf_gigachad"
@@ -84,7 +84,7 @@
       "expires_at": "2026-07-15T21:18:46+00:00",
       "first_notified_at": "2026-07-15T10:51:33.022211+00:00",
       "identifier": "zonertg6",
-      "last_checked_at": "2026-07-15T11:45:41.563877+00:00",
+      "last_checked_at": "2026-07-15T11:51:44.514790+00:00",
       "last_notification_at": "2026-07-15T10:51:33.022390+00:00",
       "message_date": "2026-07-15T10:48:46+00:00",
       "message_id": 35609,
@@ -95,7 +95,7 @@
       "page_excerpt": "",
       "page_status": "telegram_deadline",
       "participating": true,
-      "participating_at": "2026-07-15T11:21:35.144691+00:00",
+      "participating_at": "2026-07-15T11:51:44.512969+00:00",
       "source": "mechanogun",
       "sources": [
         "mechanogun"
@@ -106,6 +106,14 @@
   },
   "admin_action_attempts": {},
   "admin_action_results": {
+    "0d2cc8c3bad2460da698950fe3a78cff": {
+      "action": "participate_token",
+      "applied_at": "2026-07-15T11:51:44.512923+00:00",
+      "health_changed": false,
+      "state_changed": true,
+      "stats_changed": false,
+      "status": "applied"
+    },
     "11f54c65a5944af9b287e22c48aef031": {
       "action": "participate_token",
       "applied_at": "2026-07-15T11:21:35.145192+00:00",
@@ -125,6 +133,14 @@
     "3ee3b0c3e1104127bb8818c84fdb470e": {
       "action": "set_deadline",
       "applied_at": "2026-07-15T11:45:41.561556+00:00",
+      "health_changed": false,
+      "state_changed": true,
+      "stats_changed": false,
+      "status": "applied"
+    },
+    "49ada0740cd1481eaec369807f7c31bb": {
+      "action": "participate_token",
+      "applied_at": "2026-07-15T11:51:44.513126+00:00",
       "health_changed": false,
       "state_changed": true,
       "stats_changed": false,
@@ -153,15 +169,26 @@
       "state_changed": true,
       "stats_changed": false,
       "status": "applied"
+    },
+    "e3ff0fc4138748268bc4fddc83c080bd": {
+      "action": "participate_token",
+      "applied_at": "2026-07-15T11:51:44.512668+00:00",
+      "health_changed": false,
+      "state_changed": true,
+      "stats_changed": false,
+      "status": "applied"
     }
   },
   "applied_admin_actions": {
+    "0d2cc8c3bad2460da698950fe3a78cff": "2026-07-15T11:51:44.512923+00:00",
     "11f54c65a5944af9b287e22c48aef031": "2026-07-15T11:21:35.145192+00:00",
     "26a274d2313845e99d948ee2fd1eff9f": "2026-07-15T11:21:35.145623+00:00",
     "3ee3b0c3e1104127bb8818c84fdb470e": "2026-07-15T11:45:41.561556+00:00",
+    "49ada0740cd1481eaec369807f7c31bb": "2026-07-15T11:51:44.513126+00:00",
     "4e745c4eb6104dadbb3750df90452a3d": "2026-07-15T11:45:41.562278+00:00",
     "86cedc709f5642088bc4733f5d8ebb6d": "2026-07-15T11:36:38.305052+00:00",
-    "989957455bc6415c896dfbfc21bad68e": "2026-07-15T11:21:35.145659+00:00"
+    "989957455bc6415c896dfbfc21bad68e": "2026-07-15T11:21:35.145659+00:00",
+    "e3ff0fc4138748268bc4fddc83c080bd": "2026-07-15T11:51:44.512668+00:00"
   },
   "bot_commands_version": 1,
   "button_contexts": {
@@ -532,7 +559,7 @@
     "whylollycrry",
     "zortelad"
   ],
-  "last_admin_action_applied_at": "2026-07-15T11:45:41.562288+00:00",
+  "last_admin_action_applied_at": "2026-07-15T11:51:44.513136+00:00",
   "last_automatic_status_at": "2026-07-15T06:27:18.578870+00:00",
   "last_heartbeat_at": "2026-07-15T08:45:40.906307+00:00",
   "last_run_kind": "schedule",
@@ -609,7 +636,7 @@
       "deadline": "2026-07-15T20:16:49+00:00",
       "expires_at": "2026-07-15T20:46:49+00:00",
       "identifier": "bolt",
-      "marked_at": "2026-07-15T11:21:35.145218+00:00",
+      "marked_at": "2026-07-15T11:51:44.512696+00:00",
       "url": "https://betboom.ru/freestream/bolt"
     },
     "neret": {
@@ -619,16 +646,16 @@
       "url": "https://betboom.ru/freestream/neret"
     },
     "smurf5": {
-      "expires_at": "2026-07-15T13:45:41.561599+00:00",
+      "expires_at": "2026-07-15T13:51:44.512080+00:00",
       "identifier": "smurf5",
-      "marked_at": "2026-07-15T11:45:41.561596+00:00",
+      "marked_at": "2026-07-15T11:51:44.512065+00:00",
       "url": "https://betboom.ru/freestream/smurf5"
     },
     "zonertg6": {
       "deadline": "2026-07-15T20:48:46+00:00",
       "expires_at": "2026-07-15T21:18:46+00:00",
       "identifier": "zonertg6",
-      "marked_at": "2026-07-15T11:21:35.144627+00:00",
+      "marked_at": "2026-07-15T11:51:44.512943+00:00",
       "url": "https://betboom.ru/freestream/zonertg6"
     }
   },
