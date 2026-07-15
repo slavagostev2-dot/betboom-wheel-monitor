@@ -118,46 +118,32 @@
     "version": 3
   },
   "monitor_age_minutes": 11,
+  "notification_integrity": {
+    "algorithm": "HMAC-SHA256",
+    "contains_personal_fields": false,
+    "entry_count": 0,
+    "format": "bbvg-notification-delivery-v2",
+    "retention_seconds": 86400,
+    "router_installed": true,
+    "status": "ok"
+  },
   "notification_routing": {
-    "admin_kinds": {
-      "admin_requests": [
-        "7178093128"
-      ],
-      "admin_sources": [
-        "7178093128"
-      ],
-      "admin_system": [
-        "7178093128"
-      ]
+    "admin_kind_counts": {
+      "admin_requests": 1,
+      "admin_sources": 1,
+      "admin_system": 1
     },
-    "admin_recipients": [
-      "7178093128"
-    ],
+    "admin_recipient_count": 1,
     "duplicate_window_seconds": 86400,
     "error_category": "admin",
     "error_kind": "admin_system",
-    "user_kinds": {
-      "daily_reports": [
-        "7178093128",
-        "906643757"
-      ],
-      "weekly_reports": [
-        "7178093128",
-        "906643757"
-      ],
-      "wheels": [
-        "1059267719",
-        "7178093128",
-        "801600922",
-        "906643757"
-      ]
+    "user_kind_counts": {
+      "daily_reports": 2,
+      "weekly_reports": 2,
+      "wheels": 4
     },
-    "user_recipients": [
-      "1059267719",
-      "7178093128",
-      "801600922",
-      "906643757"
-    ]
+    "user_recipient_count": 4,
+    "wheel_with_error_word_kind": "wheels"
   },
   "primary_telegram_domain": "telegram.me",
   "rating_consistency": {
