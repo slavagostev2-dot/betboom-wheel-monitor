@@ -10,6 +10,8 @@ on:
       - "incident_manager.py"
       - "telegram_transport.py"
       - "notification_router.py"
+      - "notification_integrity_v2.py"
+      - "notification_delivery_state.json"
       - "bot_notification_state.py"
       - "bot_private_state.py"
       - "bot_private_state.enc.json"
@@ -22,6 +24,7 @@ on:
       - "admin_panel_runtime_v33.py"
       - "admin_panel_runtime_v34.py"
       - "admin_panel_runtime_v35.py"
+      - "admin_panel_runtime_v36.py"
       - "public_sources.txt"
       - "source_catalog.txt"
       - "partners_catalog.json"
@@ -76,10 +79,19 @@ jobs:
           TELEGRAM_WEB_DOMAIN: telegram.me
           EXPECTED_SOURCE_COUNT: "66"
         run: |
-          python -m py_compile system_checks.py system_checks_v2.py incident_manager.py telegram_transport.py notification_router.py bot_notification_state.py bot_private_state.py privacy_retention.py monitor.py monitor_data.py admin_panel_runtime_v35.py
+          python -m py_compile system_checks.py system_checks_v2.py incident_manager.py telegram_transport.py notification_router.py notification_integrity_v2.py bot_notification_state.py bot_private_state.py privacy_retention.py monitor.py monitor_data.py admin_panel_runtime_v36.py
+          python notification_integrity_v2.py --self-test
+          python bot_notification_state.py
           python telegram_transport.py
           python incident_manager.py
           python system_checks_v2.py --self-test
+          python - <<'PY'
+          import bot_notification_state
+          import notification_router
+          assert notification_router.load_config is bot_notification_state.load_config
+          assert notification_router._bbvg_notification_integrity_v2_installed is True
+          print("Persistent notification integrity is active in system health")
+          PY
 
       - name: Run centralized bot checks
         env:
