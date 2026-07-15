@@ -7,7 +7,7 @@
       "expires_at": "2026-07-15T20:46:49+00:00",
       "first_notified_at": "2026-07-15T11:18:42.541588+00:00",
       "identifier": "bolt",
-      "last_checked_at": "2026-07-15T12:15:52.047211+00:00",
+      "last_checked_at": "2026-07-15T12:22:09.748928+00:00",
       "last_notification_at": "2026-07-15T11:18:42.541801+00:00",
       "message_date": "2026-07-14T10:44:26+00:00",
       "message_id": 6356,
@@ -33,7 +33,7 @@
       "expires_at": "2026-07-15T20:45:21.560624+00:00",
       "first_notified_at": "2026-07-15T11:18:42.831939+00:00",
       "identifier": "neret",
-      "last_checked_at": "2026-07-15T12:15:52.047211+00:00",
+      "last_checked_at": "2026-07-15T12:22:09.748928+00:00",
       "last_notification_at": "2026-07-15T11:18:42.831939+00:00",
       "message_date": "2026-07-14T11:32:44+00:00",
       "message_id": 3909,
@@ -52,13 +52,34 @@
       "status": "unknown",
       "url": "https://betboom.ru/freestream/neret"
     },
+    "risen": {
+      "button_token": "1aac546fc6a9df",
+      "deadline": "2026-07-15T14:17:08+00:00",
+      "expires_at": "2026-07-15T14:47:08+00:00",
+      "first_notified_at": "2026-07-15T12:22:18.303576+00:00",
+      "identifier": "risen",
+      "last_checked_at": "2026-07-15T12:22:18.303620+00:00",
+      "last_notification_at": "2026-07-15T12:22:18.303576+00:00",
+      "message_date": "2026-07-15T12:17:08+00:00",
+      "message_id": 1404,
+      "message_text": "Через 2 часа запущу колесо с фрибетами, пока регайтесь в него\nhttps://betboom.ru/freestream/risen\nhttps://telegram.me/artemkef\nhttps://betboom.ru/freestream/risen\nhttps://telegram.me/artemkef/1404",
+      "message_url": "https://telegram.me/artemkef/1404",
+      "method": "текст Telegram: относительное время",
+      "needs_manual_time": false,
+      "page_excerpt": "",
+      "page_status": "telegram_deadline",
+      "participating": false,
+      "source": "artemkef",
+      "status": "scheduled",
+      "url": "https://betboom.ru/freestream/risen"
+    },
     "zonertg6": {
       "button_token": "1eaab6cb41f445",
       "deadline": "2026-07-15T20:48:46+00:00",
       "expires_at": "2026-07-15T21:18:46+00:00",
       "first_notified_at": "2026-07-15T10:51:33.022211+00:00",
       "identifier": "zonertg6",
-      "last_checked_at": "2026-07-15T12:15:52.047211+00:00",
+      "last_checked_at": "2026-07-15T12:22:09.748928+00:00",
       "last_notification_at": "2026-07-15T10:51:33.022390+00:00",
       "message_date": "2026-07-15T10:48:46+00:00",
       "message_id": 35609,
@@ -796,6 +817,7 @@
     "19ebb921acef238f4d57fdcccb48c6fe8e13d47da6c58ba27422d01cf840c760": "2026-07-12T18:21:18.200115+00:00",
     "1a0a406e2f854e38a6c3468e566011a7c01526799dc8dab76e15d0d908d30c08": "2026-07-14T18:37:14.397373+00:00",
     "1a5ccd17d7a992923e767f85a5d829858ff5ac3f04907fdbc7f3872dc5b2dd0d": "2026-07-12T16:26:27.168278+00:00",
+    "1aac546fc6a9df958bf86529db52f9131748b70115ad27002e8e57f9d4056979": "2026-07-15T12:22:18.303630+00:00",
     "1c9782360c0840960b2e870d19cf28df349dbfdd9351836b7545c0beec9f0d09": "2026-07-14T17:37:10.097744+00:00",
     "1e386ffd28b794e439bb5f1287cebe487a0cbb81581ebbda58a83cd1d46565c5": "2026-07-12T15:09:56.683803+00:00",
     "1e5709f7f6cd2025a94184aeb215b0ec51b728194d221fa13227f618900fb2b0": "2026-07-12T16:26:42.241145+00:00",
@@ -1170,6 +1192,22 @@
         "message_id": 12144,
         "message_url": "https://telegram.me/PAPAdota2/12144",
         "source": "PAPAdota2"
+      }
+    ],
+    "risen": [
+      {
+        "has_future_deadline": true,
+        "message_date": "2026-07-15T12:17:08+00:00",
+        "message_id": 1404,
+        "message_url": "https://telegram.me/artemkef/1404",
+        "source": "artemkef"
+      },
+      {
+        "has_future_deadline": true,
+        "message_date": "2026-07-15T12:17:26+00:00",
+        "message_id": 8161,
+        "message_url": "https://telegram.me/risenhaha/8161",
+        "source": "risenhaha"
       }
     ],
     "zonertg6": [
