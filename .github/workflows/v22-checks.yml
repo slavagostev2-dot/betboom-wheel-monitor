@@ -18,6 +18,7 @@ jobs:
       BOT_STATE_KEY: "test-state-key"
       BOT_CHAT_ID: "1"
       ADMIN_USER_ID: "1"
+      BBVG_TEST_MODE: "1"
       FINAL_REMINDER_BEFORE_MINUTES: "5"
       ACTIVE_REMOVE_GRACE_MINUTES: "0"
 
@@ -44,10 +45,11 @@ jobs:
             bbvg_monitor_main.py recurring_wheel_events.py wheel_metadata_quality.py \
             wheel_publications_v2.py wheel_lifecycle_v2.py personal_reminder_filter.py \
             notification_preferences_v2.py notification_navigation.py privacy_retention.py security_audit.py \
-            admin_panel_runtime_v22.py admin_panel_runtime_v25.py admin_panel_runtime_v26.py \
-            admin_panel_runtime_v31.py admin_panel_runtime_v32.py admin_panel_runtime_v33.py \
-            bot_private_state.py bot_notification_state.py migrate_bot_private_state.py \
-            daily_report.py source_intelligence_alerts.py system_checks_v2.py source_tier_maintenance_v2.py
+            test_bot_state_fixture.py admin_panel_runtime_v22.py admin_panel_runtime_v25.py \
+            admin_panel_runtime_v26.py admin_panel_runtime_v31.py admin_panel_runtime_v32.py \
+            admin_panel_runtime_v33.py bot_private_state.py bot_notification_state.py \
+            migrate_bot_private_state.py daily_report.py source_intelligence_alerts.py \
+            system_checks_v2.py source_tier_maintenance_v2.py
           python source_registry.py --self-test
           python source_registry.py
           python recurring_wheel_events.py
@@ -63,9 +65,6 @@ jobs:
           python security_audit.py --history --history-output security_history_report.json
           python source_intelligence_alerts.py
           python -c "import daily_report; daily_report.self_test()"
-          python admin_panel_runtime_v31.py --self-test
-          python admin_panel_runtime_v32.py --self-test
-          python admin_panel_runtime_v33.py --self-test
           python - <<'PY'
           import json
           value = json.load(open("source_registry.json", encoding="utf-8"))
@@ -85,6 +84,7 @@ jobs:
           set -euo pipefail
           python bot_private_state.py
           python migrate_bot_private_state.py --check
+          python test_bot_state_fixture.py
           python admin_panel_runtime_v25.py --self-test
           python admin_panel_runtime_v26.py --self-test
           python admin_panel_runtime_v31.py --self-test
