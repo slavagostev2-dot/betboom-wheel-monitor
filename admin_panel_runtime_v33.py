@@ -249,7 +249,12 @@ def self_test() -> None:
             "owner_id": "1",
             "users": {
                 "1": {"id": "1", "chat_id": "1", "first_name": "Owner"},
-                "2": {"id": "2", "chat_id": "2", "first_name": "User"},
+                "2": {
+                    "id": "2",
+                    "chat_id": "2",
+                    "first_name": "User",
+                    "notifications_enabled": True,
+                },
             },
         }
     )
