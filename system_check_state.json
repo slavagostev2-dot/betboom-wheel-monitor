@@ -1,8 +1,8 @@
 {
   "active_incidents": 0,
   "admin_panel": {
-    "age_minutes": 1,
-    "last_heartbeat_at": "2026-07-15T17:10:52.211483+00:00",
+    "age_minutes": 0,
+    "last_heartbeat_at": "2026-07-15T17:16:16.321518+00:00",
     "started_at": "2026-07-15T17:10:48.247225+00:00",
     "status": "running",
     "update_consumer": "single_getUpdates_owner",
@@ -32,7 +32,7 @@
     "source_health": "ok",
     "telegram_transport": "ok"
   },
-  "checked_at": "2026-07-15T17:12:30.578250+00:00",
+  "checked_at": "2026-07-15T17:16:31.095634+00:00",
   "discovery": {
     "active_size": 77,
     "candidate_count": 203,
@@ -73,7 +73,7 @@
   "findings": [],
   "gpt_diagnostic_snapshot": {
     "active_incidents": 0,
-    "bot_panel_heartbeat": "2026-07-15T17:10:52.211483+00:00",
+    "bot_panel_heartbeat": "2026-07-15T17:16:16.321518+00:00",
     "checked_sources": 77,
     "configured_sources": 79,
     "domain": "telegram.me",
@@ -127,7 +127,7 @@
     "status": "running",
     "version": 3
   },
-  "monitor_age_minutes": 1,
+  "monitor_age_minutes": 5,
   "notification_integrity": {
     "algorithm": "HMAC-SHA256",
     "contains_personal_fields": false,
