@@ -16,6 +16,8 @@ jobs:
       BOT_STATE_KEY: "test-state-key"
       BOT_CHAT_ID: "1"
       ADMIN_USER_ID: "1"
+      FINAL_REMINDER_BEFORE_MINUTES: "5"
+      ACTIVE_REMOVE_GRACE_MINUTES: "0"
 
     steps:
       - uses: actions/checkout@v4
@@ -26,44 +28,56 @@ jobs:
           python-version: "3.12"
           cache: pip
       - run: python -m pip install -r requirements.txt
-      - name: Compile new modules
-        run: python -m py_compile bot_private_state.py privacy_retention.py security_audit.py migrate_bot_private_state.py notification_preferences_v2.py admin_panel_runtime_v33.py bbvg_monitor_main.py
-      - name: AES-GCM state test
-        run: python bot_private_state.py
-      - name: Retention test
-        run: python privacy_retention.py
-      - name: Audit self-test
-        run: python security_audit.py --self-test
-      - name: Current tree audit
-        run: python security_audit.py --current
-      - name: History audit
-        run: python security_audit.py --history --history-output security_history_report.json
-      - name: Migration test
-        run: python migrate_bot_private_state.py --check
-      - name: Reminder routing test
-        run: python notification_preferences_v2.py
-      - name: Capture panel v33 test
-        id: panel
-        continue-on-error: true
-        shell: bash
+      - name: Compile modules
         run: |
-          set +e
-          python admin_panel_runtime_v33.py --self-test > panel-v33-test.log 2>&1
-          code=$?
-          cat panel-v33-test.log
-          echo "exit_code=$code" >> "$GITHUB_OUTPUT"
-          exit "$code"
-      - name: Upload panel v33 traceback
-        if: ${{ always() }}
-        uses: actions/upload-artifact@v4
-        with:
-          name: panel-v33-test-log-${{ github.run_id }}
-          path: panel-v33-test.log
-          if-no-files-found: error
-          retention-days: 3
-      - name: Fail after panel diagnostic
-        if: ${{ steps.panel.outputs.exit_code != '0' }}
-        run: exit 1
+          python -m py_compile \
+            bot_private_state.py privacy_retention.py security_audit.py \
+            migrate_bot_private_state.py notification_preferences_v2.py \
+            admin_panel_runtime_v25.py admin_panel_runtime_v26.py admin_panel_runtime_v28.py \
+            admin_panel_runtime_v29.py admin_panel_runtime_v30.py admin_panel_runtime_v31.py \
+            admin_panel_runtime_v32.py admin_panel_runtime_v33.py bbvg_monitor_main.py
+      - name: Security state tests
+        run: |
+          python bot_private_state.py
+          python privacy_retention.py
+          python security_audit.py --self-test
+          python security_audit.py --current
+          python security_audit.py --history --history-output security_history_report.json
+          python migrate_bot_private_state.py --check
+          python notification_preferences_v2.py
+      - name: Panel v25 test
+        run: python admin_panel_runtime_v25.py --self-test
+      - name: Panel v26 test
+        run: python admin_panel_runtime_v26.py --self-test
+      - name: Panel v28 test
+        run: python admin_panel_runtime_v28.py --self-test
+      - name: Panel v29 test
+        run: python admin_panel_runtime_v29.py --self-test
+      - name: Panel v30 test
+        run: python admin_panel_runtime_v30.py --self-test
+      - name: Panel v31 test
+        run: python admin_panel_runtime_v31.py --self-test
+      - name: Panel v32 test
+        run: python admin_panel_runtime_v32.py --self-test
+      - name: Panel v33 test
+        run: python admin_panel_runtime_v33.py --self-test
+      - name: Rating actions tests
+        run: |
+          python admin_action_v2.py --self-test
+          python admin_action_v3.py --self-test
+      - name: Wheel runtime tests
+        run: |
+          python recurring_wheel_events.py
+          python wheel_metadata_quality.py
+          python wheel_publications_v2.py
+          python wheel_lifecycle_v2.py
+          python personal_reminder_filter.py
+      - name: Reports and sources tests
+        run: |
+          python source_intelligence_alerts.py
+          python -c "import daily_report; daily_report.self_test()"
+          python source_tier_maintenance_v2.py --self-test
+          python system_checks_v2.py --self-test
       - name: Monitor integration test
         run: |
           python - <<'PY'
