@@ -73,7 +73,7 @@ def confirm_finished_global(
     rating_detail = (
         "рейтинг уже был начислен ранее"
         if already_confirmed
-        else "рейтинг источников начислен"
+        else "рейтинг источников начислен: по 40 очков каждому"
     )
     return {
         "action": "confirm_finished_global",
