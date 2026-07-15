@@ -6,6 +6,7 @@ import re
 from types import SimpleNamespace
 from typing import Any
 
+import bot_notification_state  # noqa: F401  # installs notification integrity policy
 from admin_bot import COMMANDS
 from admin_panel_runtime_v35 import TelegramPanelRuntimeV35
 
