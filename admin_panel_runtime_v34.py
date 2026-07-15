@@ -19,12 +19,7 @@ from admin_panel_runtime_v33 import (
     TelegramPanelRuntimeV33,
 )
 
-MONTHLY_NOTIFICATION_OPTION = (
-    "monthly_reports",
-    "🗓 Ежемесячная сводка",
-    "Итоговая сводка за 30 дней",
-)
-ALL_SUMMARY_NOTIFICATION_OPTIONS = (*SUMMARY_NOTIFICATION_OPTIONS, MONTHLY_NOTIFICATION_OPTION)
+ALL_SUMMARY_NOTIFICATION_OPTIONS = tuple(SUMMARY_NOTIFICATION_OPTIONS)
 _MISSING = object()
 
 
@@ -249,22 +244,6 @@ class TelegramPanelRuntimeV34(TelegramPanelRuntimeV33):
             raise RuntimeError(
                 "Не удалось безопасно сохранить состояние без потери ролей"
             ) from last_error
-
-    def notification_preferences(self, user_id: str | None = None) -> dict[str, bool]:
-        prefs = super().notification_preferences(user_id)
-        target = str(user_id or self.current_user_id or "")
-        access = self.load_access()
-        users = access.get("users") if isinstance(access.get("users"), dict) else {}
-        record = users.get(target) if isinstance(users.get(target), dict) else {}
-        raw = record.get("notification_preferences") if isinstance(record, dict) else None
-        raw = raw if isinstance(raw, dict) else {}
-        role = self.role_for(target)
-        prefs["monthly_reports"] = (
-            bool(raw.get("monthly_reports", True))
-            if role in {"owner", "admin"}
-            else False
-        )
-        return prefs
 
     def show_notifications(self) -> None:
         prefs = self.notification_preferences()
@@ -677,7 +656,6 @@ def self_test() -> None:
         "wheel_draw_alerts",
         "daily_reports",
         "weekly_reports",
-        "monthly_reports",
         "admin_system",
         "admin_sources",
         "admin_requests",
