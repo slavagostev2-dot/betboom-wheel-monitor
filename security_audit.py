@@ -11,9 +11,9 @@ from typing import Iterable
 ROOT = Path(__file__).resolve().parent
 TOKEN_RE = re.compile(r"(?<![A-Za-z0-9_])\d{6,12}:[A-Za-z0-9_-]{30,}(?![A-Za-z0-9_])")
 PRIVATE_KEY_MARKERS = (
-    "-----BEGIN PRIVATE KEY-----",
-    "-----BEGIN RSA PRIVATE KEY-----",
-    "-----BEGIN OPENSSH PRIVATE KEY-----",
+    "-----BEGIN " + "PRIVATE KEY-----",
+    "-----BEGIN RSA " + "PRIVATE KEY-----",
+    "-----BEGIN OPENSSH " + "PRIVATE KEY-----",
 )
 FORBIDDEN_BASENAMES = {".env", "id_rsa", "id_ed25519"}
 FORBIDDEN_SUFFIXES = {".session", ".pem", ".p12", ".pfx", ".key"}
@@ -161,7 +161,8 @@ def history_report() -> dict:
 
 
 def self_test() -> None:
-    assert TOKEN_RE.search("123456789:ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijk")
+    token_sample = "123456789:" + "A" * 35
+    assert TOKEN_RE.search(token_sample)
     clean = ROOT / "bot_access.json"
     findings = _public_json_findings(clean)
     assert not findings, findings
