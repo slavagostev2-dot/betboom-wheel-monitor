@@ -42,8 +42,28 @@ jobs:
         run: python migrate_bot_private_state.py --check
       - name: Reminder routing test
         run: python notification_preferences_v2.py
-      - name: Panel v33 test
-        run: python admin_panel_runtime_v33.py --self-test
+      - name: Capture panel v33 test
+        id: panel
+        continue-on-error: true
+        shell: bash
+        run: |
+          set +e
+          python admin_panel_runtime_v33.py --self-test > panel-v33-test.log 2>&1
+          code=$?
+          cat panel-v33-test.log
+          echo "exit_code=$code" >> "$GITHUB_OUTPUT"
+          exit "$code"
+      - name: Upload panel v33 traceback
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: panel-v33-test-log-${{ github.run_id }}
+          path: panel-v33-test.log
+          if-no-files-found: error
+          retention-days: 3
+      - name: Fail after panel diagnostic
+        if: ${{ steps.panel.outputs.exit_code != '0' }}
+        run: exit 1
       - name: Monitor integration test
         run: |
           python - <<'PY'
