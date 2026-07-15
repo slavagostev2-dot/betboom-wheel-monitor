@@ -92,6 +92,19 @@ def main() -> None:
         ),
     )
     require_text(
+        "wheel_lifecycle_v2.py",
+        (
+            "LIFECYCLE_TRANSITIONS",
+            "rating_event_key",
+            "complete_event",
+            "mark_inactive_event",
+        ),
+    )
+    require_text(
+        "chapter5_acceptance.py",
+        ("Chapter 5 full wheel lifecycle acceptance passed",),
+    )
+    require_text(
         "wheel_metadata_quality.py",
         (
             "preserved_timed_publication",

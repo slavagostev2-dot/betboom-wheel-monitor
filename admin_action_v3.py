@@ -6,6 +6,7 @@ import os
 from typing import Any
 
 import admin_action_v2
+import wheel_lifecycle_v2
 
 
 legacy = admin_action_v2.legacy
@@ -23,35 +24,34 @@ def confirm_finished_global(
         raise ValueError("Колесо не указано")
     context = legacy.wheel_context(state, normalized)
     if context is None:
+        completed = state.get("recently_completed_wheels", {}).get(normalized)
+        if isinstance(completed, dict):
+            return {
+                "action": "confirm_finished_global",
+                "value": value,
+                "state_changed": False,
+                "health_changed": False,
+                "stats_changed": False,
+                "detail": "Колесо уже завершено",
+            }
         raise ValueError("Колесо уже отсутствует в активном списке")
     sources = legacy.wheel_sources(state, normalized, context)
-    stats_changed = legacy.monitor.data_store.record_admin_wheel_decision(
-        stats,
-        wheel_key=normalized,
-        sources=sources,
-        decision="confirmed",
-        actor=actor or "admin",
+    entry = state.get("active_wheels", {}).get(normalized)
+    event_entry = entry if isinstance(entry, dict) else context
+    current = legacy.monitor.now_utc()
+    removed = wheel_lifecycle_v2.complete_event(
+        state,
+        normalized,
+        event_entry,
+        current=current,
+        reason="admin_finished",
     )
-
-    removed = 0
-    for name in (
-        "active_wheels",
-        "participating_wheels",
-        "pending_posts",
-        "button_contexts",
-        "completed_wheel_alerts",
-        "manual_deadlines",
-    ):
-        removed += legacy.remove_matching_records(state.setdefault(name, {}), normalized)
-
-    state.setdefault("wheel_publications", {}).pop(normalized, None)
-    state.setdefault("recently_completed_wheels", {})[normalized] = {
-        "identifier": str(context.get("identifier") or normalized),
-        "url": str(context.get("url") or ""),
-        "sources": sources,
-        "confirmed_finished_at": legacy.monitor.now_utc().isoformat(),
-        "confirmed_finished_by": actor or "admin",
-    }
+    completed = state.setdefault("recently_completed_wheels", {}).setdefault(
+        normalized, {}
+    )
+    completed["sources"] = sources
+    completed["confirmed_finished_at"] = current.isoformat()
+    completed["confirmed_finished_by"] = actor or "admin"
     # Keep url_alerts/activation_alerts and seen records. They suppress the same
     # already finished Telegram publications without blocking a later event that
     # reuses the freestream identifier.
@@ -60,11 +60,10 @@ def confirm_finished_global(
         "value": value,
         "state_changed": True,
         "health_changed": False,
-        "stats_changed": stats_changed,
+        "stats_changed": False,
         "detail": (
-            f"Колесо завершено и удалено; рейтинг начислен источникам: "
-            + (", ".join(f"@{source}" for source in sources) if sources else "источник не определён")
-            + f". Очищено записей: {removed}"
+            "Колесо завершено и удалено без изменения рейтинга. "
+            f"Очищено записей: {removed}"
         ),
     }
 
@@ -115,8 +114,11 @@ def self_test() -> None:
     assert result["state_changed"] is True
     assert "wheel-a" not in state["active_wheels"]
     assert "wheel-a" not in state["wheel_publications"]
-    assert stats["sources"]["official"]["quality_score"] == 40
-    assert stats["sources"]["collector"]["quality_score"] == 40
+    assert not stats.get("admin_wheel_decisions")
+    second = apply_action_v3(
+        state, health, stats, "confirm_finished_global", "wheel-a|1"
+    )
+    assert second["state_changed"] is False
     print("admin action v3 finished-wheel self-test passed")
 
 

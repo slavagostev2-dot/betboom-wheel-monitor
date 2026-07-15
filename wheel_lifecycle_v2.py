@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import hashlib
 import html
 import os
 from datetime import datetime, timedelta, timezone
@@ -16,6 +17,229 @@ ACTIVE_REMOVE_GRACE_MINUTES = max(
     0, int(os.getenv("ACTIVE_REMOVE_GRACE_MINUTES", "0"))
 )
 UTC = timezone.utc
+
+LIFECYCLE_TRANSITIONS = (
+    ("detected", "future_availability", "scheduled_availability"),
+    ("detected", "known_draw_time", "scheduled_draw"),
+    ("detected", "unknown_draw_time", "active_unknown_time"),
+    ("scheduled_availability", "availability_reached", "active_unknown_time"),
+    ("active_unknown_time", "manual_time_set", "scheduled_draw"),
+    ("scheduled_draw", "manual_time_changed", "scheduled_draw"),
+    ("scheduled_availability", "participate", "participating"),
+    ("active_unknown_time", "participate", "participating"),
+    ("scheduled_draw", "participate", "participating"),
+    ("participating", "draw_time_changed", "participating"),
+    ("scheduled_draw", "deadline_reached", "finished"),
+    ("participating", "deadline_reached", "finished"),
+    ("scheduled_availability", "admin_inactive", "inactive"),
+    ("active_unknown_time", "admin_inactive", "inactive"),
+    ("scheduled_draw", "admin_inactive", "inactive"),
+    ("participating", "admin_inactive", "inactive"),
+    ("scheduled_availability", "admin_finished", "finished"),
+    ("active_unknown_time", "admin_finished", "finished"),
+    ("scheduled_draw", "admin_finished", "finished"),
+    ("participating", "admin_finished", "finished"),
+)
+TERMINAL_STATES = {"finished", "inactive"}
+_CLEANUP_COLLECTIONS = (
+    "active_wheels",
+    "participating_wheels",
+    "pending_posts",
+    "button_contexts",
+    "completed_wheel_alerts",
+    "manual_deadlines",
+    "manual_overrides",
+    "wheel_publications",
+)
+
+
+def wheel_event_id(key: str, entry: dict[str, Any] | None) -> str:
+    """Stable identity for one publication event even when its URL is reused."""
+
+    record = entry if isinstance(entry, dict) else {}
+    existing = str(record.get("event_id") or "").strip().casefold()
+    if existing:
+        return existing[:64]
+    raw = "\x1f".join(
+        (
+            str(key or "").casefold(),
+            str(record.get("source") or "").casefold(),
+            str(record.get("message_id") or ""),
+            str(record.get("message_date") or ""),
+        )
+    )
+    return hashlib.sha256(raw.encode("utf-8")).hexdigest()[:20]
+
+
+def rating_event_key(key: str, entry: dict[str, Any] | None) -> str:
+    """Use a publication-specific key so a reused wheel counts again."""
+
+    normalized = str(key or "").casefold()
+    return f"{normalized}#{wheel_event_id(normalized, entry)}"
+
+
+def lifecycle_state(
+    entry: dict[str, Any], current: datetime | None = None
+) -> str:
+    current = current or datetime.now(UTC)
+    stored = str(entry.get("lifecycle_state") or "")
+    if stored in TERMINAL_STATES:
+        return stored
+    if bool(entry.get("participating")):
+        return "participating"
+    available_at = monitor_datetime(entry.get("available_at"))
+    if available_at is not None and available_at > current:
+        return "scheduled_availability"
+    if monitor_datetime(entry.get("deadline")) is not None:
+        return "scheduled_draw"
+    return "active_unknown_time"
+
+
+def stamp_lifecycle(
+    key: str,
+    entry: dict[str, Any],
+    current: datetime | None = None,
+) -> bool:
+    current = current or datetime.now(UTC)
+    changed = False
+    event_id = str(entry.get("event_id") or wheel_event_id(key, entry))
+    state_name = lifecycle_state(entry, current)
+    if entry.get("event_id") != event_id:
+        entry["event_id"] = event_id
+        changed = True
+    if entry.get("lifecycle_state") != state_name:
+        entry["lifecycle_state"] = state_name
+        entry["lifecycle_changed_at"] = current.isoformat()
+        changed = True
+    return changed
+
+
+def _record_matches(key: str, record_key: Any, record: Any) -> bool:
+    normalized = str(key or "").casefold()
+    direct = str(record_key or "").casefold()
+    if direct == normalized:
+        return True
+    if not isinstance(record, dict):
+        return False
+    related = str(
+        record.get("wheel_key")
+        or record.get("identifier")
+        or ""
+    ).casefold()
+    if related == normalized:
+        return True
+    url = str(record.get("url") or "")
+    return bool(
+        url
+        and url.rstrip("/").rsplit("/", 1)[-1].split("?", 1)[0].casefold()
+        == normalized
+    )
+
+
+def cleanup_event_records(state: dict[str, Any], key: str) -> int:
+    """Remove every mutable record owned by the terminal current event."""
+
+    removed = 0
+    for collection_name in _CLEANUP_COLLECTIONS:
+        collection = state.setdefault(collection_name, {})
+        if not isinstance(collection, dict):
+            state[collection_name] = {}
+            continue
+        for record_key in list(collection):
+            if _record_matches(key, record_key, collection.get(record_key)):
+                collection.pop(record_key, None)
+                removed += 1
+    return removed
+
+
+def _remember_history(
+    state: dict[str, Any],
+    key: str,
+    entry: dict[str, Any],
+    terminal_state: str,
+    reason: str,
+    current: datetime,
+) -> None:
+    event_id = str(entry.get("event_id") or wheel_event_id(key, entry))
+    history = state.setdefault("wheel_lifecycle_history", {})
+    history[event_id] = {
+        "event_id": event_id,
+        "wheel_key": str(key).casefold(),
+        "identifier": str(entry.get("identifier") or key),
+        "message_date": str(entry.get("message_date") or ""),
+        "state": terminal_state,
+        "reason": reason,
+        "changed_at": current.isoformat(),
+    }
+    if len(history) > 1000:
+        ordered = sorted(
+            history.items(),
+            key=lambda item: str((item[1] or {}).get("changed_at") or ""),
+        )
+        for old_key, _ in ordered[: len(history) - 1000]:
+            history.pop(old_key, None)
+
+
+def complete_event(
+    state: dict[str, Any],
+    key: str,
+    entry: dict[str, Any],
+    *,
+    current: datetime,
+    reason: str,
+    deadline: datetime | None = None,
+) -> int:
+    """Archive one finished event and remove all of its mutable state."""
+
+    normalized = str(key or "").casefold()
+    stamp_lifecycle(normalized, entry, current)
+    effective_deadline = (
+        deadline or monitor_datetime(entry.get("deadline")) or current
+    )
+    _remember_completed(state, normalized, entry, effective_deadline, current)
+    recent = state.setdefault("recently_completed_wheels", {}).get(normalized)
+    if isinstance(recent, dict):
+        recent["event_id"] = str(
+            entry.get("event_id") or wheel_event_id(normalized, entry)
+        )
+        recent["lifecycle_state"] = "finished"
+        recent["completion_reason"] = reason
+    _remember_history(state, normalized, entry, "finished", reason, current)
+    return cleanup_event_records(state, normalized)
+
+
+def mark_inactive_event(
+    state: dict[str, Any],
+    key: str,
+    entry: dict[str, Any] | None,
+    *,
+    current: datetime,
+    actor: str,
+    retention: timedelta = timedelta(days=30),
+) -> int:
+    """Archive an administrator's inactive verdict for the current event."""
+
+    normalized = str(key or "").casefold()
+    record = dict(entry or {"identifier": normalized})
+    stamp_lifecycle(normalized, record, current)
+    _remember_history(
+        state,
+        normalized,
+        record,
+        "inactive",
+        "admin_inactive",
+        current,
+    )
+    removed = cleanup_event_records(state, normalized)
+    state.setdefault("inactive_wheels", {})[normalized] = {
+        "identifier": str(record.get("identifier") or normalized),
+        "event_id": str(record.get("event_id") or wheel_event_id(normalized, record)),
+        "lifecycle_state": "inactive",
+        "marked_at": current.isoformat(),
+        "marked_by": str(actor or "admin"),
+        "expires_at": (current + retention).isoformat(),
+    }
+    return removed
 
 
 def final_reminder_due(
@@ -95,10 +319,16 @@ def install(monitor_module: Any) -> None:
             if not isinstance(entry, dict):
                 continue
             normalized = str(key).casefold()
+            if stamp_lifecycle(normalized, entry, current):
+                changed = True
             global_participating = monitor_module.is_participating(state, normalized)
             personal_reminder_filter.set_global_participating(
                 normalized, global_participating
             )
+            if global_participating and entry.get("lifecycle_state") != "participating":
+                entry["lifecycle_state"] = "participating"
+                entry["lifecycle_changed_at"] = current.isoformat()
+                changed = True
             if not final_reminder_due(monitor_module, entry, current):
                 continue
             deadline = monitor_module.parse_datetime(entry.get("deadline"))
@@ -127,6 +357,7 @@ def install(monitor_module: Any) -> None:
                 entry["final_reminder_error"] = f"{type(exc).__name__}: {exc}"[:300]
             else:
                 entry["final_reminder_sent_at"] = current.isoformat()
+                entry["known_reminder_sent_at"] = current.isoformat()
                 entry["last_notification_at"] = current.isoformat()
                 sources = wheel_publications_v2.publication_sources(
                     state, normalized, entry
@@ -150,8 +381,14 @@ def install(monitor_module: Any) -> None:
             if current < remove_at:
                 continue
             normalized = str(key).casefold()
-            _remember_completed(state, normalized, entry, deadline, current)
-            state["active_wheels"].pop(key, None)
+            complete_event(
+                state,
+                normalized,
+                entry,
+                current=current,
+                reason="deadline_reached",
+                deadline=deadline,
+            )
             personal_reminder_filter.set_global_participating(normalized, False)
             result["removed"] = int(result.get("removed", 0) or 0) + 1
             changed = True

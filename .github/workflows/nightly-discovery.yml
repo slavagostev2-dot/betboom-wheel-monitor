@@ -13,8 +13,6 @@ on:
       - "bot_private_state.enc.json"
       - "bot_notification_state.py"
       - "privacy_retention.py"
-      - "public_sources.txt"
-      - "source_catalog.txt"
       - ".github/workflows/nightly-discovery.yml"
   workflow_dispatch:
   schedule:

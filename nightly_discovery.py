@@ -27,6 +27,11 @@ MANUAL_RUN = os.getenv("MANUAL_RUN", "").strip().lower() in {
 }
 
 
+def should_notify_completion(*, manual_run: bool, catalog_size_at_start: int) -> bool:
+    """Only a real, explicitly started night scan gets a completion notice."""
+    return bool(manual_run and catalog_size_at_start > 0)
+
+
 def fetch_public_channel_page(
     username: str,
     before: int | None = None,
@@ -168,8 +173,19 @@ def main() -> int:
     active_keys = {item.casefold() for item in active}
     catalog = unique(data_store.operational_sources(monitor.read_list(CATALOG_PATH), "nightly"))
     catalog = [item for item in catalog if item.casefold() not in active_keys]
+    catalog_size_at_start = len(catalog)
 
     discovery = load_discovery_state()
+    if not catalog:
+        discovery["catalog_size"] = 0
+        discovery["last_skip_at"] = monitor.now_utc().isoformat()
+        discovery["last_skip_reason"] = "no_nightly_sources"
+        discovery["promoted"] = []
+        discovery["notifications"] = 0
+        save_discovery_state(discovery)
+        print("Nightly scan skipped: no sources in the nightly list")
+        return 0
+
     monitor_state = monitor.load_state()
     # Nightly runtime is stored inside discovery_state.json. This avoids
     # merge conflicts with the long-running five-minute monitor, which owns
@@ -403,7 +419,10 @@ def main() -> int:
     for error in errors[:40]:
         print(f"WARNING {error}")
 
-    if MANUAL_RUN:
+    if should_notify_completion(
+        manual_run=MANUAL_RUN,
+        catalog_size_at_start=catalog_size_at_start,
+    ):
         promoted_text = ", ".join(f"@{item}" for item in promoted) or "нет"
         monitor.send_message(
             "✅ <b>Ночная проверка завершена</b>\n\n"

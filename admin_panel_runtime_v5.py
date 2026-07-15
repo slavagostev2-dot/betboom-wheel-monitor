@@ -287,8 +287,10 @@ class TelegramPanelRuntimeV5(TelegramPanelRuntimeV4):
         self.save_moderation(moderation, f"Approve @{source} discovery candidate via Telegram [skip ci]")
         self.set_source_mode(source, mode)
         if mode == "nightly":
-            self.dispatch("nightly-discovery.yml", None)
-            return f"@{source} добавлен в ночную проверку."
+            return (
+                f"@{source} добавлен в ночную проверку. "
+                "Первая проверка пройдёт по ночному расписанию."
+            )
         return f"@{source} добавлен в основную проверку."
 
     def ignore_candidate(self, source: str) -> str:
@@ -313,8 +315,10 @@ class TelegramPanelRuntimeV5(TelegramPanelRuntimeV4):
         moderation["ignored"].pop(source.casefold(), None)
         self.save_moderation(moderation, f"Restore @{source} discovery candidate via Telegram [skip ci]")
         self.set_source_mode(source, "nightly")
-        self.dispatch("nightly-discovery.yml", None)
-        return f"@{source} возвращён в ночную проверку."
+        return (
+            f"@{source} возвращён в ночную проверку. "
+            "Следующая проверка пройдёт по ночному расписанию."
+        )
 
     def render_page(self, page: str) -> None:
         if page.startswith("candidate_list:"):

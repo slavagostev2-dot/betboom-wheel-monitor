@@ -351,8 +351,6 @@ class TelegramPanelRuntimeV14(TelegramPanelRuntimeV13):
             self.update_file("source_catalog.txt", nightly_new, f"Bulk move intelligence candidates to {mode} via Telegram")
         self.cache = None
         self.dispatch("monitor.yml", {"continuous": "true"})
-        if mode == "nightly":
-            self.dispatch("nightly-discovery.yml", None)
         return len(targets), skipped
 
     # ---------- Handlers ----------

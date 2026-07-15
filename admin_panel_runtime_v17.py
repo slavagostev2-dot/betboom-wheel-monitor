@@ -287,8 +287,6 @@ class TelegramPanelRuntimeV17(TelegramPanelRuntimeV16):
             request["decision_text"] = "добавлен в основные" if mode == "fast" else "добавлен в ночное наблюдение"
             try:
                 self.dispatch("monitor.yml", {"continuous": "true"})
-                if mode == "nightly":
-                    self.dispatch("nightly-discovery.yml", None)
             except Exception as exc:
                 print(f"WARNING restart after source request: {type(exc).__name__}: {exc}")
         elif action == "reject":

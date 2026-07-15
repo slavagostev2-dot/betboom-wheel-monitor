@@ -82,7 +82,7 @@ jobs:
             admin_panel_runtime_v30.py admin_panel_runtime_v31.py admin_panel_runtime_v32.py \
             admin_panel_runtime_v33.py admin_panel_runtime_v34.py admin_panel_runtime_v35.py \
             admin_panel_runtime_v36.py admin_panel_runtime_v37.py admin_panel_runtime_v38.py \
-            telegram_ui.py chapter4_acceptance.py \
+            telegram_ui.py chapter4_acceptance.py chapter5_acceptance.py wheel_lifecycle_v2.py \
             bot_private_state.py bot_notification_state.py \
             notification_integrity_v2.py notification_router.py wheel_publications_v2.py \
             rating_policy.py chapter2_unified_logic.py privacy_retention.py security_audit.py \
@@ -104,6 +104,7 @@ jobs:
           python admin_panel_runtime_v37.py --self-test
           python admin_panel_runtime_v38.py --self-test
           python chapter4_acceptance.py
+          python chapter5_acceptance.py
           python chapter1_stability.py
           python - <<'PY'
           import inspect

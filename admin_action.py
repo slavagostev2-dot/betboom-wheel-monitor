@@ -8,6 +8,7 @@ from pathlib import Path
 from typing import Any
 
 import monitor
+import wheel_lifecycle_v2
 
 
 ROOT = Path(__file__).resolve().parent
@@ -71,6 +72,7 @@ def wheel_context(state: dict[str, Any], key: str) -> dict[str, Any] | None:
             "message_date": str(entry.get("message_date") or ""),
             "message_url": str(entry.get("message_url") or ""),
             "message_text": str(entry.get("message_text") or ""),
+            "event_id": str(entry.get("event_id") or ""),
         }
     for pending in state.get("pending_posts", {}).values():
         if not isinstance(pending, dict):
@@ -166,6 +168,7 @@ def set_manual_deadline(state: dict[str, Any], key: str, deadline_text: str) -> 
     entry["needs_manual_time"] = False
     entry["last_checked_at"] = monitor.now_utc().isoformat()
     entry["expires_at"] = monitor.participation_expiry(deadline).isoformat()
+    wheel_lifecycle_v2.stamp_lifecycle(normalized, entry, monitor.now_utc())
 
     state.setdefault("manual_deadlines", {})[normalized] = {
         "deadline": deadline.isoformat(),
@@ -183,27 +186,17 @@ def mark_globally_inactive(state: dict[str, Any], key: str, actor: str) -> int:
     normalized = normalized_wheel_key(key)
     if not normalized:
         raise ValueError("Колесо не указано")
-
-    removed = 0
-    for name in (
-        "active_wheels",
-        "participating_wheels",
-        "pending_posts",
-        "button_contexts",
-        "url_alerts",
-        "activation_alerts",
-        "completed_wheel_alerts",
-        "manual_deadlines",
-    ):
-        removed += remove_matching_records(state.setdefault(name, {}), normalized)
-
+    context = wheel_context(state, normalized)
+    active_entry = state.get("active_wheels", {}).get(normalized)
+    event_entry = active_entry if isinstance(active_entry, dict) else context
     now = monitor.now_utc()
-    state.setdefault("inactive_wheels", {})[normalized] = {
-        "identifier": normalized,
-        "marked_at": now.isoformat(),
-        "marked_by": str(actor or "admin"),
-        "expires_at": (now + timedelta(days=30)).isoformat(),
-    }
+    removed = wheel_lifecycle_v2.mark_inactive_event(
+        state,
+        normalized,
+        event_entry,
+        current=now,
+        actor=actor or "admin",
+    )
     return removed
 
 
@@ -226,31 +219,45 @@ def apply_action(
         context = state.get("button_contexts", {}).get(value)
         if not isinstance(context, dict):
             raise ValueError("Контекст кнопки не найден или устарел")
-        monitor.mark_participating(state, context)
         key = record_wheel_key(context)
+        already = monitor.is_participating(state, key)
+        if not already:
+            monitor.mark_participating(state, context)
+        active_entry = state.get("active_wheels", {}).get(key)
+        if isinstance(active_entry, dict):
+            wheel_lifecycle_v2.stamp_lifecycle(key, active_entry, monitor.now_utc())
+        rating_context = active_entry if isinstance(active_entry, dict) else context
         result["stats_changed"] = monitor.data_store.record_admin_wheel_decision(
             stats,
-            wheel_key=key,
+            wheel_key=wheel_lifecycle_v2.rating_event_key(key, rating_context),
             sources=wheel_sources(state, key, context),
             decision="confirmed",
             actor="admin",
         )
-        result["state_changed"] = True
-        result["detail"] = "Участие отмечено"
+        result["state_changed"] = not already
+        result["detail"] = "Участие уже было отмечено" if already else "Участие отмечено"
     elif action == "participate_wheel":
         context = wheel_context(state, value)
         if context is None:
             raise ValueError("Колесо не найдено")
-        monitor.mark_participating(state, context)
+        normalized = normalized_wheel_key(value)
+        already = monitor.is_participating(state, normalized)
+        if not already:
+            monitor.mark_participating(state, context)
+        active_entry = state.get("active_wheels", {}).get(normalized)
+        if isinstance(active_entry, dict):
+            wheel_lifecycle_v2.stamp_lifecycle(
+                normalized, active_entry, monitor.now_utc()
+            )
         result["stats_changed"] = monitor.data_store.record_admin_wheel_decision(
             stats,
-            wheel_key=normalized_wheel_key(value),
+            wheel_key=wheel_lifecycle_v2.rating_event_key(normalized, context),
             sources=wheel_sources(state, value, context),
             decision="confirmed",
             actor="admin",
         )
-        result["state_changed"] = True
-        result["detail"] = "Участие отмечено"
+        result["state_changed"] = not already
+        result["detail"] = "Участие уже было отмечено" if already else "Участие отмечено"
     elif action == "set_deadline":
         key, deadline_text = split_action_value(value)
         set_manual_deadline(state, key, deadline_text)
@@ -258,10 +265,18 @@ def apply_action(
         result["detail"] = "Время прокрутки установлено вручную"
     elif action == "mark_inactive_global":
         key, actor = split_action_value(value)
+        normalized = normalized_wheel_key(key)
         context = wheel_context(state, key)
+        if context is None:
+            existing = state.get("inactive_wheels", {}).get(normalized)
+            if isinstance(existing, dict):
+                result["detail"] = "Колесо уже отмечено неактивным"
+                return result
+            raise ValueError("Колесо уже отсутствует в активном списке")
+        rating_key = wheel_lifecycle_v2.rating_event_key(normalized, context)
         result["stats_changed"] = monitor.data_store.record_admin_wheel_decision(
             stats,
-            wheel_key=normalized_wheel_key(key),
+            wheel_key=rating_key,
             sources=wheel_sources(state, key, context),
             decision="inactive",
             actor=actor or "admin",

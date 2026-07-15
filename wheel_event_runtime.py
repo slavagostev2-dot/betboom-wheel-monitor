@@ -5,6 +5,8 @@ import re
 from datetime import datetime, timedelta, timezone
 from typing import Any, Callable
 
+import wheel_lifecycle_v2
+
 
 UTC = timezone.utc
 EVENT_REUSE_GAP = timedelta(hours=6)
@@ -305,6 +307,7 @@ def process_due_availability(monitor_module: Any, state: dict[str, Any]) -> dict
         entry["needs_manual_time"] = True
         entry["last_notification_at"] = current.isoformat()
         entry["expires_at"] = (current + ACTIVE_WITHOUT_DRAW_TTL).isoformat()
+        wheel_lifecycle_v2.stamp_lifecycle(str(key).casefold(), entry, current)
         sent += 1
         changed = True
     return {"changed": changed, "availability_notifications": sent}

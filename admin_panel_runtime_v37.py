@@ -640,7 +640,9 @@ class TelegramPanelRuntimeV37(TelegramPanelRuntimeV36):
             run = {}
         status = str(run.get("status") or "")
         conclusion = str(run.get("conclusion") or "")
-        if status == "in_progress":
+        if not snap.nightly:
+            state_text = "⚪ не требуется — ночной список пуст"
+        elif status == "in_progress":
             state_text = "🔵 ночная проверка выполняется"
         elif status in {"queued", "waiting", "pending"}:
             state_text = "🟡 ожидает запуска"
@@ -664,9 +666,12 @@ class TelegramPanelRuntimeV37(TelegramPanelRuntimeV36):
         buttons = [
             [{"text": f"🆕 Требуют решения ({len(new_rows)})", "callback_data": "candidate:list:new:0"}],
             [{"text": f"🎡 С колёсами ({len(nightly_with_wheels)})", "callback_data": "candidate:list:nightly:0"}],
-            [{"text": "▶️ Запустить ночную проверку", "callback_data": "control:nightly"}],
-            [{"text": "🔄 Обновить состояние", "callback_data": "page:discovery"}],
         ]
+        if snap.nightly:
+            buttons.append(
+                [{"text": "▶️ Запустить ночную проверку", "callback_data": "control:nightly"}]
+            )
+        buttons.append([{"text": "🔄 Обновить состояние", "callback_data": "page:discovery"}])
         self.send(text, reply_markup=self.with_nav(buttons))
 
     def render_page(self, page: str) -> None:
