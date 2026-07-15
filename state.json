@@ -7,7 +7,7 @@
       "expires_at": "2026-07-15T20:46:49+00:00",
       "first_notified_at": "2026-07-15T11:18:42.541588+00:00",
       "identifier": "bolt",
-      "last_checked_at": "2026-07-15T11:36:38.306610+00:00",
+      "last_checked_at": "2026-07-15T11:42:40.325065+00:00",
       "last_notification_at": "2026-07-15T11:18:42.541801+00:00",
       "message_date": "2026-07-14T10:44:26+00:00",
       "message_id": 6356,
@@ -33,7 +33,7 @@
       "expires_at": "2026-07-15T20:45:21.560624+00:00",
       "first_notified_at": "2026-07-15T11:18:42.831939+00:00",
       "identifier": "neret",
-      "last_checked_at": "2026-07-15T11:36:38.306610+00:00",
+      "last_checked_at": "2026-07-15T11:42:40.325065+00:00",
       "last_notification_at": "2026-07-15T11:18:42.831939+00:00",
       "message_date": "2026-07-14T11:32:44+00:00",
       "message_id": 3909,
@@ -52,13 +52,36 @@
       "status": "unknown",
       "url": "https://betboom.ru/freestream/neret"
     },
+    "smurf5": {
+      "button_token": "49dc112f65219e",
+      "expires_at": "2026-07-22T11:42:46.258329+00:00",
+      "first_notified_at": "2026-07-15T11:42:46.257924+00:00",
+      "identifier": "smurf5",
+      "last_checked_at": "2026-07-15T11:42:46.258326+00:00",
+      "last_notification_at": "2026-07-15T11:42:46.258289+00:00",
+      "message_date": "2026-07-15T11:39:48+00:00",
+      "message_id": 2115,
+      "message_text": "Первый день EWC, сейчас будет биг серия AL vs DK, запускаем КОЛЕСО ФРИБЕТОВ ОТ BETBOOM для вас\n🔥\nhttps://betboom.ru/freestream/smurf5\nОткрывай через браузер, нажимай участвовать и получай Фрибеты\nhttps://telegram.me/smurf_gigachad\nhttps://telegram.me/smurf_gigachad/2115\nhttps://betboom.ru/freestream/smurf5",
+      "message_url": "https://telegram.me/smurf_gigachad/2115",
+      "method": "свежий Telegram-пост; страница открылась, но активность не подтверждена",
+      "needs_manual_time": true,
+      "page_excerpt": "",
+      "page_status": "fresh_unconfirmed",
+      "participating": false,
+      "source": "smurf_gigachad",
+      "sources": [
+        "smurf_gigachad"
+      ],
+      "status": "manual_time_required",
+      "url": "https://betboom.ru/freestream/smurf5"
+    },
     "zonertg6": {
       "button_token": "1eaab6cb41f445",
       "deadline": "2026-07-15T20:48:46+00:00",
       "expires_at": "2026-07-15T21:18:46+00:00",
       "first_notified_at": "2026-07-15T10:51:33.022211+00:00",
       "identifier": "zonertg6",
-      "last_checked_at": "2026-07-15T11:36:38.306610+00:00",
+      "last_checked_at": "2026-07-15T11:42:40.325065+00:00",
       "last_notification_at": "2026-07-15T10:51:33.022390+00:00",
       "message_date": "2026-07-15T10:48:46+00:00",
       "message_id": 35609,
@@ -180,6 +203,21 @@
       "status": "final_reminder",
       "url": "https://betboom.ru/freestream/zonertg5",
       "wheel_key": "zonertg5"
+    },
+    "49dc112f65219e": {
+      "created_at": "2026-07-15T11:42:44.725107+00:00",
+      "identifier": "smurf5",
+      "message_date": "2026-07-15T11:39:48+00:00",
+      "message_id": 2115,
+      "message_text": "Первый день EWC, сейчас будет биг серия AL vs DK, запускаем КОЛЕСО ФРИБЕТОВ ОТ BETBOOM для вас\n🔥\nhttps://betboom.ru/freestream/smurf5\nОткрывай через браузер, нажимай участвовать и получай Фрибеты\nhttps://telegram.me/smurf_gigachad\nhttps://telegram.me/smurf_gigachad/2115\nhttps://betboom.ru/freestream/smurf5",
+      "message_url": "https://telegram.me/smurf_gigachad/2115",
+      "method": "свежий Telegram-пост; страница открылась, но активность не подтверждена",
+      "page_excerpt": "Букмекерская контора BetBoom - ставки на спорт онлайн в России!",
+      "post_key": "49dc112f65219efb04e4098a80157a8aa5056896c7f789be692f7f1f75c3e024",
+      "source": "smurf_gigachad",
+      "status": "preliminary",
+      "url": "https://betboom.ru/freestream/smurf5",
+      "wheel_key": "smurf5"
     },
     "7022b42822c37f": {
       "created_at": "2026-07-14T15:21:22.253951+00:00",
@@ -734,6 +772,7 @@
     "3fa237ebea84c75d45600bc50568920eea0f8d83553d4b06435f973ebd4e12d7": "2026-07-14T18:32:15.194369+00:00",
     "453c6dba9d529bbeff63b25cd39b50697c18e649655891b527f001a77b994131": "2026-07-12T18:26:20.387317+00:00",
     "46bdf62323d0b3e4d7837b6172f1fb91cb51be9ac4bdb20c6ad1f527b6f40b03": "2026-07-12T19:22:25.149620+00:00",
+    "49dc112f65219efb04e4098a80157a8aa5056896c7f789be692f7f1f75c3e024": "2026-07-15T11:42:46.258333+00:00",
     "4af8ad666dd040236b72e64aaefbec1d2721a3335a5a5e9fecc7e41690efd56a": "2026-07-12T19:22:25.149620+00:00",
     "4e74a82d0b15f65d66f158d885ae29cbbbd333d026bec12b958ba88925e8ffd2": "2026-07-12T18:21:24.635788+00:00",
     "55e0214f74e007a47174b82f0afc8ffde5718c708858cedf49ade4d6571c4aea": "2026-07-12T15:09:13.354381+00:00",
@@ -968,6 +1007,12 @@
       "suppress_until": "2026-07-13T18:26:17.348888+00:00",
       "url": "https://betboom.ru/freestream/smurf4"
     },
+    "smurf5": {
+      "alerted_at": "2026-07-15T11:42:46.257999+00:00",
+      "identifier": "smurf5",
+      "suppress_until": "2026-07-16T11:42:46.257999+00:00",
+      "url": "https://betboom.ru/freestream/smurf5"
+    },
     "smurf6": {
       "alerted_at": "2026-07-12T18:26:18.629281+00:00",
       "identifier": "smurf6",
@@ -1076,6 +1121,15 @@
         "message_id": 12144,
         "message_url": "https://telegram.me/PAPAdota2/12144",
         "source": "PAPAdota2"
+      }
+    ],
+    "smurf5": [
+      {
+        "has_future_deadline": false,
+        "message_date": "2026-07-15T11:39:48+00:00",
+        "message_id": 2115,
+        "message_url": "https://telegram.me/smurf_gigachad/2115",
+        "source": "smurf_gigachad"
       }
     ],
     "zonertg6": [
