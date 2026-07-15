@@ -1,6 +1,23 @@
 {
-  "active_count": 1,
+  "active_count": 2,
   "incidents": {
+    "system_checks:admin_panel_stale:9278d429b1e1ee67": {
+      "detail": "Последний живой сигнал был 73 минут назад.",
+      "first_seen_at": "2026-07-15T23:43:26.915265+00:00",
+      "key": "system_checks:admin_panel_stale:9278d429b1e1ee67",
+      "kind": "admin_panel_stale",
+      "last_seen_at": "2026-07-15T23:43:26.915265+00:00",
+      "metadata": {},
+      "occurrences": 1,
+      "open_notification_pending": false,
+      "open_notified_at": "2026-07-15T23:43:27.530677+00:00",
+      "opened_sequence": 20,
+      "scope": "system_checks",
+      "severity": "critical",
+      "status": "active",
+      "subject": "",
+      "title": "Бот давно не принимает команды пользователей"
+    },
     "system_checks:discovery_scan_failure:763d64204869a56e": {
       "detail": "Просканировано 0 из 66; ошибок 66. Поиск должен выполняться через telegram.me.",
       "first_seen_at": "2026-07-14T04:04:11.018046+00:00",
@@ -27,9 +44,9 @@
       "first_seen_at": "2026-07-15T20:40:36.637366+00:00",
       "key": "system_checks:inactive_wheel_leak:d9fbb8f3a566c8a0",
       "kind": "inactive_wheel_leak",
-      "last_seen_at": "2026-07-15T22:48:06.583827+00:00",
+      "last_seen_at": "2026-07-15T23:43:26.915265+00:00",
       "metadata": {},
-      "occurrences": 6,
+      "occurrences": 7,
       "open_notification_pending": false,
       "open_notified_at": "2026-07-15T20:40:37.323711+00:00",
       "opened_sequence": 19,
@@ -145,17 +162,17 @@
       "title": "Не для всех источников есть данные здоровья"
     }
   },
-  "last_change_at": "2026-07-15T20:40:36.637366+00:00",
-  "last_reconcile_at": "2026-07-15T22:48:06.583827+00:00",
+  "last_change_at": "2026-07-15T23:43:26.915265+00:00",
+  "last_reconcile_at": "2026-07-15T23:43:26.915265+00:00",
   "last_reconcile_scope": "system_checks",
   "last_summary": {
-    "active": 1,
-    "new_notification_count": 0,
+    "active": 2,
+    "new_notification_count": 1,
     "recovery_notification_count": 0,
     "scope": "system_checks"
   },
-  "sequence": 19,
+  "sequence": 20,
   "status": "initializing",
-  "updated_at": "2026-07-15T22:48:06.583898+00:00",
+  "updated_at": "2026-07-15T23:43:27.530702+00:00",
   "version": 1
 }
