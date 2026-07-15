@@ -531,6 +531,20 @@
       "telegram_excerpt": "Запустил колесо https://betboom.ru/freestream/risen https://telegram.me/risenhaha https://betboom.ru/freestream/risen https://telegram.me/risenhaha/8163",
       "wheel_identifier": "risen",
       "wheel_url": "https://betboom.ru/freestream/risen"
+    },
+    {
+      "captured_at": "2026-07-15T18:43:56.324531+00:00",
+      "fingerprint": "e586449d7a8d06f9a5993a38968b136bf0f8c472f2fcd4e99c84967a2eb9da6e",
+      "message_id": 8003,
+      "message_url": "https://telegram.me/AdamStaya/8003",
+      "method": "свежий Telegram-пост; страница открылась, но активность не подтверждена",
+      "page_excerpt": "Букмекерская контора BetBoom - ставки на спорт онлайн в России!",
+      "reason": "new_post",
+      "source": "AdamStaya",
+      "status": "fresh_unconfirmed",
+      "telegram_excerpt": "Колесо https://betboom.ru/freestream/adam https://telegram.me/AdamStaya https://betboom.ru/freestream/adam https://telegram.me/AdamStaya/8003",
+      "wheel_identifier": "adam",
+      "wheel_url": "https://betboom.ru/freestream/adam"
     }
   ],
   "version": 1

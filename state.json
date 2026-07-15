@@ -1,15 +1,38 @@
 {
   "activation_alerts": {},
   "active_wheels": {
+    "adam": {
+      "button_token": "2c329e6623cd47",
+      "expires_at": "2026-07-22T18:43:58.424950+00:00",
+      "first_notified_at": "2026-07-15T18:43:58.424629+00:00",
+      "identifier": "adam",
+      "last_checked_at": "2026-07-15T18:43:58.424947+00:00",
+      "last_notification_at": "2026-07-15T18:43:58.424906+00:00",
+      "message_date": "2026-07-15T18:43:34+00:00",
+      "message_id": 8003,
+      "message_text": "Колесо\nhttps://betboom.ru/freestream/adam\nhttps://telegram.me/AdamStaya\nhttps://betboom.ru/freestream/adam\nhttps://telegram.me/AdamStaya/8003",
+      "message_url": "https://telegram.me/AdamStaya/8003",
+      "method": "свежий Telegram-пост; страница открылась, но активность не подтверждена",
+      "needs_manual_time": true,
+      "page_excerpt": "",
+      "page_status": "fresh_unconfirmed",
+      "participating": false,
+      "source": "AdamStaya",
+      "sources": [
+        "AdamStaya"
+      ],
+      "status": "manual_time_required",
+      "url": "https://betboom.ru/freestream/adam"
+    },
     "adekvat02": {
       "button_token": "73e3952af36da5",
       "event_id": "caf1eeef80e9c0e02216",
-      "expires_at": "2026-07-22T18:28:48.882688+00:00",
+      "expires_at": "2026-07-22T18:43:50.749702+00:00",
       "first_notified_at": "2026-07-15T18:07:54.106948+00:00",
       "identifier": "ADEKVAT02",
-      "last_checked_at": "2026-07-15T18:28:48.887126+00:00",
+      "last_checked_at": "2026-07-15T18:43:50.754133+00:00",
       "last_notification_at": "2026-07-15T18:07:54.107503+00:00",
-      "last_unknown_reminder_at": "2026-07-22T18:28:48.882651+00:00",
+      "last_unknown_reminder_at": "2026-07-22T18:43:50.749666+00:00",
       "lifecycle_changed_at": "2026-07-15T18:10:46.883076+00:00",
       "lifecycle_state": "active_unknown_time",
       "manual_time_waiting_since": "2026-07-15T18:10:46.883161+00:00",
@@ -36,7 +59,7 @@
       "expires_at": "2026-07-15T20:46:49+00:00",
       "first_notified_at": "2026-07-15T11:18:42.541588+00:00",
       "identifier": "bolt",
-      "last_checked_at": "2026-07-15T18:28:48.887126+00:00",
+      "last_checked_at": "2026-07-15T18:43:50.754133+00:00",
       "last_notification_at": "2026-07-15T11:18:42.541801+00:00",
       "lifecycle_changed_at": "2026-07-15T15:52:58.892840+00:00",
       "lifecycle_state": "participating",
@@ -60,12 +83,12 @@
     "neret": {
       "button_token": "8f2b8bced22840",
       "event_id": "ff5acada19034ea73627",
-      "expires_at": "2026-07-22T18:28:48.882688+00:00",
+      "expires_at": "2026-07-22T18:43:50.749702+00:00",
       "first_notified_at": "2026-07-15T18:04:50.317882+00:00",
       "identifier": "neret",
-      "last_checked_at": "2026-07-15T18:28:48.887126+00:00",
+      "last_checked_at": "2026-07-15T18:43:50.754133+00:00",
       "last_notification_at": "2026-07-15T18:04:50.318286+00:00",
-      "last_unknown_reminder_at": "2026-07-22T18:28:48.882651+00:00",
+      "last_unknown_reminder_at": "2026-07-22T18:43:50.749666+00:00",
       "lifecycle_changed_at": "2026-07-15T18:07:45.150169+00:00",
       "lifecycle_state": "active_unknown_time",
       "manual_time_waiting_since": "2026-07-15T18:07:45.150254+00:00",
@@ -93,7 +116,7 @@
       "expires_at": "2026-07-15T19:41:42+00:00",
       "first_notified_at": "2026-07-15T14:58:34.802943+00:00",
       "identifier": "papa",
-      "last_checked_at": "2026-07-15T18:28:48.887126+00:00",
+      "last_checked_at": "2026-07-15T18:43:50.754133+00:00",
       "last_notification_at": "2026-07-15T14:58:34.803265+00:00",
       "lifecycle_changed_at": "2026-07-15T15:52:58.892840+00:00",
       "lifecycle_state": "participating",
@@ -117,12 +140,12 @@
     "risen": {
       "button_token": "bcf6fab51c57df",
       "event_id": "5fca85e4b0ee4f3aad08",
-      "expires_at": "2026-07-22T18:28:48.882688+00:00",
+      "expires_at": "2026-07-22T18:43:50.749702+00:00",
       "first_notified_at": "2026-07-15T18:22:54.353590+00:00",
       "identifier": "risen",
-      "last_checked_at": "2026-07-15T18:28:48.887126+00:00",
+      "last_checked_at": "2026-07-15T18:43:50.754133+00:00",
       "last_notification_at": "2026-07-15T18:22:54.353889+00:00",
-      "last_unknown_reminder_at": "2026-07-22T18:28:48.882651+00:00",
+      "last_unknown_reminder_at": "2026-07-22T18:43:50.749666+00:00",
       "lifecycle_changed_at": "2026-07-15T18:25:49.044026+00:00",
       "lifecycle_state": "active_unknown_time",
       "manual_time_waiting_since": "2026-07-15T18:25:49.044118+00:00",
@@ -149,7 +172,7 @@
       "expires_at": "2026-07-15T21:18:46+00:00",
       "first_notified_at": "2026-07-15T10:51:33.022211+00:00",
       "identifier": "zonertg6",
-      "last_checked_at": "2026-07-15T18:28:48.887126+00:00",
+      "last_checked_at": "2026-07-15T18:43:50.754133+00:00",
       "last_notification_at": "2026-07-15T10:51:33.022390+00:00",
       "lifecycle_changed_at": "2026-07-15T15:52:58.892840+00:00",
       "lifecycle_state": "participating",
@@ -399,6 +422,21 @@
       "status": "final_reminder",
       "url": "https://betboom.ru/freestream/zonertg5",
       "wheel_key": "zonertg5"
+    },
+    "2c329e6623cd47": {
+      "created_at": "2026-07-15T18:43:56.324663+00:00",
+      "identifier": "adam",
+      "message_date": "2026-07-15T18:43:34+00:00",
+      "message_id": 8003,
+      "message_text": "Колесо\nhttps://betboom.ru/freestream/adam\nhttps://telegram.me/AdamStaya\nhttps://betboom.ru/freestream/adam\nhttps://telegram.me/AdamStaya/8003",
+      "message_url": "https://telegram.me/AdamStaya/8003",
+      "method": "свежий Telegram-пост; страница открылась, но активность не подтверждена",
+      "page_excerpt": "Букмекерская контора BetBoom - ставки на спорт онлайн в России!",
+      "post_key": "2c329e6623cd47750efba23ab749c03b05ac2b186992fcd0d94146990eb7a3ad",
+      "source": "AdamStaya",
+      "status": "preliminary",
+      "url": "https://betboom.ru/freestream/adam",
+      "wheel_key": "adam"
     },
     "31b6f832ef9a79": {
       "created_at": "2026-07-15T14:58:33.587514+00:00",
@@ -885,16 +923,6 @@
       ],
       "url": "https://betboom.ru/freestream/acool6"
     },
-    "adam": {
-      "confirmed_finished_at": "2026-07-15T00:58:23.484982+00:00",
-      "confirmed_finished_by": "7178093128",
-      "identifier": "adam",
-      "sources": [
-        "amam0610",
-        "AdamStaya"
-      ],
-      "url": "https://betboom.ru/freestream/adam"
-    },
     "aunkere": {
       "confirmed_finished_at": "2026-07-15T00:58:18.001541+00:00",
       "confirmed_finished_by": "7178093128",
@@ -1017,6 +1045,7 @@
     "25bf8fc5dbbdc5f3213d38f3553b89babaea95425328c427b5fffef1cda3d14e": "2026-07-12T18:21:21.162994+00:00",
     "26ccad6d4c8feb686c73bcffcedf7df7f0d56854d08938cadee5ee2e289915a0": "2026-07-12T15:09:13.354384+00:00",
     "26eac472265da6852012bd99c31f8676f998df594758920d75da8d624f87aa73": "2026-07-14T07:58:38.558929+00:00",
+    "2c329e6623cd47750efba23ab749c03b05ac2b186992fcd0d94146990eb7a3ad": "2026-07-15T18:43:58.424954+00:00",
     "2dfb1c4bb70cbefb8bb9c5f399144c79b8b4c2aae3159c140fac8dd9a0ab820d": "2026-07-12T18:21:22.495389+00:00",
     "2f52fc4a44639bbb464c4ca1062cf5ad5096f8bbee6ff393eb58964b78fed703": "2026-07-12T17:14:34.959937+00:00",
     "31b6f832ef9a7936f0f42b3d244f67fe056122171dba41c0aa4fe0a6e4dfe7c6": "2026-07-15T14:58:34.803315+00:00",
@@ -1132,9 +1161,9 @@
       "url": "https://betboom.ru/freestream/acool6"
     },
     "adam": {
-      "alerted_at": "2026-07-14T18:32:15.194066+00:00",
+      "alerted_at": "2026-07-15T18:43:58.424701+00:00",
       "identifier": "adam",
-      "suppress_until": "2026-07-15T18:32:15.194066+00:00",
+      "suppress_until": "2026-07-16T18:43:58.424701+00:00",
       "url": "https://betboom.ru/freestream/adam"
     },
     "adekvat02": {
@@ -1380,6 +1409,16 @@
     }
   },
   "wheel_publications": {
+    "adam": [
+      {
+        "has_future_availability": false,
+        "has_future_deadline": false,
+        "message_date": "2026-07-15T18:43:34+00:00",
+        "message_id": 8003,
+        "message_url": "https://telegram.me/AdamStaya/8003",
+        "source": "AdamStaya"
+      }
+    ],
     "adekvat02": [
       {
         "has_future_availability": false,
