@@ -7,7 +7,7 @@
       "expires_at": "2026-07-15T20:46:49+00:00",
       "first_notified_at": "2026-07-15T11:18:42.541588+00:00",
       "identifier": "bolt",
-      "last_checked_at": "2026-07-15T15:04:33.217874+00:00",
+      "last_checked_at": "2026-07-15T15:13:34.120964+00:00",
       "last_notification_at": "2026-07-15T11:18:42.541801+00:00",
       "message_date": "2026-07-14T10:44:26+00:00",
       "message_id": 6356,
@@ -33,7 +33,7 @@
       "expires_at": "2026-07-15T20:45:21.560624+00:00",
       "first_notified_at": "2026-07-15T11:18:42.831939+00:00",
       "identifier": "neret",
-      "last_checked_at": "2026-07-15T15:04:33.217874+00:00",
+      "last_checked_at": "2026-07-15T15:13:34.120964+00:00",
       "last_notification_at": "2026-07-15T14:44:08.658542+00:00",
       "message_date": "2026-07-14T11:32:44+00:00",
       "message_id": 3909,
@@ -59,7 +59,7 @@
       "expires_at": "2026-07-15T19:41:42+00:00",
       "first_notified_at": "2026-07-15T14:58:34.802943+00:00",
       "identifier": "papa",
-      "last_checked_at": "2026-07-15T15:04:33.217874+00:00",
+      "last_checked_at": "2026-07-15T15:13:34.120964+00:00",
       "last_notification_at": "2026-07-15T14:58:34.803265+00:00",
       "message_date": "2026-07-14T11:14:52+00:00",
       "message_id": 12118,
@@ -78,13 +78,36 @@
       "status": "unknown",
       "url": "https://betboom.ru/freestream/papa"
     },
+    "stray": {
+      "button_token": "502f56d7dd86b6",
+      "expires_at": "2026-07-22T15:13:39.498955+00:00",
+      "first_notified_at": "2026-07-15T15:13:39.498658+00:00",
+      "identifier": "stray",
+      "last_checked_at": "2026-07-15T15:13:39.498952+00:00",
+      "last_notification_at": "2026-07-15T15:13:39.498915+00:00",
+      "message_date": "2026-07-15T15:11:03+00:00",
+      "message_id": 115,
+      "message_text": "https://betboom.ru/freestream/stray\nhttps://telegram.me/kolesaBB\nhttps://telegram.me/kolesaBB/115",
+      "message_url": "https://telegram.me/kolesaBB/115",
+      "method": "свежий Telegram-пост; страница открылась, но активность не подтверждена",
+      "needs_manual_time": true,
+      "page_excerpt": "",
+      "page_status": "fresh_unconfirmed",
+      "participating": false,
+      "source": "kolesaBB",
+      "sources": [
+        "kolesaBB"
+      ],
+      "status": "manual_time_required",
+      "url": "https://betboom.ru/freestream/stray"
+    },
     "zonertg6": {
       "button_token": "1eaab6cb41f445",
       "deadline": "2026-07-15T20:48:46+00:00",
       "expires_at": "2026-07-15T21:18:46+00:00",
       "first_notified_at": "2026-07-15T10:51:33.022211+00:00",
       "identifier": "zonertg6",
-      "last_checked_at": "2026-07-15T15:04:33.217874+00:00",
+      "last_checked_at": "2026-07-15T15:13:34.120964+00:00",
       "last_notification_at": "2026-07-15T10:51:33.022390+00:00",
       "message_date": "2026-07-15T10:48:46+00:00",
       "message_id": 35609,
@@ -335,6 +358,21 @@
       "status": "final_reminder",
       "url": "https://betboom.ru/freestream/smurf5",
       "wheel_key": "smurf5"
+    },
+    "502f56d7dd86b6": {
+      "created_at": "2026-07-15T15:13:38.260831+00:00",
+      "identifier": "stray",
+      "message_date": "2026-07-15T15:11:03+00:00",
+      "message_id": 115,
+      "message_text": "https://betboom.ru/freestream/stray\nhttps://telegram.me/kolesaBB\nhttps://telegram.me/kolesaBB/115",
+      "message_url": "https://telegram.me/kolesaBB/115",
+      "method": "свежий Telegram-пост; страница открылась, но активность не подтверждена",
+      "page_excerpt": "Букмекерская контора BetBoom - ставки на спорт онлайн в России!",
+      "post_key": "502f56d7dd86b647bde13e27bb9f4b64260450db69c7646111614745e38882a9",
+      "source": "kolesaBB",
+      "status": "preliminary",
+      "url": "https://betboom.ru/freestream/stray",
+      "wheel_key": "stray"
     },
     "7022b42822c37f": {
       "created_at": "2026-07-14T15:21:22.253951+00:00",
@@ -877,6 +915,7 @@
     "49dc112f65219efb04e4098a80157a8aa5056896c7f789be692f7f1f75c3e024": "2026-07-15T11:42:46.258333+00:00",
     "4af8ad666dd040236b72e64aaefbec1d2721a3335a5a5e9fecc7e41690efd56a": "2026-07-12T19:22:25.149620+00:00",
     "4e74a82d0b15f65d66f158d885ae29cbbbd333d026bec12b958ba88925e8ffd2": "2026-07-12T18:21:24.635788+00:00",
+    "502f56d7dd86b647bde13e27bb9f4b64260450db69c7646111614745e38882a9": "2026-07-15T15:13:39.498960+00:00",
     "55e0214f74e007a47174b82f0afc8ffde5718c708858cedf49ade4d6571c4aea": "2026-07-12T15:09:13.354381+00:00",
     "58975ded89719d5d83dde9028c689bb7dfa0bd48c7c2d5051df15423b1ce2327": "2026-07-12T18:21:20.530985+00:00",
     "58ff2284b470bfbd26d63736eae2468711b2e32a309d0813028bea35429e61fd": "2026-07-12T15:09:46.050564+00:00",
@@ -1123,6 +1162,12 @@
       "suppress_until": "2026-07-15T19:07:19.244131+00:00",
       "url": "https://betboom.ru/freestream/staya"
     },
+    "stray": {
+      "alerted_at": "2026-07-15T15:13:39.498742+00:00",
+      "identifier": "stray",
+      "suppress_until": "2026-07-16T15:13:39.498742+00:00",
+      "url": "https://betboom.ru/freestream/stray"
+    },
     "zonertg1": {
       "alerted_at": "2026-07-12T18:21:17.104937+00:00",
       "identifier": "zonertg1",
@@ -1220,6 +1265,16 @@
         "message_id": 12144,
         "message_url": "https://telegram.me/PAPAdota2/12144",
         "source": "PAPAdota2"
+      }
+    ],
+    "stray": [
+      {
+        "has_future_availability": false,
+        "has_future_deadline": false,
+        "message_date": "2026-07-15T15:11:03+00:00",
+        "message_id": 115,
+        "message_url": "https://telegram.me/kolesaBB/115",
+        "source": "kolesaBB"
       }
     ],
     "zonertg6": [
