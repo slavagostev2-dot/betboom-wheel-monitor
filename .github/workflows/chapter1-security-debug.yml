@@ -1,0 +1,56 @@
+name: Chapter 1 security diagnostics
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      BOT_TOKEN: "test-bot-token"
+      BOT_STATE_KEY: "test-state-key"
+      BOT_CHAT_ID: "1"
+      ADMIN_USER_ID: "1"
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: python -m pip install -r requirements.txt
+      - name: Compile new modules
+        run: python -m py_compile bot_private_state.py privacy_retention.py security_audit.py migrate_bot_private_state.py notification_preferences_v2.py admin_panel_runtime_v33.py bbvg_monitor_main.py
+      - name: AES-GCM state test
+        run: python bot_private_state.py
+      - name: Retention test
+        run: python privacy_retention.py
+      - name: Audit self-test
+        run: python security_audit.py --self-test
+      - name: Current tree audit
+        run: python security_audit.py --current
+      - name: History audit
+        run: python security_audit.py --history --history-output security_history_report.json
+      - name: Migration test
+        run: python migrate_bot_private_state.py --check
+      - name: Reminder routing test
+        run: python notification_preferences_v2.py
+      - name: Panel v33 test
+        run: python admin_panel_runtime_v33.py --self-test
+      - name: Monitor integration test
+        run: |
+          python - <<'PY'
+          import bbvg_monitor_main
+          import notification_router
+          assert notification_router._bbvg_notification_preferences_v2_installed is True
+          assert notification_router.notification_kind("Время прокрутки колеса наступило") == "wheel_draw_alerts"
+          assert notification_router.notification_kind("Напоминание о колесе BetBoom: последний шанс") == "wheel_final_reminders"
+          print("monitor integration passed")
+          PY
