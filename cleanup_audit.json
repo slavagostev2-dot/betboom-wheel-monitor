@@ -71,7 +71,7 @@
   ],
   "current_runtime": "admin_panel_runtime_v41",
   "runtime_chain_count": 28,
-  "runtime_file_count": 32,
+  "runtime_file_count": 31,
   "runtime_files": [
     {
       "classes": [
@@ -244,35 +244,6 @@
       "references": [
         "admin_panel_runtime_v2.py",
         "admin_panel_runtime_v3.py",
-        "docs/RUNTIME_METHOD_INVENTORY_RU.md"
-      ],
-      "top_level_functions": [
-        "main",
-        "self_test"
-      ]
-    },
-    {
-      "classes": [
-        {
-          "bases": [
-            "WheelInteractionRuntime"
-          ],
-          "class_attributes": [],
-          "method_count": 0,
-          "methods": [],
-          "name": "TelegramPanelRuntimeV20"
-        }
-      ],
-      "direct_imports": [
-        "bbvg.bot.wheels"
-      ],
-      "in_current_import_chain": false,
-      "line_count": 33,
-      "module": "admin_panel_runtime_v20",
-      "path": "admin_panel_runtime_v20.py",
-      "reference_count": 2,
-      "references": [
-        "admin_panel_runtime_v20.py",
         "docs/RUNTIME_METHOD_INVENTORY_RU.md"
       ],
       "top_level_functions": [
@@ -3678,7 +3649,7 @@
       "admin_panel_runtime_v37"
     ]
   },
-  "runtime_total_lines": 7850,
+  "runtime_total_lines": 7817,
   "runtime_unique_method_count": 119,
   "unreferenced_python_candidates": []
 }
