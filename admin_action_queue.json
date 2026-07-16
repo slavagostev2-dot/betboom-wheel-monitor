@@ -96,6 +96,12 @@
       "sequence": 25,
       "value": "neret|admin"
     },
+    "57287a9cd8fe4862b7d06068be830b3b": {
+      "action": "participate_wheel",
+      "created_at": "2026-07-16T12:55:42.060997+00:00",
+      "sequence": 40,
+      "value": "solotg"
+    },
     "5f86a89e1d674ba49e4aeeac81a88417": {
       "action": "participate_wheel",
       "created_at": "2026-07-16T08:22:56.597978+00:00",
@@ -236,5 +242,5 @@
     }
   },
   "format": "bbvg-admin-action-queue-v1",
-  "sequence": 39
+  "sequence": 40
 }
