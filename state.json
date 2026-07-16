@@ -8,7 +8,7 @@
       "expires_at": "2026-07-16T20:52:11+00:00",
       "first_notified_at": "2026-07-16T11:23:57.495602+00:00",
       "identifier": "cct1",
-      "last_checked_at": "2026-07-16T13:49:27.123242+00:00",
+      "last_checked_at": "2026-07-16T13:52:28.726069+00:00",
       "last_notification_at": "2026-07-16T11:23:57.495863+00:00",
       "lifecycle_changed_at": "2026-07-16T11:29:53.990097+00:00",
       "lifecycle_state": "participating",
@@ -21,7 +21,7 @@
       "page_excerpt": "",
       "page_status": "telegram_deadline",
       "participating": true,
-      "participating_at": "2026-07-16T11:29:53.990033+00:00",
+      "participating_at": "2026-07-16T13:52:28.722509+00:00",
       "source": "jestercast",
       "sources": [
         "jestercast"
@@ -37,7 +37,7 @@
       "expires_at": "2026-07-16T21:16:03.370092+00:00",
       "first_notified_at": "2026-07-16T11:48:04.224568+00:00",
       "identifier": "papa",
-      "last_checked_at": "2026-07-16T13:49:27.123242+00:00",
+      "last_checked_at": "2026-07-16T13:52:28.726069+00:00",
       "last_notification_at": "2026-07-16T11:48:04.224842+00:00",
       "lifecycle_changed_at": "2026-07-16T11:53:59.896800+00:00",
       "lifecycle_state": "participating",
@@ -58,29 +58,6 @@
       "status": "unknown",
       "url": "https://betboom.ru/freestream/papa"
     },
-    "stray": {
-      "button_token": "80eabf6c72c016",
-      "expires_at": "2026-07-23T13:49:35.195758+00:00",
-      "first_notified_at": "2026-07-16T13:49:35.195425+00:00",
-      "identifier": "stray",
-      "last_checked_at": "2026-07-16T13:49:35.195755+00:00",
-      "last_notification_at": "2026-07-16T13:49:35.195714+00:00",
-      "message_date": "2026-07-16T13:47:29+00:00",
-      "message_id": 122,
-      "message_text": "https://betboom.ru/freestream/stray\nhttps://telegram.me/kolesaBB\nhttps://telegram.me/kolesaBB/122",
-      "message_url": "https://telegram.me/kolesaBB/122",
-      "method": "свежий Telegram-пост; страница открылась, но активность не подтверждена",
-      "needs_manual_time": true,
-      "page_excerpt": "",
-      "page_status": "fresh_unconfirmed",
-      "participating": false,
-      "source": "kolesaBB",
-      "sources": [
-        "kolesaBB"
-      ],
-      "status": "manual_time_required",
-      "url": "https://betboom.ru/freestream/stray"
-    },
     "zonertg7": {
       "button_token": "e3eaa268624918",
       "deadline": "2026-07-16T18:02:41+00:00",
@@ -88,7 +65,7 @@
       "expires_at": "2026-07-16T18:32:41+00:00",
       "first_notified_at": "2026-07-16T08:05:01.877690+00:00",
       "identifier": "zonertg7",
-      "last_checked_at": "2026-07-16T13:49:27.123242+00:00",
+      "last_checked_at": "2026-07-16T13:52:28.726069+00:00",
       "last_notification_at": "2026-07-16T08:05:01.877983+00:00",
       "lifecycle_changed_at": "2026-07-16T08:23:00.968486+00:00",
       "lifecycle_state": "participating",
@@ -241,6 +218,14 @@
       "stats_changed": false,
       "status": "applied"
     },
+    "566a2d2f8df04d17bdddd91656b4064f": {
+      "action": "participate_wheel",
+      "applied_at": "2026-07-16T13:52:28.722436+00:00",
+      "health_changed": false,
+      "state_changed": true,
+      "stats_changed": true,
+      "status": "applied"
+    },
     "57287a9cd8fe4862b7d06068be830b3b": {
       "action": "participate_wheel",
       "applied_at": "2026-07-16T12:57:17.326165+00:00",
@@ -385,12 +370,28 @@
       "stats_changed": false,
       "status": "applied"
     },
+    "bd8a81dbb9d14a34a62c0ca7a9f4000a": {
+      "action": "set_deadline",
+      "applied_at": "2026-07-16T13:52:28.721727+00:00",
+      "health_changed": false,
+      "state_changed": true,
+      "stats_changed": false,
+      "status": "applied"
+    },
     "c1fb664742804f8b99ded10887499baf": {
       "action": "mark_inactive_global",
       "applied_at": "2026-07-15T16:56:12.212580+00:00",
       "health_changed": false,
       "state_changed": true,
       "stats_changed": true,
+      "status": "applied"
+    },
+    "c50fdc0da08c4a55b333a0bce21faf51": {
+      "action": "participate_wheel",
+      "applied_at": "2026-07-16T13:52:28.722743+00:00",
+      "health_changed": false,
+      "state_changed": true,
+      "stats_changed": false,
       "status": "applied"
     },
     "d09a0997121b4fbe855806e47bb6c65b": {
@@ -459,6 +460,7 @@
     "4d65f201a8354384aa7e960ac0f46930": "2026-07-16T02:10:15.910247+00:00",
     "4e745c4eb6104dadbb3750df90452a3d": "2026-07-15T11:45:41.562278+00:00",
     "51968ee3fad44a81b4ae1de521d8bf78": "2026-07-16T02:13:17.424579+00:00",
+    "566a2d2f8df04d17bdddd91656b4064f": "2026-07-16T13:52:28.722436+00:00",
     "57287a9cd8fe4862b7d06068be830b3b": "2026-07-16T12:57:17.326165+00:00",
     "5f86a89e1d674ba49e4aeeac81a88417": "2026-07-16T08:23:00.969096+00:00",
     "676e68422d844063a3b26d085ff358bc": "2026-07-16T02:13:17.424376+00:00",
@@ -477,7 +479,9 @@
     "b00550e0991e401b82b02d266ebe198c": "2026-07-16T02:13:17.424571+00:00",
     "b6c86f537c2f44d79166ee4d2c030c5d": "2026-07-16T12:42:11.105435+00:00",
     "bd8a55feb26643a68b7cb2645f922bc4": "2026-07-15T15:01:31.513457+00:00",
+    "bd8a81dbb9d14a34a62c0ca7a9f4000a": "2026-07-16T13:52:28.721727+00:00",
     "c1fb664742804f8b99ded10887499baf": "2026-07-15T16:56:12.212580+00:00",
+    "c50fdc0da08c4a55b333a0bce21faf51": "2026-07-16T13:52:28.722743+00:00",
     "d09a0997121b4fbe855806e47bb6c65b": "2026-07-16T11:53:59.897280+00:00",
     "d8bc0e2c353f433b95598f10dadfa6a5": "2026-07-15T15:01:31.513879+00:00",
     "d9913d2bd2bd401383e5450fe69c3a85": "2026-07-16T03:10:03.406848+00:00",
@@ -531,36 +535,6 @@
       "status": "final_reminder",
       "url": "https://betboom.ru/freestream/smurf5",
       "wheel_key": "smurf5"
-    },
-    "502f56d7dd86b6": {
-      "created_at": "2026-07-15T15:16:35.579613+00:00",
-      "identifier": "stray",
-      "message_date": "2026-07-15T15:11:03+00:00",
-      "message_id": 115,
-      "message_text": "https://betboom.ru/freestream/stray\nhttps://telegram.me/kolesaBB\nhttps://telegram.me/kolesaBB/115",
-      "message_url": "https://telegram.me/kolesaBB/115",
-      "method": "время вручную указано администратором BB V.G.",
-      "page_excerpt": "",
-      "post_key": "502f56d7dd86b647bde13e27bb9f4b64260450db69c7646111614745e38882a9",
-      "source": "kolesaBB",
-      "status": "final_reminder",
-      "url": "https://betboom.ru/freestream/stray",
-      "wheel_key": "stray"
-    },
-    "80eabf6c72c016": {
-      "created_at": "2026-07-16T13:49:32.995380+00:00",
-      "identifier": "stray",
-      "message_date": "2026-07-16T13:47:29+00:00",
-      "message_id": 122,
-      "message_text": "https://betboom.ru/freestream/stray\nhttps://telegram.me/kolesaBB\nhttps://telegram.me/kolesaBB/122",
-      "message_url": "https://telegram.me/kolesaBB/122",
-      "method": "свежий Telegram-пост; страница открылась, но активность не подтверждена",
-      "page_excerpt": "Букмекерская контора BetBoom - ставки на спорт онлайн в России!",
-      "post_key": "80eabf6c72c016b3f1b732bb32046189d676ba29988194958bb4062932dff621",
-      "source": "kolesaBB",
-      "status": "preliminary",
-      "url": "https://betboom.ru/freestream/stray",
-      "wheel_key": "stray"
     },
     "9923e7f98f5456": {
       "created_at": "2026-07-14T20:07:18.780290+00:00",
@@ -834,7 +808,7 @@
     "whylollycrry",
     "zortelad"
   ],
-  "last_admin_action_applied_at": "2026-07-16T13:15:21.569295+00:00",
+  "last_admin_action_applied_at": "2026-07-16T13:52:28.722760+00:00",
   "last_automatic_status_at": "2026-07-16T06:31:45.207974+00:00",
   "last_heartbeat_at": "2026-07-16T09:02:37.136616+00:00",
   "last_run_kind": "schedule",
@@ -903,6 +877,13 @@
   "manual_overrides": {},
   "notification_key_version": 8,
   "participating_wheels": {
+    "cct1": {
+      "deadline": "2026-07-14T19:58:17+00:00",
+      "expires_at": "2026-07-16T15:52:28.722509+00:00",
+      "identifier": "cct1",
+      "marked_at": "2026-07-16T13:52:28.722469+00:00",
+      "url": "https://betboom.ru/freestream/cct1"
+    },
     "papa": {
       "deadline": "2026-07-16T19:46:33+00:00",
       "expires_at": "2026-07-16T20:16:33+00:00",
@@ -1067,6 +1048,19 @@
         "kolesaBB"
       ],
       "url": "https://betboom.ru/freestream/staya"
+    },
+    "stray": {
+      "completion_reason": "deadline_reached",
+      "deadline": "2026-07-16T13:51:53.955256+00:00",
+      "event_id": "6304043a2db838c667bf",
+      "expires_at": "2026-07-17T13:52:28.726161+00:00",
+      "identifier": "stray",
+      "lifecycle_state": "finished",
+      "removed_at": "2026-07-16T13:52:28.726161+00:00",
+      "sources": [
+        "kolesaBB"
+      ],
+      "url": "https://betboom.ru/freestream/stray"
     },
     "zonertg6": {
       "completion_reason": "deadline_reached",
@@ -1574,6 +1568,15 @@
       "state": "finished",
       "wheel_key": "risen"
     },
+    "6304043a2db838c667bf": {
+      "changed_at": "2026-07-16T13:52:28.726161+00:00",
+      "event_id": "6304043a2db838c667bf",
+      "identifier": "stray",
+      "message_date": "2026-07-15T15:11:03+00:00",
+      "reason": "deadline_reached",
+      "state": "finished",
+      "wheel_key": "stray"
+    },
     "93d3d96c29b72f82a239": {
       "changed_at": "2026-07-16T02:13:17.424309+00:00",
       "event_id": "93d3d96c29b72f82a239",
@@ -1682,16 +1685,6 @@
         "message_id": 12166,
         "message_url": "https://telegram.me/PAPAdota2/12166",
         "source": "PAPAdota2"
-      }
-    ],
-    "stray": [
-      {
-        "has_future_availability": false,
-        "has_future_deadline": false,
-        "message_date": "2026-07-16T13:47:29+00:00",
-        "message_id": 122,
-        "message_url": "https://telegram.me/kolesaBB/122",
-        "source": "kolesaBB"
       }
     ],
     "zonertg7": [
