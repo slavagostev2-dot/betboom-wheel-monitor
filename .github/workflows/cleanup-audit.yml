@@ -1,0 +1,38 @@
+name: BB V.G. cleanup audit
+
+on:
+  push:
+    branches:
+      - refactor/consolidate-runtime-v42
+    paths:
+      - "tools/cleanup_audit.py"
+      - ".github/workflows/cleanup-audit.yml"
+      - "admin_panel_runtime_v*.py"
+      - "chapter*.py"
+      - "tests/**"
+      - ".github/workflows/**"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: refactor/consolidate-runtime-v42
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Build dependency report
+        run: python tools/cleanup_audit.py
+      - name: Commit report
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add cleanup_audit.json
+          git commit -m "Update cleanup dependency report [skip ci]" || exit 0
+          git push origin HEAD:refactor/consolidate-runtime-v42
