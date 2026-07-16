@@ -65,8 +65,7 @@
         "docs/CODE_INVENTORY_RU.md",
         "docs/PROJECT_CHANGELOG_RU.md",
         "docs/REFACTOR_PLAN_RU.md",
-        "monitor_validation_v41.py",
-        "preflight.py"
+        "monitor_validation_v41.py"
       ]
     }
   ],
@@ -160,7 +159,7 @@
       "line_count": 44,
       "module": "admin_panel_runtime_v17",
       "path": "admin_panel_runtime_v17.py",
-      "reference_count": 12,
+      "reference_count": 11,
       "references": [
         "admin_panel_runtime_v17.py",
         "admin_panel_runtime_v19.py",
@@ -171,7 +170,6 @@
         "admin_panel_runtime_v33.py",
         "admin_panel_runtime_v34.py",
         "docs/RUNTIME_METHOD_INVENTORY_RU.md",
-        "preflight.py",
         "system_checks.py",
         "tests/test_nightly_idle_policy.py"
       ],
@@ -272,11 +270,10 @@
       "line_count": 33,
       "module": "admin_panel_runtime_v20",
       "path": "admin_panel_runtime_v20.py",
-      "reference_count": 3,
+      "reference_count": 2,
       "references": [
         "admin_panel_runtime_v20.py",
-        "docs/RUNTIME_METHOD_INVENTORY_RU.md",
-        "preflight.py"
+        "docs/RUNTIME_METHOD_INVENTORY_RU.md"
       ],
       "top_level_functions": [
         "main",
@@ -302,7 +299,7 @@
       "line_count": 35,
       "module": "admin_panel_runtime_v21",
       "path": "admin_panel_runtime_v21.py",
-      "reference_count": 10,
+      "reference_count": 9,
       "references": [
         "admin_panel_runtime_v21.py",
         "admin_panel_runtime_v22.py",
@@ -312,7 +309,6 @@
         "admin_panel_runtime_v34.py",
         "admin_panel_runtime_v37.py",
         "docs/RUNTIME_METHOD_INVENTORY_RU.md",
-        "preflight.py",
         "system_checks.py"
       ],
       "top_level_functions": [
