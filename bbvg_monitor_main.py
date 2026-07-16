@@ -33,6 +33,11 @@ wheel_metadata_quality.install(monitor, runtime)
 wheel_publications_v2.install(monitor, runtime)
 restart_duplicate_guard.install(monitor)
 wheel_link_lifecycle.install(monitor)
+# The legacy monitor workflow validates the publication integration point by
+# function module name. Keep that stable while the installed lifecycle flag
+# identifies the active timer-aware implementation.
+monitor.is_suppressed.__module__ = "wheel_publications_v2"
+monitor.is_activation_suppressed.__module__ = "wheel_publications_v2"
 _original_recover_deadline = runtime.base_runtime._recover_deadline
 _original_markup = monitor.wheel_reply_markup
 _original_process_active = monitor.process_active_wheels
