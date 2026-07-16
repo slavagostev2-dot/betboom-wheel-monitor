@@ -24,29 +24,42 @@ jobs:
           from pathlib import Path
 
           path = Path('.github/workflows/admin-bot.yml')
-          text = path.read_text(encoding='utf-8')
-          replacements = {
-              'admin_panel_runtime_v27.py admin_panel_runtime_v28.py':
-                  'admin_panel_runtime_v28.py',
-              'admin_panel_runtime_v33.py admin_panel_runtime_v34.py admin_panel_runtime_v35.py \\\n':
-                  '',
-              '          python admin_panel_runtime_v33.py --self-test\n':
-                  '',
-              '          python admin_panel_runtime_v35.py --self-test\n':
-                  '',
-              '          python admin_action_queue.py\n':
-                  '          python admin_action_queue.py\n          python -m bbvg.bot.storage\n          python -m bbvg.bot.users\n',
-              '          from admin_panel_runtime_v34 import TelegramPanelRuntimeV34\n':
-                  '          from bbvg.bot.users import UserSettingsMixin\n',
-              '          handler = inspect.getsource(TelegramPanelRuntimeV34.handle_callback)\n':
-                  '          handler = inspect.getsource(UserSettingsMixin.handle_callback)\n',
-          }
-          for old, new in replacements.items():
-              count = text.count(old)
-              if count != 1:
-                  raise SystemExit(f'Expected one occurrence of {old!r}, found {count}')
-              text = text.replace(old, new)
-          path.write_text(text, encoding='utf-8')
+          original = path.read_text(encoding='utf-8')
+          output = []
+          inserted_modules = False
+          for line in original.splitlines(keepends=True):
+              stripped = line.strip()
+              if stripped in {
+                  'python admin_panel_runtime_v33.py --self-test',
+                  'python admin_panel_runtime_v35.py --self-test',
+              }:
+                  continue
+              for name in (
+                  'admin_panel_runtime_v27.py ',
+                  'admin_panel_runtime_v33.py ',
+                  'admin_panel_runtime_v34.py ',
+                  'admin_panel_runtime_v35.py ',
+              ):
+                  line = line.replace(name, '')
+              line = line.replace(
+                  'from admin_panel_runtime_v34 import TelegramPanelRuntimeV34',
+                  'from bbvg.bot.users import UserSettingsMixin',
+              )
+              line = line.replace(
+                  'handler = inspect.getsource(TelegramPanelRuntimeV34.handle_callback)',
+                  'handler = inspect.getsource(UserSettingsMixin.handle_callback)',
+              )
+              output.append(line)
+              if stripped == 'python admin_action_queue.py':
+                  output.append('          python -m bbvg.bot.storage\n')
+                  output.append('          python -m bbvg.bot.users\n')
+                  inserted_modules = True
+          updated = ''.join(output)
+          if not inserted_modules:
+              raise SystemExit('admin_action_queue self-test anchor not found')
+          if updated == original:
+              raise SystemExit('admin-bot.yml was not changed')
+          path.write_text(updated, encoding='utf-8')
           PY
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
