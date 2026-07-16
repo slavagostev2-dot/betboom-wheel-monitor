@@ -71,7 +71,7 @@
     }
   ],
   "current_runtime": "admin_panel_runtime_v41",
-  "runtime_chain_count": 31,
+  "runtime_chain_count": 30,
   "runtime_file_count": 34,
   "runtime_files": [
     {
@@ -122,14 +122,13 @@
       "direct_imports": [
         "bbvg.bot.interface"
       ],
-      "in_current_import_chain": true,
+      "in_current_import_chain": false,
       "line_count": 29,
       "module": "admin_panel_runtime_v16",
       "path": "admin_panel_runtime_v16.py",
-      "reference_count": 3,
+      "reference_count": 2,
       "references": [
         "admin_panel_runtime_v16.py",
-        "admin_panel_runtime_v17.py",
         "docs/RUNTIME_METHOD_INVENTORY_RU.md"
       ],
       "top_level_functions": [
@@ -141,153 +140,19 @@
       "classes": [
         {
           "bases": [
-            "TelegramPanelRuntimeV16"
+            "SourceRequestRuntime"
           ],
           "class_attributes": [],
-          "method_count": 16,
-          "methods": [
-            {
-              "async": false,
-              "decorators": [],
-              "end_line": 33,
-              "line_count": 3,
-              "name": "__init__",
-              "start_line": 31
-            },
-            {
-              "async": false,
-              "decorators": [],
-              "end_line": 45,
-              "line_count": 11,
-              "name": "bot_username",
-              "start_line": 35
-            },
-            {
-              "async": false,
-              "decorators": [],
-              "end_line": 57,
-              "line_count": 11,
-              "name": "miniapp_url_for_chat",
-              "start_line": 47
-            },
-            {
-              "async": false,
-              "decorators": [],
-              "end_line": 68,
-              "line_count": 10,
-              "name": "show_app_entry",
-              "start_line": 59
-            },
-            {
-              "async": false,
-              "decorators": [],
-              "end_line": 80,
-              "line_count": 11,
-              "name": "load_source_requests",
-              "start_line": 70
-            },
-            {
-              "async": false,
-              "decorators": [],
-              "end_line": 84,
-              "line_count": 3,
-              "name": "save_source_requests",
-              "start_line": 82
-            },
-            {
-              "async": false,
-              "decorators": [],
-              "end_line": 102,
-              "line_count": 17,
-              "name": "moderator_chat_ids",
-              "start_line": 86
-            },
-            {
-              "async": false,
-              "decorators": [],
-              "end_line": 105,
-              "line_count": 2,
-              "name": "can_moderate_source_requests",
-              "start_line": 104
-            },
-            {
-              "async": false,
-              "decorators": [
-                "staticmethod"
-              ],
-              "end_line": 116,
-              "line_count": 9,
-              "name": "requester_name",
-              "start_line": 108
-            },
-            {
-              "async": false,
-              "decorators": [],
-              "end_line": 162,
-              "line_count": 45,
-              "name": "inspect_source",
-              "start_line": 118
-            },
-            {
-              "async": false,
-              "decorators": [],
-              "end_line": 166,
-              "line_count": 3,
-              "name": "request_id",
-              "start_line": 164
-            },
-            {
-              "async": false,
-              "decorators": [],
-              "end_line": 201,
-              "line_count": 34,
-              "name": "notify_moderators",
-              "start_line": 168
-            },
-            {
-              "async": false,
-              "decorators": [],
-              "end_line": 268,
-              "line_count": 66,
-              "name": "submit_source_request",
-              "start_line": 203
-            },
-            {
-              "async": false,
-              "decorators": [],
-              "end_line": 313,
-              "line_count": 44,
-              "name": "decide_source_request",
-              "start_line": 270
-            },
-            {
-              "async": false,
-              "decorators": [],
-              "end_line": 344,
-              "line_count": 30,
-              "name": "handle_message",
-              "start_line": 315
-            },
-            {
-              "async": false,
-              "decorators": [],
-              "end_line": 379,
-              "line_count": 34,
-              "name": "handle_callback",
-              "start_line": 346
-            }
-          ],
+          "method_count": 0,
+          "methods": [],
           "name": "TelegramPanelRuntimeV17"
         }
       ],
       "direct_imports": [
-        "admin_bot",
-        "admin_panel_runtime_v16",
-        "admin_panel_v2",
-        "telegram_transport"
+        "bbvg.bot.source_requests"
       ],
       "in_current_import_chain": true,
-      "line_count": 403,
+      "line_count": 34,
       "module": "admin_panel_runtime_v17",
       "path": "admin_panel_runtime_v17.py",
       "reference_count": 13,
@@ -307,7 +172,6 @@
         "tests/test_nightly_idle_policy.py"
       ],
       "top_level_functions": [
-        "default_source_requests",
         "main",
         "self_test"
       ]
@@ -3741,7 +3605,6 @@
   ],
   "runtime_method_index": {
     "__init__": [
-      "admin_panel_runtime_v17",
       "admin_panel_runtime_v23",
       "admin_panel_runtime_v25",
       "admin_panel_runtime_v34",
@@ -3884,12 +3747,6 @@
     "begin_source_request": [
       "admin_panel_runtime_v30"
     ],
-    "bot_username": [
-      "admin_panel_runtime_v17"
-    ],
-    "can_moderate_source_requests": [
-      "admin_panel_runtime_v17"
-    ],
     "can_view": [
       "admin_panel_runtime_v8"
     ],
@@ -3912,9 +3769,6 @@
       "admin_panel_runtime_v29",
       "admin_panel_runtime_v31"
     ],
-    "decide_source_request": [
-      "admin_panel_runtime_v17"
-    ],
     "delete_current_user_data": [
       "admin_panel_runtime_v33"
     ],
@@ -3930,7 +3784,6 @@
       "admin_panel_runtime_v6"
     ],
     "handle_callback": [
-      "admin_panel_runtime_v17",
       "admin_panel_runtime_v20",
       "admin_panel_runtime_v21",
       "admin_panel_runtime_v25",
@@ -3949,7 +3802,6 @@
       "admin_panel_runtime_v8"
     ],
     "handle_message": [
-      "admin_panel_runtime_v17",
       "admin_panel_runtime_v20",
       "admin_panel_runtime_v21",
       "admin_panel_runtime_v30",
@@ -3966,9 +3818,6 @@
     ],
     "ignore_candidate": [
       "admin_panel_runtime_v5"
-    ],
-    "inspect_source": [
-      "admin_panel_runtime_v17"
     ],
     "intelligence_label": [
       "admin_panel_runtime_v6"
@@ -3993,7 +3842,6 @@
       "admin_panel_runtime_v22"
     ],
     "load_source_requests": [
-      "admin_panel_runtime_v17",
       "admin_panel_runtime_v23",
       "admin_panel_runtime_v25"
     ],
@@ -4001,14 +3849,10 @@
       "admin_panel_runtime_v20"
     ],
     "miniapp_url_for_chat": [
-      "admin_panel_runtime_v17",
       "admin_panel_runtime_v18",
       "admin_panel_runtime_v19",
       "admin_panel_runtime_v21",
       "admin_panel_runtime_v22"
-    ],
-    "moderator_chat_ids": [
-      "admin_panel_runtime_v17"
     ],
     "normalize_access": [
       "admin_panel_runtime_v3",
@@ -4020,9 +3864,6 @@
       "admin_panel_runtime_v31",
       "admin_panel_runtime_v33",
       "admin_panel_runtime_v37"
-    ],
-    "notify_moderators": [
-      "admin_panel_runtime_v17"
     ],
     "notify_owner_about_new_user": [
       "admin_panel_runtime_v21"
@@ -4075,16 +3916,10 @@
       "admin_panel_runtime_v6",
       "admin_panel_runtime_v9"
     ],
-    "request_id": [
-      "admin_panel_runtime_v17"
-    ],
     "request_manual_time": [
       "admin_panel_runtime_v20",
       "admin_panel_runtime_v37",
       "admin_panel_runtime_v38"
-    ],
-    "requester_name": [
-      "admin_panel_runtime_v17"
     ],
     "restore_candidate": [
       "admin_panel_runtime_v5"
@@ -4103,7 +3938,6 @@
       "admin_panel_runtime_v5"
     ],
     "save_source_requests": [
-      "admin_panel_runtime_v17",
       "admin_panel_runtime_v23",
       "admin_panel_runtime_v25"
     ],
@@ -4166,7 +4000,6 @@
       "admin_panel_runtime_v38"
     ],
     "show_app_entry": [
-      "admin_panel_runtime_v17",
       "admin_panel_runtime_v19",
       "admin_panel_runtime_v9"
     ],
@@ -4292,9 +4125,6 @@
     "source_registry_fallback": [
       "admin_panel_runtime_v22"
     ],
-    "submit_source_request": [
-      "admin_panel_runtime_v17"
-    ],
     "summary_send_rows": [
       "admin_panel_runtime_v31"
     ],
@@ -4313,7 +4143,7 @@
       "admin_panel_runtime_v37"
     ]
   },
-  "runtime_total_lines": 9273,
-  "runtime_unique_method_count": 137,
+  "runtime_total_lines": 8904,
+  "runtime_unique_method_count": 128,
   "unreferenced_python_candidates": []
 }
