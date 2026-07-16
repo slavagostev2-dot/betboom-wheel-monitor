@@ -1,11 +1,11 @@
 # BB V.G. — карта методов исторического runtime панели
 
 Файл генерируется автоматически из AST и фактической MRO текущего runtime.
-Исходный коммит аудита: `e9746cf43d1a6acbaacf01f25ec65fcd7be8fbb9`.
+Исходный коммит аудита: `1741246cc8718b2016f1c811e76205c95df9ff94`.
 
 - Runtime-файлов: **23**
 - В текущей цепочке: **23**
-- Суммарно строк: **6040**
+- Суммарно строк: **6035**
 - Уникальных имён методов: **100**
 
 ## Фактическая MRO текущей панели
@@ -27,22 +27,21 @@
 15. `bbvg.bot.users.UserManagementRuntime`
 16. `bbvg.bot.wheels.WheelInteractionRuntime`
 17. `admin_panel_runtime_v19.TelegramPanelRuntimeV19`
-18. `admin_panel_runtime_v17.TelegramPanelRuntimeV17`
-19. `bbvg.bot.source_requests.SourceRequestRuntime`
-20. `bbvg.bot.interface.PanelInterfaceRuntime`
-21. `admin_panel_runtime_v13.TelegramPanelRuntimeV13`
-22. `bbvg.bot.foundation.PanelFoundationMixin`
-23. `admin_panel_runtime_v9.TelegramPanelRuntimeV9`
-24. `admin_panel_runtime_v8.TelegramPanelRuntimeV8`
-25. `admin_panel_runtime_v7.TelegramPanelRuntimeV7`
-26. `admin_panel_runtime_v6.TelegramPanelRuntimeV6`
-27. `admin_panel_runtime_v5.TelegramPanelRuntimeV5`
-28. `admin_panel_runtime_v4.TelegramPanelRuntimeV4`
-29. `admin_panel_runtime_v3.TelegramPanelRuntimeV3`
-30. `admin_panel_runtime_v2.TelegramPanelRuntimeV2`
-31. `admin_panel_v2.TelegramPanelV2`
-32. `admin_runtime.RuntimeAdminBot`
-33. `admin_bot.AdminBot`
+18. `bbvg.bot.source_requests.SourceRequestRuntime`
+19. `bbvg.bot.interface.PanelInterfaceRuntime`
+20. `admin_panel_runtime_v13.TelegramPanelRuntimeV13`
+21. `bbvg.bot.foundation.PanelFoundationMixin`
+22. `admin_panel_runtime_v9.TelegramPanelRuntimeV9`
+23. `admin_panel_runtime_v8.TelegramPanelRuntimeV8`
+24. `admin_panel_runtime_v7.TelegramPanelRuntimeV7`
+25. `admin_panel_runtime_v6.TelegramPanelRuntimeV6`
+26. `admin_panel_runtime_v5.TelegramPanelRuntimeV5`
+27. `admin_panel_runtime_v4.TelegramPanelRuntimeV4`
+28. `admin_panel_runtime_v3.TelegramPanelRuntimeV3`
+29. `admin_panel_runtime_v2.TelegramPanelRuntimeV2`
+30. `admin_panel_v2.TelegramPanelV2`
+31. `admin_runtime.RuntimeAdminBot`
+32. `admin_bot.AdminBot`
 
 ## Владельцы фактически действующих методов
 
@@ -108,13 +107,9 @@
 
 `_delete_callback_message()`, `_hidden_wheels()`, `_joined_wheel_keys()`, `_personal_participating_wheels()`, `hide_wheel_for_current_user()`, `mark_personal_participation()`
 
-### `admin_panel_runtime_v17.TelegramPanelRuntimeV17` — 1 методов
+### `bbvg.bot.source_requests.SourceRequestRuntime` — 9 методов
 
-`bot_username()`
-
-### `bbvg.bot.source_requests.SourceRequestRuntime` — 8 методов
-
-`can_moderate_source_requests()`, `decide_source_request()`, `inspect_source()`, `moderator_chat_ids()`, `notify_moderators()`, `request_id()`, `requester_name()`, `submit_source_request()`
+`bot_username()`, `can_moderate_source_requests()`, `decide_source_request()`, `inspect_source()`, `moderator_chat_ids()`, `notify_moderators()`, `request_id()`, `requester_name()`, `submit_source_request()`
 
 ### `bbvg.bot.interface.PanelInterfaceRuntime` — 11 методов
 
@@ -162,13 +157,11 @@
 
 - собственных методов нет
 
-### `admin_panel_runtime_v17.py` — 44 строк, в рабочей цепочке
+### `admin_panel_runtime_v17.py` — 39 строк, в рабочей цепочке
 
 Прямые импорты: `bbvg.bot.foundation`, `bbvg.bot.source_requests`
 
-Класс `TelegramPanelRuntimeV17`; база: `SourceRequestRuntime`.
-
-- собственных методов нет
+Классы не определены.
 
 ### `admin_panel_runtime_v19.py` — 32 строк, в рабочей цепочке
 

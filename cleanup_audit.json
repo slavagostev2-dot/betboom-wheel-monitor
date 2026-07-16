@@ -99,27 +99,13 @@
       ]
     },
     {
-      "classes": [
-        {
-          "bases": [
-            "SourceRequestRuntime"
-          ],
-          "class_attributes": [
-            "bot_username",
-            "miniapp_url_for_chat",
-            "show_app_entry"
-          ],
-          "method_count": 0,
-          "methods": [],
-          "name": "TelegramPanelRuntimeV17"
-        }
-      ],
+      "classes": [],
       "direct_imports": [
         "bbvg.bot.foundation",
         "bbvg.bot.source_requests"
       ],
       "in_current_import_chain": true,
-      "line_count": 44,
+      "line_count": 39,
       "module": "admin_panel_runtime_v17",
       "path": "admin_panel_runtime_v17.py",
       "reference_count": 8,
@@ -1291,7 +1277,7 @@
       "line_count": 153,
       "module": "admin_panel_runtime_v36",
       "path": "admin_panel_runtime_v36.py",
-      "reference_count": 7,
+      "reference_count": 8,
       "references": [
         ".github/workflows/admin-bot.yml",
         ".github/workflows/bot-recovery-smoke.yml",
@@ -1299,6 +1285,7 @@
         ".github/workflows/v22-checks.yml",
         ".github/workflows/validate-private-state.yml",
         "admin_panel_runtime_v37.py",
+        "docs/PROJECT_CHANGELOG_RU.md",
         "docs/RUNTIME_METHOD_INVENTORY_RU.md"
       ],
       "top_level_functions": [
@@ -1576,7 +1563,7 @@
       "line_count": 873,
       "module": "admin_panel_runtime_v37",
       "path": "admin_panel_runtime_v37.py",
-      "reference_count": 8,
+      "reference_count": 9,
       "references": [
         ".github/workflows/admin-bot.yml",
         ".github/workflows/bot-recovery-smoke.yml",
@@ -1584,6 +1571,7 @@
         ".github/workflows/v22-checks.yml",
         ".github/workflows/validate-private-state.yml",
         "admin_panel_runtime_v38.py",
+        "docs/PROJECT_CHANGELOG_RU.md",
         "docs/RUNTIME_METHOD_INVENTORY_RU.md",
         "tests/test_current_contracts.py"
       ],
@@ -2943,7 +2931,7 @@
       "admin_panel_runtime_v37"
     ]
   },
-  "runtime_total_lines": 6040,
+  "runtime_total_lines": 6035,
   "runtime_unique_method_count": 100,
   "unreferenced_python_candidates": []
 }
