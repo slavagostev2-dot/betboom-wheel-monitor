@@ -32,7 +32,7 @@
     "source_health": "failed",
     "telegram_transport": "ok"
   },
-  "checked_at": "2026-07-16T13:21:58.223099+00:00",
+  "checked_at": "2026-07-16T13:22:21.992225+00:00",
   "discovery": {
     "active_size": 77,
     "candidate_count": 204,
@@ -90,9 +90,9 @@
     "status": "degraded"
   },
   "incident_delivery": {
-    "digest_sent": true,
-    "messages_attempted": 1,
-    "opened": 1,
+    "digest_sent": false,
+    "messages_attempted": 0,
+    "opened": 0,
     "resolved": 0
   },
   "incident_sequence": 27,

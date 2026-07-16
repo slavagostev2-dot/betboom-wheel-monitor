@@ -174,9 +174,9 @@
       "first_seen_at": "2026-07-16T13:21:59.596712+00:00",
       "key": "system_checks:source_transport_smoke:581b534aecd3e81e",
       "kind": "source_transport_smoke",
-      "last_seen_at": "2026-07-16T13:21:59.596712+00:00",
+      "last_seen_at": "2026-07-16T13:22:23.090528+00:00",
       "metadata": {},
-      "occurrences": 1,
+      "occurrences": 2,
       "open_notification_pending": false,
       "open_notified_at": "2026-07-16T13:22:00.499053+00:00",
       "opened_sequence": 26,
@@ -188,16 +188,16 @@
     }
   },
   "last_change_at": "2026-07-16T13:21:59.596712+00:00",
-  "last_reconcile_at": "2026-07-16T13:21:59.596712+00:00",
+  "last_reconcile_at": "2026-07-16T13:22:23.090528+00:00",
   "last_reconcile_scope": "system_checks",
   "last_summary": {
     "active": 1,
-    "new_notification_count": 1,
+    "new_notification_count": 0,
     "recovery_notification_count": 0,
     "scope": "system_checks"
   },
   "sequence": 27,
   "status": "initializing",
-  "updated_at": "2026-07-16T13:22:00.499078+00:00",
+  "updated_at": "2026-07-16T13:22:23.090596+00:00",
   "version": 1
 }
