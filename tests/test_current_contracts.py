@@ -13,6 +13,8 @@ import admin_panel_runtime_v34
 import admin_panel_runtime_v37
 import admin_panel_runtime_v38
 import admin_panel_runtime_v39
+import admin_panel_runtime_v40
+import admin_panel_runtime_v41
 import bot_private_state
 import incident_manager
 import monitor_health
@@ -24,7 +26,9 @@ import source_intelligence_alerts
 import source_registry
 import system_checks_v2
 import wheel_lifecycle_v2
+import wheel_link_lifecycle
 import wheel_metadata_quality
+import wheel_scenario_suite
 
 
 class CurrentProductionContractTests(unittest.TestCase):
@@ -32,7 +36,7 @@ class CurrentProductionContractTests(unittest.TestCase):
         admin_action_v2.self_test()
         admin_action_v3.self_test()
 
-    def test_runtime_chain_contracts_used_by_v39(self) -> None:
+    def test_runtime_chain_contracts_used_by_v41(self) -> None:
         # Earlier versions remain in the active inheritance chain, so their
         # assertions must not be silently skipped.
         admin_panel_runtime_v14.self_test()
@@ -40,6 +44,8 @@ class CurrentProductionContractTests(unittest.TestCase):
         admin_panel_runtime_v37.self_test()
         admin_panel_runtime_v38.self_test()
         admin_panel_runtime_v39.self_test()
+        admin_panel_runtime_v40.self_test()
+        admin_panel_runtime_v41.self_test()
 
     def test_encrypted_state_and_retention(self) -> None:
         bot_private_state.self_test()
@@ -59,6 +65,8 @@ class CurrentProductionContractTests(unittest.TestCase):
         source_registry.self_test()
         source_intelligence_alerts.self_test()
         wheel_lifecycle_v2.self_test()
+        wheel_link_lifecycle.self_test()
+        wheel_scenario_suite.self_test()
         wheel_metadata_quality.self_test()
 
 
