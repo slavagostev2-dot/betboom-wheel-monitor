@@ -5,8 +5,8 @@ on:
     branches:
       - refactor/consolidate-runtime-v42
     paths:
-      - "tools/cleanup_audit.py"
       - ".github/workflows/**"
+      - "tools/cleanup_audit.py"
       - "bbvg/**"
       - "admin_panel_runtime_v*.py"
       - "chapter*.py"
@@ -20,120 +20,84 @@ permissions:
 jobs:
   audit:
     runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      BOT_TOKEN: test-bot-token
+      BOT_STATE_KEY: test-state-key
+      BOT_CHAT_ID: "1"
+      BBVG_TEST_MODE: "1"
+      TELEGRAM_WEB_DOMAIN: telegram.me
+      UNKNOWN_DEDUP_HOURS: "2"
+
     steps:
       - uses: actions/checkout@v4
         with:
           ref: refactor/consolidate-runtime-v42
           fetch-depth: 0
-      - name: Apply queued one-shot refactor patch
-        if: ${{ hashFiles('tools/refactor_patch_once.py') != '' }}
-        run: |
-          python tools/refactor_patch_once.py
-          rm tools/refactor_patch_once.py
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A
-          git commit -m "Switch control center to direct runtime entrypoint [skip ci]"
-          git pull --rebase origin refactor/consolidate-runtime-v42
-          git push origin HEAD:refactor/consolidate-runtime-v42
+
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
           cache: pip
+
       - name: Install dependencies
         run: |
           python -m pip install -r requirements.txt
           python -m pip install -r requirements-dev.txt
+
       - name: Compile repository
         id: compile
         run: python -m compileall -q .
-      - name: Validate consolidated bot modules
+
+      - name: Validate consolidated modules
         id: modules
-        env:
-          BOT_TOKEN: test-bot-token
-          BOT_STATE_KEY: test-state-key
-          BOT_CHAT_ID: "1"
-          BBVG_TEST_MODE: "1"
-          TELEGRAM_WEB_DOMAIN: telegram.me
+        shell: bash
         run: |
           set +e
-          (
-            set -e
-            echo "[foundation]"
+          {
             python -m bbvg.bot.foundation
-            echo "[interface]"
             python -m bbvg.bot.interface
-            echo "[source_requests]"
             python -m bbvg.bot.source_requests
-            echo "[wheels]"
             python -m bbvg.bot.wheels
-            echo "[users]"
             python -m bbvg.bot.users
-            echo "[sources]"
             python -m bbvg.bot.sources
-            echo "[storage]"
             python -m bbvg.bot.storage
-            echo "[runtime]"
             python -m bbvg.bot.runtime --self-test
-            echo "[rating_policy]"
             python rating_policy.py --self-test
-          ) 2>&1 | tee /tmp/modules.log
+          } 2>&1 | tee /tmp/modules.log
           status=${PIPESTATUS[0]}
-          echo "exit_code=$status" >> "$GITHUB_OUTPUT"
           exit "$status"
+
       - name: Run full pytest suite
         id: pytest
-        env:
-          BOT_TOKEN: test-bot-token
-          BOT_STATE_KEY: test-state-key
-          BOT_CHAT_ID: "1"
-          BBVG_TEST_MODE: "1"
-          TELEGRAM_WEB_DOMAIN: telegram.me
-          UNKNOWN_DEDUP_HOURS: "2"
+        shell: bash
         run: |
           set +e
           python -m pytest -q 2>&1 | tee /tmp/pytest.log
           status=${PIPESTATUS[0]}
-          echo "exit_code=$status" >> "$GITHUB_OUTPUT"
           exit "$status"
+
       - name: Run compatibility acceptance
         id: legacy
-        env:
-          BOT_TOKEN: test-bot-token
-          BOT_STATE_KEY: test-state-key
-          BOT_CHAT_ID: "1"
-          BBVG_TEST_MODE: "1"
-          TELEGRAM_WEB_DOMAIN: telegram.me
-          UNKNOWN_DEDUP_HOURS: "2"
         run: |
           python chapter1_stability.py
           python chapter2_unified_logic.py
           python chapter3_acceptance.py
           python chapter4_acceptance.py
           python chapter5_acceptance.py
+
       - name: Run consolidated acceptance
         id: acceptance
-        env:
-          BOT_TOKEN: test-bot-token
-          BOT_STATE_KEY: test-state-key
-          BOT_CHAT_ID: "1"
-          BBVG_TEST_MODE: "1"
-          TELEGRAM_WEB_DOMAIN: telegram.me
-          UNKNOWN_DEDUP_HOURS: "2"
         run: python tests/production_acceptance.py --section all
-      - name: Build dependency report
+
+      - name: Build dependency audit
         id: dependency
         if: ${{ steps.compile.outcome == 'success' && steps.modules.outcome == 'success' && steps.pytest.outcome == 'success' && steps.legacy.outcome == 'success' && steps.acceptance.outcome == 'success' }}
         run: python tools/cleanup_audit.py
-      - name: Build readable runtime inventory
+
+      - name: Build runtime inventory
         id: inventory
         if: ${{ steps.dependency.outcome == 'success' }}
-        env:
-          BOT_TOKEN: test-bot-token
-          BOT_STATE_KEY: test-state-key
-          BOT_CHAT_ID: "1"
-          BBVG_TEST_MODE: "1"
-          TELEGRAM_WEB_DOMAIN: telegram.me
         run: |
           python - <<'PY'
           import json
@@ -142,12 +106,12 @@ jobs:
           from bbvg.bot.runtime import TelegramPanelRuntime
 
           report = json.loads(Path("cleanup_audit.json").read_text(encoding="utf-8"))
-          source_sha = os.environ.get("GITHUB_SHA", "unknown")
+          mro = [cls for cls in TelegramPanelRuntime.__mro__ if cls is not object]
           lines = [
               "# BB V.G. — карта методов исторического runtime панели",
               "",
               "Файл генерируется автоматически из AST и фактической MRO текущего runtime.",
-              f"Исходный коммит аудита: `{source_sha}`.",
+              f"Исходный коммит аудита: `{os.environ.get('GITHUB_SHA', 'unknown')}`.",
               "",
               f"- Runtime-файлов: **{report['runtime_file_count']}**",
               f"- В текущей цепочке: **{report['runtime_chain_count']}**",
@@ -157,77 +121,32 @@ jobs:
               "## Фактическая MRO текущей панели",
               "",
           ]
-          mro = [value for value in TelegramPanelRuntime.__mro__ if value is not object]
-          for index, cls in enumerate(mro, 1):
-              lines.append(f"{index}. `{cls.__module__}.{cls.__name__}`")
-
-          owners = {}
-          for name in sorted(dir(TelegramPanelRuntime)):
-              if name.startswith("__"):
-                  continue
-              try:
-                  value = getattr(TelegramPanelRuntime, name)
-              except Exception:
-                  continue
-              if not callable(value) and not isinstance(value, property):
-                  continue
-              for cls in mro:
-                  if name in cls.__dict__:
-                      owner = f"{cls.__module__}.{cls.__name__}"
-                      owners.setdefault(owner, []).append(name)
-                      break
-
-          lines.extend([
-              "",
-              "## Владельцы фактически действующих методов",
-              "",
-              "Метод учитывается у первого класса MRO, который его определяет.",
-              "",
-          ])
-          order = {f"{cls.__module__}.{cls.__name__}": index for index, cls in enumerate(mro)}
-          for owner, methods in sorted(owners.items(), key=lambda item: (order.get(item[0], 10000), item[0])):
-              lines.extend([
-                  f"### `{owner}` — {len(methods)} методов",
-                  "",
-                  ", ".join(f"`{name}()`" for name in methods),
-                  "",
-              ])
-
-          lines.extend(["## Файлы и определённые методы", ""])
-          for row in report["runtime_files"]:
-              state = "в рабочей цепочке" if row["in_current_import_chain"] else "вне рабочей цепочки"
-              lines.extend([
-                  f"### `{row['path']}` — {row['line_count']} строк, {state}",
-                  "",
-                  "Прямые импорты: " + (", ".join(f"`{value}`" for value in row["direct_imports"]) or "нет"),
-                  "",
-              ])
-              if not row["classes"]:
-                  lines.extend(["Классы не определены.", ""])
-                  continue
-              for class_row in row["classes"]:
-                  bases = ", ".join(f"`{value}`" for value in class_row["bases"]) or "без базового класса"
-                  lines.extend([f"Класс `{class_row['name']}`; база: {bases}.", ""])
-                  if class_row["methods"]:
-                      for method in class_row["methods"]:
-                          lines.append(f"- `{method['name']}()` — {method['line_count']} строк")
-                  else:
-                      lines.append("- собственных методов нет")
-                  lines.append("")
-
-          lines.extend([
-              "## Методы, определённые в нескольких слоях",
-              "",
-              "Такие методы требуют осторожного объединения.",
-              "",
-          ])
-          for name, modules in report["runtime_method_index"].items():
-              if len(modules) > 1:
-                  lines.append(f"- `{name}()` — " + ", ".join(f"`{value}`" for value in modules))
-          lines.append("")
-          Path("docs/RUNTIME_METHOD_INVENTORY_RU.md").write_text("\n".join(lines), encoding="utf-8")
+          lines.extend(
+              f"{index}. `{cls.__module__}.{cls.__name__}`"
+              for index, cls in enumerate(mro, 1)
+          )
+          lines.extend(["", "## Владельцы фактически действующих методов", ""])
+          for cls in mro:
+              methods = sorted(
+                  name
+                  for name, value in cls.__dict__.items()
+                  if not name.startswith("__") and callable(value)
+              )
+              if methods:
+                  lines.extend(
+                      [
+                          f"### `{cls.__module__}.{cls.__name__}` — {len(methods)} методов",
+                          "",
+                          ", ".join(f"`{name}()`" for name in methods),
+                          "",
+                      ]
+                  )
+          Path("docs/RUNTIME_METHOD_INVENTORY_RU.md").write_text(
+              "\n".join(lines), encoding="utf-8"
+          )
           PY
-      - name: Record result
+
+      - name: Record validation result
         if: ${{ always() }}
         env:
           COMPILE_OUTCOME: ${{ steps.compile.outcome }}
@@ -237,6 +156,7 @@ jobs:
           ACCEPTANCE_OUTCOME: ${{ steps.acceptance.outcome }}
           DEPENDENCY_OUTCOME: ${{ steps.dependency.outcome }}
           INVENTORY_OUTCOME: ${{ steps.inventory.outcome }}
+        shell: bash
         run: |
           python - <<'PY'
           import json
@@ -253,25 +173,23 @@ jobs:
               "dependency": os.environ.get("DEPENDENCY_OUTCOME", "unknown"),
               "inventory": os.environ.get("INVENTORY_OUTCOME", "unknown"),
           }
-          value = {
+          result = {
               "run_id": os.environ.get("GITHUB_RUN_ID", ""),
               "source_sha": os.environ.get("GITHUB_SHA", ""),
               "updated_at": datetime.now(timezone.utc).isoformat(),
-              "result": "success" if all(item == "success" for item in parts.values()) else "failure",
+              "result": "success" if all(value == "success" for value in parts.values()) else "failure",
               "parts": parts,
               "stage": "full_refactor_validation_and_audit",
           }
-          for key, path_text in (
-              ("modules_tail", "/tmp/modules.log"),
-              ("pytest_tail", "/tmp/pytest.log"),
-          ):
-              path = Path(path_text)
-              part = "modules" if key.startswith("modules") else "pytest"
-              if parts[part] != "success" and path.is_file():
-                  lines = path.read_text(encoding="utf-8", errors="replace").splitlines()
-                  value[key] = "\n".join(lines[-100:])
+          for key, filename in (("modules_tail", "/tmp/modules.log"), ("pytest_tail", "/tmp/pytest.log")):
+              part = key.split("_", 1)[0]
+              path = Path(filename)
+              if parts.get(part) != "success" and path.exists():
+                  result[key] = "\n".join(
+                      path.read_text(encoding="utf-8", errors="replace").splitlines()[-100:]
+                  )
           Path("refactor_validation_status.json").write_text(
-              json.dumps(value, ensure_ascii=False, indent=2, sort_keys=True) + "\n",
+              json.dumps(result, ensure_ascii=False, indent=2, sort_keys=True) + "\n",
               encoding="utf-8",
           )
           PY
