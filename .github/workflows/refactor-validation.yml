@@ -8,7 +8,7 @@ on:
       - "bbvg/bot/*.py"
       - "admin_panel_runtime_v*.py"
       - "*.py"
-      - "tests/production_acceptance.py"
+      - "tests/**"
       - "chapter*.py"
       - "docs/CODE_INVENTORY_RU.md"
       - "docs/PROJECT_CHANGELOG_RU.md"
@@ -72,6 +72,16 @@ jobs:
       - name: Validate rating normalization CLI
         id: rating_cli
         run: python rating_policy.py --self-test
+      - name: Run full pytest suite
+        id: pytest
+        env:
+          BOT_TOKEN: test-bot-token
+          BOT_STATE_KEY: test-state-key
+          BOT_CHAT_ID: "1"
+          BBVG_TEST_MODE: "1"
+          TELEGRAM_WEB_DOMAIN: telegram.me
+          UNKNOWN_DEDUP_HOURS: "2"
+        run: python -m pytest -q
       - name: Run legacy acceptance files
         id: legacy
         env:
@@ -111,6 +121,7 @@ jobs:
           PANEL_INTERFACE_OUTCOME: ${{ steps.panel_interface.outcome }}
           PANEL_RUNTIME_OUTCOME: ${{ steps.panel_runtime.outcome }}
           RATING_CLI_OUTCOME: ${{ steps.rating_cli.outcome }}
+          PYTEST_OUTCOME: ${{ steps.pytest.outcome }}
           LEGACY_OUTCOME: ${{ steps.legacy.outcome }}
           CONSOLIDATED_OUTCOME: ${{ steps.consolidated.outcome }}
         run: |
@@ -125,6 +136,7 @@ jobs:
               "panel_interface": os.environ.get("PANEL_INTERFACE_OUTCOME", "unknown"),
               "panel_runtime": os.environ.get("PANEL_RUNTIME_OUTCOME", "unknown"),
               "rating_cli": os.environ.get("RATING_CLI_OUTCOME", "unknown"),
+              "pytest": os.environ.get("PYTEST_OUTCOME", "unknown"),
               "legacy": os.environ.get("LEGACY_OUTCOME", "unknown"),
               "consolidated": os.environ.get("CONSOLIDATED_OUTCOME", "unknown"),
           }
@@ -133,7 +145,7 @@ jobs:
               "updated_at": datetime.now(timezone.utc).isoformat(),
               "result": "success" if all(item == "success" for item in parts.values()) else "failure",
               "parts": parts,
-              "stage": "panel_foundation_interface_runtime_acceptance_and_rating",
+              "stage": "full_refactor_validation",
           }
           with open("refactor_validation_status.json", "w", encoding="utf-8") as stream:
               json.dump(value, stream, ensure_ascii=False, indent=2, sort_keys=True)
