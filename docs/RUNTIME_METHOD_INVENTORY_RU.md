@@ -1,12 +1,12 @@
 # BB V.G. — карта методов исторического runtime панели
 
 Файл генерируется автоматически из AST и фактической MRO текущего runtime.
-Исходный коммит аудита: `e7cbd329c76809462a74ca2b403b584e75916fd8`.
+Исходный коммит аудита: `4ecd6d5b25d7d39e65e05b0f988eedfe4dfd8fba`.
 
 - Runtime-файлов: **31**
 - В текущей цепочке: **28**
-- Суммарно строк: **7411**
-- Уникальных имён методов: **111**
+- Суммарно строк: **7137**
+- Уникальных имён методов: **106**
 
 ## Фактическая MRO текущей панели
 
@@ -71,9 +71,9 @@
 
 `_merge_access()`, `normalize_access()`, `set_all_user_notifications()`, `set_user_notification()`
 
-### `admin_panel_runtime_v34.TelegramPanelRuntimeV34` — 7 методов
+### `admin_panel_runtime_v34.TelegramPanelRuntimeV34` — 2 методов
 
-`_load_bot_bundle()`, `_load_remote_bundle()`, `_normalize_bundle()`, `_save_bot_bundle()`, `_write_remote_bundle()`, `show_user_detail()`, `show_user_notifications()`
+`show_user_detail()`, `show_user_notifications()`
 
 ### `admin_panel_runtime_v33.TelegramPanelRuntimeV33` — 2 методов
 
@@ -103,9 +103,9 @@
 
 `_prepare_callback_user()`, `_read_json_at()`, `_serialize_json()`
 
-### `bbvg.bot.storage.PrivateStateRuntime` — 5 методов
+### `bbvg.bot.storage.PrivateStateRuntime` — 10 методов
 
-`_bootstrap_access()`, `load_access()`, `load_source_requests()`, `save_access()`, `save_source_requests()`
+`_bootstrap_access()`, `_load_bot_bundle()`, `_load_remote_bundle()`, `_normalize_bundle()`, `_save_bot_bundle()`, `_write_remote_bundle()`, `load_access()`, `load_source_requests()`, `save_access()`, `save_source_requests()`
 
 ### `bbvg.bot.sources.SourceRegistryRuntime` — 6 методов
 
@@ -379,24 +379,17 @@
 - `delete_current_user_data()` — 15 строк
 - `handle_callback()` — 45 строк
 
-### `admin_panel_runtime_v34.py` — 695 строк, в рабочей цепочке
+### `admin_panel_runtime_v34.py` — 421 строк, в рабочей цепочке
 
-Прямые импорты: `admin_bot`, `admin_panel_runtime_v17`, `admin_panel_runtime_v21`, `admin_panel_runtime_v33`, `bot_private_state`, `privacy_retention`
+Прямые импорты: `admin_panel_runtime_v21`, `admin_panel_runtime_v33`, `bbvg.bot.storage`
 
 Класс `TelegramPanelRuntimeV34`; база: `TelegramPanelRuntimeV33`.
 
-- `__init__()` — 3 строк
-- `_normalize_bundle()` — 12 строк
-- `_load_remote_bundle()` — 8 строк
-- `_load_bot_bundle()` — 11 строк
-- `_merge_access()` — 68 строк
-- `_write_remote_bundle()` — 20 строк
-- `_save_bot_bundle()` — 39 строк
-- `show_notifications()` — 58 строк
+- `show_notifications()` — 52 строк
 - `toggle_notification()` — 38 строк
 - `_notification_options_for_role()` — 8 строк
-- `show_user_detail()` — 61 строк
-- `show_user_notifications()` — 66 строк
+- `show_user_detail()` — 53 строк
+- `show_user_notifications()` — 59 строк
 - `set_user_notification()` — 34 строк
 - `set_all_user_notifications()` — 28 строк
 - `render_page()` — 5 строк
@@ -617,10 +610,9 @@
 
 Такие методы требуют осторожного объединения.
 
-- `__init__()` — `admin_panel_runtime_v34`, `admin_panel_runtime_v37`, `admin_panel_runtime_v8`
+- `__init__()` — `admin_panel_runtime_v37`, `admin_panel_runtime_v8`
 - `_apply_admin_action_direct()` — `admin_panel_runtime_v26`, `admin_panel_runtime_v28`
 - `_collect_current_wheels()` — `admin_panel_runtime_v32`, `admin_panel_runtime_v4`, `admin_panel_runtime_v7`
-- `_merge_access()` — `admin_panel_runtime_v34`, `admin_panel_runtime_v35`
 - `_notification_options_for_role()` — `admin_panel_runtime_v34`, `admin_panel_runtime_v37`
 - `_set_quick_time()` — `admin_panel_runtime_v37`, `admin_panel_runtime_v38`
 - `analytics_menu_rows()` — `admin_panel_runtime_v30`, `admin_panel_runtime_v31`

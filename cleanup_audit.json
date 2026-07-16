@@ -159,7 +159,7 @@
       "line_count": 44,
       "module": "admin_panel_runtime_v17",
       "path": "admin_panel_runtime_v17.py",
-      "reference_count": 11,
+      "reference_count": 10,
       "references": [
         "admin_panel_runtime_v17.py",
         "admin_panel_runtime_v19.py",
@@ -168,7 +168,6 @@
         "admin_panel_runtime_v27.py",
         "admin_panel_runtime_v30.py",
         "admin_panel_runtime_v33.py",
-        "admin_panel_runtime_v34.py",
         "docs/RUNTIME_METHOD_INVENTORY_RU.md",
         "system_checks.py",
         "tests/test_nightly_idle_policy.py"
@@ -1433,152 +1432,93 @@
             "TelegramPanelRuntimeV33"
           ],
           "class_attributes": [],
-          "method_count": 16,
+          "method_count": 9,
           "methods": [
             {
               "async": false,
               "decorators": [],
-              "end_line": 86,
-              "line_count": 3,
-              "name": "__init__",
-              "start_line": 84
-            },
-            {
-              "async": false,
-              "decorators": [],
-              "end_line": 99,
-              "line_count": 12,
-              "name": "_normalize_bundle",
-              "start_line": 88
-            },
-            {
-              "async": false,
-              "decorators": [],
-              "end_line": 108,
-              "line_count": 8,
-              "name": "_load_remote_bundle",
-              "start_line": 101
-            },
-            {
-              "async": false,
-              "decorators": [],
-              "end_line": 120,
-              "line_count": 11,
-              "name": "_load_bot_bundle",
-              "start_line": 110
-            },
-            {
-              "async": false,
-              "decorators": [],
-              "end_line": 189,
-              "line_count": 68,
-              "name": "_merge_access",
-              "start_line": 122
-            },
-            {
-              "async": false,
-              "decorators": [],
-              "end_line": 210,
-              "line_count": 20,
-              "name": "_write_remote_bundle",
-              "start_line": 191
-            },
-            {
-              "async": false,
-              "decorators": [],
-              "end_line": 250,
-              "line_count": 39,
-              "name": "_save_bot_bundle",
-              "start_line": 212
-            },
-            {
-              "async": false,
-              "decorators": [],
-              "end_line": 309,
-              "line_count": 58,
+              "end_line": 89,
+              "line_count": 52,
               "name": "show_notifications",
-              "start_line": 252
+              "start_line": 38
             },
             {
               "async": false,
               "decorators": [],
-              "end_line": 348,
+              "end_line": 128,
               "line_count": 38,
               "name": "toggle_notification",
-              "start_line": 311
+              "start_line": 91
             },
             {
               "async": false,
               "decorators": [
                 "staticmethod"
               ],
-              "end_line": 358,
+              "end_line": 138,
               "line_count": 8,
               "name": "_notification_options_for_role",
-              "start_line": 351
+              "start_line": 131
             },
             {
               "async": false,
               "decorators": [],
-              "end_line": 420,
-              "line_count": 61,
+              "end_line": 192,
+              "line_count": 53,
               "name": "show_user_detail",
-              "start_line": 360
+              "start_line": 140
             },
             {
               "async": false,
               "decorators": [],
-              "end_line": 487,
-              "line_count": 66,
+              "end_line": 252,
+              "line_count": 59,
               "name": "show_user_notifications",
-              "start_line": 422
+              "start_line": 194
             },
             {
               "async": false,
               "decorators": [],
-              "end_line": 522,
+              "end_line": 287,
               "line_count": 34,
               "name": "set_user_notification",
-              "start_line": 489
+              "start_line": 254
             },
             {
               "async": false,
               "decorators": [],
-              "end_line": 551,
+              "end_line": 316,
               "line_count": 28,
               "name": "set_all_user_notifications",
-              "start_line": 524
+              "start_line": 289
             },
             {
               "async": false,
               "decorators": [],
-              "end_line": 557,
+              "end_line": 322,
               "line_count": 5,
               "name": "render_page",
-              "start_line": 553
+              "start_line": 318
             },
             {
               "async": false,
               "decorators": [],
-              "end_line": 596,
+              "end_line": 361,
               "line_count": 38,
               "name": "handle_callback",
-              "start_line": 559
+              "start_line": 324
             }
           ],
           "name": "TelegramPanelRuntimeV34"
         }
       ],
       "direct_imports": [
-        "admin_bot",
-        "admin_panel_runtime_v17",
         "admin_panel_runtime_v21",
         "admin_panel_runtime_v33",
-        "bot_private_state",
-        "privacy_retention"
+        "bbvg.bot.storage"
       ],
       "in_current_import_chain": true,
-      "line_count": 695,
+      "line_count": 421,
       "module": "admin_panel_runtime_v34",
       "path": "admin_panel_runtime_v34.py",
       "reference_count": 9,
@@ -1594,10 +1534,7 @@
         "tests/test_current_contracts.py"
       ],
       "top_level_functions": [
-        "_clone",
         "_display_name",
-        "_merge_set_list",
-        "_merge_value",
         "main",
         "self_test"
       ]
@@ -3025,7 +2962,6 @@
   ],
   "runtime_method_index": {
     "__init__": [
-      "admin_panel_runtime_v34",
       "admin_panel_runtime_v37",
       "admin_panel_runtime_v8"
     ],
@@ -3053,21 +2989,11 @@
     "_inspect_entry": [
       "admin_panel_runtime_v4"
     ],
-    "_load_bot_bundle": [
-      "admin_panel_runtime_v34"
-    ],
-    "_load_remote_bundle": [
-      "admin_panel_runtime_v34"
-    ],
     "_merge_access": [
-      "admin_panel_runtime_v34",
       "admin_panel_runtime_v35"
     ],
     "_monitor_status": [
       "admin_panel_runtime_v37"
-    ],
-    "_normalize_bundle": [
-      "admin_panel_runtime_v34"
     ],
     "_normalize_page": [
       "admin_panel_runtime_v38"
@@ -3103,9 +3029,6 @@
     "_restore_telegram_deadline": [
       "admin_panel_runtime_v4"
     ],
-    "_save_bot_bundle": [
-      "admin_panel_runtime_v34"
-    ],
     "_security_payload": [
       "admin_panel_runtime_v3"
     ],
@@ -3133,9 +3056,6 @@
     ],
     "_wheel_token": [
       "admin_panel_runtime_v38"
-    ],
-    "_write_remote_bundle": [
-      "admin_panel_runtime_v34"
     ],
     "analytics_menu_rows": [
       "admin_panel_runtime_v30",
@@ -3471,7 +3391,7 @@
       "admin_panel_runtime_v37"
     ]
   },
-  "runtime_total_lines": 7411,
-  "runtime_unique_method_count": 111,
+  "runtime_total_lines": 7137,
+  "runtime_unique_method_count": 106,
   "unreferenced_python_candidates": []
 }
