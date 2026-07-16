@@ -7,7 +7,6 @@
         ".github/workflows/admin-bot.yml",
         ".github/workflows/cleanup-audit.yml",
         ".github/workflows/monitor.yml",
-        ".github/workflows/refactor-validation.yml",
         ".github/workflows/system-health.yml",
         ".github/workflows/validate-current.yml",
         "docs/CODE_INVENTORY_RU.md",
@@ -24,7 +23,6 @@
         ".github/workflows/bot-recovery-smoke.yml",
         ".github/workflows/cleanup-audit.yml",
         ".github/workflows/monitor.yml",
-        ".github/workflows/refactor-validation.yml",
         ".github/workflows/system-health.yml",
         ".github/workflows/v22-checks.yml",
         ".github/workflows/validate-current.yml",
@@ -37,7 +35,6 @@
       "path": "chapter3_acceptance.py",
       "references": [
         ".github/workflows/cleanup-audit.yml",
-        ".github/workflows/refactor-validation.yml",
         ".github/workflows/validate-current.yml",
         "docs/CODE_INVENTORY_RU.md"
       ]
@@ -49,7 +46,6 @@
         ".github/workflows/admin-bot.yml",
         ".github/workflows/bot-recovery-smoke.yml",
         ".github/workflows/cleanup-audit.yml",
-        ".github/workflows/refactor-validation.yml",
         ".github/workflows/system-health.yml",
         ".github/workflows/v22-checks.yml",
         ".github/workflows/validate-current.yml",
@@ -65,7 +61,6 @@
         ".github/workflows/admin-bot.yml",
         ".github/workflows/cleanup-audit.yml",
         ".github/workflows/monitor.yml",
-        ".github/workflows/refactor-validation.yml",
         ".github/workflows/validate-current.yml",
         "docs/CODE_INVENTORY_RU.md",
         "docs/PROJECT_CHANGELOG_RU.md",
