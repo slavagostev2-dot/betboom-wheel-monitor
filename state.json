@@ -8,7 +8,7 @@
       "expires_at": "2026-07-16T20:52:11+00:00",
       "first_notified_at": "2026-07-16T11:23:57.495602+00:00",
       "identifier": "cct1",
-      "last_checked_at": "2026-07-16T12:54:16.240207+00:00",
+      "last_checked_at": "2026-07-16T12:57:17.327482+00:00",
       "last_notification_at": "2026-07-16T11:23:57.495863+00:00",
       "lifecycle_changed_at": "2026-07-16T11:29:53.990097+00:00",
       "lifecycle_state": "participating",
@@ -37,7 +37,7 @@
       "expires_at": "2026-07-16T21:16:03.370092+00:00",
       "first_notified_at": "2026-07-16T11:48:04.224568+00:00",
       "identifier": "papa",
-      "last_checked_at": "2026-07-16T12:54:16.240207+00:00",
+      "last_checked_at": "2026-07-16T12:57:17.327482+00:00",
       "last_notification_at": "2026-07-16T11:48:04.224842+00:00",
       "lifecycle_changed_at": "2026-07-16T11:53:59.896800+00:00",
       "lifecycle_state": "participating",
@@ -60,17 +60,17 @@
     },
     "solotg": {
       "button_token": "0a7dbcabdcf36f",
-      "deadline": "2026-07-16T13:13:09.318806+00:00",
+      "deadline": "2026-07-16T13:13:28.450937+00:00",
       "deadline_source": "manual",
       "event_id": "5749eef683bec8768712",
-      "expires_at": "2026-07-16T14:54:16.238821+00:00",
+      "expires_at": "2026-07-16T14:57:17.325503+00:00",
       "first_notified_at": "2026-07-16T12:48:19.363591+00:00",
       "identifier": "solotg",
-      "last_checked_at": "2026-07-16T12:54:16.240207+00:00",
+      "last_checked_at": "2026-07-16T12:57:17.327482+00:00",
       "last_notification_at": "2026-07-16T12:48:19.363819+00:00",
       "last_unknown_reminder_at": "2026-07-23T12:51:15.567530+00:00",
-      "lifecycle_changed_at": "2026-07-16T12:54:16.238830+00:00",
-      "lifecycle_state": "scheduled_draw",
+      "lifecycle_changed_at": "2026-07-16T12:57:17.325679+00:00",
+      "lifecycle_state": "participating",
       "manual_time_waiting_since": "2026-07-16T12:51:15.567530+00:00",
       "message_date": "2026-07-16T12:45:18+00:00",
       "message_id": 120,
@@ -80,7 +80,8 @@
       "needs_manual_time": false,
       "page_excerpt": "",
       "page_status": "fresh_unconfirmed",
-      "participating": false,
+      "participating": true,
+      "participating_at": "2026-07-16T12:57:17.325608+00:00",
       "source": "kolesaBB",
       "sources": [
         "kolesaBB"
@@ -95,7 +96,7 @@
       "expires_at": "2026-07-16T18:32:41+00:00",
       "first_notified_at": "2026-07-16T08:05:01.877690+00:00",
       "identifier": "zonertg7",
-      "last_checked_at": "2026-07-16T12:54:16.240207+00:00",
+      "last_checked_at": "2026-07-16T12:57:17.327482+00:00",
       "last_notification_at": "2026-07-16T08:05:01.877983+00:00",
       "lifecycle_changed_at": "2026-07-16T08:23:00.968486+00:00",
       "lifecycle_state": "participating",
@@ -246,6 +247,14 @@
       "health_changed": false,
       "state_changed": false,
       "stats_changed": false,
+      "status": "applied"
+    },
+    "57287a9cd8fe4862b7d06068be830b3b": {
+      "action": "participate_wheel",
+      "applied_at": "2026-07-16T12:57:17.326165+00:00",
+      "health_changed": false,
+      "state_changed": true,
+      "stats_changed": true,
       "status": "applied"
     },
     "5f86a89e1d674ba49e4aeeac81a88417": {
@@ -416,6 +425,14 @@
       "stats_changed": false,
       "status": "applied"
     },
+    "ed879bfedeb848fd86576a60c5e515a7": {
+      "action": "set_deadline",
+      "applied_at": "2026-07-16T12:57:17.325527+00:00",
+      "health_changed": false,
+      "state_changed": true,
+      "stats_changed": false,
+      "status": "applied"
+    },
     "f26a857493ae4bf7ace0ad0f26c23b67": {
       "action": "mark_inactive_global",
       "applied_at": "2026-07-15T15:04:33.216092+00:00",
@@ -442,6 +459,7 @@
     "4d65f201a8354384aa7e960ac0f46930": "2026-07-16T02:10:15.910247+00:00",
     "4e745c4eb6104dadbb3750df90452a3d": "2026-07-15T11:45:41.562278+00:00",
     "51968ee3fad44a81b4ae1de521d8bf78": "2026-07-16T02:13:17.424579+00:00",
+    "57287a9cd8fe4862b7d06068be830b3b": "2026-07-16T12:57:17.326165+00:00",
     "5f86a89e1d674ba49e4aeeac81a88417": "2026-07-16T08:23:00.969096+00:00",
     "676e68422d844063a3b26d085ff358bc": "2026-07-16T02:13:17.424376+00:00",
     "6b14352e281444f7bae0ebbea9d3052c": "2026-07-16T03:10:03.407777+00:00",
@@ -463,6 +481,7 @@
     "d8bc0e2c353f433b95598f10dadfa6a5": "2026-07-15T15:01:31.513879+00:00",
     "d9913d2bd2bd401383e5450fe69c3a85": "2026-07-16T03:10:03.406848+00:00",
     "e3ff0fc4138748268bc4fddc83c080bd": "2026-07-15T11:51:44.512668+00:00",
+    "ed879bfedeb848fd86576a60c5e515a7": "2026-07-16T12:57:17.325527+00:00",
     "f26a857493ae4bf7ace0ad0f26c23b67": "2026-07-15T15:04:33.216092+00:00"
   },
   "bot_commands_version": 1,
@@ -821,7 +840,7 @@
     "whylollycrry",
     "zortelad"
   ],
-  "last_admin_action_applied_at": "2026-07-16T12:54:16.238858+00:00",
+  "last_admin_action_applied_at": "2026-07-16T12:57:17.326178+00:00",
   "last_automatic_status_at": "2026-07-16T06:31:45.207974+00:00",
   "last_heartbeat_at": "2026-07-16T09:02:37.136616+00:00",
   "last_run_kind": "schedule",
@@ -883,8 +902,8 @@
       "updated_at": "2026-07-15T11:45:41.561548+00:00"
     },
     "solotg": {
-      "deadline": "2026-07-16T13:13:09.318806+00:00",
-      "updated_at": "2026-07-16T12:54:16.238839+00:00"
+      "deadline": "2026-07-16T13:13:28.450937+00:00",
+      "updated_at": "2026-07-16T12:57:17.325519+00:00"
     },
     "stray": {
       "deadline": "2026-07-15T15:17:11.369813+00:00",
@@ -911,6 +930,12 @@
       "identifier": "papa",
       "marked_at": "2026-07-16T11:53:59.896676+00:00",
       "url": "https://betboom.ru/freestream/papa"
+    },
+    "solotg": {
+      "expires_at": "2026-07-16T14:57:17.325567+00:00",
+      "identifier": "solotg",
+      "marked_at": "2026-07-16T12:57:17.325565+00:00",
+      "url": "https://betboom.ru/freestream/solotg"
     },
     "zonertg7": {
       "deadline": "2026-07-16T18:02:41+00:00",
