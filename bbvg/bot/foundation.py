@@ -3,6 +3,7 @@ from __future__ import annotations
 import html
 from types import SimpleNamespace
 from typing import Any
+from urllib.parse import quote
 
 from admin_panel_runtime_v5 import CANDIDATES_PER_PAGE
 from admin_panel_runtime_v9 import (
@@ -12,20 +13,14 @@ from admin_panel_runtime_v9 import (
     USER_KEYBOARD_V9,
 )
 
-MINI_APP_CDN_URL = (
-    "https://cdn.jsdelivr.net/gh/"
-    "slavagostev2-dot/betboom-wheel-monitor@main/docs/index.html"
-)
+BRAND_NAME = "BB V.G."
+MINIAPP_RELEASE = "5.11.0"
+MINIAPP_URL = "https://slavagostev2-betboom-monitor.pages.dev/"
 MINIMAL_COMMANDS = [
     {"command": "start", "description": "Открыть панель"},
     {"command": "myid", "description": "Показать мой Telegram ID"},
 ]
 DEPLOYMENT_PATH = "miniapp_deployment.json"
-CLOUDFLARE_APP_URL = "https://slavagostev2-betboom-monitor.pages.dev/"
-FALLBACK_APP_URL = (
-    "https://raw.githack.com/slavagostev2-dot/"
-    "betboom-wheel-monitor/main/docs/index.html"
-)
 
 
 class PanelFoundationMixin:
@@ -51,30 +46,46 @@ class PanelFoundationMixin:
             value = {"status": "unknown", "url": ""}
         return value if isinstance(value, dict) else {}
 
-    def show_app_entry(self) -> None:
+    def bot_username(self) -> str:
+        cached = getattr(self, "_bot_username_cache", None)
+        if cached is not None:
+            return str(cached)
+        try:
+            result = self.telegram_api("getMe").get("result") or {}
+            username = str(result.get("username") or "").strip().lstrip("@")
+        except Exception as exc:
+            print(f"WARNING get bot username: {type(exc).__name__}: {exc}")
+            username = ""
+        self._bot_username_cache = username
+        return username
+
+    def miniapp_url_for_chat(self) -> str:
         deployment = self.miniapp_deployment()
-        status = str(deployment.get("status") or "unknown")
-        deployed_url = str(deployment.get("url") or "").strip()
-        if status == "deployed" and deployed_url.startswith("https://"):
-            text = (
-                "📱 <b>Приложение BetBoom Monitor</b>\n\n"
-                "Основная версия опубликована на Cloudflare Pages."
-            )
-            rows = [
-                [{"text": "📱 Открыть внутри Telegram", "web_app": {"url": deployed_url}}],
-                [{"text": "🌐 Открыть в браузере", "url": deployed_url}],
-            ]
-        else:
-            text = (
-                "📱 <b>Приложение BetBoom Monitor</b>\n\n"
-                "Cloudflare Pages подготовлен, но ещё не авторизован секретами GitHub. "
-                "Пока доступна резервная HTML-версия."
-            )
-            rows = [
-                [{"text": "📱 Открыть резервную версию", "web_app": {"url": FALLBACK_APP_URL}}],
-                [{"text": "🌐 Открыть в браузере", "url": FALLBACK_APP_URL}],
-            ]
-        self.send(text, reply_markup=self.with_nav(rows))
+        deployed = str(deployment.get("url") or "").strip()
+        base = (
+            deployed
+            if deployment.get("status") == "deployed" and deployed.startswith("https://")
+            else MINIAPP_URL
+        )
+        params = [f"release={MINIAPP_RELEASE}"]
+        username = self.bot_username()
+        if username:
+            params.append(f"bot={quote(username)}")
+        separator = "&" if "?" in base else "?"
+        return base + separator + "&".join(params)
+
+    def show_app_entry(self) -> None:
+        url = self.miniapp_url_for_chat()
+        self.send(
+            f"📱 <b>Приложение {BRAND_NAME}</b>\n\n"
+            "Актуальные колёса, статистика, источники и запросы пользователей.",
+            reply_markup=self.with_nav(
+                [
+                    [{"text": "📱 Открыть внутри Telegram", "web_app": {"url": url}}],
+                    [{"text": "🌐 Открыть в браузере", "url": url}],
+                ]
+            ),
+        )
 
     def show_discovery(self) -> None:
         if not self.is_admin():
@@ -348,12 +359,12 @@ class _FoundationTestPanel(PanelFoundationMixin, TelegramPanelRuntimeV9):
 
 
 def self_test() -> None:
-    assert MINI_APP_CDN_URL.startswith("https://cdn.jsdelivr.net/")
+    assert BRAND_NAME == "BB V.G."
+    assert MINIAPP_RELEASE == "5.11.0"
+    assert MINIAPP_URL.endswith(".pages.dev/")
     assert [item["command"] for item in MINIMAL_COMMANDS] == ["start", "myid"]
     assert BTN_APP in str(ADMIN_KEYBOARD_V9)
     assert BTN_APP in str(USER_KEYBOARD_V9)
-    assert CLOUDFLARE_APP_URL.endswith(".pages.dev/")
-    assert FALLBACK_APP_URL.startswith("https://raw.githack.com/")
     assert DEPLOYMENT_PATH == "miniapp_deployment.json"
 
     panel = _FoundationTestPanel()
@@ -389,17 +400,30 @@ def self_test() -> None:
     assert "ожидает начала выполнения" in launch_text
 
     sent: list[tuple[str, dict[str, Any]]] = []
-    panel.set_context = lambda chat_id, user_id: setattr(panel, "current_user_id", str(user_id))  # type: ignore[method-assign]
+    panel.set_context = lambda chat_id, user_id: setattr(
+        panel,
+        "current_user_id",
+        str(user_id),
+    )  # type: ignore[method-assign]
     panel.send = lambda text, **kwargs: sent.append((text, kwargs)) or {}  # type: ignore[method-assign]
     panel.handle_message(
         {"text": "/myid", "chat": {"id": 10}, "from": {"id": 20}}
     )
     assert sent and "<code>20</code>" in sent[-1][0]
 
-    panel.miniapp_deployment = lambda: {"status": "deployed", "url": "https://example.com/app"}  # type: ignore[method-assign]
+    panel.telegram_api = lambda method, payload=None: {
+        "ok": True,
+        "result": {"username": "test_bot"},
+    }  # type: ignore[method-assign]
+    panel.miniapp_deployment = lambda: {
+        "status": "deployed",
+        "url": "https://example.com/app",
+    }  # type: ignore[method-assign]
     panel.show_app_entry()
-    assert "Cloudflare Pages" in sent[-1][0]
-    assert sent[-1][1]["reply_markup"]["inline_keyboard"][0][0]["web_app"]["url"] == "https://example.com/app"
+    app_text, app_kwargs = sent[-1]
+    app_url = app_kwargs["reply_markup"]["inline_keyboard"][0][0]["web_app"]["url"]
+    assert "Приложение BB V.G." in app_text
+    assert app_url == "https://example.com/app?release=5.11.0&bot=test_bot"
 
     assert issubclass(_FoundationTestPanel, TelegramPanelRuntimeV9)
     print("BB V.G. panel foundation self-test passed")
