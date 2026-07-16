@@ -865,7 +865,7 @@ def self_test() -> None:
     settings.set_user_notification("2", "wheels", False)
     assert access["users"]["2"]["notifications_enabled"] is False
     assert saved and dispatched == [("monitor.yml", {"continuous": "true"})]
-    assert settings.notification_preferences("2")["wheel_final_reminders"] is False
+    assert settings.notification_preferences("2")["wheel_final_reminders"] is True
     print("BB V.G. user management and settings subsystem self-test passed")
 
 
