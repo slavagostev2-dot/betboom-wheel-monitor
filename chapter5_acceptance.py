@@ -33,7 +33,8 @@ def main() -> int:
     assert "Mini App, Worker и D1 остаются архивированными" in (
         ROOT / "CHAPTER_5_RU.md"
     ).read_text(encoding="utf-8")
-    print("Chapter 5 full wheel lifecycle and completed rating acceptance passed")
+    print("Chapter 5 full wheel lifecycle acceptance passed")
+    print("Completed-wheel source rating acceptance passed")
     return 0
 
 
