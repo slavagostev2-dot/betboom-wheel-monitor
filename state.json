@@ -8,7 +8,7 @@
       "expires_at": "2026-07-16T20:52:11+00:00",
       "first_notified_at": "2026-07-16T11:23:57.495602+00:00",
       "identifier": "cct1",
-      "last_checked_at": "2026-07-16T12:42:11.107189+00:00",
+      "last_checked_at": "2026-07-16T12:45:13.150165+00:00",
       "last_notification_at": "2026-07-16T11:23:57.495863+00:00",
       "lifecycle_changed_at": "2026-07-16T11:29:53.990097+00:00",
       "lifecycle_state": "participating",
@@ -31,12 +31,16 @@
     },
     "dyrachyo": {
       "button_token": "4a12a976507f38",
+      "deadline": "2026-07-16T12:47:20.420560+00:00",
+      "deadline_source": "manual",
       "event_id": "d301d556758714626db1",
-      "expires_at": "2026-07-23T12:42:11.105781+00:00",
+      "expires_at": "2026-07-16T14:45:12.375925+00:00",
+      "final_reminder_sent_at": "2026-07-16T12:45:12.375973+00:00",
       "first_notified_at": "2026-07-16T12:39:14.880149+00:00",
       "identifier": "dyrachyo",
-      "last_checked_at": "2026-07-16T12:42:11.107189+00:00",
-      "last_notification_at": "2026-07-16T12:39:14.880387+00:00",
+      "known_reminder_sent_at": "2026-07-16T12:45:12.375973+00:00",
+      "last_checked_at": "2026-07-16T12:45:13.150165+00:00",
+      "last_notification_at": "2026-07-16T12:45:12.375973+00:00",
       "last_unknown_reminder_at": "2026-07-23T12:42:11.105767+00:00",
       "lifecycle_changed_at": "2026-07-16T12:42:11.104800+00:00",
       "lifecycle_state": "participating",
@@ -46,7 +50,7 @@
       "message_text": "https://betboom.ru/freestream/dyrachyo\nhttps://telegram.me/kolesaBB\nhttps://telegram.me/kolesaBB/110",
       "message_url": "https://telegram.me/kolesaBB/110",
       "method": "состояние определяется пользователями BB V.G.",
-      "needs_manual_time": true,
+      "needs_manual_time": false,
       "page_excerpt": "",
       "page_status": "fresh_unconfirmed",
       "participating": true,
@@ -66,7 +70,7 @@
       "expires_at": "2026-07-16T21:16:03.370092+00:00",
       "first_notified_at": "2026-07-16T11:48:04.224568+00:00",
       "identifier": "papa",
-      "last_checked_at": "2026-07-16T12:42:11.107189+00:00",
+      "last_checked_at": "2026-07-16T12:45:13.150165+00:00",
       "last_notification_at": "2026-07-16T11:48:04.224842+00:00",
       "lifecycle_changed_at": "2026-07-16T11:53:59.896800+00:00",
       "lifecycle_state": "participating",
@@ -94,7 +98,7 @@
       "expires_at": "2026-07-16T18:32:41+00:00",
       "first_notified_at": "2026-07-16T08:05:01.877690+00:00",
       "identifier": "zonertg7",
-      "last_checked_at": "2026-07-16T12:42:11.107189+00:00",
+      "last_checked_at": "2026-07-16T12:45:13.150165+00:00",
       "last_notification_at": "2026-07-16T08:05:01.877983+00:00",
       "lifecycle_changed_at": "2026-07-16T08:23:00.968486+00:00",
       "lifecycle_state": "participating",
@@ -130,6 +134,14 @@
     "0d2cc8c3bad2460da698950fe3a78cff": {
       "action": "participate_token",
       "applied_at": "2026-07-15T11:51:44.512923+00:00",
+      "health_changed": false,
+      "state_changed": true,
+      "stats_changed": false,
+      "status": "applied"
+    },
+    "0f2d1255c13e4b4e8858195af9958568": {
+      "action": "set_deadline",
+      "applied_at": "2026-07-16T12:45:12.375952+00:00",
       "health_changed": false,
       "state_changed": true,
       "stats_changed": false,
@@ -411,6 +423,7 @@
   "applied_admin_actions": {
     "05206b91a89d45e58b05b33d8df632aa": "2026-07-16T03:10:03.407321+00:00",
     "0d2cc8c3bad2460da698950fe3a78cff": "2026-07-15T11:51:44.512923+00:00",
+    "0f2d1255c13e4b4e8858195af9958568": "2026-07-16T12:45:12.375952+00:00",
     "0ff00c4ef88a488a8c27acc907e4548a": "2026-07-15T15:01:31.514447+00:00",
     "10c0b45b11814811bfa4b6e92fbc6ea1": "2026-07-16T11:29:53.990592+00:00",
     "11f54c65a5944af9b287e22c48aef031": "2026-07-15T11:21:35.145192+00:00",
@@ -524,17 +537,17 @@
       "wheel_key": "stray"
     },
     "7022b42822c37f": {
-      "created_at": "2026-07-14T15:21:22.253951+00:00",
+      "created_at": "2026-07-16T12:45:12.376073+00:00",
       "identifier": "dyrachyo",
       "message_date": "2026-07-14T15:09:09+00:00",
       "message_id": 110,
       "message_text": "https://betboom.ru/freestream/dyrachyo\nhttps://telegram.me/kolesaBB\nhttps://telegram.me/kolesaBB/110",
       "message_url": "https://telegram.me/kolesaBB/110",
-      "method": "свежий Telegram-пост; страница открылась, но активность не подтверждена",
-      "page_excerpt": "Букмекерская контора BetBoom - ставки на спорт онлайн в России!",
+      "method": "время вручную указано администратором BB V.G.",
+      "page_excerpt": "",
       "post_key": "7022b42822c37fd28f307f0b76ad4081c374b693a84bc0329342dd4ecc6a4c2e",
       "source": "kolesaBB",
-      "status": "preliminary",
+      "status": "final_reminder",
       "url": "https://betboom.ru/freestream/dyrachyo",
       "wheel_key": "dyrachyo"
     },
@@ -817,7 +830,7 @@
     "whylollycrry",
     "zortelad"
   ],
-  "last_admin_action_applied_at": "2026-07-16T12:42:11.105733+00:00",
+  "last_admin_action_applied_at": "2026-07-16T12:45:12.375963+00:00",
   "last_automatic_status_at": "2026-07-16T06:31:45.207974+00:00",
   "last_heartbeat_at": "2026-07-16T09:02:37.136616+00:00",
   "last_run_kind": "schedule",
@@ -870,6 +883,10 @@
   },
   "last_source_inactivity_report_at": null,
   "manual_deadlines": {
+    "dyrachyo": {
+      "deadline": "2026-07-16T12:47:20.420560+00:00",
+      "updated_at": "2026-07-16T12:45:12.375939+00:00"
+    },
     "papa": {
       "deadline": "2026-07-16T20:46:03.370092+00:00",
       "updated_at": "2026-07-16T11:53:59.896634+00:00"
@@ -898,7 +915,8 @@
       "url": "https://betboom.ru/freestream/cct1"
     },
     "dyrachyo": {
-      "expires_at": "2026-07-18T12:42:11.104647+00:00",
+      "deadline": "2026-07-16T12:47:20.420560+00:00",
+      "expires_at": "2026-07-16T14:45:12.375943+00:00",
       "identifier": "dyrachyo",
       "marked_at": "2026-07-16T12:42:11.104633+00:00",
       "url": "https://betboom.ru/freestream/dyrachyo"
