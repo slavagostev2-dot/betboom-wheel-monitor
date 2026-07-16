@@ -6,6 +6,7 @@ on:
       - refactor/consolidate-runtime-v42
     paths:
       - "bbvg/bot/runtime.py"
+      - "admin_panel_runtime_v*.py"
       - "tests/production_acceptance.py"
       - "chapter*.py"
       - "docs/CODE_INVENTORY_RU.md"
