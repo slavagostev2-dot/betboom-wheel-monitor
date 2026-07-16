@@ -70,7 +70,7 @@
     }
   ],
   "current_runtime": "admin_panel_runtime_v41",
-  "runtime_chain_count": 28,
+  "runtime_chain_count": 27,
   "runtime_file_count": 28,
   "runtime_files": [
     {
@@ -462,7 +462,7 @@
       "line_count": 320,
       "module": "admin_panel_runtime_v26",
       "path": "admin_panel_runtime_v26.py",
-      "reference_count": 7,
+      "reference_count": 8,
       "references": [
         ".github/workflows/admin-bot.yml",
         ".github/workflows/bot-recovery-smoke.yml",
@@ -470,6 +470,7 @@
         ".github/workflows/validate-private-state.yml",
         "admin_panel_runtime_v26.py",
         "admin_panel_runtime_v27.py",
+        "admin_panel_runtime_v28.py",
         "docs/RUNTIME_METHOD_INVENTORY_RU.md"
       ],
       "top_level_functions": [
@@ -495,16 +496,15 @@
         "admin_panel_runtime_v26",
         "bot_private_state"
       ],
-      "in_current_import_chain": true,
+      "in_current_import_chain": false,
       "line_count": 106,
       "module": "admin_panel_runtime_v27",
       "path": "admin_panel_runtime_v27.py",
-      "reference_count": 5,
+      "reference_count": 4,
       "references": [
         ".github/workflows/admin-bot.yml",
         ".github/workflows/bot-recovery-smoke.yml",
         "admin_panel_runtime_v27.py",
-        "admin_panel_runtime_v28.py",
         "docs/RUNTIME_METHOD_INVENTORY_RU.md"
       ],
       "top_level_functions": [
@@ -516,7 +516,7 @@
       "classes": [
         {
           "bases": [
-            "TelegramPanelRuntimeV27"
+            "TelegramPanelRuntimeV26"
           ],
           "class_attributes": [],
           "method_count": 1,
@@ -535,7 +535,7 @@
       ],
       "direct_imports": [
         "admin_action_v2",
-        "admin_panel_runtime_v27"
+        "admin_panel_runtime_v26"
       ],
       "in_current_import_chain": true,
       "line_count": 85,
