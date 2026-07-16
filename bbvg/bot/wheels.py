@@ -6,14 +6,15 @@ from datetime import datetime, timedelta
 from typing import Any
 
 import admin_bot as legacy
-from admin_panel_runtime_v19 import BRAND_NAME, TelegramPanelRuntimeV19
+from admin_panel_runtime_v17 import TelegramPanelRuntimeV17
+from bbvg.bot.foundation import BRAND_NAME
 
 UTC = legacy.UTC
 HIDDEN_WHEEL_DAYS = 30
 DEADLINE_GRACE_MINUTES = 30
 
 
-class WheelInteractionRuntime(TelegramPanelRuntimeV19):
+class WheelInteractionRuntime(TelegramPanelRuntimeV17):
     """Personal wheel state, manual deadlines and wheel callback handling."""
 
     def _hidden_wheels(self, user_id: str | None = None) -> dict[str, dict[str, Any]]:
