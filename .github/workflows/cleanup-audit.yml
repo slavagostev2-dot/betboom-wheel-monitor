@@ -50,6 +50,8 @@ jobs:
           python -m bbvg.bot.source_requests
           python -m bbvg.bot.wheels
           python -m bbvg.bot.users
+          python -m bbvg.bot.sources
+          python -m bbvg.bot.storage
           python -m bbvg.bot.runtime --self-test
           python rating_policy.py --self-test
       - name: Run full pytest suite
@@ -61,7 +63,12 @@ jobs:
           BBVG_TEST_MODE: "1"
           TELEGRAM_WEB_DOMAIN: telegram.me
           UNKNOWN_DEDUP_HOURS: "2"
-        run: python -m pytest -q
+        run: |
+          set +e
+          python -m pytest -q 2>&1 | tee /tmp/pytest.log
+          status=${PIPESTATUS[0]}
+          echo "exit_code=$status" >> "$GITHUB_OUTPUT"
+          exit "$status"
       - name: Run compatibility acceptance
         id: legacy
         env:
@@ -227,6 +234,10 @@ jobs:
               "parts": parts,
               "stage": "full_refactor_validation_and_audit",
           }
+          pytest_log = Path("/tmp/pytest.log")
+          if parts["pytest"] != "success" and pytest_log.is_file():
+              lines = pytest_log.read_text(encoding="utf-8", errors="replace").splitlines()
+              value["pytest_tail"] = "\n".join(lines[-100:])
           Path("refactor_validation_status.json").write_text(
               json.dumps(value, ensure_ascii=False, indent=2, sort_keys=True) + "\n",
               encoding="utf-8",
