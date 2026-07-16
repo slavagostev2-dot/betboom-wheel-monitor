@@ -847,10 +847,9 @@
       "line_count": 364,
       "module": "admin_panel_runtime_v3",
       "path": "admin_panel_runtime_v3.py",
-      "reference_count": 5,
+      "reference_count": 4,
       "references": [
         "admin_panel_runtime_v3.py",
-        "admin_panel_runtime_v35.py",
         "admin_panel_runtime_v4.py",
         "bbvg/bot/storage.py",
         "docs/RUNTIME_METHOD_INVENTORY_RU.md"
@@ -1546,51 +1545,34 @@
             "TelegramPanelRuntimeV34"
           ],
           "class_attributes": [],
-          "method_count": 4,
+          "method_count": 2,
           "methods": [
             {
               "async": false,
               "decorators": [],
-              "end_line": 61,
-              "line_count": 43,
-              "name": "normalize_access",
-              "start_line": 19
-            },
-            {
-              "async": false,
-              "decorators": [],
-              "end_line": 115,
-              "line_count": 53,
-              "name": "_merge_access",
-              "start_line": 63
-            },
-            {
-              "async": false,
-              "decorators": [],
-              "end_line": 124,
+              "end_line": 20,
               "line_count": 8,
               "name": "set_user_notification",
-              "start_line": 117
+              "start_line": 13
             },
             {
               "async": false,
               "decorators": [],
-              "end_line": 128,
+              "end_line": 24,
               "line_count": 3,
               "name": "set_all_user_notifications",
-              "start_line": 126
+              "start_line": 22
             }
           ],
           "name": "TelegramPanelRuntimeV35"
         }
       ],
       "direct_imports": [
-        "admin_panel_runtime_v3",
         "admin_panel_runtime_v34",
-        "admin_panel_v2"
+        "bbvg.bot.storage"
       ],
       "in_current_import_chain": true,
-      "line_count": 196,
+      "line_count": 93,
       "module": "admin_panel_runtime_v35",
       "path": "admin_panel_runtime_v35.py",
       "reference_count": 7,
@@ -2989,9 +2971,6 @@
     "_inspect_entry": [
       "admin_panel_runtime_v4"
     ],
-    "_merge_access": [
-      "admin_panel_runtime_v35"
-    ],
     "_monitor_status": [
       "admin_panel_runtime_v37"
     ],
@@ -3143,8 +3122,7 @@
       "admin_panel_runtime_v5"
     ],
     "normalize_access": [
-      "admin_panel_runtime_v3",
-      "admin_panel_runtime_v35"
+      "admin_panel_runtime_v3"
     ],
     "notification_preferences": [
       "admin_panel_runtime_v30",
@@ -3391,7 +3369,7 @@
       "admin_panel_runtime_v37"
     ]
   },
-  "runtime_total_lines": 7137,
-  "runtime_unique_method_count": 106,
+  "runtime_total_lines": 7034,
+  "runtime_unique_method_count": 105,
   "unreferenced_python_candidates": []
 }
