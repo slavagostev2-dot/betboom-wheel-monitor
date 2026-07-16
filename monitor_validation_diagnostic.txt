@@ -1,1 +1,25 @@
-PRECHECK ERROR: chapter5_acceptance.py has wrong contents; missing markers: ['Chapter 5 full wheel lifecycle acceptance passed']
+BB V.G. preflight checks passed: 79 approved telegram.me sources (77 primary, 2 nightly).
+BB V.G. notification router self-test passed
+notification integrity v2 self-test passed
+BB V.G. additive administrator action self-test passed
+admin action v3 completed-wheel rating self-test passed
+admin action queue self-test passed
+telegram_transport self-test passed
+telegram_post_links_v2 segment parser self-test passed
+recurring_wheel_events timed current-event canonicalization self-test passed
+restart duplicate guard self-test passed
+recurring wheel event and availability self-test passed
+wheel link lifecycle scenario self-test passed
+BB V.G. wheel scenario suite passed: 10 scenarios
+wheel_metadata_quality timed-source preservation self-test passed
+wheel publication merge v2 self-test passed
+wheel lifecycle v2 self-test passed
+Chapter 5 full wheel lifecycle acceptance passed
+Completed-wheel source rating acceptance passed
+monitor_health self-test passed
+incident_manager self-test passed
+system_checks self-test passed
+wheel link lifecycle scenario self-test passed
+BB V.G. wheel scenario suite passed: 10 scenarios
+Chapter 1 stability acceptance tests passed
+BB V.G. monitor v41 validation passed
