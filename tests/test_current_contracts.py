@@ -11,8 +11,6 @@ import admin_action_v3
 import admin_panel_runtime_v34
 import admin_panel_runtime_v37
 import admin_panel_runtime_v38
-import admin_panel_runtime_v39
-import admin_panel_runtime_v40
 import admin_panel_runtime_v41
 import bot_private_state
 import incident_manager
@@ -29,6 +27,7 @@ import wheel_link_lifecycle
 import wheel_metadata_quality
 import wheel_scenario_suite
 from bbvg.bot import interface as panel_interface
+from bbvg.bot import runtime as panel_runtime
 from bbvg.bot import sources as panel_sources
 
 
@@ -42,8 +41,7 @@ class CurrentProductionContractTests(unittest.TestCase):
         admin_panel_runtime_v34.self_test()
         admin_panel_runtime_v37.self_test()
         admin_panel_runtime_v38.self_test()
-        admin_panel_runtime_v39.self_test()
-        admin_panel_runtime_v40.self_test()
+        panel_runtime.self_test()
         admin_panel_runtime_v41.self_test()
 
     def test_encrypted_state_and_retention(self) -> None:
