@@ -8,7 +8,7 @@
       "expires_at": "2026-07-16T20:52:11+00:00",
       "first_notified_at": "2026-07-16T11:23:57.495602+00:00",
       "identifier": "cct1",
-      "last_checked_at": "2026-07-16T12:48:14.161032+00:00",
+      "last_checked_at": "2026-07-16T12:54:16.240207+00:00",
       "last_notification_at": "2026-07-16T11:23:57.495863+00:00",
       "lifecycle_changed_at": "2026-07-16T11:29:53.990097+00:00",
       "lifecycle_state": "participating",
@@ -37,7 +37,7 @@
       "expires_at": "2026-07-16T21:16:03.370092+00:00",
       "first_notified_at": "2026-07-16T11:48:04.224568+00:00",
       "identifier": "papa",
-      "last_checked_at": "2026-07-16T12:48:14.161032+00:00",
+      "last_checked_at": "2026-07-16T12:54:16.240207+00:00",
       "last_notification_at": "2026-07-16T11:48:04.224842+00:00",
       "lifecycle_changed_at": "2026-07-16T11:53:59.896800+00:00",
       "lifecycle_state": "participating",
@@ -60,17 +60,24 @@
     },
     "solotg": {
       "button_token": "0a7dbcabdcf36f",
-      "expires_at": "2026-07-23T12:48:19.363851+00:00",
+      "deadline": "2026-07-16T13:13:09.318806+00:00",
+      "deadline_source": "manual",
+      "event_id": "5749eef683bec8768712",
+      "expires_at": "2026-07-16T14:54:16.238821+00:00",
       "first_notified_at": "2026-07-16T12:48:19.363591+00:00",
       "identifier": "solotg",
-      "last_checked_at": "2026-07-16T12:48:19.363848+00:00",
+      "last_checked_at": "2026-07-16T12:54:16.240207+00:00",
       "last_notification_at": "2026-07-16T12:48:19.363819+00:00",
+      "last_unknown_reminder_at": "2026-07-23T12:51:15.567530+00:00",
+      "lifecycle_changed_at": "2026-07-16T12:54:16.238830+00:00",
+      "lifecycle_state": "scheduled_draw",
+      "manual_time_waiting_since": "2026-07-16T12:51:15.567530+00:00",
       "message_date": "2026-07-16T12:45:18+00:00",
       "message_id": 120,
       "message_text": "https://betboom.ru/freestream/solotg\nhttps://telegram.me/kolesaBB\nhttps://telegram.me/kolesaBB/120",
       "message_url": "https://telegram.me/kolesaBB/120",
-      "method": "свежий Telegram-пост; страница открылась, но активность не подтверждена",
-      "needs_manual_time": true,
+      "method": "состояние определяется пользователями BB V.G.",
+      "needs_manual_time": false,
       "page_excerpt": "",
       "page_status": "fresh_unconfirmed",
       "participating": false,
@@ -78,7 +85,7 @@
       "sources": [
         "kolesaBB"
       ],
-      "status": "manual_time_required",
+      "status": "unknown",
       "url": "https://betboom.ru/freestream/solotg"
     },
     "zonertg7": {
@@ -88,7 +95,7 @@
       "expires_at": "2026-07-16T18:32:41+00:00",
       "first_notified_at": "2026-07-16T08:05:01.877690+00:00",
       "identifier": "zonertg7",
-      "last_checked_at": "2026-07-16T12:48:14.161032+00:00",
+      "last_checked_at": "2026-07-16T12:54:16.240207+00:00",
       "last_notification_at": "2026-07-16T08:05:01.877983+00:00",
       "lifecycle_changed_at": "2026-07-16T08:23:00.968486+00:00",
       "lifecycle_state": "participating",
@@ -159,6 +166,14 @@
       "health_changed": false,
       "state_changed": true,
       "stats_changed": true,
+      "status": "applied"
+    },
+    "17d77a07e8924f46a1c01bccda91ed16": {
+      "action": "set_deadline",
+      "applied_at": "2026-07-16T12:54:16.238846+00:00",
+      "health_changed": false,
+      "state_changed": true,
+      "stats_changed": false,
       "status": "applied"
     },
     "1e06ce4a0d5a43a488c778561ec1b710": {
@@ -417,6 +432,7 @@
     "0ff00c4ef88a488a8c27acc907e4548a": "2026-07-15T15:01:31.514447+00:00",
     "10c0b45b11814811bfa4b6e92fbc6ea1": "2026-07-16T11:29:53.990592+00:00",
     "11f54c65a5944af9b287e22c48aef031": "2026-07-15T11:21:35.145192+00:00",
+    "17d77a07e8924f46a1c01bccda91ed16": "2026-07-16T12:54:16.238846+00:00",
     "1e06ce4a0d5a43a488c778561ec1b710": "2026-07-16T02:13:17.424292+00:00",
     "26a274d2313845e99d948ee2fd1eff9f": "2026-07-15T11:21:35.145623+00:00",
     "2fedd88f467e461498f8cc57be21e5a2": "2026-07-16T02:13:17.424445+00:00",
@@ -805,7 +821,7 @@
     "whylollycrry",
     "zortelad"
   ],
-  "last_admin_action_applied_at": "2026-07-16T12:45:12.375963+00:00",
+  "last_admin_action_applied_at": "2026-07-16T12:54:16.238858+00:00",
   "last_automatic_status_at": "2026-07-16T06:31:45.207974+00:00",
   "last_heartbeat_at": "2026-07-16T09:02:37.136616+00:00",
   "last_run_kind": "schedule",
@@ -865,6 +881,10 @@
     "smurf5": {
       "deadline": "2026-07-15T11:59:02.507162+00:00",
       "updated_at": "2026-07-15T11:45:41.561548+00:00"
+    },
+    "solotg": {
+      "deadline": "2026-07-16T13:13:09.318806+00:00",
+      "updated_at": "2026-07-16T12:54:16.238839+00:00"
     },
     "stray": {
       "deadline": "2026-07-15T15:17:11.369813+00:00",
