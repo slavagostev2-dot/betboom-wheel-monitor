@@ -41,7 +41,7 @@ jobs:
           python -m py_compile tests/production_acceptance.py rating_policy.py
       - name: Validate consolidated panel foundation
         id: panel_foundation
-        env: &test-env
+        env:
           BOT_TOKEN: test-bot-token
           BOT_STATE_KEY: test-state-key
           BOT_CHAT_ID: "1"
@@ -50,23 +50,48 @@ jobs:
         run: python -m bbvg.bot.foundation
       - name: Validate consolidated panel interface
         id: panel_interface
-        env: *test-env
+        env:
+          BOT_TOKEN: test-bot-token
+          BOT_STATE_KEY: test-state-key
+          BOT_CHAT_ID: "1"
+          BBVG_TEST_MODE: "1"
+          TELEGRAM_WEB_DOMAIN: telegram.me
         run: python -m bbvg.bot.interface
       - name: Validate consolidated source requests
         id: source_requests
-        env: *test-env
+        env:
+          BOT_TOKEN: test-bot-token
+          BOT_STATE_KEY: test-state-key
+          BOT_CHAT_ID: "1"
+          BBVG_TEST_MODE: "1"
+          TELEGRAM_WEB_DOMAIN: telegram.me
         run: python -m bbvg.bot.source_requests
       - name: Validate consolidated wheel interactions
         id: wheel_interactions
-        env: *test-env
+        env:
+          BOT_TOKEN: test-bot-token
+          BOT_STATE_KEY: test-state-key
+          BOT_CHAT_ID: "1"
+          BBVG_TEST_MODE: "1"
+          TELEGRAM_WEB_DOMAIN: telegram.me
         run: python -m bbvg.bot.wheels
       - name: Validate consolidated users
         id: users
-        env: *test-env
+        env:
+          BOT_TOKEN: test-bot-token
+          BOT_STATE_KEY: test-state-key
+          BOT_CHAT_ID: "1"
+          BBVG_TEST_MODE: "1"
+          TELEGRAM_WEB_DOMAIN: telegram.me
         run: python -m bbvg.bot.users
       - name: Validate consolidated panel runtime
         id: panel_runtime
-        env: *test-env
+        env:
+          BOT_TOKEN: test-bot-token
+          BOT_STATE_KEY: test-state-key
+          BOT_CHAT_ID: "1"
+          BBVG_TEST_MODE: "1"
+          TELEGRAM_WEB_DOMAIN: telegram.me
         run: python -m bbvg.bot.runtime --self-test
       - name: Validate rating normalization CLI
         id: rating_cli
@@ -74,13 +99,21 @@ jobs:
       - name: Run full pytest suite
         id: pytest
         env:
-          <<: *test-env
+          BOT_TOKEN: test-bot-token
+          BOT_STATE_KEY: test-state-key
+          BOT_CHAT_ID: "1"
+          BBVG_TEST_MODE: "1"
+          TELEGRAM_WEB_DOMAIN: telegram.me
           UNKNOWN_DEDUP_HOURS: "2"
         run: python -m pytest -q
       - name: Run legacy acceptance files
         id: legacy
         env:
-          <<: *test-env
+          BOT_TOKEN: test-bot-token
+          BOT_STATE_KEY: test-state-key
+          BOT_CHAT_ID: "1"
+          BBVG_TEST_MODE: "1"
+          TELEGRAM_WEB_DOMAIN: telegram.me
           UNKNOWN_DEDUP_HOURS: "2"
         run: |
           python chapter1_stability.py
@@ -91,7 +124,11 @@ jobs:
       - name: Run consolidated acceptance sections
         id: consolidated
         env:
-          <<: *test-env
+          BOT_TOKEN: test-bot-token
+          BOT_STATE_KEY: test-state-key
+          BOT_CHAT_ID: "1"
+          BBVG_TEST_MODE: "1"
+          TELEGRAM_WEB_DOMAIN: telegram.me
           UNKNOWN_DEDUP_HOURS: "2"
         run: |
           python tests/production_acceptance.py --section stability
