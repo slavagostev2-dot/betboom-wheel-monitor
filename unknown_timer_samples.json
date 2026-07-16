@@ -741,6 +741,34 @@
       "telegram_excerpt": "https://betboom.ru/freestream/stray https://telegram.me/kolesaBB https://telegram.me/kolesaBB/122",
       "wheel_identifier": "stray",
       "wheel_url": "https://betboom.ru/freestream/stray"
+    },
+    {
+      "captured_at": "2026-07-16T14:22:41.103679+00:00",
+      "fingerprint": "1051382eaf32880aba9da75613833a3910b2e458a86794fb122137b636c76378",
+      "message_id": 123,
+      "message_url": "https://telegram.me/kolesaBB/123",
+      "method": "свежий Telegram-пост; страница открылась, но активность не подтверждена",
+      "page_excerpt": "Букмекерская контора BetBoom - ставки на спорт онлайн в России!",
+      "reason": "new_post",
+      "source": "kolesaBB",
+      "status": "fresh_unconfirmed",
+      "telegram_excerpt": "https://betboom.ru/freestream/ewc1 https://telegram.me/kolesaBB https://telegram.me/kolesaBB/123",
+      "wheel_identifier": "ewc1",
+      "wheel_url": "https://betboom.ru/freestream/ewc1"
+    },
+    {
+      "captured_at": "2026-07-16T14:22:43.534243+00:00",
+      "fingerprint": "b186b6af6d5ea347ebea0e676b2648472b5aeac68223418572feb2bbd6150230",
+      "message_id": 125,
+      "message_url": "https://telegram.me/kolesaBB/125",
+      "method": "свежий Telegram-пост; страница открылась, но активность не подтверждена",
+      "page_excerpt": "Букмекерская контора BetBoom - ставки на спорт онлайн в России!",
+      "reason": "new_post",
+      "source": "kolesaBB",
+      "status": "fresh_unconfirmed",
+      "telegram_excerpt": "https://betboom.ru/freestream/sysman https://telegram.me/kolesaBB https://telegram.me/kolesaBB/125",
+      "wheel_identifier": "sysman",
+      "wheel_url": "https://betboom.ru/freestream/sysman"
     }
   ],
   "version": 1

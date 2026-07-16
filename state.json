@@ -8,7 +8,7 @@
       "expires_at": "2026-07-16T20:52:11+00:00",
       "first_notified_at": "2026-07-16T11:23:57.495602+00:00",
       "identifier": "cct1",
-      "last_checked_at": "2026-07-16T14:07:32.329802+00:00",
+      "last_checked_at": "2026-07-16T14:22:34.868950+00:00",
       "last_notification_at": "2026-07-16T11:23:57.495863+00:00",
       "lifecycle_changed_at": "2026-07-16T11:29:53.990097+00:00",
       "lifecycle_state": "participating",
@@ -29,6 +29,29 @@
       "status": "unknown",
       "url": "https://betboom.ru/freestream/cct1"
     },
+    "ewc1": {
+      "button_token": "ffa5b38aa43863",
+      "expires_at": "2026-07-23T14:22:43.178302+00:00",
+      "first_notified_at": "2026-07-16T14:22:43.177974+00:00",
+      "identifier": "ewc1",
+      "last_checked_at": "2026-07-16T14:22:43.178298+00:00",
+      "last_notification_at": "2026-07-16T14:22:43.178258+00:00",
+      "message_date": "2026-07-16T14:19:38+00:00",
+      "message_id": 123,
+      "message_text": "https://betboom.ru/freestream/ewc1\nhttps://telegram.me/kolesaBB\nhttps://telegram.me/kolesaBB/123",
+      "message_url": "https://telegram.me/kolesaBB/123",
+      "method": "свежий Telegram-пост; страница открылась, но активность не подтверждена",
+      "needs_manual_time": true,
+      "page_excerpt": "",
+      "page_status": "fresh_unconfirmed",
+      "participating": false,
+      "source": "kolesaBB",
+      "sources": [
+        "kolesaBB"
+      ],
+      "status": "manual_time_required",
+      "url": "https://betboom.ru/freestream/ewc1"
+    },
     "papa": {
       "button_token": "e96d98dc9ff290",
       "deadline": "2026-07-16T20:46:03.370092+00:00",
@@ -37,7 +60,7 @@
       "expires_at": "2026-07-16T21:16:03.370092+00:00",
       "first_notified_at": "2026-07-16T11:48:04.224568+00:00",
       "identifier": "papa",
-      "last_checked_at": "2026-07-16T14:07:32.329802+00:00",
+      "last_checked_at": "2026-07-16T14:22:34.868950+00:00",
       "last_notification_at": "2026-07-16T11:48:04.224842+00:00",
       "lifecycle_changed_at": "2026-07-16T11:53:59.896800+00:00",
       "lifecycle_state": "participating",
@@ -58,6 +81,29 @@
       "status": "unknown",
       "url": "https://betboom.ru/freestream/papa"
     },
+    "sysman": {
+      "button_token": "0217364010fe57",
+      "expires_at": "2026-07-23T14:22:45.529893+00:00",
+      "first_notified_at": "2026-07-16T14:22:45.529614+00:00",
+      "identifier": "sysman",
+      "last_checked_at": "2026-07-16T14:22:45.529890+00:00",
+      "last_notification_at": "2026-07-16T14:22:45.529852+00:00",
+      "message_date": "2026-07-16T14:22:25+00:00",
+      "message_id": 125,
+      "message_text": "https://betboom.ru/freestream/sysman\nhttps://telegram.me/kolesaBB\nhttps://telegram.me/kolesaBB/125",
+      "message_url": "https://telegram.me/kolesaBB/125",
+      "method": "свежий Telegram-пост; страница открылась, но активность не подтверждена",
+      "needs_manual_time": true,
+      "page_excerpt": "",
+      "page_status": "fresh_unconfirmed",
+      "participating": false,
+      "source": "kolesaBB",
+      "sources": [
+        "kolesaBB"
+      ],
+      "status": "manual_time_required",
+      "url": "https://betboom.ru/freestream/sysman"
+    },
     "zonertg7": {
       "button_token": "e3eaa268624918",
       "deadline": "2026-07-16T18:02:41+00:00",
@@ -65,7 +111,7 @@
       "expires_at": "2026-07-16T18:32:41+00:00",
       "first_notified_at": "2026-07-16T08:05:01.877690+00:00",
       "identifier": "zonertg7",
-      "last_checked_at": "2026-07-16T14:07:32.329802+00:00",
+      "last_checked_at": "2026-07-16T14:22:34.868950+00:00",
       "last_notification_at": "2026-07-16T08:05:01.877983+00:00",
       "lifecycle_changed_at": "2026-07-16T08:23:00.968486+00:00",
       "lifecycle_state": "participating",
@@ -491,6 +537,21 @@
   },
   "bot_commands_version": 1,
   "button_contexts": {
+    "0217364010fe57": {
+      "created_at": "2026-07-16T14:22:43.534364+00:00",
+      "identifier": "sysman",
+      "message_date": "2026-07-16T14:22:25+00:00",
+      "message_id": 125,
+      "message_text": "https://betboom.ru/freestream/sysman\nhttps://telegram.me/kolesaBB\nhttps://telegram.me/kolesaBB/125",
+      "message_url": "https://telegram.me/kolesaBB/125",
+      "method": "свежий Telegram-пост; страница открылась, но активность не подтверждена",
+      "page_excerpt": "Букмекерская контора BetBoom - ставки на спорт онлайн в России!",
+      "post_key": "0217364010fe57a8ba1ca45a7067cc8005fcacb3476fb3f512b9225529481d31",
+      "source": "kolesaBB",
+      "status": "preliminary",
+      "url": "https://betboom.ru/freestream/sysman",
+      "wheel_key": "sysman"
+    },
     "105fd5e22b560e": {
       "created_at": "2026-07-14T19:57:18.133402+00:00",
       "identifier": "cct1",
@@ -640,6 +701,21 @@
       "status": "preliminary",
       "url": "https://betboom.ru/freestream/zonertg4",
       "wheel_key": "zonertg4"
+    },
+    "ffa5b38aa43863": {
+      "created_at": "2026-07-16T14:22:41.103816+00:00",
+      "identifier": "ewc1",
+      "message_date": "2026-07-16T14:19:38+00:00",
+      "message_id": 123,
+      "message_text": "https://betboom.ru/freestream/ewc1\nhttps://telegram.me/kolesaBB\nhttps://telegram.me/kolesaBB/123",
+      "message_url": "https://telegram.me/kolesaBB/123",
+      "method": "свежий Telegram-пост; страница открылась, но активность не подтверждена",
+      "page_excerpt": "Букмекерская контора BetBoom - ставки на спорт онлайн в России!",
+      "post_key": "ffa5b38aa438632ed0ac7d699e7cb0d8762b65ae46ddf7503b75732c5f7ea475",
+      "source": "kolesaBB",
+      "status": "preliminary",
+      "url": "https://betboom.ru/freestream/ewc1",
+      "wheel_key": "ewc1"
     }
   },
   "completed_wheel_alerts": {
@@ -1078,6 +1154,7 @@
   },
   "seen": {
     "012299e0d83138e2bb8a30f9bedc98e45443d27f84571a20a8372b1c96f6ea50": "2026-07-12T18:26:18.034381+00:00",
+    "0217364010fe57a8ba1ca45a7067cc8005fcacb3476fb3f512b9225529481d31": "2026-07-16T14:22:45.529898+00:00",
     "0389975cb70b3f9d43699fcb61108c5818b7b8483f8f8f86a75dbb1dc4d6252f": "2026-07-12T15:09:43.022880+00:00",
     "053cf78948223997ac8e25cc73f3197b5187faaf4cc11807147877ea02be74ba": "2026-07-14T10:03:21.761237+00:00",
     "058ddce2804d4dd2fd4277191a222c1b2e6a436570e3915b57d4339d3733f784": "2026-07-12T15:10:04.958834+00:00",
@@ -1227,7 +1304,8 @@
     "fb6247a58e952c95b6c9145ea41984a351e4383932bde9306a3f2000388f9a79": "2026-07-12T15:08:28.238429+00:00",
     "fcc99159509ee2559a3c686e343b31c7c063258c9196279b77b12f61ecd887c4": "2026-07-12T18:21:25.207375+00:00",
     "fcd1df589cf92e6c17e0d831049ca6c2a0aab9353a4a22cfa787b71a88931b63": "2026-07-15T16:53:16.917477+00:00",
-    "fef67b001238e32446563a0eae9670161f9625559100e8e39eaabe6dcba71dad": "2026-07-12T15:09:56.683817+00:00"
+    "fef67b001238e32446563a0eae9670161f9625559100e8e39eaabe6dcba71dad": "2026-07-12T15:09:56.683817+00:00",
+    "ffa5b38aa438632ed0ac7d699e7cb0d8762b65ae46ddf7503b75732c5f7ea475": "2026-07-16T14:22:43.178306+00:00"
   },
   "telegram_update_offset": 398354386,
   "url_alerts": {
@@ -1311,6 +1389,13 @@
       "lifecycle_rule": "no_timer_2h",
       "suppress_until": "2026-07-16T14:39:14.880221+00:00",
       "url": "https://betboom.ru/freestream/dyrachyo"
+    },
+    "ewc1": {
+      "alerted_at": "2026-07-16T14:22:43.178061+00:00",
+      "identifier": "ewc1",
+      "lifecycle_rule": "no_timer_2h",
+      "suppress_until": "2026-07-16T16:22:43.178061+00:00",
+      "url": "https://betboom.ru/freestream/ewc1"
     },
     "hooch06": {
       "alerted_at": "2026-07-12T18:21:20.531002+00:00",
@@ -1440,6 +1525,13 @@
       "lifecycle_rule": "no_timer_2h",
       "suppress_until": "2026-07-16T15:49:35.195550+00:00",
       "url": "https://betboom.ru/freestream/stray"
+    },
+    "sysman": {
+      "alerted_at": "2026-07-16T14:22:45.529695+00:00",
+      "identifier": "sysman",
+      "lifecycle_rule": "no_timer_2h",
+      "suppress_until": "2026-07-16T16:22:45.529695+00:00",
+      "url": "https://betboom.ru/freestream/sysman"
     },
     "zonertg1": {
       "alerted_at": "2026-07-12T18:21:17.104937+00:00",
@@ -1677,6 +1769,16 @@
         "source": "jestercast"
       }
     ],
+    "ewc1": [
+      {
+        "has_future_availability": false,
+        "has_future_deadline": false,
+        "message_date": "2026-07-16T14:19:38+00:00",
+        "message_id": 123,
+        "message_url": "https://telegram.me/kolesaBB/123",
+        "source": "kolesaBB"
+      }
+    ],
     "papa": [
       {
         "has_future_availability": false,
@@ -1685,6 +1787,16 @@
         "message_id": 12166,
         "message_url": "https://telegram.me/PAPAdota2/12166",
         "source": "PAPAdota2"
+      }
+    ],
+    "sysman": [
+      {
+        "has_future_availability": false,
+        "has_future_deadline": false,
+        "message_date": "2026-07-16T14:22:25+00:00",
+        "message_id": 125,
+        "message_url": "https://telegram.me/kolesaBB/125",
+        "source": "kolesaBB"
       }
     ],
     "zonertg7": [
