@@ -4,16 +4,19 @@
     "zonertg7": {
       "button_token": "e3eaa268624918",
       "deadline": "2026-07-16T18:02:41+00:00",
+      "event_id": "680bb41f15a0e1cccc9f",
       "expires_at": "2026-07-16T18:32:41+00:00",
       "first_notified_at": "2026-07-16T08:05:01.877690+00:00",
       "identifier": "zonertg7",
-      "last_checked_at": "2026-07-16T08:05:01.878030+00:00",
+      "last_checked_at": "2026-07-16T08:19:58.748896+00:00",
       "last_notification_at": "2026-07-16T08:05:01.877983+00:00",
+      "lifecycle_changed_at": "2026-07-16T08:07:58.400978+00:00",
+      "lifecycle_state": "scheduled_draw",
       "message_date": "2026-07-16T08:02:41+00:00",
       "message_id": 35617,
       "message_text": "ЗАЛЕТАЙ НА КОЛЕСО ФРИБЕТОВ:\nКЛИКАЙ ДЛЯ УЧАСТИЯ\nКЛИКАЙ ДЛЯ УЧАСТИЯ\nКЛИКАЙ ДЛЯ УЧАСТИЯ\n10 ПО 1000 20 ПО 500\nИТОГИ ЧЕРЕЗ 10 ЧАСОВ\nhttps://telegram.me/mechanogun\nhttps://telegram.me/mechanogun/35617\nhttps://betboom.ru/freestream/zonertg7?utm_content=zoner&utm_source=freestream\nhttps://betboom.ru/freestream/zonertg7?utm_content=zoner&amp;utm_source=freestream",
       "message_url": "https://telegram.me/mechanogun/35617",
-      "method": "текст Telegram: относительное время",
+      "method": "состояние определяется пользователями BB V.G.",
       "needs_manual_time": false,
       "page_excerpt": "",
       "page_status": "telegram_deadline",
@@ -23,7 +26,7 @@
         "mechanogun",
         "amam0610"
       ],
-      "status": "scheduled",
+      "status": "unknown",
       "url": "https://betboom.ru/freestream/zonertg7"
     }
   },
