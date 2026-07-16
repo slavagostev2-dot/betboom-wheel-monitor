@@ -1,8 +1,8 @@
 {
-  "active_incidents": 1,
+  "active_incidents": 0,
   "admin_panel": {
-    "age_minutes": 2,
-    "last_heartbeat_at": "2026-07-16T01:19:30.242595+00:00",
+    "age_minutes": 4,
+    "last_heartbeat_at": "2026-07-16T02:20:13.132241+00:00",
     "started_at": "2026-07-16T00:59:14.360283+00:00",
     "status": "running",
     "update_consumer": "single_getUpdates_owner",
@@ -28,11 +28,11 @@
     "miniapp": "ok",
     "monitor": "ok",
     "notifications": "ok",
-    "ratings": "failed",
+    "ratings": "ok",
     "source_health": "ok",
     "telegram_transport": "ok"
   },
-  "checked_at": "2026-07-16T01:22:08.208350+00:00",
+  "checked_at": "2026-07-16T02:24:38.525126+00:00",
   "discovery": {
     "active_size": 77,
     "candidate_count": 204,
@@ -69,25 +69,17 @@
     "legacy_url_offenders": [],
     "primary": "telegram.me"
   },
-  "finding_count": 1,
-  "findings": [
-    {
-      "detail": "Количество событий: 2.",
-      "kind": "inactive_wheel_leak",
-      "severity": "critical",
-      "subject": "",
-      "title": "Неактивное колесо осталось в пользовательских списках"
-    }
-  ],
+  "finding_count": 0,
+  "findings": [],
   "gpt_diagnostic_snapshot": {
-    "active_incidents": 1,
-    "bot_panel_heartbeat": "2026-07-16T01:19:30.242595+00:00",
+    "active_incidents": 0,
+    "bot_panel_heartbeat": "2026-07-16T02:20:13.132241+00:00",
     "checked_sources": 77,
     "configured_sources": 79,
     "domain": "telegram.me",
     "reachable_sources": 77,
     "single_source": "system_check_state.json",
-    "status": "degraded"
+    "status": "ok"
   },
   "incident_delivery": {
     "digest_sent": true,
@@ -95,7 +87,7 @@
     "opened": 0,
     "resolved": 1
   },
-  "incident_sequence": 21,
+  "incident_sequence": 22,
   "inventory": {
     "configured": 77,
     "domain": "telegram.me",
@@ -114,28 +106,28 @@
     "brand": "BB V.G.",
     "checked_sources": 77,
     "checks_delta": 77,
-    "checks_total": 60116,
+    "checks_total": 61502,
     "consecutive_failures": 0,
     "consecutive_no_progress": 0,
-    "iteration": 51,
+    "iteration": 18,
     "last_failure_at": "2026-07-14T02:44:12.395838+00:00",
-    "last_iteration_at": "2026-07-16T01:18:31.487565+00:00",
-    "last_iteration_duration_seconds": 6,
+    "last_iteration_at": "2026-07-16T02:13:21.669081+00:00",
+    "last_iteration_duration_seconds": 5,
     "last_iteration_exit_code": 0,
-    "last_process_heartbeat_at": "2026-07-16T01:18:31.487565+00:00",
-    "last_successful_checks_total": 60116,
-    "last_successful_iteration_at": "2026-07-16T01:18:31.487565+00:00",
+    "last_process_heartbeat_at": "2026-07-16T02:13:21.669081+00:00",
+    "last_successful_checks_total": 61502,
+    "last_successful_iteration_at": "2026-07-16T02:13:21.669081+00:00",
     "pending_wheels": 0,
     "reachable_sources": 77,
     "restart_recommended": false,
-    "run_id": "29456571378",
-    "run_started_at": "2026-07-15T22:48:04.430235+00:00",
+    "run_id": "29463929535",
+    "run_started_at": "2026-07-16T01:22:07.034242+00:00",
     "source_errors": 0,
     "stats_counter_reset": false,
     "status": "running",
     "version": 3
   },
-  "monitor_age_minutes": 3,
+  "monitor_age_minutes": 11,
   "notification_integrity": {
     "algorithm": "HMAC-SHA256",
     "contains_personal_fields": false,
@@ -166,10 +158,7 @@
   "primary_telegram_domain": "telegram.me",
   "rating_consistency": {
     "administrator_decisions": 19,
-    "inactive_wheel_leaks": [
-      "risen",
-      "solotg"
-    ],
+    "inactive_wheel_leaks": [],
     "policy": "additive_only_v1",
     "rated_sources": 18,
     "score_mismatches": []
@@ -197,7 +186,7 @@
       "tls": 0
     }
   },
-  "status": "degraded",
+  "status": "ok",
   "telegram_web": {
     "final_url": "https://telegram.me/s/mechanogun",
     "html_messages_detected": true,
