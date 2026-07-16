@@ -1,0 +1,742 @@
+{
+  "chapter_files": [
+    {
+      "path": "chapter1_stability.py",
+      "references": [
+        ".github/workflows/admin-bot.yml",
+        ".github/workflows/monitor.yml",
+        ".github/workflows/system-health.yml",
+        ".github/workflows/validate-current.yml",
+        "monitor_validation_v41.py"
+      ]
+    },
+    {
+      "path": "chapter2_unified_logic.py",
+      "references": [
+        ".github/workflows/admin-bot.yml",
+        ".github/workflows/bot-recovery-smoke.yml",
+        ".github/workflows/monitor.yml",
+        ".github/workflows/system-health.yml",
+        ".github/workflows/v22-checks.yml",
+        ".github/workflows/validate-current.yml",
+        ".github/workflows/validate-private-state.yml"
+      ]
+    },
+    {
+      "path": "chapter3_acceptance.py",
+      "references": [
+        ".github/workflows/validate-current.yml"
+      ]
+    },
+    {
+      "path": "chapter4_acceptance.py",
+      "references": [
+        ".github/workflows/admin-bot.yml",
+        ".github/workflows/bot-recovery-smoke.yml",
+        ".github/workflows/system-health.yml",
+        ".github/workflows/v22-checks.yml",
+        ".github/workflows/validate-current.yml",
+        ".github/workflows/validate-private-state.yml"
+      ]
+    },
+    {
+      "path": "chapter5_acceptance.py",
+      "references": [
+        ".github/workflows/admin-bot.yml",
+        ".github/workflows/monitor.yml",
+        ".github/workflows/validate-current.yml",
+        "monitor_validation_v41.py",
+        "preflight.py"
+      ]
+    }
+  ],
+  "current_runtime": "admin_panel_runtime_v41",
+  "runtime_chain_count": 38,
+  "runtime_file_count": 40,
+  "runtime_files": [
+    {
+      "direct_imports": [
+        "admin_bot",
+        "admin_panel_runtime_v9"
+      ],
+      "in_current_import_chain": true,
+      "module": "admin_panel_runtime_v10",
+      "path": "admin_panel_runtime_v10.py",
+      "reference_count": 2,
+      "references": [
+        "admin_panel_runtime_v10.py",
+        "admin_panel_runtime_v11.py"
+      ]
+    },
+    {
+      "direct_imports": [
+        "admin_panel_runtime_v10",
+        "admin_panel_runtime_v5"
+      ],
+      "in_current_import_chain": true,
+      "module": "admin_panel_runtime_v11",
+      "path": "admin_panel_runtime_v11.py",
+      "reference_count": 2,
+      "references": [
+        "admin_panel_runtime_v11.py",
+        "admin_panel_runtime_v12.py"
+      ]
+    },
+    {
+      "direct_imports": [
+        "admin_panel_runtime_v11"
+      ],
+      "in_current_import_chain": true,
+      "module": "admin_panel_runtime_v12",
+      "path": "admin_panel_runtime_v12.py",
+      "reference_count": 2,
+      "references": [
+        "admin_panel_runtime_v12.py",
+        "admin_panel_runtime_v13.py"
+      ]
+    },
+    {
+      "direct_imports": [
+        "admin_panel_runtime_v12"
+      ],
+      "in_current_import_chain": true,
+      "module": "admin_panel_runtime_v13",
+      "path": "admin_panel_runtime_v13.py",
+      "reference_count": 2,
+      "references": [
+        "admin_panel_runtime_v13.py",
+        "admin_panel_runtime_v14.py"
+      ]
+    },
+    {
+      "direct_imports": [
+        "admin_panel_runtime_v13",
+        "admin_panel_runtime_v6"
+      ],
+      "in_current_import_chain": true,
+      "module": "admin_panel_runtime_v14",
+      "path": "admin_panel_runtime_v14.py",
+      "reference_count": 4,
+      "references": [
+        "admin_panel_runtime_v14.py",
+        "admin_panel_runtime_v15.py",
+        "tests/test_current_contracts.py",
+        "tests/test_nightly_idle_policy.py"
+      ]
+    },
+    {
+      "direct_imports": [
+        "admin_panel_runtime_v14"
+      ],
+      "in_current_import_chain": true,
+      "module": "admin_panel_runtime_v15",
+      "path": "admin_panel_runtime_v15.py",
+      "reference_count": 2,
+      "references": [
+        "admin_panel_runtime_v15.py",
+        "admin_panel_runtime_v16.py"
+      ]
+    },
+    {
+      "direct_imports": [
+        "admin_panel_runtime_v15"
+      ],
+      "in_current_import_chain": true,
+      "module": "admin_panel_runtime_v16",
+      "path": "admin_panel_runtime_v16.py",
+      "reference_count": 2,
+      "references": [
+        "admin_panel_runtime_v16.py",
+        "admin_panel_runtime_v17.py"
+      ]
+    },
+    {
+      "direct_imports": [
+        "admin_bot",
+        "admin_panel_runtime_v16",
+        "admin_panel_v2",
+        "telegram_transport"
+      ],
+      "in_current_import_chain": true,
+      "module": "admin_panel_runtime_v17",
+      "path": "admin_panel_runtime_v17.py",
+      "reference_count": 12,
+      "references": [
+        "admin_panel_runtime_v17.py",
+        "admin_panel_runtime_v18.py",
+        "admin_panel_runtime_v23.py",
+        "admin_panel_runtime_v25.py",
+        "admin_panel_runtime_v26.py",
+        "admin_panel_runtime_v27.py",
+        "admin_panel_runtime_v30.py",
+        "admin_panel_runtime_v33.py",
+        "admin_panel_runtime_v34.py",
+        "preflight.py",
+        "system_checks.py",
+        "tests/test_nightly_idle_policy.py"
+      ]
+    },
+    {
+      "direct_imports": [
+        "admin_panel_runtime_v17"
+      ],
+      "in_current_import_chain": true,
+      "module": "admin_panel_runtime_v18",
+      "path": "admin_panel_runtime_v18.py",
+      "reference_count": 2,
+      "references": [
+        "admin_panel_runtime_v18.py",
+        "admin_panel_runtime_v19.py"
+      ]
+    },
+    {
+      "direct_imports": [
+        "admin_panel_runtime_v18"
+      ],
+      "in_current_import_chain": true,
+      "module": "admin_panel_runtime_v19",
+      "path": "admin_panel_runtime_v19.py",
+      "reference_count": 2,
+      "references": [
+        "admin_panel_runtime_v19.py",
+        "admin_panel_runtime_v20.py"
+      ]
+    },
+    {
+      "direct_imports": [
+        "admin_bot",
+        "admin_panel_v2"
+      ],
+      "in_current_import_chain": true,
+      "module": "admin_panel_runtime_v2",
+      "path": "admin_panel_runtime_v2.py",
+      "reference_count": 2,
+      "references": [
+        "admin_panel_runtime_v2.py",
+        "admin_panel_runtime_v3.py"
+      ]
+    },
+    {
+      "direct_imports": [
+        "admin_bot",
+        "admin_panel_runtime_v19"
+      ],
+      "in_current_import_chain": true,
+      "module": "admin_panel_runtime_v20",
+      "path": "admin_panel_runtime_v20.py",
+      "reference_count": 3,
+      "references": [
+        "admin_panel_runtime_v20.py",
+        "admin_panel_runtime_v21.py",
+        "preflight.py"
+      ]
+    },
+    {
+      "direct_imports": [
+        "admin_panel_runtime_v20"
+      ],
+      "in_current_import_chain": true,
+      "module": "admin_panel_runtime_v21",
+      "path": "admin_panel_runtime_v21.py",
+      "reference_count": 10,
+      "references": [
+        "admin_panel_runtime_v21.py",
+        "admin_panel_runtime_v22.py",
+        "admin_panel_runtime_v24.py",
+        "admin_panel_runtime_v25.py",
+        "admin_panel_runtime_v30.py",
+        "admin_panel_runtime_v33.py",
+        "admin_panel_runtime_v34.py",
+        "admin_panel_runtime_v37.py",
+        "preflight.py",
+        "system_checks.py"
+      ]
+    },
+    {
+      "direct_imports": [
+        "admin_bot",
+        "admin_panel_runtime_v21"
+      ],
+      "in_current_import_chain": true,
+      "module": "admin_panel_runtime_v22",
+      "path": "admin_panel_runtime_v22.py",
+      "reference_count": 4,
+      "references": [
+        "admin_panel_runtime_v22.py",
+        "admin_panel_runtime_v23.py",
+        "admin_panel_runtime_v25.py",
+        "admin_panel_runtime_v26.py"
+      ]
+    },
+    {
+      "direct_imports": [
+        "admin_bot",
+        "admin_panel_runtime_v17",
+        "admin_panel_runtime_v22",
+        "admin_panel_v2",
+        "private_state"
+      ],
+      "in_current_import_chain": false,
+      "module": "admin_panel_runtime_v23",
+      "path": "admin_panel_runtime_v23.py",
+      "reference_count": 3,
+      "references": [
+        "PRIVATE_STATE_MIGRATION_RU.md",
+        "admin_panel_runtime_v23.py",
+        "admin_panel_runtime_v24.py"
+      ]
+    },
+    {
+      "direct_imports": [
+        "admin_panel_runtime_v21",
+        "admin_panel_runtime_v23"
+      ],
+      "in_current_import_chain": false,
+      "module": "admin_panel_runtime_v24",
+      "path": "admin_panel_runtime_v24.py",
+      "reference_count": 1,
+      "references": [
+        "admin_panel_runtime_v24.py"
+      ]
+    },
+    {
+      "direct_imports": [
+        "admin_bot",
+        "admin_panel_runtime_v17",
+        "admin_panel_runtime_v21",
+        "admin_panel_runtime_v22",
+        "admin_panel_v2",
+        "bot_private_state"
+      ],
+      "in_current_import_chain": true,
+      "module": "admin_panel_runtime_v25",
+      "path": "admin_panel_runtime_v25.py",
+      "reference_count": 8,
+      "references": [
+        ".github/workflows/admin-bot.yml",
+        ".github/workflows/bot-recovery-smoke.yml",
+        ".github/workflows/system-health.yml",
+        ".github/workflows/v22-checks.yml",
+        ".github/workflows/validate-private-state.yml",
+        "admin_panel_runtime_v25.py",
+        "admin_panel_runtime_v26.py",
+        "admin_panel_runtime_v27.py"
+      ]
+    },
+    {
+      "direct_imports": [
+        "admin_action_v2",
+        "admin_bot",
+        "admin_panel_runtime_v17",
+        "admin_panel_runtime_v22",
+        "admin_panel_runtime_v25",
+        "bot_private_state"
+      ],
+      "in_current_import_chain": true,
+      "module": "admin_panel_runtime_v26",
+      "path": "admin_panel_runtime_v26.py",
+      "reference_count": 6,
+      "references": [
+        ".github/workflows/admin-bot.yml",
+        ".github/workflows/bot-recovery-smoke.yml",
+        ".github/workflows/v22-checks.yml",
+        ".github/workflows/validate-private-state.yml",
+        "admin_panel_runtime_v26.py",
+        "admin_panel_runtime_v27.py"
+      ]
+    },
+    {
+      "direct_imports": [
+        "admin_panel_runtime_v17",
+        "admin_panel_runtime_v25",
+        "admin_panel_runtime_v26",
+        "bot_private_state"
+      ],
+      "in_current_import_chain": true,
+      "module": "admin_panel_runtime_v27",
+      "path": "admin_panel_runtime_v27.py",
+      "reference_count": 4,
+      "references": [
+        ".github/workflows/admin-bot.yml",
+        ".github/workflows/bot-recovery-smoke.yml",
+        "admin_panel_runtime_v27.py",
+        "admin_panel_runtime_v28.py"
+      ]
+    },
+    {
+      "direct_imports": [
+        "admin_action_v2",
+        "admin_panel_runtime_v27"
+      ],
+      "in_current_import_chain": true,
+      "module": "admin_panel_runtime_v28",
+      "path": "admin_panel_runtime_v28.py",
+      "reference_count": 6,
+      "references": [
+        ".github/workflows/admin-bot.yml",
+        ".github/workflows/bot-recovery-smoke.yml",
+        ".github/workflows/v22-checks.yml",
+        ".github/workflows/validate-private-state.yml",
+        "admin_panel_runtime_v28.py",
+        "admin_panel_runtime_v29.py"
+      ]
+    },
+    {
+      "direct_imports": [
+        "admin_panel_runtime_v28"
+      ],
+      "in_current_import_chain": true,
+      "module": "admin_panel_runtime_v29",
+      "path": "admin_panel_runtime_v29.py",
+      "reference_count": 6,
+      "references": [
+        ".github/workflows/admin-bot.yml",
+        ".github/workflows/bot-recovery-smoke.yml",
+        ".github/workflows/v22-checks.yml",
+        ".github/workflows/validate-private-state.yml",
+        "admin_panel_runtime_v29.py",
+        "admin_panel_runtime_v30.py"
+      ]
+    },
+    {
+      "direct_imports": [
+        "admin_bot",
+        "admin_panel_runtime_v2",
+        "admin_panel_v2"
+      ],
+      "in_current_import_chain": true,
+      "module": "admin_panel_runtime_v3",
+      "path": "admin_panel_runtime_v3.py",
+      "reference_count": 3,
+      "references": [
+        "admin_panel_runtime_v3.py",
+        "admin_panel_runtime_v35.py",
+        "admin_panel_runtime_v4.py"
+      ]
+    },
+    {
+      "direct_imports": [
+        "admin_panel_runtime_v17",
+        "admin_panel_runtime_v21",
+        "admin_panel_runtime_v29",
+        "bot_private_state"
+      ],
+      "in_current_import_chain": true,
+      "module": "admin_panel_runtime_v30",
+      "path": "admin_panel_runtime_v30.py",
+      "reference_count": 6,
+      "references": [
+        ".github/workflows/admin-bot.yml",
+        ".github/workflows/bot-recovery-smoke.yml",
+        ".github/workflows/v22-checks.yml",
+        ".github/workflows/validate-private-state.yml",
+        "admin_panel_runtime_v30.py",
+        "admin_panel_runtime_v31.py"
+      ]
+    },
+    {
+      "direct_imports": [
+        "admin_bot",
+        "admin_panel_runtime_v30"
+      ],
+      "in_current_import_chain": true,
+      "module": "admin_panel_runtime_v31",
+      "path": "admin_panel_runtime_v31.py",
+      "reference_count": 8,
+      "references": [
+        ".github/workflows/admin-bot.yml",
+        ".github/workflows/bot-recovery-smoke.yml",
+        ".github/workflows/v22-checks.yml",
+        ".github/workflows/validate-private-state.yml",
+        "admin_panel_runtime_v31.py",
+        "admin_panel_runtime_v32.py",
+        "admin_panel_runtime_v39.py",
+        "preflight.py"
+      ]
+    },
+    {
+      "direct_imports": [
+        "admin_action_v3",
+        "admin_bot",
+        "admin_panel_runtime_v31"
+      ],
+      "in_current_import_chain": true,
+      "module": "admin_panel_runtime_v32",
+      "path": "admin_panel_runtime_v32.py",
+      "reference_count": 5,
+      "references": [
+        ".github/workflows/admin-bot.yml",
+        ".github/workflows/bot-recovery-smoke.yml",
+        ".github/workflows/v22-checks.yml",
+        ".github/workflows/validate-private-state.yml",
+        "admin_panel_runtime_v33.py"
+      ]
+    },
+    {
+      "direct_imports": [
+        "admin_panel_runtime_v17",
+        "admin_panel_runtime_v21",
+        "admin_panel_runtime_v32",
+        "bot_private_state",
+        "privacy_retention"
+      ],
+      "in_current_import_chain": true,
+      "module": "admin_panel_runtime_v33",
+      "path": "admin_panel_runtime_v33.py",
+      "reference_count": 7,
+      "references": [
+        ".github/workflows/admin-bot.yml",
+        ".github/workflows/bot-recovery-smoke.yml",
+        ".github/workflows/system-health.yml",
+        ".github/workflows/v22-checks.yml",
+        ".github/workflows/validate-private-state.yml",
+        "admin_panel_runtime_v34.py",
+        "admin_panel_runtime_v37.py"
+      ]
+    },
+    {
+      "direct_imports": [
+        "admin_bot",
+        "admin_panel_runtime_v17",
+        "admin_panel_runtime_v21",
+        "admin_panel_runtime_v33",
+        "bot_private_state",
+        "privacy_retention"
+      ],
+      "in_current_import_chain": true,
+      "module": "admin_panel_runtime_v34",
+      "path": "admin_panel_runtime_v34.py",
+      "reference_count": 8,
+      "references": [
+        ".github/workflows/admin-bot.yml",
+        ".github/workflows/bot-recovery-smoke.yml",
+        ".github/workflows/system-health.yml",
+        ".github/workflows/v22-checks.yml",
+        ".github/workflows/validate-private-state.yml",
+        "admin_panel_runtime_v35.py",
+        "tests/test_concurrency_and_ci.py",
+        "tests/test_current_contracts.py"
+      ]
+    },
+    {
+      "direct_imports": [
+        "admin_panel_runtime_v3",
+        "admin_panel_runtime_v34",
+        "admin_panel_v2"
+      ],
+      "in_current_import_chain": true,
+      "module": "admin_panel_runtime_v35",
+      "path": "admin_panel_runtime_v35.py",
+      "reference_count": 6,
+      "references": [
+        ".github/workflows/admin-bot.yml",
+        ".github/workflows/bot-recovery-smoke.yml",
+        ".github/workflows/system-health.yml",
+        ".github/workflows/v22-checks.yml",
+        ".github/workflows/validate-private-state.yml",
+        "admin_panel_runtime_v36.py"
+      ]
+    },
+    {
+      "direct_imports": [
+        "admin_bot",
+        "admin_panel_runtime_v35",
+        "bot_notification_state"
+      ],
+      "in_current_import_chain": true,
+      "module": "admin_panel_runtime_v36",
+      "path": "admin_panel_runtime_v36.py",
+      "reference_count": 6,
+      "references": [
+        ".github/workflows/admin-bot.yml",
+        ".github/workflows/bot-recovery-smoke.yml",
+        ".github/workflows/system-health.yml",
+        ".github/workflows/v22-checks.yml",
+        ".github/workflows/validate-private-state.yml",
+        "admin_panel_runtime_v37.py"
+      ]
+    },
+    {
+      "direct_imports": [
+        "admin_action_queue",
+        "admin_bot",
+        "admin_panel_runtime_v21",
+        "admin_panel_runtime_v33",
+        "admin_panel_runtime_v36"
+      ],
+      "in_current_import_chain": true,
+      "module": "admin_panel_runtime_v37",
+      "path": "admin_panel_runtime_v37.py",
+      "reference_count": 7,
+      "references": [
+        ".github/workflows/admin-bot.yml",
+        ".github/workflows/bot-recovery-smoke.yml",
+        ".github/workflows/system-health.yml",
+        ".github/workflows/v22-checks.yml",
+        ".github/workflows/validate-private-state.yml",
+        "admin_panel_runtime_v38.py",
+        "tests/test_current_contracts.py"
+      ]
+    },
+    {
+      "direct_imports": [
+        "admin_bot",
+        "admin_panel_runtime_v37",
+        "telegram_ui"
+      ],
+      "in_current_import_chain": true,
+      "module": "admin_panel_runtime_v38",
+      "path": "admin_panel_runtime_v38.py",
+      "reference_count": 11,
+      "references": [
+        ".github/workflows/admin-bot.yml",
+        ".github/workflows/bot-recovery-smoke.yml",
+        ".github/workflows/system-health.yml",
+        ".github/workflows/v22-checks.yml",
+        ".github/workflows/validate-private-state.yml",
+        "admin_panel_runtime_v39.py",
+        "chapter1_stability.py",
+        "tests/test_button_matrix.py",
+        "tests/test_current_contracts.py",
+        "tests/test_nightly_idle_policy.py",
+        "tests/test_ui_chapter4.py"
+      ]
+    },
+    {
+      "direct_imports": [
+        "admin_panel_runtime_v31",
+        "admin_panel_runtime_v38"
+      ],
+      "in_current_import_chain": true,
+      "module": "admin_panel_runtime_v39",
+      "path": "admin_panel_runtime_v39.py",
+      "reference_count": 3,
+      "references": [
+        ".github/workflows/admin-bot.yml",
+        "admin_panel_runtime_v40.py",
+        "tests/test_current_contracts.py"
+      ]
+    },
+    {
+      "direct_imports": [
+        "admin_panel_runtime_v3",
+        "monitor"
+      ],
+      "in_current_import_chain": true,
+      "module": "admin_panel_runtime_v4",
+      "path": "admin_panel_runtime_v4.py",
+      "reference_count": 2,
+      "references": [
+        "admin_panel_runtime_v4.py",
+        "admin_panel_runtime_v5.py"
+      ]
+    },
+    {
+      "direct_imports": [
+        "admin_panel_runtime_v39",
+        "telegram_ui"
+      ],
+      "in_current_import_chain": true,
+      "module": "admin_panel_runtime_v40",
+      "path": "admin_panel_runtime_v40.py",
+      "reference_count": 3,
+      "references": [
+        ".github/workflows/admin-bot.yml",
+        "admin_panel_runtime_v41.py",
+        "tests/test_current_contracts.py"
+      ]
+    },
+    {
+      "direct_imports": [
+        "admin_panel_runtime_v40"
+      ],
+      "in_current_import_chain": true,
+      "module": "admin_panel_runtime_v41",
+      "path": "admin_panel_runtime_v41.py",
+      "reference_count": 3,
+      "references": [
+        ".github/workflows/admin-bot.yml",
+        "chapter4_acceptance.py",
+        "tests/test_current_contracts.py"
+      ]
+    },
+    {
+      "direct_imports": [
+        "admin_panel_runtime_v4"
+      ],
+      "in_current_import_chain": true,
+      "module": "admin_panel_runtime_v5",
+      "path": "admin_panel_runtime_v5.py",
+      "reference_count": 4,
+      "references": [
+        "admin_panel_runtime_v11.py",
+        "admin_panel_runtime_v5.py",
+        "admin_panel_runtime_v6.py",
+        "tests/test_nightly_idle_policy.py"
+      ]
+    },
+    {
+      "direct_imports": [
+        "admin_panel_runtime_v5"
+      ],
+      "in_current_import_chain": true,
+      "module": "admin_panel_runtime_v6",
+      "path": "admin_panel_runtime_v6.py",
+      "reference_count": 4,
+      "references": [
+        "admin_panel_runtime_v14.py",
+        "admin_panel_runtime_v6.py",
+        "admin_panel_runtime_v7.py",
+        "admin_panel_runtime_v9.py"
+      ]
+    },
+    {
+      "direct_imports": [
+        "admin_panel_runtime_v6",
+        "monitor"
+      ],
+      "in_current_import_chain": true,
+      "module": "admin_panel_runtime_v7",
+      "path": "admin_panel_runtime_v7.py",
+      "reference_count": 3,
+      "references": [
+        "admin_panel_runtime_v7.py",
+        "admin_panel_runtime_v8.py",
+        "admin_panel_runtime_v9.py"
+      ]
+    },
+    {
+      "direct_imports": [
+        "admin_panel_runtime_v7"
+      ],
+      "in_current_import_chain": true,
+      "module": "admin_panel_runtime_v8",
+      "path": "admin_panel_runtime_v8.py",
+      "reference_count": 2,
+      "references": [
+        "admin_panel_runtime_v8.py",
+        "admin_panel_runtime_v9.py"
+      ]
+    },
+    {
+      "direct_imports": [
+        "admin_panel_runtime_v6",
+        "admin_panel_runtime_v7",
+        "admin_panel_runtime_v8"
+      ],
+      "in_current_import_chain": true,
+      "module": "admin_panel_runtime_v9",
+      "path": "admin_panel_runtime_v9.py",
+      "reference_count": 2,
+      "references": [
+        "admin_panel_runtime_v10.py",
+        "admin_panel_runtime_v9.py"
+      ]
+    }
+  ],
+  "unreferenced_python_candidates": [
+    "admin_panel_runtime_v24.py",
+    "monitor_resilience.py",
+    "normalize_source_ratings.py"
+  ]
+}
