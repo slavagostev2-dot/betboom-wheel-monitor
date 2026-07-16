@@ -18,6 +18,12 @@
       "sequence": 1,
       "value": "1eaab6cb41f445"
     },
+    "1e06ce4a0d5a43a488c778561ec1b710": {
+      "action": "confirm_finished_global",
+      "created_at": "2026-07-16T02:11:11.328110+00:00",
+      "sequence": 20,
+      "value": "staya|admin"
+    },
     "26a274d2313845e99d948ee2fd1eff9f": {
       "action": "participate_token",
       "created_at": "2026-07-15T11:20:40.043909+00:00",
@@ -116,5 +122,5 @@
     }
   },
   "format": "bbvg-admin-action-queue-v1",
-  "sequence": 19
+  "sequence": 20
 }
