@@ -8,7 +8,7 @@ from admin_panel_runtime_v40 import TelegramPanelRuntimeV40, self_test as v40_se
 
 
 class TelegramPanelRuntimeV41(TelegramPanelRuntimeV40):
-    """Final staged build: stable summaries, safe colors and clear home screen."""
+    """Stable summaries, clear numbered wheel controls and concise home screen."""
 
     RUNTIME_VERSION = 41
 
@@ -53,7 +53,7 @@ def self_test() -> None:
     ]
     assert "page:active" in callbacks
     assert "page:control" in callbacks
-    print("BB V.G. v41 home screen self-test passed")
+    print("BB V.G. v41 clear numbered interface self-test passed")
 
 
 def main() -> int:
