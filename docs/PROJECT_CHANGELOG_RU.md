@@ -19,6 +19,26 @@
 
 ---
 
+## 2026-07-16 — Объединены пользовательские настройки и удалены v27/v33–v35
+
+**Причина:** персональные настройки, удаление данных, управление уведомлениями владельцем и запуск monitor refresh были распределены по v33–v35, а v27 оставался отдельным файлом только ради устаревшего self-test. Старые workflow продолжали проверять историческую MRO вместо фактических предметных модулей.
+
+**Что изменено:**
+
+- `bbvg/bot/users.py` стал владельцем пользовательских настроек, приватности, owner-managed notification UI и синхронизации получателей через `UserSettingsMixin`;
+- v36 подключает `UserSettingsMixin` напрямую поверх v32, а v37 импортирует типы уведомлений из `bbvg.bot.users`;
+- `admin-bot.yml`, `v22-checks.yml`, `bot-recovery-smoke.yml`, `validate-private-state.yml` и `system-health.yml` переведены на прямые проверки `bbvg.bot.runtime`, `users.py` и `storage.py`;
+- удалены `admin_panel_runtime_v27.py`, `admin_panel_runtime_v33.py`, `admin_panel_runtime_v34.py`, `admin_panel_runtime_v35.py`;
+- число исторических runtime-файлов уменьшилось до 23, все оставшиеся файлы участвуют в текущей цепочке; суммарный объём — 6 040 строк.
+
+**Затронутые модули и файлы:** `bbvg/bot/users.py`, `admin_panel_runtime_v36.py`, `admin_panel_runtime_v37.py`, перечисленные workflow, tests, удалённые runtime-файлы, `AGENTS.md`, автоматически генерируемая MRO-карта.
+
+**Проверки:** перенос mixin и сокращение оболочек подтверждены runs `29486265773` и `29486481058`; workflow — `29488438556`, `29488535331`, `29488620798`, `29488690858`, `29488875044`; удаления v35/v34/v33/v27 — `29488969914`, `29489032655`, `29489104058`, `29489184430`. Во всех runs успешны compile, modules, полный pytest, обе acceptance-схемы, dependency audit и MRO inventory.
+
+**Актуальный backup:** `backup/refactor-after-user-settings-cleanup-2026-07-16`, SHA `e9746cf43d1a6acbaacf01f25ec65fcd7be8fbb9`.
+
+**Откат:** вернуть `refactor/consolidate-runtime-v42` на SHA `e9746cf43d1a6acbaacf01f25ec65fcd7be8fbb9`; для возврата до этапа использовать `backup/refactor-before-user-settings-cleanup-2026-07-16`.
+
 ## 2026-07-16 — Создан checkpoint перед объединением пользовательских настроек
 
 **Причина:** следующий крупный этап переносит персональные настройки, удаление пользовательских данных и owner-managed notification UI из исторических v33–v35 в существующий `bbvg/bot/users.py`.
