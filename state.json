@@ -8,7 +8,7 @@
       "expires_at": "2026-07-16T20:52:11+00:00",
       "first_notified_at": "2026-07-16T11:23:57.495602+00:00",
       "identifier": "cct1",
-      "last_checked_at": "2026-07-16T15:22:54.941800+00:00",
+      "last_checked_at": "2026-07-16T15:25:56.656268+00:00",
       "last_notification_at": "2026-07-16T11:23:57.495863+00:00",
       "lifecycle_changed_at": "2026-07-16T11:29:53.990097+00:00",
       "lifecycle_state": "participating",
@@ -31,17 +31,22 @@
     },
     "mael": {
       "button_token": "e3e81c9209543e",
-      "expires_at": "2026-07-23T15:23:03.976323+00:00",
+      "deadline": "2026-07-16T15:31:17.216487+00:00",
+      "deadline_source": "manual",
+      "event_id": "c259245d91a4e3e40c0a",
+      "expires_at": "2026-07-16T17:25:56.653998+00:00",
       "first_notified_at": "2026-07-16T15:23:03.975976+00:00",
       "identifier": "mael",
-      "last_checked_at": "2026-07-16T15:23:03.976319+00:00",
+      "last_checked_at": "2026-07-16T15:25:56.656268+00:00",
       "last_notification_at": "2026-07-16T15:23:03.976277+00:00",
+      "lifecycle_changed_at": "2026-07-16T15:25:56.654010+00:00",
+      "lifecycle_state": "scheduled_draw",
       "message_date": "2026-07-16T15:20:37+00:00",
       "message_id": 129,
       "message_text": "https://betboom.ru/freestream/mael\nhttps://telegram.me/kolesaBB\nhttps://telegram.me/kolesaBB/129",
       "message_url": "https://telegram.me/kolesaBB/129",
-      "method": "свежий Telegram-пост; страница открылась, но активность не подтверждена",
-      "needs_manual_time": true,
+      "method": "состояние определяется пользователями BB V.G.",
+      "needs_manual_time": false,
       "page_excerpt": "",
       "page_status": "fresh_unconfirmed",
       "participating": false,
@@ -49,7 +54,7 @@
       "sources": [
         "kolesaBB"
       ],
-      "status": "manual_time_required",
+      "status": "unknown",
       "url": "https://betboom.ru/freestream/mael"
     },
     "papa": {
@@ -60,7 +65,7 @@
       "expires_at": "2026-07-16T21:16:03.370092+00:00",
       "first_notified_at": "2026-07-16T11:48:04.224568+00:00",
       "identifier": "papa",
-      "last_checked_at": "2026-07-16T15:22:54.941800+00:00",
+      "last_checked_at": "2026-07-16T15:25:56.656268+00:00",
       "last_notification_at": "2026-07-16T11:48:04.224842+00:00",
       "lifecycle_changed_at": "2026-07-16T11:53:59.896800+00:00",
       "lifecycle_state": "participating",
@@ -89,7 +94,7 @@
       "expires_at": "2026-07-16T21:17:06.547233+00:00",
       "first_notified_at": "2026-07-16T14:22:45.529614+00:00",
       "identifier": "sysman",
-      "last_checked_at": "2026-07-16T15:22:54.941800+00:00",
+      "last_checked_at": "2026-07-16T15:25:56.656268+00:00",
       "last_notification_at": "2026-07-16T14:22:45.529852+00:00",
       "last_unknown_reminder_at": "2026-07-23T14:34:42.097615+00:00",
       "lifecycle_changed_at": "2026-07-16T14:28:37.989359+00:00",
@@ -119,7 +124,7 @@
       "expires_at": "2026-07-16T18:32:41+00:00",
       "first_notified_at": "2026-07-16T08:05:01.877690+00:00",
       "identifier": "zonertg7",
-      "last_checked_at": "2026-07-16T15:22:54.941800+00:00",
+      "last_checked_at": "2026-07-16T15:25:56.656268+00:00",
       "last_notification_at": "2026-07-16T08:05:01.877983+00:00",
       "lifecycle_changed_at": "2026-07-16T08:23:00.968486+00:00",
       "lifecycle_state": "participating",
@@ -251,6 +256,14 @@
     "49ada0740cd1481eaec369807f7c31bb": {
       "action": "participate_token",
       "applied_at": "2026-07-15T11:51:44.513126+00:00",
+      "health_changed": false,
+      "state_changed": true,
+      "stats_changed": false,
+      "status": "applied"
+    },
+    "4a9939f47e784d9f9ed6d505d94fe229": {
+      "action": "set_deadline",
+      "applied_at": "2026-07-16T15:25:56.654050+00:00",
       "health_changed": false,
       "state_changed": true,
       "stats_changed": false,
@@ -568,6 +581,7 @@
     "3e2a642611c6405589bd1918b5f2f8a3": "2026-07-15T15:01:31.514705+00:00",
     "3ee3b0c3e1104127bb8818c84fdb470e": "2026-07-15T11:45:41.561556+00:00",
     "49ada0740cd1481eaec369807f7c31bb": "2026-07-15T11:51:44.513126+00:00",
+    "4a9939f47e784d9f9ed6d505d94fe229": "2026-07-16T15:25:56.654050+00:00",
     "4d65f201a8354384aa7e960ac0f46930": "2026-07-16T02:10:15.910247+00:00",
     "4e745c4eb6104dadbb3750df90452a3d": "2026-07-15T11:45:41.562278+00:00",
     "51968ee3fad44a81b4ae1de521d8bf78": "2026-07-16T02:13:17.424579+00:00",
@@ -963,7 +977,7 @@
     "whylollycrry",
     "zortelad"
   ],
-  "last_admin_action_applied_at": "2026-07-16T14:37:44.218407+00:00",
+  "last_admin_action_applied_at": "2026-07-16T15:25:56.654073+00:00",
   "last_automatic_status_at": "2026-07-16T06:31:45.207974+00:00",
   "last_heartbeat_at": "2026-07-16T15:05:00.124018+00:00",
   "last_run_kind": "schedule",
@@ -1016,6 +1030,10 @@
   },
   "last_source_inactivity_report_at": null,
   "manual_deadlines": {
+    "mael": {
+      "deadline": "2026-07-16T15:31:17.216487+00:00",
+      "updated_at": "2026-07-16T15:25:56.654041+00:00"
+    },
     "papa": {
       "deadline": "2026-07-16T20:46:03.370092+00:00",
       "updated_at": "2026-07-16T11:53:59.896634+00:00"
