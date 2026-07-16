@@ -65,11 +65,23 @@ jobs:
           python security_audit.py --current
           python migrate_bot_private_state.py --check
           python notification_preferences_v2.py
-          python admin_panel_runtime_v25.py --self-test
+          python - <<'PY'
+          from pathlib import Path
+          import bot_private_state
+          import admin_panel_runtime_v25
+          import admin_panel_runtime_v30
+
+          original = bot_private_state.STATE_PATH
+          try:
+              bot_private_state.STATE_PATH = Path('/tmp/bbvg-runtime-self-test-state.enc.json')
+              admin_panel_runtime_v25.self_test()
+              admin_panel_runtime_v30.self_test()
+          finally:
+              bot_private_state.STATE_PATH = original
+          PY
           python admin_panel_runtime_v26.py --self-test
           python admin_panel_runtime_v28.py --self-test
           python admin_panel_runtime_v29.py --self-test
-          python admin_panel_runtime_v30.py --self-test
           python admin_panel_runtime_v31.py --self-test
           python admin_panel_runtime_v32.py --self-test
           python admin_panel_runtime_v36.py --self-test
