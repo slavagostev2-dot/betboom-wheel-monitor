@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-# Validation trigger for the idempotent direct-runtime patch.
 from tests.production_acceptance import interface_acceptance
 
 
