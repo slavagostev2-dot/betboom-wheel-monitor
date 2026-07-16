@@ -1,17 +1,16 @@
 {
-  "modules_tail": "[foundation]\nBB V.G. panel foundation self-test passed\n[interface]\nBB V.G. panel interface self-test passed\n[source_requests]\nBB V.G. source request subsystem self-test passed\n[wheels]\nBB V.G. wheel interaction subsystem self-test passed\n[users]\nBB V.G. user management subsystem self-test passed\n[sources]\nBB V.G. source registry subsystem self-test passed\n[storage]\nTraceback (most recent call last):\n  File \"<frozen runpy>\", line 198, in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"/home/runner/work/betboom-wheel-monitor/betboom-wheel-monitor/bbvg/bot/storage.py\", line 420, in <module>\n    self_test()\n  File \"/home/runner/work/betboom-wheel-monitor/betboom-wheel-monitor/bbvg/bot/storage.py\", line 401, in self_test\n    merged = PrivateStateRuntime._merge_access(base, local, remote)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/betboom-wheel-monitor/betboom-wheel-monitor/bbvg/bot/storage.py\", line 102, in _merge_access\n    merged = bot_private_state.merge_three_way(base, local, remote)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: module 'bot_private_state' has no attribute 'merge_three_way'",
   "parts": {
-    "acceptance": "skipped",
+    "acceptance": "success",
     "compile": "success",
-    "dependency": "skipped",
-    "inventory": "skipped",
-    "legacy": "skipped",
-    "modules": "failure",
-    "pytest": "skipped"
+    "dependency": "success",
+    "inventory": "success",
+    "legacy": "success",
+    "modules": "success",
+    "pytest": "success"
   },
-  "result": "failure",
-  "run_id": "29482636813",
-  "source_sha": "a6c4d2595d552daab349b7daf777728191bee020",
+  "result": "success",
+  "run_id": "29483070934",
+  "source_sha": "6fabe62167a7857ca7b07f602e763d5f20ed7c4e",
   "stage": "full_refactor_validation_and_audit",
-  "updated_at": "2026-07-16T08:12:55.435287+00:00"
+  "updated_at": "2026-07-16T08:20:05.411711+00:00"
 }
