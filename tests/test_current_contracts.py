@@ -29,6 +29,7 @@ import wheel_link_lifecycle
 import wheel_metadata_quality
 import wheel_scenario_suite
 from bbvg.bot import interface as panel_interface
+from bbvg.bot import sources as panel_sources
 
 
 class CurrentProductionContractTests(unittest.TestCase):
@@ -60,6 +61,7 @@ class CurrentProductionContractTests(unittest.TestCase):
         personal_reminder_filter.self_test()
 
     def test_source_and_wheel_contracts(self) -> None:
+        panel_sources.self_test()
         source_registry.self_test()
         source_intelligence_alerts.self_test()
         wheel_lifecycle_v2.self_test()
