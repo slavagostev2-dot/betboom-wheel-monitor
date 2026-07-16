@@ -28,28 +28,88 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+          cache: pip
+      - name: Install runtime dependencies
+        run: python -m pip install -r requirements.txt
       - name: Build dependency report
         run: python tools/cleanup_audit.py
       - name: Build readable runtime inventory
+        env:
+          BOT_TOKEN: test-bot-token
+          BOT_STATE_KEY: test-state-key
+          BOT_CHAT_ID: "1"
+          BBVG_TEST_MODE: "1"
+          TELEGRAM_WEB_DOMAIN: telegram.me
         run: |
           python - <<'PY'
+          import inspect
           import json
           from pathlib import Path
+
+          from bbvg.bot.runtime import TelegramPanelRuntime
 
           report = json.loads(Path("cleanup_audit.json").read_text(encoding="utf-8"))
           lines = [
               "# BB V.G. — карта методов исторического runtime панели",
               "",
-              "Файл генерируется автоматически из AST. Он описывает текущую ветку рефакторинга и не заменяет ручной анализ поведения.",
+              "Файл генерируется автоматически из AST и фактической MRO текущего runtime.",
               "",
               f"- Runtime-файлов: **{report['runtime_file_count']}**",
               f"- В текущей цепочке: **{report['runtime_chain_count']}**",
               f"- Суммарно строк: **{report['runtime_total_lines']}**",
               f"- Уникальных имён методов: **{report['runtime_unique_method_count']}**",
               "",
-              "## Файлы и определённые методы",
+              "## Фактическая MRO текущей панели",
               "",
           ]
+
+          mro = [value for value in TelegramPanelRuntime.__mro__ if value is not object]
+          for index, cls in enumerate(mro, 1):
+              lines.append(f"{index}. `{cls.__module__}.{cls.__name__}`")
+
+          owners: dict[str, list[str]] = {}
+          for name in sorted(dir(TelegramPanelRuntime)):
+              if name.startswith("__"):
+                  continue
+              try:
+                  value = getattr(TelegramPanelRuntime, name)
+              except Exception:
+                  continue
+              if not callable(value) and not isinstance(value, property):
+                  continue
+              for cls in mro:
+                  if name in cls.__dict__:
+                      owner = f"{cls.__module__}.{cls.__name__}"
+                      owners.setdefault(owner, []).append(name)
+                      break
+
+          lines.extend([
+              "",
+              "## Владельцы фактически действующих методов",
+              "",
+              "Метод учитывается у первого класса MRO, который его определяет. "
+              "Исторические реализации, полностью перекрытые более поздним классом, здесь не перечисляются.",
+              "",
+          ])
+          mro_order = {
+              f"{cls.__module__}.{cls.__name__}": index
+              for index, cls in enumerate(mro)
+          }
+          for owner, methods in sorted(
+              owners.items(),
+              key=lambda item: (mro_order.get(item[0], 10_000), item[0]),
+          ):
+              lines.extend([
+                  f"### `{owner}` — {len(methods)} методов",
+                  "",
+                  ", ".join(f"`{name}()`" for name in methods),
+                  "",
+              ])
+
+          lines.extend([
+              "## Файлы и определённые методы",
+              "",
+          ])
           for row in report["runtime_files"]:
               state = "в рабочей цепочке" if row["in_current_import_chain"] else "вне рабочей цепочки"
               lines.extend([
@@ -97,4 +157,5 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add cleanup_audit.json docs/RUNTIME_METHOD_INVENTORY_RU.md
           git commit -m "Update cleanup dependency reports [skip ci]" || exit 0
+          git pull --rebase origin refactor/consolidate-runtime-v42 || { git rebase --abort || true; exit 1; }
           git push origin HEAD:refactor/consolidate-runtime-v42
