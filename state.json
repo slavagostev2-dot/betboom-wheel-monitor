@@ -8,7 +8,7 @@
       "expires_at": "2026-07-16T20:52:11+00:00",
       "first_notified_at": "2026-07-16T11:23:57.495602+00:00",
       "identifier": "cct1",
-      "last_checked_at": "2026-07-16T14:28:37.991991+00:00",
+      "last_checked_at": "2026-07-16T14:31:39.622235+00:00",
       "last_notification_at": "2026-07-16T11:23:57.495863+00:00",
       "lifecycle_changed_at": "2026-07-16T11:29:53.990097+00:00",
       "lifecycle_state": "participating",
@@ -29,6 +29,52 @@
       "status": "unknown",
       "url": "https://betboom.ru/freestream/cct1"
     },
+    "koma": {
+      "button_token": "9c42f4efef1595",
+      "expires_at": "2026-07-23T14:32:01.976729+00:00",
+      "first_notified_at": "2026-07-16T14:32:01.976445+00:00",
+      "identifier": "koma",
+      "last_checked_at": "2026-07-16T14:32:01.976725+00:00",
+      "last_notification_at": "2026-07-16T14:32:01.976685+00:00",
+      "message_date": "2026-07-16T14:29:14+00:00",
+      "message_id": 127,
+      "message_text": "https://betboom.ru/freestream/koma\nhttps://telegram.me/kolesaBB\nhttps://telegram.me/kolesaBB/127",
+      "message_url": "https://telegram.me/kolesaBB/127",
+      "method": "свежий Telegram-пост; страница открылась, но активность не подтверждена",
+      "needs_manual_time": true,
+      "page_excerpt": "",
+      "page_status": "fresh_unconfirmed",
+      "participating": false,
+      "source": "kolesaBB",
+      "sources": [
+        "kolesaBB"
+      ],
+      "status": "manual_time_required",
+      "url": "https://betboom.ru/freestream/koma"
+    },
+    "kyzko": {
+      "button_token": "1ab5f320ed7481",
+      "expires_at": "2026-07-23T14:32:04.377246+00:00",
+      "first_notified_at": "2026-07-16T14:32:04.376930+00:00",
+      "identifier": "kyzko",
+      "last_checked_at": "2026-07-16T14:32:04.377243+00:00",
+      "last_notification_at": "2026-07-16T14:32:04.377199+00:00",
+      "message_date": "2026-07-16T14:29:22+00:00",
+      "message_id": 128,
+      "message_text": "https://betboom.ru/freestream/kyzko\nhttps://telegram.me/kolesaBB\nhttps://telegram.me/kolesaBB/128",
+      "message_url": "https://telegram.me/kolesaBB/128",
+      "method": "свежий Telegram-пост; страница открылась, но активность не подтверждена",
+      "needs_manual_time": true,
+      "page_excerpt": "",
+      "page_status": "fresh_unconfirmed",
+      "participating": false,
+      "source": "kolesaBB",
+      "sources": [
+        "kolesaBB"
+      ],
+      "status": "manual_time_required",
+      "url": "https://betboom.ru/freestream/kyzko"
+    },
     "papa": {
       "button_token": "e96d98dc9ff290",
       "deadline": "2026-07-16T20:46:03.370092+00:00",
@@ -37,7 +83,7 @@
       "expires_at": "2026-07-16T21:16:03.370092+00:00",
       "first_notified_at": "2026-07-16T11:48:04.224568+00:00",
       "identifier": "papa",
-      "last_checked_at": "2026-07-16T14:28:37.991991+00:00",
+      "last_checked_at": "2026-07-16T14:31:39.622235+00:00",
       "last_notification_at": "2026-07-16T11:48:04.224842+00:00",
       "lifecycle_changed_at": "2026-07-16T11:53:59.896800+00:00",
       "lifecycle_state": "participating",
@@ -61,12 +107,12 @@
     "sysman": {
       "button_token": "0217364010fe57",
       "event_id": "a85242763bceea38a981",
-      "expires_at": "2026-07-23T14:28:37.989852+00:00",
+      "expires_at": "2026-07-23T14:31:39.619988+00:00",
       "first_notified_at": "2026-07-16T14:22:45.529614+00:00",
       "identifier": "sysman",
-      "last_checked_at": "2026-07-16T14:28:37.991991+00:00",
+      "last_checked_at": "2026-07-16T14:31:39.622235+00:00",
       "last_notification_at": "2026-07-16T14:22:45.529852+00:00",
-      "last_unknown_reminder_at": "2026-07-23T14:28:37.989839+00:00",
+      "last_unknown_reminder_at": "2026-07-23T14:31:39.619960+00:00",
       "lifecycle_changed_at": "2026-07-16T14:28:37.989359+00:00",
       "lifecycle_state": "participating",
       "manual_time_waiting_since": "2026-07-16T14:25:37.817936+00:00",
@@ -94,7 +140,7 @@
       "expires_at": "2026-07-16T18:32:41+00:00",
       "first_notified_at": "2026-07-16T08:05:01.877690+00:00",
       "identifier": "zonertg7",
-      "last_checked_at": "2026-07-16T14:28:37.991991+00:00",
+      "last_checked_at": "2026-07-16T14:31:39.622235+00:00",
       "last_notification_at": "2026-07-16T08:05:01.877983+00:00",
       "lifecycle_changed_at": "2026-07-16T08:23:00.968486+00:00",
       "lifecycle_state": "participating",
@@ -568,6 +614,21 @@
       "url": "https://betboom.ru/freestream/cct1",
       "wheel_key": "cct1"
     },
+    "1ab5f320ed7481": {
+      "created_at": "2026-07-16T14:32:02.421620+00:00",
+      "identifier": "kyzko",
+      "message_date": "2026-07-16T14:29:22+00:00",
+      "message_id": 128,
+      "message_text": "https://betboom.ru/freestream/kyzko\nhttps://telegram.me/kolesaBB\nhttps://telegram.me/kolesaBB/128",
+      "message_url": "https://telegram.me/kolesaBB/128",
+      "method": "свежий Telegram-пост; страница открылась, но активность не подтверждена",
+      "page_excerpt": "Букмекерская контора BetBoom - ставки на спорт онлайн в России!",
+      "post_key": "1ab5f320ed7481ccab0d0f3c0fd5ed826786e3e203414bd7baf4d44c8c429b5f",
+      "source": "kolesaBB",
+      "status": "preliminary",
+      "url": "https://betboom.ru/freestream/kyzko",
+      "wheel_key": "kyzko"
+    },
     "26eac472265da6": {
       "created_at": "2026-07-14T17:52:05.387173+00:00",
       "identifier": "zonertg5",
@@ -612,6 +673,21 @@
       "status": "final_reminder",
       "url": "https://betboom.ru/freestream/krat",
       "wheel_key": "krat"
+    },
+    "9c42f4efef1595": {
+      "created_at": "2026-07-16T14:31:59.990685+00:00",
+      "identifier": "koma",
+      "message_date": "2026-07-16T14:29:14+00:00",
+      "message_id": 127,
+      "message_text": "https://betboom.ru/freestream/koma\nhttps://telegram.me/kolesaBB\nhttps://telegram.me/kolesaBB/127",
+      "message_url": "https://telegram.me/kolesaBB/127",
+      "method": "свежий Telegram-пост; страница открылась, но активность не подтверждена",
+      "page_excerpt": "Букмекерская контора BetBoom - ставки на спорт онлайн в России!",
+      "post_key": "9c42f4efef1595bc35c746c3b4dcdd4a75a77b457ec08d0d24900c4fd90ac99d",
+      "source": "kolesaBB",
+      "status": "preliminary",
+      "url": "https://betboom.ru/freestream/koma",
+      "wheel_key": "koma"
     },
     "a3db268d9fb845": {
       "created_at": "2026-07-15T20:17:16.674235+00:00",
@@ -1175,6 +1251,7 @@
     "1a0a406e2f854e38a6c3468e566011a7c01526799dc8dab76e15d0d908d30c08": "2026-07-14T18:37:14.397373+00:00",
     "1a5ccd17d7a992923e767f85a5d829858ff5ac3f04907fdbc7f3872dc5b2dd0d": "2026-07-12T16:26:27.168278+00:00",
     "1aac546fc6a9df958bf86529db52f9131748b70115ad27002e8e57f9d4056979": "2026-07-15T14:58:37.527459+00:00",
+    "1ab5f320ed7481ccab0d0f3c0fd5ed826786e3e203414bd7baf4d44c8c429b5f": "2026-07-16T14:32:04.377251+00:00",
     "1c9782360c0840960b2e870d19cf28df349dbfdd9351836b7545c0beec9f0d09": "2026-07-14T17:37:10.097744+00:00",
     "1e386ffd28b794e439bb5f1287cebe487a0cbb81581ebbda58a83cd1d46565c5": "2026-07-12T15:09:56.683803+00:00",
     "1e5709f7f6cd2025a94184aeb215b0ec51b728194d221fa13227f618900fb2b0": "2026-07-12T16:26:42.241145+00:00",
@@ -1247,6 +1324,7 @@
     "99169d26a5f1dcd06f0dd425ae8e591690d21428d43ead1aa274b695c962e8ee": "2026-07-12T18:26:20.014168+00:00",
     "9923e7f98f5456dc9a50ee0385fd86242b1f18dba172d8214184b090a4feaf28": "2026-07-14T11:12:45.785395+00:00",
     "997d5b6b33d9263a510cb3b3ea28fc879a5d83f132620987ca12032e75aaad66": "2026-07-12T15:09:46.050550+00:00",
+    "9c42f4efef1595bc35c746c3b4dcdd4a75a77b457ec08d0d24900c4fd90ac99d": "2026-07-16T14:32:01.976733+00:00",
     "9f1b7087c70a36f9599f46265dbcf3cbfe95e3f8503cb7050bcc4e8e23b0c251": "2026-07-12T15:09:23.912472+00:00",
     "a10eadd8fc0ab4bf1c2bfa44916c9bb0fffea1bdb186a8d53755cdc2a5144e0f": "2026-07-14T19:57:24.330308+00:00",
     "a2e9fb9f62e1b2b649e30288fcdba5c026b726149de836012db0ec1aede70405": "2026-07-12T19:22:25.149620+00:00",
@@ -1403,12 +1481,26 @@
       "suppress_until": "2026-07-13T18:21:20.531002+00:00",
       "url": "https://betboom.ru/freestream/HOOCH06"
     },
+    "koma": {
+      "alerted_at": "2026-07-16T14:32:01.976530+00:00",
+      "identifier": "koma",
+      "lifecycle_rule": "no_timer_2h",
+      "suppress_until": "2026-07-16T16:32:01.976530+00:00",
+      "url": "https://betboom.ru/freestream/koma"
+    },
     "krat": {
       "alerted_at": "2026-07-14T11:12:45.785280+00:00",
       "deadline": "2026-07-14T20:09:21+00:00",
       "identifier": "krat",
       "suppress_until": "2026-07-14T20:39:21+00:00",
       "url": "https://betboom.ru/freestream/krat"
+    },
+    "kyzko": {
+      "alerted_at": "2026-07-16T14:32:04.377011+00:00",
+      "identifier": "kyzko",
+      "lifecycle_rule": "no_timer_2h",
+      "suppress_until": "2026-07-16T16:32:04.377011+00:00",
+      "url": "https://betboom.ru/freestream/kyzko"
     },
     "mantis": {
       "alerted_at": "2026-07-12T18:26:16.728141+00:00",
@@ -1776,6 +1868,26 @@
         "message_id": 1543,
         "message_url": "https://telegram.me/jestercast/1543",
         "source": "jestercast"
+      }
+    ],
+    "koma": [
+      {
+        "has_future_availability": false,
+        "has_future_deadline": false,
+        "message_date": "2026-07-16T14:29:14+00:00",
+        "message_id": 127,
+        "message_url": "https://telegram.me/kolesaBB/127",
+        "source": "kolesaBB"
+      }
+    ],
+    "kyzko": [
+      {
+        "has_future_availability": false,
+        "has_future_deadline": false,
+        "message_date": "2026-07-16T14:29:22+00:00",
+        "message_id": 128,
+        "message_url": "https://telegram.me/kolesaBB/128",
+        "source": "kolesaBB"
       }
     ],
     "papa": [
