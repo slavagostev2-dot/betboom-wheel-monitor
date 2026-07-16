@@ -204,6 +204,12 @@
       "sequence": 10,
       "value": "risen|2026-07-16T00:35:49.579770+00:00"
     },
+    "bd8a81dbb9d14a34a62c0ca7a9f4000a": {
+      "action": "set_deadline",
+      "created_at": "2026-07-16T13:49:54.193107+00:00",
+      "sequence": 42,
+      "value": "stray|2026-07-16T13:51:53.955256+00:00"
+    },
     "c1fb664742804f8b99ded10887499baf": {
       "action": "mark_inactive_global",
       "created_at": "2026-07-15T16:54:11.482450+00:00",
@@ -248,5 +254,5 @@
     }
   },
   "format": "bbvg-admin-action-queue-v1",
-  "sequence": 41
+  "sequence": 42
 }
