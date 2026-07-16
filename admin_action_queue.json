@@ -66,6 +66,12 @@
       "sequence": 6,
       "value": "smurf5"
     },
+    "51968ee3fad44a81b4ae1de521d8bf78": {
+      "action": "confirm_finished_global",
+      "created_at": "2026-07-16T02:11:21.738759+00:00",
+      "sequence": 25,
+      "value": "neret|admin"
+    },
     "676e68422d844063a3b26d085ff358bc": {
       "action": "confirm_finished_global",
       "created_at": "2026-07-16T02:11:13.488996+00:00",
@@ -146,5 +152,5 @@
     }
   },
   "format": "bbvg-admin-action-queue-v1",
-  "sequence": 24
+  "sequence": 25
 }
