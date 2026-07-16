@@ -1,11 +1,11 @@
 # BB V.G. — карта методов исторического runtime панели
 
 Файл генерируется автоматически из AST и фактической MRO текущего runtime.
-Исходный коммит аудита: `42f34057d23766e950f1e1712171bf051a2ffff9`.
+Исходный коммит аудита: `664f7af12b440895a84ce1e4fba227fc82e63427`.
 
 - Runtime-файлов: **27**
-- В текущей цепочке: **26**
-- Суммарно строк: **6947**
+- В текущей цепочке: **24**
+- Суммарно строк: **6949**
 - Уникальных имён методов: **105**
 
 ## Фактическая MRO текущей панели
@@ -14,37 +14,35 @@
 2. `admin_panel_runtime_v38.TelegramPanelRuntimeV38`
 3. `admin_panel_runtime_v37.TelegramPanelRuntimeV37`
 4. `admin_panel_runtime_v36.TelegramPanelRuntimeV36`
-5. `admin_panel_runtime_v35.TelegramPanelRuntimeV35`
-6. `admin_panel_runtime_v34.TelegramPanelRuntimeV34`
-7. `admin_panel_runtime_v33.TelegramPanelRuntimeV33`
-8. `admin_panel_runtime_v32.TelegramPanelRuntimeV32`
-9. `admin_panel_runtime_v31.TelegramPanelRuntimeV31`
-10. `admin_panel_runtime_v30.TelegramPanelRuntimeV30`
-11. `admin_panel_runtime_v29.TelegramPanelRuntimeV29`
-12. `admin_panel_runtime_v28.TelegramPanelRuntimeV28`
-13. `admin_panel_runtime_v26.TelegramPanelRuntimeV26`
-14. `admin_panel_runtime_v25.TelegramPanelRuntimeV25`
-15. `bbvg.bot.storage.PrivateStateRuntime`
-16. `bbvg.bot.sources.SourceRegistryRuntime`
-17. `bbvg.bot.users.UserManagementRuntime`
-18. `bbvg.bot.wheels.WheelInteractionRuntime`
-19. `admin_panel_runtime_v19.TelegramPanelRuntimeV19`
-20. `admin_panel_runtime_v17.TelegramPanelRuntimeV17`
-21. `bbvg.bot.source_requests.SourceRequestRuntime`
-22. `bbvg.bot.interface.PanelInterfaceRuntime`
-23. `admin_panel_runtime_v13.TelegramPanelRuntimeV13`
-24. `bbvg.bot.foundation.PanelFoundationMixin`
-25. `admin_panel_runtime_v9.TelegramPanelRuntimeV9`
-26. `admin_panel_runtime_v8.TelegramPanelRuntimeV8`
-27. `admin_panel_runtime_v7.TelegramPanelRuntimeV7`
-28. `admin_panel_runtime_v6.TelegramPanelRuntimeV6`
-29. `admin_panel_runtime_v5.TelegramPanelRuntimeV5`
-30. `admin_panel_runtime_v4.TelegramPanelRuntimeV4`
-31. `admin_panel_runtime_v3.TelegramPanelRuntimeV3`
-32. `admin_panel_runtime_v2.TelegramPanelRuntimeV2`
-33. `admin_panel_v2.TelegramPanelV2`
-34. `admin_runtime.RuntimeAdminBot`
-35. `admin_bot.AdminBot`
+5. `bbvg.bot.users.UserSettingsMixin`
+6. `admin_panel_runtime_v32.TelegramPanelRuntimeV32`
+7. `admin_panel_runtime_v31.TelegramPanelRuntimeV31`
+8. `admin_panel_runtime_v30.TelegramPanelRuntimeV30`
+9. `admin_panel_runtime_v29.TelegramPanelRuntimeV29`
+10. `admin_panel_runtime_v28.TelegramPanelRuntimeV28`
+11. `admin_panel_runtime_v26.TelegramPanelRuntimeV26`
+12. `admin_panel_runtime_v25.TelegramPanelRuntimeV25`
+13. `bbvg.bot.storage.PrivateStateRuntime`
+14. `bbvg.bot.sources.SourceRegistryRuntime`
+15. `bbvg.bot.users.UserManagementRuntime`
+16. `bbvg.bot.wheels.WheelInteractionRuntime`
+17. `admin_panel_runtime_v19.TelegramPanelRuntimeV19`
+18. `admin_panel_runtime_v17.TelegramPanelRuntimeV17`
+19. `bbvg.bot.source_requests.SourceRequestRuntime`
+20. `bbvg.bot.interface.PanelInterfaceRuntime`
+21. `admin_panel_runtime_v13.TelegramPanelRuntimeV13`
+22. `bbvg.bot.foundation.PanelFoundationMixin`
+23. `admin_panel_runtime_v9.TelegramPanelRuntimeV9`
+24. `admin_panel_runtime_v8.TelegramPanelRuntimeV8`
+25. `admin_panel_runtime_v7.TelegramPanelRuntimeV7`
+26. `admin_panel_runtime_v6.TelegramPanelRuntimeV6`
+27. `admin_panel_runtime_v5.TelegramPanelRuntimeV5`
+28. `admin_panel_runtime_v4.TelegramPanelRuntimeV4`
+29. `admin_panel_runtime_v3.TelegramPanelRuntimeV3`
+30. `admin_panel_runtime_v2.TelegramPanelRuntimeV2`
+31. `admin_panel_v2.TelegramPanelV2`
+32. `admin_runtime.RuntimeAdminBot`
+33. `admin_bot.AdminBot`
 
 ## Владельцы фактически действующих методов
 
@@ -66,17 +64,9 @@
 
 `safe_text_for_role()`, `source_menu_rows()`
 
-### `admin_panel_runtime_v35.TelegramPanelRuntimeV35` — 2 методов
+### `bbvg.bot.users.UserSettingsMixin` — 7 методов
 
-`set_all_user_notifications()`, `set_user_notification()`
-
-### `admin_panel_runtime_v34.TelegramPanelRuntimeV34` — 2 методов
-
-`show_user_detail()`, `show_user_notifications()`
-
-### `admin_panel_runtime_v33.TelegramPanelRuntimeV33` — 2 методов
-
-`delete_current_user_data()`, `show_settings()`
+`_save_user_preferences()`, `delete_current_user_data()`, `set_all_user_notifications()`, `set_user_notification()`, `show_settings()`, `show_user_detail()`, `show_user_notifications()`
 
 ### `admin_panel_runtime_v32.TelegramPanelRuntimeV32` — 2 методов
 
@@ -110,9 +100,9 @@
 
 `load_source_registry()`, `miniapp_url_for_chat()`, `show_app_entry()`, `source_mode_name()`, `source_registry()`, `source_registry_fallback()`
 
-### `bbvg.bot.users.UserManagementRuntime` — 2 методов
+### `bbvg.bot.users.UserManagementRuntime` — 3 методов
 
-`handle_update()`, `notify_owner_about_new_user()`
+`_sync_recipient()`, `handle_update()`, `notify_owner_about_new_user()`
 
 ### `bbvg.bot.wheels.WheelInteractionRuntime` — 6 методов
 
@@ -362,7 +352,7 @@
 - `delete_current_user_data()` — 15 строк
 - `handle_callback()` — 45 строк
 
-### `admin_panel_runtime_v34.py` — 421 строк, в рабочей цепочке
+### `admin_panel_runtime_v34.py` — 421 строк, вне рабочей цепочки
 
 Прямые импорты: `admin_panel_runtime_v21`, `admin_panel_runtime_v33`, `bbvg.bot.storage`
 
@@ -378,7 +368,7 @@
 - `render_page()` — 5 строк
 - `handle_callback()` — 38 строк
 
-### `admin_panel_runtime_v35.py` — 93 строк, в рабочей цепочке
+### `admin_panel_runtime_v35.py` — 93 строк, вне рабочей цепочки
 
 Прямые импорты: `admin_panel_runtime_v34`, `bbvg.bot.storage`
 
@@ -387,11 +377,11 @@
 - `set_user_notification()` — 8 строк
 - `set_all_user_notifications()` — 3 строк
 
-### `admin_panel_runtime_v36.py` — 151 строк, в рабочей цепочке
+### `admin_panel_runtime_v36.py` — 153 строк, в рабочей цепочке
 
-Прямые импорты: `admin_bot`, `admin_panel_runtime_v35`, `bot_notification_state`
+Прямые импорты: `admin_bot`, `admin_panel_runtime_v32`, `bbvg.bot.users`, `bot_notification_state`
 
-Класс `TelegramPanelRuntimeV36`; база: `TelegramPanelRuntimeV35`.
+Класс `TelegramPanelRuntimeV36`; база: `UserSettingsMixin`, `TelegramPanelRuntimeV32`.
 
 - `safe_text_for_role()` — 5 строк
 - `send()` — 9 строк

@@ -10,7 +10,6 @@
         ".github/workflows/system-health.yml",
         ".github/workflows/validate-current.yml",
         "docs/CODE_INVENTORY_RU.md",
-        "docs/PROJECT_CHANGELOG_RU.md",
         "docs/REFACTOR_PLAN_RU.md",
         "monitor_validation_v41.py"
       ]
@@ -63,14 +62,13 @@
         ".github/workflows/monitor.yml",
         ".github/workflows/validate-current.yml",
         "docs/CODE_INVENTORY_RU.md",
-        "docs/PROJECT_CHANGELOG_RU.md",
         "docs/REFACTOR_PLAN_RU.md",
         "monitor_validation_v41.py"
       ]
     }
   ],
   "current_runtime": "admin_panel_runtime_v41",
-  "runtime_chain_count": 26,
+  "runtime_chain_count": 24,
   "runtime_file_count": 27,
   "runtime_files": [
     {
@@ -94,11 +92,10 @@
       "line_count": 33,
       "module": "admin_panel_runtime_v13",
       "path": "admin_panel_runtime_v13.py",
-      "reference_count": 4,
+      "reference_count": 3,
       "references": [
         "admin_panel_runtime_v13.py",
         "bbvg/bot/interface.py",
-        "docs/PROJECT_CHANGELOG_RU.md",
         "docs/RUNTIME_METHOD_INVENTORY_RU.md"
       ],
       "top_level_functions": [
@@ -329,7 +326,7 @@
       "line_count": 271,
       "module": "admin_panel_runtime_v25",
       "path": "admin_panel_runtime_v25.py",
-      "reference_count": 9,
+      "reference_count": 10,
       "references": [
         ".github/workflows/admin-bot.yml",
         ".github/workflows/bot-recovery-smoke.yml",
@@ -339,6 +336,7 @@
         "admin_panel_runtime_v25.py",
         "admin_panel_runtime_v26.py",
         "admin_panel_runtime_v27.py",
+        "docs/PROJECT_CHANGELOG_RU.md",
         "docs/RUNTIME_METHOD_INVENTORY_RU.md"
       ],
       "top_level_functions": [
@@ -431,7 +429,7 @@
       "line_count": 321,
       "module": "admin_panel_runtime_v26",
       "path": "admin_panel_runtime_v26.py",
-      "reference_count": 8,
+      "reference_count": 9,
       "references": [
         ".github/workflows/admin-bot.yml",
         ".github/workflows/bot-recovery-smoke.yml",
@@ -440,6 +438,7 @@
         "admin_panel_runtime_v26.py",
         "admin_panel_runtime_v27.py",
         "admin_panel_runtime_v28.py",
+        "docs/PROJECT_CHANGELOG_RU.md",
         "docs/RUNTIME_METHOD_INVENTORY_RU.md"
       ],
       "top_level_functions": [
@@ -510,7 +509,7 @@
       "line_count": 85,
       "module": "admin_panel_runtime_v28",
       "path": "admin_panel_runtime_v28.py",
-      "reference_count": 7,
+      "reference_count": 8,
       "references": [
         ".github/workflows/admin-bot.yml",
         ".github/workflows/bot-recovery-smoke.yml",
@@ -518,6 +517,7 @@
         ".github/workflows/validate-private-state.yml",
         "admin_panel_runtime_v28.py",
         "admin_panel_runtime_v29.py",
+        "docs/PROJECT_CHANGELOG_RU.md",
         "docs/RUNTIME_METHOD_INVENTORY_RU.md"
       ],
       "top_level_functions": [
@@ -1253,13 +1253,14 @@
       "line_count": 330,
       "module": "admin_panel_runtime_v32",
       "path": "admin_panel_runtime_v32.py",
-      "reference_count": 6,
+      "reference_count": 7,
       "references": [
         ".github/workflows/admin-bot.yml",
         ".github/workflows/bot-recovery-smoke.yml",
         ".github/workflows/v22-checks.yml",
         ".github/workflows/validate-private-state.yml",
         "admin_panel_runtime_v33.py",
+        "admin_panel_runtime_v36.py",
         "docs/RUNTIME_METHOD_INVENTORY_RU.md"
       ],
       "top_level_functions": [
@@ -1456,7 +1457,7 @@
         "admin_panel_runtime_v33",
         "bbvg.bot.storage"
       ],
-      "in_current_import_chain": true,
+      "in_current_import_chain": false,
       "line_count": 421,
       "module": "admin_panel_runtime_v34",
       "path": "admin_panel_runtime_v34.py",
@@ -1511,18 +1512,17 @@
         "admin_panel_runtime_v34",
         "bbvg.bot.storage"
       ],
-      "in_current_import_chain": true,
+      "in_current_import_chain": false,
       "line_count": 93,
       "module": "admin_panel_runtime_v35",
       "path": "admin_panel_runtime_v35.py",
-      "reference_count": 7,
+      "reference_count": 6,
       "references": [
         ".github/workflows/admin-bot.yml",
         ".github/workflows/bot-recovery-smoke.yml",
         ".github/workflows/system-health.yml",
         ".github/workflows/v22-checks.yml",
         ".github/workflows/validate-private-state.yml",
-        "admin_panel_runtime_v36.py",
         "docs/RUNTIME_METHOD_INVENTORY_RU.md"
       ],
       "top_level_functions": [
@@ -1534,7 +1534,8 @@
       "classes": [
         {
           "bases": [
-            "TelegramPanelRuntimeV35"
+            "UserSettingsMixin",
+            "TelegramPanelRuntimeV32"
           ],
           "class_attributes": [],
           "method_count": 5,
@@ -1544,44 +1545,44 @@
               "decorators": [
                 "staticmethod"
               ],
-              "end_line": 34,
+              "end_line": 35,
               "line_count": 5,
               "name": "safe_text_for_role",
-              "start_line": 30
+              "start_line": 31
             },
             {
               "async": false,
               "decorators": [],
-              "end_line": 44,
+              "end_line": 45,
               "line_count": 9,
               "name": "send",
-              "start_line": 36
+              "start_line": 37
             },
             {
               "async": false,
               "decorators": [],
-              "end_line": 54,
+              "end_line": 55,
               "line_count": 9,
               "name": "setup_bot",
-              "start_line": 46
+              "start_line": 47
             },
             {
               "async": false,
               "decorators": [
                 "staticmethod"
               ],
-              "end_line": 63,
+              "end_line": 64,
               "line_count": 7,
               "name": "source_menu_rows",
-              "start_line": 57
+              "start_line": 58
             },
             {
               "async": false,
               "decorators": [],
-              "end_line": 89,
+              "end_line": 90,
               "line_count": 25,
               "name": "show_ranking",
-              "start_line": 65
+              "start_line": 66
             }
           ],
           "name": "TelegramPanelRuntimeV36"
@@ -1589,11 +1590,12 @@
       ],
       "direct_imports": [
         "admin_bot",
-        "admin_panel_runtime_v35",
+        "admin_panel_runtime_v32",
+        "bbvg.bot.users",
         "bot_notification_state"
       ],
       "in_current_import_chain": true,
-      "line_count": 151,
+      "line_count": 153,
       "module": "admin_panel_runtime_v36",
       "path": "admin_panel_runtime_v36.py",
       "reference_count": 7,
@@ -2270,9 +2272,9 @@
       "reference_count": 7,
       "references": [
         ".github/workflows/admin-bot.yml",
+        "AGENTS.md",
         "bbvg/bot/runtime.py",
         "docs/CODE_INVENTORY_RU.md",
-        "docs/PROJECT_CHANGELOG_RU.md",
         "docs/RUNTIME_METHOD_INVENTORY_RU.md",
         "tests/production_acceptance.py",
         "tests/test_current_contracts.py"
@@ -3273,7 +3275,7 @@
       "admin_panel_runtime_v37"
     ]
   },
-  "runtime_total_lines": 6947,
+  "runtime_total_lines": 6949,
   "runtime_unique_method_count": 105,
   "unreferenced_python_candidates": []
 }

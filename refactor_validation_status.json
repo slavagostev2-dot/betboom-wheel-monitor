@@ -1,17 +1,16 @@
 {
-  "modules_tail": "[foundation]\nBB V.G. panel foundation self-test passed\n[interface]\nBB V.G. panel interface self-test passed\n[source_requests]\nBB V.G. source request subsystem self-test passed\n[wheels]\nBB V.G. wheel interaction subsystem self-test passed\n[users]\nTraceback (most recent call last):\n  File \"<frozen runpy>\", line 198, in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"/home/runner/work/betboom-wheel-monitor/betboom-wheel-monitor/bbvg/bot/users.py\", line 873, in <module>\n    self_test()\n  File \"/home/runner/work/betboom-wheel-monitor/betboom-wheel-monitor/bbvg/bot/users.py\", line 868, in self_test\n    assert settings.notification_preferences(\"2\")[\"wheel_final_reminders\"] is False\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError",
   "parts": {
-    "acceptance": "skipped",
+    "acceptance": "success",
     "compile": "success",
-    "dependency": "skipped",
-    "inventory": "skipped",
-    "legacy": "skipped",
-    "modules": "failure",
-    "pytest": "skipped"
+    "dependency": "success",
+    "inventory": "success",
+    "legacy": "success",
+    "modules": "success",
+    "pytest": "success"
   },
-  "result": "failure",
-  "run_id": "29486181579",
-  "source_sha": "96266e684b787b3a23ffefe2f1ada3970639b69e",
+  "result": "success",
+  "run_id": "29486265773",
+  "source_sha": "664f7af12b440895a84ce1e4fba227fc82e63427",
   "stage": "full_refactor_validation_and_audit",
-  "updated_at": "2026-07-16T09:11:07.372472+00:00"
+  "updated_at": "2026-07-16T09:12:40.134160+00:00"
 }
