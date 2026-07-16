@@ -32,13 +32,24 @@ def confirm_finished_global(
                 "state_changed": False,
                 "health_changed": False,
                 "stats_changed": False,
-                "detail": "Колесо уже завершено",
+                "detail": "Колесо уже завершено; рейтинг уже был начислен ранее",
             }
         raise ValueError("Колесо уже отсутствует в активном списке")
+
     sources = legacy.wheel_sources(state, normalized, context)
     entry = state.get("active_wheels", {}).get(normalized)
     event_entry = entry if isinstance(entry, dict) else context
     current = legacy.monitor.now_utc()
+    rating_key = wheel_lifecycle_v2.rating_event_key(normalized, event_entry)
+    rating_changed = legacy.monitor.data_store.record_admin_wheel_decision(
+        stats,
+        wheel_key=rating_key,
+        sources=sources,
+        decision="confirmed",
+        actor=actor or "admin",
+        at=current,
+    )
+
     removed = wheel_lifecycle_v2.complete_event(
         state,
         normalized,
@@ -52,19 +63,22 @@ def confirm_finished_global(
     completed["sources"] = sources
     completed["confirmed_finished_at"] = current.isoformat()
     completed["confirmed_finished_by"] = actor or "admin"
+    completed["rating_event_key"] = rating_key
     # Keep url_alerts/activation_alerts and seen records. They suppress the same
     # already finished Telegram publications without blocking a later event that
     # reuses the freestream identifier.
+    detail = (
+        "Колесо завершено; рейтинг источников начислен: по 40 очков каждому. "
+        if rating_changed
+        else "Колесо завершено; рейтинг уже был начислен ранее. "
+    )
     return {
         "action": "confirm_finished_global",
         "value": value,
         "state_changed": True,
         "health_changed": False,
-        "stats_changed": False,
-        "detail": (
-            "Колесо завершено и удалено без изменения рейтинга. "
-            f"Очищено записей: {removed}"
-        ),
+        "stats_changed": rating_changed,
+        "detail": detail + f"Очищено записей: {removed}",
     }
 
 
@@ -97,6 +111,8 @@ def self_test() -> None:
                 "identifier": "wheel-a",
                 "url": "https://betboom.ru/freestream/wheel-a",
                 "source": "official",
+                "message_date": "2026-07-16T10:00:00+00:00",
+                "event_id": "event-a",
             }
         },
         "wheel_publications": {
@@ -112,14 +128,21 @@ def self_test() -> None:
         state, health, stats, "confirm_finished_global", "wheel-a|1"
     )
     assert result["state_changed"] is True
+    assert result["stats_changed"] is True
     assert "wheel-a" not in state["active_wheels"]
     assert "wheel-a" not in state["wheel_publications"]
-    assert not stats.get("admin_wheel_decisions")
+    assert stats["sources"]["official"]["quality_score"] == 40
+    assert stats["sources"]["collector"]["quality_score"] == 40
+    decisions = stats.get("admin_wheel_decisions", {})
+    assert len(decisions) == 1
     second = apply_action_v3(
         state, health, stats, "confirm_finished_global", "wheel-a|1"
     )
     assert second["state_changed"] is False
-    print("admin action v3 finished-wheel self-test passed")
+    assert stats["sources"]["official"]["quality_score"] == 40
+    assert stats["sources"]["collector"]["quality_score"] == 40
+    assert len(stats.get("admin_wheel_decisions", {})) == 1
+    print("admin action v3 completed-wheel rating self-test passed")
 
 
 def main() -> int:
