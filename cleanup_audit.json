@@ -142,17 +142,22 @@
           "bases": [
             "SourceRequestRuntime"
           ],
-          "class_attributes": [],
+          "class_attributes": [
+            "bot_username",
+            "miniapp_url_for_chat",
+            "show_app_entry"
+          ],
           "method_count": 0,
           "methods": [],
           "name": "TelegramPanelRuntimeV17"
         }
       ],
       "direct_imports": [
+        "bbvg.bot.foundation",
         "bbvg.bot.source_requests"
       ],
       "in_current_import_chain": true,
-      "line_count": 34,
+      "line_count": 44,
       "module": "admin_panel_runtime_v17",
       "path": "admin_panel_runtime_v17.py",
       "reference_count": 13,
@@ -4143,7 +4148,7 @@
       "admin_panel_runtime_v37"
     ]
   },
-  "runtime_total_lines": 8904,
+  "runtime_total_lines": 8914,
   "runtime_unique_method_count": 128,
   "unreferenced_python_candidates": []
 }

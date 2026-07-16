@@ -4,7 +4,7 @@
 
 - Runtime-файлов: **34**
 - В текущей цепочке: **30**
-- Суммарно строк: **8904**
+- Суммарно строк: **8914**
 - Уникальных имён методов: **128**
 
 ## Фактическая MRO текущей панели
@@ -122,9 +122,13 @@
 
 `show_app_entry()`
 
-### `bbvg.bot.source_requests.SourceRequestRuntime` — 9 методов
+### `admin_panel_runtime_v17.TelegramPanelRuntimeV17` — 1 методов
 
-`bot_username()`, `can_moderate_source_requests()`, `decide_source_request()`, `inspect_source()`, `moderator_chat_ids()`, `notify_moderators()`, `request_id()`, `requester_name()`, `submit_source_request()`
+`bot_username()`
+
+### `bbvg.bot.source_requests.SourceRequestRuntime` — 8 методов
+
+`can_moderate_source_requests()`, `decide_source_request()`, `inspect_source()`, `moderator_chat_ids()`, `notify_moderators()`, `request_id()`, `requester_name()`, `submit_source_request()`
 
 ### `bbvg.bot.interface.PanelInterfaceRuntime` — 12 методов
 
@@ -180,9 +184,9 @@
 
 - собственных методов нет
 
-### `admin_panel_runtime_v17.py` — 34 строк, в рабочей цепочке
+### `admin_panel_runtime_v17.py` — 44 строк, в рабочей цепочке
 
-Прямые импорты: `bbvg.bot.source_requests`
+Прямые импорты: `bbvg.bot.foundation`, `bbvg.bot.source_requests`
 
 Класс `TelegramPanelRuntimeV17`; база: `SourceRequestRuntime`.
 
