@@ -1,8 +1,8 @@
 {
   "active_incidents": 1,
   "admin_panel": {
-    "age_minutes": 0,
-    "last_heartbeat_at": "2026-07-16T02:48:09.294351+00:00",
+    "age_minutes": 2,
+    "last_heartbeat_at": "2026-07-16T02:58:15.542074+00:00",
     "started_at": "2026-07-16T02:48:09.294342+00:00",
     "status": "running",
     "update_consumer": "single_getUpdates_owner",
@@ -32,7 +32,7 @@
     "source_health": "ok",
     "telegram_transport": "ok"
   },
-  "checked_at": "2026-07-16T02:48:18.648473+00:00",
+  "checked_at": "2026-07-16T03:00:44.900023+00:00",
   "discovery": {
     "active_size": 77,
     "candidate_count": 204,
@@ -72,7 +72,7 @@
   "finding_count": 1,
   "findings": [
     {
-      "detail": "Последняя итерация была 34 минут назад.",
+      "detail": "Последняя итерация была 47 минут назад.",
       "kind": "monitor_stale",
       "severity": "critical",
       "subject": "",
@@ -81,7 +81,7 @@
   ],
   "gpt_diagnostic_snapshot": {
     "active_incidents": 1,
-    "bot_panel_heartbeat": "2026-07-16T02:48:09.294351+00:00",
+    "bot_panel_heartbeat": "2026-07-16T02:58:15.542074+00:00",
     "checked_sources": 77,
     "configured_sources": 79,
     "domain": "telegram.me",
@@ -135,7 +135,7 @@
     "status": "running",
     "version": 3
   },
-  "monitor_age_minutes": 34,
+  "monitor_age_minutes": 47,
   "notification_integrity": {
     "algorithm": "HMAC-SHA256",
     "contains_personal_fields": false,
