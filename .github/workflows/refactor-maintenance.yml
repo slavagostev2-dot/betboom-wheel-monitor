@@ -38,13 +38,13 @@ jobs:
           )
           replace_once(
               ".github/workflows/admin-bot.yml",
-              "admin_panel_runtime_v27.py admin_panel_runtime_v28.py admin_panel_runtime_v29.py",
-              "admin_panel_runtime_v28.py admin_panel_runtime_v29.py",
+              "            admin_panel_runtime_v27.py admin_panel_runtime_v28.py admin_panel_runtime_v29.py \\\n",
+              "            admin_panel_runtime_v28.py admin_panel_runtime_v29.py \\\n",
           )
           replace_once(
               ".github/workflows/admin-bot.yml",
-              "admin_panel_runtime_v33.py admin_panel_runtime_v34.py admin_panel_runtime_v35.py \\\n            admin_panel_runtime_v36.py",
-              "admin_panel_runtime_v36.py",
+              "            admin_panel_runtime_v33.py admin_panel_runtime_v34.py admin_panel_runtime_v35.py \\\n",
+              "",
           )
           replace_once(
               ".github/workflows/admin-bot.yml",
