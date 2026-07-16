@@ -8,6 +8,7 @@ from typing import Any
 import admin_action_queue
 import bbvg_monitor_main
 import notification_integrity_v2
+import wheel_link_lifecycle
 from admin_panel_runtime_v38 import TelegramPanelRuntimeV38
 
 
@@ -46,7 +47,10 @@ def self_test() -> None:
     assert "monitor-66-live.yml" not in text(".github/workflows/activate-66-sources.yml")
     assert bbvg_monitor_main.monitor.BOT_FEEDBACK_ENABLED is False
     assert bbvg_monitor_main.monitor.process_admin_actions is admin_action_queue.process_pending
+    assert bbvg_monitor_main.monitor._bbvg_wheel_link_lifecycle_installed is True
+    assert bbvg_monitor_main.monitor.UNKNOWN_DEDUP_HOURS == 2
     assert "getUpdates" not in inspect.getsource(bbvg_monitor_main)
+    wheel_link_lifecycle.self_test()
 
     system_checks = text("system_checks.py")
     assert "check_admin_panel_runtime(details, findings)" in system_checks
