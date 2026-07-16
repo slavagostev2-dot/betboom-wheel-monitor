@@ -72,7 +72,7 @@
   ],
   "current_runtime": "admin_panel_runtime_v41",
   "runtime_chain_count": 36,
-  "runtime_file_count": 40,
+  "runtime_file_count": 39,
   "runtime_files": [
     {
       "classes": [
@@ -1242,11 +1242,10 @@
       "line_count": 439,
       "module": "admin_panel_runtime_v21",
       "path": "admin_panel_runtime_v21.py",
-      "reference_count": 11,
+      "reference_count": 10,
       "references": [
         "admin_panel_runtime_v21.py",
         "admin_panel_runtime_v22.py",
-        "admin_panel_runtime_v24.py",
         "admin_panel_runtime_v25.py",
         "admin_panel_runtime_v30.py",
         "admin_panel_runtime_v33.py",
@@ -1443,85 +1442,10 @@
       "line_count": 138,
       "module": "admin_panel_runtime_v23",
       "path": "admin_panel_runtime_v23.py",
-      "reference_count": 5,
+      "reference_count": 4,
       "references": [
         "PRIVATE_STATE_MIGRATION_RU.md",
         "admin_panel_runtime_v23.py",
-        "admin_panel_runtime_v24.py",
-        "docs/CODE_INVENTORY_RU.md",
-        "docs/RUNTIME_METHOD_INVENTORY_RU.md"
-      ],
-      "top_level_functions": [
-        "main",
-        "self_test"
-      ]
-    },
-    {
-      "classes": [
-        {
-          "bases": [
-            "TelegramPanelRuntimeV23"
-          ],
-          "class_attributes": [],
-          "method_count": 5,
-          "methods": [
-            {
-              "async": false,
-              "decorators": [
-                "staticmethod"
-              ],
-              "end_line": 43,
-              "line_count": 27,
-              "name": "compact_menu_rows",
-              "start_line": 17
-            },
-            {
-              "async": false,
-              "decorators": [],
-              "end_line": 87,
-              "line_count": 43,
-              "name": "show_sources",
-              "start_line": 45
-            },
-            {
-              "async": false,
-              "decorators": [],
-              "end_line": 122,
-              "line_count": 34,
-              "name": "show_ranking",
-              "start_line": 89
-            },
-            {
-              "async": false,
-              "decorators": [],
-              "end_line": 179,
-              "line_count": 56,
-              "name": "show_active",
-              "start_line": 124
-            },
-            {
-              "async": false,
-              "decorators": [],
-              "end_line": 194,
-              "line_count": 14,
-              "name": "render_page",
-              "start_line": 181
-            }
-          ],
-          "name": "TelegramPanelRuntimeV24"
-        }
-      ],
-      "direct_imports": [
-        "admin_panel_runtime_v21",
-        "admin_panel_runtime_v23"
-      ],
-      "in_current_import_chain": false,
-      "line_count": 222,
-      "module": "admin_panel_runtime_v24",
-      "path": "admin_panel_runtime_v24.py",
-      "reference_count": 3,
-      "references": [
-        "admin_panel_runtime_v24.py",
         "docs/CODE_INVENTORY_RU.md",
         "docs/RUNTIME_METHOD_INVENTORY_RU.md"
       ],
@@ -3606,9 +3530,10 @@
       "line_count": 8,
       "module": "admin_panel_runtime_v39",
       "path": "admin_panel_runtime_v39.py",
-      "reference_count": 3,
+      "reference_count": 4,
       "references": [
         ".github/workflows/admin-bot.yml",
+        "docs/PROJECT_CHANGELOG_RU.md",
         "docs/RUNTIME_METHOD_INVENTORY_RU.md",
         "tests/test_current_contracts.py"
       ],
@@ -3705,9 +3630,10 @@
       "line_count": 8,
       "module": "admin_panel_runtime_v40",
       "path": "admin_panel_runtime_v40.py",
-      "reference_count": 3,
+      "reference_count": 4,
       "references": [
         ".github/workflows/admin-bot.yml",
+        "docs/PROJECT_CHANGELOG_RU.md",
         "docs/RUNTIME_METHOD_INVENTORY_RU.md",
         "tests/test_current_contracts.py"
       ],
@@ -3722,12 +3648,13 @@
       "line_count": 8,
       "module": "admin_panel_runtime_v41",
       "path": "admin_panel_runtime_v41.py",
-      "reference_count": 7,
+      "reference_count": 8,
       "references": [
         ".github/workflows/admin-bot.yml",
         "AGENTS.md",
         "bbvg/bot/runtime.py",
         "docs/CODE_INVENTORY_RU.md",
+        "docs/PROJECT_CHANGELOG_RU.md",
         "docs/RUNTIME_METHOD_INVENTORY_RU.md",
         "tests/production_acceptance.py",
         "tests/test_current_contracts.py"
@@ -4485,7 +4412,6 @@
       "admin_panel_runtime_v16",
       "admin_panel_runtime_v21",
       "admin_panel_runtime_v22",
-      "admin_panel_runtime_v24",
       "admin_panel_runtime_v25",
       "admin_panel_runtime_v26",
       "admin_panel_runtime_v29",
@@ -4668,7 +4594,6 @@
       "admin_panel_runtime_v20",
       "admin_panel_runtime_v21",
       "admin_panel_runtime_v22",
-      "admin_panel_runtime_v24",
       "admin_panel_runtime_v25",
       "admin_panel_runtime_v29",
       "admin_panel_runtime_v3",
@@ -4759,7 +4684,6 @@
       "admin_panel_runtime_v14",
       "admin_panel_runtime_v20",
       "admin_panel_runtime_v22",
-      "admin_panel_runtime_v24",
       "admin_panel_runtime_v25",
       "admin_panel_runtime_v3",
       "admin_panel_runtime_v32",
@@ -4849,7 +4773,6 @@
     ],
     "show_ranking": [
       "admin_panel_runtime_v22",
-      "admin_panel_runtime_v24",
       "admin_panel_runtime_v25",
       "admin_panel_runtime_v30",
       "admin_panel_runtime_v36",
@@ -4886,7 +4809,6 @@
     ],
     "show_sources": [
       "admin_panel_runtime_v22",
-      "admin_panel_runtime_v24",
       "admin_panel_runtime_v25",
       "admin_panel_runtime_v29",
       "admin_panel_runtime_v3",
@@ -4949,7 +4871,7 @@
       "admin_panel_runtime_v12"
     ]
   },
-  "runtime_total_lines": 10564,
+  "runtime_total_lines": 10342,
   "runtime_unique_method_count": 153,
   "unreferenced_python_candidates": []
 }
