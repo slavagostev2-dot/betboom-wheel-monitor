@@ -3,8 +3,8 @@
 Файл генерируется автоматически из AST. Он описывает текущую ветку рефакторинга и не заменяет ручной анализ поведения.
 
 - Runtime-файлов: **36**
-- В текущей цепочке: **33**
-- Суммарно строк: **9933**
+- В текущей цепочке: **32**
+- Суммарно строк: **9875**
 - Уникальных имён методов: **148**
 
 ## Файлы и определённые методы
@@ -41,7 +41,7 @@
 - `handle_message()` — 11 строк
 - `handle_callback()` — 46 строк
 
-### `admin_panel_runtime_v15.py` — 160 строк, в рабочей цепочке
+### `admin_panel_runtime_v15.py` — 160 строк, вне рабочей цепочки
 
 Прямые импорты: `admin_panel_runtime_v14`
 
@@ -54,14 +54,13 @@
 - `show_stats()` — 36 строк
 - `render_page()` — 8 строк
 
-### `admin_panel_runtime_v16.py` — 87 строк, в рабочей цепочке
+### `admin_panel_runtime_v16.py` — 29 строк, в рабочей цепочке
 
-Прямые импорты: `admin_panel_runtime_v15`
+Прямые импорты: `bbvg.bot.interface`
 
-Класс `TelegramPanelRuntimeV16`; база: `TelegramPanelRuntimeV15`.
+Класс `TelegramPanelRuntimeV16`; база: `PanelInterfaceRuntime`.
 
-- `compact_menu_rows()` — 32 строк
-- `render_page()` — 7 строк
+- собственных методов нет
 
 ### `admin_panel_runtime_v17.py` — 403 строк, в рабочей цепочке
 
@@ -599,7 +598,7 @@
 - `_save_bot_bundle()` — `admin_panel_runtime_v25`, `admin_panel_runtime_v34`
 - `_set_quick_time()` — `admin_panel_runtime_v37`, `admin_panel_runtime_v38`
 - `analytics_menu_rows()` — `admin_panel_runtime_v30`, `admin_panel_runtime_v31`
-- `compact_menu_rows()` — `admin_panel_runtime_v14`, `admin_panel_runtime_v16`, `admin_panel_runtime_v21`, `admin_panel_runtime_v22`, `admin_panel_runtime_v25`, `admin_panel_runtime_v26`, `admin_panel_runtime_v29`, `admin_panel_runtime_v32`, `admin_panel_runtime_v38`
+- `compact_menu_rows()` — `admin_panel_runtime_v14`, `admin_panel_runtime_v21`, `admin_panel_runtime_v22`, `admin_panel_runtime_v25`, `admin_panel_runtime_v26`, `admin_panel_runtime_v29`, `admin_panel_runtime_v32`, `admin_panel_runtime_v38`
 - `control_menu_rows()` — `admin_panel_runtime_v29`, `admin_panel_runtime_v31`
 - `dispatch_admin_action()` — `admin_panel_runtime_v26`, `admin_panel_runtime_v37`, `admin_panel_runtime_v8`
 - `handle_callback()` — `admin_panel_runtime_v14`, `admin_panel_runtime_v17`, `admin_panel_runtime_v20`, `admin_panel_runtime_v21`, `admin_panel_runtime_v25`, `admin_panel_runtime_v26`, `admin_panel_runtime_v29`, `admin_panel_runtime_v3`, `admin_panel_runtime_v30`, `admin_panel_runtime_v31`, `admin_panel_runtime_v32`, `admin_panel_runtime_v33`, `admin_panel_runtime_v34`, `admin_panel_runtime_v37`, `admin_panel_runtime_v38`, `admin_panel_runtime_v5`, `admin_panel_runtime_v6`, `admin_panel_runtime_v8`
@@ -613,7 +612,7 @@
 - `parse_manual_deadline()` — `admin_panel_runtime_v20`, `admin_panel_runtime_v37`
 - `period_overview()` — `admin_panel_runtime_v31`, `admin_panel_runtime_v38`
 - `register_user()` — `admin_panel_runtime_v2`, `admin_panel_runtime_v21`, `admin_panel_runtime_v30`, `admin_panel_runtime_v33`, `admin_panel_runtime_v37`
-- `render_page()` — `admin_panel_runtime_v14`, `admin_panel_runtime_v15`, `admin_panel_runtime_v16`, `admin_panel_runtime_v20`, `admin_panel_runtime_v21`, `admin_panel_runtime_v22`, `admin_panel_runtime_v25`, `admin_panel_runtime_v29`, `admin_panel_runtime_v3`, `admin_panel_runtime_v30`, `admin_panel_runtime_v31`, `admin_panel_runtime_v32`, `admin_panel_runtime_v34`, `admin_panel_runtime_v37`, `admin_panel_runtime_v38`, `admin_panel_runtime_v5`, `admin_panel_runtime_v6`, `admin_panel_runtime_v9`
+- `render_page()` — `admin_panel_runtime_v14`, `admin_panel_runtime_v15`, `admin_panel_runtime_v20`, `admin_panel_runtime_v21`, `admin_panel_runtime_v22`, `admin_panel_runtime_v25`, `admin_panel_runtime_v29`, `admin_panel_runtime_v3`, `admin_panel_runtime_v30`, `admin_panel_runtime_v31`, `admin_panel_runtime_v32`, `admin_panel_runtime_v34`, `admin_panel_runtime_v37`, `admin_panel_runtime_v38`, `admin_panel_runtime_v5`, `admin_panel_runtime_v6`, `admin_panel_runtime_v9`
 - `request_manual_time()` — `admin_panel_runtime_v20`, `admin_panel_runtime_v37`, `admin_panel_runtime_v38`
 - `save_access()` — `admin_panel_runtime_v23`, `admin_panel_runtime_v25`
 - `save_source_requests()` — `admin_panel_runtime_v17`, `admin_panel_runtime_v23`, `admin_panel_runtime_v25`
