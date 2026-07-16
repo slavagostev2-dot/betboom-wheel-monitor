@@ -19,6 +19,27 @@
 
 ---
 
+## 2026-07-16 — Удалены связующие runtime v13, v17, v19 и v21
+
+**Причина:** после переноса foundation, interface, source requests, wheels и users в предметные модули четыре исторических файла оставались только промежуточными импортами и пустыми классами/aliases.
+
+**Что изменено:**
+
+- `PanelInterfaceRuntime` напрямую объединяет `PanelFoundationMixin` и v9; v13 удалён;
+- `WheelInteractionRuntime` напрямую наследует `SourceRequestRuntime`; v19 удалён;
+- потребители `default_source_requests`, notification constants и user rendering переведены на `bbvg.bot.source_requests` и `bbvg.bot.users`;
+- `system_checks.py` контролирует предметные файлы вместо v17/v21;
+- удалены `admin_panel_runtime_v17.py` и `admin_panel_runtime_v21.py`;
+- число исторических runtime-файлов уменьшилось до 19, все 19 участвуют в рабочей цепочке; общий объём — 5 896 строк.
+
+**Затронутые модули и файлы:** `bbvg/bot/interface.py`, `wheels.py`, `admin_panel_runtime_v25.py`, `v26.py`, `v30.py`, `v37.py`, `system_checks.py`, `tests/test_nightly_idle_policy.py`, удалённые v13/v17/v19/v21.
+
+**Проверки:** aliases — runs `29489724593`, `29489869972`, `29489941317`; переключение и удаление v19 — `29490210078`, `29490275943`; переключение и удаление v13 — `29490946538`, `29491020250`; прямые зависимости и удаления v21/v17 — `29491395328`, `29491483117`, `29491536577`. Во всех runs успешны все семь частей validation.
+
+**Актуальный backup:** `backup/refactor-after-foundation-links-cleanup-2026-07-16`, SHA `378adc8fd979a1287a41f5b19df9b7161ce38d1f`.
+
+**Откат:** вернуть ветку рефакторинга на SHA `378adc8fd979a1287a41f5b19df9b7161ce38d1f`; для возврата до этапа использовать `backup/refactor-after-user-settings-cleanup-2026-07-16`.
+
 ## 2026-07-16 — Объединены пользовательские настройки и удалены v27/v33–v35
 
 **Причина:** персональные настройки, удаление данных, управление уведомлениями владельцем и запуск monitor refresh были распределены по v33–v35, а v27 оставался отдельным файлом только ради устаревшего self-test. Старые workflow продолжали проверять историческую MRO вместо фактических предметных модулей.

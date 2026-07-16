@@ -143,14 +143,22 @@ docs/
 - Назначение: полностью рабочая production v41 до крупного рефакторинга.
 - Использование: критический откат production.
 
-### Текущий актуальный бэкап рефакторинга — после объединения пользовательских настроек
+### Текущий актуальный бэкап рефакторинга — после удаления связующих runtime
+
+- Ветка: `backup/refactor-after-foundation-links-cleanup-2026-07-16`
+- Commit SHA: `378adc8fd979a1287a41f5b19df9b7161ce38d1f`
+- Последний подтверждённый run: `29491536577`
+- Состояние проверки: compile, modules, pytest, compatibility acceptance, consolidated acceptance, dependency audit и MRO inventory — успешно.
+- Включает: прямую композицию foundation/interface/source-requests/users/wheels и удалённые v13, v17, v19, v21.
+- Метрики: 19 исторических runtime-файлов, все 19 в рабочей цепочке, 5 896 строк.
+- Назначение: возврат к подтверждённому состоянию после удаления промежуточных связующих runtime.
+
+### Предыдущий подтверждённый бэкап — после объединения пользовательских настроек
 
 - Ветка: `backup/refactor-after-user-settings-cleanup-2026-07-16`
 - Commit SHA: `e9746cf43d1a6acbaacf01f25ec65fcd7be8fbb9`
 - Последний подтверждённый run: `29489184430`
-- Состояние проверки: compile, modules, pytest, compatibility acceptance, consolidated acceptance, dependency audit и MRO inventory — успешно.
-- Включает: единые `bbvg/bot/users.py` и `bbvg/bot/storage.py`, актуальные PR/recovery workflow, удалённые v27 и v33–v35.
-- Назначение: возврат к подтверждённому состоянию после переноса пользовательских настроек, приватности и owner-managed notification UI в `UserSettingsMixin`.
+- Назначение: возврат к состоянию до удаления v13/v17/v19/v21.
 
 ### Предыдущий этапный бэкап — перед объединением пользовательских настроек
 
