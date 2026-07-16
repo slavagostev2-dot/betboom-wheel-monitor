@@ -17,6 +17,7 @@ import telegram_post_links_v2
 import telegram_transport
 import wheel_lifecycle_v2
 import wheel_event_runtime
+import wheel_link_lifecycle
 import wheel_metadata_quality
 import wheel_publications_v2
 
@@ -31,6 +32,7 @@ wheel_event_runtime.install(monitor, runtime)
 wheel_metadata_quality.install(monitor, runtime)
 wheel_publications_v2.install(monitor, runtime)
 restart_duplicate_guard.install(monitor)
+wheel_link_lifecycle.install(monitor)
 _original_recover_deadline = runtime.base_runtime._recover_deadline
 _original_markup = monitor.wheel_reply_markup
 _original_process_active = monitor.process_active_wheels
