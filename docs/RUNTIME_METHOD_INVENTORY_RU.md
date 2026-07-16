@@ -1,11 +1,11 @@
 # BB V.G. — карта методов исторического runtime панели
 
 Файл генерируется автоматически из AST и фактической MRO текущего runtime.
-Исходный коммит аудита: `913d761c988be754c37eec07ec0b4d054a510c4f`.
+Исходный коммит аудита: `40906a91c589617ef2db2e464422750fc99e1292`.
 
-- Runtime-файлов: **31**
+- Runtime-файлов: **30**
 - В текущей цепочке: **28**
-- Суммарно строк: **7034**
+- Суммарно строк: **7005**
 - Уникальных имён методов: **105**
 
 ## Фактическая MRO текущей панели
@@ -170,14 +170,6 @@
 Прямые импорты: `admin_panel_runtime_v9`, `bbvg.bot.foundation`
 
 Класс `TelegramPanelRuntimeV13`; база: `PanelFoundationMixin`, `TelegramPanelRuntimeV9`.
-
-- собственных методов нет
-
-### `admin_panel_runtime_v16.py` — 29 строк, вне рабочей цепочки
-
-Прямые импорты: `bbvg.bot.interface`
-
-Класс `TelegramPanelRuntimeV16`; база: `PanelInterfaceRuntime`.
 
 - собственных методов нет
 
