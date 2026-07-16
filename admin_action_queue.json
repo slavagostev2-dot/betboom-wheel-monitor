@@ -78,6 +78,12 @@
       "sequence": 25,
       "value": "neret|admin"
     },
+    "5f86a89e1d674ba49e4aeeac81a88417": {
+      "action": "participate_wheel",
+      "created_at": "2026-07-16T08:22:56.597978+00:00",
+      "sequence": 29,
+      "value": "zonertg7"
+    },
     "676e68422d844063a3b26d085ff358bc": {
       "action": "confirm_finished_global",
       "created_at": "2026-07-16T02:11:13.488996+00:00",
@@ -170,5 +176,5 @@
     }
   },
   "format": "bbvg-admin-action-queue-v1",
-  "sequence": 28
+  "sequence": 29
 }
