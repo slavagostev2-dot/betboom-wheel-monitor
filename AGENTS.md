@@ -47,7 +47,7 @@ docs/
 
 ## 3. Действующие точки входа до завершения рефакторинга
 
-- Telegram-панель: `bbvg/bot/runtime.py` через временные совместимые runtime-слои.
+- Telegram-панель: `bbvg/bot/runtime.py` через временные совместимые runtime-слои; production-совместимая команда пока остаётся `admin_panel_runtime_v41.py`.
 - Монитор колёс: `bbvg_monitor_main.py`, `monitor.py` и тематические модули.
 
 Не добавляйте параллельный runtime или второй consumer Telegram `getUpdates`.
@@ -81,7 +81,7 @@ docs/
 
 1. Создать отдельную ветку вида `backup/YYYY-MM-DD-description` или `backup/before-description`.
 2. Указать точный commit SHA, дату, назначение и последнее подтверждённое тестовое состояние.
-3. Не перемещать эту backup-ветку после начала крупного обновления.
+3. Не перемещать backup-ветку после начала крупного обновления.
 4. После успешного обновления создать новую актуальную backup-точку уже от подтверждённого результата либо явно оставить прежнюю, если production ещё не переключён.
 5. Обновить этот раздел и запись в `docs/PROJECT_CHANGELOG_RU.md`.
 
@@ -143,20 +143,27 @@ docs/
 - Назначение: полностью рабочая production v41 до крупного рефакторинга.
 - Использование: критический откат production.
 
-### Текущий актуальный бэкап рефакторинга — после объединения хранения
+### Текущий актуальный бэкап рефакторинга — перед объединением пользовательских настроек
+
+- Ветка: `backup/refactor-before-user-settings-cleanup-2026-07-16`
+- Commit SHA: `42f34057d23766e950f1e1712171bf051a2ffff9`
+- Последний подтверждённый run: `29484775234`
+- Состояние проверки: compile, modules, pytest, compatibility acceptance, consolidated acceptance, dependency audit и MRO inventory — успешно.
+- Включает: единый source registry и encrypted storage, удалённые v16/v22/v39/v40 и рабочую production-совместимую v41.
+- Назначение: возврат перед переносом пользовательских настроек, приватности и owner-managed notification UI из v33–v35 в `bbvg/bot/users.py`.
+
+### Предыдущий подтверждённый бэкап — после объединения хранения
 
 - Ветка: `backup/refactor-after-storage-2026-07-16`
 - Commit SHA: `913d761c988be754c37eec07ec0b4d054a510c4f`
 - Последний подтверждённый run: `29483620762`
-- Состояние проверки: compile, modules, pytest, compatibility acceptance, consolidated acceptance, dependency audit и MRO inventory — успешно.
-- Назначение: возврат ветки `refactor/consolidate-runtime-v42` к состоянию после переноса хранения v25/v34/v35 в `bbvg/bot/storage.py`.
+- Назначение: возврат к моменту непосредственно после storage-консолидации.
 
-### Предыдущий этапный бэкап — до объединения хранения
+### Исторический этапный бэкап — до объединения хранения
 
 - Ветка: `backup/refactor-before-storage-2026-07-16`
 - Commit SHA: `d0ce73639521521de70351a9c62f38cc67dce638`
 - Последний подтверждённый run: `29475412096`
-- Назначение: историческая точка возврата до storage-этапа; текущим считается бэкап после storage.
 
 При критическом сбое выбирайте backup по затронутому контуру: production либо текущий этап рефакторинга.
 
