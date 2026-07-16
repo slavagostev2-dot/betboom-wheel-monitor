@@ -1,11 +1,11 @@
 # BB V.G. — карта методов исторического runtime панели
 
 Файл генерируется автоматически из AST и фактической MRO текущего runtime.
-Исходный коммит аудита: `fcb9901ed4e9ee9a9c2bd9091f5f2ccbedc30c4f`.
+Исходный коммит аудита: `d321485576dbcf82eb0a6150362406b22e30d175`.
 
-- Runtime-файлов: **22**
+- Runtime-файлов: **21**
 - В текущей цепочке: **21**
-- Суммарно строк: **6002**
+- Суммарно строк: **5969**
 - Уникальных имён методов: **100**
 
 ## Фактическая MRO текущей панели
@@ -146,14 +146,6 @@
 `age_text()`, `answer()`, `append_to_list_text()`, `authorized()`, `counter()`, `dispatch()`, `fmt_dt()`, `get_file()`, `get_json_file()`, `gh_headers()`, `gh_request()`, `merged_source_stats()`, `monitor_state_text()`, `parse_dt()`, `parse_list()`, `period_totals()`, `remove_from_list_text()`, `safe_source()`, `telegram_api()`, `update_file()`, `workflow_run()`
 
 ## Файлы и определённые методы
-
-### `admin_panel_runtime_v13.py` — 33 строк, вне рабочей цепочки
-
-Прямые импорты: `admin_panel_runtime_v9`, `bbvg.bot.foundation`
-
-Класс `TelegramPanelRuntimeV13`; база: `PanelFoundationMixin`, `TelegramPanelRuntimeV9`.
-
-- собственных методов нет
 
 ### `admin_panel_runtime_v17.py` — 39 строк, в рабочей цепочке
 
