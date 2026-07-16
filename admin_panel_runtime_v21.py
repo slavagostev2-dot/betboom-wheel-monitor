@@ -11,14 +11,13 @@ from bbvg.bot.users import (
     self_test as users_self_test,
 )
 
-
-class TelegramPanelRuntimeV21(UserManagementRuntime):
-    """Compatibility entrypoint for the consolidated user subsystem."""
+TelegramPanelRuntimeV21 = UserManagementRuntime
 
 
 def self_test() -> None:
     users_self_test()
-    print("admin_panel_runtime_v21 compatibility self-test passed")
+    assert TelegramPanelRuntimeV21 is UserManagementRuntime
+    print("admin_panel_runtime_v21 compatibility alias self-test passed")
 
 
 def main() -> int:
