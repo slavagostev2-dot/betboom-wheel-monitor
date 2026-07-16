@@ -1,42 +1,6 @@
 {
   "activation_alerts": {},
-  "active_wheels": {
-    "cct1": {
-      "action_id": 837,
-      "availability_status": "available",
-      "button_token": "a77c1bb32cae34",
-      "deadline": "2026-07-16T20:21:58.788000+00:00",
-      "deadline_source": "api",
-      "event_id": "1f76b4057a0faff1a461",
-      "expires_at": "2026-07-16T22:19:16.779362+00:00",
-      "final_reminder_sent_at": "2026-07-16T20:19:15.746587+00:00",
-      "first_notified_at": "2026-07-16T11:23:57.495602+00:00",
-      "identifier": "cct1",
-      "known_reminder_sent_at": "2026-07-16T20:19:15.746587+00:00",
-      "last_checked_at": "2026-07-16T20:19:16.929105+00:00",
-      "last_notification_at": "2026-07-16T20:19:15.746587+00:00",
-      "last_verification_at": "2026-07-16T20:19:16.779362+00:00",
-      "lifecycle_changed_at": "2026-07-16T11:29:53.990097+00:00",
-      "lifecycle_state": "participating",
-      "message_date": "2026-07-14T10:58:17+00:00",
-      "message_id": 1516,
-      "message_text": "Быстро вы справились!\nЗАЛЕТАЙ НА КОЛЕСО ФРИБЕТОВ: 5000 РАЗЫГРАЮ\n✅\n✅\n✅\nКЛИКАЙ ДЛЯ УЧАСТИЯ\nКЛИКАЙ ДЛЯ УЧАСТИЯ\nКЛИКАЙ ДЛЯ УЧАСТИЯ\nВСЁ ПОКАЗЫВАЮ НА СТРИМЕ:\nhttps://www.twitch.tv/jester_andrew\nhttps://www.twitch.tv/jester_andrew\nhttps://www.twitch.tv/jester_andrew\nИТОГИ ЧЕРЕЗ 9 ЧАСОВ\nhttps://telegram.me/jestercast\nhttps://telegram.me/jestercast/1516\nhttps://betboom.ru/freestream/cct1\nhttps://www.twitch.tv/jester_andrew",
-      "message_url": "https://telegram.me/jestercast/1516",
-      "method": "состояние определяется пользователями BB V.G.",
-      "needs_manual_time": false,
-      "page_excerpt": "",
-      "page_status": "active",
-      "participating": true,
-      "participating_at": "2026-07-16T16:47:35.708904+00:00",
-      "source": "jestercast",
-      "sources": [
-        "jestercast"
-      ],
-      "status": "unknown",
-      "url": "https://betboom.ru/freestream/cct1",
-      "verification_status": "confirmed"
-    }
-  },
+  "active_wheels": {},
   "admin_action_attempts": {},
   "admin_action_results": {
     "05206b91a89d45e58b05b33d8df632aa": {
@@ -521,21 +485,6 @@
   },
   "bot_commands_version": 1,
   "button_contexts": {
-    "105fd5e22b560e": {
-      "created_at": "2026-07-16T20:19:15.746757+00:00",
-      "identifier": "cct1",
-      "message_date": "2026-07-14T10:58:17+00:00",
-      "message_id": 1516,
-      "message_text": "Быстро вы справились!\nЗАЛЕТАЙ НА КОЛЕСО ФРИБЕТОВ: 5000 РАЗЫГРАЮ\n✅\n✅\n✅\nКЛИКАЙ ДЛЯ УЧАСТИЯ\nКЛИКАЙ ДЛЯ УЧАСТИЯ\nКЛИКАЙ ДЛЯ УЧАСТИЯ\nВСЁ ПОКАЗЫВАЮ НА СТРИМЕ:\nhttps://www.twitch.tv/jester_andrew\nhttps://www.twitch.tv/jester_andrew\nhttps://www.twitch.tv/jester_andrew\nИТОГИ ЧЕРЕЗ 9 ЧАСОВ\nhttps://telegram.me/jestercast\nhttps://telegram.me/jestercast/1516\nhttps://betboom.ru/freestream/cct1\nhttps://www.twitch.tv/jester_andrew",
-      "message_url": "https://telegram.me/jestercast/1516",
-      "method": "состояние определяется пользователями BB V.G.",
-      "page_excerpt": "",
-      "post_key": "105fd5e22b560edd7a6829bb33548ae5f140652138d934f93bf256911f0ce6ef",
-      "source": "jestercast",
-      "status": "final_reminder",
-      "url": "https://betboom.ru/freestream/cct1",
-      "wheel_key": "cct1"
-    },
     "26eac472265da6": {
       "created_at": "2026-07-14T17:52:05.387173+00:00",
       "identifier": "zonertg5",
@@ -595,21 +544,6 @@
       "status": "preliminary",
       "url": "https://betboom.ru/freestream/bolt",
       "wheel_key": "bolt"
-    },
-    "a77c1bb32cae34": {
-      "created_at": "2026-07-16T11:23:55.877414+00:00",
-      "identifier": "cct1",
-      "message_date": "2026-07-16T11:22:11+00:00",
-      "message_id": 1543,
-      "message_text": "ЗАЛЕТАЙ НА КОЛЕСО ФРИБЕТОВ: 5000 РАЗЫГРАЮ\n✅\n✅\n✅\nКЛИКАЙ ДЛЯ УЧАСТИЯ\nКЛИКАЙ ДЛЯ УЧАСТИЯ\nКЛИКАЙ ДЛЯ УЧАСТИЯ\nВСЁ ПОКАЗЫВАЮ НА СТРИМЕ:\nЗАХОДИТЕ НА СТРИМ\nTeam Yandex -  Team Spirit\nЖду вас:)\nhttps://www.twitch.tv/jester_andrew\nhttps://www.twitch.tv/jester_andrew\nhttps://www.twitch.tv/jester_andrew\nИТОГИ ЧЕРЕЗ 9 ЧАСОВ\nhttps://telegram.me/jestercast\nhttps://telegram.me/jestercast/1543\nhttps://betboom.ru/freestream/cct1\nhttps://www.twitch.tv/jester_andrew",
-      "message_url": "https://telegram.me/jestercast/1543",
-      "method": "текст Telegram: относительное время",
-      "page_excerpt": "Букмекерская контора BetBoom - ставки на спорт онлайн в России!",
-      "post_key": "a77c1bb32cae34fa5063bb016e8d63d811edf8ef2662ed91005532bd05a03874",
-      "source": "jestercast",
-      "status": "preliminary",
-      "url": "https://betboom.ru/freestream/cct1",
-      "wheel_key": "cct1"
     },
     "d722c5451f3f6f": {
       "created_at": "2026-07-14T20:17:21.236600+00:00",
@@ -880,15 +814,7 @@
   },
   "manual_overrides": {},
   "notification_key_version": 8,
-  "participating_wheels": {
-    "cct1": {
-      "deadline": "2026-07-16T20:21:58.788000+00:00",
-      "expires_at": "2026-07-16T22:19:16.779362+00:00",
-      "identifier": "cct1",
-      "marked_at": "2026-07-16T16:47:35.708825+00:00",
-      "url": "https://betboom.ru/freestream/cct1"
-    }
-  },
+  "participating_wheels": {},
   "pending_posts": {},
   "recently_completed_wheels": {
     "acool6": {
@@ -1094,7 +1020,7 @@
   },
   "seen": {
     "012299e0d83138e2bb8a30f9bedc98e45443d27f84571a20a8372b1c96f6ea50": "2026-07-12T18:26:18.034381+00:00",
-    "0217364010fe57a8ba1ca45a7067cc8005fcacb3476fb3f512b9225529481d31": "2026-07-16T20:19:21.734868+00:00",
+    "0217364010fe57a8ba1ca45a7067cc8005fcacb3476fb3f512b9225529481d31": "2026-07-16T20:22:22.891503+00:00",
     "0389975cb70b3f9d43699fcb61108c5818b7b8483f8f8f86a75dbb1dc4d6252f": "2026-07-12T15:09:43.022880+00:00",
     "053cf78948223997ac8e25cc73f3197b5187faaf4cc11807147877ea02be74ba": "2026-07-14T10:03:21.761237+00:00",
     "058ddce2804d4dd2fd4277191a222c1b2e6a436570e3915b57d4339d3733f784": "2026-07-12T15:10:04.958834+00:00",
@@ -1154,7 +1080,7 @@
     "58ff2284b470bfbd26d63736eae2468711b2e32a309d0813028bea35429e61fd": "2026-07-12T15:09:46.050564+00:00",
     "5c905b12205b8fb5d7efef9def1cdb2c9e99c6d6d2fddbabd5467ad0b4768795": "2026-07-12T19:22:25.149620+00:00",
     "5dac83ecae4b2518df3fc5e96bf15d035372a2d5736e826c77ec287519694c0e": "2026-07-12T18:21:18.200134+00:00",
-    "654b3ac09c6cfc2f5bc55db3c4d7aa7472b9901a6bcfcf1f1eb4cc18795ccc68": "2026-07-16T20:19:21.607331+00:00",
+    "654b3ac09c6cfc2f5bc55db3c4d7aa7472b9901a6bcfcf1f1eb4cc18795ccc68": "2026-07-16T20:34:24.610747+00:00",
     "657a1783effa53f74ae367254a81841824e0163188438bb1f2bb96723936d72a": "2026-07-12T19:22:25.149620+00:00",
     "6737615cc4c1572acb02ea9785ce1f2b0b199bb78414bef2ffc1a8720ad9381d": "2026-07-12T18:21:26.142261+00:00",
     "67468596cee62c05cc01a13454d23038f9f957f8f5f598ed3ed9c1f218d76f31": "2026-07-12T18:26:18.629262+00:00",
@@ -1189,7 +1115,6 @@
     "99169d26a5f1dcd06f0dd425ae8e591690d21428d43ead1aa274b695c962e8ee": "2026-07-12T18:26:20.014168+00:00",
     "9923e7f98f5456dc9a50ee0385fd86242b1f18dba172d8214184b090a4feaf28": "2026-07-14T11:12:45.785395+00:00",
     "997d5b6b33d9263a510cb3b3ea28fc879a5d83f132620987ca12032e75aaad66": "2026-07-12T15:09:46.050550+00:00",
-    "9a65ac119d083a88c7027d2f40be9959ebd61b023a843a2c9b83806184e91aea": "2026-07-16T20:19:21.444641+00:00",
     "9c42f4efef1595bc35c746c3b4dcdd4a75a77b457ec08d0d24900c4fd90ac99d": "2026-07-16T14:32:01.976733+00:00",
     "9f1b7087c70a36f9599f46265dbcf3cbfe95e3f8503cb7050bcc4e8e23b0c251": "2026-07-12T15:09:23.912472+00:00",
     "a10eadd8fc0ab4bf1c2bfa44916c9bb0fffea1bdb186a8d53755cdc2a5144e0f": "2026-07-14T19:57:24.330308+00:00",
@@ -1301,14 +1226,6 @@
       "identifier": "bolt",
       "suppress_until": "2026-07-16T20:17:18.700103+00:00",
       "url": "https://betboom.ru/freestream/bolt"
-    },
-    "cct1": {
-      "alerted_at": "2026-07-16T11:23:57.495697+00:00",
-      "deadline": "2026-07-16T20:22:11+00:00",
-      "identifier": "cct1",
-      "lifecycle_rule": "timer",
-      "suppress_until": "2026-07-16T20:22:11+00:00",
-      "url": "https://betboom.ru/freestream/cct1"
     },
     "ctom07": {
       "alerted_at": "2026-07-15T16:53:16.917029+00:00",
@@ -1550,7 +1467,7 @@
   "wheel_action_history": {
     "cct1": {
       "action_id": 837,
-      "seen_at": "2026-07-16T20:19:16.779362+00:00"
+      "seen_at": "2026-07-16T20:22:17.928414+00:00"
     },
     "papa": {
       "action_id": 852,
@@ -1568,8 +1485,8 @@
   "wheel_api_health": {
     "alert_threshold": 3,
     "consecutive_failures": 0,
-    "last_checked_at": "2026-07-16T20:19:21.734791+00:00",
-    "last_success_at": "2026-07-16T20:19:21.734791+00:00",
+    "last_checked_at": "2026-07-16T20:34:24.610643+00:00",
+    "last_success_at": "2026-07-16T20:34:24.610643+00:00",
     "status": "ok"
   },
   "wheel_lifecycle_history": {
@@ -1763,22 +1680,6 @@
         "message_id": 6381,
         "message_url": "https://telegram.me/boltcast/6381",
         "source": "boltcast"
-      }
-    ],
-    "cct1": [
-      {
-        "message_date": "2026-07-14T10:58:17+00:00",
-        "message_id": 1516,
-        "message_url": "https://telegram.me/jestercast/1516",
-        "source": "jestercast"
-      },
-      {
-        "has_future_availability": false,
-        "has_future_deadline": true,
-        "message_date": "2026-07-16T11:22:11+00:00",
-        "message_id": 1543,
-        "message_url": "https://telegram.me/jestercast/1543",
-        "source": "jestercast"
       }
     ]
   }
