@@ -71,7 +71,7 @@
     }
   ],
   "current_runtime": "admin_panel_runtime_v41",
-  "runtime_chain_count": 29,
+  "runtime_chain_count": 28,
   "runtime_file_count": 32,
   "runtime_files": [
     {
@@ -268,14 +268,13 @@
       "direct_imports": [
         "bbvg.bot.wheels"
       ],
-      "in_current_import_chain": true,
+      "in_current_import_chain": false,
       "line_count": 33,
       "module": "admin_panel_runtime_v20",
       "path": "admin_panel_runtime_v20.py",
-      "reference_count": 4,
+      "reference_count": 3,
       "references": [
         "admin_panel_runtime_v20.py",
-        "admin_panel_runtime_v21.py",
         "docs/RUNTIME_METHOD_INVENTORY_RU.md",
         "preflight.py"
       ],
@@ -288,158 +287,19 @@
       "classes": [
         {
           "bases": [
-            "TelegramPanelRuntimeV20"
+            "UserManagementRuntime"
           ],
           "class_attributes": [],
-          "method_count": 17,
-          "methods": [
-            {
-              "async": false,
-              "decorators": [],
-              "end_line": 44,
-              "line_count": 17,
-              "name": "register_user",
-              "start_line": 28
-            },
-            {
-              "async": false,
-              "decorators": [],
-              "end_line": 63,
-              "line_count": 18,
-              "name": "handle_update",
-              "start_line": 46
-            },
-            {
-              "async": false,
-              "decorators": [],
-              "end_line": 100,
-              "line_count": 36,
-              "name": "notify_owner_about_new_user",
-              "start_line": 65
-            },
-            {
-              "async": false,
-              "decorators": [],
-              "end_line": 104,
-              "line_count": 3,
-              "name": "show_access",
-              "start_line": 102
-            },
-            {
-              "async": false,
-              "decorators": [],
-              "end_line": 108,
-              "line_count": 3,
-              "name": "show_user_detail",
-              "start_line": 106
-            },
-            {
-              "async": false,
-              "decorators": [],
-              "end_line": 112,
-              "line_count": 3,
-              "name": "show_recipients",
-              "start_line": 110
-            },
-            {
-              "async": false,
-              "decorators": [],
-              "end_line": 127,
-              "line_count": 14,
-              "name": "miniapp_url_for_chat",
-              "start_line": 114
-            },
-            {
-              "async": false,
-              "decorators": [
-                "staticmethod"
-              ],
-              "end_line": 136,
-              "line_count": 7,
-              "name": "compact_menu_rows",
-              "start_line": 130
-            },
-            {
-              "async": false,
-              "decorators": [],
-              "end_line": 178,
-              "line_count": 41,
-              "name": "notification_preferences",
-              "start_line": 138
-            },
-            {
-              "async": false,
-              "decorators": [],
-              "end_line": 197,
-              "line_count": 18,
-              "name": "show_settings",
-              "start_line": 180
-            },
-            {
-              "async": false,
-              "decorators": [],
-              "end_line": 238,
-              "line_count": 40,
-              "name": "show_notifications",
-              "start_line": 199
-            },
-            {
-              "async": false,
-              "decorators": [],
-              "end_line": 272,
-              "line_count": 33,
-              "name": "toggle_notification",
-              "start_line": 240
-            },
-            {
-              "async": false,
-              "decorators": [],
-              "end_line": 297,
-              "line_count": 24,
-              "name": "set_admin",
-              "start_line": 274
-            },
-            {
-              "async": false,
-              "decorators": [],
-              "end_line": 322,
-              "line_count": 24,
-              "name": "transfer_owner",
-              "start_line": 299
-            },
-            {
-              "async": false,
-              "decorators": [],
-              "end_line": 328,
-              "line_count": 5,
-              "name": "render_page",
-              "start_line": 324
-            },
-            {
-              "async": false,
-              "decorators": [],
-              "end_line": 349,
-              "line_count": 20,
-              "name": "handle_message",
-              "start_line": 330
-            },
-            {
-              "async": false,
-              "decorators": [],
-              "end_line": 371,
-              "line_count": 21,
-              "name": "handle_callback",
-              "start_line": 351
-            }
-          ],
+          "method_count": 0,
+          "methods": [],
           "name": "TelegramPanelRuntimeV21"
         }
       ],
       "direct_imports": [
-        "admin_panel_runtime_v20"
+        "bbvg.bot.users"
       ],
       "in_current_import_chain": true,
-      "line_count": 439,
+      "line_count": 35,
       "module": "admin_panel_runtime_v21",
       "path": "admin_panel_runtime_v21.py",
       "reference_count": 10,
@@ -3481,7 +3341,6 @@
       "admin_panel_runtime_v5"
     ],
     "compact_menu_rows": [
-      "admin_panel_runtime_v21",
       "admin_panel_runtime_v22",
       "admin_panel_runtime_v25",
       "admin_panel_runtime_v26",
@@ -3508,7 +3367,6 @@
       "admin_panel_runtime_v6"
     ],
     "handle_callback": [
-      "admin_panel_runtime_v21",
       "admin_panel_runtime_v25",
       "admin_panel_runtime_v26",
       "admin_panel_runtime_v29",
@@ -3525,15 +3383,11 @@
       "admin_panel_runtime_v8"
     ],
     "handle_message": [
-      "admin_panel_runtime_v21",
       "admin_panel_runtime_v30",
       "admin_panel_runtime_v37",
       "admin_panel_runtime_v6",
       "admin_panel_runtime_v7",
       "admin_panel_runtime_v9"
-    ],
-    "handle_update": [
-      "admin_panel_runtime_v21"
     ],
     "ignore_candidate": [
       "admin_panel_runtime_v5"
@@ -3563,7 +3417,6 @@
       "admin_panel_runtime_v25"
     ],
     "miniapp_url_for_chat": [
-      "admin_panel_runtime_v21",
       "admin_panel_runtime_v22"
     ],
     "normalize_access": [
@@ -3571,14 +3424,10 @@
       "admin_panel_runtime_v35"
     ],
     "notification_preferences": [
-      "admin_panel_runtime_v21",
       "admin_panel_runtime_v30",
       "admin_panel_runtime_v31",
       "admin_panel_runtime_v33",
       "admin_panel_runtime_v37"
-    ],
-    "notify_owner_about_new_user": [
-      "admin_panel_runtime_v21"
     ],
     "open_page": [
       "admin_panel_runtime_v38",
@@ -3605,13 +3454,11 @@
     ],
     "register_user": [
       "admin_panel_runtime_v2",
-      "admin_panel_runtime_v21",
       "admin_panel_runtime_v30",
       "admin_panel_runtime_v33",
       "admin_panel_runtime_v37"
     ],
     "render_page": [
-      "admin_panel_runtime_v21",
       "admin_panel_runtime_v22",
       "admin_panel_runtime_v25",
       "admin_panel_runtime_v29",
@@ -3657,7 +3504,6 @@
       "admin_panel_runtime_v8"
     ],
     "set_admin": [
-      "admin_panel_runtime_v21",
       "admin_panel_runtime_v37"
     ],
     "set_all_user_notifications": [
@@ -3684,7 +3530,6 @@
       "admin_panel_runtime_v37"
     ],
     "show_access": [
-      "admin_panel_runtime_v21",
       "admin_panel_runtime_v38"
     ],
     "show_active": [
@@ -3748,7 +3593,6 @@
       "admin_panel_runtime_v9"
     ],
     "show_notifications": [
-      "admin_panel_runtime_v21",
       "admin_panel_runtime_v30",
       "admin_panel_runtime_v33",
       "admin_panel_runtime_v34",
@@ -3768,7 +3612,6 @@
       "admin_panel_runtime_v38"
     ],
     "show_recipients": [
-      "admin_panel_runtime_v21",
       "admin_panel_runtime_v38"
     ],
     "show_reports": [
@@ -3785,7 +3628,6 @@
       "admin_panel_runtime_v31"
     ],
     "show_settings": [
-      "admin_panel_runtime_v21",
       "admin_panel_runtime_v3",
       "admin_panel_runtime_v33",
       "admin_panel_runtime_v9"
@@ -3814,7 +3656,6 @@
       "admin_panel_runtime_v38"
     ],
     "show_user_detail": [
-      "admin_panel_runtime_v21",
       "admin_panel_runtime_v34"
     ],
     "show_user_notifications": [
@@ -3832,18 +3673,16 @@
       "admin_panel_runtime_v31"
     ],
     "toggle_notification": [
-      "admin_panel_runtime_v21",
       "admin_panel_runtime_v30",
       "admin_panel_runtime_v33",
       "admin_panel_runtime_v34",
       "admin_panel_runtime_v37"
     ],
     "transfer_owner": [
-      "admin_panel_runtime_v21",
       "admin_panel_runtime_v37"
     ]
   },
-  "runtime_total_lines": 8254,
-  "runtime_unique_method_count": 121,
+  "runtime_total_lines": 7850,
+  "runtime_unique_method_count": 119,
   "unreferenced_python_candidates": []
 }
