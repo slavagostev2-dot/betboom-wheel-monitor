@@ -2,9 +2,9 @@
 
 Файл генерируется автоматически из AST. Он описывает текущую ветку рефакторинга и не заменяет ручной анализ поведения.
 
-- Runtime-файлов: **38**
+- Runtime-файлов: **37**
 - В текущей цепочке: **33**
-- Суммарно строк: **10013**
+- Суммарно строк: **9976**
 - Уникальных имён методов: **148**
 
 ## Файлы и определённые методы
@@ -14,14 +14,6 @@
 Прямые импорты: `admin_panel_runtime_v9`, `bbvg.bot.foundation`
 
 Класс `TelegramPanelRuntimeV10`; база: `PanelFoundationMixin`, `TelegramPanelRuntimeV9`.
-
-- собственных методов нет
-
-### `admin_panel_runtime_v11.py` — 37 строк, вне рабочей цепочки
-
-Прямые импорты: `admin_panel_runtime_v10`, `bbvg.bot.foundation`
-
-Класс `TelegramPanelRuntimeV11`; база: `TelegramPanelRuntimeV10`.
 
 - собственных методов нет
 
