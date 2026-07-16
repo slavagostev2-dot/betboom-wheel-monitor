@@ -1,4 +1,5 @@
 {
+  "modules_tail": "[foundation]\nBB V.G. panel foundation self-test passed\n[interface]\nBB V.G. panel interface self-test passed\n[source_requests]\nBB V.G. source request subsystem self-test passed\n[wheels]\nBB V.G. wheel interaction subsystem self-test passed\n[users]\nBB V.G. user management subsystem self-test passed\n[sources]\nTraceback (most recent call last):\n  File \"<frozen runpy>\", line 198, in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"/home/runner/work/betboom-wheel-monitor/betboom-wheel-monitor/bbvg/bot/sources.py\", line 207, in <module>\n    self_test()\n  File \"/home/runner/work/betboom-wheel-monitor/betboom-wheel-monitor/bbvg/bot/sources.py\", line 202, in self_test\n    assert hasattr(source_registry, \"load_registry\")\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError",
   "parts": {
     "acceptance": "skipped",
     "compile": "success",
@@ -9,8 +10,8 @@
     "pytest": "skipped"
   },
   "result": "failure",
-  "run_id": "29482390436",
-  "source_sha": "257ee214b1a92172018f67e20a323a352be48058",
+  "run_id": "29482521413",
+  "source_sha": "a15959867153e687232aabadcfb93705bcc7f9c9",
   "stage": "full_refactor_validation_and_audit",
-  "updated_at": "2026-07-16T08:08:46.099365+00:00"
+  "updated_at": "2026-07-16T08:10:52.285648+00:00"
 }
