@@ -11,7 +11,7 @@ from urllib.parse import quote
 import admin_action_v2
 import admin_bot as legacy
 import bot_private_state
-from admin_panel_runtime_v17 import default_source_requests
+from bbvg.bot.source_requests import default_source_requests
 from admin_panel_runtime_v25 import TelegramPanelRuntimeV25
 from bbvg.bot.sources import SourceRegistryRuntime
 

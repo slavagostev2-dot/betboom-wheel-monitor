@@ -14,7 +14,7 @@ install_optional_dependency_stubs()
 import nightly_discovery
 import system_checks
 from admin_panel_runtime_v5 import TelegramPanelRuntimeV5
-from admin_panel_runtime_v17 import TelegramPanelRuntimeV17
+from bbvg.bot.source_requests import SourceRequestRuntime
 from admin_panel_runtime_v38 import TelegramPanelRuntimeV38
 from bbvg.bot.interface import PanelInterfaceRuntime
 
@@ -45,7 +45,7 @@ class NightlyIdlePolicyTests(unittest.TestCase):
             TelegramPanelRuntimeV5.set_candidate_mode,
             TelegramPanelRuntimeV5.restore_candidate,
             PanelInterfaceRuntime.bulk_set_intelligence_mode,
-            TelegramPanelRuntimeV17.decide_source_request,
+            SourceRequestRuntime.decide_source_request,
         ):
             self.assertNotIn("nightly-discovery.yml", inspect.getsource(method))
 

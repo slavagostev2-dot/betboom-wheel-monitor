@@ -6,8 +6,8 @@ import inspect
 from typing import Any
 
 import bot_private_state
-from admin_panel_runtime_v17 import default_source_requests
-from admin_panel_runtime_v21 import TelegramPanelRuntimeV21
+from bbvg.bot.source_requests import default_source_requests
+from bbvg.bot.users import UserManagementRuntime
 from bbvg.bot.storage import PrivateStateRuntime, self_test as storage_self_test
 
 CONFIRMED_POINTS = 40
@@ -207,7 +207,7 @@ class TelegramPanelRuntimeV25(PrivateStateRuntime):
             )
             return
         if page in {"discovery", "intelligence"}:
-            TelegramPanelRuntimeV21.render_page(self, page)
+            UserManagementRuntime.render_page(self, page)
             return
         if page in {"status", "reports", "pending"}:
             self.show_menu(clear_stack=True)
