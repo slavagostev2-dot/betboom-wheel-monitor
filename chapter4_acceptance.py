@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+# Trigger the queued direct-runtime migration.
 from tests.production_acceptance import interface_acceptance
 
 
