@@ -1,12 +1,12 @@
 {
   "active_incidents": 1,
   "admin_panel": {
-    "age_minutes": 2,
-    "last_heartbeat_at": "2026-07-16T02:30:30.651800+00:00",
-    "started_at": "2026-07-16T02:30:28.181429+00:00",
+    "age_minutes": 1,
+    "last_heartbeat_at": "2026-07-16T02:33:36.296457+00:00",
+    "started_at": "2026-07-16T02:33:32.195319+00:00",
     "status": "running",
     "update_consumer": "single_getUpdates_owner",
-    "version": 39
+    "version": 40
   },
   "automation_state": {
     "source_tier_last_run_at": "2026-07-16T00:09:30.509268+00:00",
@@ -32,7 +32,7 @@
     "source_health": "ok",
     "telegram_transport": "ok"
   },
-  "checked_at": "2026-07-16T02:33:28.163701+00:00",
+  "checked_at": "2026-07-16T02:35:12.953650+00:00",
   "discovery": {
     "active_size": 77,
     "candidate_count": 204,
@@ -72,7 +72,7 @@
   "finding_count": 1,
   "findings": [
     {
-      "detail": "Последняя итерация была 20 минут назад.",
+      "detail": "Последняя итерация была 21 минут назад.",
       "kind": "monitor_stale",
       "severity": "critical",
       "subject": "",
@@ -81,7 +81,7 @@
   ],
   "gpt_diagnostic_snapshot": {
     "active_incidents": 1,
-    "bot_panel_heartbeat": "2026-07-16T02:30:30.651800+00:00",
+    "bot_panel_heartbeat": "2026-07-16T02:33:36.296457+00:00",
     "checked_sources": 77,
     "configured_sources": 79,
     "domain": "telegram.me",
@@ -90,9 +90,9 @@
     "status": "degraded"
   },
   "incident_delivery": {
-    "digest_sent": true,
-    "messages_attempted": 1,
-    "opened": 1,
+    "digest_sent": false,
+    "messages_attempted": 0,
+    "opened": 0,
     "resolved": 0
   },
   "incident_sequence": 23,
@@ -135,7 +135,7 @@
     "status": "running",
     "version": 3
   },
-  "monitor_age_minutes": 20,
+  "monitor_age_minutes": 21,
   "notification_integrity": {
     "algorithm": "HMAC-SHA256",
     "contains_personal_fields": false,
