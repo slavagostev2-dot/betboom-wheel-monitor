@@ -11,13 +11,7 @@ from bbvg.bot.source_requests import (
     self_test as source_requests_self_test,
 )
 
-
-class TelegramPanelRuntimeV17(SourceRequestRuntime):
-    """Compatibility entrypoint for the consolidated source request subsystem."""
-
-    bot_username = PanelFoundationMixin.bot_username
-    miniapp_url_for_chat = PanelFoundationMixin.miniapp_url_for_chat
-    show_app_entry = PanelFoundationMixin.show_app_entry
+TelegramPanelRuntimeV17 = SourceRequestRuntime
 
 
 def self_test() -> None:
@@ -27,7 +21,8 @@ def self_test() -> None:
         TelegramPanelRuntimeV17.miniapp_url_for_chat
         is PanelFoundationMixin.miniapp_url_for_chat
     )
-    print("admin_panel_runtime_v17 compatibility self-test passed")
+    assert TelegramPanelRuntimeV17.bot_username is PanelFoundationMixin.bot_username
+    print("admin_panel_runtime_v17 compatibility alias self-test passed")
 
 
 def main() -> int:
