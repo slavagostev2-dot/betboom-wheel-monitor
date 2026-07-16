@@ -199,7 +199,8 @@ def self_test() -> None:
     }
     assert panel.load_source_registry() == _EMPTY_REGISTRY
     assert SOURCE_REGISTRY_PATH == "source_registry.json"
-    assert hasattr(source_registry, "load_registry")
+    assert callable(source_registry.build_registry)
+    assert callable(source_registry.write_registry)
     print("BB V.G. source registry subsystem self-test passed")
 
 
