@@ -1,5 +1,5 @@
 {
-  "active_count": 0,
+  "active_count": 1,
   "incidents": {
     "system_checks:admin_panel_stale:9278d429b1e1ee67": {
       "detail": "Последний живой сигнал был 149 минут назад.",
@@ -132,19 +132,17 @@
       "first_seen_at": "2026-07-14T04:04:11.018046+00:00",
       "key": "system_checks:monitor_stale:e73e4f9e136f77bb",
       "kind": "monitor_stale",
-      "last_seen_at": "2026-07-14T15:10:22.771289+00:00",
+      "last_seen_at": "2026-07-16T02:33:29.167181+00:00",
       "metadata": {},
-      "occurrences": 2,
+      "occurrences": 3,
       "open_notification_pending": false,
-      "open_notified_at": "2026-07-14T14:58:14.111851+00:00",
-      "opened_sequence": 15,
-      "resolution_notification_pending": true,
+      "open_notified_at": "2026-07-16T02:33:29.994095+00:00",
+      "opened_sequence": 23,
       "resolution_notified_at": "2026-07-14T04:09:29.532413+00:00",
-      "resolved_at": "2026-07-14T15:10:22.771289+00:00",
       "resolved_sequence": 16,
       "scope": "system_checks",
       "severity": "critical",
-      "status": "resolved",
+      "status": "active",
       "subject": "",
       "title": "Основной монитор давно не обновлялся"
     },
@@ -170,17 +168,17 @@
       "title": "Не для всех источников есть данные здоровья"
     }
   },
-  "last_change_at": "2026-07-16T02:24:39.831325+00:00",
-  "last_reconcile_at": "2026-07-16T02:32:04.930219+00:00",
+  "last_change_at": "2026-07-16T02:33:29.167181+00:00",
+  "last_reconcile_at": "2026-07-16T02:33:29.167181+00:00",
   "last_reconcile_scope": "system_checks",
   "last_summary": {
-    "active": 0,
-    "new_notification_count": 0,
+    "active": 1,
+    "new_notification_count": 1,
     "recovery_notification_count": 0,
     "scope": "system_checks"
   },
-  "sequence": 22,
+  "sequence": 23,
   "status": "initializing",
-  "updated_at": "2026-07-16T02:32:04.930255+00:00",
+  "updated_at": "2026-07-16T02:33:29.994123+00:00",
   "version": 1
 }
