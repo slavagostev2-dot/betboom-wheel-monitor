@@ -252,6 +252,12 @@
       "sequence": 44,
       "value": "cct1"
     },
+    "cac4d782f0fd42ac9795b2962b0b25ae": {
+      "action": "participate_wheel",
+      "created_at": "2026-07-16T14:35:18.763834+00:00",
+      "sequence": 49,
+      "value": "koma"
+    },
     "d09a0997121b4fbe855806e47bb6c65b": {
       "action": "participate_wheel",
       "created_at": "2026-07-16T11:51:41.150356+00:00",
@@ -290,5 +296,5 @@
     }
   },
   "format": "bbvg-admin-action-queue-v1",
-  "sequence": 48
+  "sequence": 49
 }
