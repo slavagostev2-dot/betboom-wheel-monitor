@@ -8,7 +8,7 @@
       "expires_at": "2026-07-16T20:52:11+00:00",
       "first_notified_at": "2026-07-16T11:23:57.495602+00:00",
       "identifier": "cct1",
-      "last_checked_at": "2026-07-16T14:31:39.622235+00:00",
+      "last_checked_at": "2026-07-16T14:34:42.100016+00:00",
       "last_notification_at": "2026-07-16T11:23:57.495863+00:00",
       "lifecycle_changed_at": "2026-07-16T11:29:53.990097+00:00",
       "lifecycle_state": "participating",
@@ -31,17 +31,22 @@
     },
     "koma": {
       "button_token": "9c42f4efef1595",
-      "expires_at": "2026-07-23T14:32:01.976729+00:00",
+      "deadline": "2026-07-16T14:39:47.466811+00:00",
+      "deadline_source": "manual",
+      "event_id": "b0b31df46469be26cb87",
+      "expires_at": "2026-07-16T16:34:42.097515+00:00",
       "first_notified_at": "2026-07-16T14:32:01.976445+00:00",
       "identifier": "koma",
-      "last_checked_at": "2026-07-16T14:32:01.976725+00:00",
+      "last_checked_at": "2026-07-16T14:34:42.100016+00:00",
       "last_notification_at": "2026-07-16T14:32:01.976685+00:00",
+      "lifecycle_changed_at": "2026-07-16T14:34:42.097522+00:00",
+      "lifecycle_state": "scheduled_draw",
       "message_date": "2026-07-16T14:29:14+00:00",
       "message_id": 127,
       "message_text": "https://betboom.ru/freestream/koma\nhttps://telegram.me/kolesaBB\nhttps://telegram.me/kolesaBB/127",
       "message_url": "https://telegram.me/kolesaBB/127",
-      "method": "свежий Telegram-пост; страница открылась, но активность не подтверждена",
-      "needs_manual_time": true,
+      "method": "состояние определяется пользователями BB V.G.",
+      "needs_manual_time": false,
       "page_excerpt": "",
       "page_status": "fresh_unconfirmed",
       "participating": false,
@@ -49,22 +54,27 @@
       "sources": [
         "kolesaBB"
       ],
-      "status": "manual_time_required",
+      "status": "unknown",
       "url": "https://betboom.ru/freestream/koma"
     },
     "kyzko": {
       "button_token": "1ab5f320ed7481",
-      "expires_at": "2026-07-23T14:32:04.377246+00:00",
+      "deadline": "2026-07-16T14:41:32.063534+00:00",
+      "deadline_source": "manual",
+      "event_id": "fd3f356da6368526d8aa",
+      "expires_at": "2026-07-16T16:34:42.097447+00:00",
       "first_notified_at": "2026-07-16T14:32:04.376930+00:00",
       "identifier": "kyzko",
-      "last_checked_at": "2026-07-16T14:32:04.377243+00:00",
+      "last_checked_at": "2026-07-16T14:34:42.100016+00:00",
       "last_notification_at": "2026-07-16T14:32:04.377199+00:00",
+      "lifecycle_changed_at": "2026-07-16T14:34:42.097457+00:00",
+      "lifecycle_state": "scheduled_draw",
       "message_date": "2026-07-16T14:29:22+00:00",
       "message_id": 128,
       "message_text": "https://betboom.ru/freestream/kyzko\nhttps://telegram.me/kolesaBB\nhttps://telegram.me/kolesaBB/128",
       "message_url": "https://telegram.me/kolesaBB/128",
-      "method": "свежий Telegram-пост; страница открылась, но активность не подтверждена",
-      "needs_manual_time": true,
+      "method": "состояние определяется пользователями BB V.G.",
+      "needs_manual_time": false,
       "page_excerpt": "",
       "page_status": "fresh_unconfirmed",
       "participating": false,
@@ -72,7 +82,7 @@
       "sources": [
         "kolesaBB"
       ],
-      "status": "manual_time_required",
+      "status": "unknown",
       "url": "https://betboom.ru/freestream/kyzko"
     },
     "papa": {
@@ -83,7 +93,7 @@
       "expires_at": "2026-07-16T21:16:03.370092+00:00",
       "first_notified_at": "2026-07-16T11:48:04.224568+00:00",
       "identifier": "papa",
-      "last_checked_at": "2026-07-16T14:31:39.622235+00:00",
+      "last_checked_at": "2026-07-16T14:34:42.100016+00:00",
       "last_notification_at": "2026-07-16T11:48:04.224842+00:00",
       "lifecycle_changed_at": "2026-07-16T11:53:59.896800+00:00",
       "lifecycle_state": "participating",
@@ -107,12 +117,12 @@
     "sysman": {
       "button_token": "0217364010fe57",
       "event_id": "a85242763bceea38a981",
-      "expires_at": "2026-07-23T14:31:39.619988+00:00",
+      "expires_at": "2026-07-23T14:34:42.097632+00:00",
       "first_notified_at": "2026-07-16T14:22:45.529614+00:00",
       "identifier": "sysman",
-      "last_checked_at": "2026-07-16T14:31:39.622235+00:00",
+      "last_checked_at": "2026-07-16T14:34:42.100016+00:00",
       "last_notification_at": "2026-07-16T14:22:45.529852+00:00",
-      "last_unknown_reminder_at": "2026-07-23T14:31:39.619960+00:00",
+      "last_unknown_reminder_at": "2026-07-23T14:34:42.097615+00:00",
       "lifecycle_changed_at": "2026-07-16T14:28:37.989359+00:00",
       "lifecycle_state": "participating",
       "manual_time_waiting_since": "2026-07-16T14:25:37.817936+00:00",
@@ -140,7 +150,7 @@
       "expires_at": "2026-07-16T18:32:41+00:00",
       "first_notified_at": "2026-07-16T08:05:01.877690+00:00",
       "identifier": "zonertg7",
-      "last_checked_at": "2026-07-16T14:31:39.622235+00:00",
+      "last_checked_at": "2026-07-16T14:34:42.100016+00:00",
       "last_notification_at": "2026-07-16T08:05:01.877983+00:00",
       "lifecycle_changed_at": "2026-07-16T08:23:00.968486+00:00",
       "lifecycle_state": "participating",
@@ -349,6 +359,14 @@
       "stats_changed": false,
       "status": "applied"
     },
+    "768bed488d9a457481d7bd2597fc49d0": {
+      "action": "set_deadline",
+      "applied_at": "2026-07-16T14:34:42.097496+00:00",
+      "health_changed": false,
+      "state_changed": true,
+      "stats_changed": false,
+      "status": "applied"
+    },
     "7c40efe61cc84e32b614b2aa115ea4dc": {
       "action": "set_deadline",
       "applied_at": "2026-07-16T11:53:59.896641+00:00",
@@ -416,6 +434,14 @@
     "989957455bc6415c896dfbfc21bad68e": {
       "action": "set_deadline",
       "applied_at": "2026-07-15T11:21:35.145659+00:00",
+      "health_changed": false,
+      "state_changed": true,
+      "stats_changed": false,
+      "status": "applied"
+    },
+    "a0211095f70a415c9ea477e2872f4d6f": {
+      "action": "set_deadline",
+      "applied_at": "2026-07-16T14:34:42.097541+00:00",
       "health_changed": false,
       "state_changed": true,
       "stats_changed": false,
@@ -558,6 +584,7 @@
     "676e68422d844063a3b26d085ff358bc": "2026-07-16T02:13:17.424376+00:00",
     "6b14352e281444f7bae0ebbea9d3052c": "2026-07-16T03:10:03.407777+00:00",
     "715c31636c104db3aca1b99e4659424c": "2026-07-16T02:13:17.424510+00:00",
+    "768bed488d9a457481d7bd2597fc49d0": "2026-07-16T14:34:42.097496+00:00",
     "7c40efe61cc84e32b614b2aa115ea4dc": "2026-07-16T11:53:59.896641+00:00",
     "82a26ddc6fc740d98ad56f126a02b313": "2026-07-16T12:42:11.105301+00:00",
     "837099ffd2e34abfa54c45bf83baf198": "2026-07-15T15:01:31.515066+00:00",
@@ -567,6 +594,7 @@
     "88d5d85057b344d89a6fdafc794e4a26": "2026-07-15T15:16:35.579490+00:00",
     "8a50f4c72d2c40dc9282c307724e0f5e": "2026-07-16T13:15:21.569282+00:00",
     "989957455bc6415c896dfbfc21bad68e": "2026-07-15T11:21:35.145659+00:00",
+    "a0211095f70a415c9ea477e2872f4d6f": "2026-07-16T14:34:42.097541+00:00",
     "a59d74aad1724a2db158caeb89b14cca": "2026-07-16T12:42:11.105592+00:00",
     "af1ec52c23b24b2cbb85a3aebab69522": "2026-07-16T14:28:37.989778+00:00",
     "b00550e0991e401b82b02d266ebe198c": "2026-07-16T02:13:17.424571+00:00",
@@ -954,7 +982,7 @@
     "whylollycrry",
     "zortelad"
   ],
-  "last_admin_action_applied_at": "2026-07-16T14:28:37.989795+00:00",
+  "last_admin_action_applied_at": "2026-07-16T14:34:42.097558+00:00",
   "last_automatic_status_at": "2026-07-16T06:31:45.207974+00:00",
   "last_heartbeat_at": "2026-07-16T09:02:37.136616+00:00",
   "last_run_kind": "schedule",
@@ -1007,6 +1035,14 @@
   },
   "last_source_inactivity_report_at": null,
   "manual_deadlines": {
+    "koma": {
+      "deadline": "2026-07-16T14:39:47.466811+00:00",
+      "updated_at": "2026-07-16T14:34:42.097536+00:00"
+    },
+    "kyzko": {
+      "deadline": "2026-07-16T14:41:32.063534+00:00",
+      "updated_at": "2026-07-16T14:34:42.097488+00:00"
+    },
     "papa": {
       "deadline": "2026-07-16T20:46:03.370092+00:00",
       "updated_at": "2026-07-16T11:53:59.896634+00:00"
