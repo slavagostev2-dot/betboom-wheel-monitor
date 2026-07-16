@@ -1,6 +1,6 @@
 {
-  "active_size": 77,
-  "catalog_size": 2,
+  "active_size": 78,
+  "catalog_size": 3,
   "duplicate_wheels": 0,
   "error_count": 0,
   "health_sources": {
@@ -16,24 +16,24 @@
       "successful_checks": 3
     },
     "alex_white_official": {
-      "checks": 3,
+      "checks": 4,
       "consecutive_empty": 0,
       "consecutive_errors": 0,
-      "last_checked_at": "2026-07-15T23:43:05.702233+00:00",
+      "last_checked_at": "2026-07-16T23:38:29.950044+00:00",
       "last_messages_count": 78,
-      "last_success_at": "2026-07-15T23:43:05.702233+00:00",
+      "last_success_at": "2026-07-16T23:38:29.950044+00:00",
       "status": "ok",
-      "successful_checks": 3
+      "successful_checks": 4
     },
     "ayukifunpage": {
-      "checks": 3,
+      "checks": 4,
       "consecutive_empty": 0,
       "consecutive_errors": 0,
-      "last_checked_at": "2026-07-15T23:43:07.716342+00:00",
+      "last_checked_at": "2026-07-16T23:38:31.893783+00:00",
       "last_messages_count": 57,
-      "last_success_at": "2026-07-15T23:43:07.716342+00:00",
+      "last_success_at": "2026-07-16T23:38:31.893783+00:00",
       "status": "ok",
-      "successful_checks": 3
+      "successful_checks": 4
     },
     "betboom_esports": {
       "checks": 4,
@@ -112,6 +112,16 @@
       "status": "ok",
       "successful_checks": 3
     },
+    "nucleartigeres": {
+      "checks": 1,
+      "consecutive_empty": 0,
+      "consecutive_errors": 0,
+      "last_checked_at": "2026-07-16T23:38:34.612531+00:00",
+      "last_messages_count": 68,
+      "last_success_at": "2026-07-16T23:38:34.612531+00:00",
+      "status": "ok",
+      "successful_checks": 1
+    },
     "pandafx2": {
       "checks": 4,
       "consecutive_empty": 0,
@@ -136,7 +146,7 @@
     }
   },
   "inactive_wheels": 0,
-  "last_run_at": "2026-07-15T23:43:07.716972+00:00",
+  "last_run_at": "2026-07-16T23:38:34.613846+00:00",
   "notifications": 0,
   "notified_wheels": {
     "mantis1": {
@@ -214,7 +224,7 @@
     },
     "alex_white_official": {
       "active_wheel_links": 0,
-      "checked_at": "2026-07-15T23:43:03.260513+00:00",
+      "checked_at": "2026-07-16T23:38:27.677961+00:00",
       "inactive_wheel_links": 0,
       "latest_wheel_at": null,
       "messages_checked": 78,
@@ -236,7 +246,7 @@
     },
     "ayukifunpage": {
       "active_wheel_links": 0,
-      "checked_at": "2026-07-15T23:43:05.703387+00:00",
+      "checked_at": "2026-07-16T23:38:29.951655+00:00",
       "inactive_wheel_links": 0,
       "latest_wheel_at": null,
       "messages_checked": 57,
@@ -381,6 +391,17 @@
       "recent_wheel_links": 1,
       "status": "ok",
       "wheel_links_found": 2
+    },
+    "nucleartigeres": {
+      "active_wheel_links": 0,
+      "checked_at": "2026-07-16T23:38:31.894316+00:00",
+      "inactive_wheel_links": 0,
+      "latest_wheel_at": null,
+      "messages_checked": 68,
+      "recent_wheel_links": 0,
+      "status": "ok",
+      "unconfirmed_wheel_links": 0,
+      "wheel_links_found": 0
     },
     "pandafx": {
       "checked_at": "2026-07-12T18:21:36.085488+00:00",
@@ -588,6 +609,30 @@
         "messages_scanned": 135,
         "successful_checks": 2
       }
+    },
+    "2026-07-17": {
+      "sources": {
+        "alex_white_official": {
+          "checks": 1,
+          "messages_scanned": 78,
+          "successful_checks": 1
+        },
+        "ayukifunpage": {
+          "checks": 1,
+          "messages_scanned": 57,
+          "successful_checks": 1
+        },
+        "nucleartigeres": {
+          "checks": 1,
+          "messages_scanned": 68,
+          "successful_checks": 1
+        }
+      },
+      "totals": {
+        "checks": 3,
+        "messages_scanned": 203,
+        "successful_checks": 3
+      }
     }
   },
   "stats_sources": {
@@ -601,20 +646,20 @@
       "successful_checks": 3
     },
     "alex_white_official": {
-      "checks": 3,
+      "checks": 4,
       "first_checked_at": "2026-07-15T15:33:20.246535+00:00",
-      "last_checked_at": "2026-07-15T23:43:05.702256+00:00",
-      "last_updated_at": "2026-07-15T23:43:05.702256+00:00",
-      "messages_scanned": 234,
-      "successful_checks": 3
+      "last_checked_at": "2026-07-16T23:38:29.950075+00:00",
+      "last_updated_at": "2026-07-16T23:38:29.950075+00:00",
+      "messages_scanned": 312,
+      "successful_checks": 4
     },
     "ayukifunpage": {
-      "checks": 3,
+      "checks": 4,
       "first_checked_at": "2026-07-15T15:33:22.205681+00:00",
-      "last_checked_at": "2026-07-15T23:43:07.716367+00:00",
-      "last_updated_at": "2026-07-15T23:43:07.716367+00:00",
-      "messages_scanned": 171,
-      "successful_checks": 3
+      "last_checked_at": "2026-07-16T23:38:31.893812+00:00",
+      "last_updated_at": "2026-07-16T23:38:31.893812+00:00",
+      "messages_scanned": 228,
+      "successful_checks": 4
     },
     "betboom_esports": {
       "checks": 4,
@@ -678,6 +723,14 @@
       "last_updated_at": "2026-07-14T03:05:47.619612+00:00",
       "messages_scanned": 200,
       "successful_checks": 3
+    },
+    "nucleartigeres": {
+      "checks": 1,
+      "first_checked_at": "2026-07-16T23:38:34.612558+00:00",
+      "last_checked_at": "2026-07-16T23:38:34.612558+00:00",
+      "last_updated_at": "2026-07-16T23:38:34.612558+00:00",
+      "messages_scanned": 68,
+      "successful_checks": 1
     },
     "pandafx2": {
       "checks": 4,
