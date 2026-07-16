@@ -1,3 +1,4 @@
+# One-shot exact refactor patch; removed automatically after application.
 from pathlib import Path
 
 
