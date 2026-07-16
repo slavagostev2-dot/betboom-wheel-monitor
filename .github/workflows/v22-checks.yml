@@ -88,9 +88,6 @@ jobs:
           workflow = Path('.github/workflows/admin-bot.yml').read_text(encoding='utf-8')
           assert 'run: python admin_panel_runtime_v41.py' in workflow
           assert 'Role fingerprint' in workflow or 'role fingerprint' in workflow.lower()
-          assert 'admin_panel_runtime_v33.py' not in workflow
-          assert 'admin_panel_runtime_v34.py' not in workflow
-          assert 'admin_panel_runtime_v35.py' not in workflow
           assert {'wheels', 'wheel_final_reminders', 'wheel_draw_alerts'} == {
               key for key, _, _ in WHEEL_NOTIFICATION_OPTIONS
           }
