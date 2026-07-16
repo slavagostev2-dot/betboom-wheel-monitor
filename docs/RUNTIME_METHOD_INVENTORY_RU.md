@@ -3,9 +3,9 @@
 Файл генерируется автоматически из AST. Он описывает текущую ветку рефакторинга и не заменяет ручной анализ поведения.
 
 - Runtime-файлов: **40**
-- В текущей цепочке: **38**
-- Суммарно строк: **10875**
-- Уникальных имён методов: **155**
+- В текущей цепочке: **37**
+- Суммарно строк: **10626**
+- Уникальных имён методов: **153**
 
 ## Файлы и определённые методы
 
@@ -517,13 +517,11 @@
 - `render_page()` — 29 строк
 - `handle_callback()` — 18 строк
 
-### `admin_panel_runtime_v39.py` — 67 строк, в рабочей цепочке
+### `admin_panel_runtime_v39.py` — 8 строк, вне рабочей цепочки
 
-Прямые импорты: `admin_panel_runtime_v31`, `admin_panel_runtime_v38`
+Прямые импорты: `bbvg.bot.runtime`
 
-Класс `TelegramPanelRuntimeV39`; база: `TelegramPanelRuntimeV38`.
-
-- `handle_callback()` — 28 строк
+Классы не определены.
 
 ### `admin_panel_runtime_v4.py` — 228 строк, в рабочей цепочке
 
@@ -538,15 +536,11 @@
 - `_collect_current_wheels()` — 63 строк
 - `show_active()` — 56 строк
 
-### `admin_panel_runtime_v40.py` — 198 строк, в рабочей цепочке
+### `admin_panel_runtime_v40.py` — 8 строк, в рабочей цепочке
 
-Прямые импорты: `admin_panel_runtime_v39`, `telegram_ui`
+Прямые импорты: `bbvg.bot.runtime`
 
-Класс `TelegramPanelRuntimeV40`; база: `TelegramPanelRuntimeV39`.
-
-- `_simplify_active_payload()` — 21 строк
-- `_color_active_payload()` — 7 строк
-- `show_active()` — 23 строк
+Классы не определены.
 
 ### `admin_panel_runtime_v41.py` — 70 строк, в рабочей цепочке
 
@@ -658,7 +652,7 @@
 - `compact_menu_rows()` — `admin_panel_runtime_v14`, `admin_panel_runtime_v16`, `admin_panel_runtime_v21`, `admin_panel_runtime_v22`, `admin_panel_runtime_v24`, `admin_panel_runtime_v25`, `admin_panel_runtime_v26`, `admin_panel_runtime_v29`, `admin_panel_runtime_v32`, `admin_panel_runtime_v38`
 - `control_menu_rows()` — `admin_panel_runtime_v29`, `admin_panel_runtime_v31`
 - `dispatch_admin_action()` — `admin_panel_runtime_v26`, `admin_panel_runtime_v37`, `admin_panel_runtime_v8`
-- `handle_callback()` — `admin_panel_runtime_v13`, `admin_panel_runtime_v14`, `admin_panel_runtime_v17`, `admin_panel_runtime_v20`, `admin_panel_runtime_v21`, `admin_panel_runtime_v25`, `admin_panel_runtime_v26`, `admin_panel_runtime_v29`, `admin_panel_runtime_v3`, `admin_panel_runtime_v30`, `admin_panel_runtime_v31`, `admin_panel_runtime_v32`, `admin_panel_runtime_v33`, `admin_panel_runtime_v34`, `admin_panel_runtime_v37`, `admin_panel_runtime_v38`, `admin_panel_runtime_v39`, `admin_panel_runtime_v5`, `admin_panel_runtime_v6`, `admin_panel_runtime_v8`
+- `handle_callback()` — `admin_panel_runtime_v13`, `admin_panel_runtime_v14`, `admin_panel_runtime_v17`, `admin_panel_runtime_v20`, `admin_panel_runtime_v21`, `admin_panel_runtime_v25`, `admin_panel_runtime_v26`, `admin_panel_runtime_v29`, `admin_panel_runtime_v3`, `admin_panel_runtime_v30`, `admin_panel_runtime_v31`, `admin_panel_runtime_v32`, `admin_panel_runtime_v33`, `admin_panel_runtime_v34`, `admin_panel_runtime_v37`, `admin_panel_runtime_v38`, `admin_panel_runtime_v5`, `admin_panel_runtime_v6`, `admin_panel_runtime_v8`
 - `handle_message()` — `admin_panel_runtime_v10`, `admin_panel_runtime_v14`, `admin_panel_runtime_v17`, `admin_panel_runtime_v20`, `admin_panel_runtime_v21`, `admin_panel_runtime_v30`, `admin_panel_runtime_v37`, `admin_panel_runtime_v6`, `admin_panel_runtime_v7`, `admin_panel_runtime_v9`
 - `load_access()` — `admin_panel_runtime_v23`, `admin_panel_runtime_v25`
 - `load_source_requests()` — `admin_panel_runtime_v17`, `admin_panel_runtime_v23`, `admin_panel_runtime_v25`
@@ -679,7 +673,7 @@
 - `set_user_notification()` — `admin_panel_runtime_v34`, `admin_panel_runtime_v35`
 - `setup_bot()` — `admin_panel_runtime_v10`, `admin_panel_runtime_v31`, `admin_panel_runtime_v32`, `admin_panel_runtime_v36`, `admin_panel_runtime_v37`
 - `show_access()` — `admin_panel_runtime_v21`, `admin_panel_runtime_v38`
-- `show_active()` — `admin_panel_runtime_v14`, `admin_panel_runtime_v20`, `admin_panel_runtime_v22`, `admin_panel_runtime_v24`, `admin_panel_runtime_v25`, `admin_panel_runtime_v3`, `admin_panel_runtime_v32`, `admin_panel_runtime_v37`, `admin_panel_runtime_v38`, `admin_panel_runtime_v4`, `admin_panel_runtime_v40`, `admin_panel_runtime_v9`
+- `show_active()` — `admin_panel_runtime_v14`, `admin_panel_runtime_v20`, `admin_panel_runtime_v22`, `admin_panel_runtime_v24`, `admin_panel_runtime_v25`, `admin_panel_runtime_v3`, `admin_panel_runtime_v32`, `admin_panel_runtime_v37`, `admin_panel_runtime_v38`, `admin_panel_runtime_v4`, `admin_panel_runtime_v9`
 - `show_analytics()` — `admin_panel_runtime_v29`, `admin_panel_runtime_v30`, `admin_panel_runtime_v31`, `admin_panel_runtime_v32`, `admin_panel_runtime_v37`, `admin_panel_runtime_v38`
 - `show_app_entry()` — `admin_panel_runtime_v10`, `admin_panel_runtime_v11`, `admin_panel_runtime_v17`, `admin_panel_runtime_v19`, `admin_panel_runtime_v9`
 - `show_candidate_list()` — `admin_panel_runtime_v11`, `admin_panel_runtime_v5`
