@@ -72,17 +72,40 @@ jobs:
           set -euo pipefail
           python - <<'PY'
           from pathlib import Path
+          from tempfile import TemporaryDirectory
           import bot_private_state
           import admin_panel_runtime_v25
           import admin_panel_runtime_v30
 
-          original = bot_private_state.STATE_PATH
-          try:
-              bot_private_state.STATE_PATH = Path('/tmp/bbvg-runtime-self-test-state.enc.json')
-              admin_panel_runtime_v25.self_test()
-              admin_panel_runtime_v30.self_test()
-          finally:
-              bot_private_state.STATE_PATH = original
+          def run_local_self_test(runtime_class, self_test):
+              original_load = runtime_class.load_access
+
+              def local_load(self, force=False):
+                  bundle = getattr(self, '_bot_bundle', None)
+                  if not isinstance(bundle, dict):
+                      return original_load(self, force=False)
+                  self.access = self.normalize_access(bundle.get('access', {}))
+                  self.access_loaded = True
+                  return self.access
+
+              original_path = bot_private_state.STATE_PATH
+              runtime_class.load_access = local_load
+              try:
+                  with TemporaryDirectory() as temporary:
+                      bot_private_state.STATE_PATH = Path(temporary) / 'state.enc.json'
+                      self_test()
+              finally:
+                  runtime_class.load_access = original_load
+                  bot_private_state.STATE_PATH = original_path
+
+          run_local_self_test(
+              admin_panel_runtime_v25.TelegramPanelRuntimeV25,
+              admin_panel_runtime_v25.self_test,
+          )
+          run_local_self_test(
+              admin_panel_runtime_v30.TelegramPanelRuntimeV30,
+              admin_panel_runtime_v30.self_test,
+          )
           PY
           python admin_panel_runtime_v26.py --self-test
           python admin_panel_runtime_v28.py --self-test
