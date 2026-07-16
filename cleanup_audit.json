@@ -125,23 +125,13 @@
       ]
     },
     {
-      "classes": [
-        {
-          "bases": [
-            "TelegramPanelRuntimeV17"
-          ],
-          "class_attributes": [],
-          "method_count": 0,
-          "methods": [],
-          "name": "TelegramPanelRuntimeV19"
-        }
-      ],
+      "classes": [],
       "direct_imports": [
         "admin_panel_runtime_v17",
         "bbvg.bot.foundation"
       ],
       "in_current_import_chain": true,
-      "line_count": 32,
+      "line_count": 30,
       "module": "admin_panel_runtime_v19",
       "path": "admin_panel_runtime_v19.py",
       "reference_count": 3,
@@ -2931,7 +2921,7 @@
       "admin_panel_runtime_v37"
     ]
   },
-  "runtime_total_lines": 6035,
+  "runtime_total_lines": 6033,
   "runtime_unique_method_count": 100,
   "unreferenced_python_candidates": []
 }
