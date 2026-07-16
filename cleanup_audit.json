@@ -465,9 +465,8 @@
       "line_count": 106,
       "module": "admin_panel_runtime_v27",
       "path": "admin_panel_runtime_v27.py",
-      "reference_count": 5,
+      "reference_count": 4,
       "references": [
-        ".github/workflows/admin-bot.yml",
         ".github/workflows/bot-recovery-smoke.yml",
         ".github/workflows/refactor-maintenance.yml",
         "admin_panel_runtime_v27.py",
@@ -1288,9 +1287,8 @@
       "line_count": 43,
       "module": "admin_panel_runtime_v33",
       "path": "admin_panel_runtime_v33.py",
-      "reference_count": 9,
+      "reference_count": 8,
       "references": [
-        ".github/workflows/admin-bot.yml",
         ".github/workflows/bot-recovery-smoke.yml",
         ".github/workflows/refactor-maintenance.yml",
         ".github/workflows/system-health.yml",
@@ -1326,9 +1324,8 @@
       "line_count": 39,
       "module": "admin_panel_runtime_v34",
       "path": "admin_panel_runtime_v34.py",
-      "reference_count": 9,
+      "reference_count": 8,
       "references": [
-        ".github/workflows/admin-bot.yml",
         ".github/workflows/bot-recovery-smoke.yml",
         ".github/workflows/refactor-maintenance.yml",
         ".github/workflows/system-health.yml",
@@ -1364,9 +1361,8 @@
       "line_count": 34,
       "module": "admin_panel_runtime_v35",
       "path": "admin_panel_runtime_v35.py",
-      "reference_count": 8,
+      "reference_count": 7,
       "references": [
-        ".github/workflows/admin-bot.yml",
         ".github/workflows/bot-recovery-smoke.yml",
         ".github/workflows/refactor-maintenance.yml",
         ".github/workflows/system-health.yml",
