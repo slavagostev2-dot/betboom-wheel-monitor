@@ -19,6 +19,7 @@ jobs:
       ADMIN_USER_ID: "1"
       BBVG_TEST_MODE: "1"
       TELEGRAM_WEB_DOMAIN: telegram.me
+      UNKNOWN_DEDUP_HOURS: "2"
       EXPECTED_SOURCE_COUNT: "77"
       FINAL_REMINDER_BEFORE_MINUTES: "5"
       ACTIVE_REMOVE_GRACE_MINUTES: "0"
@@ -36,7 +37,7 @@ jobs:
       - name: Install dependencies
         run: python -m pip install -r requirements.txt
 
-      - name: Run consolidated recovery smoke test
+      - name: Validate recovery core
         run: |
           set -euo pipefail
           python -m compileall -q bbvg tests
@@ -65,6 +66,10 @@ jobs:
           python security_audit.py --current
           python migrate_bot_private_state.py --check
           python notification_preferences_v2.py
+
+      - name: Validate runtime compatibility layers
+        run: |
+          set -euo pipefail
           python - <<'PY'
           from pathlib import Path
           import bot_private_state
@@ -88,6 +93,10 @@ jobs:
           python admin_panel_runtime_v37.py --self-test
           python admin_panel_runtime_v38.py --self-test
           python admin_panel_runtime_v41.py --self-test
+
+      - name: Validate recovery domain commands
+        run: |
+          set -euo pipefail
           python recurring_wheel_events.py
           python wheel_event_runtime.py
           python wheel_metadata_quality.py
@@ -162,7 +171,6 @@ jobs:
           ledger = json.loads(Path('notification_delivery_state.json').read_text(encoding='utf-8'))
           assert ledger.get('format') == 'bbvg-notification-delivery-v2'
           assert isinstance(ledger.get('entries'), dict)
-
           primary = [
               line.split('#', 1)[0].strip().lstrip('@')
               for line in Path('public_sources.txt').read_text(encoding='utf-8').splitlines()
