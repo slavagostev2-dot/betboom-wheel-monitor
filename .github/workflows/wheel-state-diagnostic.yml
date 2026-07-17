@@ -23,6 +23,9 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: Install HTTP dependency
+        run: python -m pip install requests
+
       - name: Query BetBoom action state
         shell: bash
         run: |
@@ -34,29 +37,44 @@ jobs:
           names = ["stray", "dyrachyo", "neret", "zonertg8"]
           result = {}
           for name in names:
-              response = requests.post(
-                  endpoint,
-                  json={"streamer_link": f"https://betboom.ru/freestream/{name}"},
-                  headers={
-                      "Content-Type": "application/json",
-                      "User-Agent": "BBVG-wheel-state-diagnostic/1.0",
-                      "x-platform": "web",
-                  },
-                  timeout=20,
-              )
-              payload = response.json()
-              info = payload.get("info") if isinstance(payload, dict) else None
-              allowed = {}
-              if isinstance(info, dict):
-                  for key, value in info.items():
-                      if value is None or isinstance(value, (str, int, float, bool)):
-                          allowed[key] = value
-              result[name] = {
-                  "http_status": response.status_code,
-                  "top_level_code": payload.get("code") if isinstance(payload, dict) else None,
-                  "top_level_status": payload.get("status") if isinstance(payload, dict) else None,
-                  "info": allowed,
-              }
+              try:
+                  response = requests.post(
+                      endpoint,
+                      json={"streamer_link": f"https://betboom.ru/freestream/{name}"},
+                      headers={
+                          "Accept": "application/json, text/plain, */*",
+                          "Content-Type": "application/json",
+                          "Origin": "https://betboom.ru",
+                          "Referer": f"https://betboom.ru/freestream/{name}",
+                          "User-Agent": "Mozilla/5.0 BBVG-wheel-state-diagnostic/1.0",
+                          "x-platform": "web",
+                      },
+                      timeout=20,
+                  )
+                  try:
+                      payload = response.json()
+                  except ValueError:
+                      payload = None
+                  info = payload.get("info") if isinstance(payload, dict) else None
+                  allowed = {}
+                  if isinstance(info, dict):
+                      for key, value in info.items():
+                          if value is None or isinstance(value, (str, int, float, bool)):
+                              allowed[key] = value
+                  result[name] = {
+                      "http_status": response.status_code,
+                      "content_type": response.headers.get("content-type"),
+                      "top_level_code": payload.get("code") if isinstance(payload, dict) else None,
+                      "top_level_status": payload.get("status") if isinstance(payload, dict) else None,
+                      "top_level_error": payload.get("error") if isinstance(payload, dict) else None,
+                      "info": allowed,
+                      "body_prefix": "" if payload is not None else response.text[:200],
+                  }
+              except Exception as exc:
+                  result[name] = {
+                      "exception_type": type(exc).__name__,
+                      "exception": str(exc),
+                  }
           print(json.dumps(result, ensure_ascii=False, indent=2, sort_keys=True))
           with open("wheel-state-diagnostic.json", "w", encoding="utf-8") as stream:
               json.dump(result, stream, ensure_ascii=False, indent=2, sort_keys=True)
