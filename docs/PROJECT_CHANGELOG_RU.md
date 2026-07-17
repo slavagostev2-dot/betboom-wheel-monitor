@@ -27,7 +27,7 @@
 
 **Pre-update backup:** `backup/before-chapter2-actions-hardening-2026-07-17`, SHA `be8421d29f2d4d688ee22eeeac2c9ce5b5ba3589`; ref проверен как точное совпадение baseline.
 
-**Проверки до PR:** YAML parse всех workflow, `py_compile`, `backup_rotation.py --self-test`, `monitor_health.py --self-test`, shell syntax и профильный pytest-контракт проходят. Полные PR runs, production acceptance, live heartbeat и post-update backup фиксируются после deploy.
+**Проверки:** до PR прошли YAML parse всех workflow, `py_compile`, `backup_rotation.py --self-test`, `monitor_health.py --self-test`, shell syntax и профильный pytest-контракт. На final head PR №48 успешны runs `29579368810`, `29579368732`, `29579368716`, `29579368718`, `29579368737` и rotation-contract `29579368709`; полный pytest и production acceptance входят в обязательный current-check. Live heartbeat и post-update backup проверяются после merge.
 
 **Откат:** вернуть merge commit главы 2 целиком; при необходимости перейти на `backup/before-chapter2-actions-hardening-2026-07-17`. State migration не требуется.
 
