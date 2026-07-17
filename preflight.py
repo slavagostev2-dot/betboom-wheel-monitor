@@ -292,7 +292,7 @@ def main() -> None:
             raise SystemExit(f"PRECHECK ERROR: {path} is missing key {key}")
 
     stats = read_json("source_stats.json")
-    if stats.get("source_rating_epoch_day") != "2026-07-14":
+    if stats.get("source_rating_epoch_day") != "2026-07-17":
         raise SystemExit("PRECHECK ERROR: source rating epoch was not reset")
 
     configured_values = source_values("public_sources.txt")

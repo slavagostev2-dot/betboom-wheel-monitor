@@ -140,6 +140,15 @@ class TelegramPanelRuntime(PersonalWheelVotingMixin, TelegramPanelRuntimeV38):
             self.navigation[str(self.current_user_id or "guest")] = ["menu"]
         role = self.role_for(self.current_user_id)
         admin = role in {"owner", "admin"}
+        rows = [
+            [
+                dict(button)
+                for button in row
+                if str(button.get("callback_data") or "") != "page:status"
+            ]
+            for row in self.compact_menu_rows(admin)
+        ]
+        rows = [row for row in rows if row]
         text = (
             "🎡 <b>BB V.G.</b>\n\n"
             "Находит колёса BetBoom, показывает время прокрутки и хранит отметки участия.\n\n"
@@ -148,8 +157,48 @@ class TelegramPanelRuntime(PersonalWheelVotingMixin, TelegramPanelRuntimeV38):
         )
         self.send(
             text,
-            reply_markup={"inline_keyboard": self.compact_menu_rows(admin)},
+            reply_markup={"inline_keyboard": rows},
         )
+
+    def show_settings(self) -> None:
+        rows: list[list[dict[str, Any]]] = [
+            [{"text": "🔔 Уведомления", "callback_data": "page:notifications"}],
+            [{"text": "✅ Работа системы", "callback_data": "page:status"}],
+        ]
+        lines = [
+            "⚙️ <b>Настройки</b>",
+            "",
+            "Личные настройки применяются только к вашему Telegram-аккаунту.",
+        ]
+        if self.is_admin():
+            rows.extend(
+                [
+                    [{"text": "🧭 API и Legacy", "callback_data": "page:wheelmode"}],
+                    [
+                        {
+                            "text": "⛔ Отключённый функционал",
+                            "callback_data": "page:disabled_features",
+                        }
+                    ],
+                ]
+            )
+            interval = int(
+                self.load_access().get("settings", {}).get("monitor_interval_minutes", 5)
+            )
+            lines.extend(["", f"Интервал постоянной проверки: <b>{interval} мин.</b>"])
+            rows.append([{"text": "⏱ Интервал проверки", "callback_data": "page:interval"}])
+        if self.is_owner():
+            rows.append([{"text": "👥 Доступ и администраторы", "callback_data": "page:access"}])
+        else:
+            rows.append([{"text": "🗑 Удалить мои данные", "callback_data": "privacy:delete:ask"}])
+        self.send("\n".join(lines), reply_markup=self.with_nav(rows))
+
+    def render_page(self, page: str) -> None:
+        normalized = str(page or "")
+        if normalized in {"wheelmode", "disabled_features"} and not self.is_admin():
+            self.show_settings()
+            return
+        super().render_page(page)
 
 
 def _configured_panel(
@@ -256,6 +305,49 @@ def self_test() -> None:
     ]
     assert "page:active" in menu_callbacks
     assert "page:control" in menu_callbacks
+    assert "page:status" not in menu_callbacks
+
+    current.current_user_id = "3"
+    current.current_chat_id = "3"
+    current.current_role = "user"
+    current.navigation = {"3": ["menu"]}
+    current.role_for = lambda user_id: "user"  # type: ignore[method-assign]
+    current.role_name = lambda role: "Пользователь"  # type: ignore[method-assign]
+    current.is_admin = lambda: False  # type: ignore[method-assign]
+    current.is_owner = lambda: False  # type: ignore[method-assign]
+    current.with_nav = lambda rows=None: {"inline_keyboard": rows or []}  # type: ignore[method-assign]
+    current.send = lambda text, **kwargs: menu_capture.append((text, kwargs)) or {}  # type: ignore[method-assign]
+    current.show_menu()
+    user_menu_callbacks = [
+        str(button.get("callback_data") or "")
+        for row in menu_capture[-1][1]["reply_markup"]["inline_keyboard"]
+        for button in row
+        if isinstance(button, dict)
+    ]
+    assert "page:settings" in user_menu_callbacks
+    assert "page:status" not in user_menu_callbacks
+
+    current.show_settings()
+    user_settings_text, user_settings_kwargs = menu_capture[-1]
+    user_settings_markup = str(user_settings_kwargs["reply_markup"])
+    assert "page:status" in user_settings_markup
+    assert "page:wheelmode" not in user_settings_markup
+    assert "page:disabled_features" not in user_settings_markup
+    assert "Проверка активных колёс выполняется через BetBoom API." not in user_settings_text
+
+    current.current_user_id = "1"
+    current.current_chat_id = "1"
+    current.current_role = "owner"
+    current.is_admin = lambda: True  # type: ignore[method-assign]
+    current.is_owner = lambda: True  # type: ignore[method-assign]
+    current.load_access = lambda force=False: {"settings": {"monitor_interval_minutes": 5}}  # type: ignore[method-assign]
+    current.show_settings()
+    admin_settings_text, admin_settings_kwargs = menu_capture[-1]
+    admin_settings_markup = str(admin_settings_kwargs["reply_markup"])
+    assert "page:status" in admin_settings_markup
+    assert "page:wheelmode" in admin_settings_markup
+    assert "page:disabled_features" in admin_settings_markup
+    assert "Проверка активных колёс выполняется через BetBoom API." not in admin_settings_text
 
     summary_calls: list[tuple[str, Any]] = []
     current._prepare_callback_user = lambda query: summary_calls.append(("prepare", query))  # type: ignore[method-assign]
