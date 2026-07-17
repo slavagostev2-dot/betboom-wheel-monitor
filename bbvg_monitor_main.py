@@ -1,6 +1,8 @@
 from __future__ import annotations
 
+from datetime import datetime
 from typing import Any
+from zoneinfo import ZoneInfo
 
 import bbvg_monitor_runtime as runtime
 import admin_action_queue
@@ -46,6 +48,24 @@ _original_send_message = monitor.send_message
 _original_load_stats = monitor.data_store.load_stats
 _original_record_admin_wheel_decision = monitor.data_store.record_admin_wheel_decision
 
+SOURCE_RATING_RESET_DAY = "2026-07-17"
+SOURCE_RATING_RESET_VERSION = 2
+SOURCE_RATING_RESET_TIMEZONE = ZoneInfo("Asia/Barnaul")
+SOURCE_RATING_RESET_FIELDS = (
+    "wheel_posts",
+    "admin_confirmed_wheels",
+    "admin_rejected_wheels",
+    "quality_score",
+    "quality_decisions",
+    "activation_sent",
+    "personal_vote_points",
+    "personal_vote_score",
+    "personal_votes",
+    "user_votes",
+    "admin_votes",
+    "last_vote_at",
+)
+
 
 # Error notifications are produced by system_checks.py and deduplicated in
 # incident_state.json. The five-minute worker must not repeat the same warning.
@@ -58,8 +78,57 @@ monitor.BOT_FEEDBACK_ENABLED = False
 monitor.process_admin_actions = admin_action_queue.process_pending
 
 
+def reset_source_rating_epoch(
+    data: dict[str, Any],
+    *,
+    at: datetime | None = None,
+) -> bool:
+    """Start the public source rating from zero at the requested local day."""
+
+    if (
+        data.get("source_rating_epoch_day") == SOURCE_RATING_RESET_DAY
+        and int(data.get("source_rating_reset_version", 0) or 0)
+        >= SOURCE_RATING_RESET_VERSION
+    ):
+        return False
+
+    data.pop("admin_wheel_decisions", None)
+    data.pop("personal_wheel_votes", None)
+
+    for entry in data.setdefault("sources", {}).values():
+        if not isinstance(entry, dict):
+            continue
+        for field in SOURCE_RATING_RESET_FIELDS:
+            entry.pop(field, None)
+
+    for daily_entry in data.setdefault("daily", {}).values():
+        if not isinstance(daily_entry, dict):
+            continue
+        totals = daily_entry.setdefault("totals", {})
+        if isinstance(totals, dict):
+            for field in SOURCE_RATING_RESET_FIELDS:
+                totals.pop(field, None)
+        for entry in daily_entry.setdefault("sources", {}).values():
+            if not isinstance(entry, dict):
+                continue
+            for field in SOURCE_RATING_RESET_FIELDS:
+                entry.pop(field, None)
+
+    current = (at or monitor.now_utc()).astimezone(SOURCE_RATING_RESET_TIMEZONE)
+    data["source_rating_policy"] = personal_wheel_voting.PERSONAL_RATING_POLICY
+    data["source_rating_epoch_day"] = SOURCE_RATING_RESET_DAY
+    data["source_rating_reset_version"] = SOURCE_RATING_RESET_VERSION
+    data["source_rating_reset_at"] = current.isoformat()
+    data["source_rating_counting_from"] = (
+        f"{SOURCE_RATING_RESET_DAY}T00:00:00+07:00"
+    )
+    return True
+
+
 def load_stats_additive() -> dict[str, Any]:
     data = _original_load_stats()
+    if reset_source_rating_epoch(data):
+        monitor.data_store.save_stats(data)
     if data.get("source_rating_policy") != personal_wheel_voting.PERSONAL_RATING_POLICY:
         rating_policy.normalize_additive_rating(data)
     return data
