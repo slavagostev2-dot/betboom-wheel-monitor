@@ -25,7 +25,6 @@ jobs:
       ADMIN_USER_ID: "1"
       BBVG_TEST_MODE: "1"
       TELEGRAM_WEB_DOMAIN: telegram.me
-      EXPECTED_SOURCE_COUNT: "66"
       FINAL_REMINDER_BEFORE_MINUTES: "5"
       ACTIVE_REMOVE_GRACE_MINUTES: "0"
       EXPECTED_EVENT_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
