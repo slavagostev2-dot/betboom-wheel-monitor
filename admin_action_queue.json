@@ -156,6 +156,12 @@
       "sequence": 29,
       "value": "zonertg7"
     },
+    "652605784b944b879bbe854e4a10a53f": {
+      "action": "record_personal_vote",
+      "created_at": "2026-07-17T13:12:13.481836+00:00",
+      "sequence": 61,
+      "value": "{\"actor\":\"vote_52b40c32d6fb8e26f3e17863bb949f92\",\"event_key\":\"smurf4#action:856\",\"role\":\"owner\",\"sources\":[\"smurf_gigachad\"],\"weight\":5,\"wheel_key\":\"smurf4\"}"
+    },
     "676e68422d844063a3b26d085ff358bc": {
       "action": "confirm_finished_global",
       "created_at": "2026-07-16T02:11:13.488996+00:00",
@@ -362,5 +368,5 @@
     }
   },
   "format": "bbvg-admin-action-queue-v1",
-  "sequence": 60
+  "sequence": 61
 }
