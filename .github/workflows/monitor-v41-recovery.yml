@@ -40,8 +40,6 @@ jobs:
           BOT_STATE_KEY: "test-state-key"
           BOT_CHAT_ID: "1"
           TELEGRAM_WEB_DOMAIN: telegram.me
-          EXPECTED_SOURCE_COUNT: "66"
-          UNKNOWN_DEDUP_HOURS: "2"
         run: |
           set +e
           (python preflight.py && python monitor_validation_v41.py) > monitor_validation.log 2>&1
@@ -87,14 +85,12 @@ jobs:
           GITHUB_REPOSITORY: ${{ github.repository }}
           GITHUB_BRANCH: main
           TELEGRAM_WEB_DOMAIN: telegram.me
-          EXPECTED_SOURCE_COUNT: "66"
           DISPLAY_TIMEZONE: Asia/Barnaul
           REQUEST_TIMEOUT_SECONDS: "15"
           MAX_WORKERS: "16"
           TRANSPORT_BATCH_ATTEMPTS: "3"
           MONITOR_RESTART_FAILURES: "2"
           MONITOR_RESTART_NO_PROGRESS: "2"
-          UNKNOWN_DEDUP_HOURS: "2"
           DEADLINE_GRACE_MINUTES: "30"
           FINAL_REMINDER_BEFORE_MINUTES: "5"
           ACTIVE_REMOVE_GRACE_MINUTES: "0"
