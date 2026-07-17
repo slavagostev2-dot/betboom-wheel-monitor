@@ -74,7 +74,6 @@ jobs:
           BOT_STATE_KEY: ${{ secrets.BOT_STATE_KEY }}
           BOT_CHAT_ID: ${{ secrets.BOT_CHAT_ID }}
           TELEGRAM_WEB_DOMAIN: telegram.me
-          EXPECTED_SOURCE_COUNT: "66"
           DISPLAY_TIMEZONE: Asia/Barnaul
           REQUEST_TIMEOUT_SECONDS: "15"
           DISCOVERY_LOOKBACK_HOURS: "48"
