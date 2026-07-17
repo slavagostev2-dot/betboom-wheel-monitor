@@ -4,6 +4,7 @@ from datetime import datetime, timezone
 
 import pytest
 
+import bbvg_monitor_main
 import personal_wheel_voting
 from bbvg.bot import runtime as bot_runtime
 
@@ -88,3 +89,64 @@ def test_bot_token_is_not_accepted_as_state_key(monkeypatch: pytest.MonkeyPatch)
     monkeypatch.setenv("BOT_TOKEN", "bot-token-must-not-be-used")
     with pytest.raises(RuntimeError, match="BOT_STATE_KEY"):
         personal_wheel_voting.actor_vote_token("100")
+
+
+def test_rating_reset_removes_scores_but_preserves_operations() -> None:
+    stats = {
+        "version": 1,
+        "source_rating_epoch_day": "2026-07-14",
+        "admin_wheel_decisions": {"old": {"decision": "confirmed"}},
+        "personal_wheel_votes": {"old": {"weight": 5}},
+        "sources": {
+            "source": {
+                "checks": 100,
+                "messages_scanned": 2000,
+                "recent_post_keys": {"post": {"wheel": "wheel-a"}},
+                "wheel_posts": 7,
+                "quality_score": 46,
+                "quality_decisions": {"old": 40},
+                "personal_vote_points": {"vote": 6},
+                "personal_vote_score": 6,
+                "personal_votes": 2,
+                "user_votes": 1,
+                "admin_votes": 1,
+            }
+        },
+        "daily": {
+            "2026-07-16": {
+                "totals": {
+                    "checks": 100,
+                    "wheel_posts": 7,
+                    "personal_vote_points": 6,
+                },
+                "sources": {
+                    "source": {
+                        "checks": 100,
+                        "wheel_posts": 7,
+                        "personal_vote_points": 6,
+                    }
+                },
+            }
+        },
+    }
+
+    changed = bbvg_monitor_main.reset_source_rating_epoch(
+        stats,
+        at=datetime(2026, 7, 17, 2, 0, tzinfo=UTC),
+    )
+
+    assert changed is True
+    assert stats["source_rating_epoch_day"] == "2026-07-17"
+    assert stats["source_rating_policy"] == "personal_votes_v1"
+    assert "admin_wheel_decisions" not in stats
+    assert "personal_wheel_votes" not in stats
+    assert stats["sources"]["source"]["checks"] == 100
+    assert stats["sources"]["source"]["messages_scanned"] == 2000
+    assert stats["sources"]["source"]["recent_post_keys"] == {
+        "post": {"wheel": "wheel-a"}
+    }
+    for field in bbvg_monitor_main.SOURCE_RATING_RESET_FIELDS:
+        assert field not in stats["sources"]["source"]
+        assert field not in stats["daily"]["2026-07-16"]["totals"]
+        assert field not in stats["daily"]["2026-07-16"]["sources"]["source"]
+    assert bbvg_monitor_main.reset_source_rating_epoch(stats) is False
