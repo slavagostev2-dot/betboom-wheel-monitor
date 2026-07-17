@@ -6,6 +6,12 @@
       "sequence": 27,
       "value": "aunkereref|admin"
     },
+    "07d5c86292584ec7bf409344b0eff656": {
+      "action": "record_personal_vote",
+      "created_at": "2026-07-17T10:56:24.877804+00:00",
+      "sequence": 57,
+      "value": "{\"actor\":\"vote_52b40c32d6fb8e26f3e17863bb949f92\",\"event_key\":\"stray#action:873\",\"role\":\"owner\",\"sources\":[\"kolesaBB\"],\"weight\":5,\"wheel_key\":\"stray\"}"
+    },
     "0d2cc8c3bad2460da698950fe3a78cff": {
       "action": "participate_token",
       "created_at": "2026-07-15T11:49:26.193783+00:00",
@@ -338,5 +344,5 @@
     }
   },
   "format": "bbvg-admin-action-queue-v1",
-  "sequence": 56
+  "sequence": 57
 }
