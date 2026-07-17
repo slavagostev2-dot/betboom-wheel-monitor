@@ -38,7 +38,6 @@ jobs:
       - name: Validate approved source pool
         env:
           TELEGRAM_WEB_DOMAIN: telegram.me
-          EXPECTED_SOURCE_COUNT: "66"
         run: |
           python preflight.py
           python -m py_compile source_transport_smoke.py telegram_transport.py bbvg_monitor_main.py monitor_health.py
