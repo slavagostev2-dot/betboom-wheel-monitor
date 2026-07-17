@@ -1,5 +1,13 @@
 {
   "activation_alerts": {
+    "stray": {
+      "alerted_at": "2026-07-17T10:55:47.703919+00:00",
+      "deadline": "2026-07-17T11:00:12.957000+00:00",
+      "identifier": "stray",
+      "lifecycle_rule": "timer",
+      "suppress_until": "2026-07-17T11:00:12.957000+00:00",
+      "url": "https://betboom.ru/freestream/stray"
+    },
     "zonertg8": {
       "alerted_at": "2026-07-17T07:58:11.558514+00:00",
       "deadline": "2026-07-17T17:55:42.221000+00:00",
@@ -10,6 +18,27 @@
     }
   },
   "active_wheels": {
+    "stray": {
+      "action_id": 873,
+      "button_token": "8b58f74edbde33",
+      "deadline": "2026-07-17T11:00:12.957000+00:00",
+      "expires_at": "2026-07-17T12:55:47.703815+00:00",
+      "first_notified_at": "2026-07-17T10:55:47.703815+00:00",
+      "identifier": "stray",
+      "last_checked_at": "2026-07-17T10:55:47.703815+00:00",
+      "last_notification_at": "2026-07-17T10:55:47.703815+00:00",
+      "message_date": "2026-07-17T10:55:06+00:00",
+      "message_id": 132,
+      "message_text": "https://betboom.ru/freestream/stray\nhttps://telegram.me/kolesaBB\nhttps://telegram.me/kolesaBB/132",
+      "message_url": "https://telegram.me/kolesaBB/132",
+      "method": "активность и таймер подтверждены BetBoom",
+      "page_excerpt": "",
+      "participating": false,
+      "source": "kolesaBB",
+      "status": "preliminary",
+      "url": "https://betboom.ru/freestream/stray",
+      "verification_status": "confirmed"
+    },
     "zonertg8": {
       "action_id": 693,
       "availability_status": "available",
@@ -20,9 +49,9 @@
       "expires_at": "2026-07-17T18:25:42.221000+00:00",
       "first_notified_at": "2026-07-17T07:58:11.558439+00:00",
       "identifier": "zonertg8",
-      "last_checked_at": "2026-07-17T10:52:40.262176+00:00",
+      "last_checked_at": "2026-07-17T10:55:41.457465+00:00",
       "last_notification_at": "2026-07-17T07:58:11.558439+00:00",
-      "last_verification_at": "2026-07-17T10:52:39.870041+00:00",
+      "last_verification_at": "2026-07-17T10:55:41.038087+00:00",
       "lifecycle_changed_at": "2026-07-17T08:01:06.697187+00:00",
       "lifecycle_state": "scheduled_draw",
       "message_date": "2026-07-17T07:58:01+00:00",
@@ -132,7 +161,7 @@
     },
     "34b6bf3464e4483681b9797c52138320": {
       "action": "record_personal_vote",
-      "applied_at": "2026-07-17T10:52:39.869990+00:00",
+      "applied_at": "2026-07-17T10:55:41.038032+00:00",
       "health_changed": false,
       "state_changed": false,
       "stats_changed": true,
@@ -212,7 +241,7 @@
     },
     "5ba28cef57b2482e9c260e67992e4305": {
       "action": "record_personal_vote",
-      "applied_at": "2026-07-17T10:52:39.869929+00:00",
+      "applied_at": "2026-07-17T10:55:41.037971+00:00",
       "health_changed": false,
       "state_changed": false,
       "stats_changed": true,
@@ -484,7 +513,7 @@
     },
     "f345e47aa91647c2b6e7694c422a71d9": {
       "action": "record_personal_vote",
-      "applied_at": "2026-07-17T10:52:39.869965+00:00",
+      "applied_at": "2026-07-17T10:55:41.038006+00:00",
       "health_changed": false,
       "state_changed": false,
       "stats_changed": true,
@@ -503,7 +532,7 @@
     "1e38cd78c77c4a6d804ef59615464444": "2026-07-16T14:28:37.989143+00:00",
     "26a274d2313845e99d948ee2fd1eff9f": "2026-07-15T11:21:35.145623+00:00",
     "2fedd88f467e461498f8cc57be21e5a2": "2026-07-16T02:13:17.424445+00:00",
-    "34b6bf3464e4483681b9797c52138320": "2026-07-17T10:52:39.869990+00:00",
+    "34b6bf3464e4483681b9797c52138320": "2026-07-17T10:55:41.038032+00:00",
     "3e2a642611c6405589bd1918b5f2f8a3": "2026-07-15T15:01:31.514705+00:00",
     "3ee3b0c3e1104127bb8818c84fdb470e": "2026-07-15T11:45:41.561556+00:00",
     "49ada0740cd1481eaec369807f7c31bb": "2026-07-15T11:51:44.513126+00:00",
@@ -513,7 +542,7 @@
     "51968ee3fad44a81b4ae1de521d8bf78": "2026-07-16T02:13:17.424579+00:00",
     "566a2d2f8df04d17bdddd91656b4064f": "2026-07-16T13:52:28.722436+00:00",
     "57287a9cd8fe4862b7d06068be830b3b": "2026-07-16T12:57:17.326165+00:00",
-    "5ba28cef57b2482e9c260e67992e4305": "2026-07-17T10:52:39.869929+00:00",
+    "5ba28cef57b2482e9c260e67992e4305": "2026-07-17T10:55:41.037971+00:00",
     "5f86a89e1d674ba49e4aeeac81a88417": "2026-07-16T08:23:00.969096+00:00",
     "676e68422d844063a3b26d085ff358bc": "2026-07-16T02:13:17.424376+00:00",
     "67ec3b0324c344fcb0fb77ea545fbafa": "2026-07-16T16:47:35.709237+00:00",
@@ -547,7 +576,7 @@
     "e3ff0fc4138748268bc4fddc83c080bd": "2026-07-15T11:51:44.512668+00:00",
     "ed879bfedeb848fd86576a60c5e515a7": "2026-07-16T12:57:17.325527+00:00",
     "f26a857493ae4bf7ace0ad0f26c23b67": "2026-07-15T15:04:33.216092+00:00",
-    "f345e47aa91647c2b6e7694c422a71d9": "2026-07-17T10:52:39.869965+00:00"
+    "f345e47aa91647c2b6e7694c422a71d9": "2026-07-17T10:55:41.038006+00:00"
   },
   "bot_commands_version": 1,
   "button_contexts": {
@@ -580,6 +609,21 @@
       "status": "final_reminder",
       "url": "https://betboom.ru/freestream/smurf5",
       "wheel_key": "smurf5"
+    },
+    "8b58f74edbde33": {
+      "created_at": "2026-07-17T10:55:46.102064+00:00",
+      "identifier": "stray",
+      "message_date": "2026-07-17T10:55:06+00:00",
+      "message_id": 132,
+      "message_text": "https://betboom.ru/freestream/stray\nhttps://telegram.me/kolesaBB\nhttps://telegram.me/kolesaBB/132",
+      "message_url": "https://telegram.me/kolesaBB/132",
+      "method": "активность и таймер подтверждены BetBoom",
+      "page_excerpt": "",
+      "post_key": "8b58f74edbde33a5d967f43454c92214a0997ed387bfe0c79e2136145f54f2bf",
+      "source": "kolesaBB",
+      "status": "preliminary",
+      "url": "https://betboom.ru/freestream/stray",
+      "wheel_key": "stray"
     },
     "9923e7f98f5456": {
       "created_at": "2026-07-14T20:07:18.780290+00:00",
@@ -831,7 +875,7 @@
     "whylollycrry",
     "zortelad"
   ],
-  "last_admin_action_applied_at": "2026-07-17T10:52:39.870004+00:00",
+  "last_admin_action_applied_at": "2026-07-17T10:55:41.038046+00:00",
   "last_automatic_status_at": "2026-07-17T06:35:52.571822+00:00",
   "last_heartbeat_at": "2026-07-17T09:12:53.304246+00:00",
   "last_run_kind": "schedule",
@@ -1076,19 +1120,6 @@
       ],
       "url": "https://betboom.ru/freestream/staya"
     },
-    "stray": {
-      "completion_reason": "deadline_reached",
-      "deadline": "2026-07-16T13:51:53.955256+00:00",
-      "event_id": "6304043a2db838c667bf",
-      "expires_at": "2026-07-17T13:52:28.726161+00:00",
-      "identifier": "stray",
-      "lifecycle_state": "finished",
-      "removed_at": "2026-07-16T13:52:28.726161+00:00",
-      "sources": [
-        "kolesaBB"
-      ],
-      "url": "https://betboom.ru/freestream/stray"
-    },
     "zonertg6": {
       "completion_reason": "deadline_reached",
       "deadline": "2026-07-15T20:48:46+00:00",
@@ -1191,6 +1222,7 @@
     "86bc22b95fa5d63901c01975ed5b6fbe61c48b4a296e4511760993372c75a997": "2026-07-14T13:49:36.423110+00:00",
     "88c8299e5ee8cc9a3dcd210ef2fd33d4364c55bb1c5c5fff4ec223bcea9dc398": "2026-07-12T18:21:19.249137+00:00",
     "8a8f9b437254774a3b4ff59ceb800dde6d5525ef260d98afbf559c1055aed9a5": "2026-07-12T19:22:25.149620+00:00",
+    "8b58f74edbde33a5d967f43454c92214a0997ed387bfe0c79e2136145f54f2bf": "2026-07-17T10:55:47.703951+00:00",
     "8c9c4c0cdbe7e871b4e6a380cb7e45bc54592ecded6ebce1afc994f0360f2498": "2026-07-14T18:37:14.030121+00:00",
     "8f2b8bced22840914926ee7e23bfd5fe7a6ce42441a2adac29e0e7b4b370ed9e": "2026-07-15T18:04:50.318365+00:00",
     "8fc16d0d85802adea6cc607f19e13d01dea59fd7de8a6ca951af369bf29bd539": "2026-07-12T15:10:04.958824+00:00",
@@ -1474,10 +1506,11 @@
       "url": "https://betboom.ru/freestream/staya"
     },
     "stray": {
-      "alerted_at": "2026-07-16T13:49:35.195550+00:00",
+      "alerted_at": "2026-07-17T10:55:47.703942+00:00",
+      "deadline": "2026-07-17T11:00:12.957000+00:00",
       "identifier": "stray",
-      "lifecycle_rule": "no_timer_2h",
-      "suppress_until": "2026-07-16T15:49:35.195550+00:00",
+      "lifecycle_rule": "timer",
+      "suppress_until": "2026-07-17T11:00:12.957000+00:00",
       "url": "https://betboom.ru/freestream/stray"
     },
     "sysman": {
@@ -1567,6 +1600,10 @@
       "action_id": 852,
       "seen_at": "2026-07-16T17:44:47.721594+00:00"
     },
+    "stray": {
+      "action_id": 873,
+      "seen_at": "2026-07-17T10:55:47.703815+00:00"
+    },
     "sysman": {
       "action_id": 854,
       "seen_at": "2026-07-16T17:44:47.721594+00:00"
@@ -1577,14 +1614,14 @@
     },
     "zonertg8": {
       "action_id": 693,
-      "seen_at": "2026-07-17T10:52:39.870041+00:00"
+      "seen_at": "2026-07-17T10:55:41.038087+00:00"
     }
   },
   "wheel_api_health": {
     "alert_threshold": 3,
     "consecutive_failures": 0,
-    "last_checked_at": "2026-07-17T10:52:39.870041+00:00",
-    "last_success_at": "2026-07-17T10:52:39.870041+00:00",
+    "last_checked_at": "2026-07-17T10:55:46.101797+00:00",
+    "last_success_at": "2026-07-17T10:55:46.101797+00:00",
     "status": "ok"
   },
   "wheel_lifecycle_history": {
@@ -1778,6 +1815,16 @@
         "message_id": 6381,
         "message_url": "https://telegram.me/boltcast/6381",
         "source": "boltcast"
+      }
+    ],
+    "stray": [
+      {
+        "has_future_availability": false,
+        "has_future_deadline": false,
+        "message_date": "2026-07-17T10:55:06+00:00",
+        "message_id": 132,
+        "message_url": "https://telegram.me/kolesaBB/132",
+        "source": "kolesaBB"
       }
     ],
     "zonertg8": [
