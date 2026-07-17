@@ -240,6 +240,12 @@
       "sequence": 16,
       "value": "stray|2026-07-15T15:17:11.369813+00:00"
     },
+    "88662882c14545b0905a9f24c37389b6": {
+      "action": "record_personal_vote",
+      "created_at": "2026-07-17T13:58:37.546561+00:00",
+      "sequence": 64,
+      "value": "{\"actor\":\"vote_52b40c32d6fb8e26f3e17863bb949f92\",\"event_key\":\"kyzko#action:875\",\"role\":\"owner\",\"sources\":[\"kolesaBB\"],\"weight\":5,\"wheel_key\":\"kyzko\"}"
+    },
     "88d5d85057b344d89a6fdafc794e4a26": {
       "action": "participate_wheel",
       "created_at": "2026-07-15T15:15:20.629658+00:00",
@@ -380,5 +386,5 @@
     }
   },
   "format": "bbvg-admin-action-queue-v1",
-  "sequence": 63
+  "sequence": 64
 }
