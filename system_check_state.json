@@ -2,14 +2,14 @@
   "active_incidents": 2,
   "admin_panel": {
     "age_minutes": 2,
-    "last_heartbeat_at": "2026-07-16T23:36:33.639037+00:00",
+    "last_heartbeat_at": "2026-07-17T00:11:56.431068+00:00",
     "started_at": "2026-07-16T19:18:14.190836+00:00",
     "status": "running",
     "update_consumer": "single_getUpdates_owner",
     "version": 41
   },
   "automation_state": {
-    "source_tier_last_run_at": "2026-07-16T00:09:30.509268+00:00",
+    "source_tier_last_run_at": "2026-07-17T00:14:20.289581+00:00",
     "source_tier_policy": "seven_day_dynamic_primary_and_nightly",
     "transport_accounted_sources": 72,
     "transport_checked_at": "2026-07-15T09:38:45.631590+00:00",
@@ -33,7 +33,7 @@
     "telegram_transport": "ok",
     "wheel_api": "ok"
   },
-  "checked_at": "2026-07-16T23:38:51.934530+00:00",
+  "checked_at": "2026-07-17T00:14:44.355461+00:00",
   "discovery": {
     "active_size": 78,
     "candidate_count": 234,
@@ -89,7 +89,7 @@
   ],
   "gpt_diagnostic_snapshot": {
     "active_incidents": 2,
-    "bot_panel_heartbeat": "2026-07-16T23:36:33.639037+00:00",
+    "bot_panel_heartbeat": "2026-07-17T00:11:56.431068+00:00",
     "checked_sources": 78,
     "configured_sources": 81,
     "domain": "telegram.me",
@@ -130,17 +130,17 @@
     "brand": "BB V.G.",
     "checked_sources": 78,
     "checks_delta": 78,
-    "checks_total": 92565,
+    "checks_total": 93423,
     "consecutive_failures": 0,
     "consecutive_no_progress": 0,
-    "iteration": 90,
+    "iteration": 101,
     "last_failure_at": "2026-07-14T02:44:12.395838+00:00",
-    "last_iteration_at": "2026-07-16T23:37:50.060009+00:00",
-    "last_iteration_duration_seconds": 6,
+    "last_iteration_at": "2026-07-17T00:10:52.597782+00:00",
+    "last_iteration_duration_seconds": 5,
     "last_iteration_exit_code": 0,
-    "last_process_heartbeat_at": "2026-07-16T23:37:50.060009+00:00",
-    "last_successful_checks_total": 92565,
-    "last_successful_iteration_at": "2026-07-16T23:37:50.060009+00:00",
+    "last_process_heartbeat_at": "2026-07-17T00:10:52.597782+00:00",
+    "last_successful_checks_total": 93423,
+    "last_successful_iteration_at": "2026-07-17T00:10:52.597782+00:00",
     "pending_wheels": 0,
     "reachable_sources": 78,
     "restart_recommended": false,
@@ -151,7 +151,7 @@
     "status": "running",
     "version": 3
   },
-  "monitor_age_minutes": 1,
+  "monitor_age_minutes": 3,
   "notification_integrity": {
     "algorithm": "HMAC-SHA256",
     "contains_personal_fields": false,
