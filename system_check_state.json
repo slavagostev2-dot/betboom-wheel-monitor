@@ -1,8 +1,8 @@
 {
-  "active_incidents": 1,
+  "active_incidents": 0,
   "admin_panel": {
-    "age_minutes": 4,
-    "last_heartbeat_at": "2026-07-17T16:36:46.589349+00:00",
+    "age_minutes": 1,
+    "last_heartbeat_at": "2026-07-17T20:14:03.672800+00:00",
     "started_at": "2026-07-17T16:16:05.852778+00:00",
     "status": "running",
     "update_consumer": "single_getUpdates_owner",
@@ -33,14 +33,14 @@
     "discovery": "ok",
     "inventory": "ok",
     "miniapp": "ok",
-    "monitor": "failed",
+    "monitor": "ok",
     "notifications": "ok",
     "ratings": "ok",
     "source_health": "ok",
     "telegram_transport": "ok",
     "wheel_api": "ok"
   },
-  "checked_at": "2026-07-17T16:41:29.947506+00:00",
+  "checked_at": "2026-07-17T20:15:43.300030+00:00",
   "discovery": {
     "active_size": 78,
     "candidate_count": 237,
@@ -77,31 +77,23 @@
     "legacy_url_offenders": [],
     "primary": "telegram.me"
   },
-  "finding_count": 1,
-  "findings": [
-    {
-      "detail": "Последняя итерация была 27 минут назад.",
-      "kind": "monitor_stale",
-      "severity": "critical",
-      "subject": "",
-      "title": "Основной монитор давно не обновлялся"
-    }
-  ],
+  "finding_count": 0,
+  "findings": [],
   "gpt_diagnostic_snapshot": {
-    "active_incidents": 1,
-    "bot_panel_heartbeat": "2026-07-17T16:36:46.589349+00:00",
+    "active_incidents": 0,
+    "bot_panel_heartbeat": "2026-07-17T20:14:03.672800+00:00",
     "checked_sources": 78,
     "configured_sources": 81,
     "domain": "telegram.me",
     "reachable_sources": 78,
     "single_source": "system_check_state.json",
-    "status": "degraded",
+    "status": "ok",
     "wheel_api_health": {
       "alert_threshold": 3,
       "consecutive_failures": 0,
-      "last_checked_at": "2026-07-17T16:13:42.489876+00:00",
+      "last_checked_at": "2026-07-17T20:13:09.530410+00:00",
       "last_failure_at": null,
-      "last_success_at": "2026-07-17T16:13:42.489876+00:00",
+      "last_success_at": "2026-07-17T20:13:09.530410+00:00",
       "status": "ok"
     }
   },
@@ -111,7 +103,7 @@
     "opened": 0,
     "resolved": 0
   },
-  "incident_sequence": 31,
+  "incident_sequence": 32,
   "inventory": {
     "configured": 78,
     "configured_total": 81,
@@ -135,35 +127,35 @@
     "brand": "BB V.G.",
     "checked_sources": 78,
     "checks_delta": 78,
-    "checks_total": 117291,
+    "checks_total": 122439,
     "consecutive_failures": 0,
     "consecutive_no_progress": 0,
-    "head_sha": "843ef04f4908b62644d938af490590b45b37b94e",
-    "iteration": 79,
+    "head_sha": "757d16e1aa908b3a99f937fe7395272bdd70ae16",
+    "iteration": 66,
     "last_failure_at": "2026-07-14T02:44:12.395838+00:00",
-    "last_iteration_at": "2026-07-17T16:13:42.566700+00:00",
-    "last_iteration_duration_seconds": 9,
+    "last_iteration_at": "2026-07-17T20:13:09.618602+00:00",
+    "last_iteration_duration_seconds": 8,
     "last_iteration_exit_code": 0,
-    "last_process_heartbeat_at": "2026-07-17T16:13:42.566700+00:00",
-    "last_successful_checks_total": 117291,
-    "last_successful_iteration_at": "2026-07-17T16:13:42.566700+00:00",
-    "pending_wheels": 0,
+    "last_process_heartbeat_at": "2026-07-17T20:13:09.618602+00:00",
+    "last_successful_checks_total": 122439,
+    "last_successful_iteration_at": "2026-07-17T20:13:09.618602+00:00",
+    "pending_wheels": 2,
     "reachable_sources": 78,
     "restart_recommended": false,
     "run_attempt": "1",
-    "run_id": "29579678130",
-    "run_started_at": "2026-07-17T12:17:08.070772+00:00",
+    "run_id": "29598076046",
+    "run_started_at": "2026-07-17T16:56:01.299467+00:00",
     "source_errors": 0,
     "stats_counter_reset": false,
     "status": "running",
     "version": 3,
-    "workflow_run_id": "29579678130"
+    "workflow_run_id": "29598076046"
   },
-  "monitor_age_minutes": 27,
+  "monitor_age_minutes": 2,
   "notification_integrity": {
     "algorithm": "HMAC-SHA256",
     "contains_personal_fields": false,
-    "entry_count": 77,
+    "entry_count": 80,
     "format": "bbvg-notification-delivery-v2",
     "retention_seconds": 86400,
     "router_installed": true,
@@ -221,7 +213,7 @@
       "tls": 0
     }
   },
-  "status": "degraded",
+  "status": "ok",
   "telegram_web": {
     "final_url": "https://telegram.me/s/mechanogun",
     "html_messages_detected": true,
@@ -233,9 +225,9 @@
   "wheel_api_health": {
     "alert_threshold": 3,
     "consecutive_failures": 0,
-    "last_checked_at": "2026-07-17T16:13:42.489876+00:00",
+    "last_checked_at": "2026-07-17T20:13:09.530410+00:00",
     "last_failure_at": null,
-    "last_success_at": "2026-07-17T16:13:42.489876+00:00",
+    "last_success_at": "2026-07-17T20:13:09.530410+00:00",
     "status": "ok"
   }
 }
