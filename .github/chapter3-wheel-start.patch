@@ -1,5 +1,5 @@
 diff --git a/bbvg_monitor_runtime.py b/bbvg_monitor_runtime.py
-index a05f1f4..f7906c8 100644
+index a05f1f4610826bfd6fc78d9750a3402f8a4aa610..f7906c8fd5dd51326bcc2ae8e9e1cfd1531a8a5d 100644
 --- a/bbvg_monitor_runtime.py
 +++ b/bbvg_monitor_runtime.py
 @@ -12,6 +12,7 @@ INACTIVE_TOMBSTONE_DAYS = 30
@@ -57,10 +57,7 @@ index a05f1f4..f7906c8 100644
 +        state["pending_posts"] = {}
 +        return 0
 +    for post_key, record in list(pending.items()):
-+        if (
-+            not isinstance(record, dict)
-+            or str(record.get("status") or "") != "not_started"
-+        ):
++        if not isinstance(record, dict) or str(record.get("status") or "") != "not_started":
 +            pending.pop(post_key, None)
 +    return len(pending)
 +
@@ -107,7 +104,7 @@ index a05f1f4..f7906c8 100644
  def _start_revalidated_action(
      state: dict,
      active: dict,
-@@ -431,6 +498,7 @@ def revalidate_active_wheels(state: dict, current=None) -> dict[str, int | bool]:
+@@ -431,6 +498,7 @@ def revalidate_active_wheels(state: dict, current=None) -> dict[str, int | bool]
      confirmed = 0
      failed = 0
      removed = 0
@@ -115,7 +112,7 @@ index a05f1f4..f7906c8 100644
      for key, entry in list(active.items()):
          if not isinstance(entry, dict):
              continue
-@@ -453,6 +521,17 @@ def revalidate_active_wheels(state: dict, current=None) -> dict[str, int | bool]:
+@@ -453,6 +521,17 @@ def revalidate_active_wheels(state: dict, current=None) -> dict[str, int | bool]
              failed += 1
              changed = True
              continue
@@ -133,7 +130,7 @@ index a05f1f4..f7906c8 100644
          if inspection.status == "inactive":
              if inspection.action_id is not None:
                  state.setdefault("wheel_action_history", {})[
-@@ -533,6 +612,7 @@ def revalidate_active_wheels(state: dict, current=None) -> dict[str, int | bool]:
+@@ -533,6 +612,7 @@ def revalidate_active_wheels(state: dict, current=None) -> dict[str, int | bool]
          "confirmed": confirmed,
          "failed": failed,
          "removed": removed,
@@ -169,24 +166,19 @@ index a05f1f4..f7906c8 100644
  
  
 diff --git a/monitor.py b/monitor.py
-index a4bf079..69e7ede 100644
+index a4bf079922c7e97343fb01df1d852137bf91cca2..69e7ede2cc6e7d102eda665ba6f0174a1ff1d25c 100644
 --- a/monitor.py
 +++ b/monitor.py
-@@ -657,6 +657,23 @@ def inspect_wheel_page(link: str) -> WheelInspection:
+@@ -657,6 +657,19 @@ def inspect_wheel_page(link: str) -> WheelInspection:
      deadline = start + timedelta(minutes=duration) if start and duration else None
      reference = now_utc()
      inactive = bool(info.get("is_ended")) or bool(info.get("is_early"))
 +
 +    # BetBoom may create an action object before the streamer actually starts
-+    # it. Such a response has an action_id and duration but no start_dttm.
++    # it.  Such a response has an action_id and duration but no start_dttm.
 +    # The public page cannot accept participation yet, so it must stay out of
 +    # the active list and be retried silently until start_dttm appears.
-+    if (
-+        not inactive
-+        and action_id is not None
-+        and duration is not None
-+        and start is None
-+    ):
++    if not inactive and action_id is not None and duration is not None and start is None:
 +        return WheelInspection(
 +            "not_started",
 +            None,
@@ -197,7 +189,7 @@ index a4bf079..69e7ede 100644
      if deadline is not None and deadline <= reference:
          inactive = True
  
-@@ -785,6 +802,10 @@ def assess_new_wheel(
+@@ -785,6 +798,10 @@ def assess_new_wheel(
              "verification_failed",
              **metadata,
          )
@@ -208,7 +200,7 @@ index a4bf079..69e7ede 100644
  
      return WheelAssessment(
          False, None, inspection.method, "unconfirmed", **metadata
-@@ -1590,6 +1611,10 @@ def assess_pending_wheel(
+@@ -1590,6 +1607,10 @@ def assess_pending_wheel(
              "verification_failed",
              **metadata,
          )
@@ -220,7 +212,7 @@ index a4bf079..69e7ede 100644
          False, inspection.deadline, inspection.method, inspection.status, **metadata
      )
 diff --git a/monitor_entry.py b/monitor_entry.py
-index 945799c..9351ec1 100644
+index 945799c6c9a1f0f503bc4ccbcc4a298ca0106d89..9351ec1fd461fc7435d4a2ecd0139a90c0ac8e94 100644
 --- a/monitor_entry.py
 +++ b/monitor_entry.py
 @@ -130,6 +130,7 @@ def _notification_first(message, result):
@@ -232,7 +224,7 @@ index 945799c..9351ec1 100644
          "duplicate_link",
          "duplicate_publication",
 diff --git a/tests/test_lifecycle.py b/tests/test_lifecycle.py
-index 1493922..01d0b10 100644
+index 1493922ef29c5f6c01b6e015651bd2e30012dd1b..01d0b10e1fb2375a9f46103353581ff3b024cca6 100644
 --- a/tests/test_lifecycle.py
 +++ b/tests/test_lifecycle.py
 @@ -73,6 +73,58 @@ class WheelApiVerificationTests(unittest.TestCase):
@@ -334,16 +326,8 @@ index 1493922..01d0b10 100644
 +            "wheel_publications": {"dyrachyo": [{"source": "kolesaBB"}]},
 +            "completed_wheel_alerts": {},
 +            "wheel_action_history": {"dyrachyo": {"action_id": 878}},
-+            "activation_alerts": {
-+                "dyrachyo": {
-+                    "suppress_until": (current + timedelta(hours=1)).isoformat()
-+                }
-+            },
-+            "url_alerts": {
-+                "dyrachyo": {
-+                    "suppress_until": (current + timedelta(hours=1)).isoformat()
-+                }
-+            },
++            "activation_alerts": {"dyrachyo": {"suppress_until": (current + timedelta(hours=1)).isoformat()}},
++            "url_alerts": {"dyrachyo": {"suppress_until": (current + timedelta(hours=1)).isoformat()}},
 +            "seen": {post_key: current.isoformat()},
 +        }
 +        original_inspector = runtime.monitor.inspect_wheel_page
@@ -368,6 +352,7 @@ index 1493922..01d0b10 100644
 +        self.assertNotIn(post_key, state["seen"])
 +        self.assertEqual(state["pending_posts"][post_key]["status"], "not_started")
 +        self.assertEqual(state["pending_posts"][post_key]["action_id"], 878)
++
 +
 +
  if __name__ == "__main__":
