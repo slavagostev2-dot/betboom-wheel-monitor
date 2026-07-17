@@ -33,7 +33,7 @@
     "telegram_transport": "ok",
     "wheel_api": "ok"
   },
-  "checked_at": "2026-07-17T09:12:13.544230+00:00",
+  "checked_at": "2026-07-17T09:12:33.182768+00:00",
   "discovery": {
     "active_size": 78,
     "candidate_count": 234,
@@ -151,7 +151,7 @@
     "status": "running",
     "version": 3
   },
-  "monitor_age_minutes": 4,
+  "monitor_age_minutes": 5,
   "notification_integrity": {
     "algorithm": "HMAC-SHA256",
     "contains_personal_fields": false,
