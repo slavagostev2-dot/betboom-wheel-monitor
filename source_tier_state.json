@@ -5,7 +5,7 @@
     "minimum_coverage_days": 6,
     "minimum_successful_checks": 100
   },
-  "last_run_at": "2026-07-17T00:14:20.289581+00:00",
+  "last_run_at": "2026-07-17T23:37:54.060195+00:00",
   "moved_to_nightly": [],
   "nightly_after": 3,
   "policy": "seven_day_dynamic_primary_and_nightly",
