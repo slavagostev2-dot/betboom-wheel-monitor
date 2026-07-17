@@ -25,25 +25,17 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Collect contract source snapshot
+      - name: Collect complete repository snapshot
         shell: bash
         run: |
           set -euo pipefail
           mkdir -p chapter3-source
-          find . -type f \
-            \( -name '*.py' -o -name '*.sh' -o -name '*.yml' -o -name '*.yaml' -o -name '*.txt' -o -name '*.md' \) \
-            -not -path './.git/*' \
-            -not -path './.venv/*' \
-            -not -path './node_modules/*' \
-            -print0 | while IFS= read -r -d '' path; do
-              mkdir -p "chapter3-source/$(dirname "$path")"
-              cp "$path" "chapter3-source/$path"
-            done
-          for path in system_check_state.json incident_state.json source_registry.json source_transport_state.json monitor_status.json admin_panel_status.json state.json source_stats.json; do
-            if [ -f "$path" ]; then
-              cp "$path" "chapter3-source/$path"
-            fi
-          done
+          rsync -a \
+            --exclude '.git/' \
+            --exclude '.venv/' \
+            --exclude 'node_modules/' \
+            --exclude 'chapter3-source/' \
+            ./ chapter3-source/
           git rev-parse HEAD > chapter3-source/HEAD_SHA
 
       - name: Upload contract snapshot
