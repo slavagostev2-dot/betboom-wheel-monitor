@@ -348,6 +348,12 @@
       "sequence": 67,
       "value": "{\"actor\":\"vote_6d354213070f7ecae88871feecfd6151\",\"event_key\":\"neret#action:855\",\"role\":\"admin\",\"sources\":[\"NeretCast\"],\"weight\":5,\"wheel_key\":\"neret\"}"
     },
+    "90b55a75284d432a86c494aa355f155f": {
+      "action": "record_personal_vote",
+      "created_at": "2026-07-18T13:53:28.628719+00:00",
+      "sequence": 85,
+      "value": "{\"actor\":\"vote_52b40c32d6fb8e26f3e17863bb949f92\",\"event_key\":\"dyrachyo#generation:0dfa1cd67fab00d13d5f\",\"role\":\"owner\",\"sources\":[\"kolesaBB\",\"amam0610\"],\"weight\":5,\"wheel_key\":\"dyrachyo\"}"
+    },
     "989957455bc6415c896dfbfc21bad68e": {
       "action": "set_deadline",
       "created_at": "2026-07-15T11:21:21.678422+00:00",
@@ -506,5 +512,5 @@
     }
   },
   "format": "bbvg-admin-action-queue-v1",
-  "sequence": 84
+  "sequence": 85
 }
