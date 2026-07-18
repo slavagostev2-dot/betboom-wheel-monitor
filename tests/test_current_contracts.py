@@ -71,6 +71,14 @@ class CurrentProductionContractTests(unittest.TestCase):
         }
         self.assertTrue(expected.issubset(primary))
         self.assertEqual(len(primary), 157)
+        self.assertGreaterEqual(source_intelligence.SOURCE_LIMIT, 160)
+
+        workflow = (
+            root / ".github/workflows/activate-66-sources.yml"
+        ).read_text(encoding="utf-8")
+        self.assertIn('"public_sources.txt"', workflow)
+        self.assertIn('"source_catalog.txt"', workflow)
+        self.assertNotIn("Check all 66 sources", workflow)
 
     def test_administrator_decisions(self) -> None:
         admin_action_v2.self_test()
