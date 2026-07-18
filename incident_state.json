@@ -1,5 +1,5 @@
 {
-  "active_count": 2,
+  "active_count": 1,
   "incidents": {
     "system_checks:admin_panel_stale:9278d429b1e1ee67": {
       "detail": "Последний живой сигнал был 149 минут назад.",
@@ -27,18 +27,21 @@
       "first_seen_at": "2026-07-18T15:16:53.876444+00:00",
       "key": "system_checks:discovery_inventory:423683e1cdf4ab6e",
       "kind": "discovery_inventory",
-      "last_seen_at": "2026-07-18T21:09:24.034141+00:00",
+      "last_seen_at": "2026-07-18T21:15:00.572912+00:00",
       "metadata": {},
+      "notification_skipped_because_resolved_before_delivery": "2026-07-18T21:15:00.572912+00:00",
       "occurrences": 8,
       "open_notification_pending": false,
       "opened_sequence": 49,
       "reopen_notification_suppressed_at": "2026-07-18T18:35:18.762046+00:00",
       "reopen_notification_suppressed_until": "2026-07-18T21:16:54.984258+00:00",
+      "resolution_notification_pending": false,
       "resolution_notified_at": "2026-07-18T15:32:06.138070+00:00",
-      "resolved_sequence": 44,
+      "resolved_at": "2026-07-18T21:15:00.572912+00:00",
+      "resolved_sequence": 53,
       "scope": "system_checks",
       "severity": "warning",
-      "status": "active",
+      "status": "resolved",
       "subject": "",
       "title": "Ночная проверка видит не весь утверждённый пул"
     },
@@ -196,14 +199,14 @@
       "title": "Не для всех источников есть данные здоровья"
     },
     "system_checks:source_transport_smoke:581b534aecd3e81e": {
-      "detail": "status=success; domain=telegram.me; primary=157/159; nightly=59/59; accounted=216/218; missing=0.",
+      "detail": "status=success; domain=telegram.me; primary=157/159; nightly=59/102; accounted=216/261; missing=0.",
       "first_seen_at": "2026-07-16T13:21:59.596712+00:00",
       "key": "system_checks:source_transport_smoke:581b534aecd3e81e",
       "kind": "source_transport_smoke",
-      "last_seen_at": "2026-07-18T21:09:24.034141+00:00",
+      "last_seen_at": "2026-07-18T21:15:00.572912+00:00",
       "metadata": {},
       "notification_skipped_because_resolved_before_delivery": "2026-07-18T15:33:42.673967+00:00",
-      "occurrences": 35,
+      "occurrences": 36,
       "open_notification_pending": false,
       "open_notified_at": "2026-07-18T18:35:19.454376+00:00",
       "opened_sequence": 50,
@@ -239,17 +242,17 @@
       "title": "Давно не выполнялась полная проверка 66 источников"
     }
   },
-  "last_change_at": "2026-07-18T20:27:16.064075+00:00",
-  "last_reconcile_at": "2026-07-18T21:09:24.034141+00:00",
+  "last_change_at": "2026-07-18T21:15:00.572912+00:00",
+  "last_reconcile_at": "2026-07-18T21:15:00.572912+00:00",
   "last_reconcile_scope": "system_checks",
   "last_summary": {
-    "active": 2,
+    "active": 1,
     "new_notification_count": 0,
     "recovery_notification_count": 0,
     "scope": "system_checks"
   },
-  "sequence": 52,
+  "sequence": 53,
   "status": "initializing",
-  "updated_at": "2026-07-18T21:09:24.034240+00:00",
+  "updated_at": "2026-07-18T21:15:00.572989+00:00",
   "version": 1
 }
