@@ -1,5 +1,5 @@
 {
-  "active_count": 1,
+  "active_count": 0,
   "incidents": {
     "system_checks:admin_panel_stale:9278d429b1e1ee67": {
       "detail": "Последний живой сигнал был 149 минут назад.",
@@ -203,7 +203,7 @@
       "first_seen_at": "2026-07-16T13:21:59.596712+00:00",
       "key": "system_checks:source_transport_smoke:581b534aecd3e81e",
       "kind": "source_transport_smoke",
-      "last_seen_at": "2026-07-18T21:15:00.572912+00:00",
+      "last_seen_at": "2026-07-18T21:15:32.953926+00:00",
       "metadata": {},
       "notification_skipped_because_resolved_before_delivery": "2026-07-18T15:33:42.673967+00:00",
       "occurrences": 36,
@@ -212,11 +212,13 @@
       "opened_sequence": 50,
       "reopen_notification_suppressed_at": "2026-07-18T15:32:04.735808+00:00",
       "reopen_notification_suppressed_until": "2026-07-18T21:16:54.984258+00:00",
+      "resolution_notification_pending": true,
       "resolution_notified_at": "2026-07-17T16:24:16.925887+00:00",
-      "resolved_sequence": 45,
+      "resolved_at": "2026-07-18T21:15:32.953926+00:00",
+      "resolved_sequence": 54,
       "scope": "system_checks",
       "severity": "critical",
-      "status": "active",
+      "status": "resolved",
       "subject": "",
       "title": "Транспортная проверка текущего inventory не подтверждена"
     },
@@ -242,17 +244,17 @@
       "title": "Давно не выполнялась полная проверка 66 источников"
     }
   },
-  "last_change_at": "2026-07-18T21:15:00.572912+00:00",
-  "last_reconcile_at": "2026-07-18T21:15:00.572912+00:00",
+  "last_change_at": "2026-07-18T21:15:32.953926+00:00",
+  "last_reconcile_at": "2026-07-18T21:15:32.953926+00:00",
   "last_reconcile_scope": "system_checks",
   "last_summary": {
-    "active": 1,
+    "active": 0,
     "new_notification_count": 0,
     "recovery_notification_count": 0,
     "scope": "system_checks"
   },
-  "sequence": 53,
+  "sequence": 54,
   "status": "initializing",
-  "updated_at": "2026-07-18T21:15:00.572989+00:00",
+  "updated_at": "2026-07-18T21:15:32.953975+00:00",
   "version": 1
 }

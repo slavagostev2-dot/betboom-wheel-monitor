@@ -1,7 +1,7 @@
 {
-  "active_incidents": 1,
+  "active_incidents": 0,
   "admin_panel": {
-    "age_minutes": 2,
+    "age_minutes": 3,
     "last_heartbeat_at": "2026-07-18T21:12:32.593139+00:00",
     "started_at": "2026-07-18T18:35:38.864783+00:00",
     "status": "running",
@@ -13,13 +13,13 @@
     "expected_primary_sources": 159,
     "expected_total_sources": 261,
     "missing_sources": 0,
-    "recorded_configured_sources": 216,
-    "recorded_nightly_sources": 59,
-    "recorded_primary_sources": 157,
+    "recorded_configured_sources": 261,
+    "recorded_nightly_sources": 102,
+    "recorded_primary_sources": 159,
     "source_tier_last_run_at": "2026-07-17T23:37:54.060195+00:00",
     "source_tier_policy": "seven_day_dynamic_primary_and_nightly",
-    "transport_accounted_sources": 216,
-    "transport_checked_at": "2026-07-18T15:33:08.919530+00:00",
+    "transport_accounted_sources": 261,
+    "transport_checked_at": "2026-07-18T21:14:58.388400+00:00",
     "transport_domain": "telegram.me",
     "transport_status": "success"
   },
@@ -28,7 +28,7 @@
     "username": "slava_wheel_monitor_bot"
   },
   "check_matrix": {
-    "automations": "failed",
+    "automations": "ok",
     "bot_panel": "ok",
     "discovery": "ok",
     "inventory": "ok",
@@ -40,7 +40,7 @@
     "telegram_transport": "ok",
     "wheel_api": "ok"
   },
-  "checked_at": "2026-07-18T21:14:59.424079+00:00",
+  "checked_at": "2026-07-18T21:15:32.067695+00:00",
   "discovery": {
     "active_size": 159,
     "candidate_count": 438,
@@ -78,25 +78,17 @@
     "legacy_url_offenders": [],
     "primary": "telegram.me"
   },
-  "finding_count": 1,
-  "findings": [
-    {
-      "detail": "status=success; domain=telegram.me; primary=157/159; nightly=59/102; accounted=216/261; missing=0.",
-      "kind": "source_transport_smoke",
-      "severity": "critical",
-      "subject": "",
-      "title": "Транспортная проверка текущего inventory не подтверждена"
-    }
-  ],
+  "finding_count": 0,
+  "findings": [],
   "gpt_diagnostic_snapshot": {
-    "active_incidents": 1,
+    "active_incidents": 0,
     "bot_panel_heartbeat": "2026-07-18T21:12:32.593139+00:00",
     "checked_sources": 159,
     "configured_sources": 261,
     "domain": "telegram.me",
     "reachable_sources": 159,
     "single_source": "system_check_state.json",
-    "status": "degraded",
+    "status": "ok",
     "wheel_api_health": {
       "alert_threshold": 3,
       "consecutive_failures": 0,
@@ -112,7 +104,7 @@
     "opened": 0,
     "resolved": 0
   },
-  "incident_sequence": 53,
+  "incident_sequence": 54,
   "inventory": {
     "configured": 159,
     "configured_total": 261,
@@ -160,7 +152,7 @@
     "version": 3,
     "workflow_run_id": "29655514242"
   },
-  "monitor_age_minutes": 10,
+  "monitor_age_minutes": 11,
   "notification_integrity": {
     "algorithm": "HMAC-SHA256",
     "contains_personal_fields": false,
@@ -321,7 +313,7 @@
       "tls": 0
     }
   },
-  "status": "degraded",
+  "status": "ok",
   "telegram_web": {
     "final_url": "https://telegram.me/s/mechanogun",
     "html_messages_detected": true,
