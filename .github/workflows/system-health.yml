@@ -46,6 +46,7 @@ on:
       - "Telegram candidate discovery"
       - "Telegram source intelligence"
       - "Telegram transport checks"
+      - "Verify configured Telegram source transport"
     types: [completed]
     branches: [main]
   schedule:
