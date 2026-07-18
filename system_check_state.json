@@ -1,8 +1,8 @@
 {
   "active_incidents": 0,
   "admin_panel": {
-    "age_minutes": 1,
-    "last_heartbeat_at": "2026-07-17T23:12:48.401945+00:00",
+    "age_minutes": 3,
+    "last_heartbeat_at": "2026-07-18T01:23:52.146880+00:00",
     "started_at": "2026-07-17T21:47:03.875211+00:00",
     "status": "running",
     "update_consumer": "single_getUpdates_owner",
@@ -16,7 +16,7 @@
     "recorded_configured_sources": 81,
     "recorded_nightly_sources": 3,
     "recorded_primary_sources": 78,
-    "source_tier_last_run_at": "2026-07-17T00:14:20.289581+00:00",
+    "source_tier_last_run_at": "2026-07-17T23:37:54.060195+00:00",
     "source_tier_policy": "seven_day_dynamic_primary_and_nightly",
     "transport_accounted_sources": 81,
     "transport_checked_at": "2026-07-17T16:15:42.999458+00:00",
@@ -40,7 +40,7 @@
     "telegram_transport": "ok",
     "wheel_api": "ok"
   },
-  "checked_at": "2026-07-17T23:14:38.934659+00:00",
+  "checked_at": "2026-07-18T01:27:23.417031+00:00",
   "discovery": {
     "active_size": 78,
     "candidate_count": 245,
@@ -81,7 +81,7 @@
   "findings": [],
   "gpt_diagnostic_snapshot": {
     "active_incidents": 0,
-    "bot_panel_heartbeat": "2026-07-17T23:12:48.401945+00:00",
+    "bot_panel_heartbeat": "2026-07-18T01:23:52.146880+00:00",
     "checked_sources": 78,
     "configured_sources": 81,
     "domain": "telegram.me",
@@ -91,9 +91,9 @@
     "wheel_api_health": {
       "alert_threshold": 3,
       "consecutive_failures": 0,
-      "last_checked_at": "2026-07-17T23:12:15.024903+00:00",
+      "last_checked_at": "2026-07-18T01:25:16.278760+00:00",
       "last_failure_at": null,
-      "last_success_at": "2026-07-17T23:12:15.024903+00:00",
+      "last_success_at": "2026-07-18T01:25:16.278760+00:00",
       "status": "ok"
     }
   },
@@ -127,18 +127,18 @@
     "brand": "BB V.G.",
     "checked_sources": 78,
     "checks_delta": 78,
-    "checks_total": 127119,
+    "checks_total": 130551,
     "consecutive_failures": 0,
     "consecutive_no_progress": 0,
     "head_sha": "2b1c7da38d2101e82d80fd659c6fb26adab7cf4c",
-    "iteration": 16,
+    "iteration": 60,
     "last_failure_at": "2026-07-14T02:44:12.395838+00:00",
-    "last_iteration_at": "2026-07-17T23:12:15.130843+00:00",
-    "last_iteration_duration_seconds": 6,
+    "last_iteration_at": "2026-07-18T01:25:16.379160+00:00",
+    "last_iteration_duration_seconds": 5,
     "last_iteration_exit_code": 0,
-    "last_process_heartbeat_at": "2026-07-17T23:12:15.130843+00:00",
-    "last_successful_checks_total": 127119,
-    "last_successful_iteration_at": "2026-07-17T23:12:15.130843+00:00",
+    "last_process_heartbeat_at": "2026-07-18T01:25:16.379160+00:00",
+    "last_successful_checks_total": 130551,
+    "last_successful_iteration_at": "2026-07-18T01:25:16.379160+00:00",
     "pending_wheels": 2,
     "reachable_sources": 78,
     "restart_recommended": false,
@@ -225,9 +225,9 @@
   "wheel_api_health": {
     "alert_threshold": 3,
     "consecutive_failures": 0,
-    "last_checked_at": "2026-07-17T23:12:15.024903+00:00",
+    "last_checked_at": "2026-07-18T01:25:16.278760+00:00",
     "last_failure_at": null,
-    "last_success_at": "2026-07-17T23:12:15.024903+00:00",
+    "last_success_at": "2026-07-18T01:25:16.278760+00:00",
     "status": "ok"
   }
 }
