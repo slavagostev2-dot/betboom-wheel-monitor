@@ -9,7 +9,7 @@ permissions:
 
 jobs:
   apply:
-    if: github.event.pull_request.head.repo.full_name == github.repository && github.head_ref == 'agent/wheel-server-generation'
+    if: github.event.pull_request.head.repo.full_name == github.repository && startsWith(github.head_ref, 'agent/wheel-server-generation')
     runs-on: ubuntu-latest
     timeout-minutes: 25
     steps:
