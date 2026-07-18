@@ -579,12 +579,18 @@ def check_discovery_runtime(details: dict[str, Any], findings: list[dict[str, An
         ))
     intelligence_summary = summary["intelligence_summary"]
     scanned = int(intelligence_summary.get("sources_scanned", 0) or 0)
+    intelligence_known = int(
+        intelligence_summary.get("known_sources", 0) or 0
+    )
     intelligence_errors = int(intelligence_summary.get("errors", 0) or 0)
-    if intelligence_errors or (intelligence_summary and scanned < expected_total):
+    if intelligence_errors or (
+        intelligence_summary and scanned < intelligence_known
+    ):
         findings.append(finding(
             "discovery_scan_failure",
             "Поиск новых источников не смог просканировать базу",
-            f"Просканировано {scanned} из текущих {expected_total}; ошибок {intelligence_errors}. "
+            f"Просканировано {scanned} из известных на старте "
+            f"{intelligence_known}; ошибок {intelligence_errors}. "
             f"Поиск должен выполняться через {telegram_transport.PRIMARY_DOMAIN}.",
             severity="critical",
         ))
