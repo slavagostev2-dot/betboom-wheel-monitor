@@ -111,7 +111,7 @@ class ButtonMatrixTests(unittest.TestCase):
         expected = {
             False: [
                 ["page:sources", "page:ranking"],
-                ["source_list:primary:0", "source:request_help"],
+                ["source_list:primary:0", "source:request"],
             ],
             True: [
                 ["page:sources", "page:ranking"],
