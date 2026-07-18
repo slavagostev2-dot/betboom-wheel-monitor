@@ -9,6 +9,10 @@ on:
       - "public_sources.txt"
       - "source_catalog.txt"
   workflow_dispatch:
+  workflow_run:
+    workflows: ["Telegram candidate discovery"]
+    types: [completed]
+    branches: [main]
 
 permissions:
   contents: read
@@ -19,6 +23,7 @@ concurrency:
 
 jobs:
   activate:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     permissions:
       contents: write
     runs-on: ubuntu-latest
