@@ -48,6 +48,12 @@
       "sequence": 12,
       "value": "solotg|admin"
     },
+    "1010f345ae514587a82daa1aad9d9ae3": {
+      "action": "record_personal_vote",
+      "created_at": "2026-07-18T09:16:23.012498+00:00",
+      "sequence": 73,
+      "value": "{\"actor\":\"vote_52b40c32d6fb8e26f3e17863bb949f92\",\"event_key\":\"zonertg9#generation:7ad472baadae20030f16\",\"role\":\"owner\",\"sources\":[\"mechanogun\"],\"weight\":5,\"wheel_key\":\"zonertg9\"}"
+    },
     "10c0b45b11814811bfa4b6e92fbc6ea1": {
       "action": "participate_wheel",
       "created_at": "2026-07-16T11:28:31.189126+00:00",
@@ -434,5 +440,5 @@
     }
   },
   "format": "bbvg-admin-action-queue-v1",
-  "sequence": 72
+  "sequence": 73
 }
