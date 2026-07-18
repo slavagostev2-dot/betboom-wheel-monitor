@@ -1,4 +1,4 @@
-name: Activate all 66 telegram.me sources
+name: Verify configured Telegram source transport
 
 on:
   push:
@@ -6,13 +6,15 @@ on:
     paths:
       - ".github/workflows/activate-66-sources.yml"
       - "source_transport_smoke.py"
+      - "public_sources.txt"
+      - "source_catalog.txt"
   workflow_dispatch:
 
 permissions:
   contents: read
 
 concurrency:
-  group: bb-vg-activate-66-sources
+  group: bb-vg-source-transport-smoke
   cancel-in-progress: true
 
 jobs:
@@ -42,7 +44,7 @@ jobs:
           python preflight.py
           python -m py_compile source_transport_smoke.py telegram_transport.py bbvg_monitor_main.py monitor_health.py
 
-      - name: Check all 66 sources through telegram.me
+      - name: Check all configured sources through telegram.me
         id: smoke
         continue-on-error: true
         env:
