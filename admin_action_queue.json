@@ -228,6 +228,12 @@
       "sequence": 21,
       "value": "adam|admin"
     },
+    "67a80c58ee10476083b8fef0f99fdb44": {
+      "action": "record_personal_vote",
+      "created_at": "2026-07-18T12:10:34.579154+00:00",
+      "sequence": 79,
+      "value": "{\"actor\":\"vote_52b40c32d6fb8e26f3e17863bb949f92\",\"event_key\":\"nix#generation:2006379ecdd0fb2b830a\",\"role\":\"owner\",\"sources\":[\"kolesaBB\"],\"weight\":5,\"wheel_key\":\"nix\"}"
+    },
     "67ec3b0324c344fcb0fb77ea545fbafa": {
       "action": "participate_wheel",
       "created_at": "2026-07-16T16:44:58.018558+00:00",
@@ -470,5 +476,5 @@
     }
   },
   "format": "bbvg-admin-action-queue-v1",
-  "sequence": 78
+  "sequence": 79
 }
