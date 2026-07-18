@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import base64
 import copy
-import json
 import threading
 from datetime import datetime, timezone
 from typing import Any
@@ -11,12 +10,12 @@ from urllib.parse import quote
 import admin_bot as legacy
 import bot_private_state
 import privacy_retention
-from admin_panel_runtime_v3 import INTERVAL_OPTIONS
 from admin_panel_v2 import DEFAULT_SETTINGS, default_access
 from bbvg.bot.source_requests import default_source_requests
 from bbvg.bot.sources import SourceRegistryRuntime
 
 UTC = timezone.utc
+INTERVAL_OPTIONS = (1, 3, 5, 10, 15, 30)
 _MISSING = object()
 
 
