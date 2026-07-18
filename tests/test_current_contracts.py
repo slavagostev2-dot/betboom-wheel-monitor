@@ -70,7 +70,10 @@ class CurrentProductionContractTests(unittest.TestCase):
             "xdzachq",
         }
         self.assertTrue(expected.issubset(primary))
-        self.assertEqual(len(primary), 157)
+        # The Telegram administrator can promote newly verified candidates at
+        # runtime, so the inventory may legitimately grow beyond the audited
+        # baseline without requiring this contract to be rewritten.
+        self.assertGreaterEqual(len(primary), 157)
         self.assertGreaterEqual(source_intelligence.SOURCE_LIMIT, 160)
 
         workflow = (
