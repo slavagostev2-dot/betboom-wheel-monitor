@@ -282,6 +282,12 @@
       "sequence": 28,
       "value": "acool7|admin"
     },
+    "6efe6f0ce97a4e14b6f23984d07c34cd": {
+      "action": "record_personal_vote",
+      "created_at": "2026-07-18T17:29:39.759032+00:00",
+      "sequence": 93,
+      "value": "{\"actor\":\"vote_52b40c32d6fb8e26f3e17863bb949f92\",\"event_key\":\"mantis2#generation:5ea650eaa9e93cdcbd9f\",\"role\":\"owner\",\"sources\":[\"kzmantis\"],\"weight\":5,\"wheel_key\":\"mantis2\"}"
+    },
     "6f5c495de7d64e16b37e9cab7f5d36a0": {
       "action": "record_personal_vote",
       "created_at": "2026-07-18T11:13:53.606573+00:00",
@@ -554,5 +560,5 @@
     }
   },
   "format": "bbvg-admin-action-queue-v1",
-  "sequence": 92
+  "sequence": 93
 }
