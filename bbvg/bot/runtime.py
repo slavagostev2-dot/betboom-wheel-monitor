@@ -13,6 +13,7 @@ from typing import Any
 
 import admin_action_queue
 import admin_bot as legacy
+import bot_notification_state  # noqa: F401  # installs notification delivery policies
 import personal_wheel_voting
 import telegram_ui
 from bbvg.bot.storage import PrivateStateRuntime
