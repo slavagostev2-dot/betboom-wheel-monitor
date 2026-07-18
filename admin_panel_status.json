@@ -1,19 +1,19 @@
 {
   "brand": "BB V.G.",
   "deferred_update": "none",
-  "event": "schedule",
-  "head_sha": "47397f58467c7e6d10f3c6b3d025fe0fb1371cbd",
+  "event": "push",
+  "head_sha": "3be20e46b4908af38b00d0fb94842e9ed08a3577",
   "heartbeat_version": 1,
-  "last_heartbeat_at": "2026-07-18T09:51:44.585730+00:00",
+  "last_heartbeat_at": "2026-07-18T09:53:17.022363+00:00",
   "miniapp": "archived",
   "notification_integrity": "persistent_hmac_delivery_ledger",
   "role_persistence": "aes_gcm_three_way_remote_merge",
   "run_attempt": "1",
-  "run_id": "29638717523",
+  "run_id": "29639903231",
   "runtime_owner": "telegram_control_center",
   "scenario_suite": "10_scenarios_passed",
   "source_rating": "administrator_decisions_additive_finished_and_participating",
-  "started_at": "2026-07-18T09:10:58.666470+00:00",
+  "started_at": "2026-07-18T09:53:17.022350+00:00",
   "state_format": "bbvg-bot-state-v2",
   "state_key_mode": "dedicated",
   "status": "running",
@@ -23,5 +23,5 @@
   "version": 41,
   "wheel_colors": "callback_payload_unchanged",
   "wheel_link_lifecycle": "timer_or_manual_deadline_else_two_hours",
-  "workflow_run_id": "29638717523"
+  "workflow_run_id": "29639903231"
 }
