@@ -1,9 +1,9 @@
 {
-  "active_incidents": 4,
+  "active_incidents": 2,
   "admin_panel": {
-    "age_minutes": 4,
-    "last_heartbeat_at": "2026-07-18T18:31:25.992779+00:00",
-    "started_at": "2026-07-18T18:15:54.332383+00:00",
+    "age_minutes": 5,
+    "last_heartbeat_at": "2026-07-18T20:22:04.128507+00:00",
+    "started_at": "2026-07-18T18:35:38.864783+00:00",
     "status": "running",
     "update_consumer": "single_getUpdates_owner",
     "version": 41
@@ -33,14 +33,14 @@
     "discovery": "failed",
     "inventory": "ok",
     "miniapp": "ok",
-    "monitor": "failed",
+    "monitor": "ok",
     "notifications": "ok",
     "ratings": "ok",
-    "source_health": "failed",
+    "source_health": "ok",
     "telegram_transport": "ok",
     "wheel_api": "ok"
   },
-  "checked_at": "2026-07-18T18:35:40.787249+00:00",
+  "checked_at": "2026-07-18T20:27:14.932504+00:00",
   "discovery": {
     "active_size": 157,
     "candidate_count": 401,
@@ -78,22 +78,8 @@
     "legacy_url_offenders": [],
     "primary": "telegram.me"
   },
-  "finding_count": 4,
+  "finding_count": 2,
   "findings": [
-    {
-      "detail": "В последней итерации проверено 157 из 159 источников основного режима.",
-      "kind": "monitor_source_count",
-      "severity": "critical",
-      "subject": "",
-      "title": "Основной монитор проверяет не все источники"
-    },
-    {
-      "detail": "Нет записей для 2 источников: @fonpass, @BetBoomPR.",
-      "kind": "source_health_missing",
-      "severity": "warning",
-      "subject": "",
-      "title": "Не для всех источников есть данные здоровья"
-    },
     {
       "detail": "В состоянии поиска записано 216, текущий inventory содержит 218.",
       "kind": "discovery_inventory",
@@ -110,20 +96,20 @@
     }
   ],
   "gpt_diagnostic_snapshot": {
-    "active_incidents": 4,
-    "bot_panel_heartbeat": "2026-07-18T18:31:25.992779+00:00",
-    "checked_sources": 157,
+    "active_incidents": 2,
+    "bot_panel_heartbeat": "2026-07-18T20:22:04.128507+00:00",
+    "checked_sources": 159,
     "configured_sources": 218,
     "domain": "telegram.me",
-    "reachable_sources": 157,
+    "reachable_sources": 159,
     "single_source": "system_check_state.json",
     "status": "degraded",
     "wheel_api_health": {
       "alert_threshold": 3,
       "consecutive_failures": 0,
-      "last_checked_at": "2026-07-18T18:34:15.155016+00:00",
+      "last_checked_at": "2026-07-18T20:22:30.568160+00:00",
       "last_failure_at": null,
-      "last_success_at": "2026-07-18T18:34:15.155016+00:00",
+      "last_success_at": "2026-07-18T20:22:30.568160+00:00",
       "status": "ok"
     }
   },
@@ -133,7 +119,7 @@
     "opened": 0,
     "resolved": 0
   },
-  "incident_sequence": 50,
+  "incident_sequence": 52,
   "inventory": {
     "configured": 159,
     "configured_total": 218,
@@ -155,22 +141,22 @@
   },
   "monitor": {
     "brand": "BB V.G.",
-    "checked_sources": 157,
-    "checks_delta": 157,
-    "checks_total": 161683,
+    "checked_sources": 159,
+    "checks_delta": 159,
+    "checks_total": 167407,
     "consecutive_failures": 0,
     "consecutive_no_progress": 0,
     "head_sha": "2c477dd1391604b542ccbfea06666c01e11d287a",
-    "iteration": 7,
+    "iteration": 43,
     "last_failure_at": "2026-07-14T02:44:12.395838+00:00",
-    "last_iteration_at": "2026-07-18T18:34:15.300503+00:00",
-    "last_iteration_duration_seconds": 17,
+    "last_iteration_at": "2026-07-18T20:22:30.712329+00:00",
+    "last_iteration_duration_seconds": 14,
     "last_iteration_exit_code": 0,
-    "last_process_heartbeat_at": "2026-07-18T18:34:15.300503+00:00",
-    "last_successful_checks_total": 161683,
-    "last_successful_iteration_at": "2026-07-18T18:34:15.300503+00:00",
+    "last_process_heartbeat_at": "2026-07-18T20:22:30.712329+00:00",
+    "last_successful_checks_total": 167407,
+    "last_successful_iteration_at": "2026-07-18T20:22:30.712329+00:00",
     "pending_wheels": 1,
-    "reachable_sources": 157,
+    "reachable_sources": 159,
     "restart_recommended": false,
     "run_attempt": "1",
     "run_id": "29655514242",
@@ -181,11 +167,11 @@
     "version": 3,
     "workflow_run_id": "29655514242"
   },
-  "monitor_age_minutes": 1,
+  "monitor_age_minutes": 4,
   "notification_integrity": {
     "algorithm": "HMAC-SHA256",
     "contains_personal_fields": false,
-    "entry_count": 95,
+    "entry_count": 104,
     "format": "bbvg-notification-delivery-v3",
     "retention_seconds": 86400,
     "router_installed": true,
@@ -213,18 +199,15 @@
   "rating_consistency": {
     "administrator_decisions": 0,
     "inactive_wheel_leaks": [],
-    "personal_vote_records": 40,
+    "personal_vote_records": 41,
     "policy": "personal_votes_v1",
-    "rated_sources": 9,
+    "rated_sources": 11,
     "score_mismatches": [],
-    "valid_personal_votes": 40
+    "valid_personal_votes": 41
   },
   "source_health_summary": {
-    "configured_records": 157,
-    "missing_sources": [
-      "fonpass",
-      "BetBoomPR"
-    ],
+    "configured_records": 159,
+    "missing_sources": [],
     "nightly_pending_first_check": [
       "alex_white_official",
       "ayukifunpage",
@@ -288,10 +271,10 @@
     ],
     "problem_details": [],
     "problem_sources": [],
-    "records": 157,
-    "required_primary_records": 157,
+    "records": 159,
+    "required_primary_records": 159,
     "statuses": {
-      "ok": 157
+      "ok": 159
     },
     "transport_failure_types": {
       "dns": 0,
@@ -314,9 +297,9 @@
   "wheel_api_health": {
     "alert_threshold": 3,
     "consecutive_failures": 0,
-    "last_checked_at": "2026-07-18T18:34:15.155016+00:00",
+    "last_checked_at": "2026-07-18T20:22:30.568160+00:00",
     "last_failure_at": null,
-    "last_success_at": "2026-07-18T18:34:15.155016+00:00",
+    "last_success_at": "2026-07-18T20:22:30.568160+00:00",
     "status": "ok"
   }
 }
