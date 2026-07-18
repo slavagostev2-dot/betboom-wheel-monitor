@@ -313,9 +313,17 @@ class Chapter4InterfaceTests(unittest.TestCase):
     def test_inactive_source_report_is_paginated(self) -> None:
         panel, captured = self.capture_panel(role="admin")
         sources = [f"source_{index:02d}" for index in range(23)]
-        snap = self.snapshot(stats={"sources": {}, "daily": {}})
+        old = (datetime.now(UTC) - timedelta(days=8)).isoformat()
+        snap = self.snapshot(
+            fast=sources,
+            stats={
+                "sources": {
+                    source: {"first_checked_at": old} for source in sources
+                },
+                "daily": {},
+            },
+        )
         panel.snapshot = lambda force=False: snap  # type: ignore[method-assign]
-        panel.source_sets = lambda value: {"inactive": sources}  # type: ignore[method-assign]
         panel.show_inactive_report(1)
         text, kwargs = captured[-1]
         self.assertIn("Страница: <b>2 из 3</b>", text)
