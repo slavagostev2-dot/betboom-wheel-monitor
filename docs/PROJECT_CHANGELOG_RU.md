@@ -43,6 +43,22 @@
 `d589f10db710a9b1466bf35287f5c4e396286800`; rotation оставила
 ровно три backup-ветки.
 
+**Production:** PR #68 слит commit
+`7f97164dc953c81af91897aef7e8a68182a014dc`. Первый живой цикл
+записал три обезличенные идентичности по трём ссылкам без
+пропусков `action_id`/`start_dttm`; повторный ID с новым стартом
+на первой выборке не обнаружен. `monitor_status.json` сообщил
+`running`, 78 проверенных primary-источников и production
+`head_sha`, включающий deploy commit.
+
+**Post-update backup:**
+`backup/after-wheel-generation-observations-2026-07-18` →
+`806f0e3728311bce72b82ca91ec9ea3371520b6d`. После автоматической
+ротации подтверждены ровно три обычные backup-ветки:
+`backup/after-chapter5-panel-architecture-2026-07-18`,
+`backup/before-wheel-generation-observations-2026-07-18` и
+`backup/after-wheel-generation-observations-2026-07-18`.
+
 **Откат:** вернуть commit целиком или перейти на pre-update
 backup; добавочное поле может быть проигнорировано старым
 кодом без отдельной миграции.
