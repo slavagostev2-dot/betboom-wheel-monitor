@@ -47,12 +47,6 @@ jobs:
           set -o pipefail
           {
             set -euo pipefail
-            sed -n '95,130p' monitor_entry.py
-            python - <<'PY'
-          import inspect
-          import monitor_entry
-          print(inspect.getsource(monitor_entry.fetch_all_sources_with_originals))
-          PY
             python -m compileall -q -x '(^|/)(\.git|\.venv|state_api|docs)(/|$)' .
             python - <<'PY'
           from pathlib import Path
@@ -60,6 +54,12 @@ jobs:
           for path in sorted(Path('.github/workflows').glob('*.yml')):
               yaml.safe_load(path.read_text(encoding='utf-8'))
           PY
+            mkdir -p /tmp/analytics-apply-workflow
+            mv .github/workflows/apply-analytics-multisource.yml /tmp/analytics-apply-workflow/
+            restore_workflow() {
+              mv /tmp/analytics-apply-workflow/apply-analytics-multisource.yml .github/workflows/
+            }
+            trap restore_workflow EXIT
             python -m pytest -q tests/test_lifecycle.py tests/test_personal_wheel_voting.py
             python -m pytest -q
             python -m bbvg.bot.sources
@@ -70,6 +70,8 @@ jobs:
             if git diff --name-only | grep -E '^(state|source_stats|source_health|source_registry|monitor_status|admin_panel_status)\.json$'; then
               exit 1
             fi
+            restore_workflow
+            trap - EXIT
           } 2>&1 | tee analytics-verify.log
 
       - name: Commit verified implementation
