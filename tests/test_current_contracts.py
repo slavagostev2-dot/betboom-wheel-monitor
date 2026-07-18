@@ -79,6 +79,16 @@ class CurrentProductionContractTests(unittest.TestCase):
         self.assertIn('"public_sources.txt"', workflow)
         self.assertIn('"source_catalog.txt"', workflow)
         self.assertNotIn("Check all 66 sources", workflow)
+        self.assertIn(
+            'workflows: ["Telegram candidate discovery"]', workflow
+        )
+
+        registry_workflow = (
+            root / ".github/workflows/source-registry.yml"
+        ).read_text(encoding="utf-8")
+        self.assertIn(
+            'workflows: ["Telegram candidate discovery"]', registry_workflow
+        )
 
     def test_administrator_decisions(self) -> None:
         admin_action_v2.self_test()
