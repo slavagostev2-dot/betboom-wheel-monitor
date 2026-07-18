@@ -22,9 +22,9 @@ NIGHTLY_PATH = ROOT / "source_catalog.txt"
 MODERATION_PATH = ROOT / "candidate_moderation.json"
 
 UTC = timezone.utc
-SOURCE_LIMIT = max(5, int(os.getenv("INTELLIGENCE_SOURCE_LIMIT", "150")))
-CANDIDATE_LIMIT = max(10, int(os.getenv("INTELLIGENCE_CANDIDATE_LIMIT", "100")))
-VERIFY_LIMIT = max(5, int(os.getenv("INTELLIGENCE_VERIFY_LIMIT", "40")))
+SOURCE_LIMIT = max(5, int(os.getenv("INTELLIGENCE_SOURCE_LIMIT", "250")))
+CANDIDATE_LIMIT = max(10, int(os.getenv("INTELLIGENCE_CANDIDATE_LIMIT", "200")))
+VERIFY_LIMIT = max(5, int(os.getenv("INTELLIGENCE_VERIFY_LIMIT", "100")))
 INTELLIGENCE_WORKERS = max(2, min(16, int(os.getenv("INTELLIGENCE_WORKERS", "12"))))
 
 USERNAME_RE = re.compile(r"(?<![A-Za-z0-9_])@([A-Za-z][A-Za-z0-9_]{4,31})")
