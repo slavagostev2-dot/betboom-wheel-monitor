@@ -17,11 +17,11 @@
       "url": "https://betboom.ru/freestream/koma"
     },
     "kyzko": {
-      "alerted_at": "2026-07-17T13:57:19.983787+00:00",
-      "deadline": "2026-07-17T14:04:38.042000+00:00",
+      "alerted_at": "2026-07-18T13:22:05.043484+00:00",
+      "deadline": "2026-07-18T13:27:08.192000+00:00",
       "identifier": "kyzko",
       "lifecycle_rule": "timer",
-      "suppress_until": "2026-07-17T14:04:38.042000+00:00",
+      "suppress_until": "2026-07-18T13:27:08.192000+00:00",
       "url": "https://betboom.ru/freestream/kyzko"
     },
     "mael": {
@@ -98,6 +98,29 @@
     }
   },
   "active_wheels": {
+    "kyzko": {
+      "action_id": 889,
+      "button_token": "81ea92f069f316",
+      "deadline": "2026-07-18T13:27:08.192000+00:00",
+      "expires_at": "2026-07-18T15:22:05.043325+00:00",
+      "first_notified_at": "2026-07-18T13:22:05.043325+00:00",
+      "generation_id": "345c18d7191115cfcd17",
+      "identifier": "kyzko",
+      "last_checked_at": "2026-07-18T13:22:05.043325+00:00",
+      "last_notification_at": "2026-07-18T13:22:05.043325+00:00",
+      "message_date": "2026-07-18T13:20:35+00:00",
+      "message_id": 148,
+      "message_text": "https://betboom.ru/freestream/kyzko\nhttps://telegram.me/kolesaBB\nhttps://telegram.me/kolesaBB/148",
+      "message_url": "https://telegram.me/kolesaBB/148",
+      "method": "активность и таймер подтверждены BetBoom",
+      "page_excerpt": "",
+      "participating": false,
+      "server_start_at": "2026-07-18T13:12:08.192000+00:00",
+      "source": "kolesaBB",
+      "status": "preliminary",
+      "url": "https://betboom.ru/freestream/kyzko",
+      "verification_status": "confirmed"
+    },
     "zonertg9": {
       "action_id": 694,
       "availability_status": "available",
@@ -109,9 +132,9 @@
       "first_notified_at": "2026-07-18T08:47:29.633335+00:00",
       "generation_id": "7ad472baadae20030f16",
       "identifier": "zonertg9",
-      "last_checked_at": "2026-07-18T13:18:56.266041+00:00",
+      "last_checked_at": "2026-07-18T13:21:57.749100+00:00",
       "last_notification_at": "2026-07-18T08:47:29.633335+00:00",
-      "last_verification_at": "2026-07-18T13:18:55.920429+00:00",
+      "last_verification_at": "2026-07-18T13:21:57.423064+00:00",
       "lifecycle_changed_at": "2026-07-18T08:50:23.857844+00:00",
       "lifecycle_state": "scheduled_draw",
       "message_date": "2026-07-18T08:45:01+00:00",
@@ -896,6 +919,21 @@
       "url": "https://betboom.ru/freestream/smurf5",
       "wheel_key": "smurf5"
     },
+    "81ea92f069f316": {
+      "created_at": "2026-07-18T13:22:03.611131+00:00",
+      "identifier": "kyzko",
+      "message_date": "2026-07-18T13:20:35+00:00",
+      "message_id": 148,
+      "message_text": "https://betboom.ru/freestream/kyzko\nhttps://telegram.me/kolesaBB\nhttps://telegram.me/kolesaBB/148",
+      "message_url": "https://telegram.me/kolesaBB/148",
+      "method": "активность и таймер подтверждены BetBoom",
+      "page_excerpt": "",
+      "post_key": "81ea92f069f31618131f387fa0aad4ac1181f406d1aa064c35d68de903051296",
+      "source": "kolesaBB",
+      "status": "preliminary",
+      "url": "https://betboom.ru/freestream/kyzko",
+      "wheel_key": "kyzko"
+    },
     "9923e7f98f5456": {
       "created_at": "2026-07-14T20:07:18.780290+00:00",
       "identifier": "krat",
@@ -1201,7 +1239,7 @@
       "expires_at": "2026-07-19T12:27:53.558240+00:00",
       "first_seen_at": "2026-07-18T12:27:53.558240+00:00",
       "identifier": "dyrachyo",
-      "last_checked_at": "2026-07-18T13:16:02.660397+00:00",
+      "last_checked_at": "2026-07-18T13:22:02.928835+00:00",
       "message_date": "2026-07-18T11:12:11+00:00",
       "message_id": 145,
       "message_text": "https://betboom.ru/freestream/dyrachyo\nhttps://telegram.me/kolesaBB\nhttps://telegram.me/kolesaBB/145",
@@ -1370,7 +1408,7 @@
     "2dfb1c4bb70cbefb8bb9c5f399144c79b8b4c2aae3159c140fac8dd9a0ab820d": "2026-07-12T18:21:22.495389+00:00",
     "2f52fc4a44639bbb464c4ca1062cf5ad5096f8bbee6ff393eb58964b78fed703": "2026-07-12T17:14:34.959937+00:00",
     "31b6f832ef9a7936f0f42b3d244f67fe056122171dba41c0aa4fe0a6e4dfe7c6": "2026-07-15T14:58:34.803315+00:00",
-    "337d5e32a531ec783b47cc1558196264e2cb6f1d253e04b675ab2f7d447d416a": "2026-07-18T13:19:03.855935+00:00",
+    "337d5e32a531ec783b47cc1558196264e2cb6f1d253e04b675ab2f7d447d416a": "2026-07-18T13:22:05.201684+00:00",
     "368f3194050806b90009f9066c96ee020906036e08a45d56b4c92053fd206cea": "2026-07-12T19:22:25.149620+00:00",
     "36f561eb489538365b9f8e9e20688d6913ca8930cfb3aead41ed3ce6da754545": "2026-07-12T18:26:16.728123+00:00",
     "375da067269bc35d23793c9330566396fcfe06971f5db4574c2734d6bfe3ca55": "2026-07-12T19:22:25.149620+00:00",
@@ -1421,6 +1459,7 @@
     "80eabf6c72c016b3f1b732bb32046189d676ba29988194958bb4062932dff621": "2026-07-16T13:49:35.195762+00:00",
     "81863bc6428bea4e0d64cdc2fa2b79a14d077dc263f1cd70f134f5abdf1f1a9a": "2026-07-12T19:22:25.149620+00:00",
     "81e406b43d79ca19ecac5c2f3fadea40309fd604374a508589ec15b3e67a14dd": "2026-07-12T18:21:20.531045+00:00",
+    "81ea92f069f31618131f387fa0aad4ac1181f406d1aa064c35d68de903051296": "2026-07-18T13:22:05.043534+00:00",
     "82f5a3c1b08d56517e062d33368b885f04a098b034267ebfbccfac6e9a9d1c9b": "2026-07-16T10:56:51.779892+00:00",
     "86bc22b95fa5d63901c01975ed5b6fbe61c48b4a296e4511760993372c75a997": "2026-07-14T13:49:36.423110+00:00",
     "88c8299e5ee8cc9a3dcd210ef2fd33d4364c55bb1c5c5fff4ec223bcea9dc398": "2026-07-12T18:21:19.249137+00:00",
@@ -1471,11 +1510,12 @@
     "c76c303dc93e53d2ceaf12fac239b6cde7f01ac0c8f0e53dd0f179bce9d91bd7": "2026-07-15T11:18:42.831982+00:00",
     "c9b4f7810d1d223e3a8568450036fc7cc31393788a25c6b90bf3ef72800606b7": "2026-07-17T20:34:27.007041+00:00",
     "c9e7f459dd8b5117cc78351bffd12f73755044222ed4abe0e34cd9c91152cefe": "2026-07-12T19:22:25.149620+00:00",
+    "cf93a1efa65615456d5e88ca4a518444cd7174c055c9c148a0c94663c64cb90c": "2026-07-18T13:22:05.043565+00:00",
     "d0b9f4dc52a155a7628e54963335119a010868d6ea86f919f58723b6c7ab36f2": "2026-07-17T21:13:47.979420+00:00",
     "d185b306d163f18944588e3ccf99dc9af77d8f22c9262b77342296fa1954e79a": "2026-07-14T20:52:27.613491+00:00",
     "d30169b28e9b2c1e142ecb5a7250d7dc9a04906e55e77558bb175a258b378abf": "2026-07-12T15:09:43.809994+00:00",
     "d4fa31f2a589420a8f824bb4bde52b3dfe93db3a76d5b704da796185c36b1a81": "2026-07-12T15:10:05.815332+00:00",
-    "d569c905e0d81fcf2df45f21bb4464b7aaa607a7178ddcb9277cc337d9d05617": "2026-07-18T13:19:03.464947+00:00",
+    "d569c905e0d81fcf2df45f21bb4464b7aaa607a7178ddcb9277cc337d9d05617": "2026-07-18T13:22:03.254476+00:00",
     "d722c5451f3f6fe0c34aefed99af055687887e71397ebbcc6843b9bcf77d8e5f": "2026-07-14T19:52:24.783487+00:00",
     "d9bce73b7da1681ccd4617763b82c4eebd8b580d3af02c9eb467bb8b365aa070": "2026-07-15T19:02:02.100324+00:00",
     "db568f77183a1f8525c0e666d4acf763f080189b1b790533f7094ce7821a7ce1": "2026-07-12T18:21:25.206458+00:00",
@@ -1491,7 +1531,7 @@
     "f0780c1e1cc0d47a2679a4bd5f026b3b004b54b2b6da2bf8d74a17a484c89df1": "2026-07-12T17:14:34.959916+00:00",
     "f0b72128b8ce7abd7927ecd90e5b489773772d735e5eb8e4bcf4e12f88ff516d": "2026-07-12T18:21:19.249780+00:00",
     "f1db298018ac2c3ab5309836f70d9c909e12043c8e98a52331f5d2f12eac4ea6": "2026-07-15T14:58:35.999057+00:00",
-    "f3f6fa16314072fbd267bf5f58c14a52165eca4a79393c79d7d9028c8cffab46": "2026-07-18T13:19:04.248047+00:00",
+    "f3f6fa16314072fbd267bf5f58c14a52165eca4a79393c79d7d9028c8cffab46": "2026-07-18T13:22:05.514933+00:00",
     "f410a25da7c3c9e7bfbb4ff40e4f06ff6e395bc588adcfe7faa2b908f7fdaf77": "2026-07-14T10:47:43.053571+00:00",
     "f62d44770527b1f1a84fae87c317f42c7206d26743aedc26e17e7230624d95c9": "2026-07-14T14:00:51.622095+00:00",
     "f6b44fe52830b4eb77617f3578ffb6ac06e693a8aa7ef21aa7d27a295155f8db": "2026-07-12T15:10:04.958811+00:00",
@@ -1604,11 +1644,11 @@
       "url": "https://betboom.ru/freestream/krat"
     },
     "kyzko": {
-      "alerted_at": "2026-07-17T13:57:19.983829+00:00",
-      "deadline": "2026-07-17T14:04:38.042000+00:00",
+      "alerted_at": "2026-07-18T13:22:05.043519+00:00",
+      "deadline": "2026-07-18T13:27:08.192000+00:00",
       "identifier": "kyzko",
       "lifecycle_rule": "timer",
-      "suppress_until": "2026-07-17T14:04:38.042000+00:00",
+      "suppress_until": "2026-07-18T13:27:08.192000+00:00",
       "url": "https://betboom.ru/freestream/kyzko"
     },
     "mael": {
@@ -1857,8 +1897,11 @@
       "seen_at": "2026-07-17T13:48:02.996425+00:00"
     },
     "kyzko": {
-      "action_id": 875,
-      "seen_at": "2026-07-17T14:06:16.234756+00:00"
+      "action_id": 889,
+      "generation_id": "345c18d7191115cfcd17",
+      "seen_at": "2026-07-18T13:22:05.043412+00:00",
+      "server_start_at": "2026-07-18T13:12:08.192000+00:00",
+      "state": "active"
     },
     "mael": {
       "action_id": 872,
@@ -1919,7 +1962,7 @@
     "zonertg9": {
       "action_id": 694,
       "generation_id": "7ad472baadae20030f16",
-      "seen_at": "2026-07-18T13:18:55.920429+00:00",
+      "seen_at": "2026-07-18T13:21:57.423064+00:00",
       "server_start_at": "2026-07-18T08:41:03.042000+00:00",
       "state": "active"
     },
@@ -1935,19 +1978,19 @@
   "wheel_api_health": {
     "alert_threshold": 3,
     "consecutive_failures": 0,
-    "last_checked_at": "2026-07-18T13:19:04.247883+00:00",
-    "last_success_at": "2026-07-18T13:19:04.247883+00:00",
+    "last_checked_at": "2026-07-18T13:22:05.514804+00:00",
+    "last_success_at": "2026-07-18T13:22:05.514804+00:00",
     "status": "ok"
   },
   "wheel_generation_observations": {
     "19df8036baf469eb34c8dc4e": {
       "action_id": 895,
       "first_seen_at": "2026-07-18T12:27:53.558128+00:00",
-      "last_seen_at": "2026-07-18T13:16:02.660281+00:00",
-      "observations": 9,
+      "last_seen_at": "2026-07-18T13:22:02.928715+00:00",
+      "observations": 10,
       "server_start_at": null,
       "statuses": {
-        "not_started": 9
+        "not_started": 10
       },
       "wheel_key": "dyrachyo"
     },
@@ -1955,27 +1998,39 @@
       "action_id": 850,
       "first_seen_at": "2026-07-18T12:08:43.814575+00:00",
       "generation_id": "2006379ecdd0fb2b830a",
-      "last_seen_at": "2026-07-18T13:19:04.247950+00:00",
-      "observations": 28,
+      "last_seen_at": "2026-07-18T13:22:05.514859+00:00",
+      "observations": 29,
       "server_start_at": "2026-07-18T12:01:15.745000+00:00",
       "statuses": {
         "active": 7,
         "closed": 1,
-        "inactive": 20
+        "inactive": 21
       },
       "wheel_key": "nix"
+    },
+    "345c18d7191115cfcd174620": {
+      "action_id": 889,
+      "first_seen_at": "2026-07-18T13:22:05.043412+00:00",
+      "generation_id": "345c18d7191115cfcd17",
+      "last_seen_at": "2026-07-18T13:22:05.043412+00:00",
+      "observations": 1,
+      "server_start_at": "2026-07-18T13:12:08.192000+00:00",
+      "statuses": {
+        "active": 1
+      },
+      "wheel_key": "kyzko"
     },
     "4c9aa2debf2ffcfb562ef402": {
       "action_id": 883,
       "first_seen_at": "2026-07-18T12:24:52.335530+00:00",
       "generation_id": "4c9aa2debf2ffcfb562e",
-      "last_seen_at": "2026-07-18T13:19:03.855861+00:00",
-      "observations": 22,
+      "last_seen_at": "2026-07-18T13:22:05.201595+00:00",
+      "observations": 23,
       "server_start_at": "2026-07-18T12:21:33.252000+00:00",
       "statuses": {
         "active": 7,
         "closed": 1,
-        "inactive": 14
+        "inactive": 15
       },
       "wheel_key": "solo"
     },
@@ -1983,13 +2038,13 @@
       "action_id": 880,
       "first_seen_at": "2026-07-18T11:29:13.022285+00:00",
       "generation_id": "636601848bb5070851b6",
-      "last_seen_at": "2026-07-18T13:19:03.464872+00:00",
-      "observations": 39,
+      "last_seen_at": "2026-07-18T13:22:03.254398+00:00",
+      "observations": 40,
       "server_start_at": "2026-07-18T11:00:00.736000+00:00",
       "statuses": {
         "active": 2,
         "closed": 1,
-        "inactive": 36
+        "inactive": 37
       },
       "wheel_key": "zzone1"
     },
@@ -1997,11 +2052,11 @@
       "action_id": 694,
       "first_seen_at": "2026-07-18T11:29:13.022285+00:00",
       "generation_id": "7ad472baadae20030f16",
-      "last_seen_at": "2026-07-18T13:18:55.920429+00:00",
-      "observations": 76,
+      "last_seen_at": "2026-07-18T13:21:57.423064+00:00",
+      "observations": 78,
       "server_start_at": "2026-07-18T08:41:03.042000+00:00",
       "statuses": {
-        "active": 76
+        "active": 78
       },
       "wheel_key": "zonertg9"
     },
@@ -2209,6 +2264,16 @@
         "message_id": 6381,
         "message_url": "https://telegram.me/boltcast/6381",
         "source": "boltcast"
+      }
+    ],
+    "kyzko": [
+      {
+        "has_future_availability": false,
+        "has_future_deadline": false,
+        "message_date": "2026-07-18T13:20:35+00:00",
+        "message_id": 148,
+        "message_url": "https://telegram.me/kolesaBB/148",
+        "source": "kolesaBB"
       }
     ],
     "zonertg9": [
