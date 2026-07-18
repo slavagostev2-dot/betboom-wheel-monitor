@@ -1,7 +1,7 @@
 {
   "active_incidents": 4,
   "admin_panel": {
-    "age_minutes": 3,
+    "age_minutes": 4,
     "last_heartbeat_at": "2026-07-18T18:31:25.992779+00:00",
     "started_at": "2026-07-18T18:15:54.332383+00:00",
     "status": "running",
@@ -40,7 +40,7 @@
     "telegram_transport": "ok",
     "wheel_api": "ok"
   },
-  "checked_at": "2026-07-18T18:35:17.854840+00:00",
+  "checked_at": "2026-07-18T18:35:40.787249+00:00",
   "discovery": {
     "active_size": 157,
     "candidate_count": 401,
@@ -128,9 +128,9 @@
     }
   },
   "incident_delivery": {
-    "digest_sent": true,
-    "messages_attempted": 1,
-    "opened": 1,
+    "digest_sent": false,
+    "messages_attempted": 0,
+    "opened": 0,
     "resolved": 0
   },
   "incident_sequence": 50,
