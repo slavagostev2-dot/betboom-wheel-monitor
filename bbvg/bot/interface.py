@@ -1077,6 +1077,13 @@ class PanelInterfaceRuntime(PanelFoundationMixin, TelegramPanelV2):
         self.send(text, reply_markup=self.with_nav(rows))
 
     def render_page(self, page: str) -> None:
+        if page.startswith("candidate_list:"):
+            _, category, page_no = page.split(":", 2)
+            self.show_candidate_list(category, int(page_no))
+            return
+        if page.startswith("candidate_detail:"):
+            self.show_candidate_detail(page.split(":", 1)[1])
+            return
         if page == "intelligence":
             self.show_intelligence()
             return
@@ -1134,10 +1141,31 @@ class PanelInterfaceRuntime(PanelFoundationMixin, TelegramPanelV2):
             # Intelligence alerts sent before the stable panel refactor used
             # ``candidate:*`` callbacks. Keep those already delivered messages
             # actionable while all newly generated alerts use ``intel:*``.
-            if data.startswith("candidate:mode:"):
-                data = "intel:mode:" + data.split(":", 2)[2]
-            elif data.startswith("candidate:defer:"):
-                data = "intel:defer:" + data.split(":", 2)[2]
+            if data.startswith("candidate:list:"):
+                if not self.is_admin():
+                    raise PermissionError
+                _, _, category, page_no = data.split(":", 3)
+                self.answer(query_id, "Открываю")
+                self.open_page(f"candidate_list:{category}:{page_no}")
+                return
+            if data.startswith("candidate:detail:"):
+                if not self.is_admin():
+                    raise PermissionError
+                source = data.split(":", 2)[2]
+                self.answer(query_id, "Открываю")
+                self.open_page(f"candidate_detail:{source}")
+                return
+            for candidate_action in (
+                "mode",
+                "defer",
+                "ignoreask",
+                "ignore",
+                "restore",
+            ):
+                prefix = f"candidate:{candidate_action}:"
+                if data.startswith(prefix):
+                    data = f"intel:{candidate_action}:" + data[len(prefix) :]
+                    break
             if data.startswith("intel:list:"):
                 if not self.is_admin():
                     raise PermissionError
