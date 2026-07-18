@@ -52,6 +52,15 @@ docs/
 - Telegram-панель: `bbvg/bot/runtime.py`.
 - Совместимая production-команда: `python admin_panel_runtime_v41.py`.
 - `admin_panel_runtime_v41.py` — только тонкий переходник на `bbvg.bot.runtime`, а не отдельная реализация.
+- Предметные владельцы панели: `bbvg/bot/interface.py` (экраны и
+  навигация), `users.py` (пользователи, роли и настройки),
+  `sources.py` (источники), `wheels.py` (колёса и callback), `storage.py`
+  (зашифрованное состояние), `runtime.py` (финальная композиция,
+  lifecycle и очередь admin actions).
+- Production MRO `bbvg.bot.runtime.TelegramPanelRuntime` не содержит
+  классов из `admin_panel_runtime_v*`. Versioned-файлы остаются только
+  как временная совместимость до главы 9 и не являются
+  владельцами production-поведения.
 - Монитор колёс: `bbvg_monitor_main.py`, `monitor.py` и тематические модули.
 
 Не добавляйте параллельный runtime или второго consumer Telegram `getUpdates`.
