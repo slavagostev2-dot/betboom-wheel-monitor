@@ -1,8 +1,8 @@
 {
-  "active_incidents": 2,
+  "active_incidents": 1,
   "admin_panel": {
-    "age_minutes": 3,
-    "last_heartbeat_at": "2026-07-18T15:28:19.460208+00:00",
+    "age_minutes": 0,
+    "last_heartbeat_at": "2026-07-18T15:33:21.470401+00:00",
     "started_at": "2026-07-18T15:12:53.534830+00:00",
     "status": "running",
     "update_consumer": "single_getUpdates_owner",
@@ -13,13 +13,13 @@
     "expected_primary_sources": 157,
     "expected_total_sources": 216,
     "missing_sources": 0,
-    "recorded_configured_sources": 160,
-    "recorded_nightly_sources": 3,
+    "recorded_configured_sources": 216,
+    "recorded_nightly_sources": 59,
     "recorded_primary_sources": 157,
     "source_tier_last_run_at": "2026-07-17T23:37:54.060195+00:00",
     "source_tier_policy": "seven_day_dynamic_primary_and_nightly",
-    "transport_accounted_sources": 160,
-    "transport_checked_at": "2026-07-18T15:21:59.588249+00:00",
+    "transport_accounted_sources": 216,
+    "transport_checked_at": "2026-07-18T15:33:08.919530+00:00",
     "transport_domain": "telegram.me",
     "transport_status": "success"
   },
@@ -28,7 +28,7 @@
     "username": "slava_wheel_monitor_bot"
   },
   "check_matrix": {
-    "automations": "failed",
+    "automations": "ok",
     "bot_panel": "ok",
     "discovery": "failed",
     "inventory": "ok",
@@ -40,7 +40,7 @@
     "telegram_transport": "ok",
     "wheel_api": "ok"
   },
-  "checked_at": "2026-07-18T15:32:03.450178+00:00",
+  "checked_at": "2026-07-18T15:33:41.562989+00:00",
   "discovery": {
     "active_size": 157,
     "candidate_count": 401,
@@ -78,7 +78,7 @@
     "legacy_url_offenders": [],
     "primary": "telegram.me"
   },
-  "finding_count": 2,
+  "finding_count": 1,
   "findings": [
     {
       "detail": "Просканировано 160 из текущих 216; ошибок 0. Поиск должен выполняться через telegram.me.",
@@ -86,18 +86,11 @@
       "severity": "critical",
       "subject": "",
       "title": "Поиск новых источников не смог просканировать базу"
-    },
-    {
-      "detail": "status=success; domain=telegram.me; primary=157/157; nightly=3/59; accounted=160/216; missing=0.",
-      "kind": "source_transport_smoke",
-      "severity": "critical",
-      "subject": "",
-      "title": "Транспортная проверка текущего inventory не подтверждена"
     }
   ],
   "gpt_diagnostic_snapshot": {
-    "active_incidents": 2,
-    "bot_panel_heartbeat": "2026-07-18T15:28:19.460208+00:00",
+    "active_incidents": 1,
+    "bot_panel_heartbeat": "2026-07-18T15:33:21.470401+00:00",
     "checked_sources": 157,
     "configured_sources": 216,
     "domain": "telegram.me",
@@ -114,12 +107,12 @@
     }
   },
   "incident_delivery": {
-    "digest_sent": true,
-    "messages_attempted": 1,
+    "digest_sent": false,
+    "messages_attempted": 0,
     "opened": 0,
-    "resolved": 1
+    "resolved": 0
   },
-  "incident_sequence": 44,
+  "incident_sequence": 45,
   "inventory": {
     "configured": 157,
     "configured_total": 216,
@@ -167,7 +160,7 @@
     "version": 3,
     "workflow_run_id": "29649840625"
   },
-  "monitor_age_minutes": 9,
+  "monitor_age_minutes": 11,
   "notification_integrity": {
     "algorithm": "HMAC-SHA256",
     "contains_personal_fields": false,
