@@ -12,20 +12,60 @@ REMINDER_MARKERS = (
     "вы ещё не отметили участие",
     "вы еще не отметили участие",
 )
+_CURRENT_STATS: dict[str, Any] | None = None
+
+
+def set_current_stats(stats: dict[str, Any] | None) -> None:
+    """Expose the current monitor-cycle vote ledger to reminder delivery."""
+
+    global _CURRENT_STATS
+    _CURRENT_STATS = stats if isinstance(stats, dict) else None
 
 
 def set_global_participating(wheel_key: str, participating: bool) -> None:
     """Compatibility no-op: global participation no longer suppresses reminders."""
 
 
-def _user_record(config: dict[str, Any], chat_id: str) -> dict[str, Any]:
+def _user_identity(
+    config: dict[str, Any], chat_id: str
+) -> tuple[str, dict[str, Any]]:
     users = config.get("users") if isinstance(config.get("users"), dict) else {}
     for user_id, raw in users.items():
         if not isinstance(raw, dict):
             continue
         if str(raw.get("chat_id") or user_id) == str(chat_id):
-            return raw
-    return {}
+            return str(raw.get("id") or user_id), raw
+    return "", {}
+
+
+def _user_record(config: dict[str, Any], chat_id: str) -> dict[str, Any]:
+    return _user_identity(config, chat_id)[1]
+
+
+def _vote_recorded_for_chat(
+    config: dict[str, Any],
+    chat_id: str,
+    event_key: str,
+    stats: dict[str, Any] | None,
+) -> bool:
+    if not isinstance(stats, dict) or not event_key:
+        return False
+    user_id, _ = _user_identity(config, chat_id)
+    if not user_id:
+        return False
+    try:
+        actor = personal_wheel_voting.actor_vote_token(user_id)
+    except RuntimeError:
+        return False
+    votes = stats.get("personal_wheel_votes")
+    if not isinstance(votes, dict):
+        return False
+    return any(
+        isinstance(record, dict)
+        and str(record.get("actor") or "").casefold() == actor
+        and str(record.get("event_key") or "").casefold() == event_key
+        for record in votes.values()
+    )
 
 
 def participating_for_chat(
@@ -33,6 +73,8 @@ def participating_for_chat(
     chat_id: str,
     wheel_key: str,
     entry: dict[str, Any] | None = None,
+    *,
+    stats: dict[str, Any] | None = None,
 ) -> bool:
     normalized = str(wheel_key or "").casefold()
     if not normalized:
@@ -41,15 +83,28 @@ def participating_for_chat(
     raw = record.get("participating_wheels")
     if isinstance(raw, list):
         joined = {str(value).casefold() for value in raw}
-        return normalized in joined and not bool((entry or {}).get("action_id") or (entry or {}).get("event_id"))
-    if not isinstance(raw, dict):
-        return False
+        if normalized in joined and not bool(
+            (entry or {}).get("action_id") or (entry or {}).get("event_id")
+        ):
+            return True
+        return _vote_recorded_for_chat(
+            config,
+            chat_id,
+            personal_wheel_voting.wheel_event_key(normalized, entry),
+            stats,
+        )
     event_key = personal_wheel_voting.wheel_event_key(normalized, entry)
-    if event_key in {str(value).casefold() for value in raw}:
+    if isinstance(raw, dict) and event_key in {
+        str(value).casefold() for value in raw
+    }:
         return True
-    if event_key != normalized:
-        return False
-    return normalized in {str(value).casefold() for value in raw}
+    if (
+        isinstance(raw, dict)
+        and event_key == normalized
+        and normalized in {str(value).casefold() for value in raw}
+    ):
+        return True
+    return _vote_recorded_for_chat(config, chat_id, event_key, stats)
 
 
 def install(monitor_module: Any, router_module: Any) -> None:
@@ -79,11 +134,19 @@ def install(monitor_module: Any, router_module: Any) -> None:
                     else None
                 )
                 chat_id = str(payload.get("chat_id") or "")
+                vote_stats = _CURRENT_STATS
+                if vote_stats is None:
+                    try:
+                        loaded = monitor_module.data_store.load_stats()
+                        vote_stats = loaded if isinstance(loaded, dict) else None
+                    except Exception:
+                        vote_stats = None
                 if participating_for_chat(
                     config,
                     chat_id,
                     key,
                     entry if isinstance(entry, dict) else None,
+                    stats=vote_stats,
                 ):
                     return {
                         "ok": True,
