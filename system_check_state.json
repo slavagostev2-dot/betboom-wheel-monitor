@@ -1,8 +1,8 @@
 {
   "active_incidents": 0,
   "admin_panel": {
-    "age_minutes": 3,
-    "last_heartbeat_at": "2026-07-18T23:33:56.214308+00:00",
+    "age_minutes": 1,
+    "last_heartbeat_at": "2026-07-18T23:38:59.006024+00:00",
     "started_at": "2026-07-18T18:35:38.864783+00:00",
     "status": "running",
     "update_consumer": "single_getUpdates_owner",
@@ -40,13 +40,13 @@
     "telegram_transport": "ok",
     "wheel_api": "ok"
   },
-  "checked_at": "2026-07-18T23:36:58.723301+00:00",
+  "checked_at": "2026-07-18T23:40:04.539414+00:00",
   "discovery": {
     "active_size": 159,
     "candidate_count": 438,
     "catalog_size": 102,
     "discovery_errors": 0,
-    "discovery_last_run_at": "2026-07-18T21:14:35.105108+00:00",
+    "discovery_last_run_at": "2026-07-18T23:39:40.393960+00:00",
     "domain": "telegram.me",
     "intelligence_domain": "telegram.me",
     "intelligence_last_run_at": "2026-07-18T21:09:07.215829+00:00",
@@ -82,7 +82,7 @@
   "findings": [],
   "gpt_diagnostic_snapshot": {
     "active_incidents": 0,
-    "bot_panel_heartbeat": "2026-07-18T23:33:56.214308+00:00",
+    "bot_panel_heartbeat": "2026-07-18T23:38:59.006024+00:00",
     "checked_sources": 159,
     "configured_sources": 261,
     "domain": "telegram.me",
@@ -152,7 +152,7 @@
     "version": 3,
     "workflow_run_id": "29655514242"
   },
-  "monitor_age_minutes": 10,
+  "monitor_age_minutes": 14,
   "notification_integrity": {
     "algorithm": "HMAC-SHA256",
     "contains_personal_fields": false,
