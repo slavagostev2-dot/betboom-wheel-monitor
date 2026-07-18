@@ -30,6 +30,52 @@ class SourceRegistryRuntime(UserManagementRuntime):
     show_app_entry = PanelFoundationMixin.show_app_entry
 
     @staticmethod
+    def source_menu_rows(admin: bool) -> list[list[dict[str, Any]]]:
+        rows: list[list[dict[str, Any]]] = [
+            [
+                {"text": "🔄 Обновить реестр", "callback_data": "page:sources"},
+                {"text": "🏆 Рейтинг источников", "callback_data": "page:ranking"},
+            ]
+        ]
+        if admin:
+            rows.extend(
+                [
+                    [
+                        {"text": "⚡ Основные источники", "callback_data": "source_list:primary:0"},
+                        {"text": "🌙 Ночное наблюдение", "callback_data": "page:discovery"},
+                    ],
+                    [
+                        {"text": "🛰️ Разведка источников", "callback_data": "page:intelligence"},
+                        {"text": "➕ Добавить источник", "callback_data": "source:add"},
+                    ],
+                ]
+            )
+        else:
+            rows.append(
+                [
+                    {"text": "📋 Основные источники", "callback_data": "source_list:primary:0"},
+                    {"text": "➕ Предложить источник", "callback_data": "source:request"},
+                ]
+            )
+        return rows
+
+    @staticmethod
+    def ranked_sources(stats: dict[str, Any]) -> list[tuple[str, int, int]]:
+        source_rows = stats.get("sources") if isinstance(stats, dict) else None
+        result: list[tuple[str, int, int]] = []
+        if isinstance(source_rows, dict):
+            for source, row in source_rows.items():
+                if not isinstance(row, dict):
+                    continue
+                score = max(0, int(row.get("quality_score", 0) or 0))
+                if score <= 0:
+                    continue
+                confirmed = max(0, int(row.get("admin_confirmed_wheels", 0) or 0))
+                result.append((str(source), score, confirmed))
+        result.sort(key=lambda item: (-item[1], -item[2], item[0].casefold()))
+        return result[:10]
+
+    @staticmethod
     def source_mode_name(mode: str) -> str:
         return {
             "primary": "Основная проверка",
