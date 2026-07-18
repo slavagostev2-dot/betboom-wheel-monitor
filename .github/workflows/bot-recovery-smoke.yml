@@ -67,56 +67,12 @@ jobs:
           python migrate_bot_private_state.py --check
           python notification_preferences_v2.py
 
-      - name: Validate runtime compatibility layers
+      - name: Validate stable production runtime
         run: |
           set -euo pipefail
-          python - <<'PY'
-          from pathlib import Path
-          from tempfile import TemporaryDirectory
-          import bot_private_state
-          import admin_panel_runtime_v25
-          import admin_panel_runtime_v30
-
-          def run_local_self_test(runtime_class, self_test):
-              original_load = runtime_class.load_access
-
-              def local_load(self, force=False):
-                  if getattr(self, 'access_loaded', False):
-                      return self.access
-                  bundle = getattr(self, '_bot_bundle', None)
-                  if not isinstance(bundle, dict):
-                      return original_load(self, force=False)
-                  self.access = self.normalize_access(bundle.get('access', {}))
-                  self.access_loaded = True
-                  return self.access
-
-              original_path = bot_private_state.STATE_PATH
-              runtime_class.load_access = local_load
-              try:
-                  with TemporaryDirectory() as temporary:
-                      bot_private_state.STATE_PATH = Path(temporary) / 'state.enc.json'
-                      self_test()
-              finally:
-                  runtime_class.load_access = original_load
-                  bot_private_state.STATE_PATH = original_path
-
-          run_local_self_test(
-              admin_panel_runtime_v25.TelegramPanelRuntimeV25,
-              admin_panel_runtime_v25.self_test,
-          )
-          run_local_self_test(
-              admin_panel_runtime_v30.TelegramPanelRuntimeV30,
-              admin_panel_runtime_v30.self_test,
-          )
-          PY
-          python admin_panel_runtime_v26.py --self-test
-          python admin_panel_runtime_v28.py --self-test
-          python admin_panel_runtime_v29.py --self-test
-          python admin_panel_runtime_v31.py --self-test
-          python admin_panel_runtime_v32.py --self-test
-          python admin_panel_runtime_v36.py --self-test
-          python admin_panel_runtime_v37.py --self-test
-          python admin_panel_runtime_v38.py --self-test
+          python -m bbvg.bot.storage
+          python -m bbvg.bot.users
+          python -m bbvg.bot.runtime --self-test
           python admin_panel_runtime_v41.py --self-test
 
       - name: Validate recovery domain commands
@@ -143,30 +99,16 @@ jobs:
           python - <<'PY'
           import json
           from pathlib import Path
-          import admin_panel_runtime_v25
-          import admin_panel_runtime_v26
-          import admin_panel_runtime_v28
-          import admin_panel_runtime_v30
-          import admin_panel_runtime_v31
-          import admin_panel_runtime_v32
-          import admin_panel_runtime_v36
-          import admin_panel_runtime_v37
-          import admin_panel_runtime_v38
           import bbvg_monitor_main
           import bot_notification_state
           import notification_router
-          from bbvg.bot.storage import PrivateStateRuntime
-          from bbvg.bot.users import UserSettingsMixin, WHEEL_NOTIFICATION_OPTIONS
+          from bbvg.bot.runtime import TelegramPanelRuntime
+          from bbvg.bot.users import WHEEL_NOTIFICATION_OPTIONS
 
-          assert admin_panel_runtime_v25.TelegramPanelRuntimeV25.__mro__[1] is PrivateStateRuntime
-          assert admin_panel_runtime_v26.TelegramPanelRuntimeV26.__mro__[1].__name__ == 'TelegramPanelRuntimeV25'
-          assert admin_panel_runtime_v28.TelegramPanelRuntimeV28.__mro__[1].__name__ == 'TelegramPanelRuntimeV26'
-          assert admin_panel_runtime_v30.TelegramPanelRuntimeV30.__mro__[1].__name__ == 'TelegramPanelRuntimeV29'
-          assert admin_panel_runtime_v31.TelegramPanelRuntimeV31.__mro__[1].__name__ == 'TelegramPanelRuntimeV30'
-          assert admin_panel_runtime_v32.TelegramPanelRuntimeV32.__mro__[1].__name__ == 'TelegramPanelRuntimeV31'
-          assert admin_panel_runtime_v36.TelegramPanelRuntimeV36.__mro__[1] is UserSettingsMixin
-          assert admin_panel_runtime_v37.TelegramPanelRuntimeV37.__mro__[1].__name__ == 'TelegramPanelRuntimeV36'
-          assert admin_panel_runtime_v38.TelegramPanelRuntimeV38.__mro__[1].__name__ == 'TelegramPanelRuntimeV37'
+          assert not any(
+              cls.__module__.startswith('admin_panel_runtime_v')
+              for cls in TelegramPanelRuntime.__mro__
+          )
           assert notification_router.load_config is bot_notification_state.load_config
           assert notification_router._bbvg_notification_preferences_v2_installed is True
           assert notification_router._bbvg_notification_integrity_v2_installed is True
@@ -177,7 +119,7 @@ jobs:
           assert bbvg_monitor_main.monitor._bbvg_wheel_lifecycle_v2_installed is True
           assert bbvg_monitor_main.monitor._bbvg_personal_reminder_filter_installed is True
 
-          panel = admin_panel_runtime_v38.TelegramPanelRuntimeV38
+          panel = TelegramPanelRuntime
           callbacks = lambda rows: [button.get('callback_data') for row in rows for button in row]
           admin_main = callbacks(panel.compact_menu_rows(True))
           user_main = callbacks(panel.compact_menu_rows(False))

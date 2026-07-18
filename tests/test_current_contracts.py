@@ -1,6 +1,9 @@
 from __future__ import annotations
 
+import inspect
 import unittest
+from pathlib import Path
+from unittest.mock import patch
 
 from tests._bootstrap import install_optional_dependency_stubs
 
@@ -8,8 +11,7 @@ install_optional_dependency_stubs()
 
 import admin_action_v2
 import admin_action_v3
-import admin_panel_runtime_v37
-import admin_panel_runtime_v38
+import admin_action_queue
 import admin_panel_runtime_v41
 import bot_private_state
 import incident_manager
@@ -39,10 +41,39 @@ class CurrentProductionContractTests(unittest.TestCase):
     def test_runtime_chain_contracts_used_by_v41(self) -> None:
         panel_interface.self_test()
         panel_users.self_test()
-        admin_panel_runtime_v37.self_test()
-        admin_panel_runtime_v38.self_test()
         panel_runtime.self_test()
         admin_panel_runtime_v41.self_test()
+
+    def test_production_runtime_has_only_stable_panel_layers(self) -> None:
+        runtime = panel_runtime.TelegramPanelRuntime
+        self.assertFalse(
+            [
+                cls
+                for cls in runtime.__mro__
+                if cls.__module__.startswith("admin_panel_runtime_v")
+            ]
+        )
+        self.assertEqual(len(runtime.__mro__), len(set(runtime.__mro__)))
+        for method_name in (
+            "handle_callback",
+            "render_page",
+            "show_active",
+            "show_user_detail",
+            "dispatch_admin_action",
+            "setup_bot",
+            "save_access",
+        ):
+            source = Path(inspect.getsourcefile(getattr(runtime, method_name)) or "")
+            self.assertEqual(source.parent.name, "bot", method_name)
+            self.assertEqual(source.parent.parent.name, "bbvg", method_name)
+
+    def test_admin_action_is_queued_without_direct_state_mutation(self) -> None:
+        panel = panel_runtime.TelegramPanelRuntime()
+        with patch.object(admin_action_queue, "enqueue_remote", return_value="command-1") as enqueue:
+            result = panel.dispatch_admin_action("confirm_finished_global", "wheel-1")
+        enqueue.assert_called_once_with("confirm_finished_global", "wheel-1")
+        self.assertTrue(result["queued"])
+        self.assertFalse(result["state_changed"])
 
     def test_encrypted_state_and_retention(self) -> None:
         bot_private_state.self_test()
