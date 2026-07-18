@@ -408,6 +408,12 @@
       "sequence": 35,
       "value": "a77c1bb32cae34"
     },
+    "ae340eb5dc3b45b0a2954c73ceefe8e0": {
+      "action": "record_personal_vote",
+      "created_at": "2026-07-18T22:36:12.894529+00:00",
+      "sequence": 95,
+      "value": "{\"actor\":\"vote_6d354213070f7ecae88871feecfd6151\",\"event_key\":\"staya1#generation:7c6887115d93c80852f4\",\"role\":\"admin\",\"sources\":[\"obshakstaya\"],\"weight\":5,\"wheel_key\":\"staya1\"}"
+    },
     "af1ec52c23b24b2cbb85a3aebab69522": {
       "action": "participate_token",
       "created_at": "2026-07-16T14:27:56.726533+00:00",
@@ -566,5 +572,5 @@
     }
   },
   "format": "bbvg-admin-action-queue-v1",
-  "sequence": 94
+  "sequence": 95
 }
