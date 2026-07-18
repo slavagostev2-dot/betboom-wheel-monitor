@@ -1,5 +1,5 @@
 {
-  "active_incidents": 2,
+  "active_incidents": 1,
   "admin_panel": {
     "age_minutes": 4,
     "last_heartbeat_at": "2026-07-18T15:18:15.489964+00:00",
@@ -40,28 +40,28 @@
     "telegram_transport": "ok",
     "wheel_api": "ok"
   },
-  "checked_at": "2026-07-18T15:22:34.943402+00:00",
+  "checked_at": "2026-07-18T15:22:55.399518+00:00",
   "discovery": {
     "active_size": 104,
-    "candidate_count": 300,
+    "candidate_count": 401,
     "catalog_size": 3,
     "discovery_errors": 0,
     "discovery_last_run_at": "2026-07-18T15:12:41.879731+00:00",
     "domain": "telegram.me",
     "intelligence_domain": "telegram.me",
-    "intelligence_last_run_at": "2026-07-18T15:12:47.780807+00:00",
+    "intelligence_last_run_at": "2026-07-18T15:22:29.064124+00:00",
     "intelligence_summary": {
       "empty_sources": 0,
       "error_types": {},
       "errors": 0,
-      "known_sources": 107,
-      "references_found": 264,
-      "relevant_candidates": 133,
-      "sources_scanned": 107,
+      "known_sources": 160,
+      "references_found": 357,
+      "relevant_candidates": 184,
+      "sources_scanned": 160,
       "strong_candidates": 2,
       "telegram_domain": "telegram.me",
-      "unique_candidates": 133,
-      "verified_candidates": 100,
+      "unique_candidates": 184,
+      "verified_candidates": 150,
       "workers": 12
     }
   },
@@ -78,7 +78,7 @@
     "legacy_url_offenders": [],
     "primary": "telegram.me"
   },
-  "finding_count": 2,
+  "finding_count": 1,
   "findings": [
     {
       "detail": "В состоянии поиска записано 107, текущий inventory содержит 160.",
@@ -86,17 +86,10 @@
       "severity": "warning",
       "subject": "",
       "title": "Ночная проверка видит не весь утверждённый пул"
-    },
-    {
-      "detail": "Просканировано 107 из текущих 160; ошибок 0. Поиск должен выполняться через telegram.me.",
-      "kind": "discovery_scan_failure",
-      "severity": "critical",
-      "subject": "",
-      "title": "Поиск новых источников не смог просканировать базу"
     }
   ],
   "gpt_diagnostic_snapshot": {
-    "active_incidents": 2,
+    "active_incidents": 1,
     "bot_panel_heartbeat": "2026-07-18T15:18:15.489964+00:00",
     "checked_sources": 157,
     "configured_sources": 160,
@@ -107,9 +100,9 @@
     "wheel_api_health": {
       "alert_threshold": 3,
       "consecutive_failures": 0,
-      "last_checked_at": "2026-07-18T15:16:59.944058+00:00",
+      "last_checked_at": "2026-07-18T15:22:30.668253+00:00",
       "last_failure_at": null,
-      "last_success_at": "2026-07-18T15:16:59.944058+00:00",
+      "last_success_at": "2026-07-18T15:22:30.668253+00:00",
       "status": "ok"
     }
   },
@@ -119,7 +112,7 @@
     "opened": 0,
     "resolved": 0
   },
-  "incident_sequence": 40,
+  "incident_sequence": 41,
   "inventory": {
     "configured": 157,
     "configured_total": 160,
@@ -143,35 +136,35 @@
     "brand": "BB V.G.",
     "checked_sources": 157,
     "checks_delta": 157,
-    "checks_total": 152106,
+    "checks_total": 152263,
     "consecutive_failures": 0,
     "consecutive_no_progress": 0,
-    "head_sha": "906c47c69d9b2d8d641e20d0fd410d83ac46be0d",
+    "head_sha": "cd2a4e4c3f21ab773fcfabbc2d126b35f5662ab4",
     "iteration": 1,
     "last_failure_at": "2026-07-14T02:44:12.395838+00:00",
-    "last_iteration_at": "2026-07-18T15:17:00.071192+00:00",
-    "last_iteration_duration_seconds": 19,
+    "last_iteration_at": "2026-07-18T15:22:30.817147+00:00",
+    "last_iteration_duration_seconds": 12,
     "last_iteration_exit_code": 0,
-    "last_process_heartbeat_at": "2026-07-18T15:17:00.071192+00:00",
-    "last_successful_checks_total": 152106,
-    "last_successful_iteration_at": "2026-07-18T15:17:00.071192+00:00",
+    "last_process_heartbeat_at": "2026-07-18T15:22:30.817147+00:00",
+    "last_successful_checks_total": 152263,
+    "last_successful_iteration_at": "2026-07-18T15:22:30.817147+00:00",
     "pending_wheels": 0,
     "reachable_sources": 157,
     "restart_recommended": false,
     "run_attempt": "1",
-    "run_id": "29649657043",
-    "run_started_at": "2026-07-18T15:16:41.146334+00:00",
+    "run_id": "29649840625",
+    "run_started_at": "2026-07-18T15:22:18.103171+00:00",
     "source_errors": 0,
     "stats_counter_reset": false,
     "status": "running",
     "version": 3,
-    "workflow_run_id": "29649657043"
+    "workflow_run_id": "29649840625"
   },
-  "monitor_age_minutes": 5,
+  "monitor_age_minutes": 0,
   "notification_integrity": {
     "algorithm": "HMAC-SHA256",
     "contains_personal_fields": false,
-    "entry_count": 87,
+    "entry_count": 84,
     "format": "bbvg-notification-delivery-v3",
     "retention_seconds": 86400,
     "router_installed": true,
@@ -241,9 +234,9 @@
   "wheel_api_health": {
     "alert_threshold": 3,
     "consecutive_failures": 0,
-    "last_checked_at": "2026-07-18T15:16:59.944058+00:00",
+    "last_checked_at": "2026-07-18T15:22:30.668253+00:00",
     "last_failure_at": null,
-    "last_success_at": "2026-07-18T15:16:59.944058+00:00",
+    "last_success_at": "2026-07-18T15:22:30.668253+00:00",
     "status": "ok"
   }
 }
