@@ -270,6 +270,12 @@
       "sequence": 6,
       "value": "smurf5"
     },
+    "4f2590e6a41b4871828c05122b9ec97b": {
+      "action": "record_personal_vote",
+      "created_at": "2026-07-19T14:12:14.162217+00:00",
+      "sequence": 120,
+      "value": "{\"actor\":\"vote_3092cd8d69b74beb8bd2579cd902c714\",\"event_key\":\"adekvat03#generation:774e130579e3432cb0bb\",\"role\":\"owner\",\"sources\":[\"adekvatik\"],\"weight\":5,\"wheel_key\":\"adekvat03\"}"
+    },
     "51968ee3fad44a81b4ae1de521d8bf78": {
       "action": "confirm_finished_global",
       "created_at": "2026-07-16T02:11:21.738759+00:00",
@@ -716,5 +722,5 @@
     }
   },
   "format": "bbvg-admin-action-queue-v1",
-  "sequence": 119
+  "sequence": 120
 }
