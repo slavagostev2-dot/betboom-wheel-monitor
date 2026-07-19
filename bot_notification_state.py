@@ -15,6 +15,20 @@ import notification_router
 notification_integrity_v2.install(notification_router)
 
 
+FAST_MONITOR_INTERVAL_MINUTES = 1
+
+
+def _with_fast_monitor_interval(access: dict[str, Any]) -> dict[str, Any]:
+    """Keep wheel discovery fast enough for events announced shortly before draw."""
+
+    settings = access.get("settings")
+    if not isinstance(settings, dict):
+        settings = {}
+        access["settings"] = settings
+    settings["monitor_interval_minutes"] = FAST_MONITOR_INTERVAL_MINUTES
+    return access
+
+
 def load_config() -> tuple[dict[str, Any], bool]:
     bundle = bot_private_state.load_file(
         access_default={},
@@ -23,7 +37,7 @@ def load_config() -> tuple[dict[str, Any], bool]:
     access = bundle.get("access") if isinstance(bundle.get("access"), dict) else {}
     exists = bool(access.get("owner_id") or access.get("users"))
     if exists:
-        return access, True
+        return _with_fast_monitor_interval(access), True
     fallback = str(os.getenv("BOT_CHAT_ID", "")).strip()
     if not fallback:
         return {}, False
@@ -40,7 +54,11 @@ def load_config() -> tuple[dict[str, Any], bool]:
         },
         "notification_recipients": [fallback],
         "blocked_users": [],
-        "settings": {"notifications": True, "public_panel": True},
+        "settings": {
+            "notifications": True,
+            "public_panel": True,
+            "monitor_interval_minutes": FAST_MONITOR_INTERVAL_MINUTES,
+        },
     }, True
 
 
