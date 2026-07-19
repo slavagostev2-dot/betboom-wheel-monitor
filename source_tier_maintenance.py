@@ -2,9 +2,7 @@ from __future__ import annotations
 
 import json
 import os
-import urllib.parse
-import urllib.request
-from datetime import date, datetime, timedelta, timezone
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any
 
@@ -54,22 +52,6 @@ def read_list(path: Path) -> list[str]:
             result.append(value)
             seen.add(key)
     return result
-
-
-def write_list(path: Path, values: list[str], header: str) -> None:
-    unique: list[str] = []
-    seen: set[str] = set()
-    for value in values:
-        clean = str(value).strip().lstrip("@")
-        key = clean.casefold()
-        if clean and key not in seen:
-            unique.append(clean)
-            seen.add(key)
-    body = "\n".join(unique)
-    data_store.atomic_write_text(
-        path,
-        header.rstrip() + ("\n\n" + body if body else "") + "\n",
-    )
 
 
 def source_record(sources: dict[str, Any], source: str) -> dict[str, Any]:
@@ -131,57 +113,10 @@ def eligible_for_nightly(payload: dict[str, Any], source: str, now: datetime) ->
     return True, "7 полных дней без новых колёс при достаточном покрытии"
 
 
-def notification_recipients() -> list[str]:
-    access = read_json(ACCESS_PATH, {})
-    users = access.get("users", {}) if isinstance(access.get("users"), dict) else {}
-    admin_ids = {
-        str(value)
-        for value in [access.get("owner_id"), *access.get("admins", [])]
-        if str(value or "")
-    }
-    result = {
-        str(users.get(user_id, {}).get("chat_id") or user_id)
-        for user_id in admin_ids
-        if isinstance(users.get(user_id, {}), dict)
-    }
-    if result:
-        return sorted(result)
-    fallback = str(os.getenv("BOT_CHAT_ID", "")).strip()
-    return [fallback] if fallback else []
-
-
-def send_notification(moved: list[str]) -> None:
-    token = str(os.getenv("BOT_TOKEN", "")).strip()
-    recipients = notification_recipients()
-    if not token or not recipients or not moved:
-        return
-    shown = "\n".join(f"• @{value}" for value in moved[:50])
-    text = (
-        "🤖 <b>Автоматическое изменение режима источников</b>\n\n"
-        f"В ночную проверку перенесено: <b>{len(moved)}</b>\n"
-        f"Причина: {INACTIVITY_DAYS} полных дней наблюдения без новых колёс.\n\n"
-        f"{shown}"
-    )
-    endpoint = f"https://api.telegram.org/bot{token}/sendMessage"
-    for chat_id in recipients:
-        payload = urllib.parse.urlencode({
-            "chat_id": chat_id,
-            "text": text,
-            "parse_mode": "HTML",
-            "disable_web_page_preview": "true",
-        }).encode("utf-8")
-        try:
-            with urllib.request.urlopen(endpoint, data=payload, timeout=20) as response:
-                response.read()
-        except Exception as exc:
-            print(f"WARNING notification {chat_id}: {type(exc).__name__}: {exc}")
-
-
 def main() -> int:
     now = datetime.now(UTC)
     primary = read_list(PRIMARY_PATH)
     nightly = read_list(NIGHTLY_PATH)
-    nightly_keys = {value.casefold() for value in nightly}
     payload = read_json(STATS_PATH, {"sources": {}, "daily": {}})
 
     candidates: list[str] = []
@@ -191,22 +126,6 @@ def main() -> int:
         reasons[source] = reason
         if eligible:
             candidates.append(source)
-
-    moved_keys = {value.casefold() for value in candidates}
-    primary_after = [value for value in primary if value.casefold() not in moved_keys]
-    nightly_after = nightly + [value for value in candidates if value.casefold() not in nightly_keys]
-    write_list(
-        PRIMARY_PATH,
-        primary_after,
-        "# Основной мониторинг: отобранные тематические источники в 7-дневном наблюдении.\n"
-        "# Проверяется примерно каждые 5 минут через telegram.me.",
-    )
-    write_list(
-        NIGHTLY_PATH,
-        nightly_after,
-        "# Ночной мониторинг: утверждённые источники без колёс 7 дней.\n"
-        "# При обнаружении нового активного колеса источник автоматически возвращается в основной режим.",
-    )
 
     state = {
         "version": 1,
@@ -218,19 +137,19 @@ def main() -> int:
             "maximum_last_check_age_hours": MAX_LAST_CHECK_AGE_HOURS,
         },
         "primary_before": len(primary),
-        "policy": "seven_day_dynamic_primary_and_nightly",
-        "primary_after": len(primary_after),
-        "nightly_after": len(nightly_after),
-        "total_after": len({value.casefold() for value in primary_after + nightly_after}),
-        "moved_to_nightly": candidates,
+        "policy": "manual_nightly_only",
+        "primary_after": len(primary),
+        "nightly_after": len(nightly),
+        "total_after": len({value.casefold() for value in primary + nightly}),
+        "moved_to_nightly": [],
+        "would_move_to_nightly": candidates,
         "reasons": reasons,
     }
     data_store.atomic_write_json(STATE_PATH, state)
     print(
-        f"Primary sources: {len(primary_after)}; nightly sources: {len(nightly_after)}; "
-        f"moved after {INACTIVITY_DAYS} days: {len(candidates)}"
+        f"Primary sources: {len(primary)}; nightly sources: {len(nightly)}; "
+        f"eligible for manual review after {INACTIVITY_DAYS} days: {len(candidates)}"
     )
-    send_notification(candidates)
     return 0
 
 
