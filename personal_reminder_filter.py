@@ -175,7 +175,7 @@ def install(monitor_module: Any, router_module: Any) -> None:
     if getattr(monitor_module, "_bbvg_personal_reminder_filter_installed", False):
         return
     original_api: Callable = monitor_module.telegram_api
-    original_process_active: Callable = monitor_module.process_active_wheels
+    original_process_active = getattr(monitor_module, "process_active_wheels", None)
 
     def telegram_api_filtered(method: str, payload: dict) -> dict:
         if method == "sendMessage" and isinstance(payload, dict):
@@ -222,17 +222,20 @@ def install(monitor_module: Any, router_module: Any) -> None:
                     }
         return original_api(method, payload)
 
-    def process_active_with_auto_dispatch(state: dict, stats: dict):
-        result = original_process_active(state, stats)
-        if _schedule_auto_participation_dispatch(state, monitor_module):
-            result["changed"] = True
-        return result
-
-    # Preserve the production contract checked by monitor.yml: the installed
-    # lifecycle remains formally attributed to wheel_lifecycle_v2.
-    process_active_with_auto_dispatch.__module__ = original_process_active.__module__
     monitor_module.telegram_api = telegram_api_filtered
-    monitor_module.process_active_wheels = process_active_with_auto_dispatch
+
+    if callable(original_process_active):
+        def process_active_with_auto_dispatch(state: dict, stats: dict):
+            result = original_process_active(state, stats)
+            if _schedule_auto_participation_dispatch(state, monitor_module):
+                result["changed"] = True
+            return result
+
+        # Preserve the production contract checked by monitor.yml: the installed
+        # lifecycle remains formally attributed to wheel_lifecycle_v2.
+        process_active_with_auto_dispatch.__module__ = original_process_active.__module__
+        monitor_module.process_active_wheels = process_active_with_auto_dispatch
+
     monitor_module._bbvg_personal_reminder_filter_installed = True
 
 
