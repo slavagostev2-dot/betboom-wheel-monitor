@@ -2,8 +2,8 @@
   "active_incidents": 0,
   "admin_panel": {
     "age_minutes": 0,
-    "last_heartbeat_at": "2026-07-19T17:03:06.613358+00:00",
-    "started_at": "2026-07-19T15:56:11.043872+00:00",
+    "last_heartbeat_at": "2026-07-19T17:04:23.914712+00:00",
+    "started_at": "2026-07-19T17:04:20.892472+00:00",
     "status": "running",
     "update_consumer": "single_getUpdates_owner",
     "version": 41
@@ -19,7 +19,7 @@
     "source_tier_last_run_at": "2026-07-19T05:10:32.302005+00:00",
     "source_tier_policy": "manual_nightly_only",
     "transport_accounted_sources": 165,
-    "transport_checked_at": "2026-07-19T15:36:07.786367+00:00",
+    "transport_checked_at": "2026-07-19T17:04:31.946152+00:00",
     "transport_domain": "telegram.me",
     "transport_status": "success"
   },
@@ -40,13 +40,13 @@
     "telegram_transport": "ok",
     "wheel_api": "ok"
   },
-  "checked_at": "2026-07-19T17:04:05.059508+00:00",
+  "checked_at": "2026-07-19T17:05:19.263633+00:00",
   "discovery": {
-    "active_size": 159,
+    "active_size": 163,
     "candidate_count": 438,
-    "catalog_size": 3,
+    "catalog_size": 2,
     "discovery_errors": 0,
-    "discovery_last_run_at": "2026-07-19T05:10:53.706482+00:00",
+    "discovery_last_run_at": "2026-07-19T17:04:08.462868+00:00",
     "domain": "telegram.me",
     "intelligence_domain": "telegram.me",
     "intelligence_last_run_at": "2026-07-19T05:11:13.999528+00:00",
@@ -63,10 +63,7 @@
       "unique_candidates": 169,
       "verified_candidates": 150,
       "workers": 12
-    },
-    "inventory_confirmation_window_hours": 6,
-    "inventory_snapshot_age_hours": 11,
-    "inventory_sync_state": "waiting_for_next_discovery_run"
+    }
   },
   "domain_compliance": {
     "checked_files": [
@@ -85,7 +82,7 @@
   "findings": [],
   "gpt_diagnostic_snapshot": {
     "active_incidents": 0,
-    "bot_panel_heartbeat": "2026-07-19T17:03:06.613358+00:00",
+    "bot_panel_heartbeat": "2026-07-19T17:04:23.914712+00:00",
     "checked_sources": 163,
     "configured_sources": 165,
     "domain": "telegram.me",
@@ -155,7 +152,7 @@
     "version": 3,
     "workflow_run_id": "29695370011"
   },
-  "monitor_age_minutes": 3,
+  "monitor_age_minutes": 4,
   "notification_integrity": {
     "algorithm": "HMAC-SHA256",
     "contains_personal_fields": false,
