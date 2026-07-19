@@ -284,24 +284,34 @@
   "active_wheels": {
     "brokeboys": {
       "action_id": 932,
+      "availability_status": "available",
       "button_token": "08d55e1dbbeadf",
       "deadline": "2026-07-19T20:14:56.211000+00:00",
-      "expires_at": "2026-07-19T22:09:04.790053+00:00",
+      "deadline_source": "api",
+      "event_id": "8a22fe08c2d5206f72c7",
+      "expires_at": "2026-07-19T22:10:48.963380+00:00",
+      "final_reminder_sent_at": "2026-07-19T20:10:47.918564+00:00",
       "first_notified_at": "2026-07-19T20:09:04.790053+00:00",
       "generation_id": "8a22fe08c2d5206f72c7",
       "identifier": "brokeboys",
-      "last_checked_at": "2026-07-19T20:09:04.790053+00:00",
-      "last_notification_at": "2026-07-19T20:09:04.790053+00:00",
+      "known_reminder_sent_at": "2026-07-19T20:10:47.918564+00:00",
+      "last_checked_at": "2026-07-19T20:10:49.307141+00:00",
+      "last_notification_at": "2026-07-19T20:10:47.918564+00:00",
+      "last_verification_at": "2026-07-19T20:10:48.963380+00:00",
+      "lifecycle_changed_at": "2026-07-19T20:09:47.708469+00:00",
+      "lifecycle_state": "scheduled_draw",
       "message_date": "2026-07-19T20:08:20+00:00",
       "message_id": 186,
       "message_text": "https://betboom.ru/freestream/brokeboys\nhttps://telegram.me/kolesaBB\nhttps://telegram.me/kolesaBB/186",
       "message_url": "https://telegram.me/kolesaBB/186",
-      "method": "активность и таймер подтверждены BetBoom",
+      "method": "состояние определяется пользователями BB V.G.",
+      "needs_manual_time": false,
       "page_excerpt": "",
+      "page_status": "active",
       "participating": false,
       "server_start_at": "2026-07-19T19:59:56.211000+00:00",
       "source": "kolesaBB",
-      "status": "preliminary",
+      "status": "unknown",
       "url": "https://betboom.ru/freestream/brokeboys",
       "verification_status": "confirmed"
     },
@@ -312,15 +322,15 @@
       "deadline": "2026-07-19T20:11:14.647000+00:00",
       "deadline_source": "api",
       "event_id": "5cdee85d47d2f2c7e0ba",
-      "expires_at": "2026-07-19T22:08:46.174307+00:00",
+      "expires_at": "2026-07-19T22:10:48.963380+00:00",
       "final_reminder_sent_at": "2026-07-19T20:06:43.632939+00:00",
       "first_notified_at": "2026-07-19T19:56:56.552158+00:00",
       "generation_id": "5cdee85d47d2f2c7e0ba",
       "identifier": "staya1",
       "known_reminder_sent_at": "2026-07-19T20:06:43.632939+00:00",
-      "last_checked_at": "2026-07-19T20:08:46.351705+00:00",
+      "last_checked_at": "2026-07-19T20:10:49.307141+00:00",
       "last_notification_at": "2026-07-19T20:06:43.632939+00:00",
-      "last_verification_at": "2026-07-19T20:08:46.174307+00:00",
+      "last_verification_at": "2026-07-19T20:10:48.963380+00:00",
       "lifecycle_changed_at": "2026-07-19T19:57:42.987562+00:00",
       "lifecycle_state": "scheduled_draw",
       "message_date": "2026-07-19T19:56:31+00:00",
@@ -1778,6 +1788,11 @@
       "status": "workflow_dispatch_scheduled",
       "wheel_key": "aunkere"
     },
+    "brokeboys": {
+      "scheduled_at": "2026-07-19T20:09:48.069009+00:00",
+      "status": "workflow_dispatch_scheduled",
+      "wheel_key": "brokeboys"
+    },
     "dyrachyo#event:29763481e1d505cf5829": {
       "scheduled_at": "2026-07-19T17:50:54.752755+00:00",
       "status": "workflow_dispatch_scheduled",
@@ -1860,17 +1875,17 @@
   "bot_commands_version": 1,
   "button_contexts": {
     "08d55e1dbbeadf": {
-      "created_at": "2026-07-19T20:09:01.965583+00:00",
+      "created_at": "2026-07-19T20:10:47.918665+00:00",
       "identifier": "brokeboys",
       "message_date": "2026-07-19T20:08:20+00:00",
       "message_id": 186,
       "message_text": "https://betboom.ru/freestream/brokeboys\nhttps://telegram.me/kolesaBB\nhttps://telegram.me/kolesaBB/186",
       "message_url": "https://telegram.me/kolesaBB/186",
-      "method": "активность и таймер подтверждены BetBoom",
+      "method": "состояние определяется пользователями BB V.G.",
       "page_excerpt": "",
       "post_key": "08d55e1dbbeadf8d74fbfad7e9f294690fe342ebd37fa9ab7ce1a53f970936c6",
       "source": "kolesaBB",
-      "status": "preliminary",
+      "status": "final_reminder",
       "url": "https://betboom.ru/freestream/brokeboys",
       "wheel_key": "brokeboys"
     },
@@ -2370,7 +2385,7 @@
     "2dfb1c4bb70cbefb8bb9c5f399144c79b8b4c2aae3159c140fac8dd9a0ab820d": "2026-07-12T18:21:22.495389+00:00",
     "2e6f7ae94c98de3088eebe520f3e71243fd7e1aca29b4c0592d87ba890e0a0e0": "2026-07-18T20:04:25.255419+00:00",
     "2f52fc4a44639bbb464c4ca1062cf5ad5096f8bbee6ff393eb58964b78fed703": "2026-07-12T17:14:34.959937+00:00",
-    "3168ed81d913642f11bc5512e5b5f0f858dd50f62bf60b52298aad608174dd09": "2026-07-19T20:08:58.154857+00:00",
+    "3168ed81d913642f11bc5512e5b5f0f858dd50f62bf60b52298aad608174dd09": "2026-07-19T20:11:00.744528+00:00",
     "31b6f832ef9a7936f0f42b3d244f67fe056122171dba41c0aa4fe0a6e4dfe7c6": "2026-07-15T14:58:34.803315+00:00",
     "337d5e32a531ec783b47cc1558196264e2cb6f1d253e04b675ab2f7d447d416a": "2026-07-18T18:22:09.018077+00:00",
     "368f3194050806b90009f9066c96ee020906036e08a45d56b4c92053fd206cea": "2026-07-12T19:22:25.149620+00:00",
@@ -2398,7 +2413,7 @@
     "49dc112f65219efb04e4098a80157a8aa5056896c7f789be692f7f1f75c3e024": "2026-07-15T11:42:46.258333+00:00",
     "4a12a976507f385f68dc21ac309d192871412ccaf0f205490b0073193472601b": "2026-07-16T12:39:14.880427+00:00",
     "4af8ad666dd040236b72e64aaefbec1d2721a3335a5a5e9fecc7e41690efd56a": "2026-07-12T19:22:25.149620+00:00",
-    "4db4117a7e345d18be6f1f880772826d65a7cac5be650538d5e37e28a8c5943f": "2026-07-19T20:09:00.964651+00:00",
+    "4db4117a7e345d18be6f1f880772826d65a7cac5be650538d5e37e28a8c5943f": "2026-07-19T20:11:03.954576+00:00",
     "4e74a82d0b15f65d66f158d885ae29cbbbd333d026bec12b958ba88925e8ffd2": "2026-07-12T18:21:24.635788+00:00",
     "502f56d7dd86b647bde13e27bb9f4b64260450db69c7646111614745e38882a9": "2026-07-15T15:13:39.498960+00:00",
     "52417b27424806de9ee611da37dd11219d4acf203d05d56237efbc5706edaa74": "2026-07-18T18:37:10.880483+00:00",
@@ -2408,7 +2423,7 @@
     "56d8372d6b4ef782d0d14210985dbd56be586c344c1d8f7c41fd8409d66191c1": "2026-07-19T05:08:08.379548+00:00",
     "58975ded89719d5d83dde9028c689bb7dfa0bd48c7c2d5051df15423b1ce2327": "2026-07-12T18:21:20.530985+00:00",
     "58ff2284b470bfbd26d63736eae2468711b2e32a309d0813028bea35429e61fd": "2026-07-12T15:09:46.050564+00:00",
-    "59aaa540753bbb3fe02d95666dec82a7afed6deb428ce2436edbdf9214d1b876": "2026-07-19T20:09:01.322074+00:00",
+    "59aaa540753bbb3fe02d95666dec82a7afed6deb428ce2436edbdf9214d1b876": "2026-07-19T20:11:04.300678+00:00",
     "5c5d65f7f2e3ccbf3465e60a317065184b88a3e05951f80f17f1cd9d4a8967ef": "2026-07-19T01:41:51.394747+00:00",
     "5c905b12205b8fb5d7efef9def1cdb2c9e99c6d6d2fddbabd5467ad0b4768795": "2026-07-12T19:22:25.149620+00:00",
     "5dac83ecae4b2518df3fc5e96bf15d035372a2d5736e826c77ec287519694c0e": "2026-07-12T18:21:18.200134+00:00",
@@ -2420,9 +2435,9 @@
     "6737615cc4c1572acb02ea9785ce1f2b0b199bb78414bef2ffc1a8720ad9381d": "2026-07-12T18:21:26.142261+00:00",
     "67468596cee62c05cc01a13454d23038f9f957f8f5f598ed3ed9c1f218d76f31": "2026-07-12T18:26:18.629262+00:00",
     "68ecfd5c2b78fc8aad89ae3426c79512d118ab1fd2f70456a2d917fc324693c9": "2026-07-12T18:21:18.578765+00:00",
-    "6a2f14deae0dbcdb829347ae5dbdade29960c501d5b350fdaa8ef955f507101e": "2026-07-19T20:08:59.413725+00:00",
+    "6a2f14deae0dbcdb829347ae5dbdade29960c501d5b350fdaa8ef955f507101e": "2026-07-19T20:11:02.393403+00:00",
     "6abfa80482c56225c61566a9750a923a1fd2728f07351eaf051bab00ce696671": "2026-07-12T19:22:25.149620+00:00",
-    "6b00b172b98917b6fceefd189212aa8f3b2f80c8242450a536ef2600cd21a22b": "2026-07-19T20:08:58.332931+00:00",
+    "6b00b172b98917b6fceefd189212aa8f3b2f80c8242450a536ef2600cd21a22b": "2026-07-19T20:11:00.918286+00:00",
     "7022b42822c37fd28f307f0b76ad4081c374b693a84bc0329342dd4ecc6a4c2e": "2026-07-14T15:21:24.287181+00:00",
     "726bafad19f028b67b1de1b5942224667a72a146cf02ec3e52feaf575a349136": "2026-07-15T20:11:15.454842+00:00",
     "7344d0cf9e308a56ec6dc472986dfb6f2b6f539153083af5d87d914e0b26ceb8": "2026-07-12T18:21:17.830064+00:00",
@@ -2431,7 +2446,7 @@
     "742555deb59598dcadacc90007ca1a63d136e5fc83e4bcc481494d6d0c6d34c7": "2026-07-19T19:56:56.552410+00:00",
     "74cc5642c469241cbefe2c1ffd60ec881114ec481507099bb1668a2c261b934f": "2026-07-12T15:10:04.958830+00:00",
     "753216c4cdbd6405ab467db83241315a264973467af5857b5eed894e3ea22b14": "2026-07-12T19:22:25.149620+00:00",
-    "78c063f7c8a4e8805afc98a9353f4ebbe5129393c676ceef276bbd860318dfbb": "2026-07-19T20:08:59.218120+00:00",
+    "78c063f7c8a4e8805afc98a9353f4ebbe5129393c676ceef276bbd860318dfbb": "2026-07-19T20:11:01.922513+00:00",
     "78c73b619786b2ad32bf086aef4c82d7010a0a6225c2050a286e72c2e8e64663": "2026-07-14T16:32:54.449669+00:00",
     "79fecd77f1ec0e6d8082765413edba53fa79be8b5920cf720dbf0e38c588a630": "2026-07-12T18:26:19.628034+00:00",
     "7a2d4eb58b48e0f1e620dab809f03843b2c7162695831c03a4a79e684176961b": "2026-07-12T18:26:20.897392+00:00",
@@ -2448,12 +2463,12 @@
     "86bc22b95fa5d63901c01975ed5b6fbe61c48b4a296e4511760993372c75a997": "2026-07-14T13:49:36.423110+00:00",
     "88c8299e5ee8cc9a3dcd210ef2fd33d4364c55bb1c5c5fff4ec223bcea9dc398": "2026-07-12T18:21:19.249137+00:00",
     "8905f28b8972c00f0cd26d9d05cac636f5cd77bed75f78de3eef3c2aac875134": "2026-07-18T18:37:09.483498+00:00",
-    "8a103eae38007e492c9623f4883cd591cec536b09ddedfde17e0bd86719e5c36": "2026-07-19T20:08:58.687119+00:00",
+    "8a103eae38007e492c9623f4883cd591cec536b09ddedfde17e0bd86719e5c36": "2026-07-19T20:11:01.304162+00:00",
     "8a8f9b437254774a3b4ff59ceb800dde6d5525ef260d98afbf559c1055aed9a5": "2026-07-12T19:22:25.149620+00:00",
     "8b58f74edbde33a5d967f43454c92214a0997ed387bfe0c79e2136145f54f2bf": "2026-07-18T10:54:32.795800+00:00",
     "8c9c4c0cdbe7e871b4e6a380cb7e45bc54592ecded6ebce1afc994f0360f2498": "2026-07-14T18:37:14.030121+00:00",
-    "8e30679e3f9ac2be1438042e1f0b16a385cf31a90ef7432d246a3e5d17ec73a1": "2026-07-19T20:08:59.041728+00:00",
-    "8f1bb9184d7f6f41c5a2e587fa8d108296c5715d1a9f6856624d20460d934d25": "2026-07-19T20:09:04.995308+00:00",
+    "8e30679e3f9ac2be1438042e1f0b16a385cf31a90ef7432d246a3e5d17ec73a1": "2026-07-19T20:11:01.669756+00:00",
+    "8f1bb9184d7f6f41c5a2e587fa8d108296c5715d1a9f6856624d20460d934d25": "2026-07-19T20:11:05.167692+00:00",
     "8f2b8bced22840914926ee7e23bfd5fe7a6ce42441a2adac29e0e7b4b370ed9e": "2026-07-15T18:04:50.318365+00:00",
     "8fc16d0d85802adea6cc607f19e13d01dea59fd7de8a6ca951af369bf29bd539": "2026-07-12T15:10:04.958824+00:00",
     "90ab32961a9de8465cd7da233a1dfc591ab3b620126d161206b66f6c5afdc202": "2026-07-12T15:09:46.050561+00:00",
@@ -2467,7 +2482,7 @@
     "99169d26a5f1dcd06f0dd425ae8e591690d21428d43ead1aa274b695c962e8ee": "2026-07-12T18:26:20.014168+00:00",
     "9923e7f98f5456dc9a50ee0385fd86242b1f18dba172d8214184b090a4feaf28": "2026-07-14T11:12:45.785395+00:00",
     "997d5b6b33d9263a510cb3b3ea28fc879a5d83f132620987ca12032e75aaad66": "2026-07-12T15:09:46.050550+00:00",
-    "9ae95bf20853aa812b91500d0645ee336f5bd521eacf889be20a53d8138e3a75": "2026-07-19T20:09:00.779124+00:00",
+    "9ae95bf20853aa812b91500d0645ee336f5bd521eacf889be20a53d8138e3a75": "2026-07-19T20:11:03.776703+00:00",
     "9b05c17fe2ee9eeb3c986dffc5626c257613eae47601402292a1b6889cbdfb4d": "2026-07-18T18:37:09.184814+00:00",
     "9c42f4efef1595bc35c746c3b4dcdd4a75a77b457ec08d0d24900c4fd90ac99d": "2026-07-16T14:32:01.976733+00:00",
     "9f1b7087c70a36f9599f46265dbcf3cbfe95e3f8503cb7050bcc4e8e23b0c251": "2026-07-12T15:09:23.912472+00:00",
@@ -2486,7 +2501,7 @@
     "aca4a20b1e7a57517e3dc79637229d3fddcf2a12c5e6a3dd5910143f7f5fe688": "2026-07-16T01:18:31.390920+00:00",
     "aea3adfe1a57495bedebb3a218ec5077f88bde12c56f61357f88e09dd39c207c": "2026-07-12T18:21:24.635725+00:00",
     "afdc537505573a5527d8cd25777303862fa976e4ad974e473e51962bd8435edb": "2026-07-12T18:26:17.348868+00:00",
-    "b09c919b14f63c03eadcb6e81891b399b88a562cfd7961e69240065d857fc793": "2026-07-19T20:08:59.588074+00:00",
+    "b09c919b14f63c03eadcb6e81891b399b88a562cfd7961e69240065d857fc793": "2026-07-19T20:11:02.569212+00:00",
     "b1a700cc4ddc4ef49c1414af86ec8f6a93f12fb64e29ae1260222773f61d89e6": "2026-07-12T15:10:04.958827+00:00",
     "b25c839020f00e90bfc22f0787f86eae61bfb4b3a0722b9ba0216d80c8d57b3b": "2026-07-15T19:20:05.403977+00:00",
     "b2a307e2097efff617d7252d89789064685150eb810c3a824f3d1211b34ef861": "2026-07-13T14:47:54.976624+00:00",
@@ -2502,23 +2517,23 @@
     "bbca12513d18e3fc90c854cb5b06bf67b29045c7c3ed2668808545920561fdb7": "2026-07-12T15:09:45.307645+00:00",
     "bcf6fab51c57df4a8e3966ceb57b0cac0ec2a7c51ae0a4f7d9dbf4c1aba13464": "2026-07-15T18:22:54.353937+00:00",
     "bdebd2fdf9bfbaa97fb15ad44ac38f4471a67a6b31298c9a1ce4924e3ddffcee": "2026-07-12T18:21:21.732319+00:00",
-    "be17fbc4502e2a1e00c25fb6d8caf757279f64a09c73056eb69d0637764053e8": "2026-07-19T20:08:59.766868+00:00",
+    "be17fbc4502e2a1e00c25fb6d8caf757279f64a09c73056eb69d0637764053e8": "2026-07-19T20:11:02.907495+00:00",
     "bedab1f70c4151e8d3d2a22b6916487d5589595ddc6dcf0e1269df00f8049ec1": "2026-07-12T19:22:25.149620+00:00",
     "c1854628934e0b14c9664e1cbf4d84e126516398cbe7d1dc7d6d69d4dea345a2": "2026-07-14T19:07:19.244345+00:00",
     "c4314f0326cb8f34f759dc26a8402d9279bd5adfa5d44610abb9fc70ef777d2a": "2026-07-12T18:21:25.206520+00:00",
     "c4d75fdd8736b5250d794e4b6f1df424db704f3acf28f67ef222ebf0a76825cc": "2026-07-12T16:26:27.168261+00:00",
     "c520430dc1382a7b7cc2cf7c979846428543d1bfa97189e3920a4ba775ba12e6": "2026-07-12T18:21:17.104918+00:00",
     "c76c303dc93e53d2ceaf12fac239b6cde7f01ac0c8f0e53dd0f179bce9d91bd7": "2026-07-15T11:18:42.831982+00:00",
-    "c7ee61acadd04ca36b7f191cf5a4a45a89a1459c90cbe9a54b4269dc94df3032": "2026-07-19T20:09:01.145882+00:00",
+    "c7ee61acadd04ca36b7f191cf5a4a45a89a1459c90cbe9a54b4269dc94df3032": "2026-07-19T20:11:04.132369+00:00",
     "c9b4f7810d1d223e3a8568450036fc7cc31393788a25c6b90bf3ef72800606b7": "2026-07-17T20:34:27.007041+00:00",
-    "c9c5731a0a08b9f2b16b735af6142caefbeb1ee7c4576006c2ca03b6fd101bc8": "2026-07-19T20:09:00.417991+00:00",
+    "c9c5731a0a08b9f2b16b735af6142caefbeb1ee7c4576006c2ca03b6fd101bc8": "2026-07-19T20:11:03.255151+00:00",
     "c9e7f459dd8b5117cc78351bffd12f73755044222ed4abe0e34cd9c91152cefe": "2026-07-12T19:22:25.149620+00:00",
-    "ca2b95b04a8ed9251b5e2a67771bd55ff7fd017b984165780f1953f0d745986b": "2026-07-19T20:09:01.501721+00:00",
-    "cd431c9415b48e4b52759ec6764ae877a9573d961f26a20e9f669980ec6bc21a": "2026-07-19T20:09:00.602363+00:00",
+    "ca2b95b04a8ed9251b5e2a67771bd55ff7fd017b984165780f1953f0d745986b": "2026-07-19T20:11:04.474929+00:00",
+    "cd431c9415b48e4b52759ec6764ae877a9573d961f26a20e9f669980ec6bc21a": "2026-07-19T20:11:03.610791+00:00",
     "cf93a1efa65615456d5e88ca4a518444cd7174c055c9c148a0c94663c64cb90c": "2026-07-18T13:22:05.043565+00:00",
     "d0b9f4dc52a155a7628e54963335119a010868d6ea86f919f58723b6c7ab36f2": "2026-07-17T21:13:47.979420+00:00",
     "d185b306d163f18944588e3ccf99dc9af77d8f22c9262b77342296fa1954e79a": "2026-07-14T20:52:27.613491+00:00",
-    "d18a2b455728f4f43747e4fa6d7cb3eb2cc5665486dc5e7e51bd4c59fb8d39de": "2026-07-19T20:08:58.508166+00:00",
+    "d18a2b455728f4f43747e4fa6d7cb3eb2cc5665486dc5e7e51bd4c59fb8d39de": "2026-07-19T20:11:01.131098+00:00",
     "d30169b28e9b2c1e142ecb5a7250d7dc9a04906e55e77558bb175a258b378abf": "2026-07-12T15:09:43.809994+00:00",
     "d4fa31f2a589420a8f824bb4bde52b3dfe93db3a76d5b704da796185c36b1a81": "2026-07-12T15:10:05.815332+00:00",
     "d569c905e0d81fcf2df45f21bb4464b7aaa607a7178ddcb9277cc337d9d05617": "2026-07-18T16:58:47.869443+00:00",
@@ -2526,10 +2541,10 @@
     "d943a649513ab3e2d93341ea34e7670992938dfab1b7d40e9db42c7e717d8051": "2026-07-18T22:10:47.299287+00:00",
     "d9bce73b7da1681ccd4617763b82c4eebd8b580d3af02c9eb467bb8b365aa070": "2026-07-15T19:02:02.100324+00:00",
     "db568f77183a1f8525c0e666d4acf763f080189b1b790533f7094ce7821a7ce1": "2026-07-12T18:21:25.206458+00:00",
-    "db76282ecc68adba320de6feebad648c4d091b4c377035f9b7ba6834c0f40832": "2026-07-19T20:08:59.949002+00:00",
+    "db76282ecc68adba320de6feebad648c4d091b4c377035f9b7ba6834c0f40832": "2026-07-19T20:11:03.082897+00:00",
     "dcd8526d5a796a844b0d66a2a8d7af3a8a712dbc22a3c9242bc221756598166e": "2026-07-18T19:22:23.700326+00:00",
     "dd5eaca4c7755e17a9f75815242cf64365542b1fb7df67be2fc40f53999c3653": "2026-07-15T19:50:14.018090+00:00",
-    "de3dc6398056ca0ebdddf1fc3934d1c13d0078af30413dac591247bbdad1753f": "2026-07-19T20:08:58.859350+00:00",
+    "de3dc6398056ca0ebdddf1fc3934d1c13d0078af30413dac591247bbdad1753f": "2026-07-19T20:11:01.496937+00:00",
     "e0a8dd6a0e7f5bf946f7164d84869c3a1702f2742d2105608673b2d2941ab003": "2026-07-12T19:22:25.149620+00:00",
     "e3e81c9209543e56eb34b57672122d428ad8cd543af3620d7735431fd7a1eade": "2026-07-16T15:23:03.976328+00:00",
     "e3eaa268624918eb21d892d104b870116d75190b48cc01b33bec544d1599da70": "2026-07-16T08:05:01.878041+00:00",
@@ -2545,7 +2560,7 @@
     "f2fbbb27412f91fad839941cfc7346a8b1f8f4090a126811996037b0bad1af13": "2026-07-18T21:28:41.930517+00:00",
     "f3f6fa16314072fbd267bf5f58c14a52165eca4a79393c79d7d9028c8cffab46": "2026-07-18T18:02:06.347251+00:00",
     "f410a25da7c3c9e7bfbb4ff40e4f06ff6e395bc588adcfe7faa2b908f7fdaf77": "2026-07-14T10:47:43.053571+00:00",
-    "f5e8d524a59be6065c1d8a204dcaefa031aed5ad0019db48670aadf19aaefe36": "2026-07-19T20:09:01.777539+00:00",
+    "f5e8d524a59be6065c1d8a204dcaefa031aed5ad0019db48670aadf19aaefe36": "2026-07-19T20:11:04.953263+00:00",
     "f62d44770527b1f1a84fae87c317f42c7206d26743aedc26e17e7230624d95c9": "2026-07-14T14:00:51.622095+00:00",
     "f6b44fe52830b4eb77617f3578ffb6ac06e693a8aa7ef21aa7d27a295155f8db": "2026-07-12T15:10:04.958811+00:00",
     "f745fbbe63b10742fc942de8021de48d13a37fb52122f515f03bd1af7d4b3241": "2026-07-18T08:47:29.633520+00:00",
@@ -3063,7 +3078,7 @@
     "brokeboys": {
       "action_id": 932,
       "generation_id": "8a22fe08c2d5206f72c7",
-      "seen_at": "2026-07-19T20:09:04.790143+00:00",
+      "seen_at": "2026-07-19T20:10:48.963380+00:00",
       "server_start_at": "2026-07-19T19:59:56.211000+00:00",
       "state": "active"
     },
@@ -3278,7 +3293,7 @@
     "staya1": {
       "action_id": 930,
       "generation_id": "5cdee85d47d2f2c7e0ba",
-      "seen_at": "2026-07-19T20:08:46.174307+00:00",
+      "seen_at": "2026-07-19T20:10:48.963380+00:00",
       "server_start_at": "2026-07-19T19:56:14.647000+00:00",
       "state": "active"
     },
@@ -3346,8 +3361,8 @@
   "wheel_api_health": {
     "alert_threshold": 3,
     "consecutive_failures": 0,
-    "last_checked_at": "2026-07-19T20:09:04.995133+00:00",
-    "last_success_at": "2026-07-19T20:09:04.995133+00:00",
+    "last_checked_at": "2026-07-19T20:11:05.167476+00:00",
+    "last_success_at": "2026-07-19T20:11:05.167476+00:00",
     "status": "ok"
   },
   "wheel_generation_observations": {
@@ -3380,13 +3395,13 @@
       "action_id": 799,
       "first_seen_at": "2026-07-19T18:09:27.155670+00:00",
       "generation_id": "0956b28d728ea096d8e9",
-      "last_seen_at": "2026-07-19T20:09:01.501603+00:00",
-      "observations": 91,
+      "last_seen_at": "2026-07-19T20:11:04.474810+00:00",
+      "observations": 93,
       "server_start_at": "2026-07-19T18:05:36.076000+00:00",
       "statuses": {
         "active": 23,
         "closed": 1,
-        "inactive": 67
+        "inactive": 69
       },
       "wheel_key": "lolly12"
     },
@@ -3447,13 +3462,13 @@
       "action_id": 909,
       "first_seen_at": "2026-07-19T16:54:33.167409+00:00",
       "generation_id": "1f791bf00bcc66143899",
-      "last_seen_at": "2026-07-19T20:09:01.321954+00:00",
-      "observations": 129,
+      "last_seen_at": "2026-07-19T20:11:04.300565+00:00",
+      "observations": 131,
       "server_start_at": "2026-07-19T16:52:26.999000+00:00",
       "statuses": {
         "active": 17,
         "closed": 1,
-        "inactive": 111
+        "inactive": 113
       },
       "wheel_key": "solo1"
     },
@@ -3502,13 +3517,13 @@
       "action_id": 936,
       "first_seen_at": "2026-07-19T17:50:07.975675+00:00",
       "generation_id": "29763481e1d505cf5829",
-      "last_seen_at": "2026-07-19T20:09:00.417875+00:00",
-      "observations": 111,
+      "last_seen_at": "2026-07-19T20:11:03.255026+00:00",
+      "observations": 113,
       "server_start_at": "2026-07-19T17:47:45.407000+00:00",
       "statuses": {
         "active": 25,
         "closed": 1,
-        "inactive": 85
+        "inactive": 87
       },
       "wheel_key": "dyrachyo"
     },
@@ -3544,13 +3559,13 @@
       "action_id": 911,
       "first_seen_at": "2026-07-19T16:25:37.264836+00:00",
       "generation_id": "3edb6d00d10689daf11a",
-      "last_seen_at": "2026-07-19T20:09:00.964524+00:00",
-      "observations": 144,
+      "last_seen_at": "2026-07-19T20:11:03.954458+00:00",
+      "observations": 146,
       "server_start_at": "2026-07-19T16:22:36.762000+00:00",
       "statuses": {
         "active": 11,
         "closed": 1,
-        "inactive": 132
+        "inactive": 134
       },
       "wheel_key": "mael"
     },
@@ -3627,13 +3642,13 @@
       "action_id": 938,
       "first_seen_at": "2026-07-19T16:19:42.303892+00:00",
       "generation_id": "5465326d8f1795da2ad6",
-      "last_seen_at": "2026-07-19T20:08:59.766727+00:00",
-      "observations": 161,
+      "last_seen_at": "2026-07-19T20:11:02.907331+00:00",
+      "observations": 163,
       "server_start_at": "2026-07-19T16:06:36.347000+00:00",
       "statuses": {
         "active": 33,
         "closed": 1,
-        "inactive": 127
+        "inactive": 129
       },
       "wheel_key": "shoke"
     },
@@ -3655,13 +3670,13 @@
       "action_id": 910,
       "first_seen_at": "2026-07-19T16:25:38.957856+00:00",
       "generation_id": "5a864dde6966ca6845a7",
-      "last_seen_at": "2026-07-19T20:09:01.145764+00:00",
-      "observations": 144,
+      "last_seen_at": "2026-07-19T20:11:04.132251+00:00",
+      "observations": 146,
       "server_start_at": "2026-07-19T16:23:43.130000+00:00",
       "statuses": {
         "active": 11,
         "closed": 1,
-        "inactive": 132
+        "inactive": 134
       },
       "wheel_key": "koma"
     },
@@ -3669,13 +3684,13 @@
       "action_id": 934,
       "first_seen_at": "2026-07-19T16:19:38.855798+00:00",
       "generation_id": "5ac0944427bbae953362",
-      "last_seen_at": "2026-07-19T20:09:00.779006+00:00",
-      "observations": 156,
+      "last_seen_at": "2026-07-19T20:11:03.776584+00:00",
+      "observations": 158,
       "server_start_at": "2026-07-19T16:17:43.781000+00:00",
       "statuses": {
         "active": 23,
         "closed": 1,
-        "inactive": 132
+        "inactive": 134
       },
       "wheel_key": "risen"
     },
@@ -3683,11 +3698,11 @@
       "action_id": 930,
       "first_seen_at": "2026-07-19T19:56:56.552254+00:00",
       "generation_id": "5cdee85d47d2f2c7e0ba",
-      "last_seen_at": "2026-07-19T20:08:46.174307+00:00",
-      "observations": 25,
+      "last_seen_at": "2026-07-19T20:10:48.963380+00:00",
+      "observations": 29,
       "server_start_at": "2026-07-19T19:56:14.647000+00:00",
       "statuses": {
-        "active": 25
+        "active": 29
       },
       "wheel_key": "staya1"
     },
@@ -3723,13 +3738,13 @@
       "action_id": 901,
       "first_seen_at": "2026-07-19T15:04:37.359471+00:00",
       "generation_id": "663944fc0612226c002d",
-      "last_seen_at": "2026-07-19T20:08:59.041613+00:00",
-      "observations": 219,
+      "last_seen_at": "2026-07-19T20:11:01.669637+00:00",
+      "observations": 221,
       "server_start_at": "2026-07-19T15:02:57.397000+00:00",
       "statuses": {
         "active": 23,
         "closed": 1,
-        "inactive": 195
+        "inactive": 197
       },
       "wheel_key": "mantis2"
     },
@@ -3737,13 +3752,13 @@
       "action_id": 935,
       "first_seen_at": "2026-07-19T15:51:46.209080+00:00",
       "generation_id": "6d0bb02138bb2596cfcc",
-      "last_seen_at": "2026-07-19T20:09:00.602226+00:00",
-      "observations": 202,
+      "last_seen_at": "2026-07-19T20:11:03.610644+00:00",
+      "observations": 204,
       "server_start_at": "2026-07-19T15:27:05.974000+00:00",
       "statuses": {
         "active": 65,
         "closed": 1,
-        "inactive": 136
+        "inactive": 138
       },
       "wheel_key": "kontora"
     },
@@ -3765,13 +3780,13 @@
       "action_id": 927,
       "first_seen_at": "2026-07-19T19:01:44.046598+00:00",
       "generation_id": "7509401faf926cb90418",
-      "last_seen_at": "2026-07-19T20:09:04.995188+00:00",
-      "observations": 72,
+      "last_seen_at": "2026-07-19T20:11:05.167555+00:00",
+      "observations": 74,
       "server_start_at": "2026-07-19T18:36:17.206000+00:00",
       "statuses": {
         "active": 9,
         "closed": 1,
-        "inactive": 62
+        "inactive": 64
       },
       "wheel_key": "muggy05"
     },
@@ -3807,13 +3822,13 @@
       "action_id": 921,
       "first_seen_at": "2026-07-19T14:56:12.655465+00:00",
       "generation_id": "7b4214917ad7f30b96ba",
-      "last_seen_at": "2026-07-19T20:08:59.948886+00:00",
-      "observations": 221,
+      "last_seen_at": "2026-07-19T20:11:03.082786+00:00",
+      "observations": 223,
       "server_start_at": "2026-07-19T14:54:11.476000+00:00",
       "statuses": {
         "active": 13,
         "closed": 1,
-        "inactive": 207
+        "inactive": 209
       },
       "wheel_key": "stray"
     },
@@ -3860,13 +3875,13 @@
       "action_id": 920,
       "first_seen_at": "2026-07-19T10:55:03.389149+00:00",
       "generation_id": "87cace99c097471fd48e",
-      "last_seen_at": "2026-07-19T20:08:58.154713+00:00",
-      "observations": 674,
+      "last_seen_at": "2026-07-19T20:11:00.744351+00:00",
+      "observations": 676,
       "server_start_at": "2026-07-19T10:52:00.674000+00:00",
       "statuses": {
         "active": 605,
         "closed": 1,
-        "inactive": 68
+        "inactive": 70
       },
       "wheel_key": "papa"
     },
@@ -3874,11 +3889,11 @@
       "action_id": 932,
       "first_seen_at": "2026-07-19T20:09:04.790143+00:00",
       "generation_id": "8a22fe08c2d5206f72c7",
-      "last_seen_at": "2026-07-19T20:09:04.790143+00:00",
-      "observations": 1,
+      "last_seen_at": "2026-07-19T20:10:48.963380+00:00",
+      "observations": 5,
       "server_start_at": "2026-07-19T19:59:56.211000+00:00",
       "statuses": {
-        "active": 1
+        "active": 5
       },
       "wheel_key": "brokeboys"
     },
@@ -3886,11 +3901,11 @@
       "action_id": 912,
       "first_seen_at": "2026-07-19T19:01:35.904997+00:00",
       "generation_id": "93136404dbc3fe886761",
-      "last_seen_at": "2026-07-19T20:09:01.777380+00:00",
-      "observations": 68,
+      "last_seen_at": "2026-07-19T20:11:04.953121+00:00",
+      "observations": 70,
       "server_start_at": "2026-07-19T18:28:46.419000+00:00",
       "statuses": {
-        "inactive": 68
+        "inactive": 70
       },
       "wheel_key": "adam"
     },
@@ -3898,13 +3913,13 @@
       "action_id": 931,
       "first_seen_at": "2026-07-19T14:53:29.228909+00:00",
       "generation_id": "9c97c4fb308131d690b2",
-      "last_seen_at": "2026-07-19T20:08:59.413612+00:00",
-      "observations": 231,
+      "last_seen_at": "2026-07-19T20:11:02.393264+00:00",
+      "observations": 233,
       "server_start_at": "2026-07-19T14:47:59.437000+00:00",
       "statuses": {
         "active": 27,
         "closed": 1,
-        "inactive": 203
+        "inactive": 205
       },
       "wheel_key": "avice"
     },
@@ -3980,13 +3995,13 @@
       "action_id": 796,
       "first_seen_at": "2026-07-19T17:00:38.927857+00:00",
       "generation_id": "c37870280420a4b5fb6d",
-      "last_seen_at": "2026-07-19T20:08:59.218005+00:00",
-      "observations": 121,
+      "last_seen_at": "2026-07-19T20:11:01.922368+00:00",
+      "observations": 123,
       "server_start_at": "2026-07-19T17:00:13.636000+00:00",
       "statuses": {
         "active": 13,
         "closed": 1,
-        "inactive": 107
+        "inactive": 109
       },
       "wheel_key": "shik6"
     },
@@ -4008,13 +4023,13 @@
       "action_id": 776,
       "first_seen_at": "2026-07-19T15:40:41.571443+00:00",
       "generation_id": "c8933345a9fc43f215f0",
-      "last_seen_at": "2026-07-19T20:08:58.859227+00:00",
-      "observations": 293,
+      "last_seen_at": "2026-07-19T20:11:01.496821+00:00",
+      "observations": 295,
       "server_start_at": "2026-07-19T15:39:33.610000+00:00",
       "statuses": {
         "active": 225,
         "closed": 1,
-        "inactive": 67
+        "inactive": 69
       },
       "wheel_key": "shadowkekw"
     },
@@ -4022,13 +4037,13 @@
       "action_id": 928,
       "first_seen_at": "2026-07-19T14:24:12.640805+00:00",
       "generation_id": "d3bd44bc415bb19ee891",
-      "last_seen_at": "2026-07-19T20:08:58.687006+00:00",
-      "observations": 303,
+      "last_seen_at": "2026-07-19T20:11:01.304045+00:00",
+      "observations": 305,
       "server_start_at": "2026-07-19T14:23:57.495000+00:00",
       "statuses": {
         "active": 113,
         "closed": 1,
-        "inactive": 189
+        "inactive": 191
       },
       "wheel_key": "hooch66"
     },
@@ -4083,13 +4098,13 @@
       "action_id": 929,
       "first_seen_at": "2026-07-19T19:01:35.732986+00:00",
       "generation_id": "ecae85e10ed41f1c4357",
-      "last_seen_at": "2026-07-19T20:08:58.508051+00:00",
-      "observations": 72,
+      "last_seen_at": "2026-07-19T20:11:01.130963+00:00",
+      "observations": 74,
       "server_start_at": "2026-07-19T18:51:05.416000+00:00",
       "statuses": {
         "active": 9,
         "closed": 1,
-        "inactive": 62
+        "inactive": 64
       },
       "wheel_key": "staya"
     },
@@ -4097,13 +4112,13 @@
       "action_id": 937,
       "first_seen_at": "2026-07-19T17:58:15.324081+00:00",
       "generation_id": "ef82ebd7b7f693e7388b",
-      "last_seen_at": "2026-07-19T20:08:58.332817+00:00",
-      "observations": 113,
+      "last_seen_at": "2026-07-19T20:11:00.918167+00:00",
+      "observations": 115,
       "server_start_at": "2026-07-19T17:57:17.279000+00:00",
       "statuses": {
         "active": 45,
         "closed": 1,
-        "inactive": 67
+        "inactive": 69
       },
       "wheel_key": "aunkere"
     },
@@ -4111,13 +4126,13 @@
       "action_id": 908,
       "first_seen_at": "2026-07-19T15:17:52.751377+00:00",
       "generation_id": "f1423e3c4943f4869e4f",
-      "last_seen_at": "2026-07-19T20:08:59.587959+00:00",
-      "observations": 218,
+      "last_seen_at": "2026-07-19T20:11:02.569105+00:00",
+      "observations": 220,
       "server_start_at": "2026-07-19T15:15:40.497000+00:00",
       "statuses": {
         "active": 43,
         "closed": 1,
-        "inactive": 174
+        "inactive": 176
       },
       "wheel_key": "solotg"
     },
