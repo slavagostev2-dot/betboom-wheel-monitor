@@ -32,8 +32,24 @@ def enabled() -> bool:
     }
 
 
+def _storage_state_raw() -> str:
+    direct = os.getenv("BETBOOM_STORAGE_STATE_JSON", "").strip()
+    if direct:
+        return direct
+
+    # GitHub Actions repository secrets are size-limited. Large Playwright
+    # storage-state JSON can therefore be stored in two secrets and joined
+    # byte-for-byte at runtime. Do not strip either part: a split may occur
+    # inside a JSON string where whitespace is significant.
+    part1 = os.getenv("BETBOOM_STORAGE_STATE_JSON_PART1", "")
+    part2 = os.getenv("BETBOOM_STORAGE_STATE_JSON_PART2", "")
+    if not part1 and not part2:
+        return ""
+    return part1 + part2
+
+
 def _storage_state() -> dict[str, Any] | None:
-    raw = os.getenv("BETBOOM_STORAGE_STATE_JSON", "").strip()
+    raw = _storage_state_raw()
     if not raw:
         return None
     try:
@@ -70,7 +86,7 @@ def participate(url: str) -> ParticipationResult:
         return ParticipationResult(
             False,
             "not_configured",
-            "не задан корректный BETBOOM_STORAGE_STATE_JSON",
+            "не задан корректный BETBOOM_STORAGE_STATE_JSON или две части PART1/PART2",
         )
 
     try:
