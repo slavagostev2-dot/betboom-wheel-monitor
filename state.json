@@ -140,24 +140,32 @@
   "active_wheels": {
     "zonertg10": {
       "action_id": 695,
+      "availability_status": "available",
       "button_token": "2d5668217da6e0",
       "deadline": "2026-07-19T18:06:47.078000+00:00",
+      "deadline_source": "api",
+      "event_id": "221ef4ffd15b304f6a03",
       "expires_at": "2026-07-19T18:36:47.078000+00:00",
       "first_notified_at": "2026-07-19T08:15:07.698791+00:00",
       "generation_id": "221ef4ffd15b304f6a03",
       "identifier": "zonertg10",
-      "last_checked_at": "2026-07-19T08:15:07.698791+00:00",
+      "last_checked_at": "2026-07-19T08:17:57.901583+00:00",
       "last_notification_at": "2026-07-19T08:15:07.698791+00:00",
+      "last_verification_at": "2026-07-19T08:17:57.681628+00:00",
+      "lifecycle_changed_at": "2026-07-19T08:17:57.681594+00:00",
+      "lifecycle_state": "scheduled_draw",
       "message_date": "2026-07-19T08:12:01+00:00",
       "message_id": 35640,
       "message_text": "ЗАЛЕТАЙ НА КОЛЕСО ФРИБЕТОВ:\nКЛИКАЙ ДЛЯ УЧАСТИЯ\nКЛИКАЙ ДЛЯ УЧАСТИЯ\nКЛИКАЙ ДЛЯ УЧАСТИЯ\n10 ПО 1000 20 ПО 500\nИТОГИ ЧЕРЕЗ 10 ЧАСОВ\nhttps://telegram.me/mechanogun\nhttps://telegram.me/mechanogun/35640\nhttps://betboom.ru/freestream/zonertg10?utm_content=zoner&utm_source=freestream\nhttps://betboom.ru/freestream/zonertg10?utm_content=zoner&amp;utm_source=freestream",
       "message_url": "https://telegram.me/mechanogun/35640",
-      "method": "активность и таймер подтверждены BetBoom",
+      "method": "состояние определяется пользователями BB V.G.",
+      "needs_manual_time": false,
       "page_excerpt": "",
+      "page_status": "active",
       "participating": false,
       "server_start_at": "2026-07-19T08:06:47.078000+00:00",
       "source": "mechanogun",
-      "status": "preliminary",
+      "status": "unknown",
       "url": "https://betboom.ru/freestream/zonertg10",
       "verification_status": "confirmed"
     }
@@ -386,6 +394,14 @@
       "health_changed": false,
       "state_changed": true,
       "stats_changed": false,
+      "status": "applied"
+    },
+    "3f4d8cba83ad4e32bc5da65e073f971d": {
+      "action": "record_personal_vote",
+      "applied_at": "2026-07-19T08:17:57.681546+00:00",
+      "health_changed": false,
+      "state_changed": false,
+      "stats_changed": true,
       "status": "applied"
     },
     "405da2b0c55b44acb0b7cb281e2463e9": {
@@ -954,6 +970,7 @@
     "3b4bb81e23cf49daa0c945e230c453ac": "2026-07-18T12:14:38.283603+00:00",
     "3e2a642611c6405589bd1918b5f2f8a3": "2026-07-15T15:01:31.514705+00:00",
     "3ee3b0c3e1104127bb8818c84fdb470e": "2026-07-15T11:45:41.561556+00:00",
+    "3f4d8cba83ad4e32bc5da65e073f971d": "2026-07-19T08:17:57.681546+00:00",
     "405da2b0c55b44acb0b7cb281e2463e9": "2026-07-18T12:14:38.283992+00:00",
     "4895775f09ca4807a0002c2edfa112bc": "2026-07-18T12:14:38.283463+00:00",
     "49ada0740cd1481eaec369807f7c31bb": "2026-07-15T11:51:44.513126+00:00",
@@ -1343,7 +1360,7 @@
     "wonderbelkaML",
     "zortelad"
   ],
-  "last_admin_action_applied_at": "2026-07-18T22:37:43.685605+00:00",
+  "last_admin_action_applied_at": "2026-07-19T08:17:57.681574+00:00",
   "last_automatic_status_at": "2026-07-17T06:35:52.571822+00:00",
   "last_heartbeat_at": "2026-07-19T03:25:40.484402+00:00",
   "last_run_kind": "schedule",
@@ -2180,7 +2197,7 @@
     "zonertg10": {
       "action_id": 695,
       "generation_id": "221ef4ffd15b304f6a03",
-      "seen_at": "2026-07-19T08:15:07.698890+00:00",
+      "seen_at": "2026-07-19T08:17:57.681628+00:00",
       "server_start_at": "2026-07-19T08:06:47.078000+00:00",
       "state": "active"
     },
@@ -2212,8 +2229,8 @@
   "wheel_api_health": {
     "alert_threshold": 3,
     "consecutive_failures": 0,
-    "last_checked_at": "2026-07-19T08:15:06.431746+00:00",
-    "last_success_at": "2026-07-19T08:15:06.431746+00:00",
+    "last_checked_at": "2026-07-19T08:17:57.681628+00:00",
+    "last_success_at": "2026-07-19T08:17:57.681628+00:00",
     "status": "ok"
   },
   "wheel_generation_observations": {
@@ -2302,11 +2319,11 @@
       "action_id": 695,
       "first_seen_at": "2026-07-19T08:15:07.698890+00:00",
       "generation_id": "221ef4ffd15b304f6a03",
-      "last_seen_at": "2026-07-19T08:15:07.698890+00:00",
-      "observations": 1,
+      "last_seen_at": "2026-07-19T08:17:57.681628+00:00",
+      "observations": 3,
       "server_start_at": "2026-07-19T08:06:47.078000+00:00",
       "statuses": {
-        "active": 1
+        "active": 3
       },
       "wheel_key": "zonertg10"
     },
