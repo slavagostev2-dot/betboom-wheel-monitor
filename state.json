@@ -252,6 +252,11 @@
   "active_wheels": {
     "dyrachyo": {
       "action_id": 936,
+      "auto_participation_checked_at": "2026-07-19T17:51:27.703921+00:00",
+      "auto_participation_error": "кнопка «Участвую»/«Участвовать»/«Принять участие» не найдена",
+      "auto_participation_manual_notification_at": "2026-07-19T17:51:27.703921+00:00",
+      "auto_participation_retry_allowed": false,
+      "auto_participation_status": "button_not_found",
       "availability_status": "available",
       "button_token": "c9c5731a0a08b9",
       "deadline": "2026-07-19T18:02:45.407000+00:00",
@@ -1790,6 +1795,16 @@
   },
   "auto_participation_event_mode_initialized_at": "2026-07-19T17:14:18.523241+00:00",
   "auto_participation_events": {
+    "dyrachyo#event:29763481e1d505cf5829": {
+      "attempted_at": "2026-07-19T17:51:27.703921+00:00",
+      "detail": "кнопка «Участвую»/«Участвовать»/«Принять участие» не найдена",
+      "manual_notification_at": "2026-07-19T17:51:27.703921+00:00",
+      "manual_notification_detail": "801600922",
+      "manual_notification_sent": true,
+      "retry_allowed": false,
+      "status": "button_not_found",
+      "wheel_key": "dyrachyo"
+    },
     "neret#event:4624e3ac9ebe9ca3e88e": {
       "recorded_at": "2026-07-19T17:14:18.523241+00:00",
       "status": "baseline_existing",
