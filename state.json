@@ -104,6 +104,14 @@
       "suppress_until": "2026-07-18T14:08:35.566000+00:00",
       "url": "https://betboom.ru/freestream/smurf5"
     },
+    "smurf6": {
+      "alerted_at": "2026-07-19T12:52:27.557349+00:00",
+      "deadline": "2026-07-19T13:11:15.102000+00:00",
+      "identifier": "smurf6",
+      "lifecycle_rule": "timer",
+      "suppress_until": "2026-07-19T13:11:15.102000+00:00",
+      "url": "https://betboom.ru/freestream/smurf6"
+    },
     "solo": {
       "alerted_at": "2026-07-18T12:24:52.335598+00:00",
       "deadline": "2026-07-18T12:36:33.252000+00:00",
@@ -162,39 +170,6 @@
     }
   },
   "active_wheels": {
-    "betnews": {
-      "action_id": 914,
-      "availability_status": "available",
-      "button_token": "337730427c31a9",
-      "deadline": "2026-07-19T12:51:32.211000+00:00",
-      "deadline_source": "api",
-      "event_id": "3f25bb4f67ef91ddd74a",
-      "expires_at": "2026-07-19T14:49:15.351628+00:00",
-      "final_reminder_sent_at": "2026-07-19T12:49:14.902792+00:00",
-      "first_notified_at": "2026-07-19T12:40:26.862247+00:00",
-      "generation_id": "3f25bb4f67ef91ddd74a",
-      "identifier": "betnews",
-      "known_reminder_sent_at": "2026-07-19T12:49:14.902792+00:00",
-      "last_checked_at": "2026-07-19T12:49:16.365098+00:00",
-      "last_notification_at": "2026-07-19T12:49:14.902792+00:00",
-      "last_verification_at": "2026-07-19T12:49:15.351628+00:00",
-      "lifecycle_changed_at": "2026-07-19T12:43:11.950810+00:00",
-      "lifecycle_state": "scheduled_draw",
-      "message_date": "2026-07-19T12:38:47+00:00",
-      "message_id": 160,
-      "message_text": "https://betboom.ru/freestream/betnews\nhttps://telegram.me/kolesaBB\nhttps://telegram.me/kolesaBB/160",
-      "message_url": "https://telegram.me/kolesaBB/160",
-      "method": "состояние определяется пользователями BB V.G.",
-      "needs_manual_time": false,
-      "page_excerpt": "",
-      "page_status": "active",
-      "participating": false,
-      "server_start_at": "2026-07-19T11:51:32.211000+00:00",
-      "source": "kolesaBB",
-      "status": "unknown",
-      "url": "https://betboom.ru/freestream/betnews",
-      "verification_status": "confirmed"
-    },
     "neret": {
       "action_id": 919,
       "availability_status": "available",
@@ -206,9 +181,9 @@
       "first_notified_at": "2026-07-19T11:04:24.139072+00:00",
       "generation_id": "4624e3ac9ebe9ca3e88e",
       "identifier": "neret",
-      "last_checked_at": "2026-07-19T12:49:16.365098+00:00",
+      "last_checked_at": "2026-07-19T12:52:16.990043+00:00",
       "last_notification_at": "2026-07-19T11:04:24.139072+00:00",
-      "last_verification_at": "2026-07-19T12:49:15.351628+00:00",
+      "last_verification_at": "2026-07-19T12:52:16.058345+00:00",
       "lifecycle_changed_at": "2026-07-19T11:06:58.296827+00:00",
       "lifecycle_state": "scheduled_draw",
       "message_date": "2026-07-19T11:03:35+00:00",
@@ -237,9 +212,9 @@
       "first_notified_at": "2026-07-19T10:55:03.388997+00:00",
       "generation_id": "87cace99c097471fd48e",
       "identifier": "papa",
-      "last_checked_at": "2026-07-19T12:49:16.365098+00:00",
+      "last_checked_at": "2026-07-19T12:52:16.990043+00:00",
       "last_notification_at": "2026-07-19T10:55:03.388997+00:00",
-      "last_verification_at": "2026-07-19T12:49:15.351628+00:00",
+      "last_verification_at": "2026-07-19T12:52:16.058345+00:00",
       "lifecycle_changed_at": "2026-07-19T10:57:54.434251+00:00",
       "lifecycle_state": "scheduled_draw",
       "message_date": "2026-07-19T10:52:08+00:00",
@@ -257,6 +232,29 @@
       "url": "https://betboom.ru/freestream/papa",
       "verification_status": "confirmed"
     },
+    "smurf6": {
+      "action_id": 858,
+      "button_token": "a9dc8ece0d034e",
+      "deadline": "2026-07-19T13:11:15.102000+00:00",
+      "expires_at": "2026-07-19T14:52:27.556916+00:00",
+      "first_notified_at": "2026-07-19T12:52:27.556916+00:00",
+      "generation_id": "510f5d5e7fb4ec5fc264",
+      "identifier": "smurf6",
+      "last_checked_at": "2026-07-19T12:52:27.556916+00:00",
+      "last_notification_at": "2026-07-19T12:52:27.556916+00:00",
+      "message_date": "2026-07-19T12:51:33+00:00",
+      "message_id": 2129,
+      "message_text": "GRAND FINAL EWC вот-вот начнётся! Запускаем КОЛЕСО ФРИБЕТОВ ОТ\nBETBOOM\nдля вас\n🥰\nhttps://betboom.ru/freestream/smurf6\nОткрывай через браузер, нажимай участвовать и получай Фрибеты\nhttps://telegram.me/smurf_gigachad\nhttps://telegram.me/smurf_gigachad/2129\nhttps://betboom-link.ru/link/jDK499/?erid:KW2aPRYdr5QoPXHUGki5XsnCPRdbMowBCPH484RRyUo9DsMDcXepyqz277vUUJoAw\nhttps://betboom.ru/freestream/smurf6",
+      "message_url": "https://telegram.me/smurf_gigachad/2129",
+      "method": "активность и таймер подтверждены BetBoom",
+      "page_excerpt": "",
+      "participating": false,
+      "server_start_at": "2026-07-19T12:51:15.102000+00:00",
+      "source": "smurf_gigachad",
+      "status": "preliminary",
+      "url": "https://betboom.ru/freestream/smurf6",
+      "verification_status": "confirmed"
+    },
     "zonertg10": {
       "action_id": 695,
       "availability_status": "available",
@@ -268,9 +266,9 @@
       "first_notified_at": "2026-07-19T08:15:07.698791+00:00",
       "generation_id": "221ef4ffd15b304f6a03",
       "identifier": "zonertg10",
-      "last_checked_at": "2026-07-19T12:49:16.365098+00:00",
+      "last_checked_at": "2026-07-19T12:52:16.990043+00:00",
       "last_notification_at": "2026-07-19T08:15:07.698791+00:00",
-      "last_verification_at": "2026-07-19T12:49:15.351628+00:00",
+      "last_verification_at": "2026-07-19T12:52:16.058345+00:00",
       "lifecycle_changed_at": "2026-07-19T08:17:57.681594+00:00",
       "lifecycle_state": "scheduled_draw",
       "message_date": "2026-07-19T08:12:01+00:00",
@@ -1292,21 +1290,6 @@
       "url": "https://betboom.ru/freestream/zonertg10",
       "wheel_key": "zonertg10"
     },
-    "337730427c31a9": {
-      "created_at": "2026-07-19T12:49:14.902909+00:00",
-      "identifier": "betnews",
-      "message_date": "2026-07-19T12:38:47+00:00",
-      "message_id": 160,
-      "message_text": "https://betboom.ru/freestream/betnews\nhttps://telegram.me/kolesaBB\nhttps://telegram.me/kolesaBB/160",
-      "message_url": "https://telegram.me/kolesaBB/160",
-      "method": "состояние определяется пользователями BB V.G.",
-      "page_excerpt": "",
-      "post_key": "337730427c31a977e25a704dfc987299ae086e8eea2f74de9a4a05fc2ad083c7",
-      "source": "kolesaBB",
-      "status": "final_reminder",
-      "url": "https://betboom.ru/freestream/betnews",
-      "wheel_key": "betnews"
-    },
     "9923e7f98f5456": {
       "created_at": "2026-07-14T20:07:18.780290+00:00",
       "identifier": "krat",
@@ -1336,6 +1319,21 @@
       "status": "preliminary",
       "url": "https://betboom.ru/freestream/bolt",
       "wheel_key": "bolt"
+    },
+    "a9dc8ece0d034e": {
+      "created_at": "2026-07-19T12:52:26.176981+00:00",
+      "identifier": "smurf6",
+      "message_date": "2026-07-19T12:51:33+00:00",
+      "message_id": 2129,
+      "message_text": "GRAND FINAL EWC вот-вот начнётся! Запускаем КОЛЕСО ФРИБЕТОВ ОТ\nBETBOOM\nдля вас\n🥰\nhttps://betboom.ru/freestream/smurf6\nОткрывай через браузер, нажимай участвовать и получай Фрибеты\nhttps://telegram.me/smurf_gigachad\nhttps://telegram.me/smurf_gigachad/2129\nhttps://betboom-link.ru/link/jDK499/?erid:KW2aPRYdr5QoPXHUGki5XsnCPRdbMowBCPH484RRyUo9DsMDcXepyqz277vUUJoAw\nhttps://betboom.ru/freestream/smurf6",
+      "message_url": "https://telegram.me/smurf_gigachad/2129",
+      "method": "активность и таймер подтверждены BetBoom",
+      "page_excerpt": "",
+      "post_key": "a9dc8ece0d034e26b7f9bf37084e8ee967189386b94b894d866538793ae46a66",
+      "source": "smurf_gigachad",
+      "status": "preliminary",
+      "url": "https://betboom.ru/freestream/smurf6",
+      "wheel_key": "smurf6"
     },
     "d722c5451f3f6f": {
       "created_at": "2026-07-14T20:17:21.236600+00:00",
@@ -1667,7 +1665,7 @@
       "expires_at": "2026-07-19T18:16:17.775701+00:00",
       "first_seen_at": "2026-07-18T18:16:17.775701+00:00",
       "identifier": "mantis2",
-      "last_checked_at": "2026-07-19T12:46:24.564941+00:00",
+      "last_checked_at": "2026-07-19T12:52:26.042387+00:00",
       "message_date": "2026-07-18T17:28:23+00:00",
       "message_id": 7531,
       "message_text": "✔️\nКОЛЕСО!\nhttps://betboom.ru/freestream/mantis2\nhttps://betboom.ru/freestream/mantis2\nhttps://betboom.ru/freestream/mantis2\nhttps://telegram.me/kzmantis\nhttps://betboom.ru/freestream/mantis2\nhttps://telegram.me/kzmantis/7531",
@@ -1796,7 +1794,7 @@
     "3d77a7f5fec3bdd2c14a5079048f1bc6e784d170552a866fd6606edc15132fa2": "2026-07-12T19:22:25.149620+00:00",
     "3ddbc93b73f7446d4a83187cbc999ca64961140faead7aad7a4b87329d59fc6f": "2026-07-14T12:59:56.774245+00:00",
     "3fa237ebea84c75d45600bc50568920eea0f8d83553d4b06435f973ebd4e12d7": "2026-07-14T18:32:15.194369+00:00",
-    "438b7b6d0748af90ee374afef170e9a2f69f2dd153851758e79c97a9f5e932b0": "2026-07-19T12:49:25.435450+00:00",
+    "438b7b6d0748af90ee374afef170e9a2f69f2dd153851758e79c97a9f5e932b0": "2026-07-19T12:52:27.707396+00:00",
     "44d4bb427649c3b9d83143b13be90cc0010d829b90b78ae197a2ecdb941fbfb3": "2026-07-15T14:44:08.658604+00:00",
     "453c6dba9d529bbeff63b25cd39b50697c18e649655891b527f001a77b994131": "2026-07-12T18:26:20.387317+00:00",
     "45a3454e4d3c7808108ca4d6a008584b696edf48972c7b5a8b779fe1c2814725": "2026-07-18T18:37:10.658228+00:00",
@@ -1877,6 +1875,7 @@
     "a802e40766e7f7a38052bb3df5b50cfa4b8ec978d4352e9ac7884e4b6e182fce": "2026-07-18T18:37:10.879317+00:00",
     "a83c6554b193401cc197d686361e0f952191a1ba151f45911c82c29a3e1bb989": "2026-07-14T13:29:47.673053+00:00",
     "a8f7dd87cc0cdc07bdddf11a677b1368e083e425f63ff16edf867872b802f606": "2026-07-15T20:05:10.742848+00:00",
+    "a9dc8ece0d034e26b7f9bf37084e8ee967189386b94b894d866538793ae46a66": "2026-07-19T12:52:27.557395+00:00",
     "abb4dc47ee8a83d1c8f153afadc25330a1303d2f42a3914efd89d4a0fdf98bf4": "2026-07-12T18:21:19.884502+00:00",
     "ac500d1bdc835067412d010448ba956009ea82dfbffb4d96b97b3a26861f744a": "2026-07-12T19:22:25.149620+00:00",
     "aca4a20b1e7a57517e3dc79637229d3fddcf2a12c5e6a3dd5910143f7f5fe688": "2026-07-16T01:18:31.390920+00:00",
@@ -2170,9 +2169,11 @@
       "url": "https://betboom.ru/freestream/smurf5"
     },
     "smurf6": {
-      "alerted_at": "2026-07-12T18:26:18.629281+00:00",
+      "alerted_at": "2026-07-19T12:52:27.557382+00:00",
+      "deadline": "2026-07-19T13:11:15.102000+00:00",
       "identifier": "smurf6",
-      "suppress_until": "2026-07-13T18:26:18.629281+00:00",
+      "lifecycle_rule": "timer",
+      "suppress_until": "2026-07-19T13:11:15.102000+00:00",
       "url": "https://betboom.ru/freestream/smurf6"
     },
     "solo": {
@@ -2320,10 +2321,11 @@
     },
     "betnews": {
       "action_id": 914,
+      "closed_at": "2026-07-19T12:52:16.058345+00:00",
       "generation_id": "3f25bb4f67ef91ddd74a",
-      "seen_at": "2026-07-19T12:49:15.351628+00:00",
+      "seen_at": "2026-07-19T12:52:16.058345+00:00",
       "server_start_at": "2026-07-19T11:51:32.211000+00:00",
-      "state": "active"
+      "state": "closed"
     },
     "cct1": {
       "action_id": 837,
@@ -2372,7 +2374,7 @@
     "neret": {
       "action_id": 919,
       "generation_id": "4624e3ac9ebe9ca3e88e",
-      "seen_at": "2026-07-19T12:49:15.351628+00:00",
+      "seen_at": "2026-07-19T12:52:16.058345+00:00",
       "server_start_at": "2026-07-19T11:01:22.086000+00:00",
       "state": "active"
     },
@@ -2387,7 +2389,7 @@
     "papa": {
       "action_id": 920,
       "generation_id": "87cace99c097471fd48e",
-      "seen_at": "2026-07-19T12:49:15.351628+00:00",
+      "seen_at": "2026-07-19T12:52:16.058345+00:00",
       "server_start_at": "2026-07-19T10:52:00.674000+00:00",
       "state": "active"
     },
@@ -2418,6 +2420,13 @@
       "seen_at": "2026-07-18T14:10:11.719382+00:00",
       "server_start_at": "2026-07-18T13:48:35.566000+00:00",
       "state": "closed"
+    },
+    "smurf6": {
+      "action_id": 858,
+      "generation_id": "510f5d5e7fb4ec5fc264",
+      "seen_at": "2026-07-19T12:52:27.557258+00:00",
+      "server_start_at": "2026-07-19T12:51:15.102000+00:00",
+      "state": "active"
     },
     "solo": {
       "action_id": 883,
@@ -2474,7 +2483,7 @@
     "zonertg10": {
       "action_id": 695,
       "generation_id": "221ef4ffd15b304f6a03",
-      "seen_at": "2026-07-19T12:49:15.351628+00:00",
+      "seen_at": "2026-07-19T12:52:16.058345+00:00",
       "server_start_at": "2026-07-19T08:06:47.078000+00:00",
       "state": "active"
     },
@@ -2514,8 +2523,8 @@
   "wheel_api_health": {
     "alert_threshold": 3,
     "consecutive_failures": 0,
-    "last_checked_at": "2026-07-19T12:49:25.435272+00:00",
-    "last_success_at": "2026-07-19T12:49:25.435272+00:00",
+    "last_checked_at": "2026-07-19T12:52:27.707226+00:00",
+    "last_success_at": "2026-07-19T12:52:27.707226+00:00",
     "status": "ok"
   },
   "wheel_generation_observations": {
@@ -2604,11 +2613,11 @@
       "action_id": 695,
       "first_seen_at": "2026-07-19T08:15:07.698890+00:00",
       "generation_id": "221ef4ffd15b304f6a03",
-      "last_seen_at": "2026-07-19T12:49:15.351628+00:00",
-      "observations": 185,
+      "last_seen_at": "2026-07-19T12:52:16.058345+00:00",
+      "observations": 187,
       "server_start_at": "2026-07-19T08:06:47.078000+00:00",
       "statuses": {
-        "active": 185
+        "active": 187
       },
       "wheel_key": "zonertg10"
     },
@@ -2644,11 +2653,12 @@
       "action_id": 914,
       "first_seen_at": "2026-07-19T12:40:26.862334+00:00",
       "generation_id": "3f25bb4f67ef91ddd74a",
-      "last_seen_at": "2026-07-19T12:49:15.351628+00:00",
-      "observations": 7,
+      "last_seen_at": "2026-07-19T12:52:16.058345+00:00",
+      "observations": 8,
       "server_start_at": "2026-07-19T11:51:32.211000+00:00",
       "statuses": {
-        "active": 7
+        "active": 7,
+        "closed": 1
       },
       "wheel_key": "betnews"
     },
@@ -2670,11 +2680,11 @@
       "action_id": 919,
       "first_seen_at": "2026-07-19T11:04:24.139200+00:00",
       "generation_id": "4624e3ac9ebe9ca3e88e",
-      "last_seen_at": "2026-07-19T12:49:15.351628+00:00",
-      "observations": 71,
+      "last_seen_at": "2026-07-19T12:52:16.058345+00:00",
+      "observations": 73,
       "server_start_at": "2026-07-19T11:01:22.086000+00:00",
       "statuses": {
-        "active": 71
+        "active": 73
       },
       "wheel_key": "neret"
     },
@@ -2692,17 +2702,29 @@
       },
       "wheel_key": "solo"
     },
+    "510f5d5e7fb4ec5fc264162b": {
+      "action_id": 858,
+      "first_seen_at": "2026-07-19T12:52:27.557258+00:00",
+      "generation_id": "510f5d5e7fb4ec5fc264",
+      "last_seen_at": "2026-07-19T12:52:27.557258+00:00",
+      "observations": 1,
+      "server_start_at": "2026-07-19T12:51:15.102000+00:00",
+      "statuses": {
+        "active": 1
+      },
+      "wheel_key": "smurf6"
+    },
     "596c86c51cd42ce3e4a38422": {
       "action_id": 879,
       "first_seen_at": "2026-07-19T11:01:06.363415+00:00",
       "generation_id": "596c86c51cd42ce3e4a3",
-      "last_seen_at": "2026-07-19T12:49:25.435349+00:00",
-      "observations": 46,
+      "last_seen_at": "2026-07-19T12:52:27.707291+00:00",
+      "observations": 47,
       "server_start_at": "2026-07-19T11:00:01.156000+00:00",
       "statuses": {
         "active": 19,
         "closed": 1,
-        "inactive": 26
+        "inactive": 27
       },
       "wheel_key": "zzone"
     },
@@ -2780,11 +2802,11 @@
       "action_id": 920,
       "first_seen_at": "2026-07-19T10:55:03.389149+00:00",
       "generation_id": "87cace99c097471fd48e",
-      "last_seen_at": "2026-07-19T12:49:15.351628+00:00",
-      "observations": 77,
+      "last_seen_at": "2026-07-19T12:52:16.058345+00:00",
+      "observations": 79,
       "server_start_at": "2026-07-19T10:52:00.674000+00:00",
       "statuses": {
-        "active": 77
+        "active": 79
       },
       "wheel_key": "papa"
     },
@@ -2845,11 +2867,11 @@
     "da71fc0c38393dd4a2631fd1": {
       "action_id": 901,
       "first_seen_at": "2026-07-18T18:16:17.775569+00:00",
-      "last_seen_at": "2026-07-19T12:46:24.564793+00:00",
-      "observations": 186,
+      "last_seen_at": "2026-07-19T12:52:26.042238+00:00",
+      "observations": 187,
       "server_start_at": null,
       "statuses": {
-        "not_started": 186
+        "not_started": 187
       },
       "wheel_key": "mantis2"
     },
@@ -3062,16 +3084,6 @@
     }
   },
   "wheel_publications": {
-    "betnews": [
-      {
-        "has_future_availability": false,
-        "has_future_deadline": false,
-        "message_date": "2026-07-19T12:38:47+00:00",
-        "message_id": 160,
-        "message_url": "https://telegram.me/kolesaBB/160",
-        "source": "kolesaBB"
-      }
-    ],
     "bolt": [
       {
         "has_future_availability": false,
@@ -3100,6 +3112,16 @@
         "message_id": 12202,
         "message_url": "https://telegram.me/PAPAdota2/12202",
         "source": "PAPAdota2"
+      }
+    ],
+    "smurf6": [
+      {
+        "has_future_availability": false,
+        "has_future_deadline": false,
+        "message_date": "2026-07-19T12:51:33+00:00",
+        "message_id": 2129,
+        "message_url": "https://telegram.me/smurf_gigachad/2129",
+        "source": "smurf_gigachad"
       }
     ],
     "zonertg10": [
