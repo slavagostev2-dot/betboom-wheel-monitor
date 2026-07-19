@@ -13,7 +13,10 @@ _SUCCESS_RE = re.compile(
     r"вы\s+(?:уже\s+)?участвуете|уже\s+участвуете|участие\s+отмечено)",
     re.IGNORECASE,
 )
-_BUTTON_RE = re.compile(r"^(?:участвую|принять\s+участие)$", re.IGNORECASE)
+_BUTTON_RE = re.compile(
+    r"^\s*(?:участвую|участвовать|принять\s+участие)\s*$",
+    re.IGNORECASE,
+)
 
 
 @dataclass(frozen=True)
@@ -128,13 +131,13 @@ def participate(url: str) -> ParticipationResult:
                 return ParticipationResult(
                     False,
                     "button_not_found",
-                    "кнопка «Участвую»/«Принять участие» не найдена",
+                    "кнопка «Участвую»/«Участвовать»/«Принять участие» не найдена",
                 )
 
             buttons.first.click(timeout=timeout_ms)
             try:
                 page.wait_for_function(
-                    """() => /участие\\s+(принято|подтверждено|зарегистрировано)|вы\\s+(уже\\s+)?участвуете|уже\\s+участвуете|участие\\s+отмечено/i.test(document.body?.innerText || '')""",
+                    """() => /участие\s+(принято|подтверждено|зарегистрировано)|вы\s+(уже\s+)?участвуете|уже\s+участвуете|участие\s+отмечено/i.test(document.body?.innerText || '')""",
                     timeout=timeout_ms,
                 )
             except PlaywrightTimeoutError:
