@@ -196,7 +196,7 @@ def main() -> None:
     require_text("telegram_monitor.py", ("from monitor import main", "raise SystemExit(main())"))
     require_text("self_test.py", ("import monitor", "def main()"))
     require_text("public_sources.txt", ("narodCast", "kolesaBB", "betboomteamcs2"))
-    require_text("source_catalog.txt", ("Ночной мониторинг", "7 дней"))
+    require_text("source_catalog.txt", ("Ночной мониторинг", "вручную одобренные"))
     require_text(
         ".github/workflows/daily-report.yml",
         ("BB V.G. summaries", "period:", "daily_report.py"),
