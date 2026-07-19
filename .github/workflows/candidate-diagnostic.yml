@@ -1,9 +1,8 @@
 name: Candidate diagnostic
 
 on:
-  push:
-    branches:
-      - fix/betboom-candidate-promotion-and-vote-idempotency
+  pull_request:
+    branches: [main]
 
 permissions:
   contents: read
@@ -12,16 +11,19 @@ jobs:
   inspect:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
-        with:
-          persist-credentials: false
+      - name: Fetch candidate data
+        env:
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          curl -fsSL "https://raw.githubusercontent.com/${GITHUB_REPOSITORY}/${HEAD_SHA}/intelligence_state.json" -o /tmp/intelligence_state.json
+          curl -fsSL "https://raw.githubusercontent.com/${GITHUB_REPOSITORY}/${HEAD_SHA}/public_sources.txt" -o /tmp/public_sources.txt
       - name: Print BetBoom-linked candidates
         run: |
           python - <<'PY'
           import json, re
           from pathlib import Path
-          state=json.loads(Path('intelligence_state.json').read_text(encoding='utf-8'))
-          known={x.strip().lstrip('@').casefold() for x in Path('public_sources.txt').read_text(encoding='utf-8').splitlines() if x.strip() and not x.lstrip().startswith('#')}
+          state=json.loads(Path('/tmp/intelligence_state.json').read_text(encoding='utf-8'))
+          known={x.strip().lstrip('@').casefold() for x in Path('/tmp/public_sources.txt').read_text(encoding='utf-8').splitlines() if x.strip() and not x.lstrip().startswith('#')}
           competitors=re.compile(r'(fonbet|betcity|pari|ligastavok|liga_stavok|winline|leon|melbet|xbet|1xbet|olimp|marathon)',re.I)
           rows=[]
           for key,raw in state.get('candidates',{}).items():
