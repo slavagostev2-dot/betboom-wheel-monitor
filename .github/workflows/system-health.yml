@@ -7,6 +7,7 @@ on:
     paths:
       - "system_checks.py"
       - "system_checks_v2.py"
+      - "system_checks_v3.py"
       - "incident_manager.py"
       - "telegram_transport.py"
       - "notification_router.py"
@@ -90,7 +91,7 @@ jobs:
           TELEGRAM_WEB_DOMAIN: telegram.me
         run: |
           python -m compileall -q bbvg
-          python -m py_compile system_checks.py system_checks_v2.py incident_manager.py telegram_transport.py notification_router.py notification_integrity_v2.py wheel_publications_v2.py rating_policy.py chapter2_unified_logic.py admin_action_queue.py chapter1_stability.py bot_notification_state.py bot_private_state.py privacy_retention.py monitor.py monitor_data.py admin_panel_runtime_v36.py admin_panel_runtime_v37.py admin_panel_runtime_v38.py telegram_ui.py chapter4_acceptance.py
+          python -m py_compile system_checks.py system_checks_v2.py system_checks_v3.py incident_manager.py telegram_transport.py notification_router.py notification_integrity_v2.py wheel_publications_v2.py rating_policy.py chapter2_unified_logic.py admin_action_queue.py chapter1_stability.py bot_notification_state.py bot_private_state.py privacy_retention.py monitor.py monitor_data.py admin_panel_runtime_v36.py admin_panel_runtime_v37.py admin_panel_runtime_v38.py telegram_ui.py chapter4_acceptance.py
           python -m bbvg.bot.storage
           python -m bbvg.bot.users
           python notification_integrity_v2.py --self-test
@@ -98,7 +99,7 @@ jobs:
           python bot_notification_state.py
           python telegram_transport.py
           python incident_manager.py
-          python system_checks_v2.py --self-test
+          python system_checks_v3.py --self-test
           python chapter1_stability.py
           python - <<'PY'
           import bot_notification_state
@@ -119,7 +120,7 @@ jobs:
           ADMIN_PANEL_MAX_AGE_MINUTES: "20"
           REQUEST_TIMEOUT_SECONDS: "15"
           DISPLAY_TIMEZONE: Asia/Barnaul
-        run: python system_checks_v2.py
+        run: python system_checks_v3.py
 
       - name: Save incident state
         shell: bash
