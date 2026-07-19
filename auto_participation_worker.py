@@ -2,13 +2,13 @@ from __future__ import annotations
 
 import json
 
-import bbvg_monitor_main as runtime
+import bbvg_monitor_runtime as runtime
 import betboom_auto_participation
 
 
 def main() -> int:
     monitor = runtime.monitor
-    state = monitor.load_state()
+    state = monitor.load_state_without_pending()
     result = betboom_auto_participation.process_new_wheel_events(state, monitor)
     if bool(result.get("changed")):
         monitor.save_state(state)
