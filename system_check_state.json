@@ -40,7 +40,7 @@
     "telegram_transport": "ok",
     "wheel_api": "ok"
   },
-  "checked_at": "2026-07-19T16:41:37.116408+00:00",
+  "checked_at": "2026-07-19T16:42:15.531359+00:00",
   "discovery": {
     "active_size": 159,
     "candidate_count": 438,
@@ -155,7 +155,7 @@
     "version": 3,
     "workflow_run_id": "29693830929"
   },
-  "monitor_age_minutes": 10,
+  "monitor_age_minutes": 11,
   "notification_integrity": {
     "algorithm": "HMAC-SHA256",
     "contains_personal_fields": false,
