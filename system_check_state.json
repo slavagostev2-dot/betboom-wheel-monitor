@@ -1,7 +1,7 @@
 {
   "active_incidents": 0,
   "admin_panel": {
-    "age_minutes": 0,
+    "age_minutes": 1,
     "last_heartbeat_at": "2026-07-19T23:41:05.607916+00:00",
     "started_at": "2026-07-19T22:35:23.036629+00:00",
     "status": "running",
@@ -19,7 +19,7 @@
     "source_tier_last_run_at": "2026-07-19T05:10:32.302005+00:00",
     "source_tier_policy": "manual_nightly_only",
     "transport_accounted_sources": 166,
-    "transport_checked_at": "2026-07-19T17:06:17.868919+00:00",
+    "transport_checked_at": "2026-07-19T23:41:45.230293+00:00",
     "transport_domain": "telegram.me",
     "transport_status": "success"
   },
@@ -40,7 +40,7 @@
     "telegram_transport": "ok",
     "wheel_api": "ok"
   },
-  "checked_at": "2026-07-19T23:41:47.322330+00:00",
+  "checked_at": "2026-07-19T23:42:16.405618+00:00",
   "discovery": {
     "active_size": 164,
     "candidate_count": 453,
@@ -152,7 +152,7 @@
     "version": 3,
     "workflow_run_id": "29699784553"
   },
-  "monitor_age_minutes": 13,
+  "monitor_age_minutes": 14,
   "notification_integrity": {
     "algorithm": "HMAC-SHA256",
     "contains_personal_fields": false,
