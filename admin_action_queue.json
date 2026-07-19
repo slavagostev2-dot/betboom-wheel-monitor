@@ -492,6 +492,12 @@
       "sequence": 31,
       "value": "papa|2026-07-16T20:46:03.370092+00:00"
     },
+    "81e26ee406a643cf928d4dc18043fe83": {
+      "action": "record_personal_vote",
+      "created_at": "2026-07-19T18:10:00.872463+00:00",
+      "sequence": 150,
+      "value": "{\"actor\":\"vote_3092cd8d69b74beb8bd2579cd902c714\",\"event_key\":\"lolly12#generation:0956b28d728ea096d8e9\",\"role\":\"owner\",\"sources\":[\"kolesaBB\"],\"weight\":5,\"wheel_key\":\"lolly12\"}"
+    },
     "82a26ddc6fc740d98ad56f126a02b313": {
       "action": "participate_token",
       "created_at": "2026-07-16T12:39:47.906021+00:00",
@@ -896,5 +902,5 @@
     }
   },
   "format": "bbvg-admin-action-queue-v1",
-  "sequence": 149
+  "sequence": 150
 }
