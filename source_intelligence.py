@@ -180,15 +180,6 @@ def candidate_is_relevant(entry: dict[str, Any]) -> bool:
     return bool(entry.get("context_signals") or entry.get("username_signals"))
 
 
-def candidate_is_nightly_eligible(entry: dict[str, Any]) -> bool:
-    return bool(
-        entry.get("public") is True
-        and entry.get("status") == "ok"
-        and entry.get("relevance_status") == "relevant"
-        and candidate_is_relevant(entry)
-    )
-
-
 def verify_candidate(username: str) -> dict[str, Any]:
     result: dict[str, Any] = {
         "public": False,

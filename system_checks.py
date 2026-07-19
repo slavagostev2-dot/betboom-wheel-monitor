@@ -765,11 +765,11 @@ def check_automation_state(details: dict[str, Any], findings: list[dict[str, Any
         "recorded_configured_sources": configured_total,
         "missing_sources": len(missing),
     }
-    if tier.get("policy") != "seven_day_dynamic_primary_and_nightly":
+    if tier.get("policy") != "manual_nightly_only":
         findings.append(finding(
             "source_tier_policy_stale",
-            "Не включён автоматический ночной режим источников",
-            "Состояние обслуживания не подтверждает перенос после 7 полных дней без колёс.",
+            "Не подтверждён ручной режим ночных источников",
+            "Состояние обслуживания должно запрещать автоматическое пополнение ночного списка.",
             severity="critical",
         ))
     if tier_at is None or now_utc() - tier_at > timedelta(hours=36):
