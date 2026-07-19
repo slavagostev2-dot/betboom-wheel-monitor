@@ -164,24 +164,32 @@
   "active_wheels": {
     "neret": {
       "action_id": 919,
+      "availability_status": "available",
       "button_token": "13d99285f2b4ce",
       "deadline": "2026-07-19T20:01:22.086000+00:00",
+      "deadline_source": "api",
+      "event_id": "4624e3ac9ebe9ca3e88e",
       "expires_at": "2026-07-19T20:31:22.086000+00:00",
       "first_notified_at": "2026-07-19T11:04:24.139072+00:00",
       "generation_id": "4624e3ac9ebe9ca3e88e",
       "identifier": "neret",
-      "last_checked_at": "2026-07-19T11:04:24.139072+00:00",
+      "last_checked_at": "2026-07-19T11:06:59.456993+00:00",
       "last_notification_at": "2026-07-19T11:04:24.139072+00:00",
+      "last_verification_at": "2026-07-19T11:06:58.296887+00:00",
+      "lifecycle_changed_at": "2026-07-19T11:06:58.296827+00:00",
+      "lifecycle_state": "scheduled_draw",
       "message_date": "2026-07-19T11:03:35+00:00",
       "message_id": 4048,
       "message_text": "ЗАЛЕТАЙ НА КОЛЕСО ФРИБЕТОВ: 10 000 РАЗЫГРАЮ\n💎\n💎\n💎\nКЛИКАЙ ДЛЯ УЧАСТИЯ\nКЛИКАЙ ДЛЯ УЧАСТИЯ\nКЛИКАЙ ДЛЯ УЧАСТИЯ\nВСЁ ПОКАЗЫВАЮ НА СТРИМЕ:\nhttps://www.twitch.tv/neret17\nhttps://www.twitch.tv/neret17\nhttps://www.twitch.tv/neret17\nЕсли не зареган на BetBoom:\nhttps://cyberbb.ru/tw/neret\nИТОГИ В КОНЦЕ СТРИМА\n❗️\n❗️\n❗️\nhttps://telegram.me/NeretCast\nhttps://telegram.me/NeretCast/4048\nhttps://betboom.ru/freestream/neret\nhttps://www.twitch.tv/neret17\nhttps://cyberbb.ru/tw/neret",
       "message_url": "https://telegram.me/NeretCast/4048",
-      "method": "активность и таймер подтверждены BetBoom",
+      "method": "состояние определяется пользователями BB V.G.",
+      "needs_manual_time": false,
       "page_excerpt": "",
+      "page_status": "active",
       "participating": false,
       "server_start_at": "2026-07-19T11:01:22.086000+00:00",
       "source": "NeretCast",
-      "status": "preliminary",
+      "status": "unknown",
       "url": "https://betboom.ru/freestream/neret",
       "verification_status": "confirmed"
     },
@@ -196,9 +204,9 @@
       "first_notified_at": "2026-07-19T10:55:03.388997+00:00",
       "generation_id": "87cace99c097471fd48e",
       "identifier": "papa",
-      "last_checked_at": "2026-07-19T11:03:57.322063+00:00",
+      "last_checked_at": "2026-07-19T11:06:59.456993+00:00",
       "last_notification_at": "2026-07-19T10:55:03.388997+00:00",
-      "last_verification_at": "2026-07-19T11:03:56.408292+00:00",
+      "last_verification_at": "2026-07-19T11:06:58.296887+00:00",
       "lifecycle_changed_at": "2026-07-19T10:57:54.434251+00:00",
       "lifecycle_state": "scheduled_draw",
       "message_date": "2026-07-19T10:52:08+00:00",
@@ -227,9 +235,9 @@
       "first_notified_at": "2026-07-19T08:15:07.698791+00:00",
       "generation_id": "221ef4ffd15b304f6a03",
       "identifier": "zonertg10",
-      "last_checked_at": "2026-07-19T11:03:57.322063+00:00",
+      "last_checked_at": "2026-07-19T11:06:59.456993+00:00",
       "last_notification_at": "2026-07-19T08:15:07.698791+00:00",
-      "last_verification_at": "2026-07-19T11:03:56.408292+00:00",
+      "last_verification_at": "2026-07-19T11:06:58.296887+00:00",
       "lifecycle_changed_at": "2026-07-19T08:17:57.681594+00:00",
       "lifecycle_state": "scheduled_draw",
       "message_date": "2026-07-19T08:12:01+00:00",
@@ -254,13 +262,13 @@
       "deadline": "2026-07-19T11:30:01.156000+00:00",
       "deadline_source": "api",
       "event_id": "596c86c51cd42ce3e4a3",
-      "expires_at": "2026-07-19T13:03:56.408292+00:00",
+      "expires_at": "2026-07-19T13:06:58.296887+00:00",
       "first_notified_at": "2026-07-19T11:01:06.363311+00:00",
       "generation_id": "596c86c51cd42ce3e4a3",
       "identifier": "zzone",
-      "last_checked_at": "2026-07-19T11:03:57.322063+00:00",
+      "last_checked_at": "2026-07-19T11:06:59.456993+00:00",
       "last_notification_at": "2026-07-19T11:01:06.363311+00:00",
-      "last_verification_at": "2026-07-19T11:03:56.408292+00:00",
+      "last_verification_at": "2026-07-19T11:06:58.296887+00:00",
       "lifecycle_changed_at": "2026-07-19T11:03:56.408233+00:00",
       "lifecycle_state": "scheduled_draw",
       "message_date": "2026-07-19T11:00:03+00:00",
@@ -630,6 +638,14 @@
       "applied_at": "2026-07-16T08:23:00.969096+00:00",
       "health_changed": false,
       "state_changed": true,
+      "stats_changed": true,
+      "status": "applied"
+    },
+    "6236b498822b49cbbe0150e80be48a76": {
+      "action": "record_personal_vote",
+      "applied_at": "2026-07-19T11:06:58.296779+00:00",
+      "health_changed": false,
+      "state_changed": false,
       "stats_changed": true,
       "status": "applied"
     },
@@ -1111,6 +1127,7 @@
     "5ba28cef57b2482e9c260e67992e4305": "2026-07-18T12:14:38.283321+00:00",
     "5e8f1059f96f4bac9b9e6b5c146b6e5b": "2026-07-18T12:14:38.283576+00:00",
     "5f86a89e1d674ba49e4aeeac81a88417": "2026-07-16T08:23:00.969096+00:00",
+    "6236b498822b49cbbe0150e80be48a76": "2026-07-19T11:06:58.296779+00:00",
     "652605784b944b879bbe854e4a10a53f": "2026-07-18T12:14:38.283549+00:00",
     "676e68422d844063a3b26d085ff358bc": "2026-07-16T02:13:17.424376+00:00",
     "67a80c58ee10476083b8fef0f99fdb44": "2026-07-18T12:14:38.284090+00:00",
@@ -1532,7 +1549,7 @@
     "wonderbelkaML",
     "zortelad"
   ],
-  "last_admin_action_applied_at": "2026-07-19T11:03:56.408209+00:00",
+  "last_admin_action_applied_at": "2026-07-19T11:06:58.296807+00:00",
   "last_automatic_status_at": "2026-07-17T06:35:52.571822+00:00",
   "last_heartbeat_at": "2026-07-19T09:27:19.256292+00:00",
   "last_run_kind": "schedule",
@@ -2300,7 +2317,7 @@
     "neret": {
       "action_id": 919,
       "generation_id": "4624e3ac9ebe9ca3e88e",
-      "seen_at": "2026-07-19T11:04:24.139200+00:00",
+      "seen_at": "2026-07-19T11:06:58.296887+00:00",
       "server_start_at": "2026-07-19T11:01:22.086000+00:00",
       "state": "active"
     },
@@ -2315,7 +2332,7 @@
     "papa": {
       "action_id": 920,
       "generation_id": "87cace99c097471fd48e",
-      "seen_at": "2026-07-19T11:03:56.408292+00:00",
+      "seen_at": "2026-07-19T11:06:58.296887+00:00",
       "server_start_at": "2026-07-19T10:52:00.674000+00:00",
       "state": "active"
     },
@@ -2402,7 +2419,7 @@
     "zonertg10": {
       "action_id": 695,
       "generation_id": "221ef4ffd15b304f6a03",
-      "seen_at": "2026-07-19T11:03:56.408292+00:00",
+      "seen_at": "2026-07-19T11:06:58.296887+00:00",
       "server_start_at": "2026-07-19T08:06:47.078000+00:00",
       "state": "active"
     },
@@ -2425,7 +2442,7 @@
     "zzone": {
       "action_id": 879,
       "generation_id": "596c86c51cd42ce3e4a3",
-      "seen_at": "2026-07-19T11:03:56.408292+00:00",
+      "seen_at": "2026-07-19T11:06:58.296887+00:00",
       "server_start_at": "2026-07-19T11:00:01.156000+00:00",
       "state": "active"
     },
@@ -2441,8 +2458,8 @@
   "wheel_api_health": {
     "alert_threshold": 3,
     "consecutive_failures": 0,
-    "last_checked_at": "2026-07-19T11:04:22.679583+00:00",
-    "last_success_at": "2026-07-19T11:04:22.679583+00:00",
+    "last_checked_at": "2026-07-19T11:06:58.296887+00:00",
+    "last_success_at": "2026-07-19T11:06:58.296887+00:00",
     "status": "ok"
   },
   "wheel_generation_observations": {
@@ -2531,11 +2548,11 @@
       "action_id": 695,
       "first_seen_at": "2026-07-19T08:15:07.698890+00:00",
       "generation_id": "221ef4ffd15b304f6a03",
-      "last_seen_at": "2026-07-19T11:03:56.408292+00:00",
-      "observations": 115,
+      "last_seen_at": "2026-07-19T11:06:58.296887+00:00",
+      "observations": 117,
       "server_start_at": "2026-07-19T08:06:47.078000+00:00",
       "statuses": {
-        "active": 115
+        "active": 117
       },
       "wheel_key": "zonertg10"
     },
@@ -2585,11 +2602,11 @@
       "action_id": 919,
       "first_seen_at": "2026-07-19T11:04:24.139200+00:00",
       "generation_id": "4624e3ac9ebe9ca3e88e",
-      "last_seen_at": "2026-07-19T11:04:24.139200+00:00",
-      "observations": 1,
+      "last_seen_at": "2026-07-19T11:06:58.296887+00:00",
+      "observations": 3,
       "server_start_at": "2026-07-19T11:01:22.086000+00:00",
       "statuses": {
-        "active": 1
+        "active": 3
       },
       "wheel_key": "neret"
     },
@@ -2611,11 +2628,11 @@
       "action_id": 879,
       "first_seen_at": "2026-07-19T11:01:06.363415+00:00",
       "generation_id": "596c86c51cd42ce3e4a3",
-      "last_seen_at": "2026-07-19T11:03:56.408292+00:00",
-      "observations": 3,
+      "last_seen_at": "2026-07-19T11:06:58.296887+00:00",
+      "observations": 5,
       "server_start_at": "2026-07-19T11:00:01.156000+00:00",
       "statuses": {
-        "active": 3
+        "active": 5
       },
       "wheel_key": "zzone"
     },
@@ -2692,11 +2709,11 @@
       "action_id": 920,
       "first_seen_at": "2026-07-19T10:55:03.389149+00:00",
       "generation_id": "87cace99c097471fd48e",
-      "last_seen_at": "2026-07-19T11:03:56.408292+00:00",
-      "observations": 7,
+      "last_seen_at": "2026-07-19T11:06:58.296887+00:00",
+      "observations": 9,
       "server_start_at": "2026-07-19T10:52:00.674000+00:00",
       "statuses": {
-        "active": 7
+        "active": 9
       },
       "wheel_key": "papa"
     },
