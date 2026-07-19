@@ -87,10 +87,11 @@ def participate(url: str) -> ParticipationResult:
         5000,
         min(60000, int(os.getenv("BETBOOM_PARTICIPATION_TIMEOUT_MS", "20000"))),
     )
+    browser_channel = os.getenv("BETBOOM_BROWSER_CHANNEL", "chrome").strip() or "chrome"
 
     try:
         with sync_playwright() as playwright:
-            browser = playwright.chromium.launch(headless=True)
+            browser = playwright.chromium.launch(headless=True, channel=browser_channel)
             context = browser.new_context(storage_state=storage_state)
             page = context.new_page()
             page.set_default_timeout(timeout_ms)
