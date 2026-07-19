@@ -1,0 +1,41 @@
+name: VK wheel notification
+
+on:
+  workflow_dispatch:
+    inputs:
+      message:
+        description: "Plain-text wheel notification"
+        required: true
+        type: string
+      url:
+        description: "BetBoom wheel URL"
+        required: false
+        type: string
+      event_identity:
+        description: "Stable wheel event identity"
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  send:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          ref: main
+          persist-credentials: false
+
+      - name: Send wheel notification to VK
+        env:
+          VK_GROUP_TOKEN: ${{ secrets.VK_GROUP_TOKEN }}
+          VK_WHEEL_PEER_IDS: ${{ secrets.VK_WHEEL_PEER_IDS }}
+          VK_API_VERSION: "5.199"
+          VK_WHEEL_MESSAGE: ${{ inputs.message }}
+          VK_WHEEL_URL: ${{ inputs.url }}
+          VK_WHEEL_EVENT_ID: ${{ inputs.event_identity }}
+        run: python3 vk_wheel_notifications.py --send-env
