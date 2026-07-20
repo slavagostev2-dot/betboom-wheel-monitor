@@ -18,7 +18,7 @@
     "finding_kinds": [
       "monitor_stale"
     ],
-    "generated_at": "2026-07-20T10:34:51.134895+00:00",
+    "generated_at": "2026-07-20T10:35:14.434459+00:00",
     "impact": "Часть функций BB V.G. может работать неполно до устранения подтверждённой причины.",
     "mode": "rules",
     "model": "",
@@ -63,7 +63,7 @@
     "telegram_transport": "ok",
     "wheel_api": "ok"
   },
-  "checked_at": "2026-07-20T10:34:50.174975+00:00",
+  "checked_at": "2026-07-20T10:35:13.500165+00:00",
   "discovery": {
     "active_size": 164,
     "candidate_count": 462,
