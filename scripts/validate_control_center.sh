@@ -1,6 +1,23 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+release_sha="$(head -n 1 control_center_release.txt | tr -d '\r\n[:space:]')"
+if [[ ! "$release_sha" =~ ^[0-9a-fA-F]{40}$ ]]; then
+  echo "control_center_release.txt must contain the exact 40-character release commit SHA" >&2
+  exit 1
+fi
+if ! git cat-file -e "${release_sha}^{commit}" 2>/dev/null; then
+  echo "Release commit is not available in checkout: ${release_sha}" >&2
+  exit 1
+fi
+git checkout --detach "$release_sha"
+validated_sha="$(git rev-parse HEAD)"
+if [[ "$validated_sha" != "$release_sha" ]]; then
+  echo "Release SHA mismatch: expected ${release_sha}, got ${validated_sha}" >&2
+  exit 1
+fi
+echo "Validating exact Control Center release SHA: ${validated_sha}"
+
 python -m compileall -q bbvg
 python -m py_compile \
   admin_bot.py admin_action.py admin_action_v2.py admin_action_v3.py admin_action_queue.py chapter1_stability.py admin_runtime.py \
