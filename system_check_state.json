@@ -1,7 +1,7 @@
 {
   "active_incidents": 1,
   "admin_panel": {
-    "age_minutes": 1,
+    "age_minutes": 3,
     "last_heartbeat_at": "2026-07-20T10:33:34.197343+00:00",
     "started_at": "2026-07-20T10:33:34.197332+00:00",
     "status": "running",
@@ -18,7 +18,7 @@
     "finding_kinds": [
       "monitor_stale"
     ],
-    "generated_at": "2026-07-20T10:35:14.434459+00:00",
+    "generated_at": "2026-07-20T10:36:48.440543+00:00",
     "impact": "Часть функций BB V.G. может работать неполно до устранения подтверждённой причины.",
     "mode": "rules",
     "model": "",
@@ -63,7 +63,7 @@
     "telegram_transport": "ok",
     "wheel_api": "ok"
   },
-  "checked_at": "2026-07-20T10:35:13.500165+00:00",
+  "checked_at": "2026-07-20T10:36:47.635141+00:00",
   "discovery": {
     "active_size": 164,
     "candidate_count": 462,
@@ -107,7 +107,7 @@
   "finding_count": 1,
   "findings": [
     {
-      "detail": "Последняя итерация была 29 минут назад.",
+      "detail": "Последняя итерация была 31 минут назад.",
       "kind": "monitor_stale",
       "severity": "critical",
       "subject": "",
@@ -188,7 +188,7 @@
     "version": 3,
     "workflow_run_id": "29731646626"
   },
-  "monitor_age_minutes": 29,
+  "monitor_age_minutes": 31,
   "notification_integrity": {
     "algorithm": "HMAC-SHA256",
     "contains_personal_fields": false,
