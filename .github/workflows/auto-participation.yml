@@ -2,6 +2,10 @@ name: BB V.G. auto participation
 
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "auto_participation_test.trigger"
 
 permissions:
   contents: read
