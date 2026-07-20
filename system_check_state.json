@@ -1,25 +1,25 @@
 {
-  "active_incidents": 0,
+  "active_incidents": 1,
   "admin_panel": {
     "age_minutes": 1,
-    "last_heartbeat_at": "2026-07-19T23:41:05.607916+00:00",
-    "started_at": "2026-07-19T22:35:23.036629+00:00",
+    "last_heartbeat_at": "2026-07-20T05:16:44.951194+00:00",
+    "started_at": "2026-07-20T04:06:09.285739+00:00",
     "status": "running",
     "update_consumer": "single_getUpdates_owner",
     "version": 41
   },
   "automation_state": {
     "expected_nightly_sources": 2,
-    "expected_primary_sources": 164,
-    "expected_total_sources": 166,
+    "expected_primary_sources": 165,
+    "expected_total_sources": 167,
     "missing_sources": 0,
-    "recorded_configured_sources": 166,
+    "recorded_configured_sources": 167,
     "recorded_nightly_sources": 2,
-    "recorded_primary_sources": 164,
-    "source_tier_last_run_at": "2026-07-19T05:10:32.302005+00:00",
+    "recorded_primary_sources": 165,
+    "source_tier_last_run_at": "2026-07-19T23:46:32.636190+00:00",
     "source_tier_policy": "manual_nightly_only",
-    "transport_accounted_sources": 166,
-    "transport_checked_at": "2026-07-19T23:41:45.230293+00:00",
+    "transport_accounted_sources": 167,
+    "transport_checked_at": "2026-07-20T04:00:28.722207+00:00",
     "transport_domain": "telegram.me",
     "transport_status": "success"
   },
@@ -30,7 +30,7 @@
   "check_matrix": {
     "automations": "ok",
     "bot_panel": "ok",
-    "discovery": "ok",
+    "discovery": "failed",
     "inventory": "ok",
     "miniapp": "ok",
     "monitor": "ok",
@@ -40,7 +40,7 @@
     "telegram_transport": "ok",
     "wheel_api": "ok"
   },
-  "checked_at": "2026-07-19T23:42:16.405618+00:00",
+  "checked_at": "2026-07-20T05:18:12.325383+00:00",
   "discovery": {
     "active_size": 164,
     "candidate_count": 453,
@@ -78,46 +78,54 @@
     "legacy_url_offenders": [],
     "primary": "telegram.me"
   },
-  "finding_count": 0,
-  "findings": [],
+  "finding_count": 1,
+  "findings": [
+    {
+      "detail": "В состоянии поиска записано 166, текущий inventory содержит 167.",
+      "kind": "discovery_inventory",
+      "severity": "warning",
+      "subject": "",
+      "title": "Ночная проверка видит не весь утверждённый пул"
+    }
+  ],
   "gpt_diagnostic_snapshot": {
-    "active_incidents": 0,
-    "bot_panel_heartbeat": "2026-07-19T23:41:05.607916+00:00",
-    "checked_sources": 164,
-    "configured_sources": 166,
+    "active_incidents": 1,
+    "bot_panel_heartbeat": "2026-07-20T05:16:44.951194+00:00",
+    "checked_sources": 165,
+    "configured_sources": 167,
     "domain": "telegram.me",
-    "reachable_sources": 164,
+    "reachable_sources": 165,
     "single_source": "system_check_state.json",
-    "status": "ok",
+    "status": "degraded",
     "wheel_api_health": {
       "alert_threshold": 3,
       "consecutive_failures": 0,
-      "last_checked_at": "2026-07-19T23:27:59.596179+00:00",
+      "last_checked_at": "2026-07-20T05:12:26.300316+00:00",
       "last_failure_at": null,
-      "last_success_at": "2026-07-19T23:27:59.596179+00:00",
+      "last_success_at": "2026-07-20T05:12:26.300316+00:00",
       "status": "ok"
     }
   },
   "incident_delivery": {
-    "digest_sent": false,
-    "messages_attempted": 0,
-    "opened": 0,
+    "digest_sent": true,
+    "messages_attempted": 1,
+    "opened": 1,
     "resolved": 0
   },
-  "incident_sequence": 60,
+  "incident_sequence": 61,
   "inventory": {
-    "configured": 164,
-    "configured_total": 166,
+    "configured": 165,
+    "configured_total": 167,
     "domain": "telegram.me",
     "duplicates": 0,
-    "expected": 166,
+    "expected": 167,
     "nightly": 2,
     "nightly_configured": 2,
     "nightly_operational": 2,
-    "operational": 164,
-    "primary_configured": 164,
-    "primary_operational": 164,
-    "total": 166
+    "operational": 165,
+    "primary_configured": 165,
+    "primary_operational": 165,
+    "total": 167
   },
   "miniapp": {
     "checked": false,
@@ -126,37 +134,37 @@
   },
   "monitor": {
     "brand": "BB V.G.",
-    "checked_sources": 164,
-    "checks_delta": 164,
-    "checks_total": 305998,
+    "checked_sources": 165,
+    "checks_delta": 165,
+    "checks_total": 360354,
     "consecutive_failures": 0,
     "consecutive_no_progress": 0,
-    "head_sha": "9f73bbb8a2a8a598c26866b4b15e54f1b7cea4f3",
-    "iteration": 266,
+    "head_sha": "e0df08ba1c1decfbb927ab441cf440876a4af5ed",
+    "iteration": 72,
     "last_failure_at": "2026-07-14T02:44:12.395838+00:00",
-    "last_iteration_at": "2026-07-19T23:27:59.726950+00:00",
-    "last_iteration_duration_seconds": 14,
+    "last_iteration_at": "2026-07-20T05:12:26.428003+00:00",
+    "last_iteration_duration_seconds": 13,
     "last_iteration_exit_code": 0,
-    "last_process_heartbeat_at": "2026-07-19T23:27:59.726950+00:00",
-    "last_successful_checks_total": 305998,
-    "last_successful_iteration_at": "2026-07-19T23:27:59.726950+00:00",
+    "last_process_heartbeat_at": "2026-07-20T05:12:26.428003+00:00",
+    "last_successful_checks_total": 360354,
+    "last_successful_iteration_at": "2026-07-20T05:12:26.428003+00:00",
     "pending_wheels": 0,
-    "reachable_sources": 164,
+    "reachable_sources": 165,
     "restart_recommended": false,
     "run_attempt": "1",
-    "run_id": "29699784553",
-    "run_started_at": "2026-07-19T19:01:18.021483+00:00",
+    "run_id": "29715872923",
+    "run_started_at": "2026-07-20T04:00:50.394249+00:00",
     "source_errors": 0,
     "stats_counter_reset": false,
     "status": "running",
     "version": 3,
-    "workflow_run_id": "29699784553"
+    "workflow_run_id": "29715872923"
   },
-  "monitor_age_minutes": 14,
+  "monitor_age_minutes": 5,
   "notification_integrity": {
     "algorithm": "HMAC-SHA256",
     "contains_personal_fields": false,
-    "entry_count": 234,
+    "entry_count": 229,
     "format": "bbvg-notification-delivery-v3",
     "retention_seconds": 86400,
     "router_installed": true,
@@ -184,14 +192,14 @@
   "rating_consistency": {
     "administrator_decisions": 0,
     "inactive_wheel_leaks": [],
-    "personal_vote_records": 101,
+    "personal_vote_records": 102,
     "policy": "personal_votes_v1",
-    "rated_sources": 25,
+    "rated_sources": 27,
     "score_mismatches": [],
-    "valid_personal_votes": 101
+    "valid_personal_votes": 102
   },
   "source_health_summary": {
-    "configured_records": 164,
+    "configured_records": 165,
     "missing_sources": [],
     "nightly_pending_first_check": [
       "ayukifunpage",
@@ -199,10 +207,10 @@
     ],
     "problem_details": [],
     "problem_sources": [],
-    "records": 164,
-    "required_primary_records": 164,
+    "records": 165,
+    "required_primary_records": 165,
     "statuses": {
-      "ok": 164
+      "ok": 165
     },
     "transport_failure_types": {
       "dns": 0,
@@ -213,7 +221,7 @@
       "tls": 0
     }
   },
-  "status": "ok",
+  "status": "degraded",
   "telegram_web": {
     "final_url": "https://telegram.me/s/mechanogun",
     "html_messages_detected": true,
@@ -225,9 +233,9 @@
   "wheel_api_health": {
     "alert_threshold": 3,
     "consecutive_failures": 0,
-    "last_checked_at": "2026-07-19T23:27:59.596179+00:00",
+    "last_checked_at": "2026-07-20T05:12:26.300316+00:00",
     "last_failure_at": null,
-    "last_success_at": "2026-07-19T23:27:59.596179+00:00",
+    "last_success_at": "2026-07-20T05:12:26.300316+00:00",
     "status": "ok"
   }
 }
