@@ -9,7 +9,8 @@ from typing import Any
 
 _SUCCESS_RE = re.compile(
     r"(?:участие\s+(?:принято|подтверждено|зарегистрировано)|"
-    r"вы\s+(?:уже\s+)?участвуете|уже\s+участвуете|участие\s+отмечено)",
+    r"вы\s+(?:уже\s+)?участвуете|уже\s+участвуете|участие\s+отмечено|"
+    r"теперь\s+ты\s+участвуешь\s+в\s+розыгрыше)",
     re.IGNORECASE,
 )
 _BUTTON_RE = re.compile(
@@ -128,7 +129,7 @@ def participate(url: str) -> ParticipationResult:
             buttons.first.click(timeout=timeout_ms)
             try:
                 page.wait_for_function(
-                    """() => /участие\\s+(принято|подтверждено|зарегистрировано)|вы\\s+(уже\\s+)?участвуете|уже\\s+участвуете|участие\\s+отмечено/i.test(document.body?.innerText || '')""",
+                    """() => /участие\s+(принято|подтверждено|зарегистрировано)|вы\s+(уже\s+)?участвуете|уже\s+участвуете|участие\s+отмечено|теперь\s+ты\s+участвуешь\s+в\s+розыгрыше/i.test(document.body?.innerText || '')""",
                     timeout=timeout_ms,
                 )
             except PlaywrightTimeoutError:
