@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import os
+import sys
 from pathlib import Path
 from tempfile import TemporaryDirectory
 from typing import Any
@@ -13,6 +14,28 @@ import notification_router
 # Install the durable deduplication and strict role boundary in one place so
 # monitor, summaries, discovery, intelligence and system checks use one policy.
 notification_integrity_v2.install(notification_router)
+
+# The hunter profile belongs only to the Telegram control-center runtime.
+# bbvg_monitor_main also imports this module for recipient configuration, so the
+# UI extension is installed only while bbvg.bot.runtime itself is being built.
+if "bbvg.bot.runtime" in sys.modules:
+    import personal_wheel_voting
+    from bbvg.bot import profile as hunter_profile
+    from bbvg.bot.users import UserManagementRuntime
+
+    hunter_profile.install(personal_wheel_voting.PersonalWheelVotingMixin)
+    if "compact_menu_rows" in personal_wheel_voting.PersonalWheelVotingMixin.__dict__:
+        delattr(personal_wheel_voting.PersonalWheelVotingMixin, "compact_menu_rows")
+    if not getattr(UserManagementRuntime, "_bbvg_hunter_profile_menu_installed", False):
+        _base_compact_menu_rows = UserManagementRuntime.compact_menu_rows
+
+        def _compact_menu_rows_with_profile(admin: bool) -> list[list[dict[str, Any]]]:
+            rows = [list(row) for row in _base_compact_menu_rows(admin)]
+            rows.append([{"text": "👤 Мой профиль", "callback_data": "page:profile"}])
+            return rows
+
+        UserManagementRuntime.compact_menu_rows = staticmethod(_compact_menu_rows_with_profile)
+        UserManagementRuntime._bbvg_hunter_profile_menu_installed = True
 
 
 FAST_MONITOR_INTERVAL_MINUTES = 1
