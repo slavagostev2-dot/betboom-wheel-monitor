@@ -10,20 +10,26 @@ import bot_private_state
 import notification_integrity_v2
 import notification_router
 
-# Every production entry point imports bot_notification_state before sending.
-# Install the durable deduplication and strict role boundary in one place so
-# monitor, summaries, discovery, intelligence and system checks use one policy.
 notification_integrity_v2.install(notification_router)
 
-# The hunter profile belongs only to the Telegram control-center runtime.
-# bbvg_monitor_main also imports this module for recipient configuration, so the
-# UI extension is installed only while bbvg.bot.runtime itself is being built.
 if "bbvg.bot.runtime" in sys.modules:
     import personal_wheel_voting
     from bbvg.bot import profile as hunter_profile
     from bbvg.bot.users import UserManagementRuntime
 
+    _previous_profile_handler = personal_wheel_voting.PersonalWheelVotingMixin.handle_callback
     hunter_profile.install(personal_wheel_voting.PersonalWheelVotingMixin)
+    _new_profile_handler = personal_wheel_voting.PersonalWheelVotingMixin.handle_callback
+
+    def _combined_profile_handler(self, query: dict[str, Any]) -> None:
+        data = str(query.get("data") or "")
+        if data in {"page:profile", "profile:refresh"}:
+            _new_profile_handler(self, query)
+            return
+        _previous_profile_handler(self, query)
+
+    personal_wheel_voting.PersonalWheelVotingMixin.handle_callback = _combined_profile_handler
+
     if "compact_menu_rows" in personal_wheel_voting.PersonalWheelVotingMixin.__dict__:
         delattr(personal_wheel_voting.PersonalWheelVotingMixin, "compact_menu_rows")
     if not getattr(UserManagementRuntime, "_bbvg_hunter_profile_menu_installed", False):
@@ -42,8 +48,6 @@ FAST_MONITOR_INTERVAL_MINUTES = 1
 
 
 def _with_fast_monitor_interval(access: dict[str, Any]) -> dict[str, Any]:
-    """Keep wheel discovery fast enough for events announced shortly before draw."""
-
     settings = access.get("settings")
     if not isinstance(settings, dict):
         settings = {}
@@ -111,8 +115,6 @@ def self_test() -> None:
     original = bot_private_state.STATE_PATH
     try:
         with TemporaryDirectory() as temporary:
-            # A unit test must never try to decrypt the real production bundle
-            # with a synthetic CI key.
             bot_private_state.STATE_PATH = Path(temporary) / "missing-state.enc.json"
             access, exists = load_config()
             assert isinstance(access, dict)
