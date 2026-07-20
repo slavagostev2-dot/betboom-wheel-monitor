@@ -18,7 +18,7 @@
     "finding_kinds": [
       "monitor_stale"
     ],
-    "generated_at": "2026-07-20T10:42:08.764462+00:00",
+    "generated_at": "2026-07-20T10:42:28.347989+00:00",
     "impact": "Часть функций BB V.G. может работать неполно до устранения подтверждённой причины.",
     "mode": "rules",
     "model": "",
@@ -42,7 +42,7 @@
     "source_tier_last_run_at": "2026-07-19T23:46:32.636190+00:00",
     "source_tier_policy": "manual_nightly_only",
     "transport_accounted_sources": 167,
-    "transport_checked_at": "2026-07-20T10:37:20.079940+00:00",
+    "transport_checked_at": "2026-07-20T10:41:53.274241+00:00",
     "transport_domain": "telegram.me",
     "transport_status": "success"
   },
@@ -63,7 +63,7 @@
     "telegram_transport": "ok",
     "wheel_api": "ok"
   },
-  "checked_at": "2026-07-20T10:42:07.717470+00:00",
+  "checked_at": "2026-07-20T10:42:27.167785+00:00",
   "discovery": {
     "active_size": 165,
     "candidate_count": 462,
@@ -72,7 +72,7 @@
     "discovery_last_run_at": "2026-07-20T10:41:31.221836+00:00",
     "domain": "telegram.me",
     "intelligence_domain": "telegram.me",
-    "intelligence_last_run_at": "2026-07-20T10:37:13.480370+00:00",
+    "intelligence_last_run_at": "2026-07-20T10:42:02.122294+00:00",
     "intelligence_summary": {
       "empty_sources": 0,
       "error_types": {},
@@ -104,7 +104,7 @@
   "finding_count": 1,
   "findings": [
     {
-      "detail": "Последняя итерация была 36 минут назад.",
+      "detail": "Последняя итерация была 37 минут назад.",
       "kind": "monitor_stale",
       "severity": "critical",
       "subject": "",
@@ -185,7 +185,7 @@
     "version": 3,
     "workflow_run_id": "29731646626"
   },
-  "monitor_age_minutes": 36,
+  "monitor_age_minutes": 37,
   "notification_integrity": {
     "algorithm": "HMAC-SHA256",
     "contains_personal_fields": false,
