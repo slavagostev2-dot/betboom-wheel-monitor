@@ -252,24 +252,32 @@
   "active_wheels": {
     "ctom05": {
       "action_id": 800,
+      "availability_status": "available",
       "button_token": "4383a1e6f78c91",
       "deadline": "2026-07-20T21:47:52.674000+00:00",
-      "expires_at": "2026-07-20T23:19:08.286444+00:00",
+      "deadline_source": "api",
+      "event_id": "f5f7e69fd74b16023a7b",
+      "expires_at": "2026-07-20T23:19:55.622223+00:00",
       "first_notified_at": "2026-07-20T21:19:08.286444+00:00",
       "generation_id": "f5f7e69fd74b16023a7b",
       "identifier": "CTOM05",
-      "last_checked_at": "2026-07-20T21:19:08.286444+00:00",
+      "last_checked_at": "2026-07-20T21:19:55.869823+00:00",
       "last_notification_at": "2026-07-20T21:19:08.286444+00:00",
+      "last_verification_at": "2026-07-20T21:19:55.622223+00:00",
+      "lifecycle_changed_at": "2026-07-20T21:19:55.622186+00:00",
+      "lifecycle_state": "scheduled_draw",
       "message_date": "2026-07-20T21:18:15+00:00",
       "message_id": 1043,
       "message_text": "колесо для всех ->\nhttps://betboom.ru/freestream/CTOM05\nBetBoom промокод CTOM до 10000 фрибетов\nРеклама 18+. ООО \"Фирма СТОМ\", ИНН 7705005321\nhttps://telegram.me/meowbettt\nhttps://betboom.ru/freestream/CTOM05\nhttps://bbsport.site/link/fanVbz//?erid=KW2aPRYdr5QoPXHUemhFMRzEf8uMyTMWx2opN2bMghG3uZk92nYvjmWrPSiKYt59T\nhttps://telegram.me/meowbettt/1043",
       "message_url": "https://telegram.me/meowbettt/1043",
-      "method": "активность и таймер подтверждены BetBoom",
+      "method": "состояние определяется пользователями BB V.G.",
+      "needs_manual_time": false,
       "page_excerpt": "",
+      "page_status": "active",
       "participating": false,
       "server_start_at": "2026-07-20T21:17:52.674000+00:00",
       "source": "meowbettt",
-      "status": "preliminary",
+      "status": "unknown",
       "url": "https://betboom.ru/freestream/CTOM05",
       "verification_status": "confirmed"
     }
@@ -1750,6 +1758,11 @@
       "status": "workflow_dispatch_scheduled",
       "wheel_key": "brokeboys"
     },
+    "ctom05#event:f5f7e69fd74b16023a7b": {
+      "scheduled_at": "2026-07-20T21:19:55.869882+00:00",
+      "status": "workflow_dispatch_scheduled",
+      "wheel_key": "ctom05"
+    },
     "dyrachyo#event:29763481e1d505cf5829": {
       "scheduled_at": "2026-07-19T17:50:54.752755+00:00",
       "status": "workflow_dispatch_scheduled",
@@ -3004,7 +3017,7 @@
     "ctom05": {
       "action_id": 800,
       "generation_id": "f5f7e69fd74b16023a7b",
-      "seen_at": "2026-07-20T21:19:08.286552+00:00",
+      "seen_at": "2026-07-20T21:19:55.622223+00:00",
       "server_start_at": "2026-07-20T21:17:52.674000+00:00",
       "state": "active"
     },
@@ -3300,9 +3313,9 @@
   "wheel_api_health": {
     "alert_threshold": 3,
     "consecutive_failures": 0,
-    "last_checked_at": "2026-07-20T21:19:05.441918+00:00",
+    "last_checked_at": "2026-07-20T21:19:55.622223+00:00",
     "last_failure_at": "2026-07-20T14:02:03.366327+00:00",
-    "last_success_at": "2026-07-20T21:19:05.441918+00:00",
+    "last_success_at": "2026-07-20T21:19:55.622223+00:00",
     "status": "ok"
   },
   "wheel_generation_observations": {
@@ -4125,11 +4138,11 @@
       "action_id": 800,
       "first_seen_at": "2026-07-20T21:19:08.286552+00:00",
       "generation_id": "f5f7e69fd74b16023a7b",
-      "last_seen_at": "2026-07-20T21:19:08.286552+00:00",
-      "observations": 1,
+      "last_seen_at": "2026-07-20T21:19:55.622223+00:00",
+      "observations": 3,
       "server_start_at": "2026-07-20T21:17:52.674000+00:00",
       "statuses": {
-        "active": 1
+        "active": 3
       },
       "wheel_key": "ctom05"
     },
