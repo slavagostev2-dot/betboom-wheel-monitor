@@ -5,38 +5,7 @@ on:
   push:
     branches: [main]
     paths:
-      - "admin_bot.py"
-      - "admin_action*.py"
-      - "admin_action_queue.json"
-      - "chapter1_stability.py"
-      - "admin_runtime.py"
-      - "admin_panel_v2.py"
-      - "admin_panel_runtime_v*.py"
-      - "bbvg/bot/**"
-      - "telegram_ui.py"
-      - "bot_private_state.py"
-      - "bot_private_state.enc.json"
-      - "bot_notification_state.py"
-      - "notification_integrity_v2.py"
-      - "notification_router.py"
-      - "notification_delivery_state.json"
-      - "wheel_publications_v2.py"
-      - "wheel_event_runtime.py"
-      - "wheel_link_lifecycle.py"
-      - "wheel_scenario_suite.py"
-      - "rating_policy.py"
-      - "chapter2_unified_logic.py"
-      - "privacy_retention.py"
-      - "security_audit.py"
-      - "migrate_bot_private_state.py"
-      - "candidate_moderation.json"
-      - "intelligence_state.json"
-      - "CHAPTER_2_RU.md"
-      - "CHAPTER_4_RU.md"
-      - "CHAPTER_5_RU.md"
-      - "chapter4_acceptance.py"
-      - "chapter5_acceptance.py"
-      - "requirements.txt"
+      - "control_center_release.txt"
       - ".github/workflows/admin-bot.yml"
   workflow_dispatch:
   schedule:
@@ -308,4 +277,4 @@ jobs:
           sleep 20
           gh workflow run admin-bot.yml --ref main
 
-# v41: consolidated runtime, timer-aware duplicate lifecycle and idempotent source rating.
+# v41: deployment is released explicitly through control_center_release.txt so intermediate code commits do not cancel the live bot.
