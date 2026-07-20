@@ -1,5 +1,5 @@
 {
-  "active_size": 164,
+  "active_size": 165,
   "catalog_size": 2,
   "duplicate_wheels": 0,
   "error_count": 0,
@@ -206,14 +206,14 @@
       "successful_checks": 4
     },
     "ayukifunpage": {
-      "checks": 16,
+      "checks": 17,
       "consecutive_empty": 0,
       "consecutive_errors": 0,
-      "last_checked_at": "2026-07-19T23:41:18.666081+00:00",
+      "last_checked_at": "2026-07-20T10:36:52.714865+00:00",
       "last_messages_count": 57,
-      "last_success_at": "2026-07-19T23:41:18.666081+00:00",
+      "last_success_at": "2026-07-20T10:36:52.714865+00:00",
       "status": "ok",
-      "successful_checks": 16
+      "successful_checks": 17
     },
     "begemotikdays": {
       "checks": 2,
@@ -663,14 +663,14 @@
       "successful_checks": 4
     },
     "nucleartigeres": {
-      "checks": 13,
+      "checks": 14,
       "consecutive_empty": 0,
       "consecutive_errors": 0,
-      "last_checked_at": "2026-07-19T23:41:23.666629+00:00",
-      "last_messages_count": 73,
-      "last_success_at": "2026-07-19T23:41:23.666629+00:00",
+      "last_checked_at": "2026-07-20T10:36:55.749588+00:00",
+      "last_messages_count": 67,
+      "last_success_at": "2026-07-20T10:36:55.749588+00:00",
       "status": "ok",
-      "successful_checks": 13
+      "successful_checks": 14
     },
     "official_mirtankovru": {
       "checks": 4,
@@ -1137,7 +1137,7 @@
   },
   "inactive_wheels": 0,
   "intelligence_candidates_added": 0,
-  "last_run_at": "2026-07-19T23:41:23.674453+00:00",
+  "last_run_at": "2026-07-20T10:36:55.753747+00:00",
   "notifications": 0,
   "notified_wheels": {
     "mantis1": {
@@ -1435,7 +1435,7 @@
     },
     "ayukifunpage": {
       "active_wheel_links": 0,
-      "checked_at": "2026-07-19T23:41:15.774794+00:00",
+      "checked_at": "2026-07-20T10:36:49.906640+00:00",
       "inactive_wheel_links": 0,
       "latest_wheel_at": null,
       "messages_checked": 57,
@@ -1990,10 +1990,10 @@
     },
     "nucleartigeres": {
       "active_wheel_links": 0,
-      "checked_at": "2026-07-19T23:41:18.666665+00:00",
+      "checked_at": "2026-07-20T10:36:52.715362+00:00",
       "inactive_wheel_links": 0,
       "latest_wheel_at": null,
-      "messages_checked": 73,
+      "messages_checked": 67,
       "recent_wheel_links": 0,
       "status": "ok",
       "unconfirmed_wheel_links": 0,
@@ -3540,20 +3540,20 @@
     "2026-07-20": {
       "sources": {
         "ayukifunpage": {
-          "checks": 2,
-          "messages_scanned": 114,
-          "successful_checks": 2
+          "checks": 3,
+          "messages_scanned": 171,
+          "successful_checks": 3
         },
         "nucleartigeres": {
-          "checks": 2,
-          "messages_scanned": 146,
-          "successful_checks": 2
+          "checks": 3,
+          "messages_scanned": 213,
+          "successful_checks": 3
         }
       },
       "totals": {
-        "checks": 4,
-        "messages_scanned": 260,
-        "successful_checks": 4
+        "checks": 6,
+        "messages_scanned": 384,
+        "successful_checks": 6
       }
     }
   },
@@ -3720,12 +3720,12 @@
       "successful_checks": 4
     },
     "ayukifunpage": {
-      "checks": 16,
+      "checks": 17,
       "first_checked_at": "2026-07-15T15:33:22.205681+00:00",
-      "last_checked_at": "2026-07-19T23:41:18.666108+00:00",
-      "last_updated_at": "2026-07-19T23:41:18.666108+00:00",
-      "messages_scanned": 912,
-      "successful_checks": 16
+      "last_checked_at": "2026-07-20T10:36:52.714889+00:00",
+      "last_updated_at": "2026-07-20T10:36:52.714889+00:00",
+      "messages_scanned": 969,
+      "successful_checks": 17
     },
     "begemotikdays": {
       "checks": 2,
@@ -4087,12 +4087,12 @@
       "successful_checks": 4
     },
     "nucleartigeres": {
-      "checks": 13,
+      "checks": 14,
       "first_checked_at": "2026-07-16T23:38:34.612558+00:00",
-      "last_checked_at": "2026-07-19T23:41:23.666655+00:00",
-      "last_updated_at": "2026-07-19T23:41:23.666655+00:00",
-      "messages_scanned": 923,
-      "successful_checks": 13
+      "last_checked_at": "2026-07-20T10:36:55.749613+00:00",
+      "last_updated_at": "2026-07-20T10:36:55.749613+00:00",
+      "messages_scanned": 990,
+      "successful_checks": 14
     },
     "official_mirtankovru": {
       "checks": 4,
