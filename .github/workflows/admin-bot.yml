@@ -293,6 +293,10 @@ jobs:
           ADMIN_CACHE_SECONDS: "20"
           SOURCE_INACTIVITY_DAYS: "7"
           SOURCE_INACTIVITY_REPORT_DAYS: "7"
+          BBVG_AI_ENABLED: "true"
+          BBVG_AI_FEATURES: "natural_language_admin"
+          BBVG_AI_MODEL: ${{ vars.BBVG_AI_MODEL }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: python admin_panel_runtime_v41.py
 
       - name: Start replacement control-center shift
