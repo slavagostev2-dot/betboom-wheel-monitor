@@ -6,11 +6,15 @@ import os
 import re
 from dataclasses import dataclass
 from datetime import datetime, timedelta, timezone
+from pathlib import Path
 from typing import Any, Iterable
 
 from bbvg.ai_core import AIClient, FEATURE_SUSPICIOUS_POST_ANALYSIS, client_from_env
 
 UTC = timezone.utc
+ROOT = Path(__file__).resolve().parents[2]
+STATE_PATH = ROOT / "ai_suspicious_posts_state.json"
+
 ALLOWED = frozenset({
     "active_wheel",
     "possible_wheel_announcement",
@@ -102,6 +106,29 @@ def _normalize(data: dict[str, Any] | None) -> tuple[str, float, str]:
     return classification, confidence, reason
 
 
+def load_state() -> dict[str, Any]:
+    try:
+        value = json.loads(STATE_PATH.read_text(encoding="utf-8"))
+    except (FileNotFoundError, OSError, json.JSONDecodeError):
+        value = {}
+    if not isinstance(value, dict):
+        value = {}
+    value.setdefault("version", 1)
+    value.setdefault("posts", {})
+    value.setdefault("last_summary", {})
+    return value
+
+
+def save_state(value: dict[str, Any]) -> None:
+    STATE_PATH.parent.mkdir(parents=True, exist_ok=True)
+    temp = STATE_PATH.with_suffix(STATE_PATH.suffix + ".tmp")
+    temp.write_text(
+        json.dumps(value, ensure_ascii=False, indent=2, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
+    temp.replace(STATE_PATH)
+
+
 def _prune(records: dict[str, Any], current: datetime) -> bool:
     changed = False
     cutoff = current - timedelta(days=_int_env("AI_SUSPICIOUS_POST_RETENTION_DAYS", 14, 1, 90))
@@ -124,6 +151,17 @@ def _prune(records: dict[str, Any], current: datetime) -> bool:
     return changed
 
 
+def _alert_from_record(key: str, row: dict[str, Any]) -> dict[str, Any]:
+    return {
+        "record_key": key,
+        "source": str(row.get("source") or "unknown"),
+        "message_url": str(row.get("message_url") or ""),
+        "classification": str(row.get("classification") or "uncertain"),
+        "confidence": float(row.get("confidence", 0.0) or 0.0),
+        "reason": str(row.get("reason") or "")[:500],
+    }
+
+
 def analyze_posts(
     posts: Iterable[SuspiciousPost],
     state: dict[str, Any],
@@ -143,17 +181,23 @@ def analyze_posts(
     }
     if not ai.feature_enabled(FEATURE_SUSPICIOUS_POST_ANALYSIS):
         return summary
+    if not ai.status_snapshot().get("provider_configured"):
+        summary["status"] = "not_configured"
+        return summary
 
     summary["status"] = "enabled"
     now = (current or datetime.now(UTC)).astimezone(UTC)
     max_age = timedelta(minutes=_int_env("AI_SUSPICIOUS_POST_MAX_AGE_MINUTES", 30, 5, 180))
     threshold = _float_env("AI_SUSPICIOUS_POST_MIN_CONFIDENCE", 0.80, 0.50, 0.99)
-    active_threshold = max(threshold, _float_env("AI_SUSPICIOUS_ACTIVE_MIN_CONFIDENCE", 0.88, 0.50, 0.99))
+    active_threshold = max(
+        threshold,
+        _float_env("AI_SUSPICIOUS_ACTIVE_MIN_CONFIDENCE", 0.88, 0.50, 0.99),
+    )
 
-    records = state.setdefault("ai_suspicious_posts", {})
+    records = state.setdefault("posts", {})
     if not isinstance(records, dict):
         records = {}
-        state["ai_suspicious_posts"] = records
+        state["posts"] = records
         summary["changed"] = True
     if _prune(records, now):
         summary["changed"] = True
@@ -169,8 +213,18 @@ def analyze_posts(
         text_sha = _text_hash(post.text)
         previous = records.get(key)
         previous = previous if isinstance(previous, dict) else {}
+
         if previous.get("text_sha256") == text_sha:
             summary["skipped_seen"] += 1
+            classification = str(previous.get("classification") or "uncertain")
+            confidence = float(previous.get("confidence", 0.0) or 0.0)
+            required = active_threshold if classification == "active_wheel" else threshold
+            if (
+                classification in ALERTING
+                and confidence >= required
+                and not previous.get("notified_at")
+            ):
+                summary["alerts"].append(_alert_from_record(key, previous))
             continue
 
         result = ai.ask_json(
@@ -189,7 +243,11 @@ def analyze_posts(
                 ensure_ascii=False,
                 sort_keys=True,
             ),
-            fallback_data={"classification": "uncertain", "confidence": 0.0, "reason": "analysis unavailable"},
+            fallback_data={
+                "classification": "uncertain",
+                "confidence": 0.0,
+                "reason": "analysis unavailable",
+            },
         )
         if not result.ok:
             summary["provider_failures"] += 1
@@ -218,19 +276,12 @@ def analyze_posts(
         summary["analyzed"] += 1
         summary["changed"] = True
         if should_alert:
-            summary["alerts"].append({
-                "record_key": key,
-                "source": post.source,
-                "message_url": post.message_url,
-                "classification": classification,
-                "confidence": confidence,
-                "reason": reason,
-            })
+            summary["alerts"].append(_alert_from_record(key, row))
     return summary
 
 
 def mark_alert_notified(state: dict[str, Any], record_key: str) -> bool:
-    records = state.get("ai_suspicious_posts")
+    records = state.get("posts")
     row = records.get(record_key) if isinstance(records, dict) else None
     if not isinstance(row, dict) or row.get("notified_at"):
         return False
@@ -253,3 +304,69 @@ def format_admin_alert(alert: dict[str, Any]) -> str:
         "Это только сигнал для просмотра: состояние колёс автоматически не меняется."
         + (f"\nПост: {url}" if url else "")
     )[:4000]
+
+
+def run_for_messages(monitor_module: Any, messages_by_source: dict[str, list[Any]]) -> dict[str, Any]:
+    state = load_state()
+    posts: list[SuspiciousPost] = []
+    for messages in messages_by_source.values():
+        for message in messages:
+            text = str(getattr(message, "text", "") or "")
+            if DIRECT_LINK.search(text):
+                continue
+            posts.append(
+                SuspiciousPost(
+                    source=str(getattr(message, "source", "") or "unknown"),
+                    message_id=int(getattr(message, "message_id", 0) or 0),
+                    date=getattr(message, "date"),
+                    text=text,
+                    message_url=str(getattr(message, "message_url", "") or ""),
+                )
+            )
+
+    summary = analyze_posts(posts, state)
+    sent = 0
+    for alert in list(summary.get("alerts", [])):
+        try:
+            monitor_module.send_message(format_admin_alert(alert))
+        except Exception as exc:
+            print(
+                "WARNING AI suspicious-post admin alert failed: "
+                f"{type(exc).__name__}: {exc}"
+            )
+        else:
+            if mark_alert_notified(state, str(alert.get("record_key") or "")):
+                summary["changed"] = True
+            sent += 1
+
+    state["last_summary"] = {
+        "checked_at": datetime.now(UTC).isoformat(),
+        "status": str(summary.get("status") or "unknown"),
+        "candidates": int(summary.get("candidates", 0) or 0),
+        "analyzed": int(summary.get("analyzed", 0) or 0),
+        "alerts_sent": sent,
+        "provider_failures": int(summary.get("provider_failures", 0) or 0),
+    }
+    if summary.get("changed") or sent:
+        save_state(state)
+    return {**summary, "alerts_sent": sent}
+
+
+def install(monitor_module: Any) -> None:
+    if getattr(monitor_module, "_bbvg_ai_suspicious_post_analysis_installed", False):
+        return
+    original = monitor_module.fetch_all_sources
+
+    def fetch_all_sources_with_ai(sources):
+        result = original(sources)
+        try:
+            run_for_messages(monitor_module, result[0])
+        except Exception as exc:
+            print(
+                "WARNING AI suspicious-post analysis failed: "
+                f"{type(exc).__name__}: {exc}"
+            )
+        return result
+
+    monitor_module.fetch_all_sources = fetch_all_sources_with_ai
+    monitor_module._bbvg_ai_suspicious_post_analysis_installed = True
