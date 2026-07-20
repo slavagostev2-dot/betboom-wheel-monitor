@@ -4,6 +4,7 @@ import html
 import os
 import subprocess
 import sys
+from datetime import timedelta
 from typing import Any, Callable
 
 import betboom_auto_participation
@@ -112,7 +113,7 @@ def participating_for_chat(
 
 
 def _schedule_auto_participation_dispatch(state: dict[str, Any], monitor_module: Any) -> bool:
-    """Queue one isolated participation workflow when new eligible wheel events appear."""
+    """Queue isolated participation workflow and retry stale dispatch requests."""
 
     if not os.getenv("GITHUB_TOKEN", "").strip() or not os.getenv(
         "GITHUB_REPOSITORY", ""
@@ -124,20 +125,31 @@ def _schedule_auto_participation_dispatch(state: dict[str, Any], monitor_module:
     current = monitor_module.now_utc()
     processed = state.setdefault("auto_participation_events", {})
     dispatched = state.setdefault("auto_participation_dispatch_events", {})
-    candidates: list[tuple[str, str]] = []
+    retry_after = timedelta(minutes=3)
+    candidates: list[tuple[str, str, bool]] = []
 
     for key, entry in list(state.setdefault("active_wheels", {}).items()):
         if not isinstance(entry, dict):
             continue
         normalized = str(key).casefold()
         token = betboom_auto_participation._event_token(normalized, entry)
-        if not token or token in processed or token in dispatched:
+        if not token or token in processed:
             continue
+
+        previous_dispatch = dispatched.get(token)
+        is_retry = isinstance(previous_dispatch, dict)
+        if is_retry:
+            scheduled_at = monitor_module.parse_datetime(
+                previous_dispatch.get("scheduled_at")
+            )
+            if scheduled_at is not None and current - scheduled_at < retry_after:
+                continue
+
         if not betboom_auto_participation._eligible_for_event_attempt(
             entry, monitor_module, current
         ):
             continue
-        candidates.append((token, normalized))
+        candidates.append((token, normalized, is_retry))
 
     if not candidates:
         return False
@@ -159,13 +171,23 @@ def _schedule_auto_participation_dispatch(state: dict[str, Any], monitor_module:
         )
         return False
 
-    for token, normalized in candidates:
+    retry_count = 0
+    for token, normalized, is_retry in candidates:
+        if is_retry:
+            retry_count += 1
         dispatched[token] = {
             "wheel_key": normalized,
             "scheduled_at": current.isoformat(),
-            "status": "workflow_dispatch_scheduled",
+            "status": (
+                "workflow_dispatch_retry_scheduled"
+                if is_retry
+                else "workflow_dispatch_scheduled"
+            ),
         }
-    print(f"Scheduled auto participation workflow for {len(candidates)} new wheel event(s)")
+    print(
+        f"Scheduled auto participation workflow for {len(candidates)} new wheel event(s)"
+        + (f"; retries={retry_count}" if retry_count else "")
+    )
     return True
 
 
