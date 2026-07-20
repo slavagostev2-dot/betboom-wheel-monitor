@@ -70,7 +70,10 @@ jobs:
           python chapter5_acceptance.py
 
       - name: Run pytest and enforce critical-core coverage
+        id: pytest
+        shell: bash
         run: |
+          set +e
           python -m pytest \
             --cov=notification_router \
             --cov=notification_integrity_v2 \
@@ -78,4 +81,21 @@ jobs:
             --cov=rating_policy \
             --cov-report=term-missing \
             --cov-report=xml \
-            --cov-fail-under=80
+            --cov-fail-under=80 > pytest-output.txt 2>&1
+          status=$?
+          echo "status=$status" >> "$GITHUB_OUTPUT"
+          tail -n 80 pytest-output.txt
+          exit 0
+
+      - name: Upload pytest diagnostics
+        if: ${{ steps.pytest.outputs.status != '0' }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: chapter-2a-pytest-diagnostics
+          path: pytest-output.txt
+          if-no-files-found: error
+          retention-days: 1
+
+      - name: Fail when pytest failed
+        if: ${{ steps.pytest.outputs.status != '0' }}
+        run: exit 1
