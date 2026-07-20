@@ -10,6 +10,7 @@ import notification_integrity_v2
 import notification_router
 import personal_wheel_voting
 from bbvg.bot import profile as hunter_profile
+from bbvg.bot.users import UserManagementRuntime
 
 # Every production entry point imports bot_notification_state before sending.
 # Install the durable deduplication and strict role boundary in one place so
@@ -19,6 +20,22 @@ notification_integrity_v2.install(notification_router)
 # Installing it here keeps one Telegram runtime and does not create a second
 # update consumer or a parallel state owner.
 hunter_profile.install(personal_wheel_voting.PersonalWheelVotingMixin)
+
+# Main-menu rows are historically exposed as a static class contract. The
+# profile mixin handles callbacks and rendering, while the stable menu owner
+# receives one appended row without changing any existing row or button order.
+if "compact_menu_rows" in personal_wheel_voting.PersonalWheelVotingMixin.__dict__:
+    delattr(personal_wheel_voting.PersonalWheelVotingMixin, "compact_menu_rows")
+if not getattr(UserManagementRuntime, "_bbvg_hunter_profile_menu_installed", False):
+    _base_compact_menu_rows = UserManagementRuntime.compact_menu_rows
+
+    def _compact_menu_rows_with_profile(admin: bool) -> list[list[dict[str, Any]]]:
+        rows = [list(row) for row in _base_compact_menu_rows(admin)]
+        rows.append([{"text": "👤 Мой профиль", "callback_data": "page:profile"}])
+        return rows
+
+    UserManagementRuntime.compact_menu_rows = staticmethod(_compact_menu_rows_with_profile)
+    UserManagementRuntime._bbvg_hunter_profile_menu_installed = True
 
 
 FAST_MONITOR_INTERVAL_MINUTES = 1
@@ -102,6 +119,13 @@ def self_test() -> None:
             assert isinstance(exists, bool)
             assert notification_router._bbvg_notification_integrity_v2_installed is True
             assert personal_wheel_voting.PersonalWheelVotingMixin._bbvg_hunter_profile_installed is True
+            assert UserManagementRuntime._bbvg_hunter_profile_menu_installed is True
+            callbacks = {
+                str(button.get("callback_data") or "")
+                for row in UserManagementRuntime.compact_menu_rows(False)
+                for button in row
+            }
+            assert "page:profile" in callbacks
     finally:
         bot_private_state.STATE_PATH = original
     print("BB V.G. bot notification state self-test passed")
