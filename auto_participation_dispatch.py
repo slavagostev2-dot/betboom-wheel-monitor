@@ -10,7 +10,6 @@ import requests
 
 
 STATE_PATH = Path(__file__).with_name("state.json")
-PROBE_MARKER_PATH = Path(__file__).with_name("auto_participation_probe.trigger")
 _PENDING_STATUSES = {
     "workflow_dispatch_scheduled",
     "workflow_dispatch_retry_scheduled",
@@ -113,15 +112,10 @@ def main() -> int:
         print(f"Auto participation dispatch blocked: state push failed: {push_error}")
         return 1
 
-    probe_requested = PROBE_MARKER_PATH.exists()
     url = (
         f"https://api.github.com/repos/{repository}/actions/workflows/"
         "auto-participation.yml/dispatches"
     )
-    payload: dict[str, object] = {"ref": branch}
-    if probe_requested:
-        payload["inputs"] = {"probe": "true"}
-
     try:
         response = requests.post(
             url,
@@ -130,7 +124,7 @@ def main() -> int:
                 "Accept": "application/vnd.github+json",
                 "X-GitHub-Api-Version": "2022-11-28",
             },
-            json=payload,
+            json={"ref": branch},
             timeout=20,
         )
     except requests.RequestException as exc:
@@ -148,10 +142,9 @@ def main() -> int:
         for entry in pending.values():
             entry["status"] = "workflow_dispatch_sent"
             entry["dispatched_at"] = now
-            if probe_requested:
-                entry["probe_requested"] = True
             entry.pop("dispatch_error", None)
             entry.pop("dispatch_failed_at", None)
+            entry.pop("probe_requested", None)
         _save_state(state)
         _git("add", "state.json", check=False)
         if _git("diff", "--cached", "--quiet", check=False).returncode != 0:
@@ -165,7 +158,7 @@ def main() -> int:
         print(
             "Auto participation workflow dispatched: "
             f"events={len(pending)} repository={repository} ref={branch} "
-            f"workflow=auto-participation.yml probe={str(probe_requested).lower()}"
+            "workflow=auto-participation.yml"
         )
         return 0
 
