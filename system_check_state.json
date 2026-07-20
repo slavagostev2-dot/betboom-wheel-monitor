@@ -16,7 +16,7 @@
     "decision_id": "",
     "finding_count": 0,
     "finding_kinds": [],
-    "generated_at": "2026-07-20T11:10:11.485217+00:00",
+    "generated_at": "2026-07-20T11:10:32.441440+00:00",
     "impact": "Мониторинг и связанные контуры могут продолжать штатную работу.",
     "mode": "rules",
     "model": "",
@@ -61,7 +61,7 @@
     "telegram_transport": "ok",
     "wheel_api": "ok"
   },
-  "checked_at": "2026-07-20T11:10:10.142350+00:00",
+  "checked_at": "2026-07-20T11:10:30.913378+00:00",
   "discovery": {
     "active_size": 165,
     "candidate_count": 462,
