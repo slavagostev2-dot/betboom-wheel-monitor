@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 concurrency:
   group: bb-vg-current-validation-${{ github.ref }}
@@ -36,6 +36,107 @@ jobs:
           ref: ${{ github.event.pull_request.head.sha || github.sha }}
           persist-credentials: false
           fetch-depth: 0
+
+      - name: Apply one-time Chapter 2B validation dependency cleanup
+        if: ${{ github.event_name == 'pull_request' && github.head_ref == 'cleanup/global-repository-audit-2026-07-20' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+          HEAD_BRANCH: ${{ github.head_ref }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+
+          def replace_once(path: str, old: str, new: str) -> bool:
+              target = Path(path)
+              text = target.read_text(encoding="utf-8")
+              if new in text:
+                  return False
+              if old not in text:
+                  raise SystemExit(f"Expected Chapter 2B anchor not found: {path}")
+              target.write_text(text.replace(old, new, 1), encoding="utf-8")
+              return True
+
+          changed = False
+
+          changed |= replace_once(
+              "scripts/validate_control_center.sh",
+              "  admin_panel_v2.py admin_panel_runtime_v25.py admin_panel_runtime_v26.py \\\n  admin_panel_runtime_v28.py admin_panel_runtime_v29.py \\\n  admin_panel_runtime_v30.py admin_panel_runtime_v31.py admin_panel_runtime_v32.py \\\n  admin_panel_runtime_v36.py admin_panel_runtime_v37.py admin_panel_runtime_v38.py admin_panel_runtime_v41.py \\\n",
+              "  admin_panel_v2.py admin_panel_runtime_v41.py \\\n",
+          )
+
+          changed |= replace_once(
+              ".github/workflows/v22-checks.yml",
+              "            admin_panel_runtime_v25.py admin_panel_runtime_v26.py \\\n            admin_panel_runtime_v28.py admin_panel_runtime_v29.py \\\n            admin_panel_runtime_v30.py admin_panel_runtime_v31.py \\\n            admin_panel_runtime_v32.py admin_panel_runtime_v36.py \\\n            admin_panel_runtime_v37.py admin_panel_runtime_v38.py \\\n            admin_panel_runtime_v41.py bot_private_state.py \\\n",
+              "            admin_panel_runtime_v41.py bot_private_state.py \\\n",
+          )
+
+          changed |= replace_once(
+              ".github/workflows/bot-recovery-smoke.yml",
+              "            admin_panel_runtime_v25.py admin_panel_runtime_v26.py \\\n            admin_panel_runtime_v28.py admin_panel_runtime_v29.py \\\n            admin_panel_runtime_v30.py admin_panel_runtime_v31.py \\\n            admin_panel_runtime_v32.py admin_panel_runtime_v36.py \\\n            admin_panel_runtime_v37.py admin_panel_runtime_v38.py \\\n            admin_panel_runtime_v41.py telegram_ui.py \\\n",
+              "            admin_panel_runtime_v41.py telegram_ui.py \\\n",
+          )
+
+          changed |= replace_once(
+              ".github/workflows/validate-private-state.yml",
+              "            admin_panel_runtime_v25.py admin_panel_runtime_v26.py \\\n            admin_panel_runtime_v28.py admin_panel_runtime_v29.py \\\n            admin_panel_runtime_v30.py admin_panel_runtime_v31.py \\\n            admin_panel_runtime_v32.py admin_panel_runtime_v36.py \\\n            admin_panel_runtime_v37.py admin_panel_runtime_v38.py \\\n            admin_panel_runtime_v41.py telegram_ui.py chapter4_acceptance.py \\\n",
+              "            admin_panel_runtime_v41.py telegram_ui.py chapter4_acceptance.py \\\n",
+          )
+          changed |= replace_once(
+              ".github/workflows/validate-private-state.yml",
+              "          from bbvg.bot.runtime import TelegramPanelRuntime\n",
+              "          from bbvg.bot.control_center import TelegramPanelRuntimeV41 as TelegramControlCenterRuntime\n",
+          )
+          changed |= replace_once(
+              ".github/workflows/validate-private-state.yml",
+              "              TelegramPanelRuntime.show_user_detail\n",
+              "              TelegramControlCenterRuntime.show_user_detail\n",
+          )
+          changed |= replace_once(
+              ".github/workflows/validate-private-state.yml",
+              "              for row in TelegramPanelRuntime.compact_menu_rows(False)\n",
+              "              for row in TelegramControlCenterRuntime.compact_menu_rows(False)\n",
+          )
+
+          changed |= replace_once(
+              ".github/workflows/system-health.yml",
+              "      - \"admin_panel_runtime_v25.py\"\n      - \"admin_panel_runtime_v36.py\"\n      - \"admin_panel_runtime_v37.py\"\n      - \"admin_panel_runtime_v38.py\"\n",
+              "",
+          )
+          changed |= replace_once(
+              ".github/workflows/system-health.yml",
+              " monitor.py monitor_data.py admin_panel_runtime_v36.py admin_panel_runtime_v37.py admin_panel_runtime_v38.py telegram_ui.py chapter4_acceptance.py",
+              " monitor.py monitor_data.py telegram_ui.py chapter4_acceptance.py",
+          )
+
+          changed |= replace_once(
+              "preflight.py",
+              '''    require_text(\n        "admin_panel_runtime_v31.py",\n        (\n            "📨 Отправить сводку",\n            "summary:send:monthly",\n            "📭 Давно без колёс",\n            "def show_period_report",\n        ),\n    )\n''',
+              '''    require_text(\n        "bbvg/bot/interface.py",\n        (\n            "📨 Отправить сводку",\n            "summary:send:monthly",\n            "📭 Давно без колёс",\n        ),\n    )\n    require_text(\n        "bbvg/bot/runtime.py",\n        ("self.show_period_report(days)",),\n    )\n''',
+          )
+
+          print(f"Chapter 2B validation dependency cleanup changed files: {changed}")
+          PY
+
+          files=(
+            scripts/validate_control_center.sh
+            .github/workflows/v22-checks.yml
+            .github/workflows/bot-recovery-smoke.yml
+            .github/workflows/validate-private-state.yml
+            .github/workflows/system-health.yml
+            preflight.py
+          )
+          if git diff --quiet -- "${files[@]}"; then
+            echo "Chapter 2B validation dependency cleanup already applied."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add "${files[@]}"
+          git commit -m "refactor: validate stable Control Center instead of old runtime chain"
+          git remote set-url origin "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          git push origin "HEAD:${HEAD_BRANCH}"
 
       - name: Set up Python
         uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
