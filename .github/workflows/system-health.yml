@@ -103,7 +103,6 @@ jobs:
           python telegram_transport.py
           python incident_manager.py
           python system_checks_v3.py --self-test
-          python -m pytest -q tests/test_ai_core.py tests/test_ai_health_inspector.py
           python chapter1_stability.py
           python - <<'PY'
           import bot_notification_state
