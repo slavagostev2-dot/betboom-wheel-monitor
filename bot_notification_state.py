@@ -13,7 +13,9 @@ import notification_router
 notification_integrity_v2.install(notification_router)
 
 if "bbvg.bot.runtime" in sys.modules:
+    import admin_bot as legacy_admin
     import personal_wheel_voting
+    from bbvg.bot import natural_language_admin
     from bbvg.bot import profile as hunter_profile
     from bbvg.bot.users import UserManagementRuntime
 
@@ -42,6 +44,8 @@ if "bbvg.bot.runtime" in sys.modules:
 
         UserManagementRuntime.compact_menu_rows = staticmethod(_compact_menu_rows_with_profile)
         UserManagementRuntime._bbvg_hunter_profile_menu_installed = True
+
+    natural_language_admin.install(legacy_admin.AdminBot)
 
 
 FAST_MONITOR_INTERVAL_MINUTES = 1
