@@ -1,0 +1,127 @@
+name: VK live diagnostic
+
+on:
+  push:
+    branches:
+      - "diag/vk-start-live"
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Run live VK diagnostic and update issue
+        env:
+          VK_GROUP_TOKEN: ${{ secrets.VK_GROUP_TOKEN }}
+          VK_API_VERSION: "5.199"
+          GH_TOKEN: ${{ github.token }}
+          REPOSITORY: ${{ github.repository }}
+          ISSUE_NUMBER: "103"
+        run: |
+          python3 - <<'PY'
+          import json
+          import os
+          from urllib.error import HTTPError, URLError
+          from urllib.parse import urlencode
+          from urllib.request import Request, urlopen
+
+          token = (os.getenv("VK_GROUP_TOKEN") or "").strip()
+          version = (os.getenv("VK_API_VERSION") or "5.199").strip()
+          result = {
+              "token_present": bool(token),
+              "conversations_total": 0,
+              "user_conversations": 0,
+              "writable_user_conversations": 0,
+              "start_candidates": 0,
+              "welcome_sent": 0,
+          }
+
+          def vk_call(method, **params):
+              payload = {
+                  "access_token": token,
+                  "v": version,
+                  **{k: str(v) for k, v in params.items()},
+              }
+              req = Request(
+                  f"https://api.vk.com/method/{method}",
+                  data=urlencode(payload).encode("utf-8"),
+                  method="POST",
+                  headers={"Content-Type": "application/x-www-form-urlencoded; charset=utf-8"},
+              )
+              with urlopen(req, timeout=20) as response:
+                  data = json.loads(response.read().decode("utf-8"))
+              if isinstance(data, dict) and isinstance(data.get("error"), dict):
+                  err = data["error"]
+                  raise RuntimeError(f"VK API error {err.get('error_code')}: {err.get('error_msg')}")
+              return data.get("response") if isinstance(data, dict) else None
+
+          try:
+              if not token:
+                  result["error"] = "VK_GROUP_TOKEN is empty in GitHub Actions"
+              else:
+                  response = vk_call("messages.getConversations", count=50)
+                  items = response.get("items", []) if isinstance(response, dict) else []
+                  result["conversations_total"] = len(items) if isinstance(items, list) else 0
+                  starts = {"старт", "start", "/start", "начать"}
+                  for item in items if isinstance(items, list) else []:
+                      if not isinstance(item, dict):
+                          continue
+                      conversation = item.get("conversation") or {}
+                      last_message = item.get("last_message") or {}
+                      peer = conversation.get("peer") or {}
+                      if peer.get("type") != "user":
+                          continue
+                      result["user_conversations"] += 1
+                      can_write = conversation.get("can_write") or {}
+                      if can_write.get("allowed") is False:
+                          continue
+                      result["writable_user_conversations"] += 1
+                      peer_id = int(peer.get("id") or 0)
+                      from_id = int(last_message.get("from_id") or 0)
+                      text = " ".join(str(last_message.get("text") or "").strip().casefold().split())
+                      if peer_id > 0 and from_id == peer_id and text in starts:
+                          result["start_candidates"] += 1
+                          welcome = (
+                              "👋 Привет! BB V.G. работает и готов присылать уведомления о новых колёсах BetBoom.\n\n"
+                              "Бот отслеживает появление новых колёс и отправляет сюда уведомление со ссылкой, как только колесо будет найдено.\n\n"
+                              "Дополнительных команд использовать не нужно — после начала диалога уведомления будут приходить автоматически."
+                          )
+                          vk_call(
+                              "messages.send",
+                              peer_id=peer_id,
+                              random_id=0,
+                              message=welcome,
+                          )
+                          vk_call("messages.markAsRead", peer_id=peer_id)
+                          result["welcome_sent"] += 1
+          except Exception as exc:
+              result["error"] = f"{type(exc).__name__}: {exc}"
+
+          body = "Live VK diagnostic result:\n\n```json\n" + json.dumps(result, ensure_ascii=False, indent=2) + "\n```"
+          repo = os.environ["REPOSITORY"]
+          issue = os.environ["ISSUE_NUMBER"]
+          gh_token = os.environ["GH_TOKEN"]
+          patch = json.dumps({
+              "title": "VK live diagnostic result",
+              "body": body,
+          }, ensure_ascii=False).encode("utf-8")
+          request = Request(
+              f"https://api.github.com/repos/{repo}/issues/{issue}",
+              data=patch,
+              method="PATCH",
+              headers={
+                  "Authorization": f"Bearer {gh_token}",
+                  "Accept": "application/vnd.github+json",
+                  "X-GitHub-Api-Version": "2022-11-28",
+                  "Content-Type": "application/json; charset=utf-8",
+                  "User-Agent": "BB-VG-VK-Diagnostic",
+              },
+          )
+          with urlopen(request, timeout=20) as response:
+              response.read()
+          print(json.dumps(result, ensure_ascii=False))
+          PY
