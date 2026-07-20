@@ -1,7 +1,7 @@
 # Контекст проекта BB V.G. для нового чата / AI-агента
 
 > Состояние на 20.07.2026.
-> Этап 1 глобальной ревизии и этап 2A стабилизации baseline CI завершены. Handoff-PDF создан. Следующий архитектурный блок по плану — этап 2B (Telegram Control Center), но начинать его только по отдельной команде пользователя.
+> Этапы 1, 2A и 2B завершены. Handoff-PDF создан; после 2B production Control Center находится в `bbvg/bot/control_center.py`, а `admin_panel_runtime_v41.py` — тонкий compatibility entrypoint. Следующий отдельный блок — 2C очистки исторической panel runtime chain, начинать его только по команде пользователя.
 
 ## 1. Репозиторий
 
@@ -34,14 +34,14 @@ BB V.G. мониторит утверждённые Telegram-источники,
 
 Инвентаризация завершена. Подтверждено:
 
-- Telegram production: `admin-bot.yml → admin_panel_runtime_v41.py → bbvg/bot/runtime.py`;
+- Telegram production: `admin-bot.yml → admin_panel_runtime_v41.py` (thin wrapper) `→ bbvg/bot/control_center.py → bbvg/bot/runtime.py`;
 - monitor production: `monitor.yml → bbvg_monitor_main.py`;
 - health production: `system-health.yml → system_checks_v3.py → v2 → system_checks.py`;
 - legacy Mini App-era panel chain как минимум `v16–v24`;
 - bot-only compatibility chain `v25→v26→v28→v29→v30→v31→v32→v36→v37→v38`;
 - stable `bbvg.bot.runtime.TelegramPanelRuntime` уже не наследует versioned classes;
-- старую runtime-chain удерживают validation/recovery workflows;
-- `admin_panel_runtime_v41.py` всё ещё содержит уникальную production-логику;
+- основные current/recovery/private-state проверки больше не компилируют всю старую runtime-chain, но отдельные stale-ссылки System Health/preflight ещё требуют этапа 2C;
+- `admin_panel_runtime_v41.py` стал тонким compatibility entrypoint, а production-логика верхнего слоя находится в `bbvg/bot/control_center.py`;
 - Mini App/State API заморожены и отключены;
 - production `preflight.py` всё ещё требует frozen Mini App static assets;
 - source workflows содержат stale `66`-названия;
@@ -97,13 +97,13 @@ Baseline CI PR #108 диагностирован и стабилизирован
 
 ## 12. Что делать дальше
 
-По PDF следующий блок — этап 2B:
+Следующий отдельный блок — этап 2C:
 
-1. перенести уникальную логику `admin_panel_runtime_v41.py` в stable `bbvg/bot/*`;
-2. сохранить точный состав и порядок существующих кнопок и `callback_data`;
-3. после каждого небольшого переноса запускать button matrix, current contracts, full pytest и acceptance;
-4. только после доказанной эквивалентности сделать `v41` thin compatibility entrypoint;
-5. дальнейшие главы (`system_checks`, legacy runtime, stale workflows, runtime-state architecture) не начинать без отдельной команды пользователя.
+1. убрать оставшиеся stale-ссылки System Health/preflight на versioned panel runtime;
+2. повторно проверить внутренние импорты `v25–v40`;
+3. удалить только доказанно ненужные historical/compatibility файлы небольшими группами;
+4. после каждой группы запускать пять основных CI-проверок и regression порядка кнопок;
+5. System Health consolidation и остальные главы не начинать без отдельной команды пользователя.
 
 ## 13. Правило достоверности
 

@@ -47,17 +47,17 @@ docs/
 - `docs/PROJECT_CHANGELOG_RU.md`
 - `docs/RUNTIME_METHOD_INVENTORY_RU.md`
 
-Этап 1 глобальной ревизии завершён 20.07.2026. Самодостаточный handoff-PDF после инвентаризации создан. Этап 2A завершён: baseline CI draft PR #108 диагностирован и стабилизирован, ownership inventory расширен до 29 JSON, а реальная ошибка natural-language admin исправлена. Следующий архитектурный блок по плану — этап 2B (Telegram Control Center); не начинать его без отдельной команды пользователя.
+Этапы 1, 2A и 2B завершены. В 2B production-логика Telegram Control Center перенесена в стабильный `bbvg/bot/control_center.py`, а `admin_panel_runtime_v41.py` стал тонким compatibility entrypoint. Точный порядок пользовательского и административного меню закреплён regression-тестом. Историческая versioned panel chain не удалена: её остаточные статические ссылки разбираются отдельным безопасным блоком 2C. Следующую главу не начинать без отдельной команды пользователя.
 
 ## 3. Действующие точки входа
 
-- Стабильный владелец Telegram-панели: `bbvg/bot/runtime.py`.
+- Стабильный production-владелец верхнего слоя Telegram Control Center: `bbvg/bot/control_center.py`; базовый runtime: `bbvg/bot/runtime.py`.
 - Фактическая production-команда workflow: `python admin_panel_runtime_v41.py`.
-- `admin_panel_runtime_v41.py` пока **не является полностью тонким переходником**: этап 1 подтвердил, что в нём остаются уникальные production-методы UI, аналитики, удаления/стирания пользователей и callback личного участия. До их переноса в стабильные `bbvg/bot/*` файл является одновременно production entrypoint и compatibility-слоем.
+- `admin_panel_runtime_v41.py` — тонкий compatibility entrypoint: production workflow сохраняет прежнюю команду запуска, но реализация импортируется из `bbvg/bot/control_center.py`.
 - Предметные владельцы панели: `bbvg/bot/interface.py` (экраны и навигация), `users.py` (пользователи, роли и настройки), `sources.py` (источники), `wheels.py` (колёса и callback), `storage.py` (зашифрованное состояние), `runtime.py` (финальная композиция, lifecycle и очередь admin actions).
 - Production MRO `bbvg.bot.runtime.TelegramPanelRuntime` не содержит классов из `admin_panel_runtime_v*`.
 - Historical Mini App-era runtime как минимум `admin_panel_runtime_v16–v24` классифицирован как legacy и не является владельцем текущего production-поведения.
-- Bot-only chain `v25→v26→v28→v29→v30→v31→v32→v36→v37→v38` больше не входит в production MRO, но пока удерживается validation/recovery workflows; удалять её можно только после переноса оставшихся recovery-контрактов и удаления всех входящих ссылок.
+- Bot-only chain `v25→v26→v28→v29→v30→v31→v32→v36→v37→v38` больше не входит в production MRO. Основные current/recovery/private-state проверки больше не компилируют эту лестницу, но отдельные stale-ссылки ещё остаются в System Health/preflight и должны быть сняты до удаления файлов в этапе 2C.
 - Монитор колёс: `bbvg_monitor_main.py`, `monitor.py` и тематические install/runtime-модули.
 - System Health production entrypoint: `system_checks_v3.py`, который сейчас строится поверх `system_checks_v2.py` и `system_checks.py`; эта chain является кандидатом на отдельную консолидацию, а не прямое удаление.
 

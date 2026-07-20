@@ -1,6 +1,6 @@
 # Инвентарь runtime и точек входа BB V.G.
 
-> Статус: этап 1 глобальной ревизии завершён.
+> Статус: этапы 1, 2A и 2B завершены; production Control Center перенесён в стабильный модуль.
 > Снимок `main`: `e91f7608b4377bd8bbdf539d75c266c1278084db`.
 
 Документ отвечает на вопрос: **что реально запускается сейчас, через какую цепочку и какие исторические слои всё ещё удерживаются CI/compatibility-контрактами**.
@@ -10,25 +10,18 @@
 ### Production
 
 `.github/workflows/admin-bot.yml`
-→ `python admin_panel_runtime_v41.py`
-→ `TelegramPanelRuntimeV41(TelegramPanelRuntime)`
+→ `python admin_panel_runtime_v41.py` (тонкий compatibility entrypoint)
+→ `bbvg.bot.control_center.TelegramPanelRuntimeV41`
 → `bbvg.bot.runtime.TelegramPanelRuntime`
 → stable mixin/runtime слои `bbvg/bot/*`.
 
 `bbvg.bot.runtime.TelegramPanelRuntime` не имеет `admin_panel_runtime_v*` в MRO.
 
-### Расхождение
+### Результат этапа 2B
 
-`admin_panel_runtime_v41.py` не является полностью тонким wrapper: он содержит уникальные production-методы UI, analytics, owner user deletion/erasure и participation callbacks.
+Уникальный production-слой бывшего `v41` перенесён без изменения поведения в устойчивый модуль `bbvg/bot/control_center.py`. Корневой `admin_panel_runtime_v41.py` оставлен только как тонкий compatibility entrypoint для неизменной production-команды workflow.
 
-Следующий безопасный refactor должен переносить эти методы по владельцам:
-
-- UI/control navigation → `bbvg/bot/interface.py`/`runtime.py`;
-- user deletion/privacy operations → `bbvg/bot/users.py`/`storage.py`;
-- participation callbacks → `bbvg/bot/wheels.py`/`runtime.py`;
-- analytics presentation → стабильный panel runtime/interface owner.
-
-До переноса workflow остаётся на `v41`.
+Regression-тест `tests/test_control_center_stable.py` фиксирует, что wrapper не владеет `show_*`/`handle_callback`, а также точный порядок callback-строк пользовательского и административного меню.
 
 ## 2. Legacy panel runtime maps
 
@@ -46,9 +39,7 @@
 
 `PrivateStateRuntime → v25 → v26 → v28 → v29 → v30 → v31 → v32 → v36 → v37 → v38`.
 
-Текущий stable runtime уже вынесен из этой MRO-chain, но файлы компилируются `v22-checks.yml`, `bot-recovery-smoke.yml` и `validate-private-state.yml`.
-
-Следовательно, удаление требует сначала убрать устаревший recovery/validation contract, а не только production import.
+Текущий stable runtime вынесен из этой MRO-chain. В этапе 2B `v22-checks.yml`, `bot-recovery-smoke.yml`, `validate-private-state.yml` и `scripts/validate_control_center.sh` переведены на стабильный Control Center и больше не компилируют всю старую лестницу. До физического удаления файлов в этапе 2C необходимо снять оставшиеся статические ссылки System Health/preflight и повторно проверить внутренние импорты versioned-файлов.
 
 ## 3. Wheel monitor
 

@@ -1,7 +1,7 @@
 # План глобальной очистки и рефакторинга BB V.G.
 
 > Актуализация: 20.07.2026.
-> Статус: **этап 1 и этап 2A — завершены; следующий архитектурный блок — этап 2B**.
+> Статус: **этапы 1, 2A и 2B завершены; следующий отдельный блок — этап 2C очистки исторической panel runtime chain**.
 > Текущий снимок `main`, использованный для завершения этапа 1: `e91f7608b4377bd8bbdf539d75c266c1278084db`.
 > Исходная rollback-точка: `backup/before-global-repository-cleanup-2026-07-20`, созданная от `1da3115319305fa5e237cd90124186c12ab98753`.
 > Рабочая ветка: `cleanup/global-repository-audit-2026-07-20`.
@@ -88,14 +88,22 @@
 - [x] Временная CI-диагностика и одноразовые patch-шаги удалены.
 - [x] На чистом head после исправлений все пять основных PR-проверок прошли: Validate current, current checks, bot-only recovery, recovery smoke и Telegram transport.
 
-## Этап 2B. Telegram Control Center
+## Этап 2B. Telegram Control Center — завершено
 
-1. Составить метод-карту уникальной логики `TelegramPanelRuntimeV41`.
-2. Перенести её по стабильным владельцам `bbvg/bot/*`.
-3. Сохранить состав, порядок и `callback_data` кнопок.
-4. Запустить button matrix, current contracts, full pytest и acceptance.
-5. Сделать `v41` thin compatibility entrypoint.
-6. После этого убрать validation/recovery-зависимость от `v25–v38` и удалить подтверждённо ненужные слои отдельным блоком.
+- [x] Составлена карта 14 уникальных production-методов `TelegramPanelRuntimeV41`.
+- [x] Реализация перенесена в устойчивый `bbvg/bot/control_center.py` без изменения поведения.
+- [x] `admin_panel_runtime_v41.py` превращён в тонкий compatibility entrypoint с прежней production-командой запуска.
+- [x] Добавлен `tests/test_control_center_stable.py`, фиксирующий отсутствие production-методов в wrapper и точный порядок меню/callback.
+- [x] После переноса одновременно прошли Validate current, current checks, bot-only recovery, recovery smoke и Telegram transport.
+- [x] `scripts/validate_control_center.sh`, `v22-checks.yml`, `bot-recovery-smoke.yml` и `validate-private-state.yml` больше не компилируют всю старую `v25–v38`-лестницу.
+
+## Этап 2C. Очистка исторической panel runtime chain
+
+1. Снять оставшиеся stale-ссылки на versioned panel runtime из System Health/preflight.
+2. Повторно построить граф внутренних импортов `v25–v40`.
+3. Классифицировать каждый файл как обязательный compatibility или SAFE TO DELETE.
+4. Удалять только доказанно ненужные файлы небольшими группами с полным CI после каждой группы.
+5. Не менять UI, callback_data и production-команду запуска.
 
 ## Этап 3 после PDF. System Health
 

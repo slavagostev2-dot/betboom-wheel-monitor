@@ -1,6 +1,6 @@
 # Инвентарь кода и структуры BB V.G.
 
-> Статус: **этап 1 глобальной ревизии и этап 2A стабилизации baseline CI завершены**.
+> Статус: **этапы 1, 2A и 2B завершены; Telegram Control Center имеет стабильного production-владельца**.
 > Дата фиксации: 20.07.2026.
 > Актуальный `main`, с которым синхронизирована рабочая ветка аудита: `e91f7608b4377bd8bbdf539d75c266c1278084db`.
 > Исходная rollback-точка: `backup/before-global-repository-cleanup-2026-07-20`, созданная от SHA `1da3115319305fa5e237cd90124186c12ab98753`.
@@ -23,8 +23,9 @@
 ### PRODUCTION
 
 - `.github/workflows/admin-bot.yml` — основной long-running workflow.
-- `admin_panel_runtime_v41.py` — фактическая production-команда workflow.
-- `bbvg/bot/runtime.py` — стабильный `TelegramPanelRuntime`; production MRO не наследует `admin_panel_runtime_v*`.
+- `admin_panel_runtime_v41.py` — тонкий compatibility entrypoint и фактическая production-команда workflow.
+- `bbvg/bot/control_center.py` — стабильный владелец production-логики верхнего слоя Telegram Control Center.
+- `bbvg/bot/runtime.py` — стабильный базовый `TelegramPanelRuntime`; production MRO не наследует `admin_panel_runtime_v*`.
 - `bbvg/bot/foundation.py` — фундамент runtime.
 - `bbvg/bot/interface.py` — экраны и навигация.
 - `bbvg/bot/users.py` — пользователи, роли и настройки.
@@ -37,11 +38,9 @@
 - `admin_runtime.py` — runtime-операции источников.
 - `admin_action_queue.py` — очередь административных действий.
 
-### Подтверждённое расхождение
+### Результат этапа 2B
 
-`admin_panel_runtime_v41.py` ранее описывался как тонкий compatibility entrypoint, но фактически содержит собственную production-логику: меню, фильтрацию callback, аналитику, удаление/стирание пользователей и callback участия.
-
-**Статус:** PRODUCTION + COMPATIBILITY + CANDIDATE. Цель следующего cleanup-блока — перенести уникальную логику в тематические `bbvg/bot/*`, сохранив UI и callback-контракты.
+Уникальная production-логика бывшего `v41` перенесена в `bbvg/bot/control_center.py` без изменения пользовательского поведения. Корневой `admin_panel_runtime_v41.py` больше не владеет методами интерфейса и callback и остаётся только совместимым entrypoint. Порядок меню и callback-строк закреплён отдельным regression-тестом.
 
 ## 3. Исторические runtime-слои панели
 
@@ -53,15 +52,11 @@
 
 ### Bot-only compatibility chain
 
-Текущие validation/recovery workflows явно компилируют:
-
-`v25`, `v26`, `v28`, `v29`, `v30`, `v31`, `v32`, `v36`, `v37`, `v38`, `v41`.
-
 Подтверждённая лестница наследования: `v25 → v26 → v28 → v29 → v30 → v31 → v32 → v36 → v37 → v38`.
 
-Стабильный `bbvg.bot.runtime.TelegramPanelRuntime` уже не использует эту MRO-лестницу, но CI/recovery продолжает удерживать файлы.
+После этапа 2B основные current/recovery/private-state workflows и Control Center validator больше не компилируют всю эту лестницу. Файлы пока не удалены: остаются отдельные stale-ссылки System Health/preflight и внутренние versioned-импорты, которые должны быть проверены в самостоятельном этапе 2C.
 
-**Статус `v25–v38`:** COMPATIBILITY / VALIDATION-RETAINED / CANDIDATE.
+**Статус `v25–v38`:** LEGACY/COMPATIBILITY CANDIDATE; физическое удаление пока запрещено.
 
 ### Отдельный монолит
 

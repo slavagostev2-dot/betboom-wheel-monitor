@@ -6,6 +6,18 @@
 
 ---
 
+## 2026-07-21 — Этап 2B: Telegram Control Center перенесён в стабильный production-модуль
+
+Перед этапом создана ordinary backup-ветка `backup/before-chapter-2b-2026-07-21` от текущего `main` и отдельная rollback-точка audit-ветки `safety/chapter-2b-start-2026-07-21` на SHA `a865cce5771e8275619152fefa4851a632d3bfdc`.
+
+Уникальный 517-строчный production-слой `admin_panel_runtime_v41.py` механически перенесён в стабильный `bbvg/bot/control_center.py`; корневой `admin_panel_runtime_v41.py` оставлен тонким compatibility entrypoint для неизменной команды `python admin_panel_runtime_v41.py`. Поведение интерфейса на первом переносе сохранено побайтово.
+
+Добавлен regression-тест `tests/test_control_center_stable.py`: он проверяет, что wrapper не владеет `show_*` и `handle_callback`, и фиксирует точный порядок callback-строк пользовательского и административного меню. После переноса все пять основных PR-проверок одновременно прошли.
+
+Основные current/recovery/private-state workflow и `scripts/validate_control_center.sh` больше не компилируют целиком историческую `v25–v38`-лестницу. Сами versioned-файлы в 2B не удалялись: для безопасного удаления выделен отдельный этап 2C, потому что остаются отдельные stale-ссылки System Health/preflight и внутренние versioned-импорты.
+
+Wheel lifecycle, source tiers, backup rotation, callback_data и порядок существовавших кнопок этапом 2B не менялись.
+
 ## 2026-07-21 — Этап 2A: baseline CI диагностирован и стабилизирован
 
 После завершения полной инвентаризации draft PR #108 имел красные проверки `Validate current`, `BB V.G. current checks` и `Validate bot-only recovery`. Диагностика по отдельным шагам и полному pytest-выводу показала, что проблемы не были следствием одной audit-документации.

@@ -12,9 +12,9 @@ Production workflow: `.github/workflows/admin-bot.yml`.
 
 Текущая команда запуска: `python admin_panel_runtime_v41.py`.
 
-Стабильная архитектура находится в `bbvg/bot/`: `runtime.py`, `foundation.py`, `interface.py`, `users.py`, `sources.py`, `source_requests.py`, `storage.py`, `wheels.py`, `profile.py`, `natural_language_admin.py`.
+Стабильная архитектура находится в `bbvg/bot/`: `control_center.py`, `runtime.py`, `foundation.py`, `interface.py`, `users.py`, `sources.py`, `source_requests.py`, `storage.py`, `wheels.py`, `profile.py`, `natural_language_admin.py`.
 
-На этапе глобальной ревизии подтверждено, что `admin_panel_runtime_v41.py` пока содержит часть уникальной production-логики и ещё не является полностью тонким compatibility entrypoint.
+После этапа 2B `admin_panel_runtime_v41.py` является тонким compatibility entrypoint. Фактический production-слой Control Center находится в `bbvg/bot/control_center.py`; прежняя команда запуска сохранена для совместимости workflow.
 
 ## Мониторинг колёс
 
