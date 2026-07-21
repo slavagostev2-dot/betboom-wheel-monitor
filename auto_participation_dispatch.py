@@ -69,7 +69,14 @@ def _push_state_before_dispatch(branch: str) -> tuple[bool, str]:
             pushed = _git("push", "origin", f"HEAD:{branch}", check=False)
             if pushed.returncode == 0:
                 return True, ""
-            pulled = _git("pull", "--rebase", "origin", branch, check=False)
+            pulled = _git(
+                "pull",
+                "--rebase",
+                "--autostash",
+                "origin",
+                branch,
+                check=False,
+            )
             if pulled.returncode != 0:
                 _git("rebase", "--abort", check=False)
                 return False, (pulled.stderr or pulled.stdout)[-500:]
