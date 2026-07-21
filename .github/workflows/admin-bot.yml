@@ -7,6 +7,7 @@ on:
     paths:
       - "control_center_release.txt"
       - ".github/workflows/admin-bot.yml"
+      - "notification_button_recovery.py"
   workflow_dispatch:
   schedule:
     - cron: "37 3 * * *"
@@ -45,6 +46,15 @@ jobs:
           ADMIN_USER_ID: ${{ secrets.ADMIN_USER_ID }}
           BBVG_TEST_MODE: "1"
         run: bash scripts/validate_control_center.sh
+
+      - name: Validate notification participation recovery
+        env:
+          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+          BOT_STATE_KEY: ${{ secrets.BOT_STATE_KEY }}
+          BOT_CHAT_ID: ${{ secrets.BOT_CHAT_ID }}
+          ADMIN_USER_ID: ${{ secrets.ADMIN_USER_ID }}
+          BBVG_TEST_MODE: "1"
+        run: python notification_button_recovery.py --self-test
 
       - name: Verify configured AI provider
         env:
@@ -180,6 +190,7 @@ jobs:
               "state_key_mode": encrypted.get("key_mode", "unknown"),
               "role_persistence": "aes_gcm_three_way_remote_merge",
               "notification_integrity": "persistent_hmac_delivery_ledger",
+              "notification_button_recovery": "active_wheel_token_fallback",
               "source_rating": "administrator_decisions_additive_finished_and_participating",
               "summary_delivery": "direct_in_process",
               "wheel_colors": "callback_payload_unchanged",
@@ -226,7 +237,7 @@ jobs:
           BBVG_AI_MODEL: ${{ vars.BBVG_AI_MODEL }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-        run: python admin_panel_runtime_v41.py
+        run: python notification_button_recovery.py
 
       - name: Start replacement control-center shift
         if: ${{ always() && steps.run_panel.outcome != 'skipped' && steps.run_panel.outcome != 'cancelled' }}
