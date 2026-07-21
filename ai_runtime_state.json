@@ -1,8 +1,8 @@
 {
   "cache": {
-    "fa807c2141e2bac5817f8c27c1ba84ac42bd414ffe5d86e231ff5bb0f2621f3a": {
-      "expires_at": 1784671369.1497278,
-      "text": "{\n  \"summary\": \"Критический сбой: панель управления не обновлялась 26 минут, бот перестал принимать команды.\",\n  \"impact\": \"Бот неактивен для пользователей, несмотря на корректную работу фоновых процессов и наличие данных в инвентаре.\",\n  \"recommended_action\": \"Проверить heartbeat Control Center и последний workflow панели.\",\n  \"confidence\": \"high\"\n}"
+    "912352b8adfe2334d535b330e2b23585b9ba267d0071a72000c6fa47e9b70a65": {
+      "expires_at": 1784678334.5624597,
+      "text": "{\n  \"summary\": \"Критический сбой: панель управления не обновляла статус более 2 часов (142 минуты).\",\n  \"impact\": \"Бот перестал принимать и обрабатывать команды пользователей, несмотря на исправность источников данных.\",\n  \"recommended_action\": \"Проверить heartbeat Control Center и последний workflow панели.\",\n  \"confidence\": \"high\"\n}"
     }
   },
   "decisions": [
@@ -729,10 +729,20 @@
       "output_sha256": "36d43f5c325d9a1cbc0e592741c0d61bb8539d9bd8667df7353f6d347e1c2603",
       "provider": "gemini",
       "status": "ok"
+    },
+    {
+      "cached": false,
+      "created_at": 1784677434.5624597,
+      "feature": "health_inspector",
+      "id": "73fd8ecda76a44b9aba7d4afb018eeb9",
+      "model": "gemini-3.1-flash-lite",
+      "output_sha256": "d2edb16fe9cb919a1581cee31f312c90360950de9f01c2a011828a134126bc77",
+      "provider": "gemini",
+      "status": "ok"
     }
   ],
   "rate_calls": [
-    1784670469.1497278
+    1784677434.5624597
   ],
   "version": 1
 }

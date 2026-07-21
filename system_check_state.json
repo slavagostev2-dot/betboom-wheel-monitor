@@ -1,7 +1,7 @@
 {
-  "active_incidents": 2,
+  "active_incidents": 1,
   "admin_panel": {
-    "age_minutes": 26,
+    "age_minutes": 142,
     "last_heartbeat_at": "2026-07-21T21:21:03.986713+00:00",
     "started_at": "2026-07-21T15:53:12.674345+00:00",
     "status": "running",
@@ -13,24 +13,23 @@
     "cached": false,
     "confidence": 0.0,
     "critical_count": 1,
-    "decision_id": "dd58fafeddad45e18f093db185247a43",
-    "finding_count": 2,
+    "decision_id": "73fd8ecda76a44b9aba7d4afb018eeb9",
+    "finding_count": 1,
     "finding_kinds": [
-      "admin_panel_stale",
-      "discovery_inventory"
+      "admin_panel_stale"
     ],
-    "generated_at": "2026-07-21T21:47:50.172028+00:00",
-    "impact": "Бот неактивен для пользователей, несмотря на корректную работу фоновых процессов и наличие данных в инвентаре.",
+    "generated_at": "2026-07-21T23:43:55.296817+00:00",
+    "impact": "Бот перестал принимать и обрабатывать команды пользователей, несмотря на исправность источников данных.",
     "mode": "ai",
     "model": "gemini-3.1-flash-lite",
     "provider": "gemini",
     "recommended_action": "Проверить heartbeat Control Center и последний workflow панели.",
     "requires_human_attention": true,
     "severity": "critical",
-    "summary": "Критический сбой: панель управления не обновлялась 26 минут, бот перестал принимать команды.",
+    "summary": "Критический сбой: панель управления не обновляла статус более 2 часов (142 минуты).",
     "used_fallback": false,
     "version": 1,
-    "warning_count": 1
+    "warning_count": 0
   },
   "automation_state": {
     "expected_nightly_sources": 1,
@@ -43,7 +42,7 @@
     "source_tier_last_run_at": "2026-07-21T16:14:08.424555+00:00",
     "source_tier_policy": "manual_nightly_only",
     "transport_accounted_sources": 169,
-    "transport_checked_at": "2026-07-21T16:14:11.322708+00:00",
+    "transport_checked_at": "2026-07-21T23:43:18.873681+00:00",
     "transport_domain": "telegram.me",
     "transport_status": "success"
   },
@@ -54,7 +53,7 @@
   "check_matrix": {
     "automations": "ok",
     "bot_panel": "failed",
-    "discovery": "failed",
+    "discovery": "ok",
     "inventory": "ok",
     "miniapp": "ok",
     "monitor": "ok",
@@ -64,13 +63,13 @@
     "telegram_transport": "ok",
     "wheel_api": "ok"
   },
-  "checked_at": "2026-07-21T21:47:47.833090+00:00",
+  "checked_at": "2026-07-21T23:43:53.341500+00:00",
   "discovery": {
-    "active_size": 167,
+    "active_size": 168,
     "candidate_count": 484,
     "catalog_size": 1,
     "discovery_errors": 0,
-    "discovery_last_run_at": "2026-07-21T14:27:48.719304+00:00",
+    "discovery_last_run_at": "2026-07-21T23:42:58.485350+00:00",
     "domain": "telegram.me",
     "intelligence_domain": "telegram.me",
     "intelligence_last_run_at": "2026-07-21T21:47:26.340853+00:00",
@@ -87,11 +86,7 @@
       "unique_candidates": 157,
       "verified_candidates": 150,
       "workers": 12
-    },
-    "inventory_confirmation_window_hours": 6,
-    "inventory_registry_generated_at": "2026-07-21T15:45:24.849679+00:00",
-    "inventory_sync_age_minutes": 362,
-    "inventory_sync_state": "discovery_sync_overdue"
+    }
   },
   "domain_compliance": {
     "checked_files": [
@@ -106,25 +101,18 @@
     "legacy_url_offenders": [],
     "primary": "telegram.me"
   },
-  "finding_count": 2,
+  "finding_count": 1,
   "findings": [
     {
-      "detail": "Последний живой сигнал был 26 минут назад.",
+      "detail": "Последний живой сигнал был 142 минут назад.",
       "kind": "admin_panel_stale",
       "severity": "critical",
       "subject": "",
       "title": "Бот давно не принимает команды пользователей"
-    },
-    {
-      "detail": "В состоянии поиска записано 168, текущий inventory содержит 169.",
-      "kind": "discovery_inventory",
-      "severity": "warning",
-      "subject": "",
-      "title": "Ночная проверка видит не весь утверждённый пул"
     }
   ],
   "gpt_diagnostic_snapshot": {
-    "active_incidents": 2,
+    "active_incidents": 1,
     "bot_panel_heartbeat": "2026-07-21T21:21:03.986713+00:00",
     "checked_sources": 168,
     "configured_sources": 169,
@@ -135,9 +123,9 @@
     "wheel_api_health": {
       "alert_threshold": 3,
       "consecutive_failures": 0,
-      "last_checked_at": "2026-07-21T21:45:50.796631+00:00",
+      "last_checked_at": "2026-07-21T23:42:41.757485+00:00",
       "last_failure_at": "2026-07-20T14:02:03.366327+00:00",
-      "last_success_at": "2026-07-21T21:45:50.796631+00:00",
+      "last_success_at": "2026-07-21T23:42:41.757485+00:00",
       "status": "ok"
     }
   },
@@ -146,10 +134,10 @@
     "health_inspector_mode": "ai",
     "health_inspector_status": "ok",
     "messages_attempted": 1,
-    "opened": 2,
+    "opened": 0,
     "resolved": 1
   },
-  "incident_sequence": 92,
+  "incident_sequence": 93,
   "inventory": {
     "configured": 168,
     "configured_total": 169,
@@ -172,19 +160,19 @@
   "monitor": {
     "brand": "BB V.G.",
     "checked_sources": 168,
-    "checks_delta": 612318,
-    "checks_total": 612318,
+    "checks_delta": 168,
+    "checks_total": 631638,
     "consecutive_failures": 0,
     "consecutive_no_progress": 0,
     "head_sha": "45943714b1f4fd08f1d964df06da369427e99c74",
-    "iteration": 1,
+    "iteration": 116,
     "last_failure_at": "2026-07-21T12:13:02.326632+00:00",
-    "last_iteration_at": "2026-07-21T21:45:50.964290+00:00",
-    "last_iteration_duration_seconds": 16,
+    "last_iteration_at": "2026-07-21T23:42:41.921804+00:00",
+    "last_iteration_duration_seconds": 13,
     "last_iteration_exit_code": 0,
-    "last_process_heartbeat_at": "2026-07-21T21:45:50.964290+00:00",
-    "last_successful_checks_total": 612318,
-    "last_successful_iteration_at": "2026-07-21T21:45:50.964290+00:00",
+    "last_process_heartbeat_at": "2026-07-21T23:42:41.921804+00:00",
+    "last_successful_checks_total": 631638,
+    "last_successful_iteration_at": "2026-07-21T23:42:41.921804+00:00",
     "pending_wheels": 0,
     "reachable_sources": 168,
     "restart_recommended": false,
@@ -192,7 +180,7 @@
     "run_id": "29871199987",
     "run_started_at": "2026-07-21T21:45:34.770514+00:00",
     "source_errors": 0,
-    "stats_counter_reset": true,
+    "stats_counter_reset": false,
     "status": "running",
     "version": 3,
     "workflow_run_id": "29871199987"
@@ -267,9 +255,9 @@
   "wheel_api_health": {
     "alert_threshold": 3,
     "consecutive_failures": 0,
-    "last_checked_at": "2026-07-21T21:45:50.796631+00:00",
+    "last_checked_at": "2026-07-21T23:42:41.757485+00:00",
     "last_failure_at": "2026-07-20T14:02:03.366327+00:00",
-    "last_success_at": "2026-07-21T21:45:50.796631+00:00",
+    "last_success_at": "2026-07-21T23:42:41.757485+00:00",
     "status": "ok"
   }
 }
