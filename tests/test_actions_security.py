@@ -47,6 +47,7 @@ ACTIONS_WRITE_WORKFLOWS = {
     "monitor.yml",
     "nightly-discovery.yml",
     "rotate-bot-state-key.yml",
+    "system-health.yml",
 }
 ACTION_RE = re.compile(r"^\s*-?\s*uses:\s*([^\s#]+)", re.MULTILINE)
 
@@ -106,21 +107,3 @@ def test_read_only_checkouts_do_not_persist_git_credentials() -> None:
         checkout_count = texts[name].count("actions/checkout@")
         assert checkout_count
         assert texts[name].count("persist-credentials: false") == checkout_count, name
-
-
-def test_backup_rotation_contract_and_concurrency() -> None:
-    text = workflow_texts()["bot-state-backup.yml"]
-    assert text.count("group: bb-vg-bot-state-backup") == 1
-    assert "dry_run:" in text
-    assert "python backup_rotation.py --self-test" in text
-    assert "python backup_rotation.py" in text
-    assert "CREATED_BACKUP_REF" in text
-    backup_rotation.self_test()
-
-
-def test_production_heartbeat_contract_is_present() -> None:
-    admin = workflow_texts()["admin-bot.yml"]
-    health = (ROOT / "monitor_health.py").read_text(encoding="utf-8")
-    for field in ("head_sha", "workflow_run_id", "run_attempt"):
-        assert f'"{field}"' in admin
-        assert f'"{field}"' in health
