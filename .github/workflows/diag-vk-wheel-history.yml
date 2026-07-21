@@ -30,28 +30,25 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          vk_runs="$(gh run list --repo "$GH_REPO" --workflow vk-wheel-notification.yml --limit 100 --json databaseId,status,conclusion,createdAt,updatedAt,event,displayTitle,headSha,url)"
-          monitor_runs="$(gh run list --repo "$GH_REPO" --workflow monitor.yml --limit 40 --json databaseId,status,conclusion,createdAt,updatedAt,event,displayTitle,headSha,url)"
-          target_monitor_id="$(printf '%s' "$monitor_runs" | jq -r '[.[] | select(.createdAt <= "2026-07-20T21:19:08Z" and .updatedAt >= "2026-07-20T21:19:08Z")][0].databaseId // empty')"
-          if [[ -z "$target_monitor_id" ]]; then
-            target_monitor_id="$(printf '%s' "$monitor_runs" | jq -r '[.[] | select(.createdAt <= "2026-07-20T21:19:08Z")] | sort_by(.createdAt) | reverse | .[0].databaseId // empty')"
-          fi
-          monitor_matches=""
-          if [[ -n "$target_monitor_id" ]]; then
-            monitor_matches="$(gh run view "$target_monitor_id" --repo "$GH_REPO" --log 2>&1 | grep -Ei -C 8 'CTOM05|meowbettt|WARNING VK|VK wheel notification|workflow dispatch' | tail -n 260 || true)"
-          fi
-          state_matches="$(grep -Rni -C 8 'CTOM05\|meowbettt' state.json source_stats.json notification_delivery_state.json 2>/dev/null | head -n 260 || true)"
+          vk_runs="$(gh run list --repo "$GH_REPO" --workflow vk-wheel-notification.yml --limit 150 --json databaseId,status,conclusion,createdAt,updatedAt,event,displayTitle,headSha,url)"
+          selected_vk="$(printf '%s' "$vk_runs" | jq '[.[] | select((.createdAt >= "2026-07-20T20:30:00Z" and .createdAt <= "2026-07-20T22:30:00Z") or (.createdAt >= "2026-07-21T03:00:00Z" and .createdAt <= "2026-07-21T03:40:00Z"))]')"
+          vk_logs_file="$(mktemp)"
+          printf '%s' "$selected_vk" | jq -r '.[].databaseId' | while read -r run_id; do
+            [[ -z "$run_id" ]] && continue
+            echo "===== VK RUN $run_id =====" >> "$vk_logs_file"
+            gh run view "$run_id" --repo "$GH_REPO" --log 2>&1 | tail -n 100 >> "$vk_logs_file" || true
+          done
+          state_matches="$(grep -Rni -C 12 'CTOM05\|meowbettt' state.json source_stats.json notification_delivery_state.json 2>/dev/null | head -n 360 || true)"
           body_file="$(mktemp)"
           {
             echo '## VK workflow runs around CTOM05'
             echo '```json'
-            printf '%s\n' "$vk_runs" | jq '[.[] | select(.createdAt >= "2026-07-20T21:00:00Z" and .createdAt <= "2026-07-20T21:40:00Z")]'
+            printf '%s\n' "$selected_vk" | jq .
             echo '```'
             echo
-            echo '## Matching monitor run'
-            echo "Run id: ${target_monitor_id:-none}"
+            echo '## VK run logs'
             echo '```text'
-            printf '%s\n' "$monitor_matches"
+            cat "$vk_logs_file"
             echo '```'
             echo
             echo '## Runtime state matches'
