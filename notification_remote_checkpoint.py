@@ -10,7 +10,8 @@ import requests
 
 _API_ROOT = "https://api.github.com"
 _STATE_PATH = "notification_delivery_state.json"
-_TIMEOUT = 12
+_TIME_OUT = 12
+_dispatched_wheel_events: set[str] = set()
 
 
 def _configured() -> bool:
@@ -46,7 +47,7 @@ def _remote_state() -> tuple[dict[str, Any], str]:
         _endpoint(),
         headers=_headers(),
         params={"ref": _branch()},
-        timeout=_TIMEOUT,
+        timeout=_TIME_OUT,
     )
     if response.status_code == 404:
         return {}, ""
@@ -86,7 +87,7 @@ def checkpoint(integrity_module: Any) -> bool:
                 _endpoint(),
                 headers=_headers(),
                 json=body,
-                timeout=_TIMEOUT,
+                timeout=_TIME_OUT,
             )
             if response.status_code in {409, 422} and attempt < 3:
                 time.sleep(0.4 * attempt)
@@ -105,6 +106,34 @@ def checkpoint(integrity_module: Any) -> bool:
     return False
 
 
+def _dispatch_auto_participation_recovery(event_identity: str) -> bool:
+    if not _configured() or not event_identity:
+        return False
+    if event_identity in _dispatched_wheel_events:
+        return True
+    endpoint = (
+        f"{_API_ROOT}/repos/{os.environ['GITHUB_REPOSITORY'].strip()}"
+        "/actions/workflows/auto-participation.yml/dispatches"
+    )
+    try:
+        response = requests.post(
+            endpoint,
+            headers=_headers(),
+            json={"ref": _branch()},
+            timeout=_TIME_OUT,
+        )
+        response.raise_for_status()
+        _dispatched_wheel_events.add(event_identity)
+        print(f"Auto participation recovery dispatched for {event_identity}")
+        return True
+    except Exception as exc:
+        print(
+            "WARNING auto participation recovery dispatch failed: "
+            f"{type(exc).__name__}: {exc}"
+        )
+        return False
+
+
 def install(router_module: Any, integrity_module: Any) -> None:
     if getattr(router_module, "_bbvg_remote_notification_checkpoint_installed", False):
         return
@@ -112,6 +141,21 @@ def install(router_module: Any, integrity_module: Any) -> None:
     original_claim = router_module.claim_delivery
     original_complete = router_module.complete_delivery
     original_release = router_module.release_delivery
+    original_event_identity = router_module.notification_event_identity
+
+    def durable_event_identity(
+        kind: str,
+        text: str,
+        url: str | None,
+        reply_markup: dict | None,
+    ) -> str:
+        identity = original_event_identity(kind, text, url, reply_markup)
+        if identity.startswith("wheel:wheels:") and any(
+            marker in identity
+            for marker in (":detected", ":active", ":available")
+        ):
+            _dispatch_auto_participation_recovery(identity)
+        return identity
 
     def durable_claim(key: str) -> bool:
         claimed = bool(original_claim(key))
@@ -132,6 +176,7 @@ def install(router_module: Any, integrity_module: Any) -> None:
         original_release(key)
         checkpoint(integrity_module)
 
+    router_module.notification_event_identity = durable_event_identity
     router_module.claim_delivery = durable_claim
     router_module.complete_delivery = durable_complete
     router_module.release_delivery = durable_release
