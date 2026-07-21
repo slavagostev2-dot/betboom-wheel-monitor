@@ -16,7 +16,7 @@
     "decision_id": "",
     "finding_count": 0,
     "finding_kinds": [],
-    "generated_at": "2026-07-21T05:34:30.192645+00:00",
+    "generated_at": "2026-07-21T05:35:11.355093+00:00",
     "impact": "Мониторинг и связанные контуры могут продолжать штатную работу.",
     "mode": "rules",
     "model": "gemini-2.5-flash-lite",
@@ -61,13 +61,13 @@
     "telegram_transport": "ok",
     "wheel_api": "ok"
   },
-  "checked_at": "2026-07-21T05:34:29.103252+00:00",
+  "checked_at": "2026-07-21T05:35:10.499976+00:00",
   "discovery": {
     "active_size": 166,
     "candidate_count": 470,
     "catalog_size": 2,
     "discovery_errors": 0,
-    "discovery_last_run_at": "2026-07-21T03:30:47.013139+00:00",
+    "discovery_last_run_at": "2026-07-21T05:34:40.097895+00:00",
     "domain": "telegram.me",
     "intelligence_domain": "telegram.me",
     "intelligence_last_run_at": "2026-07-20T21:53:52.982730+00:00",
@@ -175,7 +175,7 @@
     "version": 3,
     "workflow_run_id": "29796244085"
   },
-  "monitor_age_minutes": 12,
+  "monitor_age_minutes": 13,
   "notification_integrity": {
     "algorithm": "HMAC-SHA256",
     "contains_personal_fields": false,
