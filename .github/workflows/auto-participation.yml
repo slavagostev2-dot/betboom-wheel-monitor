@@ -43,10 +43,10 @@ jobs:
             echo "enabled=false" >> "$GITHUB_OUTPUT"
           fi
 
-      - name: Wait for monitor state persistence
+      - name: Refresh latest monitor state
         if: ${{ steps.force.outputs.enabled != 'true' }}
         run: |
-          sleep 20
+          sleep 2
           git fetch origin main
           git reset --hard origin/main
 
