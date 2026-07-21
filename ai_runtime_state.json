@@ -401,6 +401,16 @@
       "output_sha256": "3eb579c656c49e36bb876fd5ee6452d4d514399ad336cad9845bb7d8d3f436fe",
       "provider": "gemini",
       "status": "ok"
+    },
+    {
+      "cached": true,
+      "created_at": 1784631215.3795538,
+      "feature": "health_inspector",
+      "id": "c3c4981708644b3aa991c024729e9518",
+      "model": "gemini-3.1-flash-lite",
+      "output_sha256": "3eb579c656c49e36bb876fd5ee6452d4d514399ad336cad9845bb7d8d3f436fe",
+      "provider": "gemini",
+      "status": "cache_hit"
     }
   ],
   "rate_calls": [

@@ -272,16 +272,16 @@
     }
   },
   "last_change_at": "2026-07-21T10:50:23.339383+00:00",
-  "last_reconcile_at": "2026-07-21T10:50:23.339383+00:00",
+  "last_reconcile_at": "2026-07-21T10:53:35.377195+00:00",
   "last_reconcile_scope": "system_checks",
   "last_summary": {
     "active": 0,
     "new_notification_count": 0,
-    "recovery_notification_count": 1,
+    "recovery_notification_count": 0,
     "scope": "system_checks"
   },
   "sequence": 80,
   "status": "initializing",
-  "updated_at": "2026-07-21T10:50:25.590829+00:00",
+  "updated_at": "2026-07-21T10:53:35.377236+00:00",
   "version": 1
 }
