@@ -1,9 +1,9 @@
 {
   "active_incidents": 3,
   "admin_panel": {
-    "age_minutes": 3,
-    "last_heartbeat_at": "2026-07-21T07:58:29.748708+00:00",
-    "started_at": "2026-07-21T06:01:38.709765+00:00",
+    "age_minutes": 1,
+    "last_heartbeat_at": "2026-07-21T08:11:46.360222+00:00",
+    "started_at": "2026-07-21T08:01:36.885121+00:00",
     "status": "running",
     "update_consumer": "single_getUpdates_owner",
     "version": 41
@@ -13,14 +13,14 @@
     "cached": true,
     "confidence": 0.0,
     "critical_count": 2,
-    "decision_id": "6f0586fa57cc4ea89c5490788170e45f",
+    "decision_id": "f4cf1acd80054534ac281d0aaf5d6c91",
     "finding_count": 3,
     "finding_kinds": [
       "monitor_source_count",
       "source_health_missing",
       "source_transport_smoke"
     ],
-    "generated_at": "2026-07-21T08:01:45.996938+00:00",
+    "generated_at": "2026-07-21T08:13:13.218413+00:00",
     "impact": "Нарушена целостность данных мониторинга; информация по источникам @ayukifunpage и @nucleartigeres отсутствует, что делает текущий отчет неполным.",
     "mode": "ai",
     "model": "gemini-3.1-flash-lite",
@@ -65,7 +65,7 @@
     "telegram_transport": "ok",
     "wheel_api": "ok"
   },
-  "checked_at": "2026-07-21T08:01:44.422660+00:00",
+  "checked_at": "2026-07-21T08:13:11.878412+00:00",
   "discovery": {
     "active_size": 166,
     "candidate_count": 470,
@@ -129,7 +129,7 @@
   ],
   "gpt_diagnostic_snapshot": {
     "active_incidents": 3,
-    "bot_panel_heartbeat": "2026-07-21T07:58:29.748708+00:00",
+    "bot_panel_heartbeat": "2026-07-21T08:11:46.360222+00:00",
     "checked_sources": 166,
     "configured_sources": 168,
     "domain": "telegram.me",
@@ -202,7 +202,7 @@
     "version": 3,
     "workflow_run_id": "29806000685"
   },
-  "monitor_age_minutes": 8,
+  "monitor_age_minutes": 19,
   "notification_integrity": {
     "algorithm": "HMAC-SHA256",
     "contains_personal_fields": false,
