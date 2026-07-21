@@ -1,0 +1,47 @@
+name: Diagnostic VK wheel history
+
+on:
+  push:
+    branches:
+      - diag/vk-wheel-history
+    paths:
+      - ".github/workflows/diag-vk-wheel-history.yml"
+
+permissions:
+  actions: read
+  contents: read
+  issues: write
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Inspect VK wheel workflow history
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          ISSUE_NUMBER: "111"
+        shell: bash
+        run: |
+          set -euo pipefail
+          runs="$(gh run list --repo "$GH_REPO" --workflow vk-wheel-notification.yml --limit 100 --json databaseId,status,conclusion,createdAt,event,displayTitle,headSha,url)"
+          target_id="$(printf '%s' "$runs" | jq -r '[.[] | select(.createdAt >= "2026-07-20T21:10:00Z" and .createdAt <= "2026-07-20T21:30:00Z")][0].databaseId // empty')"
+          target_log=""
+          if [[ -n "$target_id" ]]; then
+            target_log="$(gh run view "$target_id" --repo "$GH_REPO" --log 2>&1 | tail -n 160 || true)"
+          fi
+          body_file="$(mktemp)"
+          {
+            echo 'VK wheel workflow history around CTOM05:'
+            echo
+            echo '```json'
+            printf '%s\n' "$runs" | jq '[.[] | select(.createdAt >= "2026-07-20T21:00:00Z" and .createdAt <= "2026-07-20T21:40:00Z")]'
+            echo '```'
+            echo
+            echo "Target run id: ${target_id:-none}"
+            echo
+            echo '```text'
+            printf '%s\n' "$target_log"
+            echo '```'
+          } > "$body_file"
+          gh issue edit "$ISSUE_NUMBER" --repo "$GH_REPO" --title "VK CTOM05 diagnostic result" --body-file "$body_file"
