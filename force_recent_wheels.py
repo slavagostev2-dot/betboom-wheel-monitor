@@ -26,6 +26,105 @@ def _json(path: Path, default: Any) -> Any:
     return value
 
 
+def _event_token(item: dict[str, Any]) -> str:
+    key = str(item.get("wheel_key") or "").casefold()
+    action_id = int(item.get("action_id") or 0)
+    start = str(item.get("server_start_at") or "")
+    if action_id:
+        return f"{key}#action:{action_id}:{start}"
+    return f"{key}#seen:{item.get('message_date') or ''}"
+
+
+def _restore_runtime_state(
+    state: dict[str, Any],
+    active: list[dict[str, Any]],
+    attempts: list[dict[str, Any]],
+    scanned_at: Any,
+) -> None:
+    attempts_by_key = {
+        str(item.get("wheel_key") or "").casefold(): item
+        for item in attempts
+        if isinstance(item, dict)
+    }
+    active_wheels = state.setdefault("active_wheels", {})
+    participating_wheels = state.setdefault("participating_wheels", {})
+    processed = state.setdefault("auto_participation_events", {})
+
+    for item in active:
+        key = str(item.get("wheel_key") or "").casefold()
+        if not key:
+            continue
+        entry = active_wheels.get(key)
+        if not isinstance(entry, dict):
+            entry = {}
+            active_wheels[key] = entry
+
+        deadline = monitor.parse_datetime(item.get("deadline"))
+        expires = deadline + timedelta(minutes=30) if deadline is not None else scanned_at + timedelta(hours=2)
+        entry.update(
+            {
+                "identifier": key,
+                "wheel_key": key,
+                "url": str(item.get("url") or ""),
+                "source": str(item.get("source") or ""),
+                "message_id": int(item.get("message_id") or 0),
+                "message_date": item.get("message_date"),
+                "message_url": item.get("message_url"),
+                "action_id": int(item.get("action_id") or 0),
+                "deadline": item.get("deadline"),
+                "expires_at": expires.isoformat(),
+                "server_start_at": item.get("server_start_at"),
+                "page_status": "active",
+                "availability_status": "available",
+                "verification_status": monitor.WHEEL_VERIFICATION_CONFIRMED,
+                "method": "восстановлено аварийной проверкой BetBoom",
+                "last_checked_at": scanned_at.isoformat(),
+                "last_verification_at": scanned_at.isoformat(),
+                "needs_manual_time": deadline is None,
+            }
+        )
+
+        attempt = attempts_by_key.get(key)
+        if not isinstance(attempt, dict) or not bool(attempt.get("success")):
+            entry.setdefault("participating", False)
+            entry.setdefault("lifecycle_state", "active")
+            continue
+
+        status = str(attempt.get("status") or "participated")
+        entry.update(
+            {
+                "participating": True,
+                "participating_at": scanned_at.isoformat(),
+                "lifecycle_state": "participating",
+                "auto_participation_status": "participated",
+                "auto_participation_checked_at": scanned_at.isoformat(),
+                "auto_participation_confirmed_at": scanned_at.isoformat(),
+                "auto_participation_retry_allowed": False,
+            }
+        )
+        participating_wheels[key] = {
+            "identifier": key,
+            "url": str(item.get("url") or ""),
+            "deadline": item.get("deadline"),
+            "expires_at": expires.isoformat(),
+            "marked_at": scanned_at.isoformat(),
+            "confirmed_at": scanned_at.isoformat(),
+            "participation_source": "betboom_browser_recovery",
+            "participation_status": status,
+        }
+        processed[_event_token(item)] = {
+            "wheel_key": key,
+            "status": "participated",
+            "detail": str(attempt.get("detail") or "BetBoom подтвердил участие")[:300],
+            "attempted_at": scanned_at.isoformat(),
+            "retry_allowed": False,
+            "recovery_scan": True,
+        }
+
+    state["last_auto_participation_recovery_scan_at"] = scanned_at.isoformat()
+    monitor.save_state(state)
+
+
 def main() -> int:
     if not auto.configured():
         raise SystemExit("BetBoom auto participation session is not configured")
@@ -111,7 +210,12 @@ def main() -> int:
             }
             attempts.append(attempt)
     finally:
-        TRIGGER_PATH.write_text(original_trigger, encoding="utf-8")
+        if original_trigger:
+            TRIGGER_PATH.write_text(original_trigger, encoding="utf-8")
+        else:
+            TRIGGER_PATH.unlink(missing_ok=True)
+
+    _restore_runtime_state(persisted, active, attempts, now)
 
     payload = {
         "scanned_at": now.isoformat(),
