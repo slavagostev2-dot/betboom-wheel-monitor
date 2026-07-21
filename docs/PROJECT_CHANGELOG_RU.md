@@ -20,7 +20,9 @@
 
 **Проверка:** срочное `zonertw4` — участие подтверждено BetBoom; последующее `aunkere` — штатно `participated`; монитор проверяет 167 источников, source errors = 0.
 
-**Промежуточная rollback-точка:** `backup/2026-07-21-after-auto-participation-recovery`. Финальная post-update backup создаётся после этой синхронизации документации.
+**Промежуточная rollback-точка:** `backup/2026-07-21-after-auto-participation-recovery`.
+
+**Post-update backup:** `backup/2026-07-21-after-auto-participation-recovery-final` → `fdb91fe2a9ce853b4cc5f3433f0bb065cda35e49`.
 
 **Откат:** вернуть post-update/pre-update backup целиком; ручное восстановление отдельных runtime JSON не требуется.
 
