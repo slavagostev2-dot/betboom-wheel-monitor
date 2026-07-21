@@ -127,6 +127,7 @@ def self_test() -> None:
             assert isinstance(exists, bool)
             assert notification_router._bbvg_notification_integrity_v2_installed is True
             assert notification_router._bbvg_remote_notification_checkpoint_installed is True
+            assert callable(notification_router.notification_event_identity)
     finally:
         bot_private_state.STATE_PATH = original
     print("BB V.G. bot notification state self-test passed")
