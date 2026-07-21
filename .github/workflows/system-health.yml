@@ -9,6 +9,8 @@ on:
       - "system_checks_v2.py"
       - "system_checks_v3.py"
       - "incident_manager.py"
+      - "monitor_health.py"
+      - "monitor_status.json"
       - "bbvg/ai_core.py"
       - "bbvg/health_inspector.py"
       - "ai_runtime_state.json"
@@ -52,16 +54,91 @@ on:
     branches: [main]
   schedule:
     - cron: "7,22,37,52 * * * *"
+    - cron: "*/5 * * * *"
 
 permissions:
   contents: read
 
 concurrency:
-  group: bb-vg-system-health
+  group: bb-vg-system-health-${{ github.event_name == 'schedule' && github.event.schedule || github.event_name }}
   cancel-in-progress: true
 
 jobs:
+  monitor-watchdog:
+    if: ${{ github.event_name == 'schedule' && github.event.schedule == '*/5 * * * *' }}
+    permissions:
+      contents: read
+      actions: write
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          ref: main
+          fetch-depth: 1
+          persist-credentials: false
+
+      - name: Check monitor heartbeat freshness
+        id: heartbeat
+        shell: bash
+        run: |
+          set -euo pipefail
+          max_age_seconds=480
+          heartbeat=$(jq -r '.last_process_heartbeat_at // .last_iteration_at // empty' monitor_status.json)
+          run_id=$(jq -r '.workflow_run_id // .run_id // empty' monitor_status.json)
+          stale=false
+          age_seconds=999999
+
+          if [[ -n "$heartbeat" ]]; then
+            heartbeat_epoch=$(date -u -d "$heartbeat" +%s 2>/dev/null || echo 0)
+            now_epoch=$(date -u +%s)
+            if (( heartbeat_epoch > 0 )); then
+              age_seconds=$(( now_epoch - heartbeat_epoch ))
+              if (( age_seconds < 0 )); then
+                age_seconds=0
+              fi
+            fi
+          fi
+
+          if [[ -z "$heartbeat" ]] || (( age_seconds > max_age_seconds )); then
+            stale=true
+          fi
+
+          echo "stale=$stale" >> "$GITHUB_OUTPUT"
+          echo "run_id=$run_id" >> "$GITHUB_OUTPUT"
+          echo "age_seconds=$age_seconds" >> "$GITHUB_OUTPUT"
+          echo "Monitor heartbeat age: $(( age_seconds / 60 )) minute(s); stale=$stale; run_id=${run_id:-unknown}"
+
+      - name: Replace stale monitor
+        if: ${{ steps.heartbeat.outputs.stale == 'true' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+          STALE_RUN_ID: ${{ steps.heartbeat.outputs.run_id }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          newer_active=0
+          if [[ "$STALE_RUN_ID" =~ ^[0-9]+$ ]]; then
+            newer_active=$(gh run list \
+              --workflow monitor.yml \
+              --limit 20 \
+              --json databaseId,status \
+              --jq --argjson stale "$STALE_RUN_ID" \
+              '[.[] | select((.status == "queued" or .status == "in_progress") and .databaseId > $stale)] | length')
+          fi
+
+          if (( newer_active > 0 )); then
+            echo "A newer monitor replacement is already queued or running; watchdog will not duplicate it."
+            exit 0
+          fi
+
+          echo "Monitor heartbeat is stale; requesting an authoritative replacement."
+          gh workflow run monitor.yml --ref main -f continuous=true -f replace=true
+
   health:
+    if: ${{ github.event_name != 'schedule' || github.event.schedule != '*/5 * * * *' }}
     permissions:
       contents: write
     runs-on: ubuntu-latest
@@ -98,7 +175,8 @@ jobs:
             }
           done
           python -m compileall -q bbvg
-          python -m py_compile system_checks.py system_checks_v2.py system_checks_v3.py incident_manager.py telegram_transport.py notification_router.py notification_integrity_v2.py wheel_publications_v2.py rating_policy.py chapter2_unified_logic.py admin_action_queue.py chapter1_stability.py bot_notification_state.py bot_private_state.py privacy_retention.py monitor.py monitor_data.py admin_panel_runtime_v41.py telegram_ui.py chapter4_acceptance.py
+          python -m py_compile system_checks.py system_checks_v2.py system_checks_v3.py incident_manager.py monitor_health.py telegram_transport.py notification_router.py notification_integrity_v2.py wheel_publications_v2.py rating_policy.py chapter2_unified_logic.py admin_action_queue.py chapter1_stability.py bot_notification_state.py bot_private_state.py privacy_retention.py monitor.py monitor_data.py admin_panel_runtime_v41.py telegram_ui.py chapter4_acceptance.py
+          python monitor_health.py --self-test
           python -m bbvg.bot.storage
           python -m bbvg.bot.users
           python notification_integrity_v2.py --self-test
