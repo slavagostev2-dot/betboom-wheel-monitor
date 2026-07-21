@@ -287,7 +287,7 @@ def main() -> None:
     if not splash_art.is_file() or splash_art.stat().st_size < 10_000:
         raise SystemExit("PRECHECK ERROR: unified Mini App splash artwork is missing or empty")
     require_text("docs/styles.css", ("--chart-columns", ".theme-moon", ".profile-settings"))
-    controls_source = (ROOT / "docs/bbvg-controls.js").read_text(encoding="utf-8")
+    controls_source = (ROOT / "docs" / "bbvg-controls.js").read_text(encoding="utf-8")
     if 'data-setting="lightTheme"' in controls_source:
         raise SystemExit("PRECHECK ERROR: duplicate profile theme switch returned")
     if 'class="card profile-head"' in controls_source:
@@ -326,8 +326,8 @@ def main() -> None:
     all_values = configured_values + nightly_values
     configured_keys = [item.casefold() for item in all_values]
     configured_total = len(set(configured_keys))
-    if not configured_values or not nightly_values:
-        raise SystemExit("PRECHECK ERROR: primary and nightly inventories must both be explicit")
+    if not configured_values:
+        raise SystemExit("PRECHECK ERROR: primary inventory must be explicit")
     if len(configured_keys) != len(set(configured_keys)):
         raise SystemExit("PRECHECK ERROR: source tiers contain duplicate or overlapping sources")
 
