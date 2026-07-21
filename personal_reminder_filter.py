@@ -21,6 +21,8 @@ REMINDER_MARKERS = (
 _CURRENT_STATS: dict[str, Any] | None = None
 _DISPATCH_RETRY_AFTER = timedelta(minutes=3)
 _DISPATCH_RESULT_TIMEOUT = timedelta(minutes=5)
+_DISPATCH_FAILURE_LIMIT = 3
+_DISABLED_WORKFLOW_MARKER = "disabled workflow"
 
 
 def set_current_stats(stats: dict[str, Any] | None) -> None:
@@ -131,6 +133,62 @@ def _merge_dispatch_ledger_from_disk(state: dict[str, Any], monitor_module: Any)
     return True
 
 
+def _disabled_workflow_failure(record: Any, entry: dict[str, Any]) -> bool:
+    if not isinstance(record, dict):
+        return False
+    status = str(record.get("status") or entry.get("auto_participation_status") or "")
+    if status != "workflow_dispatch_failed":
+        return False
+    detail = " ".join(
+        str(value or "")
+        for value in (
+            record.get("detail"),
+            record.get("dispatch_error"),
+            entry.get("auto_participation_error"),
+        )
+    ).casefold()
+    return _DISABLED_WORKFLOW_MARKER in detail
+
+
+def _rearm_disabled_workflow_failure(
+    state: dict[str, Any],
+    monitor_module: Any,
+    processed: dict[str, Any],
+    dispatched: dict[str, Any],
+    token: str,
+    wheel_key: str,
+    entry: dict[str, Any],
+    current: Any,
+) -> bool:
+    """Reopen only still-active events that failed solely because Actions disabled the worker."""
+
+    record = processed.get(token)
+    if not _disabled_workflow_failure(record, entry):
+        return False
+    if not betboom_auto_participation._eligible_for_event_attempt(
+        entry, monitor_module, current
+    ):
+        return False
+
+    processed.pop(token, None)
+    dispatched.pop(token, None)
+    for field in (
+        "auto_participation_status",
+        "auto_participation_checked_at",
+        "auto_participation_retry_allowed",
+        "auto_participation_error",
+        "auto_participation_manual_notification_at",
+        "auto_participation_manual_notification_error",
+    ):
+        entry.pop(field, None)
+    entry["auto_participation_rearmed_at"] = current.isoformat()
+    print(
+        "Rearmed auto participation after disabled workflow recovery: "
+        f"wheel={wheel_key} token={token}"
+    )
+    return True
+
+
 def _record_dispatch_failure(
     state: dict[str, Any],
     monitor_module: Any,
@@ -140,7 +198,7 @@ def _record_dispatch_failure(
     status: str,
     detail: str,
 ) -> bool:
-    """Alert the owner once and stop automatic retries for this wheel event."""
+    """Retry ordinary dispatch failures silently before escalating to the owner."""
 
     current = monitor_module.now_utc()
     active = state.setdefault("active_wheels", {})
@@ -148,6 +206,47 @@ def _record_dispatch_failure(
     if not isinstance(entry, dict):
         entry = {"wheel_key": wheel_key, "identifier": wheel_key}
         active[wheel_key] = entry
+
+    dispatches = state.setdefault("auto_participation_dispatch_events", {})
+    dispatch_record = dispatches.get(token)
+    if not isinstance(dispatch_record, dict):
+        dispatch_record = {"wheel_key": wheel_key}
+        dispatches[token] = dispatch_record
+
+    try:
+        previous_failures = int(dispatch_record.get("failure_count", 0) or 0)
+    except (TypeError, ValueError):
+        previous_failures = 0
+    failure_count = previous_failures + 1
+    dispatch_record["failure_count"] = failure_count
+
+    if status == "workflow_dispatch_failed" and failure_count < _DISPATCH_FAILURE_LIMIT:
+        retry_at = current + _DISPATCH_RETRY_AFTER
+        dispatch_record.update(
+            {
+                "wheel_key": wheel_key,
+                "status": "workflow_dispatch_retry_wait",
+                "dispatch_error": detail[:500],
+                "last_failure_at": current.isoformat(),
+                "retry_after_at": retry_at.isoformat(),
+                "manual_notification_sent": False,
+            }
+        )
+        dispatch_record.pop("alert_attempted_at", None)
+        dispatch_record.pop("manual_notification_at", None)
+        dispatch_record.pop("manual_notification_detail", None)
+        entry["auto_participation_status"] = "workflow_dispatch_retry_wait"
+        entry["auto_participation_checked_at"] = current.isoformat()
+        entry["auto_participation_retry_allowed"] = True
+        entry["auto_participation_error"] = detail[:300]
+        entry.pop("auto_participation_manual_notification_at", None)
+        entry.pop("auto_participation_manual_notification_error", None)
+        print(
+            "Auto participation dispatch will retry silently: "
+            f"wheel={wheel_key} attempt={failure_count}/{_DISPATCH_FAILURE_LIMIT} "
+            f"retry_at={retry_at.isoformat()}"
+        )
+        return False
 
     result = betboom_auto_participation.ParticipationResult(
         False,
@@ -162,11 +261,6 @@ def _record_dispatch_failure(
         )
     )
 
-    dispatches = state.setdefault("auto_participation_dispatch_events", {})
-    dispatch_record = dispatches.get(token)
-    if not isinstance(dispatch_record, dict):
-        dispatch_record = {"wheel_key": wheel_key}
-        dispatches[token] = dispatch_record
     dispatch_record["status"] = (
         f"{status}_notified" if notified else f"{status}_alert_pending"
     )
@@ -215,14 +309,29 @@ def _schedule_auto_participation_dispatch(state: dict[str, Any], monitor_module:
     dispatched = state.setdefault("auto_participation_dispatch_events", {})
     candidates: list[tuple[str, str, bool]] = []
     alerts: list[tuple[str, str, str, str]] = []
+    changed = False
 
     for key, entry in list(state.setdefault("active_wheels", {}).items()):
         if not isinstance(entry, dict):
             continue
         normalized = str(key).casefold()
         token = betboom_auto_participation._event_token(normalized, entry)
-        if not token or token in processed:
+        if not token:
             continue
+        if token in processed:
+            if _rearm_disabled_workflow_failure(
+                state,
+                monitor_module,
+                processed,
+                dispatched,
+                token,
+                normalized,
+                entry,
+                current,
+            ):
+                changed = True
+            else:
+                continue
 
         previous_dispatch = dispatched.get(token)
         is_retry = isinstance(previous_dispatch, dict)
@@ -230,11 +339,18 @@ def _schedule_auto_participation_dispatch(state: dict[str, Any], monitor_module:
             previous_status = str(previous_dispatch.get("status") or "")
             previous_at = monitor_module.parse_datetime(
                 previous_dispatch.get("alert_attempted_at")
+                or previous_dispatch.get("last_failure_at")
                 or previous_dispatch.get("dispatched_at")
                 or previous_dispatch.get("scheduled_at")
             )
             if previous_status.endswith("_notified"):
                 continue
+            if previous_status == "workflow_dispatch_retry_wait":
+                retry_at = monitor_module.parse_datetime(
+                    previous_dispatch.get("retry_after_at")
+                )
+                if retry_at is not None and current < retry_at:
+                    continue
             if previous_status.endswith("_alert_pending"):
                 if previous_at is not None and current - previous_at < _DISPATCH_RETRY_AFTER:
                     continue
@@ -274,7 +390,6 @@ def _schedule_auto_participation_dispatch(state: dict[str, Any], monitor_module:
             continue
         candidates.append((token, normalized, is_retry))
 
-    changed = False
     for token, normalized, status, detail in alerts:
         _record_dispatch_failure(
             state,
@@ -293,9 +408,16 @@ def _schedule_auto_participation_dispatch(state: dict[str, Any], monitor_module:
 
     retry_count = 0
     for token, normalized, is_retry in candidates:
+        previous_record = dispatched.get(token) if is_retry else None
+        try:
+            failure_count = int(
+                previous_record.get("failure_count", 0) if isinstance(previous_record, dict) else 0
+            )
+        except (TypeError, ValueError):
+            failure_count = 0
         if is_retry:
             retry_count += 1
-        dispatched[token] = {
+        dispatch_record = {
             "wheel_key": normalized,
             "scheduled_at": current.isoformat(),
             "status": (
@@ -304,6 +426,9 @@ def _schedule_auto_participation_dispatch(state: dict[str, Any], monitor_module:
                 else "workflow_dispatch_scheduled"
             ),
         }
+        if failure_count:
+            dispatch_record["failure_count"] = failure_count
+        dispatched[token] = dispatch_record
 
     # The dispatcher must see the same state that will be pushed to GitHub.
     # Saving here is intentional: the child process commits state.json before
@@ -489,6 +614,13 @@ def self_test() -> None:
     assert not participating_for_chat(config, "30", "wheel-a", {"action_id": 10})
     set_global_participating("wheel-a", True)
     assert not participating_for_chat(config, "10", "wheel-a", {"action_id": 10})
+
+    disabled = {
+        "status": "workflow_dispatch_failed",
+        "detail": "HTTP 422 Cannot trigger a workflow_dispatch on a disabled workflow",
+    }
+    assert _disabled_workflow_failure(disabled, {})
+    assert not _disabled_workflow_failure({"status": "participated"}, {})
     print("personal reminder filter self-test passed")
 
 
