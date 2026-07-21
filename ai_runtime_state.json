@@ -1,6 +1,20 @@
 {
   "cache": {},
-  "decisions": [],
-  "rate_calls": [],
+  "decisions": [
+    {
+      "cached": false,
+      "created_at": 1784612370.2883875,
+      "error": "RuntimeError: Gemini HTTP 404: {\n  \"error\": {\n    \"code\": 404,\n    \"message\": \"This model models/gemini-2.5-flash-lite is no longer available to new users. Please update your code to use a newer model for the latest features and improvements.\",\n    \"status\": \"NOT_FOUND\"\n  }\n}\n",
+      "feature": "health_inspector",
+      "id": "519b13777efe41a2acdea5aa9db5e78d",
+      "model": "gemini-2.5-flash-lite",
+      "output_sha256": "fda3cbb2268944c39771547ab1412a8292dd223ee5ebaaa22dabc4dbee7b580b",
+      "provider": "gemini",
+      "status": "provider_error"
+    }
+  ],
+  "rate_calls": [
+    1784612370.2883875
+  ],
   "version": 1
 }
