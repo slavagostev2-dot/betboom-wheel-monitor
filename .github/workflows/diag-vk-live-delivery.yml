@@ -1,0 +1,94 @@
+name: Diagnose live VK delivery
+
+on:
+  push:
+    branches:
+      - diag/vk-live-delivery-20260721
+    paths:
+      - ".github/workflows/diag-vk-live-delivery.yml"
+
+permissions:
+  actions: read
+  contents: read
+  issues: write
+
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout main production code
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          ref: main
+          persist-credentials: false
+
+      - name: Inspect VK workflow and monitor history
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          VK_GROUP_TOKEN: ${{ secrets.VK_GROUP_TOKEN }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          vk_runs="$(gh run list --repo "$GH_REPO" --workflow vk-wheel-notification.yml --limit 30 --json databaseId,status,conclusion,createdAt,updatedAt,event,displayTitle,headSha,url)"
+          monitor_runs="$(gh run list --repo "$GH_REPO" --workflow monitor.yml --limit 15 --json databaseId,status,conclusion,createdAt,updatedAt,event,displayTitle,headSha,url)"
+
+          logs_file="$(mktemp)"
+          printf '%s' "$vk_runs" | jq -r '.[0:8][].databaseId' | while read -r run_id; do
+            [[ -z "$run_id" ]] && continue
+            echo "===== VK RUN $run_id =====" >> "$logs_file"
+            gh run view "$run_id" --repo "$GH_REPO" --log 2>&1 | tail -n 100 >> "$logs_file" || true
+          done
+
+          monitor_file="$(mktemp)"
+          printf '%s' "$monitor_runs" | jq -r '.[] | select(.createdAt >= "2026-07-21T07:30:00Z") | .databaseId' | while read -r run_id; do
+            [[ -z "$run_id" ]] && continue
+            echo "===== MONITOR RUN $run_id =====" >> "$monitor_file"
+            gh run view "$run_id" --repo "$GH_REPO" --log 2>&1 \
+              | grep -Ei -C 8 'zonertg12|VK wheel notification|workflow scheduled|WARNING VK|freestream/zonertg12' \
+              | tail -n 220 >> "$monitor_file" || true
+          done
+
+          token_status="missing"
+          if [[ -n "${VK_GROUP_TOKEN:-}" ]]; then token_status="configured"; fi
+
+          subscriber_summary="not checked"
+          if [[ "$token_status" == "configured" ]]; then
+            subscriber_summary="$(python3 - <<'PY'
+          import os
+          import vk_dynamic_subscribers as vk
+          token = os.environ.get("VK_GROUP_TOKEN", "").strip()
+          try:
+              peers = vk.conversation_peer_ids(token)
+              print(f"writable_user_conversations={len(peers)}")
+          except Exception as exc:
+              print(f"conversation_check_error={type(exc).__name__}: {exc}")
+          PY
+          )"
+          fi
+
+          body="$(mktemp)"
+          {
+            echo '## Live VK delivery diagnostic'
+            echo
+            echo "VK_GROUP_TOKEN: ${token_status}"
+            echo "Subscriber check: ${subscriber_summary}"
+            echo
+            echo '### Recent VK workflow runs'
+            echo '```json'
+            printf '%s\n' "$vk_runs" | jq '.[0:12]'
+            echo '```'
+            echo
+            echo '### Recent VK workflow logs'
+            echo '```text'
+            cat "$logs_file"
+            echo '```'
+            echo
+            echo '### Monitor evidence for zonertg12'
+            echo '```text'
+            cat "$monitor_file"
+            echo '```'
+          } > "$body"
+
+          gh issue edit 111 --repo "$GH_REPO" --title "Live VK delivery diagnostic" --body-file "$body"
