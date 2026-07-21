@@ -1,4 +1,4 @@
-name: Inspect VK regression test failures
+name: Patch malformed NLA safety patterns
 
 on:
   push:
@@ -8,15 +8,20 @@ on:
       - ".github/workflows/diag-vk-wheel-history.yml"
 
 permissions:
-  actions: read
-  contents: read
+  contents: write
   issues: write
 
 jobs:
-  inspect:
+  patch:
     runs-on: ubuntu-latest
     steps:
-      - name: Collect failed PR logs
+      - name: Checkout repository
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          ref: diag/vk-wheel-history
+          fetch-depth: 0
+
+      - name: Patch both affected branches
         env:
           GH_TOKEN: ${{ github.token }}
           GH_REPO: ${{ github.repository }}
@@ -24,21 +29,39 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          body_file="$(mktemp)"
-          {
-            echo '## PR 112 exact pytest failures'
-            for run_id in 29802179686 29802179677; do
-              echo
-              echo "### Run ${run_id}"
-              echo '```text'
-              log_file="$(mktemp)"
-              gh run view "$run_id" --repo "$GH_REPO" --log > "$log_file" 2>&1 || true
-              awk '
-                /={3,} FAILURES ={3,}/ {show=1}
-                /short test summary info/ {show=1}
-                show {print}
-              ' "$log_file" | tail -n 220
-              echo '```'
-            done
-          } > "$body_file"
-          gh issue edit "$ISSUE_NUMBER" --repo "$GH_REPO" --title "VK PR 112 exact pytest failures" --body-file "$body_file"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          report="$(mktemp)"
+
+          for branch in fix/nla-critical-pattern-tuples fix/vk-detect-all-new-wheels; do
+            git fetch origin "$branch"
+            git checkout -B work "origin/$branch"
+            python3 - <<'PY'
+          from pathlib import Path
+
+          path = Path("bbvg/bot/natural_language_admin.py")
+          text = path.read_text(encoding="utf-8")
+          old = '''        ("удал", "бэкап", "delete_backups"),
+        ("удал", "backup", "delete_backups"),
+'''
+          new = '''        ("удал", "бэкап", "delete_backups", "delete_backups"),
+        ("удал", "backup", "delete_backups", "delete_backups"),
+'''
+          if old not in text and new not in text:
+              raise SystemExit("Expected malformed NLA tuple block was not found")
+          if old in text:
+              path.write_text(text.replace(old, new, 1), encoding="utf-8")
+          PY
+            if git diff --quiet -- bbvg/bot/natural_language_admin.py; then
+              echo "$branch: already fixed" >> "$report"
+            else
+              git add bbvg/bot/natural_language_admin.py
+              git commit -m "Fix natural-language critical action patterns"
+              git push origin HEAD:"$branch"
+              echo "$branch: fixed and pushed" >> "$report"
+            fi
+          done
+
+          gh issue edit "$ISSUE_NUMBER" --repo "$GH_REPO" \
+            --title "NLA tuple repair result" \
+            --body "$(cat "$report")"
