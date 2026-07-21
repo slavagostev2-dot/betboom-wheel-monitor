@@ -16,13 +16,14 @@ jobs:
   inspect:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout current production state
+      - name: Checkout repository history
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
           ref: main
+          fetch-depth: 0
           persist-credentials: false
 
-      - name: Inspect CTOM05 delivery chain
+      - name: Inspect historical CTOM05 notification context
         env:
           GH_TOKEN: ${{ github.token }}
           GH_REPO: ${{ github.repository }}
@@ -32,13 +33,16 @@ jobs:
           set -euo pipefail
           vk_runs="$(gh run list --repo "$GH_REPO" --workflow vk-wheel-notification.yml --limit 150 --json databaseId,status,conclusion,createdAt,updatedAt,event,displayTitle,headSha,url)"
           selected_vk="$(printf '%s' "$vk_runs" | jq '[.[] | select((.createdAt >= "2026-07-20T20:30:00Z" and .createdAt <= "2026-07-20T22:30:00Z") or (.createdAt >= "2026-07-21T03:00:00Z" and .createdAt <= "2026-07-21T03:40:00Z"))]')"
-          vk_logs_file="$(mktemp)"
-          printf '%s' "$selected_vk" | jq -r '.[].databaseId' | while read -r run_id; do
-            [[ -z "$run_id" ]] && continue
-            echo "===== VK RUN $run_id =====" >> "$vk_logs_file"
-            gh run view "$run_id" --repo "$GH_REPO" --log 2>&1 | tail -n 100 >> "$vk_logs_file" || true
+          history_file="$(mktemp)"
+          for commit in ec54ec9c69f455e8b93766c88578049eab2fb6fb 46010e925e0daa8ce6286be9468aff1742400ad4 3b660761b3d9d8e3007918b6623a391bd8a36005; do
+            echo "===== COMMIT $commit =====" >> "$history_file"
+            echo '-- changed files --' >> "$history_file"
+            git show --format= --name-only "$commit" | sort -u >> "$history_file" || true
+            for file in state.json source_stats.json notification_delivery_state.json; do
+              echo "-- $file --" >> "$history_file"
+              git show "$commit:$file" 2>/dev/null | grep -ni -C 35 'ctom05\|meowbettt' | head -n 280 >> "$history_file" || true
+            done
           done
-          state_matches="$(grep -Rni -C 12 'CTOM05\|meowbettt' state.json source_stats.json notification_delivery_state.json 2>/dev/null | head -n 360 || true)"
           body_file="$(mktemp)"
           {
             echo '## VK workflow runs around CTOM05'
@@ -46,14 +50,9 @@ jobs:
             printf '%s\n' "$selected_vk" | jq .
             echo '```'
             echo
-            echo '## VK run logs'
+            echo '## Historical runtime context'
             echo '```text'
-            cat "$vk_logs_file"
-            echo '```'
-            echo
-            echo '## Runtime state matches'
-            echo '```text'
-            printf '%s\n' "$state_matches"
+            cat "$history_file"
             echo '```'
           } > "$body_file"
           gh issue edit "$ISSUE_NUMBER" --repo "$GH_REPO" --title "VK CTOM05 diagnostic result" --body-file "$body_file"
