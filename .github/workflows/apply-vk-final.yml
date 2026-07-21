@@ -1,11 +1,8 @@
 name: Apply final VK wheel delivery patch
 
 on:
-  push:
-    branches:
-      - fix/vk-wheel-delivery-final
-    paths:
-      - ".github/workflows/apply-vk-final.yml"
+  pull_request:
+    branches: [main]
 
 permissions:
   contents: write
