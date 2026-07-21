@@ -67,7 +67,7 @@ class Chapter4InterfaceTests(unittest.TestCase):
         )
         self.assertEqual(
             admin,
-            {"page:active", "page:analytics", "page:sources", "page:settings", "page:control"},
+            {"page:active", "page:analytics", "page:profile", "page:sources", "page:settings", "page:control"},
         )
         for role_rows in (
             TelegramPanelRuntime.compact_menu_rows(False),
