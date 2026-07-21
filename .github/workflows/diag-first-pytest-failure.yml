@@ -6,6 +6,7 @@ on:
 
 permissions:
   contents: read
+  issues: write
 
 jobs:
   diagnose:
@@ -23,7 +24,7 @@ jobs:
           python-version: "3.12"
       - name: Install test dependencies
         run: python -m pip install -r requirements.txt -r requirements-dev.txt
-      - name: Show first pytest failure
+      - name: Capture first pytest failure
         env:
           BOT_TOKEN: test-bot-token
           BOT_STATE_KEY: test-state-key
@@ -33,4 +34,28 @@ jobs:
           TELEGRAM_WEB_DOMAIN: telegram.me
           FINAL_REMINDER_BEFORE_MINUTES: "5"
           ACTIVE_REMOVE_GRACE_MINUTES: "0"
-        run: python -m pytest -q --maxfail=1
+        shell: bash
+        run: |
+          set +e
+          python -m pytest -q --maxfail=1 > pytest-first.log 2>&1
+          status=$?
+          tail -n 160 pytest-first.log > pytest-first-tail.log
+          echo "$status" > pytest-status.txt
+          exit 0
+      - name: Publish diagnostic result
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          {
+            echo '## First remaining pytest failure after NLA tuple repair'
+            echo
+            echo '```text'
+            cat pytest-first-tail.log
+            echo '```'
+            echo
+            echo "Exit status: $(cat pytest-status.txt)"
+          } > issue-body.md
+          gh issue edit 111 --repo slavagostev2-dot/betboom-wheel-monitor \
+            --title "First remaining pytest failure" \
+            --body-file issue-body.md
