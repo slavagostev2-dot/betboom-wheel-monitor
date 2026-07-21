@@ -10,6 +10,7 @@ import requests
 
 
 STATE_PATH = Path(__file__).with_name("state.json")
+WORKFLOW_FILE = "auto-participation.yml"
 _PENDING_STATUSES = {
     "workflow_dispatch_scheduled",
     "workflow_dispatch_retry_scheduled",
@@ -77,6 +78,67 @@ def _push_state_before_dispatch(branch: str) -> tuple[bool, str]:
         return False, f"{type(exc).__name__}: {exc}"
 
 
+def _github_headers(token: str) -> dict[str, str]:
+    return {
+        "Authorization": f"Bearer {token}",
+        "Accept": "application/vnd.github+json",
+        "X-GitHub-Api-Version": "2022-11-28",
+    }
+
+
+def _workflow_urls(repository: str) -> tuple[str, str]:
+    base = f"https://api.github.com/repos/{repository}/actions/workflows/{WORKFLOW_FILE}"
+    return f"{base}/dispatches", f"{base}/enable"
+
+
+def _workflow_disabled(response: requests.Response) -> bool:
+    if response.status_code != 422:
+        return False
+    detail = str(response.text or "").casefold()
+    return "disabled workflow" in detail or (
+        "cannot trigger" in detail and "disabled" in detail
+    )
+
+
+def _dispatch_with_recovery(
+    token: str,
+    repository: str,
+    branch: str,
+) -> tuple[requests.Response, bool, str]:
+    """Dispatch the worker and self-heal a workflow disabled in GitHub Actions."""
+
+    dispatch_url, enable_url = _workflow_urls(repository)
+    headers = _github_headers(token)
+    response = requests.post(
+        dispatch_url,
+        headers=headers,
+        json={"ref": branch},
+        timeout=20,
+    )
+    if not _workflow_disabled(response):
+        return response, False, ""
+
+    enable_response = requests.put(
+        enable_url,
+        headers=headers,
+        timeout=20,
+    )
+    if enable_response.status_code != 204:
+        detail = (
+            f"workflow_enable_failed: HTTP {enable_response.status_code} "
+            f"{enable_response.text[:500]}"
+        )
+        return response, False, detail
+
+    response = requests.post(
+        dispatch_url,
+        headers=headers,
+        json={"ref": branch},
+        timeout=20,
+    )
+    return response, True, ""
+
+
 def main() -> int:
     """Push queued wheel state, then send workflow_dispatch synchronously."""
 
@@ -112,20 +174,11 @@ def main() -> int:
         print(f"Auto participation dispatch blocked: state push failed: {push_error}")
         return 1
 
-    url = (
-        f"https://api.github.com/repos/{repository}/actions/workflows/"
-        "auto-participation.yml/dispatches"
-    )
     try:
-        response = requests.post(
-            url,
-            headers={
-                "Authorization": f"Bearer {token}",
-                "Accept": "application/vnd.github+json",
-                "X-GitHub-Api-Version": "2022-11-28",
-            },
-            json={"ref": branch},
-            timeout=20,
+        response, workflow_reenabled, recovery_error = _dispatch_with_recovery(
+            token,
+            repository,
+            branch,
         )
     except requests.RequestException as exc:
         detail = f"{type(exc).__name__}: {exc}"
@@ -142,6 +195,8 @@ def main() -> int:
         for entry in pending.values():
             entry["status"] = "workflow_dispatch_sent"
             entry["dispatched_at"] = now
+            if workflow_reenabled:
+                entry["workflow_reenabled_at"] = now
             entry.pop("dispatch_error", None)
             entry.pop("dispatch_failed_at", None)
             entry.pop("probe_requested", None)
@@ -155,21 +210,22 @@ def main() -> int:
                 check=False,
             )
             _git("push", "origin", f"HEAD:{branch}", check=False)
+        recovery_note = " workflow_reenabled=true" if workflow_reenabled else ""
         print(
             "Auto participation workflow dispatched: "
             f"events={len(pending)} repository={repository} ref={branch} "
-            "workflow=auto-participation.yml"
+            f"workflow={WORKFLOW_FILE}{recovery_note}"
         )
         return 0
 
-    detail = f"HTTP {response.status_code} {response.text[:500]}"
+    detail = recovery_error or f"HTTP {response.status_code} {response.text[:500]}"
     for entry in pending.values():
         entry["dispatch_failed_at"] = now
-        entry["dispatch_error"] = detail
+        entry["dispatch_error"] = detail[:500]
     _save_state(state)
     print(
         "Auto participation dispatch failed: "
-        f"repository={repository} ref={branch} workflow=auto-participation.yml {detail}"
+        f"repository={repository} ref={branch} workflow={WORKFLOW_FILE} {detail}"
     )
     return 1
 
