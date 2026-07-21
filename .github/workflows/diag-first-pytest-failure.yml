@@ -1,61 +1,69 @@
-name: Diagnose next pytest failure
+name: Restore admin state file contract
 
 on:
   pull_request:
     branches: [main]
 
 permissions:
-  contents: read
+  contents: write
   issues: write
 
 jobs:
-  diagnose:
+  patch:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - name: Checkout branch
+      - name: Checkout repository history
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
           ref: fix/nla-critical-pattern-tuples
-          persist-credentials: false
-      - name: Set up Python
-        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
-        with:
-          python-version: "3.12"
-      - name: Install test dependencies
-        run: python -m pip install -r requirements.txt -r requirements-dev.txt
-      - name: Capture first pytest failure
-        env:
-          BOT_TOKEN: test-bot-token
-          BOT_STATE_KEY: test-state-key
-          BOT_CHAT_ID: "1"
-          ADMIN_USER_ID: "1"
-          BBVG_TEST_MODE: "1"
-          TELEGRAM_WEB_DOMAIN: telegram.me
-          FINAL_REMINDER_BEFORE_MINUTES: "5"
-          ACTIVE_REMOVE_GRACE_MINUTES: "0"
-        shell: bash
-        run: |
-          set +e
-          python -m pytest -q --maxfail=1 > pytest-first.log 2>&1
-          status=$?
-          tail -n 180 pytest-first.log > pytest-first-tail.log
-          echo "$status" > pytest-status.txt
-          exit 0
-      - name: Publish diagnostic result
+          fetch-depth: 0
+
+      - name: Patch affected branches
         env:
           GH_TOKEN: ${{ github.token }}
         shell: bash
         run: |
-          {
-            echo '## First remaining pytest failure after NLA and AI-state repairs'
-            echo
-            echo '```text'
-            cat pytest-first-tail.log
-            echo '```'
-            echo
-            echo "Exit status: $(cat pytest-status.txt)"
-          } > issue-body.md
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          report="$(mktemp)"
+
+          for branch in fix/admin-bot-state-file-contract fix/ai-runtime-state-contract fix/nla-critical-pattern-tuples fix/vk-detect-all-new-wheels; do
+            git fetch origin "$branch"
+            git checkout -B work "origin/$branch"
+            python3 - <<'PY'
+          from pathlib import Path
+
+          path = Path(".github/workflows/admin-bot.yml")
+          text = path.read_text(encoding="utf-8")
+          old = '''          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if ! git diff --quiet -- bot_private_state.enc.json; then
+            git add bot_private_state.enc.json
+'''
+          new = '''          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          files=(bot_private_state.enc.json)
+          if ! git diff --quiet -- "${files[@]}"; then
+            git add "${files[@]}"
+'''
+          if old in text:
+              path.write_text(text.replace(old, new, 1), encoding="utf-8")
+          elif new not in text:
+              raise SystemExit("Admin private-state write block not found")
+          PY
+
+            if git diff --quiet -- .github/workflows/admin-bot.yml; then
+              echo "$branch: already fixed" >> "$report"
+            else
+              git add .github/workflows/admin-bot.yml
+              git commit -m "Restore explicit admin state file contract"
+              git push origin HEAD:"$branch"
+              echo "$branch: fixed and pushed" >> "$report"
+            fi
+          done
+
           gh issue edit 111 --repo slavagostev2-dot/betboom-wheel-monitor \
-            --title "Next remaining pytest failure" \
-            --body-file issue-body.md
+            --title "Admin state file contract repair" \
+            --body "$(cat "$report")"
