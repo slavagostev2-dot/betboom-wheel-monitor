@@ -14,6 +14,7 @@ _ORIGINAL_CHECK_DISCOVERY_RUNTIME = legacy.check_discovery_runtime
 _ORIGINAL_DELIVER_PENDING_NOTIFICATIONS = legacy.deliver_pending_notifications
 DISCOVERY_INVENTORY_CONFIRMATION_HOURS = 6
 SOURCE_REGISTRY_PATH = legacy.ROOT / "source_registry.json"
+# Inventory changes are checked again by the centralized health workflow.
 
 
 def check_inventory_allow_empty_nightly(
