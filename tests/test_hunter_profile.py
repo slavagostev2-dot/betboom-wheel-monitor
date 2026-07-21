@@ -1,21 +1,10 @@
 from __future__ import annotations
 
 from datetime import datetime, timezone
-from types import SimpleNamespace
 
 from bbvg.bot import profile
 
 UTC = timezone.utc
-
-
-def event_key(wheel_key: str, entry: dict) -> str:
-    action = entry.get("action_id")
-    generation = entry.get("generation_id")
-    if generation:
-        return f"{wheel_key}#generation:{generation}"
-    if action:
-        return f"{wheel_key}#action:{action}"
-    return wheel_key
 
 
 def test_manual_and_auto_same_action_are_one_event() -> None:
@@ -73,7 +62,7 @@ def test_generation_and_worker_event_identity_are_deduplicated() -> None:
     assert events[0]["event_key"] == "wheel-a#id:abc"
 
 
-def test_profile_rebuilds_counts_streak_and_active_participation() -> None:
+def test_profile_rebuilds_personal_counts_streak_and_history() -> None:
     stats = {
         "personal_wheel_votes": {
             str(index): {
@@ -85,12 +74,6 @@ def test_profile_rebuilds_counts_streak_and_active_participation() -> None:
             for index in range(1, 4)
         }
     }
-    state = {
-        "active_wheels": {
-            "wheel-3": {"action_id": 3},
-        },
-        "auto_participation_events": {},
-    }
     user = {
         "first_seen_at": "2026-07-01T00:00:00+00:00",
         "participating_wheels": {
@@ -99,23 +82,28 @@ def test_profile_rebuilds_counts_streak_and_active_participation() -> None:
     }
     result = profile.build_profile(
         stats,
-        state,
+        {"auto_participation_events": {}},
         user,
         actor="vote_user",
         include_auto=False,
-        event_key_fn=event_key,
         current=datetime(2026, 7, 20, 12, 0, tzinfo=UTC),
     )
     assert result["total"] == 3
     assert result["manual"] == 3
     assert result["auto"] == 0
-    assert result["active"] == 1
+    assert "active" not in result
     assert result["current_streak"] == 3
     assert result["best_streak"] == 3
     assert result["best_month"] == "2026-07"
     assert result["best_month_count"] == 3
     assert result["days_in_bot"] == 19
     assert "🔥 Серия 3 дня" in result["achievements"]
+
+    text = profile.format_profile(result, include_auto=False)
+    assert "Активные колёса" not in text
+    assert "Сейчас активных" not in text
+    assert "<b>Участие</b>" in text
+    assert "<b>Личная активность</b>" in text
 
 
 def test_auto_history_is_counted_only_when_requested() -> None:
@@ -139,7 +127,7 @@ def test_auto_history_is_counted_only_when_requested() -> None:
     assert with_auto[0]["method"] == "auto"
 
 
-def test_install_appends_profile_without_reordering_existing_menu() -> None:
+def test_profile_callback_edits_same_message_and_keeps_menu_order() -> None:
     class Base:
         def compact_menu_rows(self, admin: bool):
             return [[{"text": "one"}], [{"text": "two"}]]
@@ -154,6 +142,7 @@ def test_install_appends_profile_without_reordering_existing_menu() -> None:
 
     class Runtime(Mixin, Base):
         current_user_id = "1"
+        _edit_message_id = None
 
         def _prepare_callback_user(self, query):
             self.prepared = True
@@ -162,15 +151,120 @@ def test_install_appends_profile_without_reordering_existing_menu() -> None:
             self.answered = (query_id, text)
 
         def show_profile(self):
-            self.shown = True
+            self.profile_message_id = self._edit_message_id
 
     runtime = Runtime()
     rows = runtime.compact_menu_rows(False)
     assert [row[0]["text"] for row in rows] == ["one", "two", "👤 Мой профиль"]
 
-    runtime.handle_callback({"id": "q", "data": "page:profile"})
+    runtime.handle_callback(
+        {
+            "id": "q",
+            "data": "page:profile",
+            "message": {"message_id": 77, "chat": {"id": "1"}},
+        }
+    )
     assert runtime.prepared is True
-    assert runtime.shown is True
+    assert runtime.profile_message_id == 77
+    assert runtime._edit_message_id is None
+
+    runtime.handle_callback(
+        {
+            "id": "refresh",
+            "data": "profile:refresh",
+            "message": {"message_id": 88, "chat": {"id": "1"}},
+        }
+    )
+    assert runtime.profile_message_id == 88
+    assert runtime._edit_message_id is None
 
     runtime.handle_callback({"data": "other"})
     assert runtime.delegated == "other"
+
+
+def test_analytics_keeps_period_metrics_and_links_to_detail_sections() -> None:
+    text = (
+        "📊 <b>Аналитика за 7 дней</b>\n\n"
+        "<b>Находки</b>\n"
+        "🎡 Публикаций с колёсами: <b>5</b>\n"
+        "⚠️ Ошибок источников: <b>2</b>\n"
+        "✅ Проблемных источников сейчас: <b>0</b>\n\n"
+        "<b>Участие и рейтинг</b>\n"
+        "🙋 Личных голосов: <b>4</b>\n\n"
+        "<b>Сейчас</b>\n"
+        "🔥 Активных колёс: <b>1</b>\n\n"
+        "<b>Покрытие источников</b>\n"
+        "✅ Доступно: <b>168 из 168</b>"
+    )
+    cleaned = profile.analytics_text_for_section(text)
+    assert "Публикаций с колёсами" in cleaned
+    assert "Разовых ошибок проверок за период" in cleaned
+    assert "Проблемных источников сейчас" not in cleaned
+    assert "Участие и рейтинг" not in cleaned
+    assert "Активных колёс" not in cleaned
+    assert "Покрытие источников" not in cleaned
+
+    markup = profile.analytics_markup_for_section(
+        {
+            "inline_keyboard": [
+                [{"text": "7 дней", "callback_data": "page:analytics:7"}],
+                [{"text": "Давно без колёс", "callback_data": "page:report:inactive"}],
+                [{"text": "Главное меню", "callback_data": "nav:home"}],
+            ]
+        }
+    )
+    assert markup is not None
+    callbacks = [
+        str(button.get("callback_data") or "")
+        for row in markup["inline_keyboard"]
+        for button in row
+    ]
+    assert "page:analytics:7" in callbacks
+    assert "page:report:inactive" not in callbacks
+    assert callbacks.count("page:ranking") == 1
+    assert callbacks.count("page:sources") == 1
+    assert callbacks[-1] == "nav:home"
+
+
+def test_future_runtime_analytics_is_wrapped_after_class_definition() -> None:
+    class Base:
+        def compact_menu_rows(self, admin: bool):
+            return []
+
+        def handle_callback(self, query):
+            return None
+
+        def send(self, text, *, reply_markup=None, chat_id=None):
+            self.sent = (text, reply_markup, chat_id)
+            return {}
+
+    class Mixin:
+        pass
+
+    profile.install(Mixin)
+
+    class Runtime(Mixin, Base):
+        def show_analytics(self, days=1):
+            self.send(
+                "Находки\n⚠️ Ошибок источников: <b>0</b>\n"
+                "<b>Участие и рейтинг</b>\nЛичные голоса",
+                reply_markup={
+                    "inline_keyboard": [
+                        [{"text": "Главное меню", "callback_data": "nav:home"}]
+                    ]
+                },
+            )
+
+    class Production(Runtime):
+        def show_analytics(self, days=1):
+            super().show_analytics(days)
+
+    runtime = Production()
+    runtime.show_analytics(7)
+    text, markup, _ = runtime.sent
+    assert "Находки" in text
+    assert "Разовых ошибок проверок за период" in text
+    assert "Участие и рейтинг" not in text
+    assert markup is not None
+    assert "page:ranking" in str(markup)
+    assert "page:sources" in str(markup)
