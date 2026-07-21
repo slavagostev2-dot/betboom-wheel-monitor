@@ -102,12 +102,15 @@ jobs:
           cache: pip
 
       - name: Install dependencies
+        timeout-minutes: 3
         run: python -m pip install -r requirements.txt
 
       - name: Verify repository layout
+        timeout-minutes: 2
         run: python preflight.py
 
       - name: Check BB V.G. project files
+        timeout-minutes: 5
         env:
           BOT_TOKEN: "test-bot-token"
           BOT_STATE_KEY: "test-state-key"
@@ -203,6 +206,7 @@ jobs:
           python self_test.py
 
       - name: Verify configured AI provider
+        timeout-minutes: 2
         env:
           BBVG_AI_ENABLED: "true"
           BBVG_AI_FEATURES: "suspicious_post_analysis,source_discovery"
@@ -288,11 +292,11 @@ jobs:
             git commit -m "Update BB V.G. runtime data [skip ci]" || true
 
             for attempt in 1 2 3; do
-              if timeout --signal=TERM --kill-after=10s 60s git push origin "HEAD:${GITHUB_REF_NAME:-main}"; then
+              if timeout --signal=TERM --kill-after=10s 30s git push origin "HEAD:${GITHUB_REF_NAME:-main}"; then
                 return 0
               fi
               echo "Runtime push attempt ${attempt} failed or timed out; rebasing before retry."
-              if ! timeout --signal=TERM --kill-after=10s 60s git pull --rebase origin "${GITHUB_REF_NAME:-main}"; then
+              if ! timeout --signal=TERM --kill-after=10s 30s git pull --rebase origin "${GITHUB_REF_NAME:-main}"; then
                 git rebase --abort || true
                 echo "Runtime rebase failed or timed out; preserving local data for the next retry."
                 return 1
@@ -375,8 +379,11 @@ jobs:
               admin_action_applied=true
             fi
             if [[ "$delivery_changed" == "true" || "$admin_action_applied" == "true" || "$CONTINUOUS" != "true" ]] || (( last_commit_at == 0 || now_ts - last_commit_at >= 300 || now_ts >= shift_end )); then
-              push_runtime || echo "Runtime push is deferred; watchdog will continue checking repository freshness."
-              last_commit_at=$now_ts
+              if push_runtime; then
+                last_commit_at=$now_ts
+              else
+                echo "Runtime push is deferred; the next monitor iteration will retry without waiting for the publish interval."
+              fi
             fi
 
             if [[ "$CONTINUOUS" != "true" ]] || (( now_ts >= shift_end )); then
