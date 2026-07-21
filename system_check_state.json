@@ -1,22 +1,22 @@
 {
   "active_incidents": 0,
   "admin_panel": {
-    "age_minutes": 4,
-    "last_heartbeat_at": "2026-07-21T05:56:44.997335+00:00",
-    "started_at": "2026-07-21T05:51:38.460275+00:00",
+    "age_minutes": 5,
+    "last_heartbeat_at": "2026-07-21T06:01:41.706417+00:00",
+    "started_at": "2026-07-21T06:01:38.709765+00:00",
     "status": "running",
     "update_consumer": "single_getUpdates_owner",
     "version": 41
   },
   "ai_health_inspector": {
     "ai_status": "ok",
-    "cached": true,
+    "cached": false,
     "confidence": 0.0,
     "critical_count": 0,
-    "decision_id": "ebe04c8a228f48ce9cfd32db645aa574",
+    "decision_id": "033f5aefcbeb4ee68ebe8fa2172bac6c",
     "finding_count": 0,
     "finding_kinds": [],
-    "generated_at": "2026-07-21T06:01:41.886864+00:00",
+    "generated_at": "2026-07-21T06:06:50.746173+00:00",
     "impact": "Отсутствует. Все сервисы работают согласно целевым показателям.",
     "mode": "ai",
     "model": "gemini-3.1-flash-lite",
@@ -24,7 +24,7 @@
     "recommended_action": "Вмешательство не требуется. Продолжать штатный мониторинг.",
     "requires_human_attention": false,
     "severity": "ok",
-    "summary": "Система функционирует в штатном режиме: все 166 источников доступны, ошибок не зафиксировано.",
+    "summary": "Система функционирует в штатном режиме: все 166 источников доступны, критических ошибок и инцидентов не зафиксировано.",
     "used_fallback": false,
     "version": 1,
     "warning_count": 0
@@ -61,7 +61,7 @@
     "telegram_transport": "ok",
     "wheel_api": "ok"
   },
-  "checked_at": "2026-07-21T06:01:41.136298+00:00",
+  "checked_at": "2026-07-21T06:06:48.584656+00:00",
   "discovery": {
     "active_size": 166,
     "candidate_count": 470,
@@ -103,7 +103,7 @@
   "findings": [],
   "gpt_diagnostic_snapshot": {
     "active_incidents": 0,
-    "bot_panel_heartbeat": "2026-07-21T05:56:44.997335+00:00",
+    "bot_panel_heartbeat": "2026-07-21T06:01:41.706417+00:00",
     "checked_sources": 166,
     "configured_sources": 168,
     "domain": "telegram.me",
@@ -175,7 +175,7 @@
     "version": 3,
     "workflow_run_id": "29805453040"
   },
-  "monitor_age_minutes": 4,
+  "monitor_age_minutes": 10,
   "notification_integrity": {
     "algorithm": "HMAC-SHA256",
     "contains_personal_fields": false,
