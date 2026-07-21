@@ -260,11 +260,11 @@
       "deadline": "2026-07-21T12:25:02.320000+00:00",
       "deadline_source": "api",
       "event_id": "289a6bdac05f1ade33bd",
-      "expires_at": "2026-07-21T14:11:37.070581+00:00",
+      "expires_at": "2026-07-21T12:55:02.320000+00:00",
       "generation_id": "9ee1a81b79a565410b4c",
       "identifier": "aunkere",
-      "last_checked_at": "2026-07-21T12:11:37.590004+00:00",
-      "last_verification_at": "2026-07-21T12:11:37.070581+00:00",
+      "last_checked_at": "2026-07-21T12:12:06.436775+00:00",
+      "last_verification_at": "2026-07-21T12:12:06.436775+00:00",
       "lifecycle_state": "participating",
       "message_date": "2026-07-21T12:06:31+00:00",
       "message_id": 194,
@@ -299,9 +299,9 @@
       "first_notified_at": "2026-07-21T08:26:56.555850+00:00",
       "generation_id": "3385cc03ed657edff57e",
       "identifier": "zonertg12",
-      "last_checked_at": "2026-07-21T12:11:37.590004+00:00",
+      "last_checked_at": "2026-07-21T12:12:06.436775+00:00",
       "last_notification_at": "2026-07-21T08:26:56.555850+00:00",
-      "last_verification_at": "2026-07-21T12:11:37.070581+00:00",
+      "last_verification_at": "2026-07-21T12:12:06.436775+00:00",
       "lifecycle_changed_at": "2026-07-21T10:47:16.849107+00:00",
       "lifecycle_state": "participating",
       "message_date": "2026-07-21T08:06:00+00:00",
@@ -1886,6 +1886,12 @@
       "status": "participated",
       "wheel_key": "aunkere"
     },
+    "aunkere#event:289a6bdac05f1ade33bd": {
+      "attempt_version": 2,
+      "recorded_at": "2026-07-21T12:11:57.705218+00:00",
+      "status": "already_marked_in_bot",
+      "wheel_key": "aunkere"
+    },
     "aunkere#event:ef82ebd7b7f693e7388b": {
       "attempted_at": "2026-07-19T17:59:34.399275+00:00",
       "detail": "кнопка «Участвую»/«Участвовать»/«Принять участие» не найдена",
@@ -2264,7 +2270,7 @@
     "zortelad"
   ],
   "last_admin_action_applied_at": "2026-07-21T12:11:37.070507+00:00",
-  "last_auto_participation_recovery_scan_at": "2026-07-21T12:08:02.467938+00:00",
+  "last_auto_participation_recovery_scan_at": "2026-07-21T12:12:06.436775+00:00",
   "last_automatic_status_at": "2026-07-17T06:35:52.571822+00:00",
   "last_heartbeat_at": "2026-07-21T09:36:34.364853+00:00",
   "last_run_kind": "schedule",
