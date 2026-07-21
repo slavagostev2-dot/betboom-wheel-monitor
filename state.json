@@ -2112,11 +2112,11 @@
   ],
   "last_admin_action_applied_at": "2026-07-20T09:34:59.821555+00:00",
   "last_automatic_status_at": "2026-07-17T06:35:52.571822+00:00",
-  "last_heartbeat_at": "2026-07-20T21:31:11.009505+00:00",
+  "last_heartbeat_at": "2026-07-21T03:31:21.369239+00:00",
   "last_run_kind": "schedule",
   "last_run_summary": {
     "activation_sent": 0,
-    "active_wheels": 1,
+    "active_wheels": 0,
     "admin_actions": {
       "applied": 0,
       "changed": false,
@@ -2129,28 +2129,28 @@
       "lists": 0,
       "participating": 0
     },
-    "checked_sources": 165,
+    "checked_sources": 166,
     "duplicates_suppressed": 0,
-    "inactive_waiting": 0,
+    "inactive_waiting": 1,
     "initialized_now": 0,
     "notification_errors": 0,
     "pending_expired": 0,
     "pending_total": 0,
     "preliminary_sent": 0,
     "quarantined_skipped": 0,
-    "reachable_sources": 165,
+    "reachable_sources": 166,
     "reminders": {
       "availability_notifications": 0,
-      "changed": true,
+      "changed": false,
       "draw_alerts": 0,
       "final_reminders": 0,
       "known_reminders": 0,
       "pending_total": 0,
       "removed": 0,
-      "tracked": 1,
+      "tracked": 0,
       "unknown_reminders": 0,
-      "verification_checked": 1,
-      "verification_confirmed": 1,
+      "verification_checked": 0,
+      "verification_confirmed": 0,
       "verification_deferred": 0,
       "verification_failed": 0,
       "verification_removed": 0
@@ -2161,7 +2161,7 @@
       "count": 0,
       "sent": false
     },
-    "sources": 165,
+    "sources": 166,
     "stale_skipped": 0,
     "unconfirmed_waiting": 0,
     "unknown_timer_samples_added": 0
@@ -2436,7 +2436,7 @@
     "d4fa31f2a589420a8f824bb4bde52b3dfe93db3a76d5b704da796185c36b1a81": "2026-07-12T15:10:05.815332+00:00",
     "d569c905e0d81fcf2df45f21bb4464b7aaa607a7178ddcb9277cc337d9d05617": "2026-07-18T16:58:47.869443+00:00",
     "d722c5451f3f6fe0c34aefed99af055687887e71397ebbcc6843b9bcf77d8e5f": "2026-07-14T19:52:24.783487+00:00",
-    "d928578e298136ef7a355232ca94e43e3ef079209677802a0a5f0f8d53224f16": "2026-07-21T03:21:19.364897+00:00",
+    "d928578e298136ef7a355232ca94e43e3ef079209677802a0a5f0f8d53224f16": "2026-07-21T03:36:22.742804+00:00",
     "d943a649513ab3e2d93341ea34e7670992938dfab1b7d40e9db42c7e717d8051": "2026-07-18T22:10:47.299287+00:00",
     "d9bce73b7da1681ccd4617763b82c4eebd8b580d3af02c9eb467bb8b365aa070": "2026-07-15T19:02:02.100324+00:00",
     "db568f77183a1f8525c0e666d4acf763f080189b1b790533f7094ce7821a7ce1": "2026-07-12T18:21:25.206458+00:00",
@@ -3256,9 +3256,9 @@
   "wheel_api_health": {
     "alert_threshold": 3,
     "consecutive_failures": 0,
-    "last_checked_at": "2026-07-21T03:21:19.364718+00:00",
+    "last_checked_at": "2026-07-21T03:36:22.742643+00:00",
     "last_failure_at": "2026-07-20T14:02:03.366327+00:00",
-    "last_success_at": "2026-07-21T03:21:19.364718+00:00",
+    "last_success_at": "2026-07-21T03:36:22.742643+00:00",
     "status": "ok"
   },
   "wheel_generation_observations": {
@@ -4081,13 +4081,13 @@
       "action_id": 800,
       "first_seen_at": "2026-07-20T21:19:08.286552+00:00",
       "generation_id": "f5f7e69fd74b16023a7b",
-      "last_seen_at": "2026-07-21T03:21:19.364767+00:00",
-      "observations": 371,
+      "last_seen_at": "2026-07-21T03:36:22.742687+00:00",
+      "observations": 386,
       "server_start_at": "2026-07-20T21:17:52.674000+00:00",
       "statuses": {
         "active": 57,
         "closed": 1,
-        "inactive": 313
+        "inactive": 328
       },
       "wheel_key": "ctom05"
     },
