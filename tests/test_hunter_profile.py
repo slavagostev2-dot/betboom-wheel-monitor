@@ -220,7 +220,7 @@ def test_analytics_keeps_period_metrics_and_links_to_detail_sections() -> None:
         for button in row
     ]
     assert "page:analytics:7" in callbacks
-    assert "page:report:inactive" not in callbacks
+    assert "page:report:inactive" in callbacks
     assert callbacks.count("page:ranking") == 0
     assert callbacks.count("page:sources") == 0
     assert callbacks[-1] == "nav:home"
