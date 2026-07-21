@@ -6,6 +6,35 @@
 
 ---
 
+## 2026-07-21 — Глава 2C: удалена историческая цепочка Telegram-панели v25–v40
+
+После переноса production-поведения в `bbvg/bot/*` файлы
+`admin_panel_runtime_v25.py`–`admin_panel_runtime_v40.py` образовывали замкнутую
+историческую лестницу. Production MRO их не использовал; внешние ссылки
+оставались только в устаревших preflight, CI и recovery-контрактах.
+
+Удалены 16 versioned-файлов и 5 394 строки. `preflight.py`, Control Center
+validation, current checks, recovery smoke, private-state validation и System
+Health переведены на `bbvg/bot/*`, `admin_panel_v2.py` и совместимую production-
+команду `admin_panel_runtime_v41.py`. Добавлен отрицательный regression-контракт,
+запрещающий возврат v25–v40. Callback-данные, порядок кнопок, JSON-state и
+логика колёс не изменялись.
+
+Одновременно восстановлен зелёный baseline: `ai_runtime_state.json` внесён в
+машинный ownership-inventory как 29-й JSON; исправлена четырёхполевая таблица
+критических natural-language команд; тесты синхронизированы с текущим запуском
+nightly discovery, профилем пользователя и CAS-сохранением encrypted state.
+
+Pre-update backup:
+`backup/before-chapter-2c-legacy-panel-removal-2026-07-21` →
+`ebd84b148a8b0aa6457106d729d86925a3a77393`.
+Safety-точка после физического удаления:
+`safety/chapter-2c-deletion-head-2026-07-21` →
+`ef2a7661b7c70b8c26951079223f4a7c990a7651`.
+
+Откат: вернуть merge главы целиком либо восстановить pre-update backup; не
+восстанавливать отдельные versioned-файлы вручную поверх нового runtime.
+
 ## 2026-07-19 — Ночной список переведён на ручное пополнение
 
 Из 102 ночных источников только три были добавлены администратором вручную:

@@ -35,6 +35,11 @@ JSON_STATE_CONTRACTS: dict[str, dict[str, Any]] = {
         "owner": "control-center-status",
         "schema": ("heartbeat_version", (1,)),
     },
+    "ai_runtime_state.json": {
+        "category": "diagnostic",
+        "owner": "ai-health-inspector",
+        "schema": ("version", (1,)),
+    },
     "bot_access.json": {
         "category": "compatibility",
         "owner": "encrypted-private-state",

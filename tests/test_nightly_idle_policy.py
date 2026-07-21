@@ -74,13 +74,13 @@ class NightlyIdlePolicyTests(unittest.TestCase):
         ):
             self.assertNotIn("nightly-discovery.yml", inspect.getsource(method))
 
-    def test_catalog_change_does_not_trigger_nightly_workflow(self) -> None:
+    def test_catalog_change_triggers_nightly_inventory_synchronization(self) -> None:
         workflow = (ROOT / ".github/workflows/nightly-discovery.yml").read_text(
             encoding="utf-8"
         )
         push_paths = workflow.split("workflow_dispatch:", 1)[0]
-        self.assertNotIn('"source_catalog.txt"', push_paths)
-        self.assertNotIn('"public_sources.txt"', push_paths)
+        self.assertIn('"source_catalog.txt"', push_paths)
+        self.assertIn('"public_sources.txt"', push_paths)
 
     def test_intelligence_run_does_not_feed_nightly_discovery(self) -> None:
         workflow = (ROOT / ".github/workflows/nightly-discovery.yml").read_text(
