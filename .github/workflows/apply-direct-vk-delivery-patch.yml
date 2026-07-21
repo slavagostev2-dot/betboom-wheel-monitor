@@ -1,4 +1,4 @@
-name: Apply direct VK delivery patch
+name: Generate direct VK monitor candidate
 
 on:
   pull_request:
@@ -8,97 +8,36 @@ permissions:
   contents: write
 
 jobs:
-  patch:
+  candidate:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 10
     steps:
       - name: Checkout feature branch
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
           ref: fix/direct-vk-wheel-delivery
           fetch-depth: 0
-
-      - name: Build direct VK delivery patch
+      - name: Generate candidate without materializing the secret
         shell: bash
         run: |
           set -euo pipefail
           python3 - <<'PY'
           from pathlib import Path
-          import re
-
-          vk_path = Path("vk_wheel_notifications.py")
-          vk_text = vk_path.read_text(encoding="utf-8")
-          if "import vk_dynamic_subscribers\n" not in vk_text:
-              vk_text = vk_text.replace(
-                  "from urllib.request import Request, urlopen\n",
-                  "from urllib.request import Request, urlopen\n\nimport vk_dynamic_subscribers\n",
-                  1,
-              )
-          vk_text = vk_text.replace('VK_WORKFLOW_FILE = "vk-wheel-notification.yml"\n', "", 1)
-          new_dispatch = '''def _direct_vk_dispatch(\n    *,\n    message: str,\n    wheel_url: str,\n    event_identity: str,\n) -> bool:\n    """Deliver one wheel alert directly from the live monitor to VK dialogs."""\n\n    token = str(os.getenv("VK_GROUP_TOKEN") or "").strip()\n    if not token:\n        raise RuntimeError("VK_GROUP_TOKEN is not configured in the monitor runtime")\n    if wheel_url and wheel_url not in message:\n        message = f"{message}\\n\\n{wheel_url}" if message else wheel_url\n\n    peers = vk_dynamic_subscribers.conversation_peer_ids(token)\n    if not peers:\n        raise RuntimeError("VK has no writable user conversations")\n\n    sent = 0\n    failures: list[str] = []\n    for peer_id in peers:\n        try:\n            vk_dynamic_subscribers.send_message(token, peer_id, message, event_identity)\n            sent += 1\n        except Exception as exc:\n            failures.append(f"{type(exc).__name__}: {exc}")\n\n    print(\n        "VK direct wheel delivery: "\n        f"subscribers={len(peers)}, sent={sent}, failed={len(failures)}"\n    )\n    if failures:\n        raise RuntimeError(\n            "VK direct delivery failed for "\n            f"{len(failures)} of {len(peers)} writable conversations; "\n            f"first_error={failures[0]}"\n        )\n    return sent > 0\n\n\n'''
-          pattern = re.compile(
-              r"def _github_dispatch\(.*?\n\n(?=def dispatch_vk_wheel_notification\()",
-              re.S,
-          )
-          if "def _direct_vk_dispatch(" not in vk_text:
-              vk_text, count = pattern.subn(new_dispatch, vk_text, count=1)
-              if count != 1:
-                  raise SystemExit("Unable to replace GitHub workflow dispatch")
-          vk_text = vk_text.replace(
-              "dispatcher: Callable[..., bool] = _github_dispatch,",
-              "dispatcher: Callable[..., bool] = _direct_vk_dispatch,",
-              1,
-          )
-          vk_text = vk_text.replace(
-              '"VK wheel notification workflow scheduled: "',
-              '"VK wheel notification sent directly: "',
-              1,
-          )
-          vk_path.write_text(vk_text, encoding="utf-8")
-
-          tests = Path("tests/test_vk_wheel_notifications.py")
-          test_text = tests.read_text(encoding="utf-8")
-          regression = '''\n\ndef test_direct_vk_dispatch_sends_to_every_writable_conversation(monkeypatch) -> None:\n    calls: list[tuple[str, str]] = []\n    monkeypatch.setenv("VK_GROUP_TOKEN", "group-token")\n    monkeypatch.setattr(\n        vk_wheel_notifications.vk_dynamic_subscribers,\n        "conversation_peer_ids",\n        lambda token: ["10", "20", "30"] if token == "group-token" else [],\n    )\n    monkeypatch.setattr(\n        vk_wheel_notifications.vk_dynamic_subscribers,\n        "send_message",\n        lambda token, peer_id, message, event_identity: calls.append((peer_id, event_identity)),\n    )\n    assert vk_wheel_notifications._direct_vk_dispatch(\n        message="Новое колесо",\n        wheel_url="https://betboom.ru/freestream/direct-test",\n        event_identity="wheel:wheels:direct-test:detected",\n    ) is True\n    assert calls == [\n        ("10", "wheel:wheels:direct-test:detected"),\n        ("20", "wheel:wheels:direct-test:detected"),\n        ("30", "wheel:wheels:direct-test:detected"),\n    ]\n\n\ndef test_direct_vk_failure_releases_delivery_for_retry(monkeypatch) -> None:\n    monkeypatch.setenv("VK_GROUP_TOKEN", "group-token")\n    monkeypatch.setattr(\n        vk_wheel_notifications.vk_dynamic_subscribers,\n        "conversation_peer_ids",\n        lambda token: ["10"],\n    )\n    def fail_once(token: str, peer_id: str, message: str, event_identity: str) -> None:\n        raise RuntimeError("temporary VK failure")\n    monkeypatch.setattr(vk_wheel_notifications.vk_dynamic_subscribers, "send_message", fail_once)\n    try:\n        vk_wheel_notifications.dispatch_vk_wheel_notification(\n            FakeRouter,\n            "🎡 Новое колесо BetBoom",\n            url="https://betboom.ru/freestream/direct-retry",\n        )\n    except RuntimeError:\n        pass\n    else:\n        raise AssertionError("Direct VK failure must remain visible to the wrapper")\n    sent: list[str] = []\n    monkeypatch.setattr(\n        vk_wheel_notifications.vk_dynamic_subscribers,\n        "send_message",\n        lambda token, peer_id, message, event_identity: sent.append(peer_id),\n    )\n    retry = vk_wheel_notifications.dispatch_vk_wheel_notification(\n        FakeRouter,\n        "🎡 Новое колесо BetBoom",\n        url="https://betboom.ru/freestream/direct-retry",\n    )\n    assert retry["dispatched"] is True\n    assert sent == ["10"]\n'''
-          if "test_direct_vk_dispatch_sends_to_every_writable_conversation" not in test_text:
-              tests.write_text(test_text + regression, encoding="utf-8")
-
-          # Build monitor workflow as an ordinary candidate file. The final API
-          # commit will place this exact blob at .github/workflows/monitor.yml.
-          monitor_text = Path(".github/workflows/monitor.yml").read_text(encoding="utf-8")
-          secret_ref = "$" + "{{ secrets.VK_GROUP_TOKEN }}"
-          env_anchor = "          GITHUB_BRANCH: main\n"
-          env_block = env_anchor + f"          VK_GROUP_TOKEN: {secret_ref}\n" + '          VK_API_VERSION: "5.199"\n'
-          if "          VK_GROUP_TOKEN:" not in monitor_text:
-              if env_anchor not in monitor_text:
-                  raise SystemExit("monitor VK env anchor not found")
-              monitor_text = monitor_text.replace(env_anchor, env_block, 1)
-          Path("monitor_direct_vk_candidate.yml").write_text(monitor_text, encoding="utf-8")
-
-          agents = Path("AGENTS.md")
-          agents_text = agents.read_text(encoding="utf-8")
-          agents_anchor = "- Монитор колёс: `bbvg_monitor_main.py`, `monitor.py` и тематические модули.\n"
-          agents_line = agents_anchor + "- VK-уведомления о новых колёсах отправляются напрямую из monitor-runtime: `vk_wheel_notifications.py` определяет событие и дедупликацию, `vk_dynamic_subscribers.py` получает доступные диалоги и вызывает VK API. `vk-wheel-notification.yml` остаётся только ручным fallback/диагностикой.\n"
-          if "VK-уведомления о новых колёсах отправляются напрямую" not in agents_text:
-              if agents_anchor not in agents_text:
-                  raise SystemExit("AGENTS monitor anchor not found")
-              agents.write_text(agents_text.replace(agents_anchor, agents_line, 1), encoding="utf-8")
-
-          changelog = Path("docs/PROJECT_CHANGELOG_RU.md")
-          changelog_text = changelog.read_text(encoding="utf-8")
-          title = "## 2026-07-21 — VK-доставка переведена напрямую в монитор"
-          entry = '''## 2026-07-21 — VK-доставка переведена напрямую в монитор\n\nПовторная production-диагностика после пропуска `zonertg12` показала: монитор исправно видит колесо, `VK_GROUP_TOKEN` настроен, VK API возвращает три доступных для записи пользовательских диалога, но после 19 июля не создавался ни один новый запуск `VK wheel notification`. Доставка обрывалась на промежуточном переходе monitor → GitHub workflow ещё до обращения к VK API.\n\nProduction-доставка новых колёс теперь выполняется напрямую из живого monitor-runtime через существующий `vk_dynamic_subscribers.py`. Распознавание только первичного события, event-level dedupe и изоляция Telegram остаются в `vk_wheel_notifications.py`. В monitor workflow передаётся repository secret `VK_GROUP_TOKEN`; значение секрета не сохраняется в коде или runtime-state. Ошибка VK освобождает dedupe-claim для повторной попытки и не ломает Telegram.\n\nДобавлены regression-тесты прямой отправки всем доступным диалогам и повторной попытки после ошибки. `vk-wheel-notification.yml` оставлен только как ручной fallback/диагностика и больше не является production-hop.\n\n**Pre-update backup:** `backup/before-direct-vk-wheel-delivery-2026-07-21` → `7d435b7efc7f74c9dd7731337f351a96d6b228d9`.\n\n**Откат:** вернуть commit целиком; миграция данных не требуется.\n\n'''
-          if title not in changelog_text:
-              marker = "---\n\n"
-              if marker not in changelog_text:
-                  raise SystemExit("changelog insertion marker not found")
-              changelog.write_text(changelog_text.replace(marker, marker + entry, 1), encoding="utf-8")
+          source = Path('.github/workflows/monitor.yml').read_text(encoding='utf-8')
+          secret_ref = '$' + '{{ secrets.VK_GROUP_TOKEN }}'
+          anchor = '          GITHUB_BRANCH: main\n'
+          addition = anchor + f'          VK_GROUP_TOKEN: {secret_ref}\n' + '          VK_API_VERSION: "5.199"\n'
+          if '          VK_GROUP_TOKEN:' not in source:
+              if anchor not in source:
+                  raise SystemExit('monitor VK env anchor not found')
+              source = source.replace(anchor, addition, 1)
+          Path('monitor_direct_vk_candidate.yml').write_text(source, encoding='utf-8')
           PY
-
-          python -m py_compile vk_wheel_notifications.py vk_dynamic_subscribers.py
-          python -m pytest -q tests/test_vk_wheel_notifications.py
-
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add vk_wheel_notifications.py tests/test_vk_wheel_notifications.py AGENTS.md docs/PROJECT_CHANGELOG_RU.md monitor_direct_vk_candidate.yml
-          git commit -m "Build direct VK wheel delivery patch"
+          git add monitor_direct_vk_candidate.yml
+          if git diff --cached --quiet; then
+            exit 0
+          fi
+          git commit -m "Prepare direct VK monitor candidate"
           git push origin HEAD:fix/direct-vk-wheel-delivery
