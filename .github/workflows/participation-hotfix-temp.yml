@@ -64,7 +64,6 @@ jobs:
 
           changelog_path = Path("docs/PROJECT_CHANGELOG_RU.md")
           changelog = changelog_path.read_text(encoding="utf-8")
-          heading = "#"
           insert_at = changelog.find("\n## ")
           if insert_at < 0:
               raise SystemExit("changelog insertion point not found")
@@ -90,3 +89,5 @@ jobs:
             git pull --rebase origin main || { git rebase --abort || true; exit 1; }
           done
           exit 1
+
+# retrigger: 2026-07-21
