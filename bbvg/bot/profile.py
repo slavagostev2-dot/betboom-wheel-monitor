@@ -288,7 +288,6 @@ _ANALYTICS_SECTION_CUTOFFS = frozenset({
 _ANALYTICS_DETAIL_CALLBACKS = frozenset({
     "page:ranking",
     "page:sources",
-    "page:report:inactive",
 })
 
 
