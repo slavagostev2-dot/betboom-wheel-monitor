@@ -98,6 +98,7 @@ jobs:
           assert callable(auto_participation_bot_sync.queue_confirmed_participation)
           assert callable(auto_participation_owner_sync.sync_once)
           assert callable(betboom_participation_browser.participate)
+          auto_participation_recovery.self_test()
           auto_participation_bot_sync.self_test()
           auto_participation_owner_sync.self_test()
           print("Auto participation preflight OK")
