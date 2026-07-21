@@ -30,6 +30,12 @@
       "sequence": 27,
       "value": "aunkereref|admin"
     },
+    "05c1824d5a9b4d968f085200964f8ca9": {
+      "action": "record_personal_vote",
+      "created_at": "2026-07-21T15:33:42.307702+00:00",
+      "sequence": 168,
+      "value": "{\"actor\":\"vote_3092cd8d69b74beb8bd2579cd902c714\",\"event_key\":\"dayneez#action:950\",\"role\":\"owner\",\"sources\":[\"DayneezBet\"],\"weight\":5,\"wheel_key\":\"dayneez\"}"
+    },
     "07d5c86292584ec7bf409344b0eff656": {
       "action": "record_personal_vote",
       "created_at": "2026-07-17T10:56:24.877804+00:00",
@@ -1004,5 +1010,5 @@
     }
   },
   "format": "bbvg-admin-action-queue-v1",
-  "sequence": 167
+  "sequence": 168
 }
