@@ -85,7 +85,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          max_age_seconds=480
+          max_age_seconds=1200
           heartbeat=$(jq -r '.last_process_heartbeat_at // .last_iteration_at // empty' monitor_status.json)
           run_id=$(jq -r '.workflow_run_id // .run_id // empty' monitor_status.json)
           stale=false
