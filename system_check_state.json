@@ -1,8 +1,8 @@
 {
-  "active_incidents": 4,
+  "active_incidents": 3,
   "admin_panel": {
     "age_minutes": 1,
-    "last_heartbeat_at": "2026-07-21T07:53:26.757700+00:00",
+    "last_heartbeat_at": "2026-07-21T07:58:29.748708+00:00",
     "started_at": "2026-07-21T06:01:38.709765+00:00",
     "status": "running",
     "update_consumer": "single_getUpdates_owner",
@@ -13,26 +13,25 @@
     "cached": false,
     "confidence": 0.0,
     "critical_count": 2,
-    "decision_id": "52cb1c67df5c452abb9ff1a0981019d0",
-    "finding_count": 4,
+    "decision_id": "2ee39d51e8e74acb8feddb00a7f908eb",
+    "finding_count": 3,
     "finding_kinds": [
       "monitor_source_count",
       "source_health_missing",
-      "source_nightly_inventory",
       "source_transport_smoke"
     ],
-    "generated_at": "2026-07-21T07:54:44.191928+00:00",
-    "impact": "Нарушена целостность данных мониторинга. Часть источников (2 из 168) не опрашивается, что приводит к потере актуальной информации по ним.",
+    "generated_at": "2026-07-21T08:00:26.385840+00:00",
+    "impact": "Нарушена целостность данных мониторинга; информация по источникам @ayukifunpage и @nucleartigeres отсутствует, что делает текущий отчет неполным.",
     "mode": "ai",
     "model": "gemini-3.1-flash-lite",
     "provider": "gemini",
     "recommended_action": "Проверить состояние основного monitor workflow и время последней успешной итерации для выявления причин пропуска источников.",
     "requires_human_attention": true,
     "severity": "critical",
-    "summary": "Система мониторинга BB V.G. находится в критическом состоянии: 2 критические ошибки и 2 предупреждения. Основной монитор не охватывает 2 источника, а транспортная проверка inventory не подтверждена.",
+    "summary": "Система мониторинга работает частично: зафиксировано 2 критические ошибки и 1 предупреждение. Основной монитор не охватывает 2 источника из 168.",
     "used_fallback": false,
     "version": 1,
-    "warning_count": 2
+    "warning_count": 1
   },
   "automation_state": {
     "expected_nightly_sources": 0,
@@ -66,7 +65,7 @@
     "telegram_transport": "ok",
     "wheel_api": "ok"
   },
-  "checked_at": "2026-07-21T07:54:42.289080+00:00",
+  "checked_at": "2026-07-21T08:00:24.669140+00:00",
   "discovery": {
     "active_size": 166,
     "candidate_count": 470,
@@ -104,15 +103,8 @@
     "legacy_url_offenders": [],
     "primary": "telegram.me"
   },
-  "finding_count": 4,
+  "finding_count": 3,
   "findings": [
-    {
-      "detail": "Файл ночного наблюдения не содержит источников.",
-      "kind": "source_nightly_inventory",
-      "severity": "warning",
-      "subject": "",
-      "title": "Не задан ночной inventory источников"
-    },
     {
       "detail": "В последней итерации проверено 166 из 168 источников основного режима.",
       "kind": "monitor_source_count",
@@ -136,8 +128,8 @@
     }
   ],
   "gpt_diagnostic_snapshot": {
-    "active_incidents": 4,
-    "bot_panel_heartbeat": "2026-07-21T07:53:26.757700+00:00",
+    "active_incidents": 3,
+    "bot_panel_heartbeat": "2026-07-21T07:58:29.748708+00:00",
     "checked_sources": 166,
     "configured_sources": 168,
     "domain": "telegram.me",
@@ -154,14 +146,14 @@
     }
   },
   "incident_delivery": {
-    "digest_sent": false,
+    "digest_sent": true,
     "health_inspector_mode": "ai",
     "health_inspector_status": "ok",
-    "messages_attempted": 0,
+    "messages_attempted": 1,
     "opened": 0,
-    "resolved": 0
+    "resolved": 1
   },
-  "incident_sequence": 74,
+  "incident_sequence": 75,
   "inventory": {
     "configured": 168,
     "configured_total": 168,
@@ -171,6 +163,7 @@
     "nightly": 0,
     "nightly_configured": 0,
     "nightly_operational": 0,
+    "nightly_policy": "optional_empty",
     "operational": 168,
     "primary_configured": 168,
     "primary_operational": 168,
@@ -209,7 +202,7 @@
     "version": 3,
     "workflow_run_id": "29806000685"
   },
-  "monitor_age_minutes": 1,
+  "monitor_age_minutes": 6,
   "notification_integrity": {
     "algorithm": "HMAC-SHA256",
     "contains_personal_fields": false,
