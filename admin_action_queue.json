@@ -948,6 +948,12 @@
       "sequence": 108,
       "value": "{\"actor\":\"vote_3092cd8d69b74beb8bd2579cd902c714\",\"event_key\":\"zonertg10#generation:221ef4ffd15b304f6a03\",\"role\":\"owner\",\"sources\":[\"mechanogun\"],\"weight\":5,\"wheel_key\":\"zonertg10\"}"
     },
+    "e2134a1d2ec94f9388012f6686f561f1": {
+      "action": "record_personal_vote",
+      "created_at": "2026-07-21T17:31:57.615151+00:00",
+      "sequence": 172,
+      "value": "{\"actor\":\"vote_3092cd8d69b74beb8bd2579cd902c714\",\"event_key\":\"pomidor2#action:963\",\"role\":\"owner\",\"sources\":[\"kolesaBB\"],\"weight\":5,\"wheel_key\":\"pomidor2\"}"
+    },
     "e245e3c65afc428db43ca64b6cbdbb91": {
       "action": "record_personal_vote",
       "created_at": "2026-07-21T13:30:17.125951+00:00",
@@ -1028,5 +1034,5 @@
     }
   },
   "format": "bbvg-admin-action-queue-v1",
-  "sequence": 171
+  "sequence": 172
 }
