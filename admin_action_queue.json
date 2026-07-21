@@ -876,6 +876,12 @@
       "sequence": 32,
       "value": "papa"
     },
+    "d0cf8281cfed4b50bb79225df49f33e4": {
+      "action": "record_personal_vote",
+      "created_at": "2026-07-21T15:27:12.721866+00:00",
+      "sequence": 167,
+      "value": "{\"actor\":\"vote_3092cd8d69b74beb8bd2579cd902c714\",\"event_key\":\"kekw#action:955\",\"role\":\"owner\",\"sources\":[\"kolesaBB\"],\"weight\":5,\"wheel_key\":\"kekw\"}"
+    },
     "d42effc208e84ff1a7f5ad96305fed69": {
       "action": "record_personal_vote",
       "created_at": "2026-07-18T19:10:43.439115+00:00",
@@ -998,5 +1004,5 @@
     }
   },
   "format": "bbvg-admin-action-queue-v1",
-  "sequence": 166
+  "sequence": 167
 }
