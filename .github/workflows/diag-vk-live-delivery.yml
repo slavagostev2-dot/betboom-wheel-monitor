@@ -23,7 +23,7 @@ jobs:
           ref: main
           persist-credentials: false
 
-      - name: Inspect VK workflow and monitor history
+      - name: Inspect zonertg12 delivery path
         env:
           GH_TOKEN: ${{ github.token }}
           GH_REPO: ${{ github.repository }}
@@ -31,64 +31,61 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          vk_runs="$(gh run list --repo "$GH_REPO" --workflow vk-wheel-notification.yml --limit 30 --json databaseId,status,conclusion,createdAt,updatedAt,event,displayTitle,headSha,url)"
-          monitor_runs="$(gh run list --repo "$GH_REPO" --workflow monitor.yml --limit 15 --json databaseId,status,conclusion,createdAt,updatedAt,event,displayTitle,headSha,url)"
+          vk_runs="$(gh run list --repo "$GH_REPO" --workflow vk-wheel-notification.yml --limit 20 --json databaseId,status,conclusion,createdAt,updatedAt,event,headSha,url)"
+          latest_vk="$(printf '%s' "$vk_runs" | jq '.[0] // {}')"
+          vk_count_since_midnight="$(printf '%s' "$vk_runs" | jq '[.[] | select(.createdAt >= "2026-07-21T00:00:00Z")] | length')"
 
-          logs_file="$(mktemp)"
-          printf '%s' "$vk_runs" | jq -r '.[0:8][].databaseId' | while read -r run_id; do
-            [[ -z "$run_id" ]] && continue
-            echo "===== VK RUN $run_id =====" >> "$logs_file"
-            gh run view "$run_id" --repo "$GH_REPO" --log 2>&1 | tail -n 100 >> "$logs_file" || true
-          done
-
+          monitor_runs="$(gh run list --repo "$GH_REPO" --workflow monitor.yml --limit 20 --json databaseId,status,conclusion,createdAt,updatedAt,event,headSha,url)"
           monitor_file="$(mktemp)"
           printf '%s' "$monitor_runs" | jq -r '.[] | select(.createdAt >= "2026-07-21T07:30:00Z") | .databaseId' | while read -r run_id; do
             [[ -z "$run_id" ]] && continue
             echo "===== MONITOR RUN $run_id =====" >> "$monitor_file"
             gh run view "$run_id" --repo "$GH_REPO" --log 2>&1 \
-              | grep -Ei -C 8 'zonertg12|VK wheel notification|workflow scheduled|WARNING VK|freestream/zonertg12' \
-              | tail -n 220 >> "$monitor_file" || true
+              | grep -Ei -C 12 'zonertg12|VK wheel notification|workflow scheduled|WARNING VK|freestream/zonertg12|новое колесо|активное колесо' \
+              | tail -n 260 >> "$monitor_file" || true
           done
 
-          token_status="missing"
-          if [[ -n "${VK_GROUP_TOKEN:-}" ]]; then token_status="configured"; fi
-
-          subscriber_summary="not checked"
-          if [[ "$token_status" == "configured" ]]; then
-            subscriber_summary="$(python3 - <<'PY'
-          import os
-          import vk_dynamic_subscribers as vk
-          token = os.environ.get("VK_GROUP_TOKEN", "").strip()
-          try:
-              peers = vk.conversation_peer_ids(token)
-              print(f"writable_user_conversations={len(peers)}")
-          except Exception as exc:
-              print(f"conversation_check_error={type(exc).__name__}: {exc}")
+          ledger_result="$(python3 - <<'PY'
+          import hashlib, json
+          from pathlib import Path
+          ledger=json.loads(Path('notification_delivery_state.json').read_text(encoding='utf-8'))
+          entries=set((ledger.get('entries') or {}).keys())
+          variants=[]
+          for ident in ('zonertg12','ZONERTG12','Zonertg12'):
+              raw='\x1f'.join(['vk:wheel-notifications','wheels',f'wheel:wheels:{ident}:detected',f'https://betboom.ru/freestream/{ident}'])
+              key=hashlib.sha256(raw.encode('utf-8')).hexdigest()
+              variants.append(f'{ident}={key in entries}')
+          print(', '.join(variants))
           PY
           )"
-          fi
+
+          subscriber_summary="$(python3 - <<'PY'
+          import os
+          import vk_dynamic_subscribers as vk
+          token=os.environ.get('VK_GROUP_TOKEN','').strip()
+          if not token:
+              print('token_missing')
+          else:
+              try:
+                  peers=vk.conversation_peer_ids(token)
+                  print(f'writable_user_conversations={len(peers)}')
+              except Exception as exc:
+                  print(f'error={type(exc).__name__}: {exc}')
+          PY
+          )"
 
           body="$(mktemp)"
           {
-            echo '## Live VK delivery diagnostic'
+            echo '## zonertg12 VK delivery path'
             echo
-            echo "VK_GROUP_TOKEN: ${token_status}"
-            echo "Subscriber check: ${subscriber_summary}"
+            echo "VK workflow runs since 2026-07-21 00:00 UTC: $vk_count_since_midnight"
+            echo "Latest VK workflow: $latest_vk"
+            echo "VK subscriber check: $subscriber_summary"
+            echo "VK dedupe key present for zonertg12: $ledger_result"
             echo
-            echo '### Recent VK workflow runs'
-            echo '```json'
-            printf '%s\n' "$vk_runs" | jq '.[0:12]'
-            echo '```'
-            echo
-            echo '### Recent VK workflow logs'
-            echo '```text'
-            cat "$logs_file"
-            echo '```'
-            echo
-            echo '### Monitor evidence for zonertg12'
+            echo '### Monitor log evidence'
             echo '```text'
             cat "$monitor_file"
             echo '```'
           } > "$body"
-
-          gh issue edit 111 --repo "$GH_REPO" --title "Live VK delivery diagnostic" --body-file "$body"
+          gh issue edit 111 --repo "$GH_REPO" --title "zonertg12 VK delivery path" --body-file "$body"
