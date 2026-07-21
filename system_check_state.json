@@ -10,23 +10,23 @@
   },
   "ai_health_inspector": {
     "ai_status": "ok",
-    "cached": true,
+    "cached": false,
     "confidence": 0.0,
     "critical_count": 1,
-    "decision_id": "5c8a2acefdb740459e083af88121f617",
+    "decision_id": "bc3cb473e9614e7a8f4a092bc8d42285",
     "finding_count": 1,
     "finding_kinds": [
       "monitor_stale"
     ],
-    "generated_at": "2026-07-21T10:46:42.953459+00:00",
-    "impact": "Система мониторинга зависла, что приводит к отсутствию актуальных данных о состоянии инфраструктуры.",
+    "generated_at": "2026-07-21T10:47:13.685539+00:00",
+    "impact": "Система мониторинга не предоставляет актуальных данных о состоянии инфраструктуры, что делает невозможным оперативное обнаружение новых инцидентов.",
     "mode": "ai",
     "model": "gemini-3.1-flash-lite",
     "provider": "gemini",
     "recommended_action": "Проверить состояние основного monitor workflow и время последней успешной итерации.",
     "requires_human_attention": true,
     "severity": "critical",
-    "summary": "Критическая ошибка: основной монитор не обновлял данные в течение 57 минут.",
+    "summary": "Критическая задержка обновления основного монитора: последняя итерация была 58 минут назад.",
     "used_fallback": false,
     "version": 1,
     "warning_count": 0
@@ -63,7 +63,7 @@
     "telegram_transport": "ok",
     "wheel_api": "ok"
   },
-  "checked_at": "2026-07-21T10:46:41.861532+00:00",
+  "checked_at": "2026-07-21T10:47:11.724539+00:00",
   "discovery": {
     "active_size": 166,
     "candidate_count": 470,
@@ -104,7 +104,7 @@
   "finding_count": 1,
   "findings": [
     {
-      "detail": "Последняя итерация была 57 минут назад.",
+      "detail": "Последняя итерация была 58 минут назад.",
       "kind": "monitor_stale",
       "severity": "critical",
       "subject": "",
@@ -185,7 +185,7 @@
     "version": 3,
     "workflow_run_id": "29819709034"
   },
-  "monitor_age_minutes": 57,
+  "monitor_age_minutes": 58,
   "notification_integrity": {
     "algorithm": "HMAC-SHA256",
     "contains_personal_fields": false,
