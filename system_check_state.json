@@ -1,8 +1,8 @@
 {
   "active_incidents": 1,
   "admin_panel": {
-    "age_minutes": 4,
-    "last_heartbeat_at": "2026-07-21T11:56:53.966374+00:00",
+    "age_minutes": 0,
+    "last_heartbeat_at": "2026-07-21T12:01:56.978485+00:00",
     "started_at": "2026-07-21T11:21:17.336292+00:00",
     "status": "running",
     "update_consumer": "single_getUpdates_owner",
@@ -10,15 +10,15 @@
   },
   "ai_health_inspector": {
     "ai_status": "ok",
-    "cached": false,
+    "cached": true,
     "confidence": 0.0,
     "critical_count": 1,
-    "decision_id": "a9b73a3530f64cc89db4b0845222cd36",
+    "decision_id": "a3485ba876724728941bb48c01d4cf3e",
     "finding_count": 1,
     "finding_kinds": [
       "monitor_stale"
     ],
-    "generated_at": "2026-07-21T12:01:39.262821+00:00",
+    "generated_at": "2026-07-21T12:02:14.101095+00:00",
     "impact": "Система мониторинга не обновляет данные в реальном времени, что делает невозможным оперативное обнаружение новых инцидентов.",
     "mode": "ai",
     "model": "gemini-3.1-flash-lite",
@@ -42,7 +42,7 @@
     "source_tier_last_run_at": "2026-07-21T08:30:49.544865+00:00",
     "source_tier_policy": "manual_nightly_only",
     "transport_accounted_sources": 168,
-    "transport_checked_at": "2026-07-21T11:42:23.489189+00:00",
+    "transport_checked_at": "2026-07-21T12:01:34.736819+00:00",
     "transport_domain": "telegram.me",
     "transport_status": "success"
   },
@@ -63,27 +63,27 @@
     "telegram_transport": "ok",
     "wheel_api": "ok"
   },
-  "checked_at": "2026-07-21T12:01:37.251460+00:00",
+  "checked_at": "2026-07-21T12:02:12.959389+00:00",
   "discovery": {
     "active_size": 167,
-    "candidate_count": 472,
+    "candidate_count": 474,
     "catalog_size": 1,
     "discovery_errors": 0,
     "discovery_last_run_at": "2026-07-21T12:01:08.604077+00:00",
     "domain": "telegram.me",
     "intelligence_domain": "telegram.me",
-    "intelligence_last_run_at": "2026-07-21T11:42:13.237987+00:00",
+    "intelligence_last_run_at": "2026-07-21T12:01:32.196844+00:00",
     "intelligence_summary": {
       "empty_sources": 0,
       "error_types": {},
       "errors": 0,
       "known_sources": 168,
-      "references_found": 300,
-      "relevant_candidates": 154,
+      "references_found": 303,
+      "relevant_candidates": 156,
       "sources_scanned": 168,
       "strong_candidates": 0,
       "telegram_domain": "telegram.me",
-      "unique_candidates": 154,
+      "unique_candidates": 156,
       "verified_candidates": 150,
       "workers": 12
     }
@@ -113,7 +113,7 @@
   ],
   "gpt_diagnostic_snapshot": {
     "active_incidents": 1,
-    "bot_panel_heartbeat": "2026-07-21T11:56:53.966374+00:00",
+    "bot_panel_heartbeat": "2026-07-21T12:01:56.978485+00:00",
     "checked_sources": 167,
     "configured_sources": 168,
     "domain": "telegram.me",
