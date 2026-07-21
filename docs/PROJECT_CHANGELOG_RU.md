@@ -16,6 +16,8 @@
 
 **Pre-update backup:** `backup/2026-07-21-before-auto-participation-success-vote` → `ba15f7aba4c7d9ebdd77fb468ca84c20f7ef3224`.
 
+**Post-update backup:** `backup/2026-07-21-after-auto-participation-success-vote` → `e1206153185ad9d0714d938cf19e80150ac9b86d`.
+
 ## 2026-07-21 — Автоучастие и доставка wheel-event защищены от отмены monitor-run
 
 Диагностика одновременных симптомов — повторного Telegram-уведомления, отсутствия нового колеса в `active_wheels` и пропущенного автоучастия — подтвердила одно аварийное окно: внешний Telegram-send мог завершиться раньше, чем runner успевал сохранить runtime-state в `main`. При отмене/replacement запуска следующий monitor видел старое состояние и мог повторить уведомление, а event автоучастия и карточка активного колеса терялись.
