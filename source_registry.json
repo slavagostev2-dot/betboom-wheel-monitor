@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-21T11:30:53.424280+00:00",
+  "generated_at": "2026-07-21T15:45:24.849679+00:00",
   "sources": [
     {
       "admin_confirmed_wheels": 0,
@@ -623,6 +623,22 @@
       "status": "available",
       "tier": "primary",
       "username": "cakestreampage",
+      "wheel_posts": 0
+    },
+    {
+      "admin_confirmed_wheels": 0,
+      "admin_rejected_wheels": 0,
+      "available": false,
+      "checked": false,
+      "checks": 0,
+      "last_checked_at": null,
+      "last_success_at": null,
+      "quality_score": 0,
+      "raw_status": "unknown",
+      "reason": "ожидает первой проверки",
+      "status": "pending",
+      "tier": "primary",
+      "username": "cct_betboom",
       "wheel_posts": 0
     },
     {
@@ -2694,9 +2710,9 @@
     "available": 168,
     "checked": 168,
     "nightly": 1,
-    "pending": 0,
-    "primary": 167,
-    "total": 168,
+    "pending": 1,
+    "primary": 168,
+    "total": 169,
     "unavailable": 0
   },
   "version": 2
