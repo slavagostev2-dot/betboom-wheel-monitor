@@ -249,64 +249,7 @@
       "url": "https://betboom.ru/freestream/zzone1"
     }
   },
-  "active_wheels": {
-    "aunkereref": {
-      "action_id": 968,
-      "auto_participation_checked_at": "2026-07-21T19:22:00.289412+00:00",
-      "auto_participation_error": "элемент участия нажат, но подтверждение BetBoom не найдено",
-      "auto_participation_retry_allowed": false,
-      "auto_participation_status": "unconfirmed",
-      "availability_status": "available",
-      "button_token": "d9e9be0fd37ab9",
-      "deadline": "2026-07-21T19:24:52.684000+00:00",
-      "expires_at": "2026-07-21T19:54:52.684000+00:00",
-      "identifier": "aunkereref",
-      "last_checked_at": "2026-07-21T19:22:00.289412+00:00",
-      "last_verification_at": "2026-07-21T19:22:00.289412+00:00",
-      "lifecycle_state": "active",
-      "message_date": "2026-07-21T19:06:23+00:00",
-      "message_id": 4767,
-      "message_text": "Колесо для рефов\n❤️\nВ течение 20-ти минут после публикации вы можете выиграть часть фрибетов в\nBetBoom\n!\nЧто нужно сделать:\n•\nперейти по ссылке\n• нажать «Принять участие» (если не зареганы, выше ссылка)\nДальше ничего делать не надо:\nпросто дождитесь окончания таймера — сразу после этого колесо начнет крутиться, и вы увидите результаты.\nhttps://telegram.me/aunkereEZ\nhttps://telegram.me/aunkereEZ/4767\nhttps://bbsport.su/link/1ZTAe0/?erid=CQH36pWzJqUzRLzcaA8sv8hxDo4KensKmhE2AaDsKmyXSw\nhttps://betboom.ru/freestream/aunkere?utm_content=aunkere&utm_source=freestream\nhttps://betboom.ru/freestream/aunkereref",
-      "message_url": "https://telegram.me/aunkereEZ/4767",
-      "method": "восстановлено recovery-проверкой BetBoom",
-      "needs_manual_time": false,
-      "page_status": "active",
-      "participating": false,
-      "server_start_at": "2026-07-21T19:04:52.684000+00:00",
-      "source": "aunkereEZ",
-      "url": "https://betboom.ru/freestream/aunkereref",
-      "verification_status": "confirmed",
-      "wheel_key": "aunkereref"
-    },
-    "little": {
-      "action_id": 967,
-      "auto_participation_checked_at": "2026-07-21T19:22:00.289412+00:00",
-      "auto_participation_error": "TimeoutError: Page.goto: Timeout 30000ms exceeded.\nCall log:\n  - navigating to \"https://betboom.ru/freestream/little\", waiting until \"domcontentloaded\"\n",
-      "auto_participation_retry_allowed": false,
-      "auto_participation_status": "browser_error",
-      "availability_status": "available",
-      "button_token": "c9d16102e38a22",
-      "deadline": "2026-07-21T19:48:25.316000+00:00",
-      "expires_at": "2026-07-21T20:18:25.316000+00:00",
-      "identifier": "little",
-      "last_checked_at": "2026-07-21T19:22:00.289412+00:00",
-      "last_verification_at": "2026-07-21T19:22:00.289412+00:00",
-      "lifecycle_state": "active",
-      "message_date": "2026-07-21T19:20:48+00:00",
-      "message_id": 206,
-      "message_text": "https://betboom.ru/freestream/little\nhttps://telegram.me/kolesaBB\nhttps://telegram.me/kolesaBB/206",
-      "message_url": "https://telegram.me/kolesaBB/206",
-      "method": "восстановлено recovery-проверкой BetBoom",
-      "needs_manual_time": false,
-      "page_status": "active",
-      "participating": false,
-      "server_start_at": "2026-07-21T19:18:25.316000+00:00",
-      "source": "kolesaBB",
-      "url": "https://betboom.ru/freestream/little",
-      "verification_status": "confirmed",
-      "wheel_key": "little"
-    }
-  },
+  "active_wheels": {},
   "admin_action_attempts": {},
   "admin_action_results": {
     "007aff55bf304e62983bd4c0fa33ca5e": {
@@ -346,6 +289,14 @@
       "applied_at": "2026-07-16T03:10:03.407321+00:00",
       "health_changed": false,
       "state_changed": true,
+      "stats_changed": true,
+      "status": "applied"
+    },
+    "05c1824d5a9b4d968f085200964f8ca9": {
+      "action": "record_personal_vote",
+      "applied_at": "2026-07-21T21:45:36.529293+00:00",
+      "health_changed": false,
+      "state_changed": false,
       "stats_changed": true,
       "status": "applied"
     },
@@ -565,6 +516,14 @@
       "stats_changed": true,
       "status": "applied"
     },
+    "284d1dd7c218428ea375ffb7dd4e28e2": {
+      "action": "record_personal_vote",
+      "applied_at": "2026-07-21T21:45:36.529346+00:00",
+      "health_changed": false,
+      "state_changed": false,
+      "stats_changed": true,
+      "status": "applied"
+    },
     "2878805b2f494955afb25c5f3c831567": {
       "action": "record_personal_vote",
       "applied_at": "2026-07-18T12:27:47.069196+00:00",
@@ -597,6 +556,14 @@
       "stats_changed": false,
       "status": "applied"
     },
+    "31cbb92fd0214718b7e0cd2d9032dc65": {
+      "action": "record_personal_vote",
+      "applied_at": "2026-07-21T21:45:36.529153+00:00",
+      "health_changed": false,
+      "state_changed": false,
+      "stats_changed": true,
+      "status": "applied"
+    },
     "34b6bf3464e4483681b9797c52138320": {
       "action": "record_personal_vote",
       "applied_at": "2026-07-18T12:14:38.283401+00:00",
@@ -616,6 +583,14 @@
     "36e1608db5bf49799ab4a937db14daa1": {
       "action": "record_personal_vote",
       "applied_at": "2026-07-19T12:46:13.289379+00:00",
+      "health_changed": false,
+      "state_changed": false,
+      "stats_changed": true,
+      "status": "applied"
+    },
+    "38d967dd351f441a9ba670f3a19e2754": {
+      "action": "record_personal_vote",
+      "applied_at": "2026-07-21T21:45:36.529183+00:00",
       "health_changed": false,
       "state_changed": false,
       "stats_changed": true,
@@ -861,6 +836,14 @@
       "stats_changed": true,
       "status": "applied"
     },
+    "6674e84e4fd34bdf8b37f112b6047c4f": {
+      "action": "record_personal_vote",
+      "applied_at": "2026-07-21T21:45:36.528970+00:00",
+      "health_changed": false,
+      "state_changed": false,
+      "stats_changed": true,
+      "status": "applied"
+    },
     "676e68422d844063a3b26d085ff358bc": {
       "action": "confirm_finished_global",
       "applied_at": "2026-07-16T02:13:17.424376+00:00",
@@ -957,6 +940,14 @@
       "stats_changed": true,
       "status": "applied"
     },
+    "754060c8675b4b32a112c1e12b50117e": {
+      "action": "record_personal_vote",
+      "applied_at": "2026-07-21T21:45:36.529616+00:00",
+      "health_changed": false,
+      "state_changed": false,
+      "stats_changed": true,
+      "status": "applied"
+    },
     "768bed488d9a457481d7bd2597fc49d0": {
       "action": "set_deadline",
       "applied_at": "2026-07-16T14:34:42.097496+00:00",
@@ -999,7 +990,7 @@
     },
     "8275b01ee6914f4facc674fc6380cf12": {
       "action": "record_personal_vote",
-      "applied_at": "2026-07-21T12:11:37.070469+00:00",
+      "applied_at": "2026-07-21T21:45:36.528901+00:00",
       "health_changed": false,
       "state_changed": false,
       "stats_changed": true,
@@ -1069,6 +1060,14 @@
       "stats_changed": true,
       "status": "applied"
     },
+    "893d8037c9d74f9fb1180e28c2f62e0e": {
+      "action": "record_personal_vote",
+      "applied_at": "2026-07-21T21:45:36.529124+00:00",
+      "health_changed": false,
+      "state_changed": false,
+      "stats_changed": true,
+      "status": "applied"
+    },
     "8a50f4c72d2c40dc9282c307724e0f5e": {
       "action": "confirm_finished_global",
       "applied_at": "2026-07-16T13:15:21.569282+00:00",
@@ -1120,6 +1119,14 @@
     "915e410547424c589839c2054388b372": {
       "action": "record_personal_vote",
       "applied_at": "2026-07-19T13:43:23.549042+00:00",
+      "health_changed": false,
+      "state_changed": false,
+      "stats_changed": true,
+      "status": "applied"
+    },
+    "94514c4970284293968ace6667bbb36f": {
+      "action": "record_personal_vote",
+      "applied_at": "2026-07-21T21:45:36.529494+00:00",
       "health_changed": false,
       "state_changed": false,
       "stats_changed": true,
@@ -1197,6 +1204,14 @@
       "stats_changed": true,
       "status": "applied"
     },
+    "a3b7c653851441da861d99599943b950": {
+      "action": "record_personal_vote",
+      "applied_at": "2026-07-21T21:45:36.529431+00:00",
+      "health_changed": false,
+      "state_changed": false,
+      "stats_changed": true,
+      "status": "applied"
+    },
     "a59d74aad1724a2db158caeb89b14cca": {
       "action": "participate_token",
       "applied_at": "2026-07-16T12:42:11.105592+00:00",
@@ -1224,6 +1239,22 @@
     "aa4f706379314a2b86b6d3b731c9a470": {
       "action": "record_personal_vote",
       "applied_at": "2026-07-19T15:57:12.180828+00:00",
+      "health_changed": false,
+      "state_changed": false,
+      "stats_changed": true,
+      "status": "applied"
+    },
+    "ab7ad86924674277815c6aaf6dc9461a": {
+      "action": "record_personal_vote",
+      "applied_at": "2026-07-21T21:45:36.529213+00:00",
+      "health_changed": false,
+      "state_changed": false,
+      "stats_changed": true,
+      "status": "applied"
+    },
+    "adcfcd801a7047e08d23d0ab86db657e": {
+      "action": "record_personal_vote",
+      "applied_at": "2026-07-21T21:45:36.529075+00:00",
       "health_changed": false,
       "state_changed": false,
       "stats_changed": true,
@@ -1381,6 +1412,14 @@
       "stats_changed": true,
       "status": "applied"
     },
+    "c71d94a1fd2b4ed393023625cbc531d2": {
+      "action": "record_personal_vote",
+      "applied_at": "2026-07-21T21:45:36.529044+00:00",
+      "health_changed": false,
+      "state_changed": false,
+      "stats_changed": true,
+      "status": "applied"
+    },
     "c8b87cc05ec54f6787863b440051673d": {
       "action": "record_personal_vote",
       "applied_at": "2026-07-19T14:57:01.341827+00:00",
@@ -1418,6 +1457,14 @@
       "applied_at": "2026-07-16T11:53:59.897280+00:00",
       "health_changed": false,
       "state_changed": true,
+      "stats_changed": true,
+      "status": "applied"
+    },
+    "d0cf8281cfed4b50bb79225df49f33e4": {
+      "action": "record_personal_vote",
+      "applied_at": "2026-07-21T21:45:36.529261+00:00",
+      "health_changed": false,
+      "state_changed": false,
       "stats_changed": true,
       "status": "applied"
     },
@@ -1472,6 +1519,22 @@
     "e129f50b1f8d47d3afe1a492c59f1245": {
       "action": "record_personal_vote",
       "applied_at": "2026-07-19T13:17:15.646166+00:00",
+      "health_changed": false,
+      "state_changed": false,
+      "stats_changed": true,
+      "status": "applied"
+    },
+    "e2134a1d2ec94f9388012f6686f561f1": {
+      "action": "record_personal_vote",
+      "applied_at": "2026-07-21T21:45:36.529548+00:00",
+      "health_changed": false,
+      "state_changed": false,
+      "stats_changed": true,
+      "status": "applied"
+    },
+    "e245e3c65afc428db43ca64b6cbdbb91": {
+      "action": "record_personal_vote",
+      "applied_at": "2026-07-21T21:45:36.529011+00:00",
       "health_changed": false,
       "state_changed": false,
       "stats_changed": true,
@@ -1580,6 +1643,7 @@
     "04c8d1495506405bb5c3e7cdd0146f5c": "2026-07-19T13:57:33.532318+00:00",
     "04edeb5c9e0e42ad82005137893df2d4": "2026-07-19T12:58:19.300499+00:00",
     "05206b91a89d45e58b05b33d8df632aa": "2026-07-16T03:10:03.407321+00:00",
+    "05c1824d5a9b4d968f085200964f8ca9": "2026-07-21T21:45:36.529293+00:00",
     "07d5c86292584ec7bf409344b0eff656": "2026-07-18T12:14:38.283433+00:00",
     "0a0a0d2b6b8f4120811accf44c8e5861": "2026-07-19T16:20:21.168953+00:00",
     "0c9ca13d4c0c4967888c7ec914feb42a": "2026-07-19T16:26:24.125398+00:00",
@@ -1607,13 +1671,16 @@
     "24aed1e9880e411391acbd788d65975c": "2026-07-19T17:06:37.516633+00:00",
     "26a274d2313845e99d948ee2fd1eff9f": "2026-07-15T11:21:35.145623+00:00",
     "281d5fb668fa471db42c258fd6b01c78": "2026-07-19T16:28:27.777636+00:00",
+    "284d1dd7c218428ea375ffb7dd4e28e2": "2026-07-21T21:45:36.529346+00:00",
     "2878805b2f494955afb25c5f3c831567": "2026-07-18T12:27:47.069196+00:00",
     "2f9856ca2cf943afa17983d4348f1080": "2026-07-18T12:14:38.284057+00:00",
     "2fc721fd447547f0865ca5eb3f34e602": "2026-07-19T12:43:11.950704+00:00",
     "2fedd88f467e461498f8cc57be21e5a2": "2026-07-16T02:13:17.424445+00:00",
+    "31cbb92fd0214718b7e0cd2d9032dc65": "2026-07-21T21:45:36.529153+00:00",
     "34b6bf3464e4483681b9797c52138320": "2026-07-18T12:14:38.283401+00:00",
     "35ca2c8b01834d2b81d448686b17336d": "2026-07-19T17:59:01.100776+00:00",
     "36e1608db5bf49799ab4a937db14daa1": "2026-07-19T12:46:13.289379+00:00",
+    "38d967dd351f441a9ba670f3a19e2754": "2026-07-21T21:45:36.529183+00:00",
     "3ac8981092e74d97b95adfb0b1da4073": "2026-07-19T17:50:53.551721+00:00",
     "3b4bb81e23cf49daa0c945e230c453ac": "2026-07-18T12:14:38.283603+00:00",
     "3e2a642611c6405589bd1918b5f2f8a3": "2026-07-15T15:01:31.514705+00:00",
@@ -1644,6 +1711,7 @@
     "6236b498822b49cbbe0150e80be48a76": "2026-07-19T11:06:58.296779+00:00",
     "62eb4a6208d24e7bbc7b1265a66e7777": "2026-07-19T15:07:24.228241+00:00",
     "652605784b944b879bbe854e4a10a53f": "2026-07-18T12:14:38.283549+00:00",
+    "6674e84e4fd34bdf8b37f112b6047c4f": "2026-07-21T21:45:36.528970+00:00",
     "676e68422d844063a3b26d085ff358bc": "2026-07-16T02:13:17.424376+00:00",
     "67a80c58ee10476083b8fef0f99fdb44": "2026-07-18T12:14:38.284090+00:00",
     "67ec3b0324c344fcb0fb77ea545fbafa": "2026-07-16T16:47:35.709237+00:00",
@@ -1656,12 +1724,13 @@
     "71029a9d06cb4cfba85097b9a9cf3d12": "2026-07-18T12:14:38.283801+00:00",
     "715c31636c104db3aca1b99e4659424c": "2026-07-16T02:13:17.424510+00:00",
     "71c645361c1c411db548946e5809dfea": "2026-07-18T12:30:48.804134+00:00",
+    "754060c8675b4b32a112c1e12b50117e": "2026-07-21T21:45:36.529616+00:00",
     "768bed488d9a457481d7bd2597fc49d0": "2026-07-16T14:34:42.097496+00:00",
     "7a14167a6c104b80948ba5e3132ee0a4": "2026-07-19T12:58:19.300549+00:00",
     "7c40efe61cc84e32b614b2aa115ea4dc": "2026-07-16T11:53:59.896641+00:00",
     "8065f467ea894f12b1a162f06dcdcc2b": "2026-07-19T18:11:09.977462+00:00",
     "81e26ee406a643cf928d4dc18043fe83": "2026-07-19T18:10:08.049416+00:00",
-    "8275b01ee6914f4facc674fc6380cf12": "2026-07-21T12:11:37.070469+00:00",
+    "8275b01ee6914f4facc674fc6380cf12": "2026-07-21T21:45:36.528901+00:00",
     "82a26ddc6fc740d98ad56f126a02b313": "2026-07-16T12:42:11.105301+00:00",
     "837099ffd2e34abfa54c45bf83baf198": "2026-07-15T15:01:31.515066+00:00",
     "8633405f4a814053b1290f2a490d34c0": "2026-07-19T12:46:13.289433+00:00",
@@ -1670,6 +1739,7 @@
     "8819f7ac8620452db791a5a6db6b4479": "2026-07-15T15:16:35.578825+00:00",
     "88662882c14545b0905a9f24c37389b6": "2026-07-18T12:14:38.283629+00:00",
     "88d5d85057b344d89a6fdafc794e4a26": "2026-07-15T15:16:35.579490+00:00",
+    "893d8037c9d74f9fb1180e28c2f62e0e": "2026-07-21T21:45:36.529124+00:00",
     "8a50f4c72d2c40dc9282c307724e0f5e": "2026-07-16T13:15:21.569282+00:00",
     "8c073c54e04f4150a3dde0489cf24c2e": "2026-07-19T15:45:31.924606+00:00",
     "8cbf894a81304c898b19ac15a343b7dd": "2026-07-19T19:03:22.417022+00:00",
@@ -1677,6 +1747,7 @@
     "8feac9565b564c38be396eaeb80332f7": "2026-07-19T13:55:31.312629+00:00",
     "90b55a75284d432a86c494aa355f155f": "2026-07-18T13:55:07.230597+00:00",
     "915e410547424c589839c2054388b372": "2026-07-19T13:43:23.549042+00:00",
+    "94514c4970284293968ace6667bbb36f": "2026-07-21T21:45:36.529494+00:00",
     "94aca762440344c1adc5b71dd028ca12": "2026-07-18T13:55:07.230751+00:00",
     "94ccd7c1ba554e599b35c927d34013e5": "2026-07-19T17:59:01.100650+00:00",
     "989957455bc6415c896dfbfc21bad68e": "2026-07-15T11:21:35.145659+00:00",
@@ -1686,10 +1757,13 @@
     "a06ef06bf4804ae894c4b8e22f51c5fc": "2026-07-19T13:58:35.549024+00:00",
     "a136698623c045b3b3c523ed7f53b61b": "2026-07-19T17:59:01.100710+00:00",
     "a1ade2a5d32e4d0fab63a106711bb94b": "2026-07-19T16:26:24.125239+00:00",
+    "a3b7c653851441da861d99599943b950": "2026-07-21T21:45:36.529431+00:00",
     "a59d74aad1724a2db158caeb89b14cca": "2026-07-16T12:42:11.105592+00:00",
     "a6c2e41783694a83b7b0abe9485cf960": "2026-07-19T12:55:17.823201+00:00",
     "a93849cee67d4e1c862db01ee3f5f649": "2026-07-19T15:07:24.228316+00:00",
     "aa4f706379314a2b86b6d3b731c9a470": "2026-07-19T15:57:12.180828+00:00",
+    "ab7ad86924674277815c6aaf6dc9461a": "2026-07-21T21:45:36.529213+00:00",
+    "adcfcd801a7047e08d23d0ab86db657e": "2026-07-21T21:45:36.529075+00:00",
     "ae340eb5dc3b45b0a2954c73ceefe8e0": "2026-07-18T22:37:43.685579+00:00",
     "af1ec52c23b24b2cbb85a3aebab69522": "2026-07-16T14:28:37.989778+00:00",
     "af4803cd1bcc49dead848d12437a87a1": "2026-07-19T14:37:51.557570+00:00",
@@ -1709,11 +1783,13 @@
     "c50fdc0da08c4a55b333a0bce21faf51": "2026-07-16T13:52:28.722743+00:00",
     "c659e42f4fab43ca94464a8846759bba": "2026-07-16T14:37:44.218346+00:00",
     "c6f00cf1c7c14b8eb0520863dd7d4958": "2026-07-19T14:57:01.341894+00:00",
+    "c71d94a1fd2b4ed393023625cbc531d2": "2026-07-21T21:45:36.529044+00:00",
     "c8b87cc05ec54f6787863b440051673d": "2026-07-19T14:57:01.341827+00:00",
     "cac4d782f0fd42ac9795b2962b0b25ae": "2026-07-16T14:37:44.217759+00:00",
     "ce2dc2e00b9c4449a2be6225ce3d810e": "2026-07-19T16:26:24.125319+00:00",
     "cf91489fda73412f9b2c614a375d22f8": "2026-07-19T14:06:39.260140+00:00",
     "d09a0997121b4fbe855806e47bb6c65b": "2026-07-16T11:53:59.897280+00:00",
+    "d0cf8281cfed4b50bb79225df49f33e4": "2026-07-21T21:45:36.529261+00:00",
     "d42effc208e84ff1a7f5ad96305fed69": "2026-07-18T19:13:06.577163+00:00",
     "d4c122805086496689bf37e4e9051ea4": "2026-07-19T15:56:11.125054+00:00",
     "d58392aeb60c437dbcfd671bd5b88e6a": "2026-07-18T12:14:38.283521+00:00",
@@ -1721,6 +1797,8 @@
     "d8bc0e2c353f433b95598f10dadfa6a5": "2026-07-15T15:01:31.513879+00:00",
     "d9913d2bd2bd401383e5450fe69c3a85": "2026-07-16T03:10:03.406848+00:00",
     "e129f50b1f8d47d3afe1a492c59f1245": "2026-07-19T13:17:15.646166+00:00",
+    "e2134a1d2ec94f9388012f6686f561f1": "2026-07-21T21:45:36.529548+00:00",
+    "e245e3c65afc428db43ca64b6cbdbb91": "2026-07-21T21:45:36.529011+00:00",
     "e38d19bc04d640d39cac5337d0d83399": "2026-07-19T16:57:21.882670+00:00",
     "e3ff0fc4138748268bc4fddc83c080bd": "2026-07-15T11:51:44.512668+00:00",
     "e7e45131febe4a56855f7fc2b5f21270": "2026-07-19T15:01:03.622659+00:00",
@@ -2212,21 +2290,6 @@
       "url": "https://betboom.ru/freestream/MAGER01",
       "wheel_key": "mager01"
     },
-    "9923e7f98f5456": {
-      "created_at": "2026-07-14T20:07:18.780290+00:00",
-      "identifier": "krat",
-      "message_date": "2026-07-14T11:09:21+00:00",
-      "message_id": 10188,
-      "message_text": "ЗАЛЕТАЙ НА КОЛЕСО ФРИБЕТОВ: 20 000 РАЗЫГРАЮ\nКЛИКАЙ ДЛЯ УЧАСТИЯ\nКЛИКАЙ ДЛЯ УЧАСТИЯ\nКЛИКАЙ ДЛЯ УЧАСТИЯ\nВСЁ ПОКАЗЫВАЮ НА СТРИМЕ:\nhttps://www.twitch.tv/krat0ntv\nhttps://www.twitch.tv/krat0ntv\nhttps://www.twitch.tv/krat0ntv\nИТОГИ ЧЕРЕЗ 9 ЧАСОВ\nhttps://telegram.me/KRATtv\nhttps://telegram.me/KRATtv/10188\nhttps://betboom.ru/freestream/krat\nhttps://www.twitch.tv/krat0ntv",
-      "message_url": "https://telegram.me/KRATtv/10188",
-      "method": "состояние определяется пользователями BB V.G.",
-      "page_excerpt": "",
-      "post_key": "9923e7f98f5456dc9a50ee0385fd86242b1f18dba172d8214184b090a4feaf28",
-      "source": "KRATtv",
-      "status": "final_reminder",
-      "url": "https://betboom.ru/freestream/krat",
-      "wheel_key": "krat"
-    },
     "a3db268d9fb845": {
       "created_at": "2026-07-15T20:17:16.674235+00:00",
       "identifier": "bolt",
@@ -2271,36 +2334,6 @@
       "status": "preliminary",
       "url": "https://betboom.ru/freestream/zonertg12",
       "wheel_key": "zonertg12"
-    },
-    "c9d16102e38a22": {
-      "created_at": "2026-07-21T19:23:34.594026+00:00",
-      "identifier": "little",
-      "message_date": "2026-07-21T19:20:48+00:00",
-      "message_id": 206,
-      "message_text": "https://betboom.ru/freestream/little\nhttps://telegram.me/kolesaBB\nhttps://telegram.me/kolesaBB/206",
-      "message_url": "https://telegram.me/kolesaBB/206",
-      "method": "восстановлено recovery-проверкой BetBoom",
-      "page_excerpt": "",
-      "post_key": "c9d16102e38a22c6d900fb4b12a9679f9e78ae18d472102e53014c61dca4d16a",
-      "source": "kolesaBB",
-      "status": "preliminary",
-      "url": "https://betboom.ru/freestream/little",
-      "wheel_key": "little"
-    },
-    "d722c5451f3f6f": {
-      "created_at": "2026-07-14T20:17:21.236600+00:00",
-      "identifier": "shik4",
-      "message_date": "2026-07-14T19:48:37+00:00",
-      "message_id": 6055,
-      "message_text": "Между таймами, самое то.\n🏆\nКолесо фрибетов от BetBoom для вас\n.\nhttps://betboom.ru/freestream/shik4\nКолесо будет активно следующие полчаса. Ловите бонусы.\n@GShikaryan\nhttps://telegram.me/GShikaryan\nhttps://telegram.me/GShikaryan/6055\nhttps://betboom.ru/freestream/shik4",
-      "message_url": "https://telegram.me/GShikaryan/6055",
-      "method": "состояние определяется пользователями BB V.G.",
-      "page_excerpt": "",
-      "post_key": "d722c5451f3f6fe0c34aefed99af055687887e71397ebbcc6843b9bcf77d8e5f",
-      "source": "GShikaryan",
-      "status": "final_reminder",
-      "url": "https://betboom.ru/freestream/shik4",
-      "wheel_key": "shik4"
     },
     "d9e9be0fd37ab9": {
       "created_at": "2026-07-21T19:23:34.594108+00:00",
@@ -2404,14 +2437,6 @@
     "last_all_failed_alert_at": "2026-07-14T02:34:34.476136+00:00"
   },
   "inactive_wheels": {
-    "aunkereref": {
-      "event_id": "f29c214f9090584d2ec5",
-      "expires_at": "2026-08-15T03:10:03.407261+00:00",
-      "identifier": "aunkereref",
-      "lifecycle_state": "inactive",
-      "marked_at": "2026-07-16T03:10:03.407261+00:00",
-      "marked_by": "admin"
-    },
     "ctom07": {
       "event_id": "21d41b64ab09d76dfb59",
       "expires_at": "2026-08-14T16:56:12.212479+00:00",
@@ -2493,6 +2518,7 @@
     "boltcast",
     "burdakekw",
     "cakestreampage",
+    "cct_betboom",
     "chiilstreeamML",
     "chopperinho",
     "chopperis",
@@ -2600,36 +2626,36 @@
     "zont1x",
     "zortelad"
   ],
-  "last_admin_action_applied_at": "2026-07-21T12:11:37.070507+00:00",
+  "last_admin_action_applied_at": "2026-07-21T21:45:36.529657+00:00",
   "last_auto_participation_recovery_scan_at": "2026-07-21T19:22:00.289412+00:00",
   "last_automatic_status_at": "2026-07-17T06:35:52.571822+00:00",
-  "last_heartbeat_at": "2026-07-21T09:36:34.364853+00:00",
+  "last_heartbeat_at": "2026-07-21T21:45:50.832763+00:00",
   "last_run_kind": "schedule",
   "last_run_summary": {
     "activation_sent": 0,
-    "active_wheels": 1,
+    "active_wheels": 0,
     "admin_actions": {
-      "applied": 0,
-      "changed": false,
+      "applied": 16,
+      "changed": true,
       "failed": 0,
-      "loaded": 157,
-      "pending": 0
+      "loaded": 173,
+      "pending": 16
     },
     "callbacks": {
       "callbacks": 0,
       "lists": 0,
       "participating": 0
     },
-    "checked_sources": 167,
+    "checked_sources": 168,
     "duplicates_suppressed": 0,
-    "inactive_waiting": 0,
-    "initialized_now": 0,
+    "inactive_waiting": 7,
+    "initialized_now": 1,
     "notification_errors": 0,
     "pending_expired": 0,
     "pending_total": 0,
     "preliminary_sent": 0,
     "quarantined_skipped": 0,
-    "reachable_sources": 167,
+    "reachable_sources": 168,
     "reminders": {
       "availability_notifications": 0,
       "changed": true,
@@ -2638,13 +2664,13 @@
       "known_reminders": 0,
       "pending_total": 0,
       "removed": 0,
-      "tracked": 1,
+      "tracked": 0,
       "unknown_reminders": 0,
       "verification_checked": 1,
-      "verification_confirmed": 1,
+      "verification_confirmed": 0,
       "verification_deferred": 0,
       "verification_failed": 0,
-      "verification_removed": 0
+      "verification_removed": 1
     },
     "source_errors": 0,
     "source_inactivity": {
@@ -2652,8 +2678,8 @@
       "count": 0,
       "sent": false
     },
-    "sources": 167,
-    "stale_skipped": 0,
+    "sources": 168,
+    "stale_skipped": 9,
     "unconfirmed_waiting": 0,
     "unknown_timer_samples_added": 0
   },
@@ -2744,6 +2770,8 @@
     "1138f4acdbb886bcbfe4a6939d317435cb32f24d1c06d890e8d2bbec58f4f746": "2026-07-12T15:09:37.922692+00:00",
     "11d85974eb61f11403737175812ae563cc2f12c7883ed55bab9b3aad9ddd6812": "2026-07-15T00:28:12.681383+00:00",
     "11f29c11faaa721b479b06a271c8e8233779353fdc11461fd4010af1a733780c": "2026-07-12T15:09:13.354369+00:00",
+    "1214c8807c1f9cee84ecb65b6bfa5b11563b15a12079aa242d71e8911326a4c3": "2026-07-21T21:45:49.200375+00:00",
+    "12ca2c46aa63d39d0c423f6a10768f0f8905f7a36282216910390a772003fb99": "2026-07-21T21:45:49.813929+00:00",
     "131dadb6f58e8e7e80acb9745832a889825955f0050f4e4e69ff1d8cfc040d86": "2026-07-12T15:09:37.922706+00:00",
     "13d99285f2b4cef8009397d64d46b75ac0b9b282bd86e5e8589c17973244533b": "2026-07-19T11:04:24.139331+00:00",
     "142e3535b73a53b4c40cc82d707141cdc865955c61c8dd52222907ce66c7a121": "2026-07-12T16:26:39.903985+00:00",
@@ -2791,7 +2819,9 @@
     "3ce4c4424b51d81f437992ba1fd02d24967064ded712ae4c21b9fe9d132f33a7": "2026-07-12T15:10:04.958836+00:00",
     "3d77a7f5fec3bdd2c14a5079048f1bc6e784d170552a866fd6606edc15132fa2": "2026-07-12T19:22:25.149620+00:00",
     "3ddbc93b73f7446d4a83187cbc999ca64961140faead7aad7a4b87329d59fc6f": "2026-07-14T12:59:56.774245+00:00",
+    "3ddf196434ddc572d730100543a4202ad8cf7646260648c686852cd05c1a8abe": "2026-07-21T21:45:48.747433+00:00",
     "3e94d0cd18a31a54b9acfdc99a0abef36cd2da7bd5a50fee6a3300a05b5f9efc": "2026-07-19T19:56:58.296897+00:00",
+    "3f89b7e39c138832cec162a5fb86437856cb4533ac5b2bb2b52519c78b10bdbd": "2026-07-21T21:45:48.747792+00:00",
     "3fa237ebea84c75d45600bc50568920eea0f8d83553d4b06435f973ebd4e12d7": "2026-07-14T18:32:15.194369+00:00",
     "438b7b6d0748af90ee374afef170e9a2f69f2dd153851758e79c97a9f5e932b0": "2026-07-19T17:00:38.928424+00:00",
     "44d4bb427649c3b9d83143b13be90cc0010d829b90b78ae197a2ecdb941fbfb3": "2026-07-15T14:44:08.658604+00:00",
@@ -2816,6 +2846,7 @@
     "58975ded89719d5d83dde9028c689bb7dfa0bd48c7c2d5051df15423b1ce2327": "2026-07-12T18:21:20.530985+00:00",
     "58ff2284b470bfbd26d63736eae2468711b2e32a309d0813028bea35429e61fd": "2026-07-12T15:09:46.050564+00:00",
     "59aaa540753bbb3fe02d95666dec82a7afed6deb428ce2436edbdf9214d1b876": "2026-07-19T22:53:48.220683+00:00",
+    "59d72f2bad9172ca625aa0aede3657f0ad78ecbd64805af895dfed496dc0f27c": "2026-07-21T21:45:48.312320+00:00",
     "5c5d65f7f2e3ccbf3465e60a317065184b88a3e05951f80f17f1cd9d4a8967ef": "2026-07-19T01:41:51.394747+00:00",
     "5c905b12205b8fb5d7efef9def1cdb2c9e99c6d6d2fddbabd5467ad0b4768795": "2026-07-12T19:22:25.149620+00:00",
     "5dac83ecae4b2518df3fc5e96bf15d035372a2d5736e826c77ec287519694c0e": "2026-07-12T18:21:18.200134+00:00",
@@ -2827,6 +2858,7 @@
     "6737615cc4c1572acb02ea9785ce1f2b0b199bb78414bef2ffc1a8720ad9381d": "2026-07-12T18:21:26.142261+00:00",
     "67468596cee62c05cc01a13454d23038f9f957f8f5f598ed3ed9c1f218d76f31": "2026-07-12T18:26:18.629262+00:00",
     "68ecfd5c2b78fc8aad89ae3426c79512d118ab1fd2f70456a2d917fc324693c9": "2026-07-12T18:21:18.578765+00:00",
+    "69f6f8d315c4174090cf751194d079fee5fd29b38b2bf932973d55f520cec4e1": "2026-07-21T21:45:48.747415+00:00",
     "6abfa80482c56225c61566a9750a923a1fd2728f07351eaf051bab00ce696671": "2026-07-12T19:22:25.149620+00:00",
     "6b00b172b98917b6fceefd189212aa8f3b2f80c8242450a536ef2600cd21a22b": "2026-07-20T00:00:08.674091+00:00",
     "7022b42822c37fd28f307f0b76ad4081c374b693a84bc0329342dd4ecc6a4c2e": "2026-07-14T15:21:24.287181+00:00",
@@ -2840,6 +2872,7 @@
     "7852f85a116f3ed105d4bf1cc579d26639b9c1a86a343e953fc520ccc6b0f1c2": "2026-07-21T00:57:08.036579+00:00",
     "78c063f7c8a4e8805afc98a9353f4ebbe5129393c676ceef276bbd860318dfbb": "2026-07-19T22:59:49.897229+00:00",
     "78c73b619786b2ad32bf086aef4c82d7010a0a6225c2050a286e72c2e8e64663": "2026-07-14T16:32:54.449669+00:00",
+    "792c44b4d7ea1dddc563326556acee815ba645502d7b39e68ec97a0f6cd63c33": "2026-07-21T21:45:48.747399+00:00",
     "79fecd77f1ec0e6d8082765413edba53fa79be8b5920cf720dbf0e38c588a630": "2026-07-12T18:26:19.628034+00:00",
     "7a2d4eb58b48e0f1e620dab809f03843b2c7162695831c03a4a79e684176961b": "2026-07-12T18:26:20.897392+00:00",
     "7b1e4eeacb8c3b8a18ce17ddd255e6bb63ea2db9eb9770e74622d330bd442c66": "2026-07-12T15:09:58.068418+00:00",
@@ -2869,6 +2902,7 @@
     "94b542c18180021f3aae536dba8f095ce2af0ce89eb897eef77d90825cf6950c": "2026-07-19T04:15:11.536594+00:00",
     "94bb9d38709a0c2754587807d81fc210bb262bd64383334ca51ca09a4c384c7a": "2026-07-12T19:22:25.149620+00:00",
     "952927b78a179ac9f940d5cb1f8148417df1bc602823d51078911e2529eaf8b1": "2026-07-12T19:22:25.149620+00:00",
+    "95e2cdd75e579c0bf87f2d7117917aa528eda779d62aa30ee4dd279df7a56ac4": "2026-07-21T21:45:50.338186+00:00",
     "966a3077746c4526889551e1dde0f72c1a707000157a3c6bc5d47b131b649843": "2026-07-18T19:37:22.828286+00:00",
     "96847c4a8f0e269e9ef168db51470b06561c001565869b86894e39605b361bdc": "2026-07-18T18:37:10.879317+00:00",
     "9764ecaa46fe63d5177d25a3d6d61bd3c140249c4213383fc3400d4bd85080cb": "2026-07-17T11:44:14.731371+00:00",
@@ -2878,12 +2912,14 @@
     "997d5b6b33d9263a510cb3b3ea28fc879a5d83f132620987ca12032e75aaad66": "2026-07-12T15:09:46.050550+00:00",
     "9b05c17fe2ee9eeb3c986dffc5626c257613eae47601402292a1b6889cbdfb4d": "2026-07-18T18:37:09.184814+00:00",
     "9c42f4efef1595bc35c746c3b4dcdd4a75a77b457ec08d0d24900c4fd90ac99d": "2026-07-16T14:32:01.976733+00:00",
+    "9f0db2388a35d52045ca28bf8237f30cdefaf6f689a026835b37613007324685": "2026-07-21T21:45:50.832699+00:00",
     "9f1b7087c70a36f9599f46265dbcf3cbfe95e3f8503cb7050bcc4e8e23b0c251": "2026-07-12T15:09:23.912472+00:00",
     "a10eadd8fc0ab4bf1c2bfa44916c9bb0fffea1bdb186a8d53755cdc2a5144e0f": "2026-07-14T19:57:24.330308+00:00",
     "a2e9fb9f62e1b2b649e30288fcdba5c026b726149de836012db0ec1aede70405": "2026-07-12T19:22:25.149620+00:00",
     "a3db268d9fb8452348caf0d230441878192e156ec23e1bac98269150cc70b180": "2026-07-18T08:05:09.384458+00:00",
     "a41b0d5039bf3d9ce3c762e6961ace7b9bfae111b4c92f18b2ba15363990bca9": "2026-07-12T18:21:26.735714+00:00",
     "a50b5d1831d7ff14cc4354750aa486909aed0a3cd9e026ad2009ef52bf626b4a": "2026-07-14T20:22:28.037179+00:00",
+    "a5ffbea1dec738bc4786643c91f7e3f269cb556cc001bc5c2455d1dc59f4be9b": "2026-07-21T21:45:50.079102+00:00",
     "a77c1bb32cae34fa5063bb016e8d63d811edf8ef2662ed91005532bd05a03874": "2026-07-16T11:23:57.495904+00:00",
     "a802e40766e7f7a38052bb3df5b50cfa4b8ec978d4352e9ac7884e4b6e182fce": "2026-07-18T18:37:10.879317+00:00",
     "a83c6554b193401cc197d686361e0f952191a1ba151f45911c82c29a3e1bb989": "2026-07-14T13:29:47.673053+00:00",
@@ -2919,8 +2955,10 @@
     "c7ee61acadd04ca36b7f191cf5a4a45a89a1459c90cbe9a54b4269dc94df3032": "2026-07-19T22:25:40.314801+00:00",
     "c9b4f7810d1d223e3a8568450036fc7cc31393788a25c6b90bf3ef72800606b7": "2026-07-17T20:34:27.007041+00:00",
     "c9c5731a0a08b9f2b16b735af6142caefbeb1ee7c4576006c2ca03b6fd101bc8": "2026-07-20T00:04:06.903124+00:00",
+    "c9d16102e38a22c6d900fb4b12a9679f9e78ae18d472102e53014c61dca4d16a": "2026-07-21T21:45:50.796818+00:00",
     "c9e7f459dd8b5117cc78351bffd12f73755044222ed4abe0e34cd9c91152cefe": "2026-07-12T19:22:25.149620+00:00",
     "ca2b95b04a8ed9251b5e2a67771bd55ff7fd017b984165780f1953f0d745986b": "2026-07-20T00:09:07.953641+00:00",
+    "cba7abb40c5b777f0bad9dc94c6e7edd312f0f18f58644f46df08a4c9ff8b1c5": "2026-07-21T21:45:48.740079+00:00",
     "cd431c9415b48e4b52759ec6764ae877a9573d961f26a20e9f669980ec6bc21a": "2026-07-19T21:51:32.379858+00:00",
     "cf93a1efa65615456d5e88ca4a518444cd7174c055c9c148a0c94663c64cb90c": "2026-07-18T13:22:05.043565+00:00",
     "d0b9f4dc52a155a7628e54963335119a010868d6ea86f919f58723b6c7ab36f2": "2026-07-17T21:13:47.979420+00:00",
@@ -2929,14 +2967,17 @@
     "d4fa31f2a589420a8f824bb4bde52b3dfe93db3a76d5b704da796185c36b1a81": "2026-07-12T15:10:05.815332+00:00",
     "d569c905e0d81fcf2df45f21bb4464b7aaa607a7178ddcb9277cc337d9d05617": "2026-07-18T16:58:47.869443+00:00",
     "d722c5451f3f6fe0c34aefed99af055687887e71397ebbcc6843b9bcf77d8e5f": "2026-07-14T19:52:24.783487+00:00",
+    "d9337e6fa789fa7a0803f13ce4f53d8dd88d9b28d758f0ca81612ad96e4070c8": "2026-07-21T21:45:48.747440+00:00",
     "d943a649513ab3e2d93341ea34e7670992938dfab1b7d40e9db42c7e717d8051": "2026-07-18T22:10:47.299287+00:00",
     "d9bce73b7da1681ccd4617763b82c4eebd8b580d3af02c9eb467bb8b365aa070": "2026-07-15T19:02:02.100324+00:00",
+    "d9e9be0fd37ab934a9d3e124eedb85753bed6477ea4e562e313af07c3e1a5099": "2026-07-21T21:45:48.737407+00:00",
     "db568f77183a1f8525c0e666d4acf763f080189b1b790533f7094ce7821a7ce1": "2026-07-12T18:21:25.206458+00:00",
     "db76282ecc68adba320de6feebad648c4d091b4c377035f9b7ba6834c0f40832": "2026-07-19T20:56:17.528132+00:00",
     "dcd8526d5a796a844b0d66a2a8d7af3a8a712dbc22a3c9242bc221756598166e": "2026-07-18T19:22:23.700326+00:00",
     "dd5eaca4c7755e17a9f75815242cf64365542b1fb7df67be2fc40f53999c3653": "2026-07-15T19:50:14.018090+00:00",
     "de3dc6398056ca0ebdddf1fc3934d1c13d0078af30413dac591247bbdad1753f": "2026-07-19T21:50:31.894982+00:00",
     "e0a8dd6a0e7f5bf946f7164d84869c3a1702f2742d2105608673b2d2941ab003": "2026-07-12T19:22:25.149620+00:00",
+    "e3bbbf5d0be1647e33b467d12e9c32cf8bb30e109836946d2c3ebdcb821d9c02": "2026-07-21T21:45:48.747806+00:00",
     "e3e81c9209543e56eb34b57672122d428ad8cd543af3620d7735431fd7a1eade": "2026-07-16T15:23:03.976328+00:00",
     "e3eaa268624918eb21d892d104b870116d75190b48cc01b33bec544d1599da70": "2026-07-16T08:05:01.878041+00:00",
     "e414a81f55bce0056d2ea90532ca3466b0a5c95f44e734dcbf12ee966e69e873": "2026-07-21T00:57:08.071796+00:00",
@@ -2958,6 +2999,7 @@
     "f6b44fe52830b4eb77617f3578ffb6ac06e693a8aa7ef21aa7d27a295155f8db": "2026-07-12T15:10:04.958811+00:00",
     "f745fbbe63b10742fc942de8021de48d13a37fb52122f515f03bd1af7d4b3241": "2026-07-18T08:47:29.633520+00:00",
     "f7f544ff714d910d904647c1f3ac3afc2630bb223c159cbddb838c6fa2ec6404": "2026-07-13T19:17:01.201142+00:00",
+    "fa4848a3f715576db3b946e582d2ee0f8db593f13098043c4c42fc25eea6ee17": "2026-07-21T21:45:48.747425+00:00",
     "fb404a18d583743c8e2869d162cbe3c4a6b0bfabb0ad4251f7d54906d1b8c53b": "2026-07-15T19:50:11.504433+00:00",
     "fb4ba954e407736dea38b26236f0bf90d432a9373c0aeda0a1f9077df971d2a1": "2026-07-12T15:10:04.958829+00:00",
     "fb6247a58e952c95b6c9145ea41984a351e4383932bde9306a3f2000388f9a79": "2026-07-12T15:08:28.238429+00:00",
@@ -3003,12 +3045,6 @@
       "lifecycle_rule": "timer",
       "suppress_until": "2026-07-19T13:59:20.301000+00:00",
       "url": "https://betboom.ru/freestream/asan"
-    },
-    "aunkereref": {
-      "alerted_at": "2026-07-15T19:50:09.221352+00:00",
-      "identifier": "aunkereref",
-      "suppress_until": "2026-07-16T19:50:09.221352+00:00",
-      "url": "https://betboom.ru/freestream/aunkereref"
     },
     "avice": {
       "alerted_at": "2026-07-19T14:53:29.229042+00:00",
@@ -3519,6 +3555,14 @@
       "server_start_at": "2026-07-20T03:47:49.191000+00:00",
       "state": "closed"
     },
+    "little": {
+      "action_id": 967,
+      "closed_at": "2026-07-21T21:45:36.529737+00:00",
+      "generation_id": "6a1e90a1b37ded62f989",
+      "seen_at": "2026-07-21T21:45:36.529737+00:00",
+      "server_start_at": "2026-07-21T19:18:25.316000+00:00",
+      "state": "closed"
+    },
     "lolly12": {
       "action_id": 799,
       "closed_at": "2026-07-19T19:01:18.551988+00:00",
@@ -3762,9 +3806,9 @@
   "wheel_api_health": {
     "alert_threshold": 3,
     "consecutive_failures": 0,
-    "last_checked_at": "2026-07-21T12:11:37.070581+00:00",
+    "last_checked_at": "2026-07-21T21:45:50.796631+00:00",
     "last_failure_at": "2026-07-20T14:02:03.366327+00:00",
-    "last_success_at": "2026-07-21T12:11:37.070581+00:00",
+    "last_success_at": "2026-07-21T21:45:50.796631+00:00",
     "status": "ok"
   },
   "wheel_generation_observations": {
@@ -4080,6 +4124,18 @@
       },
       "wheel_key": "shoke"
     },
+    "57cd6949d99b597f633da8ca": {
+      "action_id": 963,
+      "first_seen_at": "2026-07-21T21:45:50.078984+00:00",
+      "generation_id": "57cd6949d99b597f633d",
+      "last_seen_at": "2026-07-21T21:45:50.078984+00:00",
+      "observations": 1,
+      "server_start_at": "2026-07-21T17:24:52.354000+00:00",
+      "statuses": {
+        "inactive": 1
+      },
+      "wheel_key": "pomidor2"
+    },
     "596c86c51cd42ce3e4a38422": {
       "action_id": 879,
       "first_seen_at": "2026-07-19T11:01:06.363415+00:00",
@@ -4178,6 +4234,31 @@
       },
       "wheel_key": "mantis2"
     },
+    "69c437b17be60bbf0f0607d2": {
+      "action_id": 968,
+      "first_seen_at": "2026-07-21T21:45:48.737291+00:00",
+      "generation_id": "69c437b17be60bbf0f06",
+      "last_seen_at": "2026-07-21T21:45:48.737291+00:00",
+      "observations": 1,
+      "server_start_at": "2026-07-21T19:04:52.684000+00:00",
+      "statuses": {
+        "inactive": 1
+      },
+      "wheel_key": "aunkereref"
+    },
+    "6a1e90a1b37ded62f9894c9a": {
+      "action_id": 967,
+      "first_seen_at": "2026-07-21T21:45:36.529737+00:00",
+      "generation_id": "6a1e90a1b37ded62f989",
+      "last_seen_at": "2026-07-21T21:45:50.796692+00:00",
+      "observations": 2,
+      "server_start_at": "2026-07-21T19:18:25.316000+00:00",
+      "statuses": {
+        "closed": 1,
+        "inactive": 1
+      },
+      "wheel_key": "little"
+    },
     "6d0bb02138bb2596cfccbb9a": {
       "action_id": 935,
       "first_seen_at": "2026-07-19T15:51:46.209080+00:00",
@@ -4219,6 +4300,18 @@
         "inactive": 328
       },
       "wheel_key": "muggy05"
+    },
+    "769d6b464965108e86172877": {
+      "action_id": 962,
+      "first_seen_at": "2026-07-21T21:45:49.200263+00:00",
+      "generation_id": "769d6b464965108e8617",
+      "last_seen_at": "2026-07-21T21:45:49.200263+00:00",
+      "observations": 1,
+      "server_start_at": "2026-07-21T16:00:57.100000+00:00",
+      "statuses": {
+        "inactive": 1
+      },
+      "wheel_key": "pomidor1"
     },
     "774e130579e3432cb0bbf5ea": {
       "action_id": 926,
@@ -4373,11 +4466,12 @@
       "action_id": 951,
       "first_seen_at": "2026-07-21T12:11:37.070581+00:00",
       "generation_id": "9ee1a81b79a565410b4c",
-      "last_seen_at": "2026-07-21T12:11:37.070581+00:00",
-      "observations": 2,
+      "last_seen_at": "2026-07-21T21:45:48.312194+00:00",
+      "observations": 3,
       "server_start_at": "2026-07-21T12:05:02.320000+00:00",
       "statuses": {
-        "active": 2
+        "active": 2,
+        "inactive": 1
       },
       "wheel_key": "aunkere"
     },
@@ -4394,6 +4488,18 @@
         "inactive": 252
       },
       "wheel_key": "sweet"
+    },
+    "a781057a1f752859d4c24437": {
+      "action_id": 964,
+      "first_seen_at": "2026-07-21T21:45:49.813816+00:00",
+      "generation_id": "a781057a1f752859d4c2",
+      "last_seen_at": "2026-07-21T21:45:49.813816+00:00",
+      "observations": 1,
+      "server_start_at": "2026-07-21T16:48:24.600000+00:00",
+      "statuses": {
+        "inactive": 1
+      },
+      "wheel_key": "chopper"
     },
     "b3dc4b4dcb73f6dc8ec467ab": {
       "action_id": 904,
@@ -4476,6 +4582,18 @@
         "inactive": 139
       },
       "wheel_key": "over"
+    },
+    "c7a6453e7b8fe568948dec97": {
+      "action_id": 966,
+      "first_seen_at": "2026-07-21T21:45:50.338050+00:00",
+      "generation_id": "c7a6453e7b8fe568948d",
+      "last_seen_at": "2026-07-21T21:45:50.338050+00:00",
+      "observations": 1,
+      "server_start_at": "2026-07-21T18:21:11.966000+00:00",
+      "statuses": {
+        "inactive": 1
+      },
+      "wheel_key": "mager01"
     },
     "c8933345a9fc43f215f0cd85": {
       "action_id": 776,
