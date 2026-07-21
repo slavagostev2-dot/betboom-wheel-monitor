@@ -147,7 +147,7 @@ def test_reminders_draw_alerts_and_active_menu_do_not_dispatch_to_vk() -> None:
     assert calls == []
 
 
-# Production regression: CTOM05 had a valid BetBoom URL but no fixed alert title.
+# Production regression from the missed CTOM05 night-wheel notification.
 def test_ctom05_style_initial_notification_dispatches_without_exact_title() -> None:
     class StrictRouter(FakeRouter):
         @staticmethod
