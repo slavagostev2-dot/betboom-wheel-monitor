@@ -252,8 +252,8 @@
   "active_wheels": {
     "zonertg12": {
       "action_id": 697,
-      "auto_participation_checked_at": "2026-07-21T09:49:09.798660+00:00",
-      "auto_participation_confirmed_at": "2026-07-21T09:49:09.798660+00:00",
+      "auto_participation_checked_at": "2026-07-21T11:41:51.056211+00:00",
+      "auto_participation_confirmed_at": "2026-07-21T11:41:51.056211+00:00",
       "auto_participation_manual_notification_at": "2026-07-21T09:42:05.534284+00:00",
       "auto_participation_rearm_reason": "browser_attempt_upgrade",
       "auto_participation_rearmed_at": "2026-07-21T09:48:30.890759+00:00",
@@ -268,26 +268,27 @@
       "first_notified_at": "2026-07-21T08:26:56.555850+00:00",
       "generation_id": "3385cc03ed657edff57e",
       "identifier": "zonertg12",
-      "last_checked_at": "2026-07-21T10:47:17.319037+00:00",
+      "last_checked_at": "2026-07-21T11:41:51.056211+00:00",
       "last_notification_at": "2026-07-21T08:26:56.555850+00:00",
-      "last_verification_at": "2026-07-21T10:47:16.849162+00:00",
+      "last_verification_at": "2026-07-21T11:41:51.056211+00:00",
       "lifecycle_changed_at": "2026-07-21T10:47:16.849107+00:00",
       "lifecycle_state": "participating",
-      "message_date": "2026-07-21T08:06:00+00:00",
-      "message_id": 35659,
+      "message_date": "2026-07-21T09:34:22+00:00",
+      "message_id": 71831,
       "message_text": "ЗАЛЕТАЙ НА КОЛЕСО ФРИБЕТОВ:\nКЛИКАЙ ДЛЯ УЧАСТИЯ\nКЛИКАЙ ДЛЯ УЧАСТИЯ\nКЛИКАЙ ДЛЯ УЧАСТИЯ\n10 ПО 1000 20 ПО 500\nИТОГИ ЧЕРЕЗ 10 ЧАСОВ\nhttps://telegram.me/mechanogun\nhttps://telegram.me/mechanogun/35659\nhttps://betboom.ru/freestream/zonertg12?utm_content=zoner&utm_source=freestream\nhttps://betboom.ru/freestream/zonertg12?utm_content=zoner&amp;utm_source=freestream",
-      "message_url": "https://telegram.me/mechanogun/35659",
-      "method": "состояние определяется пользователями BB V.G.",
+      "message_url": "https://telegram.me/amam0610/71831",
+      "method": "восстановлено аварийной проверкой BetBoom",
       "needs_manual_time": false,
       "page_excerpt": "",
       "page_status": "active",
       "participating": true,
-      "participating_at": "2026-07-21T09:49:16.469997+00:00",
+      "participating_at": "2026-07-21T11:41:51.056211+00:00",
       "server_start_at": "2026-07-21T08:05:58.421000+00:00",
-      "source": "mechanogun",
+      "source": "amam0610",
       "status": "unknown",
       "url": "https://betboom.ru/freestream/zonertg12",
-      "verification_status": "confirmed"
+      "verification_status": "confirmed",
+      "wheel_key": "zonertg12"
     }
   },
   "admin_action_attempts": {},
@@ -1877,6 +1878,14 @@
       "status": "baseline_existing",
       "wheel_key": "zonertg10"
     },
+    "zonertg12#action:697:2026-07-21T08:05:58.421000+00:00": {
+      "attempted_at": "2026-07-21T11:41:51.056211+00:00",
+      "detail": "BetBoom подтвердил участие",
+      "recovery_scan": true,
+      "retry_allowed": false,
+      "status": "participated",
+      "wheel_key": "zonertg12"
+    },
     "zonertg12#event:3385cc03ed657edff57e": {
       "attempt_version": 2,
       "attempted_at": "2026-07-21T09:49:09.798660+00:00",
@@ -2202,6 +2211,7 @@
     "zortelad"
   ],
   "last_admin_action_applied_at": "2026-07-20T09:34:59.821555+00:00",
+  "last_auto_participation_recovery_scan_at": "2026-07-21T11:41:51.056211+00:00",
   "last_automatic_status_at": "2026-07-17T06:35:52.571822+00:00",
   "last_heartbeat_at": "2026-07-21T09:36:34.364853+00:00",
   "last_run_kind": "schedule",
@@ -2268,13 +2278,13 @@
   "notification_key_version": 8,
   "participating_wheels": {
     "zonertg12": {
-      "confirmed_at": "2026-07-21T09:49:09.798660+00:00",
+      "confirmed_at": "2026-07-21T11:41:51.056211+00:00",
       "deadline": "2026-07-21T18:05:58.421000+00:00",
       "expires_at": "2026-07-21T18:35:58.421000+00:00",
       "identifier": "zonertg12",
-      "marked_at": "2026-07-21T09:49:16.469967+00:00",
-      "participation_source": "betboom_browser",
-      "participation_status": "participated",
+      "marked_at": "2026-07-21T11:41:51.056211+00:00",
+      "participation_source": "betboom_browser_recovery",
+      "participation_status": "already_marked_participating",
       "url": "https://betboom.ru/freestream/zonertg12"
     }
   },
