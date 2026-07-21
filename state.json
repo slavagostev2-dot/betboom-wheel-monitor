@@ -252,7 +252,11 @@
   "active_wheels": {
     "zonertg12": {
       "action_id": 697,
+      "auto_participation_checked_at": "2026-07-21T09:36:22.667777+00:00",
+      "auto_participation_error": "dispatcher_exit_1: Auto participation dispatch blocked: state push failed: error: cannot pull with rebase: You have unstaged changes.\nerror: Please commit or stash them.",
       "auto_participation_rearmed_at": "2026-07-21T09:36:22.078599+00:00",
+      "auto_participation_retry_allowed": true,
+      "auto_participation_status": "workflow_dispatch_retry_wait",
       "availability_status": "available",
       "button_token": "b5b428be2360d5",
       "deadline": "2026-07-21T18:05:58.421000+00:00",
@@ -1745,92 +1749,98 @@
   },
   "auto_participation_dispatch_events": {
     "acool5": {
-      "dispatch_error": "HTTP 422 {\"message\":\"Cannot trigger a 'workflow_dispatch' on a disabled workflow\",\"documentation_url\":\"https://docs.github.com/rest/actions/workflows#create-a-workflow-dispatch-event\",\"status\":\"422\"}",
-      "dispatch_failed_at": "2026-07-21T08:27:47.882182+00:00",
+      "dispatch_error": "state_push_failed: error: cannot pull with rebase: You have unstaged changes.\nerror: Please commit or stash them.\n",
+      "dispatch_failed_at": "2026-07-21T09:36:22.644049+00:00",
       "scheduled_at": "2026-07-19T20:48:01.090097+00:00",
       "status": "workflow_dispatch_scheduled",
       "wheel_key": "acool5"
     },
     "aunkere#event:ef82ebd7b7f693e7388b": {
-      "dispatch_error": "HTTP 422 {\"message\":\"Cannot trigger a 'workflow_dispatch' on a disabled workflow\",\"documentation_url\":\"https://docs.github.com/rest/actions/workflows#create-a-workflow-dispatch-event\",\"status\":\"422\"}",
-      "dispatch_failed_at": "2026-07-21T08:27:47.882182+00:00",
+      "dispatch_error": "state_push_failed: error: cannot pull with rebase: You have unstaged changes.\nerror: Please commit or stash them.\n",
+      "dispatch_failed_at": "2026-07-21T09:36:22.644049+00:00",
       "scheduled_at": "2026-07-19T17:59:02.259121+00:00",
       "status": "workflow_dispatch_scheduled",
       "wheel_key": "aunkere"
     },
     "brokeboys": {
-      "dispatch_error": "HTTP 422 {\"message\":\"Cannot trigger a 'workflow_dispatch' on a disabled workflow\",\"documentation_url\":\"https://docs.github.com/rest/actions/workflows#create-a-workflow-dispatch-event\",\"status\":\"422\"}",
-      "dispatch_failed_at": "2026-07-21T08:27:47.882182+00:00",
+      "dispatch_error": "state_push_failed: error: cannot pull with rebase: You have unstaged changes.\nerror: Please commit or stash them.\n",
+      "dispatch_failed_at": "2026-07-21T09:36:22.644049+00:00",
       "scheduled_at": "2026-07-19T20:09:48.069009+00:00",
       "status": "workflow_dispatch_scheduled",
       "wheel_key": "brokeboys"
     },
     "ctom05#event:f5f7e69fd74b16023a7b": {
-      "dispatch_error": "HTTP 422 {\"message\":\"Cannot trigger a 'workflow_dispatch' on a disabled workflow\",\"documentation_url\":\"https://docs.github.com/rest/actions/workflows#create-a-workflow-dispatch-event\",\"status\":\"422\"}",
-      "dispatch_failed_at": "2026-07-21T08:27:47.882182+00:00",
+      "dispatch_error": "state_push_failed: error: cannot pull with rebase: You have unstaged changes.\nerror: Please commit or stash them.\n",
+      "dispatch_failed_at": "2026-07-21T09:36:22.644049+00:00",
       "scheduled_at": "2026-07-20T21:45:04.472579+00:00",
       "status": "workflow_dispatch_retry_scheduled",
       "wheel_key": "ctom05"
     },
     "dyrachyo#event:29763481e1d505cf5829": {
-      "dispatch_error": "HTTP 422 {\"message\":\"Cannot trigger a 'workflow_dispatch' on a disabled workflow\",\"documentation_url\":\"https://docs.github.com/rest/actions/workflows#create-a-workflow-dispatch-event\",\"status\":\"422\"}",
-      "dispatch_failed_at": "2026-07-21T08:27:47.882182+00:00",
+      "dispatch_error": "state_push_failed: error: cannot pull with rebase: You have unstaged changes.\nerror: Please commit or stash them.\n",
+      "dispatch_failed_at": "2026-07-21T09:36:22.644049+00:00",
       "scheduled_at": "2026-07-19T17:50:54.752755+00:00",
       "status": "workflow_dispatch_scheduled",
       "wheel_key": "dyrachyo"
     },
     "lent#event:0bfab1be3ee2a251b3e6": {
-      "dispatch_error": "HTTP 422 {\"message\":\"Cannot trigger a 'workflow_dispatch' on a disabled workflow\",\"documentation_url\":\"https://docs.github.com/rest/actions/workflows#create-a-workflow-dispatch-event\",\"status\":\"422\"}",
-      "dispatch_failed_at": "2026-07-21T08:27:47.882182+00:00",
+      "dispatch_error": "state_push_failed: error: cannot pull with rebase: You have unstaged changes.\nerror: Please commit or stash them.\n",
+      "dispatch_failed_at": "2026-07-21T09:36:22.644049+00:00",
       "scheduled_at": "2026-07-20T04:01:53.487028+00:00",
       "status": "workflow_dispatch_scheduled",
       "wheel_key": "lent"
     },
     "lolly12#event:0956b28d728ea096d8e9": {
-      "dispatch_error": "HTTP 422 {\"message\":\"Cannot trigger a 'workflow_dispatch' on a disabled workflow\",\"documentation_url\":\"https://docs.github.com/rest/actions/workflows#create-a-workflow-dispatch-event\",\"status\":\"422\"}",
-      "dispatch_failed_at": "2026-07-21T08:27:47.882182+00:00",
+      "dispatch_error": "state_push_failed: error: cannot pull with rebase: You have unstaged changes.\nerror: Please commit or stash them.\n",
+      "dispatch_failed_at": "2026-07-21T09:36:22.644049+00:00",
       "scheduled_at": "2026-07-19T18:10:09.987365+00:00",
       "status": "workflow_dispatch_scheduled",
       "wheel_key": "lolly12"
     },
     "muggy05": {
-      "dispatch_error": "HTTP 422 {\"message\":\"Cannot trigger a 'workflow_dispatch' on a disabled workflow\",\"documentation_url\":\"https://docs.github.com/rest/actions/workflows#create-a-workflow-dispatch-event\",\"status\":\"422\"}",
-      "dispatch_failed_at": "2026-07-21T08:27:47.882182+00:00",
+      "dispatch_error": "state_push_failed: error: cannot pull with rebase: You have unstaged changes.\nerror: Please commit or stash them.\n",
+      "dispatch_failed_at": "2026-07-21T09:36:22.644049+00:00",
       "scheduled_at": "2026-07-19T19:02:24.864803+00:00",
       "status": "workflow_dispatch_scheduled",
       "wheel_key": "muggy05"
     },
     "neret": {
-      "dispatch_error": "HTTP 422 {\"message\":\"Cannot trigger a 'workflow_dispatch' on a disabled workflow\",\"documentation_url\":\"https://docs.github.com/rest/actions/workflows#create-a-workflow-dispatch-event\",\"status\":\"422\"}",
-      "dispatch_failed_at": "2026-07-21T08:27:47.882182+00:00",
+      "dispatch_error": "state_push_failed: error: cannot pull with rebase: You have unstaged changes.\nerror: Please commit or stash them.\n",
+      "dispatch_failed_at": "2026-07-21T09:36:22.644049+00:00",
       "scheduled_at": "2026-07-19T19:01:19.966357+00:00",
       "status": "workflow_dispatch_scheduled",
       "wheel_key": "neret"
     },
     "staya": {
-      "dispatch_error": "HTTP 422 {\"message\":\"Cannot trigger a 'workflow_dispatch' on a disabled workflow\",\"documentation_url\":\"https://docs.github.com/rest/actions/workflows#create-a-workflow-dispatch-event\",\"status\":\"422\"}",
-      "dispatch_failed_at": "2026-07-21T08:27:47.882182+00:00",
+      "dispatch_error": "state_push_failed: error: cannot pull with rebase: You have unstaged changes.\nerror: Please commit or stash them.\n",
+      "dispatch_failed_at": "2026-07-21T09:36:22.644049+00:00",
       "scheduled_at": "2026-07-19T19:02:24.864803+00:00",
       "status": "workflow_dispatch_scheduled",
       "wheel_key": "staya"
     },
     "staya1": {
-      "dispatch_error": "HTTP 422 {\"message\":\"Cannot trigger a 'workflow_dispatch' on a disabled workflow\",\"documentation_url\":\"https://docs.github.com/rest/actions/workflows#create-a-workflow-dispatch-event\",\"status\":\"422\"}",
-      "dispatch_failed_at": "2026-07-21T08:27:47.882182+00:00",
+      "dispatch_error": "state_push_failed: error: cannot pull with rebase: You have unstaged changes.\nerror: Please commit or stash them.\n",
+      "dispatch_failed_at": "2026-07-21T09:36:22.644049+00:00",
       "scheduled_at": "2026-07-19T19:57:43.637685+00:00",
       "status": "workflow_dispatch_scheduled",
       "wheel_key": "staya1"
     },
     "zonertg11#event:fbf258932f13c53957aa": {
-      "dispatch_error": "HTTP 422 {\"message\":\"Cannot trigger a 'workflow_dispatch' on a disabled workflow\",\"documentation_url\":\"https://docs.github.com/rest/actions/workflows#create-a-workflow-dispatch-event\",\"status\":\"422\"}",
-      "dispatch_failed_at": "2026-07-21T08:27:47.882182+00:00",
+      "dispatch_error": "state_push_failed: error: cannot pull with rebase: You have unstaged changes.\nerror: Please commit or stash them.\n",
+      "dispatch_failed_at": "2026-07-21T09:36:22.644049+00:00",
       "scheduled_at": "2026-07-20T17:53:51.337179+00:00",
       "status": "workflow_dispatch_retry_scheduled",
       "wheel_key": "zonertg11"
     },
     "zonertg12#event:3385cc03ed657edff57e": {
+      "dispatch_error": "dispatcher_exit_1: Auto participation dispatch blocked: state push failed: error: cannot pull with rebase: You have unstaged changes.\nerror: Please commit or stash them.",
+      "dispatch_failed_at": "2026-07-21T09:36:22.644049+00:00",
+      "failure_count": 1,
+      "last_failure_at": "2026-07-21T09:36:22.667777+00:00",
+      "manual_notification_sent": false,
+      "retry_after_at": "2026-07-21T09:39:22.667777+00:00",
       "scheduled_at": "2026-07-21T09:36:22.078599+00:00",
-      "status": "workflow_dispatch_scheduled",
+      "status": "workflow_dispatch_retry_wait",
       "wheel_key": "zonertg12"
     }
   },
@@ -2199,11 +2209,11 @@
   ],
   "last_admin_action_applied_at": "2026-07-20T09:34:59.821555+00:00",
   "last_automatic_status_at": "2026-07-17T06:35:52.571822+00:00",
-  "last_heartbeat_at": "2026-07-21T03:31:21.369239+00:00",
+  "last_heartbeat_at": "2026-07-21T09:36:34.364853+00:00",
   "last_run_kind": "schedule",
   "last_run_summary": {
     "activation_sent": 0,
-    "active_wheels": 0,
+    "active_wheels": 1,
     "admin_actions": {
       "applied": 0,
       "changed": false,
@@ -2216,28 +2226,28 @@
       "lists": 0,
       "participating": 0
     },
-    "checked_sources": 166,
+    "checked_sources": 167,
     "duplicates_suppressed": 0,
-    "inactive_waiting": 1,
+    "inactive_waiting": 0,
     "initialized_now": 0,
     "notification_errors": 0,
     "pending_expired": 0,
     "pending_total": 0,
     "preliminary_sent": 0,
     "quarantined_skipped": 0,
-    "reachable_sources": 166,
+    "reachable_sources": 167,
     "reminders": {
       "availability_notifications": 0,
-      "changed": false,
+      "changed": true,
       "draw_alerts": 0,
       "final_reminders": 0,
       "known_reminders": 0,
       "pending_total": 0,
       "removed": 0,
-      "tracked": 0,
+      "tracked": 1,
       "unknown_reminders": 0,
-      "verification_checked": 0,
-      "verification_confirmed": 0,
+      "verification_checked": 1,
+      "verification_confirmed": 1,
       "verification_deferred": 0,
       "verification_failed": 0,
       "verification_removed": 0
@@ -2248,7 +2258,7 @@
       "count": 0,
       "sent": false
     },
-    "sources": 166,
+    "sources": 167,
     "stale_skipped": 0,
     "unconfirmed_waiting": 0,
     "unknown_timer_samples_added": 0
