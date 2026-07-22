@@ -1,0 +1,66 @@
+ath("auto_participation_bot_sync.py")
+text = sync.read_text(encoding="utf-8")
+fields_marker = '    "auto_participation_rearm_reason",\n'
+fields_new = fields_marker + '    "auto_participation_retry_after_at",\n    "auto_participation_user_alert_policy",\n'
+if '"auto_participation_retry_after_at"' not in text:
+    if text.count(fields_marker) != 1:
+        raise SystemExit("Auto participation merge fields marker not found")
+    text = text.replace(fields_marker, fields_new, 1)
+
+print_marker = '    print("auto participation bot outcome sync self-test passed")\n'
+test_block = '''    monitor_local = {
+        "active_wheels": {
+            "existing": {"wheel_key": "existing", "last_checked_at": "local"}
+        },
+        "auto_participation_events": {},
+    }
+    workflow_remote = {
+        "active_wheels": {
+            "ctom13": {
+                "wheel_key": "ctom13",
+                "auto_participation_status": "unconfirmed",
+                "auto_participation_retry_allowed": True,
+                "auto_participation_retry_after_at": "2026-07-22T13:18:00+00:00",
+            }
+        },
+        "auto_participation_events": {
+            "ctom13#action:971:start": {
+                "wheel_key": "ctom13",
+                "status": "unconfirmed",
+                "attempted_at": "2026-07-22T13:15:00+00:00",
+                "retry_allowed": True,
+            }
+        },
+    }
+    refreshed = merge_auto_participation_state(monitor_local, workflow_remote)
+    assert refreshed["active_wheels"]["existing"]["last_checked_at"] == "local"
+    assert refreshed["active_wheels"]["ctom13"]["auto_participation_retry_allowed"] is True
+    assert "ctom13#action:971:start" in refreshed["auto_participation_events"]
+    print("auto participation bot outcome sync self-test passed")
+'''
+if "workflow_remote = {" not in text:
+    if text.count(print_marker) != 1:
+        raise SystemExit("Auto participation sync self-test marker not found")
+    text = text.replace(print_marker, test_block, 1)
+sync.write_text(text, encoding="utf-8")
+
+workflow = Path(".github/workflows/monitor.yml")
+text = workflow.read_text(encoding="utf-8")
+path_marker = '      - "personal_reminder_filter.py"\n'
+path_new = (
+    path_marker
+    + '      - "auto_participation_bot_sync.py"\n'
+    + '      - "auto_participation_recovery.py"\n'
+    + '      - "betboom_account_participation.py"\n'
+)
+if '      - "auto_participation_bot_sync.py"\n' not in text:
+    if text.count(path_marker) != 1:
+        raise SystemExit("Monitor paths marker not found")
+    text = text.replace(path_marker, path_new, 1)
+
+compile_old = "personal_reminder_filter.py notification_preferences_v2.py"
+compile_new = "personal_reminder_filter.py auto_participation_bot_sync.py auto_participation_recovery.py betboom_account_participation.py notification_preferences_v2.py"
+if compile_new not in text:
+    if text.count(compile_old) != 1:
+        raise SystemExit("Monitor compile marker not found")
+    text = text.replace(compile_old, com
