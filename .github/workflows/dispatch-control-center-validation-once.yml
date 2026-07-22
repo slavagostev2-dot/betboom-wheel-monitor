@@ -1,5 +1,6 @@
 name: BB V.G. dispatch Control Center validation once
 
+# Second push activates this registered one-shot dispatcher.
 on:
   push:
     branches: [main]
