@@ -158,33 +158,6 @@ replace_once(
     '''    assert _account_event_token(item).endswith("#account:vyacheslav_secondary")\n    assert _account_event_token(\n        item, account_key=XFLARXX_ACCOUNT_KEY\n    ).endswith("#account:xflarxx_primary")\n''',
 )
 
-# 2. Run PART5/PART6 in the normal serialized auto-participation workflow.
-replace_once(
-    ".github/workflows/auto-participation.yml",
-    '''          BETBOOM_STORAGE_STATE_JSON_PART3: ${{ secrets.BETBOOM_STORAGE_STATE_JSON_PART3 }}\n          BETBOOM_STORAGE_STATE_JSON_PART4: ${{ secrets.BETBOOM_STORAGE_STATE_JSON_PART4 }}\n          BETBOOM_ACCOUNT2_LABEL: "Аккаунт 2"\n''',
-    '''          BETBOOM_STORAGE_STATE_JSON_PART3: ${{ secrets.BETBOOM_STORAGE_STATE_JSON_PART3 }}\n          BETBOOM_STORAGE_STATE_JSON_PART4: ${{ secrets.BETBOOM_STORAGE_STATE_JSON_PART4 }}\n          BETBOOM_STORAGE_STATE_JSON_PART5: ${{ secrets.BETBOOM_STORAGE_STATE_JSON_PART5 }}\n          BETBOOM_STORAGE_STATE_JSON_PART6: ${{ secrets.BETBOOM_STORAGE_STATE_JSON_PART6 }}\n          BETBOOM_ACCOUNT2_LABEL: "Аккаунт 2"\n''',
-)
-replace_once(
-    ".github/workflows/auto-participation.yml",
-    '''           if not betboom_account_participation.configured():\n               raise SystemExit("Vyacheslav second BetBoom session PART3/PART4 is not configured")\n''',
-    '''           if not betboom_account_participation.configured():\n               raise SystemExit("Vyacheslav second BetBoom session PART3/PART4 is not configured")\n           if not betboom_account_participation.xflarxx_configured():\n               raise SystemExit("xFLARXx BetBoom session PART5/PART6 is not configured")\n''',
-)
-replace_once(
-    ".github/workflows/auto-participation.yml",
-    '           print("Auto participation preflight OK for both BetBoom accounts")\n',
-    '           print("Auto participation preflight OK for all configured BetBoom accounts")\n',
-)
-replace_once(
-    ".github/workflows/auto-participation.yml",
-    '      - name: Run second BetBoom account for Vyacheslav\n',
-    '      - name: Run additional BetBoom accounts\n',
-)
-replace_once(
-    ".github/workflows/auto-participation.yml",
-    '''          BETBOOM_STORAGE_STATE_JSON_PART3: ${{ secrets.BETBOOM_STORAGE_STATE_JSON_PART3 }}\n          BETBOOM_STORAGE_STATE_JSON_PART4: ${{ secrets.BETBOOM_STORAGE_STATE_JSON_PART4 }}\n          BETBOOM_ACCOUNT2_LABEL: "Аккаунт 2"\n          BETBOOM_ACCOUNT2_TELEGRAM_USER: "Вячеслав"\n''',
-    '''          BETBOOM_STORAGE_STATE_JSON_PART3: ${{ secrets.BETBOOM_STORAGE_STATE_JSON_PART3 }}\n          BETBOOM_STORAGE_STATE_JSON_PART4: ${{ secrets.BETBOOM_STORAGE_STATE_JSON_PART4 }}\n          BETBOOM_STORAGE_STATE_JSON_PART5: ${{ secrets.BETBOOM_STORAGE_STATE_JSON_PART5 }}\n          BETBOOM_STORAGE_STATE_JSON_PART6: ${{ secrets.BETBOOM_STORAGE_STATE_JSON_PART6 }}\n          BETBOOM_ACCOUNT2_LABEL: "Аккаунт 2"\n          BETBOOM_ACCOUNT2_TELEGRAM_USER: "Вячеслав"\n          BETBOOM_ACCOUNT3_LABEL: "xFLARXx"\n          BETBOOM_ACCOUNT3_TELEGRAM_USER: "xFLARXx"\n''',
-)
-
 # 3. Fix the TypeError in owner user details and deliver xFLARXx outcomes independently.
 replace_once(
     "auto_participation_notifications.py",
