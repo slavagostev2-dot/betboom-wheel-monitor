@@ -1,7 +1,7 @@
 {
   "active_incidents": 1,
   "admin_panel": {
-    "age_minutes": 370,
+    "age_minutes": 373,
     "last_heartbeat_at": "2026-07-21T21:21:03.986713+00:00",
     "started_at": "2026-07-21T15:53:12.674345+00:00",
     "status": "running",
@@ -13,20 +13,20 @@
     "cached": false,
     "confidence": 0.0,
     "critical_count": 1,
-    "decision_id": "3224a69efd86453c91317111df2e8f67",
+    "decision_id": "c823dccd775c42f08a5e4b3c9a2dc55b",
     "finding_count": 1,
     "finding_kinds": [
       "admin_panel_stale"
     ],
-    "generated_at": "2026-07-22T03:31:29.045454+00:00",
-    "impact": "Бот перестал принимать команды от пользователей, так как связь с панелью управления прервана.",
+    "generated_at": "2026-07-22T03:34:44.536625+00:00",
+    "impact": "Бот перестал принимать команды от пользователей, так как связь с Control Center прервана.",
     "mode": "ai",
     "model": "gemini-3.1-flash-lite",
     "provider": "gemini",
-    "recommended_action": "Проверить статус службы Control Center и логи последнего workflow панели для выявления причины отсутствия heartbeat.",
+    "recommended_action": "Проверить heartbeat Control Center и последний workflow панели.",
     "requires_human_attention": true,
     "severity": "critical",
-    "summary": "Критический сбой: панель управления не обновляла heartbeat в течение 370 минут, что делает систему недоступной для команд.",
+    "summary": "Критический сбой: панель управления не обновлялась более 6 часов (373 минуты).",
     "used_fallback": false,
     "version": 1,
     "warning_count": 0
@@ -63,7 +63,7 @@
     "telegram_transport": "ok",
     "wheel_api": "ok"
   },
-  "checked_at": "2026-07-22T03:31:26.851270+00:00",
+  "checked_at": "2026-07-22T03:34:42.969039+00:00",
   "discovery": {
     "active_size": 168,
     "candidate_count": 484,
@@ -104,7 +104,7 @@
   "finding_count": 1,
   "findings": [
     {
-      "detail": "Последний живой сигнал был 370 минут назад.",
+      "detail": "Последний живой сигнал был 373 минут назад.",
       "kind": "admin_panel_stale",
       "severity": "critical",
       "subject": "",
@@ -161,18 +161,18 @@
     "brand": "BB V.G.",
     "checked_sources": 168,
     "checks_delta": 168,
-    "checks_total": 668766,
+    "checks_total": 669606,
     "consecutive_failures": 0,
     "consecutive_no_progress": 0,
     "head_sha": "cc2ae87c3be10cb50ed23b2c353d23e55d5f28e9",
-    "iteration": 11,
+    "iteration": 16,
     "last_failure_at": "2026-07-21T12:13:02.326632+00:00",
-    "last_iteration_at": "2026-07-22T03:27:04.949229+00:00",
-    "last_iteration_duration_seconds": 13,
+    "last_iteration_at": "2026-07-22T03:32:09.327891+00:00",
+    "last_iteration_duration_seconds": 14,
     "last_iteration_exit_code": 0,
-    "last_process_heartbeat_at": "2026-07-22T03:27:04.949229+00:00",
-    "last_successful_checks_total": 668766,
-    "last_successful_iteration_at": "2026-07-22T03:27:04.949229+00:00",
+    "last_process_heartbeat_at": "2026-07-22T03:32:09.327891+00:00",
+    "last_successful_checks_total": 669606,
+    "last_successful_iteration_at": "2026-07-22T03:32:09.327891+00:00",
     "pending_wheels": 0,
     "reachable_sources": 168,
     "restart_recommended": false,
@@ -185,7 +185,7 @@
     "version": 3,
     "workflow_run_id": "29888019198"
   },
-  "monitor_age_minutes": 4,
+  "monitor_age_minutes": 2,
   "notification_integrity": {
     "algorithm": "HMAC-SHA256",
     "contains_personal_fields": false,
