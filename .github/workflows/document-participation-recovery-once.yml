@@ -1,5 +1,6 @@
 name: BB V.G. document participation recovery once
 
+# Second push activates the registered one-shot documentation workflow.
 on:
   push:
     branches: [main]
