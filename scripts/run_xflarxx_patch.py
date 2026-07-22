@@ -4,7 +4,7 @@ import subprocess
 import sys
 from pathlib import Path
 
-# Чистый повторный запуск после удаления временных workflow и диагностик.
+# Повторная публикация уже прошедшего полный набор тестов кода.
 
 
 def replace_once(text: str, old: str, new: str, label: str) -> str:
