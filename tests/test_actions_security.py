@@ -119,3 +119,14 @@ def test_backup_rotation_contract_and_concurrency() -> None:
     assert "python backup_rotation.py" in text
     assert "CREATED_BACKUP_REF" in text
     assert backup_rotation.DEFAULT_KEEP_COUNT == 7
+    assert 'KEEP_BACKUPS: "7"' in text
+    assert "retain only the newest seven" in text
+    backup_rotation.self_test()
+
+
+def test_production_heartbeat_contract_is_present() -> None:
+    admin = workflow_texts()["admin-bot.yml"]
+    health = (ROOT / "monitor_health.py").read_text(encoding="utf-8")
+    for field in ("head_sha", "workflow_run_id", "run_attempt"):
+        assert f'"{field}"' in admin
+        assert f'"{field}"' in health
