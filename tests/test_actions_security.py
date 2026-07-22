@@ -134,3 +134,4 @@ def test_production_heartbeat_contract_is_present() -> None:
 # Synchronize event requests an exact inventory diagnostic.
 # Final synchronization runs against the clean permanent workflow set.
 # This synchronization records every validation stage separately.
+# Final run follows removal of all temporary write-enabled workflows.
