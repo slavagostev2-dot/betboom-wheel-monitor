@@ -5,7 +5,7 @@
   "checks_total": 744870,
   "consecutive_failures": 0,
   "consecutive_no_progress": 0,
-  "head_sha": "100a3738fb3ff716253820b6a1d32aa56709367c",
+  "head_sha": "360e471799eaec4c2fe6030120cb40d97617b54a",
   "iteration": 36,
   "last_iteration_at": "2026-07-22T15:42:04.037574+00:00",
   "last_iteration_duration_seconds": 13,
@@ -17,11 +17,11 @@
   "reachable_sources": 168,
   "restart_recommended": false,
   "run_attempt": "1",
-  "run_id": "29931701401",
-  "run_started_at": "2026-07-22T15:06:00.167309+00:00",
+  "run_id": "29934910525",
+  "run_started_at": "2026-07-22T15:46:19.735131173Z",
   "source_errors": 0,
   "stats_counter_reset": false,
-  "status": "running",
+  "status": "starting",
   "version": 3,
-  "workflow_run_id": "29931701401"
+  "workflow_run_id": "29934910525"
 }
