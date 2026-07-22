@@ -90,3 +90,14 @@ jobs:
         run: |
           mapfile -t files < <(find . -path './.git' -prune -o -type f -name 'test_*.py' -print | sort | grep -Ei '/test_[t-z]')
           ((${#files[@]} == 0)) || python -m pytest -q "${files[@]}"
+
+      - name: Enforce critical-core coverage
+        run: |
+          python -m pytest \
+            --cov=notification_router \
+            --cov=notification_integrity_v2 \
+            --cov=wheel_publications_v2 \
+            --cov=rating_policy \
+            --cov-report=term-missing \
+            --cov-report=xml \
+            --cov-fail-under=80
