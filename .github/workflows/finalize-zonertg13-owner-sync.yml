@@ -58,8 +58,8 @@ jobs:
               raise SystemExit("unexpected owner sync event-token call count")
           text = text.replace("if _event_token(item) != token:", "if _event_token(item, key) != token:")
 
-          test_anchor = '''    success = pending_events(state)\n    assert len(success) == 1\n'''
-          test_insert = '''    assert _event_token(\n        {\n            "action_id": 698,\n            "server_start_at": "2026-07-22T08:04:56.849000+00:00",\n        },\n        "zonertg13",\n    ) == "zonertg13#action:698:2026-07-22T08:04:56.849000+00:00"\n\n    success = pending_events(state)\n    assert len(success) == 1\n'''
+          test_anchor = '''    assert _event_token(\n        {\n            "wheel_key": "ctom11",\n            "action_id": 958,\n            "server_start_at": "2026-07-21T15:28:57.035000+00:00",\n        }\n    ) == "ctom11#action:958:2026-07-21T15:28:57.035000+00:00"\n'''
+          test_insert = '''    assert _event_token(\n        {\n            "action_id": 698,\n            "server_start_at": "2026-07-22T08:04:56.849000+00:00",\n        },\n        "zonertg13",\n    ) == "zonertg13#action:698:2026-07-22T08:04:56.849000+00:00"\n    assert _event_token(\n        {\n            "wheel_key": "ctom11",\n            "action_id": 958,\n            "server_start_at": "2026-07-21T15:28:57.035000+00:00",\n        }\n    ) == "ctom11#action:958:2026-07-21T15:28:57.035000+00:00"\n'''
           if test_anchor not in text:
               raise SystemExit("owner sync self-test anchor not found")
           text = text.replace(test_anchor, test_insert, 1)
