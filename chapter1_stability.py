@@ -144,7 +144,8 @@ def _apply_referral_wheel_label_once() -> None:
         "tests.test_chapter5_lifecycle",
     )
     _run(sys.executable, "wheel_publications_v2.py")
-    _run(sys.executable, "chapter4_acceptance.py")
+    _run(sys.executable, "admin_panel_runtime_v41.py", "--self-test")
+    _run(sys.executable, "notification_button_recovery.py", "--self-test")
     _run(sys.executable, "chapter5_acceptance.py")
 
     (ROOT / "chapter1_stability.py").write_text(_ORIGINAL_SOURCE, encoding="utf-8")
