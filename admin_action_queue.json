@@ -6,6 +6,12 @@
       "sequence": 69,
       "value": "{\"actor\":\"vote_52b40c32d6fb8e26f3e17863bb949f92\",\"event_key\":\"solotg#action:869\",\"role\":\"owner\",\"sources\":[\"kolesaBB\"],\"weight\":5,\"wheel_key\":\"solotg\"}"
     },
+    "018ba63502dc418d995086bbb295c5a3": {
+      "action": "record_personal_vote",
+      "created_at": "2026-07-22T11:18:05.952142+00:00",
+      "sequence": 180,
+      "value": "{\"actor\":\"vote_3092cd8d69b74beb8bd2579cd902c714\",\"event_key\":\"ctom12#generation:8bdd74483704def09a11\",\"role\":\"owner\",\"sources\":[\"kolesaBB\"],\"weight\":5,\"wheel_key\":\"ctom12\"}"
+    },
     "0434b9412fa34426bf5fb2c4c61ec357": {
       "action": "record_personal_vote",
       "created_at": "2026-07-18T14:36:34.028438+00:00",
@@ -1076,5 +1082,5 @@
     }
   },
   "format": "bbvg-admin-action-queue-v1",
-  "sequence": 179
+  "sequence": 180
 }
