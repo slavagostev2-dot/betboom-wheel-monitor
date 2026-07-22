@@ -49,7 +49,13 @@ jobs:
           BOT_CHAT_ID: ${{ secrets.BOT_CHAT_ID }}
           ADMIN_USER_ID: ${{ secrets.ADMIN_USER_ID }}
           BBVG_TEST_MODE: "1"
-        run: bash scripts/validate_control_center.sh
+        shell: bash
+        run: |
+          set +e
+          bash scripts/validate_control_center.sh 2>&1 | tee /tmp/bbvg-control-center-candidate.log
+          code=${PIPESTATUS[0]}
+          set -e
+          exit "$code"
 
       - name: Validate notification participation recovery
         id: button_recovery
@@ -167,20 +173,27 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          candidate_log=$(tail -c 3500 /tmp/bbvg-control-center-candidate.log 2>/dev/null || true)
           git fetch origin main
           git checkout -B main origin/main
           now=$(date -u +%FT%T.%NZ)
           stages="dependencies=${DEPENDENCIES_OUTCOME:-unknown}; candidate=${CANDIDATE_OUTCOME:-unknown}; button_recovery=${BUTTON_RECOVERY_OUTCOME:-unknown}; owner_sync=${OWNER_SYNC_OUTCOME:-unknown}; ai_provider=${AI_PROVIDER_OUTCOME:-unknown}; state_migration=${STATE_MIGRATION_OUTCOME:-unknown}"
+          error="$stages"
+          if [[ -n "$candidate_log" ]]; then
+            error="$stages
+
+$candidate_log"
+          fi
           tmp=$(mktemp)
           jq \
             --arg now "$now" \
             --arg run_id "${GITHUB_RUN_ID:-}" \
             --arg head_sha "${GITHUB_SHA:-}" \
             --arg event "${GITHUB_EVENT_NAME:-}" \
-            --arg stages "$stages" \
+            --arg error "$error" \
             '.status = "validation_failed"
              | .last_validation_at = $now
-             | .validation_error = $stages
+             | .validation_error = $error
              | .validation_run_id = $run_id
              | .validation_head_sha = $head_sha
              | .validation_event = $event' \
