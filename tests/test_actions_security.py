@@ -137,3 +137,4 @@ def test_production_heartbeat_contract_is_present() -> None:
 # Final run follows removal of all temporary write-enabled workflows.
 # This synchronization records the exact workflow permission sets.
 # Final synchronization performs documentation and removes the technical branch.
+# This synchronization writes the permanent changelog entry.
