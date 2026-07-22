@@ -1,10 +1,10 @@
 {
-  "active_incidents": 1,
+  "active_incidents": 2,
   "admin_panel": {
-    "age_minutes": 396,
+    "age_minutes": 399,
     "last_heartbeat_at": "2026-07-21T21:21:03.986713+00:00",
     "started_at": "2026-07-21T15:53:12.674345+00:00",
-    "status": "running",
+    "status": "validation_failed",
     "update_consumer": "single_getUpdates_owner",
     "version": 41
   },
@@ -12,21 +12,22 @@
     "ai_status": "ok",
     "cached": false,
     "confidence": 0.0,
-    "critical_count": 1,
-    "decision_id": "6272acd709374da8b55c80c826829877",
-    "finding_count": 1,
+    "critical_count": 2,
+    "decision_id": "3049bfb36d104dbd86ebf1648bfc5b4c",
+    "finding_count": 2,
     "finding_kinds": [
+      "admin_panel_not_running",
       "admin_panel_stale"
     ],
-    "generated_at": "2026-07-22T03:57:47.572445+00:00",
-    "impact": "Бот перестал принимать и обрабатывать команды пользователей, что делает систему неработоспособной.",
+    "generated_at": "2026-07-22T04:00:23.636606+00:00",
+    "impact": "Бот полностью неработоспособен, пользователи не могут взаимодействовать с системой, так как панель управления не функционирует.",
     "mode": "ai",
     "model": "gemini-3.1-flash-lite",
     "provider": "gemini",
-    "recommended_action": "Проверить heartbeat Control Center и последний workflow панели.",
+    "recommended_action": "Проверить heartbeat Control Center и последний workflow панели для выявления причин остановки.",
     "requires_human_attention": true,
     "severity": "critical",
-    "summary": "Критическая ошибка: панель управления не обновляла статус более 6 часов (396 минут).",
+    "summary": "Система BB V.G. находится в критическом состоянии: панель управления остановлена, а бот перестал принимать команды более 6 часов назад.",
     "used_fallback": false,
     "version": 1,
     "warning_count": 0
@@ -63,7 +64,7 @@
     "telegram_transport": "ok",
     "wheel_api": "ok"
   },
-  "checked_at": "2026-07-22T03:57:45.881623+00:00",
+  "checked_at": "2026-07-22T04:00:21.581689+00:00",
   "discovery": {
     "active_size": 168,
     "candidate_count": 484,
@@ -101,10 +102,17 @@
     "legacy_url_offenders": [],
     "primary": "telegram.me"
   },
-  "finding_count": 1,
+  "finding_count": 2,
   "findings": [
     {
-      "detail": "Последний живой сигнал был 396 минут назад.",
+      "detail": "Текущее состояние: validation_failed.",
+      "kind": "admin_panel_not_running",
+      "severity": "critical",
+      "subject": "",
+      "title": "Панель управления ботом остановлена"
+    },
+    {
+      "detail": "Последний живой сигнал был 399 минут назад.",
       "kind": "admin_panel_stale",
       "severity": "critical",
       "subject": "",
@@ -112,7 +120,7 @@
     }
   ],
   "gpt_diagnostic_snapshot": {
-    "active_incidents": 1,
+    "active_incidents": 2,
     "bot_panel_heartbeat": "2026-07-21T21:21:03.986713+00:00",
     "checked_sources": 168,
     "configured_sources": 169,
@@ -130,14 +138,14 @@
     }
   },
   "incident_delivery": {
-    "digest_sent": false,
+    "digest_sent": true,
     "health_inspector_mode": "ai",
     "health_inspector_status": "ok",
-    "messages_attempted": 0,
-    "opened": 0,
+    "messages_attempted": 1,
+    "opened": 1,
     "resolved": 0
   },
-  "incident_sequence": 93,
+  "incident_sequence": 94,
   "inventory": {
     "configured": 168,
     "configured_total": 169,
@@ -185,7 +193,7 @@
     "version": 3,
     "workflow_run_id": "29888876680"
   },
-  "monitor_age_minutes": 0,
+  "monitor_age_minutes": 3,
   "notification_integrity": {
     "algorithm": "HMAC-SHA256",
     "contains_personal_fields": false,

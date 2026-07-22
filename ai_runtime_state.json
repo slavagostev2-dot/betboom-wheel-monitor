@@ -1,12 +1,12 @@
 {
   "cache": {
-    "09edb731ccd80101a9de893bc7ad6529f2a09c7e854cf26e660c0f63318cb22d": {
-      "expires_at": 1784692738.2255802,
-      "text": "{\n  \"summary\": \"Критический сбой: панель управления не обновляла статус более 6 часов (382 минуты).\",\n  \"impact\": \"Бот перестал принимать и обрабатывать команды пользователей, система управления зависла.\",\n  \"recommended_action\": \"Проверить heartbeat Control Center и последний workflow панели.\",\n  \"confidence\": \"high\"\n}"
-    },
     "4df202414a2e34b85a268df06a83e6d4f36c732bc4f4536de907eb4bf097b726": {
       "expires_at": 1784693122.741732,
       "text": "{\n  \"summary\": \"Критический сбой: панель управления не обновляла статус более 6 часов (389 минут).\",\n  \"impact\": \"Бот перестал принимать и обрабатывать команды пользователей, несмотря на исправность источников данных.\",\n  \"recommended_action\": \"Проверить heartbeat Control Center и последний workflow панели.\",\n  \"confidence\": \"high\"\n}"
+    },
+    "95958e07fde504c5e5767f7b080c405a5902a6dc45fff8fe426fb671d7e85871": {
+      "expires_at": 1784693722.6676395,
+      "text": "{\n  \"summary\": \"Система BB V.G. находится в критическом состоянии: панель управления остановлена, а бот перестал принимать команды более 6 часов назад.\",\n  \"impact\": \"Бот полностью неработоспособен, пользователи не могут взаимодействовать с системой, так как панель управления не функционирует.\",\n  \"recommended_action\": \"Проверить heartbeat Control Center и последний workflow панели для выявления причин остановки.\",\n  \"confidence\": \"high\"\n}"
     },
     "969d68b1afd06ab822caf1c43f17ff48125fa28b5c24a3b389a587b9aead8c36": {
       "expires_at": 1784693566.8050678,
@@ -837,10 +837,20 @@
       "output_sha256": "d42fbc4e0e586a795f0a29a2a761a919225ee5f8af437801b337f97c49e56357",
       "provider": "gemini",
       "status": "ok"
+    },
+    {
+      "cached": false,
+      "created_at": 1784692822.6676395,
+      "feature": "health_inspector",
+      "id": "3049bfb36d104dbd86ebf1648bfc5b4c",
+      "model": "gemini-3.1-flash-lite",
+      "output_sha256": "c9e425b98578fd5f80df0437e6103ae6c503edfb27517482bdfc228b2fa9366e",
+      "provider": "gemini",
+      "status": "ok"
     }
   ],
   "rate_calls": [
-    1784692666.8050678
+    1784692822.6676395
   ],
   "version": 1
 }

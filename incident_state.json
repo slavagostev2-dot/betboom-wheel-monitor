@@ -1,14 +1,31 @@
 {
-  "active_count": 1,
+  "active_count": 2,
   "incidents": {
+    "system_checks:admin_panel_not_running:3e312a33e5d944e2": {
+      "detail": "Текущее состояние: validation_failed.",
+      "first_seen_at": "2026-07-22T04:00:22.665239+00:00",
+      "key": "system_checks:admin_panel_not_running:3e312a33e5d944e2",
+      "kind": "admin_panel_not_running",
+      "last_seen_at": "2026-07-22T04:00:22.665239+00:00",
+      "metadata": {},
+      "occurrences": 1,
+      "open_notification_pending": false,
+      "open_notified_at": "2026-07-22T04:00:24.333433+00:00",
+      "opened_sequence": 94,
+      "scope": "system_checks",
+      "severity": "critical",
+      "status": "active",
+      "subject": "",
+      "title": "Панель управления ботом остановлена"
+    },
     "system_checks:admin_panel_stale:9278d429b1e1ee67": {
-      "detail": "Последний живой сигнал был 396 минут назад.",
+      "detail": "Последний живой сигнал был 399 минут назад.",
       "first_seen_at": "2026-07-15T23:43:26.915265+00:00",
       "key": "system_checks:admin_panel_stale:9278d429b1e1ee67",
       "kind": "admin_panel_stale",
-      "last_seen_at": "2026-07-22T03:57:46.802558+00:00",
+      "last_seen_at": "2026-07-22T04:00:22.665239+00:00",
       "metadata": {},
-      "occurrences": 21,
+      "occurrences": 22,
       "open_notification_pending": false,
       "open_notified_at": "2026-07-21T21:47:51.118253+00:00",
       "opened_sequence": 90,
@@ -268,17 +285,17 @@
       "title": "Давно не выполнялась полная проверка 66 источников"
     }
   },
-  "last_change_at": "2026-07-22T03:57:46.802558+00:00",
-  "last_reconcile_at": "2026-07-22T03:57:46.802558+00:00",
+  "last_change_at": "2026-07-22T04:00:22.665239+00:00",
+  "last_reconcile_at": "2026-07-22T04:00:22.665239+00:00",
   "last_reconcile_scope": "system_checks",
   "last_summary": {
-    "active": 1,
-    "new_notification_count": 0,
+    "active": 2,
+    "new_notification_count": 1,
     "recovery_notification_count": 0,
     "scope": "system_checks"
   },
-  "sequence": 93,
+  "sequence": 94,
   "status": "initializing",
-  "updated_at": "2026-07-22T03:57:46.802645+00:00",
+  "updated_at": "2026-07-22T04:00:24.333465+00:00",
   "version": 1
 }
