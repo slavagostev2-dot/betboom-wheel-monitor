@@ -79,8 +79,6 @@ def _control_center_authoritative_failure(*_args: Any, **_kwargs: Any) -> tuple[
     return False, "control_center_authoritative"
 
 
-# Global fail-safe. The monitor dispatcher, legacy worker helpers and recovery code
-# may record technical state, but they cannot send a user-facing participation failure.
 betboom_auto_participation._notify_manual_participation = (
     _control_center_authoritative_failure
 )
@@ -197,8 +195,6 @@ personal_reminder_filter._record_dispatch_failure = (
 )
 
 
-# A single browser/network result is not final. Give recovery and state
-# convergence five minutes, then surface only an explicit terminal outcome.
 auto_participation_owner_sync.FAILURE_GRACE_SECONDS = 300
 _original_pending_failure_events = auto_participation_owner_sync.pending_failure_events
 
@@ -348,9 +344,6 @@ if "bbvg.bot.runtime" in sys.modules:
         PanelInterfaceRuntime.period_overview = _period_overview_without_top_find_sources
         PanelInterfaceRuntime._bbvg_top_find_sources_removed = True
 
-    # Keep encrypted personal participation owned by the single live Control Center.
-    # The auto-participation workflow only places a pending marker in public state.json;
-    # this installer makes the running panel consume it through the normal personal vote path.
     auto_participation_owner_sync.install(TelegramPanelV2)
     natural_language_admin.install(legacy_admin.AdminBot)
 
@@ -434,7 +427,17 @@ def self_test() -> None:
             assert notification_router._bbvg_remote_notification_checkpoint_installed is True
             assert callable(notification_router.notification_event_identity)
             notification_remote_checkpoint.self_test()
-            auto_participation_owner_sync.self_test()
+
+            current_pending_policy = auto_participation_owner_sync.pending_failure_events
+            try:
+                auto_participation_owner_sync.pending_failure_events = (
+                    _original_pending_failure_events
+                )
+                auto_participation_owner_sync.self_test()
+            finally:
+                auto_participation_owner_sync.pending_failure_events = (
+                    current_pending_policy
+                )
 
             assert betboom_auto_participation._notify_manual_participation(
                 None,
