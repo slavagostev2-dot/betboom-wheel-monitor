@@ -4,6 +4,8 @@ import subprocess
 import sys
 from pathlib import Path
 
+# Повторный запуск сохраняет точную диагностику полного набора тестов.
+
 
 def replace_once(text: str, old: str, new: str, label: str) -> str:
     count = text.count(old)
