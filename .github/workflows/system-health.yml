@@ -60,8 +60,8 @@ permissions:
   contents: read
 
 concurrency:
-  group: bb-vg-system-health-${{ github.event_name == 'schedule' && github.event.schedule || github.event_name }}
-  cancel-in-progress: true
+  group: ${{ github.event_name == 'schedule' && github.event.schedule == '*/5 * * * *' && 'bb-vg-monitor-watchdog' || 'bb-vg-system-health' }}
+  cancel-in-progress: false
 
 jobs:
   monitor-watchdog:
