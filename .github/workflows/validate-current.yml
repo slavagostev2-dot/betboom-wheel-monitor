@@ -50,7 +50,7 @@ jobs:
         run: python ci_verify_current_commit.py --expected "$EXPECTED_EVENT_SHA"
 
       - name: Install production and test dependencies
-        run: python -m pip install -r requirements-dev.txt
+        run: python -m pip install -q -r requirements-dev.txt
 
       - name: Compile every active Python module
         run: |
@@ -74,21 +74,25 @@ jobs:
           python admin_runtime.py --self-test
           python system_checks_v3.py --self-test
 
-      - name: Run pytest AI
+      - name: Run pytest AA-AF
         run: |
-          mapfile -t files < <(find . -path './.git' -prune -o -type f -name 'test_ai*.py' -print | sort)
+          mapfile -t files < <(find . -path './.git' -prune -o -type f -name 'test_a[a-f]*.py' -print | sort)
+          printf '%s\n' "${files[@]}"
           ((${#files[@]} == 0)) || python -m pytest -q "${files[@]}"
-      - name: Run pytest admin
+      - name: Run pytest AG-AM
         run: |
-          mapfile -t files < <(find . -path './.git' -prune -o -type f -name 'test_ad*.py' -print | sort)
+          mapfile -t files < <(find . -path './.git' -prune -o -type f -name 'test_a[g-m]*.py' -print | sort)
+          printf '%s\n' "${files[@]}"
           ((${#files[@]} == 0)) || python -m pytest -q "${files[@]}"
-      - name: Run pytest auto
+      - name: Run pytest AN-AS
         run: |
-          mapfile -t files < <(find . -path './.git' -prune -o -type f -name 'test_au*.py' -print | sort)
+          mapfile -t files < <(find . -path './.git' -prune -o -type f -name 'test_a[n-s]*.py' -print | sort)
+          printf '%s\n' "${files[@]}"
           ((${#files[@]} == 0)) || python -m pytest -q "${files[@]}"
-      - name: Run pytest remaining A
+      - name: Run pytest AT-AZ
         run: |
-          mapfile -t files < <(find . -path './.git' -prune -o -type f -name 'test_a*.py' -print | sort | grep -Eiv '/test_(ai|ad|au)')
+          mapfile -t files < <(find . -path './.git' -prune -o -type f -name 'test_a[t-z]*.py' -print | sort)
+          printf '%s\n' "${files[@]}"
           ((${#files[@]} == 0)) || python -m pytest -q "${files[@]}"
       - name: Run pytest B-Z
         run: |
