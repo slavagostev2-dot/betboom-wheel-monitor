@@ -12,11 +12,18 @@ def replace_once(text: str, old: str, new: str, label: str) -> str:
     return text.replace(old, new, 1)
 
 
+def replace_first(text: str, old: str, new: str, label: str) -> str:
+    position = text.find(old)
+    if position < 0:
+        raise RuntimeError(f"{label}: marker not found")
+    return text[:position] + new + text[position + len(old):]
+
+
 def prepare_workflow() -> None:
     path = Path(".github/workflows/auto-participation.yml")
     text = path.read_text(encoding="utf-8")
 
-    text = replace_once(
+    text = replace_first(
         text,
         """          BETBOOM_STORAGE_STATE_JSON_PART3: ${{ secrets.BETBOOM_STORAGE_STATE_JSON_PART3 }}
           BETBOOM_STORAGE_STATE_JSON_PART4: ${{ secrets.BETBOOM_STORAGE_STATE_JSON_PART4 }}
