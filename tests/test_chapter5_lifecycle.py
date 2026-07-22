@@ -10,9 +10,12 @@ from tests._bootstrap import install_optional_dependency_stubs
 install_optional_dependency_stubs()
 
 import admin_action_v3
+import monitor
 import notification_router
 import wheel_event_runtime
 import wheel_lifecycle_v2
+import wheel_publications_v2
+from bbvg.bot.wheels import WheelInteractionRuntime
 
 
 UTC = timezone.utc
@@ -107,6 +110,71 @@ class Chapter5LifecycleTests(unittest.TestCase):
             lambda text, published: (published + timedelta(hours=2), "relative"),
         )
         self.assertEqual(available_at, now + timedelta(hours=2))
+
+    def test_referral_restriction_is_visible_in_notification_and_active_list(self) -> None:
+        restricted = (
+            "Участие доступно только пользователям, зарегистрированным "
+            "по промокоду автора. https://betboom.ru/freestream/ref-wheel"
+        )
+        regular = (
+            "Новое колесо BetBoom и промокод на бонус. "
+            "https://betboom.ru/freestream/regular-wheel"
+        )
+        self.assertTrue(wheel_publications_v2.is_referral_restricted(restricted))
+        self.assertFalse(wheel_publications_v2.is_referral_restricted(regular))
+
+        message = monitor.Message(
+            source="refsource",
+            message_id=77,
+            date=datetime(2026, 7, 22, 8, 0, tzinfo=UTC),
+            text=restricted,
+            message_url="https://telegram.me/refsource/77",
+        )
+        state: dict[str, Any] = {
+            "active_wheels": {},
+            "participating_wheels": {},
+            "wheel_action_history": {},
+            "button_contexts": {},
+        }
+        monitor.remember_active_wheel(
+            state,
+            message,
+            "https://betboom.ru/freestream/ref-wheel",
+            None,
+            "active",
+            "test",
+        )
+        entry = state["active_wheels"]["ref-wheel"]
+        self.assertTrue(entry["referral_restricted"])
+        self.assertIn("только для рефералов", monitor.active_wheels_text(state).casefold())
+
+        sent: list[str] = []
+        original_send = monitor.send_message
+        try:
+            monitor.send_message = lambda text, **kwargs: sent.append(text) or {"ok": True}  # type: ignore[assignment]
+            monitor.notify_new_link(
+                message,
+                "https://betboom.ru/freestream/ref-wheel",
+                None,
+                "test",
+                [],
+            )
+        finally:
+            monitor.send_message = original_send
+        self.assertIn("Колесо только для рефералов", sent[0])
+
+        panel_messages: list[str] = []
+        panel = WheelInteractionRuntime.__new__(WheelInteractionRuntime)
+        panel._collect_current_wheels = lambda: [dict(entry, _key="ref-wheel")]  # type: ignore[method-assign]
+        panel.snapshot = lambda force=False: SimpleNamespace(state={"participating_wheels": {}})  # type: ignore[method-assign]
+        panel._joined_wheel_keys = lambda snap: set()  # type: ignore[method-assign]
+        panel.is_admin = lambda: False  # type: ignore[method-assign]
+        panel.parse_dt = lambda value: None  # type: ignore[method-assign]
+        panel.remaining = lambda value: ""  # type: ignore[method-assign]
+        panel.with_nav = lambda rows=None: {"inline_keyboard": rows or []}  # type: ignore[method-assign]
+        panel.send = lambda text, **kwargs: panel_messages.append(text) or {}  # type: ignore[method-assign]
+        panel.show_active()
+        self.assertIn("Колесо только для рефералов", panel_messages[0])
 
     def test_event_identity_stays_stable_when_a_second_source_is_merged(self) -> None:
         now = datetime(2026, 7, 15, 12, 0, tzinfo=UTC)

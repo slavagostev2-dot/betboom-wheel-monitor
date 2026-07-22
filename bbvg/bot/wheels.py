@@ -8,6 +8,7 @@ from typing import Any
 
 import admin_bot as legacy
 import telegram_ui
+import wheel_publications_v2
 from bbvg.bot.source_requests import SourceRequestRuntime
 from bbvg.bot.foundation import BRAND_NAME
 
@@ -264,6 +265,11 @@ class WheelInteractionRuntime(SourceRequestRuntime):
                     status_text,
                     f"⏳ {html.escape(time_text)}",
                     f"📡 @{html.escape(source)}",
+                    *(
+                        [wheel_publications_v2.REFERRAL_RESTRICTED_SHORT_HTML]
+                        if wheel_publications_v2.entry_is_referral_restricted(item)
+                        else []
+                    ),
                     "✅ Участие отмечено" if joined else "❌ Участие не отмечено",
                     "",
                 ]

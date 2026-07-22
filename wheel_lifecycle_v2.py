@@ -386,8 +386,13 @@ def install(monitor_module: Any) -> None:
                     "🚨 <b>Напоминание о колесе BetBoom: последний шанс</b>\n\n"
                     f"Идентификатор: <code>{html.escape(str(entry.get('identifier') or normalized))}</code>\n"
                     f"Источники: {_source_text(state, normalized, entry)}\n"
-                    f"⏳ Осталось: <b>{html.escape(monitor_module.human_remaining(deadline))}</b>\n\n"
-                    "Вы ещё не отметили участие. Откройте колесо сейчас — оно скоро завершится.",
+                    f"⏳ Осталось: <b>{html.escape(monitor_module.human_remaining(deadline))}</b>\n"
+                    + (
+                        f"{wheel_publications_v2.REFERRAL_RESTRICTED_NOTICE_HTML}\n\n"
+                        if wheel_publications_v2.entry_is_referral_restricted(entry)
+                        else "\n"
+                    )
+                    + "Вы ещё не отметили участие. Откройте колесо сейчас — оно скоро завершится.",
                     reply_markup=monitor_module.wheel_reply_markup(
                         state,
                         message,

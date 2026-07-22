@@ -1,10 +1,61 @@
 from __future__ import annotations
 
 from datetime import datetime, timezone
+import re
 from typing import Any, Callable
 
 
 UTC = timezone.utc
+
+REFERRAL_RESTRICTED_NOTICE_TEXT = (
+    "Колесо только для рефералов. Для участия аккаунт должен быть зарегистрирован "
+    "по реферальной ссылке или промокоду автора."
+)
+REFERRAL_RESTRICTED_NOTICE_HTML = (
+    "⚠️ <b>Колесо только для рефералов</b>\n"
+    "Для участия аккаунт должен быть зарегистрирован по реферальной ссылке "
+    "или промокоду автора."
+)
+REFERRAL_RESTRICTED_SHORT_HTML = "⚠️ <b>Колесо только для рефералов</b>"
+_REFERRAL_RESTRICTION_PATTERNS = (
+    re.compile(r"\bтолько\s+(?:для\s+)?реф(?:ерал\w*|ов)\b", re.IGNORECASE),
+    re.compile(r"\b(?:для|моим?|нашим?)\s+реферал\w*\b", re.IGNORECASE),
+    re.compile(
+        r"\b(?:участ\w*|доступ\w*|колес\w*)[^.\n]{0,140}"
+        r"\b(?:только|лишь|исключительно)[^.\n]{0,140}"
+        r"\b(?:реферал\w*|реферальн\w*\s+ссылк\w*|промокод\w*)",
+        re.IGNORECASE,
+    ),
+    re.compile(
+        r"\b(?:участ\w*|доступ\w*)[^.\n]{0,140}"
+        r"\b(?:зарегистрирован\w*|регистрац\w*)[^.\n]{0,120}"
+        r"\b(?:по|через)\s+(?:моей\s+|наш\w*\s+)?"
+        r"(?:реферальн\w*\s+)?(?:ссылк\w*|промокод\w*)",
+        re.IGNORECASE,
+    ),
+    re.compile(r"\b(?:only\s+for\s+referrals?|referral[-\s]?only)\b", re.IGNORECASE),
+)
+
+
+def is_referral_restricted(text: str) -> bool:
+    """Recognize an explicit referral/promo eligibility restriction in a post."""
+
+    value = " ".join(str(text or "").split())
+    return bool(value and any(pattern.search(value) for pattern in _REFERRAL_RESTRICTION_PATTERNS))
+
+
+def entry_is_referral_restricted(entry: Any) -> bool:
+    if not isinstance(entry, dict):
+        return False
+    if entry.get("referral_restricted") is True:
+        return True
+    return is_referral_restricted(str(entry.get("message_text") or ""))
+
+
+def referral_restriction_notice(text: str, *, html_mode: bool = True) -> str:
+    if not is_referral_restricted(text):
+        return ""
+    return REFERRAL_RESTRICTED_NOTICE_HTML if html_mode else REFERRAL_RESTRICTED_NOTICE_TEXT
 
 
 def _clean_source(value: Any) -> str:

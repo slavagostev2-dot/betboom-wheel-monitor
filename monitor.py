@@ -20,6 +20,7 @@ from bs4 import BeautifulSoup
 
 import monitor_data as data_store
 import telegram_transport
+import wheel_publications_v2
 
 
 ROOT = Path(__file__).resolve().parent
@@ -943,6 +944,10 @@ def remember_active_wheel(
             "last_checked_at": current.isoformat(),
             "expires_at": participation_expiry(deadline, current=current).isoformat(),
             "button_token": button_context_token(message, link),
+            "referral_restricted": (
+                bool(entry.get("referral_restricted"))
+                or wheel_publications_v2.is_referral_restricted(message.text)
+            ),
             "participating": is_participating(state, key),
         }
     )
@@ -1037,9 +1042,14 @@ def active_wheels_text(state: dict) -> str:
         if entry.get("verification_status") == WHEEL_VERIFICATION_FAILED:
             timing += " · 🟡 проверка временно недоступна"
         participation = "✅ участвую" if is_participating(state, identifier_raw) else "❌ не отмечено"
+        referral = (
+            "\n   ⚠️ колесо только для рефералов"
+            if wheel_publications_v2.entry_is_referral_restricted(entry)
+            else ""
+        )
         lines.append(
             f"{index}. <code>{identifier}</code> — {html.escape(timing)} — {participation}\n"
-            f"   источник: @{source}"
+            f"   источник: @{source}{referral}"
         )
     return "\n".join(lines)[:4000]
 
@@ -1169,8 +1179,13 @@ def process_active_wheels(state: dict, stats: dict) -> dict[str, int | bool]:
                     "⏰ <b>Напоминание о колесе BetBoom</b>\n\n"
                     f"Идентификатор: <code>{html.escape(str(entry.get('identifier') or key))}</code>\n"
                     f"Источник: @{html.escape(str(entry.get('source') or 'неизвестно'))}\n"
-                    f"⏳ До прокрутки: <b>{html.escape(human_remaining(deadline))}</b>\n\n"
-                    "Вы ещё не отметили участие.",
+                    f"⏳ До прокрутки: <b>{html.escape(human_remaining(deadline))}</b>\n"
+                    + (
+                        f"{wheel_publications_v2.REFERRAL_RESTRICTED_NOTICE_HTML}\n\n"
+                        if wheel_publications_v2.entry_is_referral_restricted(entry)
+                        else "\n"
+                    )
+                    + "Вы ещё не отметили участие.",
                     reply_markup=wheel_reply_markup(
                         state, message, url, active=True, status="reminder",
                         method=str(entry.get("method") or "reminder"),
@@ -1191,8 +1206,13 @@ def process_active_wheels(state: dict, stats: dict) -> dict[str, int | bool]:
                     "⏰ <b>Напоминание о колесе BetBoom</b>\n\n"
                     f"Идентификатор: <code>{html.escape(str(entry.get('identifier') or key))}</code>\n"
                     f"Источник: @{html.escape(str(entry.get('source') or 'неизвестно'))}\n"
-                    "⏳ Время прокрутки пока не найдено.\n\n"
-                    "Вы ещё не отметили участие; следующее напоминание будет через 30 минут.",
+                    "⏳ Время прокрутки пока не найдено.\n"
+                    + (
+                        f"{wheel_publications_v2.REFERRAL_RESTRICTED_NOTICE_HTML}\n\n"
+                        if wheel_publications_v2.entry_is_referral_restricted(entry)
+                        else "\n"
+                    )
+                    + "Вы ещё не отметили участие; следующее напоминание будет через 30 минут.",
                     reply_markup=wheel_reply_markup(
                         state, message, url, active=True, status="reminder_unknown",
                         method=str(entry.get("method") or "unknown reminder"),
@@ -1649,6 +1669,8 @@ def notify_new_link(
         if verification_status == WHEEL_VERIFICATION_FAILED
         else ""
     )
+    referral_notice = wheel_publications_v2.referral_restriction_notice(message.text)
+    referral_line = f"{referral_notice}\n" if referral_notice else ""
     send_message(
         "🎡 <b>Новое колесо BetBoom</b>\n\n"
         f"Источник: <a href=\"{html.escape(message.message_url, quote=True)}\">"
@@ -1656,6 +1678,7 @@ def notify_new_link(
         f"Идентификатор: <code>{identifier}</code>\n"
         f"Пост: {published:%d.%m.%Y %H:%M}\n"
         f"{verification}"
+        f"{referral_line}"
         f"{timing}",
         reply_markup=(
             wheel_reply_markup(
@@ -1708,6 +1731,8 @@ def notify_activation(
         if verification_status == WHEEL_VERIFICATION_FAILED
         else ""
     )
+    referral_notice = wheel_publications_v2.referral_restriction_notice(message.text)
+    referral_line = f"{referral_notice}\n" if referral_notice else ""
     send_message(
         "✅ <b>Колесо BetBoom стало активно</b>\n\n"
         f"Источник: <a href=\"{html.escape(message.message_url, quote=True)}\">"
@@ -1715,6 +1740,7 @@ def notify_activation(
         f"Идентификатор: <code>{identifier}</code>\n"
         f"Пост: {published:%d.%m.%Y %H:%M}\n"
         f"{verification}"
+        f"{referral_line}"
         f"{timing}",
         reply_markup=(
             wheel_reply_markup(
