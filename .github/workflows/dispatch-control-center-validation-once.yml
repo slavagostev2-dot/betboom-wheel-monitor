@@ -1,6 +1,6 @@
 name: BB V.G. dispatch Control Center validation once
 
-# Second push activates this registered one-shot dispatcher.
+# Registered one-shot dispatcher: enable the production workflow before dispatch.
 on:
   push:
     branches: [main]
@@ -22,13 +22,18 @@ jobs:
           ref: main
           fetch-depth: 0
 
-      - name: Dispatch Control Center validation
+      - name: Enable and dispatch Control Center validation
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh workflow run admin-bot.yml --ref main
+        run: |
+          gh workflow enable admin-bot.yml || true
+          gh workflow run admin-bot.yml --ref main
 
       - name: Remove dispatcher
+        if: ${{ always() }}
         run: |
+          git fetch origin main
+          git checkout -B main origin/main
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git rm .github/workflows/dispatch-control-center-validation-once.yml
