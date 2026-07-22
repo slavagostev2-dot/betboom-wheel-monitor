@@ -10,7 +10,7 @@ from dataclasses import dataclass
 from typing import Any, Protocol
 
 BACKUP_PREFIX = "backup/"
-DEFAULT_KEEP_COUNT = 3
+DEFAULT_KEEP_COUNT = 7
 MAX_BACKUP_REFS = 50
 
 
@@ -50,7 +50,7 @@ def plan_rotation(
     keep_count: int = DEFAULT_KEEP_COUNT,
 ) -> RotationPlan:
     if keep_count != DEFAULT_KEEP_COUNT:
-        raise BackupRotationError("KEEP_BACKUPS must remain exactly 3")
+        raise BackupRotationError("KEEP_BACKUPS must remain exactly 7")
     if len(records) > MAX_BACKUP_REFS:
         raise BackupRotationError(
             f"Refusing unexpected backup ref count: {len(records)}"
@@ -357,18 +357,18 @@ def fixture_records(count: int) -> list[BackupRecord]:
 
 
 def self_test() -> None:
-    for count in range(4):
+    for count in range(DEFAULT_KEEP_COUNT + 1):
         records = fixture_records(count)
         plan = plan_rotation(records)
         assert len(plan.retained) == count
         assert not plan.obsolete
 
-    records = fixture_records(4)
-    plan = plan_rotation(records, created_ref="backup/item-3")
+    records = fixture_records(DEFAULT_KEEP_COUNT + 1)
+    newest_name = f"backup/item-{DEFAULT_KEEP_COUNT}"
+    plan = plan_rotation(records, created_ref=newest_name)
     assert [item.name for item in plan.retained] == [
-        "backup/item-3",
-        "backup/item-2",
-        "backup/item-1",
+        f"backup/item-{index}"
+        for index in range(DEFAULT_KEEP_COUNT, 0, -1)
     ]
     assert [item.name for item in plan.obsolete] == ["backup/item-0"]
 
@@ -377,33 +377,43 @@ def self_test() -> None:
     assert plan.retained[0].name == "backup/item-0"
     assert "backup/item-0" not in {item.name for item in plan.obsolete}
 
-    client = FakeClient(fixture_records(4))
-    applied = rotate(client, created_ref="backup/item-3")
+    client = FakeClient(fixture_records(DEFAULT_KEEP_COUNT + 1))
+    applied = rotate(client, created_ref=newest_name)
     assert client.deleted == ["backup/item-0"]
-    assert len(applied.retained) == 3
+    assert len(applied.retained) == DEFAULT_KEEP_COUNT
 
     # Applying the planner again is idempotent.
-    second = rotate(client, created_ref="backup/item-3")
+    second = rotate(client, created_ref=newest_name)
     assert not second.obsolete
     assert client.deleted == ["backup/item-0"]
 
     # Dry-run verifies but never deletes.
-    client = FakeClient(fixture_records(4))
-    dry = rotate(client, created_ref="backup/item-3", dry_run=True)
+    client = FakeClient(fixture_records(DEFAULT_KEEP_COUNT + 1))
+    dry = rotate(client, created_ref=newest_name, dry_run=True)
     assert [item.name for item in dry.obsolete] == ["backup/item-0"]
     assert not client.deleted
-    assert len(client.records) == 4
+    assert len(client.records) == DEFAULT_KEEP_COUNT + 1
 
     # Failed verification performs no deletion.
-    client = FakeClient(fixture_records(4), bad_name="backup/item-1")
+    client = FakeClient(
+        fixture_records(DEFAULT_KEEP_COUNT + 1),
+        bad_name="backup/item-1",
+    )
     try:
-        rotate(client, created_ref="backup/item-3")
+        rotate(client, created_ref=newest_name)
     except BackupRotationError:
         pass
     else:
         raise AssertionError("Unsafe backup verification unexpectedly passed")
     assert not client.deleted
-    assert len(client.records) == 4
+    assert len(client.records) == DEFAULT_KEEP_COUNT + 1
+
+    try:
+        plan_rotation(records, keep_count=3)
+    except BackupRotationError:
+        pass
+    else:
+        raise AssertionError("Unexpected backup retention count was accepted")
 
     for unsafe in ("main", "backup/", "refs/heads/backup/item", "backup/../main"):
         try:
