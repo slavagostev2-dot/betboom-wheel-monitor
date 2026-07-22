@@ -128,3 +128,6 @@ def test_production_heartbeat_contract_is_present() -> None:
     for field in ("head_sha", "workflow_run_id", "run_attempt"):
         assert f'"{field}"' in admin
         assert f'"{field}"' in health
+
+
+# Clean technical PR trigger for auto-participation delivery repair.
