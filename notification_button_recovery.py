@@ -67,11 +67,11 @@ auto_participation_notifications.install(TelegramPanelRuntimeButtonRecovery)
 
 def self_test() -> None:
     auto_participation_notifications.self_test()
-    assert (
-        auto_participation_notifications.auto_participation_owner_sync.
-        _bbvg_unified_account_notifications_installed
-        is True
-    )
+    assert getattr(
+        auto_participation_notifications.auto_participation_owner_sync,
+        "_bbvg_unified_account_notifications_installed",
+        False,
+    ) is True
     assert TelegramPanelRuntimeButtonRecovery._bbvg_auto_notification_toggle_installed is True
 
     events: list[str] = []
