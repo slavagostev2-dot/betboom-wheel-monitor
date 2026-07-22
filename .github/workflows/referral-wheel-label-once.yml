@@ -1,0 +1,308 @@
+name: BB V.G. referral wheel label migration once
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/referral-wheel-label-once.yml"
+
+permissions:
+  contents: write
+  actions: write
+
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install dependencies
+        run: python -m pip install -r requirements.txt -r requirements-dev.txt
+
+      - name: Add referral restriction label
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          git fetch origin main
+          git reset --hard origin/main
+
+          python - <<'PY'
+          from pathlib import Path
+
+          event_path = Path("wheel_event_runtime.py")
+          event = event_path.read_text(encoding="utf-8")
+          constants_anchor = "GENERATION_OBSERVATIONS_KEY = \"wheel_generation_observations\"\n"
+          constants_block = '''GENERATION_OBSERVATIONS_KEY = "wheel_generation_observations"
+          REFERRAL_RESTRICTED_NOTICE_TEXT = (
+              "Только для рефералов: участвовать могут пользователи, "
+              "зарегистрированные по реферальной ссылке или промокоду автора."
+          )
+          REFERRAL_RESTRICTED_NOTICE_HTML = (
+              "⚠️ <b>Только для рефералов:</b> участвовать могут пользователи, "
+              "зарегистрированные по реферальной ссылке или промокоду автора."
+          )
+          _REFERRAL_RESTRICTION_PATTERNS = (
+              re.compile(r"\\bтолько\\s+(?:для\\s+)?реф(?:ерал\\w*|ов)\\b", re.IGNORECASE),
+              re.compile(r"\\b(?:для|моим?|нашим?)\\s+реферал\\w*\\b", re.IGNORECASE),
+              re.compile(
+                  r"\\b(?:участ\\w*|доступ\\w*)[^.\\n]{0,140}"
+                  r"\\b(?:только\\s+)?(?:зарегистрирован\\w*|регистрац\\w*)"
+                  r"[^.\\n]{0,140}\\b(?:по|через)\\s+"
+                  r"(?:моей\\s+|наш\\w*\\s+)?(?:реферальн\\w*\\s+)?"
+                  r"(?:ссылк\\w*|промокод\\w*)",
+                  re.IGNORECASE,
+              ),
+              re.compile(
+                  r"\\b(?:зарегистрирован\\w*|регистрац\\w*)[^.\\n]{0,120}"
+                  r"\\b(?:по|через)\\s+(?:моей\\s+|наш\\w*\\s+)?"
+                  r"(?:реферальн\\w*\\s+)?(?:ссылк\\w*|промокод\\w*)",
+                  re.IGNORECASE,
+              ),
+              re.compile(
+                  r"\\b(?:только|исключительно)[^.\\n]{0,100}\\b(?:по\\s+)?промокод\\w*",
+                  re.IGNORECASE,
+              ),
+          )
+          '''
+          if "REFERRAL_RESTRICTED_NOTICE_TEXT" not in event:
+              if constants_anchor not in event:
+                  raise SystemExit("wheel_event_runtime constants anchor not found")
+              event = event.replace(constants_anchor, constants_block, 1)
+
+          function_anchor = "\n\ndef _parse_datetime(value: Any) -> datetime | None:\n"
+          function_block = '''
+
+          def is_referral_restricted(text: str) -> bool:
+              """Return True only when the publication states a referral/promo restriction."""
+
+              value = " ".join(str(text or "").split())
+              return bool(value and any(pattern.search(value) for pattern in _REFERRAL_RESTRICTION_PATTERNS))
+
+
+          def referral_restriction_notice(text: str, *, html_mode: bool = True) -> str:
+              if not is_referral_restricted(text):
+                  return ""
+              return REFERRAL_RESTRICTED_NOTICE_HTML if html_mode else REFERRAL_RESTRICTED_NOTICE_TEXT
+
+
+          def entry_is_referral_restricted(entry: Any) -> bool:
+              if not isinstance(entry, dict):
+                  return False
+              if entry.get("referral_restricted") is True:
+                  return True
+              return is_referral_restricted(str(entry.get("message_text") or ""))
+          '''
+          if "def is_referral_restricted" not in event:
+              if function_anchor not in event:
+                  raise SystemExit("wheel_event_runtime function anchor not found")
+              event = event.replace(function_anchor, function_block + function_anchor, 1)
+          event_path.write_text(event, encoding="utf-8")
+
+          monitor_path = Path("monitor.py")
+          monitor = monitor_path.read_text(encoding="utf-8")
+          if "import wheel_event_runtime\n" not in monitor:
+              monitor = monitor.replace(
+                  "import telegram_transport\n",
+                  "import telegram_transport\nimport wheel_event_runtime\n",
+                  1,
+              )
+
+          entry_anchor = '            "button_token": button_context_token(message, link),\n            "participating": is_participating(state, key),\n'
+          entry_replacement = '            "button_token": button_context_token(message, link),\n            "referral_restricted": wheel_event_runtime.is_referral_restricted(message.text),\n            "participating": is_participating(state, key),\n'
+          if '"referral_restricted": wheel_event_runtime.is_referral_restricted(message.text)' not in monitor:
+              if entry_anchor not in monitor:
+                  raise SystemExit("remember_active_wheel anchor not found")
+              monitor = monitor.replace(entry_anchor, entry_replacement, 1)
+
+          active_anchor = '''        lines.append(
+              f"{index}. <code>{identifier}</code> — {html.escape(timing)} — {participation}\\n"
+              f"   источник: @{source}"
+          )
+          '''
+          active_replacement = '''        referral = (
+              "\\n   ⚠️ только для рефералов"
+              if wheel_event_runtime.entry_is_referral_restricted(entry)
+              else ""
+          )
+          lines.append(
+              f"{index}. <code>{identifier}</code> — {html.escape(timing)} — {participation}\\n"
+              f"   источник: @{source}{referral}"
+          )
+          '''
+          if "⚠️ только для рефералов" not in monitor:
+              if active_anchor not in monitor:
+                  raise SystemExit("active_wheels_text anchor not found")
+              monitor = monitor.replace(active_anchor, active_replacement, 1)
+
+          notify_anchor = '''    verification = (
+              "🟡 <b>Проверка активности временно недоступна</b>\\n"
+              if verification_status == WHEEL_VERIFICATION_FAILED
+              else ""
+          )
+          send_message(
+          '''
+          notify_replacement = '''    verification = (
+              "🟡 <b>Проверка активности временно недоступна</b>\\n"
+              if verification_status == WHEEL_VERIFICATION_FAILED
+              else ""
+          )
+          referral_notice = wheel_event_runtime.referral_restriction_notice(message.text)
+          referral_line = f"{referral_notice}\\n" if referral_notice else ""
+          send_message(
+          '''
+          occurrences = monitor.count(notify_anchor)
+          if "referral_line = f\"{referral_notice}\\n\"" not in monitor:
+              if occurrences != 2:
+                  raise SystemExit(f"notification anchor count={occurrences}")
+              monitor = monitor.replace(notify_anchor, notify_replacement, 2)
+
+          message_anchor = '        f"{verification}"\n        f"{timing}",\n'
+          message_replacement = '        f"{verification}"\n        f"{referral_line}"\n        f"{timing}",\n'
+          if monitor.count(message_anchor) != 2:
+              raise SystemExit(f"notification text anchor count={monitor.count(message_anchor)}")
+          monitor = monitor.replace(message_anchor, message_replacement, 2)
+
+          known_anchor = '''                    f"⏳ До прокрутки: <b>{html.escape(human_remaining(deadline))}</b>\\n\\n"
+                      "Вы ещё не отметили участие.",
+          '''
+          known_replacement = '''                    f"⏳ До прокрутки: <b>{html.escape(human_remaining(deadline))}</b>\\n"
+                      + (
+                          f"{wheel_event_runtime.REFERRAL_RESTRICTED_NOTICE_HTML}\\n"
+                          if wheel_event_runtime.entry_is_referral_restricted(entry)
+                          else ""
+                      )
+                      + "\\nВы ещё не отметили участие.",
+          '''
+          if "REFERRAL_RESTRICTED_NOTICE_HTML" not in monitor:
+              if known_anchor not in monitor:
+                  raise SystemExit("known reminder anchor not found")
+              monitor = monitor.replace(known_anchor, known_replacement, 1)
+
+          unknown_anchor = '''                    "⏳ Время прокрутки пока не найдено.\\n\\n"
+                      "Вы ещё не отметили участие; следующее напоминание будет через 30 минут.",
+          '''
+          unknown_replacement = '''                    "⏳ Время прокрутки пока не найдено.\\n"
+                      + (
+                          f"{wheel_event_runtime.REFERRAL_RESTRICTED_NOTICE_HTML}\\n"
+                          if wheel_event_runtime.entry_is_referral_restricted(entry)
+                          else ""
+                      )
+                      + "\\nВы ещё не отметили участие; следующее напоминание будет через 30 минут.",
+          '''
+          if unknown_anchor not in monitor:
+              raise SystemExit("unknown reminder anchor not found")
+          monitor = monitor.replace(unknown_anchor, unknown_replacement, 1)
+          monitor_path.write_text(monitor, encoding="utf-8")
+
+          wheels_path = Path("bbvg/bot/wheels.py")
+          wheels = wheels_path.read_text(encoding="utf-8")
+          if "import wheel_event_runtime\n" not in wheels:
+              wheels = wheels.replace(
+                  "import telegram_ui\n",
+                  "import telegram_ui\nimport wheel_event_runtime\n",
+                  1,
+              )
+          lines_anchor = '''                    f"📡 @{html.escape(source)}",
+                      "✅ Участие отмечено" if joined else "❌ Участие не отмечено",
+          '''
+          lines_replacement = '''                    f"📡 @{html.escape(source)}",
+                      *(
+                          ["⚠️ <b>Только для рефералов</b>"]
+                          if wheel_event_runtime.entry_is_referral_restricted(item)
+                          else []
+                      ),
+                      "✅ Участие отмечено" if joined else "❌ Участие не отмечено",
+          '''
+          if "⚠️ <b>Только для рефералов</b>" not in wheels:
+              if lines_anchor not in wheels:
+                  raise SystemExit("Control Center active wheel anchor not found")
+              wheels = wheels.replace(lines_anchor, lines_replacement, 1)
+          wheels_path.write_text(wheels, encoding="utf-8")
+
+          test_path = Path("tests/test_chapter5_lifecycle.py")
+          tests = test_path.read_text(encoding="utf-8")
+          test_anchor = '''    def test_event_identity_stays_stable_when_a_second_source_is_merged(self) -> None:
+          '''
+          test_block = '''    def test_referral_restriction_is_detected_without_flagging_regular_promo_text(self) -> None:
+              restricted = (
+                  "Участие доступно только пользователям, зарегистрированным "
+                  "по промокоду автора. https://betboom.ru/freestream/ref-wheel"
+              )
+              regular = (
+                  "Новое колесо BetBoom и промокод на бонус. "
+                  "https://betboom.ru/freestream/regular-wheel"
+              )
+              self.assertTrue(wheel_event_runtime.is_referral_restricted(restricted))
+              self.assertTrue(
+                  wheel_event_runtime.entry_is_referral_restricted(
+                      {"message_text": "Колесо только для рефов"}
+                  )
+              )
+              self.assertFalse(wheel_event_runtime.is_referral_restricted(regular))
+              self.assertIn(
+                  "Только для рефералов",
+                  wheel_event_runtime.referral_restriction_notice(restricted),
+              )
+
+          '''
+          if "test_referral_restriction_is_detected_without_flagging_regular_promo_text" not in tests:
+              if test_anchor not in tests:
+                  raise SystemExit("chapter5 test anchor not found")
+              tests = tests.replace(test_anchor, test_block + test_anchor, 1)
+          test_path.write_text(tests, encoding="utf-8")
+
+          changelog_path = Path("docs/PROJECT_CHANGELOG_RU.md")
+          changelog = changelog_path.read_text(encoding="utf-8")
+          heading = "## 2026-07-22 — Реферальные колёса получили явную приписку"
+          if heading not in changelog:
+              marker = "---\n\n"
+              entry = '''## 2026-07-22 — Реферальные колёса получили явную приписку
+
+          Публикации, в которых участие явно ограничено рефералами, регистрацией по реферальной ссылке или промокоду автора, теперь получают признак `referral_restricted`. В первичном уведомлении и уведомлении об активации показывается предупреждение: «Только для рефералов: участвовать могут пользователи, зарегистрированные по реферальной ссылке или промокоду автора». Та же отметка сохраняется в `active_wheels`, видна в разделе «Активные колёса» и повторяется в напоминаниях.
+
+          Обычное упоминание промокода без условия участия не помечает колесо как реферальное. Callback-данные, дедупликация, рейтинг и автоматическое участие не изменены.
+
+          **Pre-update backup:** `backup/2026-07-22-before-referral-wheel-label`.
+
+          '''
+              if marker not in changelog:
+                  raise SystemExit("changelog marker not found")
+              changelog = changelog.replace(marker, marker + entry, 1)
+              changelog_path.write_text(changelog, encoding="utf-8")
+          PY
+
+          python -m py_compile wheel_event_runtime.py monitor.py bbvg/bot/wheels.py
+          python -m unittest tests.test_chapter5_lifecycle
+          python -m pytest -q tests/test_chapter5_lifecycle.py tests/test_button_matrix.py
+          python chapter4_acceptance.py
+          python chapter5_acceptance.py
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git rm .github/workflows/referral-wheel-label-once.yml
+          git add wheel_event_runtime.py monitor.py bbvg/bot/wheels.py tests/test_chapter5_lifecycle.py docs/PROJECT_CHANGELOG_RU.md
+          git commit -m "Помечать реферальные колёса в уведомлениях"
+          for attempt in 1 2 3 4; do
+            if git push origin HEAD:main; then
+              break
+            fi
+            git pull --rebase origin main || { git rebase --abort || true; exit 1; }
+            if (( attempt == 4 )); then
+              exit 1
+            fi
+          done
+
+          gh workflow run monitor.yml --ref main -f continuous=true -f replace=true
