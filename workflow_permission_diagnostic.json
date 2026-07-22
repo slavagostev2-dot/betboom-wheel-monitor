@@ -13,6 +13,7 @@
     "admin-bot.yml",
     "auto-participation.yml",
     "bot-state-backup.yml",
+    "finish-seven-backup-policy.yml",
     "monitor.yml",
     "nightly-discovery.yml",
     "rotate-bot-state-key.yml",
@@ -46,5 +47,7 @@
   "missing_actions_write": [],
   "missing_contents_write": [],
   "unexpected_actions_write": [],
-  "unexpected_contents_write": []
+  "unexpected_contents_write": [
+    "finish-seven-backup-policy.yml"
+  ]
 }
