@@ -102,6 +102,20 @@ def _record_referral_label_failure(exc: BaseException) -> None:
         )
 
 
+def _ensure_referral_test_import() -> None:
+    path = ROOT / "tests/test_chapter5_lifecycle.py"
+    text = path.read_text(encoding="utf-8")
+    if "import wheel_publications_v2\n" in text:
+        return
+    anchor = "import wheel_lifecycle_v2\n"
+    if anchor not in text:
+        raise RuntimeError("Не найден anchor импорта wheel_lifecycle_v2 в regression-тесте")
+    path.write_text(
+        text.replace(anchor, anchor + "import wheel_publications_v2\n", 1),
+        encoding="utf-8",
+    )
+
+
 def _apply_referral_wheel_label_once() -> None:
     patch_script = ROOT / ".github/scripts/apply_referral_wheel_label.py"
     if not os.getenv("GITHUB_ACTIONS") or not patch_script.exists():
@@ -110,6 +124,7 @@ def _apply_referral_wheel_label_once() -> None:
     _run("git", "fetch", "origin", "main")
     _run("git", "reset", "--hard", "origin/main")
     _run(sys.executable, str(patch_script))
+    _ensure_referral_test_import()
 
     _run(
         sys.executable,
