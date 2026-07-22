@@ -29,8 +29,9 @@ jobs:
 
           path = Path('.github/workflows/monitor.yml')
           text = path.read_text(encoding='utf-8')
-          old = "  cancel-in-progress: ${{ github.event_name == 'workflow_dispatch' && inputs.replace == true }}"
-          new = "  cancel-in-progress: ${{ github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.replace == true) }}"
+          expression = chr(36) + '{{ '
+          old = "  cancel-in-progress: " + expression + "github.event_name == 'workflow_dispatch' && inputs.replace == true }}"
+          new = "  cancel-in-progress: " + expression + "github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.replace == true) }}"
           if text.count(old) != 1:
               raise SystemExit('Expected one monitor concurrency contract')
           path.write_text(text.replace(old, new), encoding='utf-8')
