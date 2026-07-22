@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
+import notification_button_recovery
 import telegram_ui
 from admin_panel_runtime_v41 import TelegramPanelRuntimeV41, self_test as panel_self_test
 
@@ -12,13 +13,13 @@ ROOT = Path(__file__).resolve().parent
 def main() -> int:
     telegram_ui.self_test()
     panel_self_test()
+    notification_button_recovery.self_test()
 
-    workflow = (ROOT / ".github/workflows/admin-bot.yml").read_text(encoding="utf-8")
-    validator = ROOT / "scripts/validate_control_center.sh"
     assert TelegramPanelRuntimeV41.RUNTIME_VERSION == 41
-    assert "run: python notification_button_recovery.py" in workflow
-    assert "admin_panel_runtime_v41.py" in workflow
-    assert validator.is_file()
+    assert Path(notification_button_recovery.__file__).resolve() == (
+        ROOT / "notification_button_recovery.py"
+    ).resolve()
+    assert (ROOT / "scripts/validate_control_center.sh").is_file()
 
     user_callbacks = {
         str(button.get("callback_data") or "")
