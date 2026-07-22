@@ -61,7 +61,8 @@ jobs:
             xflarxx_final4_failure.txt \
             xflarxx_main_failure.txt \
             xflarxx_main_final2_failure.txt \
-            .github/workflows/apply-xflarxx-main-final.yml
+            xflarxx_validation.log
+          rm -f .github/workflows/apply-xflarxx-*.yml
 
       - name: Validate changed contracts and full suite
         id: validation
