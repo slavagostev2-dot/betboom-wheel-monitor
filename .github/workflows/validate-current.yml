@@ -23,31 +23,22 @@ jobs:
       - name: Add project changelog entry
         env:
           HEAD_BRANCH: ${{ github.head_ref }}
+          ENTRY_B64: IyMgMjAyNi0wNy0yMiDigJQg0KPQstC10LTQvtC80LvQtdC90LjRjyDRg9GH0LDRgdGC0LjRjyDQuCBBSS3QtNC40LDQs9C90L7RgdGC0LjQutCwINC/0LXRgNC10YHQvtCx0YDQsNC90YsKCtCf0L7Qu9GM0LfQvtCy0LDRgtC10LvRjNGB0LrQuNC5INC40YHRhdC+0LQg0LDQstGC0L7Rg9GH0LDRgdGC0LjRjyDRgtC10L/QtdGA0Ywg0L/RgNC40L3QsNC00LvQtdC20LjRgiDRgtC+0LvRjNC60L4g0LXQtNC40L3RgdGC0LLQtdC90L3QvtC80YMg0LbQuNCy0L7QvNGDIENvbnRyb2wgQ2VudGVyLiDQn9GA0Y/QvNC+0LkgbGVnYWN5LWZhaWx1cmUg0LfQsNC/0YDQtdGJ0ZHQvTsgYHVuY29uZmlybWVkYCwgYnJvd3Nlci9uZXR3b3JrIHRpbWVvdXQg0LggZGlzcGF0Y2gt0YHQsdC+0Lgg0L7RgdGC0LDRjtGC0YHRjyDQsdC10YHRiNGD0LzQvdGL0Lwg0L/QvtCy0YLQvtGA0Y/QtdC80YvQvCDRgdC+0YHRgtC+0Y/QvdC40LXQvC4g0KPRgdC/0LXRhSDQuCDQv9C+0LTRgtCy0LXRgNC20LTRkdC90L3QsNGPINGC0LXRgNC80LjQvdCw0LvRjNC90LDRjyDQvdC10YPQtNCw0YfQsCDQv9C+0LrQsNC30YvQstCw0Y7RgtGB0Y8g0LrQvtGA0L7RgtC60L4sINGBINC40LTQtdC90YLQuNGE0LjQutCw0YLQvtGA0L7QvCDQutC+0LvQtdGB0LAg0Lgg0YLQvtC70YzQutC+INC60L3QvtC/0LrQsNC80LggwqvQkNC60YLQuNCy0L3Ri9C1INC60L7Qu9GR0YHQsMK7L8Kr0JPQu9Cw0LLQvdC+0LUg0LzQtdC90Y7Cuy4g0JLRgdC1INGD0LLQtdC00L7QvNC70LXQvdC40Y8g0L4g0LrQvtC70ZHRgdCw0YUg0L/QvtC70YPRh9C40LvQuCDQv9C10YDQtdGF0L7QtCDQuiDQsNC60YLQuNCy0L3QvtC80YMg0YHQv9C40YHQutGDLgoKQUkt0LDQvdCw0LvQuNC3INC/0YPQsdC70LjQutCw0YbQuNC5INC00L7Qv9GD0YHQutCw0LXRgiDQvNC+0LTQtdC70Ywg0YLQvtC70YzQutC+INC/0YDQuCDQv9GA0L7QstC10YDRj9C10LzQvtC8INGB0L7Rh9C10YLQsNC90LjQuCDQutC+0LvQtdGB0LAsIEJldEJvb20g0Lgg0LTQtdC50YHRgtCy0LjRjywg0LAg0LjRgtC+0LPQvtCy0LDRjyDRg9Cy0LXRgNC10L3QvdC+0YHRgtGMINC+0LPRgNCw0L3QuNGH0LjQstCw0LXRgtGB0Y8g0L/RgNC40LfQvdCw0LrQsNC80Lgg0LjRgdGF0L7QtNC90L7Qs9C+INGC0LXQutGB0YLQsC4g0JDQsdGB0YLRgNCw0LrRgtC90L7QtSDRg9C/0L7QvNC40L3QsNC90LjQtSDRgdGC0YDQuNC80LAg0L3QtSDRgdGH0LjRgtCw0LXRgtGB0Y8g0YHQuNCz0L3QsNC70L7QvC4g0J/QtdGA0LXQvNC10L3QvdGL0Lkg0YLQtdC60YHRgiBBSS3QuNC90YHQv9C10LrRgtC+0YDQsCDQuNGB0LrQu9GO0YfRkdC9INC40LcgVGVsZWdyYW0t0LjQtNC10L3RgtC40YfQvdC+0YHRgtC4INGB0LjRgdGC0LXQvNC90L7Qs9C+INC40L3RhtC40LTQtdC90YLQsDsgcHVzaC3Qt9Cw0L/Rg9GB0LrQuCDQvdC1INGA0LDRgdGB0YvQu9Cw0Y7RgiDQstGA0LXQvNC10L3QvdGL0LUg0L7RiNC40LHQutC4INGA0LDQt9Cy0ZHRgNGC0YvQstCw0L3QuNGPLgoK0JjQtyDRgNCw0LfQtNC10LvQsCDCq9CY0YHRgtC+0YfQvdC40LrQuMK7INGD0LTQsNC70LXQvdCwINC60L3QvtC/0LrQsCDCq9Ce0LHQvdC+0LLQuNGC0Ywg0YDQtdC10YHRgtGAwrssINC40Lcg0LDQvdCw0LvQuNGC0LjQutC4INGB0LrRgNGL0YIg0L3QtdC00L7RgdGC0L7QstC10YDQvdGL0Lkg0LHQu9C+0LogwqvQotC+0L8g0LjRgdGC0L7Rh9C90LjQutC+0LIg0L/QviDQvdCw0YXQvtC00LrQsNC8wrsuIFNlY3VyaXR5LdCw0YPQtNC40YIg0LLQsNC70LjQtNC40YDRg9C10YIgSE1BQy3QutCw0YDRgtGDIG1lc3NhZ2UgY2hlY2twb2ludCwg0LjRgdC/0YDQsNCy0LvQtdC90YsgaW1tdXRhYmxlIFNIQSBgYWN0aW9ucy9zZXR1cC1weXRob25gINCyIGJhY2t1cCB3b3JrZmxvdy4KCioqUHJlLXVwZGF0ZSBiYWNrdXA6KiogYGJhY2t1cC8yMDI2LTA3LTIyLWJlZm9yZS1ub3RpZmljYXRpb24tYWktZGlhZ25vc3RpY3MtcmVidWlsZGAuCgoqKlByZS1tZXJnZSB2YWxpZGF0aW9uOioqIGBWYWxpZGF0ZSBjdXJyZW50YCBydW4gYDI5OTEzNzE1MjIxYCwgYGN1cnJlbnQgY2hlY2tzYCBydW4gYDI5OTEzNzE1MTE4YCwgcmVjb3Zlcnkgc21va2UgYDI5OTEzNzE1MjQyYCwgYm90LW9ubHkgYDI5OTEzNzE1MTYxYCwgVGVsZWdyYW0gdHJhbnNwb3J0IGAyOTkxMzcxNTEyNGAg4oCUINGD0YHQv9C10YjQvdC+LgoK
         run: |
           python - <<'PY'
+          import base64
+          import os
           from pathlib import Path
 
           path = Path('docs/PROJECT_CHANGELOG_RU.md')
           text = path.read_text(encoding='utf-8')
-          title = '## 2026-07-22 — Уведомления участия и AI-диагностика пересобраны'
+          entry = base64.b64decode(os.environ['ENTRY_B64']).decode('utf-8')
+          title = entry.splitlines()[0]
           if title in text:
               raise SystemExit('Changelog entry already exists')
           marker = '---\n\n'
           if marker not in text:
               raise SystemExit('Changelog insertion marker not found')
-          entry = '''## 2026-07-22 — Уведомления участия и AI-диагностика пересобраны
-
-Пользовательский исход автоучастия теперь принадлежит только единственному живому Control Center. Прямой legacy-failure запрещён; `unconfirmed`, browser/network timeout и dispatch-сбои остаются бесшумным повторяемым состоянием. Успех и подтверждённая терминальная неудача показываются коротко, с идентификатором колеса и только кнопками «Активные колёса»/«Главное меню». Все уведомления о колёсах получили переход к активному списку.
-
-AI-анализ публикаций допускает модель только при проверяемом сочетании колеса, BetBoom и действия, а итоговая уверенность ограничивается признаками исходного текста. Абстрактное упоминание стрима не считается сигналом. Переменный текст AI-инспектора исключён из Telegram-идентичности системного инцидента; push-запуски не рассылают временные ошибки развёртывания.
-
-Из раздела «Источники» удалена кнопка «Обновить реестр», из аналитики скрыт недостоверный блок «Топ источников по находкам». Security-аудит валидирует HMAC-карту message checkpoint, исправлены immutable SHA `actions/setup-python` в backup workflow.
-
-**Pre-update backup:** `backup/2026-07-22-before-notification-ai-diagnostics-rebuild`.
-
-**Pre-merge validation:** `Validate current` run `29913715221`, `current checks` run `29913715118`, recovery smoke `29913715242`, bot-only `29913715161`, Telegram transport `29913715124` — успешно.
-
-'''
           path.write_text(text.replace(marker, marker + entry, 1), encoding='utf-8')
           PY
           git config user.name github-actions[bot]
