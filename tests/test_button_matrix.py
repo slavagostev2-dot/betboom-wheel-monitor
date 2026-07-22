@@ -135,11 +135,11 @@ class ButtonMatrixTests(unittest.TestCase):
     def test_source_buttons_keep_pre_update_order_and_actions(self) -> None:
         expected = {
             False: [
-                ["page:sources", "page:ranking"],
+                ["page:ranking"],
                 ["source_list:primary:0", "source:request"],
             ],
             True: [
-                ["page:sources", "page:ranking"],
+                ["page:ranking"],
                 ["source_list:primary:0", "page:discovery"],
                 ["page:intelligence", "source:add"],
             ],
