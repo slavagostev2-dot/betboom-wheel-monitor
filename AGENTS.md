@@ -50,8 +50,9 @@ docs/
 ## 3. Действующие точки входа
 
 - Telegram-панель: `bbvg/bot/runtime.py`.
-- Совместимая production-команда: `python admin_panel_runtime_v41.py`.
-- `admin_panel_runtime_v41.py` — compatibility entrypoint над `bbvg.bot.runtime`; он может сохранять узкие presentation-совместимости, но не создаёт параллельный production-runtime.
+- Production-команда: `python notification_button_recovery.py`.
+- `notification_button_recovery.py` — узкий compatibility entrypoint: он наследует `admin_panel_runtime_v41.TelegramPanelRuntimeV41`, не создаёт второго `getUpdates` consumer и добавляет только восстановление callback `bb:p:<token>` по активному колесу, когда `button_contexts` был потерян в гонке состояния. Его точный regression-сценарий `hooch07 → cba7abb40c5b77` обязателен в preflight.
+- `admin_panel_runtime_v41.py` — основной compatibility runtime над `bbvg.bot.runtime`; вся остальная UI- и lifecycle-логика принадлежит ему и предметным модулям `bbvg/bot/*`.
 - Предметные владельцы панели: `bbvg/bot/interface.py` (экраны и
   навигация), `users.py` (пользователи, роли и настройки),
   `sources.py` (источники), `wheels.py` (колёса и callback), `storage.py`
