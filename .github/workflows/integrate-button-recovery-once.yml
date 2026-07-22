@@ -1,5 +1,6 @@
 name: BB V.G. integrate notification button recovery once
 
+# Second push activates the registered one-shot integration workflow.
 on:
   push:
     branches: [main]
