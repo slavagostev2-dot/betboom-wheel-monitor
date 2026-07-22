@@ -8,6 +8,10 @@
       "expires_at": 1784691988.1098065,
       "text": "{\n  \"summary\": \"Критический сбой: панель управления не обновляла heartbeat в течение 370 минут, что делает систему недоступной для команд.\",\n  \"impact\": \"Бот перестал принимать команды от пользователей, так как связь с панелью управления прервана.\",\n  \"recommended_action\": \"Проверить статус службы Control Center и логи последнего workflow панели для выявления причины отсутствия heartbeat.\",\n  \"confidence\": \"critical\"\n}"
     },
+    "09edb731ccd80101a9de893bc7ad6529f2a09c7e854cf26e660c0f63318cb22d": {
+      "expires_at": 1784692738.2255802,
+      "text": "{\n  \"summary\": \"Критический сбой: панель управления не обновляла статус более 6 часов (382 минуты).\",\n  \"impact\": \"Бот перестал принимать и обрабатывать команды пользователей, система управления зависла.\",\n  \"recommended_action\": \"Проверить heartbeat Control Center и последний workflow панели.\",\n  \"confidence\": \"high\"\n}"
+    },
     "d738271f881c0636ecbbf8f7d340946801e90dc596b934caa55e75738c906250": {
       "expires_at": 1784692183.809372,
       "text": "{\n  \"summary\": \"Критический сбой: панель управления не обновлялась более 6 часов (373 минуты).\",\n  \"impact\": \"Бот перестал принимать команды от пользователей, так как связь с Control Center прервана.\",\n  \"recommended_action\": \"Проверить heartbeat Control Center и последний workflow панели.\",\n  \"confidence\": \"high\"\n}"
@@ -811,10 +815,20 @@
       "output_sha256": "7f84e1ad8ac4ccd75c4f62d7bed41938c245a849160ece6c8ca0fe12ea55bbee",
       "provider": "gemini",
       "status": "ok"
+    },
+    {
+      "cached": false,
+      "created_at": 1784691838.2255802,
+      "feature": "health_inspector",
+      "id": "2ba0bfa0ba4347398dc2dae2731d376f",
+      "model": "gemini-3.1-flash-lite",
+      "output_sha256": "86088f55b8a898020f1843a9188e2d0744462a080fed3e360a0cca9fe6dad330",
+      "provider": "gemini",
+      "status": "ok"
     }
   ],
   "rate_calls": [
-    1784691637.6073542
+    1784691838.2255802
   ],
   "version": 1
 }
