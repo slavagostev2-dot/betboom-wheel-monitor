@@ -4,7 +4,7 @@ import subprocess
 import sys
 from pathlib import Path
 
-# Повторный запуск сохраняет точную диагностику полного набора тестов.
+# Чистый повторный запуск после удаления временных workflow и диагностик.
 
 
 def replace_once(text: str, old: str, new: str, label: str) -> str:
