@@ -714,6 +714,12 @@
       "sequence": 136,
       "value": "{\"actor\":\"vote_6d354213070f7ecae88871feecfd6151\",\"event_key\":\"mael#generation:3edb6d00d10689daf11a\",\"role\":\"admin\",\"sources\":[\"kolesaBB\"],\"weight\":5,\"wheel_key\":\"mael\"}"
     },
+    "a3434f9788484ca086ac25193f0422fa": {
+      "action": "record_personal_vote",
+      "created_at": "2026-07-22T08:06:51.356587+00:00",
+      "sequence": 174,
+      "value": "{\"actor\":\"vote_6d354213070f7ecae88871feecfd6151\",\"event_key\":\"zonertg13#generation:ce916a36d3a5131f3374\",\"role\":\"admin\",\"sources\":[\"mechanogun\"],\"weight\":5,\"wheel_key\":\"zonertg13\"}"
+    },
     "a3b7c653851441da861d99599943b950": {
       "action": "record_personal_vote",
       "created_at": "2026-07-21T16:15:49.159808+00:00",
@@ -1040,5 +1046,5 @@
     }
   },
   "format": "bbvg-admin-action-queue-v1",
-  "sequence": 173
+  "sequence": 174
 }
