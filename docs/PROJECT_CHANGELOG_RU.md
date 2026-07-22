@@ -6,6 +6,16 @@
 
 ---
 
+## 2026-07-22 — Ротация хранит семь backup-веток
+
+Лимит обычных веток `backup/*` увеличен с трёх до семи. `backup_rotation.py` и `.github/workflows/bot-state-backup.yml` используют единый fail-closed контракт `KEEP_BACKUPS=7`: только что созданная ветка сохраняется всегда, а удаление начинается только при появлении восьмой проверенной backup-ветки.
+
+Self-test проверяет переход `8 → 7`, идемпотентный повтор, dry-run и запрет удаления при ошибке ancestry. Security-contract отдельно фиксирует значение 7 в Python-модуле и workflow. Production-инвентаризация обнаружила четыре backup-ветки; все четыре являются безопасными предками `main`, поэтому сохранены и удаление не потребовалось.
+
+Во время проверки удалён устаревший временный workflow `participation-hotfix-temp.yml`, конфликтовавший с действующим `notification_button_recovery.py`.
+
+**Pre-update rollback:** `backup/2026-07-22-after-referral-wheel-label`.
+
 ## 2026-07-22 — Единый исход автоучастия и восстановление Control Center
 
 Скриншоты production подтвердили три связанных сбоя: после подтверждённого участия `chopper`, `pomidor2` и `MAGER01` старый monitor-dispatcher отправлял ложное сообщение «не сработало»; временный Playwright `TimeoutError/Page.goto` по `little` показывался пользователю как финальный отказ; Control Center завершился по job timeout до запуска следующей смены.
