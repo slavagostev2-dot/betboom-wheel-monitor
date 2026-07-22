@@ -2156,8 +2156,9 @@
     },
     "pomidor1#event:1719b2991926bd0f5511": {
       "scheduled_at": "2026-07-22T16:10:04.769831+00:00",
-      "status": "workflow_dispatch_scheduled",
-      "wheel_key": "pomidor1"
+      "status": "workflow_dispatch_sent",
+      "wheel_key": "pomidor1",
+      "dispatched_at": "2026-07-22T16:10:07.263717+00:00"
     },
     "staya": {
       "dispatched_at": "2026-07-21T09:48:34.445880+00:00",
