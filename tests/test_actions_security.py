@@ -132,3 +132,4 @@ def test_production_heartbeat_contract_is_present() -> None:
 
 # Technical pull-request trigger for the one-time seven-backup validation.
 # Synchronize event requests an exact inventory diagnostic.
+# Final synchronization runs against the clean permanent workflow set.
