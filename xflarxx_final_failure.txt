@@ -1,9 +1,7 @@
 From https://github.com/slavagostev2-dot/BB.V.G.
  * branch              main       -> FETCH_HEAD
-warning: skipped previously applied commit cfc2916c
-hint: use --reapply-cherry-picks to include skipped commits
-hint: Disable this message with "git config set advice.skippedCherryPicks false"
-Rebasing (1/2)Rebasing (2/2)Successfully rebased and updated refs/heads/feature/xflarxx-account-access-cleanup-final.
-.github/workflows/auto-participation.yml: expected one marker, found 2: '          BETBOOM_STORAGE_STATE_JSON_PART3: ${{ secrets.BETBOOM_STORAGE_STATE_JSON_PART3 }}\n          BETBOOM_STORAGE_ST'
-FAILED_STAGE=patch
-HEAD is now at 730cb96a Добавить финальную проверку подключения xFLARXx
+   67ba862b..b9d9f533  main       -> origin/main
+Rebasing (1/4)Rebasing (2/4)Rebasing (3/4)Rebasing (4/4)Successfully rebased and updated refs/heads/feature/xflarxx-account-access-cleanup-final.
+installer validation block mismatch: 0
+FAILED_STAGE=prepare
+HEAD is now at 6fa3d227 Уточнить область добавления PART5 и PART6
