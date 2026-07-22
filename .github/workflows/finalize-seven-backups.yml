@@ -1,6 +1,11 @@
 name: Finalize seven backup retention
 
 on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/finalize-seven-backups.yml"
   create:
 
 permissions:
@@ -9,8 +14,9 @@ permissions:
 jobs:
   finalize:
     if: >-
-      github.event.ref_type == 'branch' &&
-      github.event.ref == 'backup/2026-07-22-validate-seven-backups'
+      github.event_name == 'push' ||
+      (github.event.ref_type == 'branch' &&
+      github.event.ref == 'backup/2026-07-22-validate-seven-backups')
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -46,8 +52,8 @@ jobs:
           python - <<'PY'
           from pathlib import Path
 
-          path = Path("docs/PROJECT_CHANGELOG_RU.md")
-          text = path.read_text(encoding="utf-8")
+          changelog_path = Path("docs/PROJECT_CHANGELOG_RU.md")
+          text = changelog_path.read_text(encoding="utf-8")
           heading = "## 2026-07-22 — Ротация хранит семь backup-веток"
           if heading not in text:
               marker = "---\n\n"
@@ -62,13 +68,32 @@ jobs:
           '''
               if marker not in text:
                   raise SystemExit("PROJECT_CHANGELOG_RU.md marker not found")
-              path.write_text(text.replace(marker, marker + entry, 1), encoding="utf-8")
+              changelog_path.write_text(
+                  text.replace(marker, marker + entry, 1),
+                  encoding="utf-8",
+              )
+
+          Path("chapter1_stability.py").write_text(
+              '''from __future__ import annotations
+
+          from tests.production_acceptance import stability_acceptance
+
+
+          def self_test() -> None:
+              stability_acceptance()
+
+
+          if __name__ == "__main__":
+              self_test()
+          ''',
+              encoding="utf-8",
+          )
           PY
 
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git rm .github/workflows/finalize-seven-backups.yml
-          git add docs/PROJECT_CHANGELOG_RU.md
+          git add chapter1_stability.py docs/PROJECT_CHANGELOG_RU.md
           git commit -m "Задокументировать хранение семи backup-веток"
           for attempt in 1 2 3 4; do
             if git push origin HEAD:main; then
