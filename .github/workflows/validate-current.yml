@@ -1,6 +1,8 @@
 name: Apply referral-only auto participation guard
 
 on:
+  push:
+    branches: [fix/skip-referral-auto-participation]
   pull_request:
     branches: [main]
 
@@ -9,20 +11,20 @@ permissions:
 
 jobs:
   patch:
-    if: github.head_ref == 'fix/skip-referral-auto-participation'
+    if: github.ref_name == 'fix/skip-referral-auto-participation' || github.head_ref == 'fix/skip-referral-auto-participation'
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout exact pull request head
+      - name: Checkout exact branch commit
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
-          ref: ${{ github.event.pull_request.head.sha }}
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
           persist-credentials: true
           fetch-depth: 1
           show-progress: false
 
       - name: Add pre-browser referral guard
         env:
-          HEAD_BRANCH: ${{ github.head_ref }}
+          HEAD_BRANCH: ${{ github.head_ref || github.ref_name }}
         run: |
           python - <<'PY'
           from pathlib import Path
