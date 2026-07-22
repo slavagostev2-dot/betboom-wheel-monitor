@@ -273,13 +273,13 @@
       "deadline": "2026-07-22T09:56:53.493000+00:00",
       "deadline_source": "api",
       "event_id": "be81b6580df642f5d7fe",
-      "expires_at": "2026-07-22T11:38:06.481064+00:00",
+      "expires_at": "2026-07-22T11:43:09.245367+00:00",
       "first_notified_at": "2026-07-22T09:37:41.191033+00:00",
       "generation_id": "be81b6580df642f5d7fe",
       "identifier": "over",
-      "last_checked_at": "2026-07-22T09:38:07.124237+00:00",
+      "last_checked_at": "2026-07-22T09:43:09.796243+00:00",
       "last_notification_at": "2026-07-22T09:37:41.191033+00:00",
-      "last_verification_at": "2026-07-22T09:38:06.481064+00:00",
+      "last_verification_at": "2026-07-22T09:43:09.245367+00:00",
       "lifecycle_changed_at": "2026-07-22T09:38:06.481007+00:00",
       "lifecycle_state": "scheduled_draw",
       "message_date": "2026-07-22T09:37:03+00:00",
@@ -317,9 +317,9 @@
       "first_notified_at": "2026-07-22T08:06:19.188953+00:00",
       "generation_id": "ce916a36d3a5131f3374",
       "identifier": "zonertg13",
-      "last_checked_at": "2026-07-22T09:38:07.124237+00:00",
+      "last_checked_at": "2026-07-22T09:43:09.796243+00:00",
       "last_notification_at": "2026-07-22T08:06:19.188953+00:00",
-      "last_verification_at": "2026-07-22T09:38:06.481064+00:00",
+      "last_verification_at": "2026-07-22T09:43:09.245367+00:00",
       "lifecycle_changed_at": "2026-07-22T09:32:59.194845+00:00",
       "lifecycle_state": "participating",
       "message_date": "2026-07-22T08:05:08+00:00",
@@ -3853,7 +3853,7 @@
     "over": {
       "action_id": 969,
       "generation_id": "be81b6580df642f5d7fe",
-      "seen_at": "2026-07-22T09:38:06.481064+00:00",
+      "seen_at": "2026-07-22T09:43:09.245367+00:00",
       "server_start_at": "2026-07-22T09:36:53.493000+00:00",
       "state": "active"
     },
@@ -4011,7 +4011,7 @@
     "zonertg13": {
       "action_id": 698,
       "generation_id": "ce916a36d3a5131f3374",
-      "seen_at": "2026-07-22T09:38:06.481064+00:00",
+      "seen_at": "2026-07-22T09:43:09.245367+00:00",
       "server_start_at": "2026-07-22T08:04:56.849000+00:00",
       "state": "active"
     },
@@ -4051,9 +4051,9 @@
   "wheel_api_health": {
     "alert_threshold": 3,
     "consecutive_failures": 0,
-    "last_checked_at": "2026-07-22T09:38:06.481064+00:00",
+    "last_checked_at": "2026-07-22T09:43:09.245367+00:00",
     "last_failure_at": "2026-07-20T14:02:03.366327+00:00",
-    "last_success_at": "2026-07-22T09:38:06.481064+00:00",
+    "last_success_at": "2026-07-22T09:43:09.245367+00:00",
     "status": "ok"
   },
   "wheel_generation_observations": {
@@ -4792,11 +4792,11 @@
       "action_id": 969,
       "first_seen_at": "2026-07-22T09:37:41.191161+00:00",
       "generation_id": "be81b6580df642f5d7fe",
-      "last_seen_at": "2026-07-22T09:38:06.481064+00:00",
-      "observations": 3,
+      "last_seen_at": "2026-07-22T09:43:09.245367+00:00",
+      "observations": 13,
       "server_start_at": "2026-07-22T09:36:53.493000+00:00",
       "statuses": {
-        "active": 3
+        "active": 13
       },
       "wheel_key": "over"
     },
@@ -4870,11 +4870,11 @@
       "action_id": 698,
       "first_seen_at": "2026-07-22T08:06:19.189238+00:00",
       "generation_id": "ce916a36d3a5131f3374",
-      "last_seen_at": "2026-07-22T09:38:06.481064+00:00",
-      "observations": 17,
+      "last_seen_at": "2026-07-22T09:43:09.245367+00:00",
+      "observations": 27,
       "server_start_at": "2026-07-22T08:04:56.849000+00:00",
       "statuses": {
-        "active": 17
+        "active": 27
       },
       "wheel_key": "zonertg13"
     },
