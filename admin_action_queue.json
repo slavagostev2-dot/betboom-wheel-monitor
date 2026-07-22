@@ -726,6 +726,12 @@
       "sequence": 152,
       "value": "{\"actor\":\"vote_52b40c32d6fb8e26f3e17863bb949f92\",\"event_key\":\"aunkere#generation:ef82ebd7b7f693e7388b\",\"role\":\"admin\",\"sources\":[\"aunkereEZ\",\"aunkeretg\"],\"weight\":5,\"wheel_key\":\"aunkere\"}"
     },
+    "9ee0bbbe590a46e88cbbea827b2c5bee": {
+      "action": "record_personal_vote",
+      "created_at": "2026-07-22T15:45:36.479028+00:00",
+      "sequence": 185,
+      "value": "{\"actor\":\"vote_3092cd8d69b74beb8bd2579cd902c714\",\"event_key\":\"deko2#generation:abe2d71fdc6088ded240\",\"role\":\"owner\",\"sources\":[\"kolesaBB\"],\"weight\":5,\"wheel_key\":\"deko2\"}"
+    },
     "a0211095f70a415c9ea477e2872f4d6f": {
       "action": "set_deadline",
       "created_at": "2026-07-16T14:32:47.726577+00:00",
@@ -1106,5 +1112,5 @@
     }
   },
   "format": "bbvg-admin-action-queue-v1",
-  "sequence": 184
+  "sequence": 185
 }
