@@ -5,6 +5,7 @@ import threading
 from datetime import datetime, timezone
 from typing import Any
 
+import notification_integrity_v2
 import personal_wheel_voting
 
 UTC = timezone.utc
@@ -166,6 +167,51 @@ def _save_failure(
     )
 
 
+def _mark_original_notification(
+    panel: Any,
+    owner_chat_id: str,
+    item: dict[str, Any],
+) -> bool:
+    button_token = str(item.get("button_token") or "").strip().casefold()
+    if not button_token:
+        return False
+    try:
+        message_id = notification_integrity_v2.participation_message_id(
+            owner_chat_id, button_token
+        )
+    except Exception as exc:
+        print(
+            "WARNING participation notification lookup failed: "
+            f"{type(exc).__name__}: {exc}"
+        )
+        return False
+    if not message_id:
+        return False
+    url = str(item.get("url") or "").strip()
+    button: dict[str, Any] = {
+        "text": "✅ Участвую",
+        "callback_data": f"bb:p:{button_token}",
+    }
+    if url:
+        button = {"text": "✅ Участвую", "url": url}
+    try:
+        response = panel.telegram_api(
+            "editMessageReplyMarkup",
+            {
+                "chat_id": owner_chat_id,
+                "message_id": int(message_id),
+                "reply_markup": {"inline_keyboard": [[button]]},
+            },
+        )
+    except Exception as exc:
+        print(
+            "WARNING automatic participation button update failed: "
+            f"message_id={message_id} {type(exc).__name__}: {exc}"
+        )
+        return False
+    return bool(response.get("ok", True)) if isinstance(response, dict) else True
+
+
 def _success_message(
     key: str,
     item: dict[str, Any],
@@ -297,6 +343,9 @@ def sync_once(panel: Any) -> dict[str, int]:
             except (TypeError, ValueError):
                 weight = 5
             sources = panel._sources_for_item(snap, key, item)
+            original_button_updated = _mark_original_notification(
+                panel, owner_chat_id, item
+            )
             text, markup = _success_message(key, item, sources, weight, changed)
             panel.send(text, reply_markup=markup, chat_id=owner_chat_id)
             now_text = datetime.now(UTC).isoformat()
@@ -309,6 +358,7 @@ def sync_once(panel: Any) -> dict[str, int]:
                     "source_event_token": token,
                     "notified_at": now_text,
                     "rating_weight": weight,
+                    "original_button_updated": original_button_updated,
                     "vote_command_id": (
                         str(result.get("vote_command_id") or "")
                         if isinstance(result, dict)

@@ -382,6 +382,33 @@ def markup_for_chat(reply_markup: dict | None, *, admin: bool) -> dict | None:
     return result
 
 
+def participation_button_token(reply_markup: dict | None) -> str:
+    if not isinstance(reply_markup, dict):
+        return ""
+    for row in reply_markup.get("inline_keyboard", []):
+        if not isinstance(row, list):
+            continue
+        for button in row:
+            if not isinstance(button, dict):
+                continue
+            callback = str(button.get("callback_data") or "")
+            if callback.startswith("bb:p:"):
+                return callback.split(":", 2)[2].casefold()
+    return ""
+
+
+def record_participation_message(
+    _chat_id: str,
+    _button_token: str,
+    _message_id: int,
+) -> None:
+    """Installed by notification_integrity_v2; default keeps router standalone."""
+
+
+def participation_message_id(_chat_id: str, _button_token: str) -> int | None:
+    return None
+
+
 def install(monitor_module: Any) -> None:
     if getattr(monitor_module, "_bbvg_notification_router_installed", False):
         return
@@ -438,6 +465,15 @@ def install(monitor_module: Any) -> None:
             try:
                 response = monitor_module.telegram_api("sendMessage", payload)
                 result = response
+                response_result = response.get("result") if isinstance(response, dict) else None
+                button_token = participation_button_token(target_markup)
+                if button_token and isinstance(response_result, dict):
+                    try:
+                        sent_message_id = int(response_result.get("message_id") or 0)
+                    except (TypeError, ValueError):
+                        sent_message_id = 0
+                    if sent_message_id > 0:
+                        record_participation_message(chat_id, button_token, sent_message_id)
                 sent += 1
             except Exception as exc:
                 release_delivery(dedup_key)
@@ -509,6 +545,9 @@ def self_test() -> None:
         None,
     )
     assert first_event == second_event == "wheel:wheels:wheel-a:detected"
+    assert participation_button_token(
+        {"inline_keyboard": [[{"text": "Участвую", "callback_data": "bb:p:ABC123"}]]}
+    ) == "abc123"
     assert notification_event_identity(
         "wheel_final_reminders",
         "Напоминание о колесе BetBoom\nИдентификатор: <code>wheel-a</code>",

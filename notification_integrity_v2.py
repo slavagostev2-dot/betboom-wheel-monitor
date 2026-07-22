@@ -64,6 +64,7 @@ def default_state() -> dict[str, Any]:
         "retention_seconds": RETENTION_SECONDS,
         "entries": {},
         "claims": {},
+        "messages": {},
     }
 
 
@@ -96,6 +97,7 @@ def load_state(path: Path | None = None) -> dict[str, Any]:
         if HEX_DIGEST_RE.fullmatch(key) and timestamp is not None:
             normalized[key] = timestamp.isoformat()
     claims = raw.get("claims") if isinstance(raw.get("claims"), dict) else {}
+    messages = raw.get("messages") if isinstance(raw.get("messages"), dict) else {}
     return {
         "format": FORMAT,
         "version": 3,
@@ -103,6 +105,7 @@ def load_state(path: Path | None = None) -> dict[str, Any]:
         "retention_seconds": RETENTION_SECONDS,
         "entries": normalized,
         "claims": _pruned_claims(claims),
+        "messages": _pruned_messages(messages),
     }
 
 
@@ -132,6 +135,35 @@ def _pruned_claims(claims: dict[str, Any], current: datetime | None = None) -> d
     return {digest: timestamp.isoformat() for digest, timestamp in rows[:MAX_CLAIMS]}
 
 
+def _pruned_messages(
+    messages: dict[str, Any],
+    current: datetime | None = None,
+) -> dict[str, dict[str, Any]]:
+    current = current or now_utc()
+    threshold = current - timedelta(seconds=RETENTION_SECONDS)
+    rows: list[tuple[str, datetime, int]] = []
+    for digest, raw in messages.items():
+        key = str(digest).casefold()
+        record = raw if isinstance(raw, dict) else {}
+        timestamp = _parse_datetime(record.get("recorded_at"))
+        try:
+            message_id = int(record.get("message_id") or 0)
+        except (TypeError, ValueError):
+            message_id = 0
+        if (
+            HEX_DIGEST_RE.fullmatch(key)
+            and timestamp is not None
+            and timestamp >= threshold
+            and message_id > 0
+        ):
+            rows.append((key, timestamp, message_id))
+    rows.sort(key=lambda item: item[1], reverse=True)
+    return {
+        digest: {"message_id": message_id, "recorded_at": timestamp.isoformat()}
+        for digest, timestamp, message_id in rows[:MAX_ENTRIES]
+    }
+
+
 @contextmanager
 def _file_lock(path: Path) -> Iterator[None]:
     lock_path = path.with_suffix(path.suffix + ".lock")
@@ -159,9 +191,11 @@ def save_state(value: dict[str, Any], path: Path | None = None) -> dict[str, Any
     target.parent.mkdir(parents=True, exist_ok=True)
     entries = value.get("entries") if isinstance(value, dict) else {}
     claims = value.get("claims") if isinstance(value, dict) else {}
+    messages = value.get("messages") if isinstance(value, dict) else {}
     normalized = default_state()
     normalized["entries"] = _pruned_entries(entries if isinstance(entries, dict) else {})
     normalized["claims"] = _pruned_claims(claims if isinstance(claims, dict) else {})
+    normalized["messages"] = _pruned_messages(messages if isinstance(messages, dict) else {})
     for digest in normalized["entries"]:
         normalized["claims"].pop(digest, None)
     temporary_path: Path | None = None
@@ -212,6 +246,71 @@ def delivery_digest(
         separators=(",", ":"),
     ).encode("utf-8")
     return hmac.new(_secret(secret), payload, hashlib.sha256).hexdigest()
+
+
+def participation_message_digest(
+    chat_id: str,
+    button_token: str,
+    *,
+    secret: str | None = None,
+) -> str:
+    payload = json.dumps(
+        ["participation-message", str(chat_id), str(button_token).casefold()],
+        ensure_ascii=False,
+        separators=(",", ":"),
+    ).encode("utf-8")
+    return hmac.new(_secret(secret), payload, hashlib.sha256).hexdigest()
+
+
+def record_participation_message(
+    chat_id: str,
+    button_token: str,
+    message_id: int,
+    path: Path | None = None,
+) -> None:
+    token = str(button_token or "").strip().casefold()
+    try:
+        numeric_message_id = int(message_id)
+    except (TypeError, ValueError):
+        return
+    if not token or numeric_message_id <= 0:
+        return
+    digest = participation_message_digest(chat_id, token)
+    target = _state_path(path)
+    with _lock:
+        with _file_lock(target):
+            state = load_state(target)
+            state.setdefault("messages", {})[digest] = {
+                "message_id": numeric_message_id,
+                "recorded_at": now_utc().isoformat(),
+            }
+            save_state(state, target)
+
+
+def participation_message_id(
+    chat_id: str,
+    button_token: str,
+    path: Path | None = None,
+) -> int | None:
+    token = str(button_token or "").strip().casefold()
+    if not token:
+        return None
+    digest = participation_message_digest(chat_id, token)
+    target = _state_path(path)
+    with _lock:
+        with _file_lock(target):
+            state = load_state(target)
+    record = state.get("messages", {}).get(digest)
+    if not isinstance(record, dict):
+        return None
+    recorded_at = _parse_datetime(record.get("recorded_at"))
+    if recorded_at is None or now_utc() - recorded_at > timedelta(seconds=RETENTION_SECONDS):
+        return None
+    try:
+        value = int(record.get("message_id") or 0)
+    except (TypeError, ValueError):
+        return None
+    return value if value > 0 else None
 
 
 def duplicate_delivery(digest: str, path: Path | None = None) -> bool:
@@ -322,6 +421,7 @@ def merge_states(left: dict[str, Any], right: dict[str, Any]) -> dict[str, Any]:
     merged = default_state()
     entries: dict[str, Any] = {}
     claims: dict[str, Any] = {}
+    messages: dict[str, Any] = {}
     for value in (left, right):
         raw = value.get("entries") if isinstance(value, dict) else None
         if isinstance(raw, dict):
@@ -343,8 +443,31 @@ def merge_states(left: dict[str, Any], right: dict[str, Any]) -> dict[str, Any]:
                     previous is None or incoming > previous
                 ):
                     claims[key] = incoming.isoformat()
+        raw_messages = value.get("messages") if isinstance(value, dict) else None
+        if isinstance(raw_messages, dict):
+            for digest, raw_record in raw_messages.items():
+                key = str(digest).casefold()
+                record = raw_record if isinstance(raw_record, dict) else {}
+                incoming = _parse_datetime(record.get("recorded_at"))
+                previous_record = messages.get(key) if isinstance(messages.get(key), dict) else {}
+                previous = _parse_datetime(previous_record.get("recorded_at"))
+                try:
+                    message_id = int(record.get("message_id") or 0)
+                except (TypeError, ValueError):
+                    message_id = 0
+                if (
+                    HEX_DIGEST_RE.fullmatch(key)
+                    and incoming is not None
+                    and message_id > 0
+                    and (previous is None or incoming > previous)
+                ):
+                    messages[key] = {
+                        "message_id": message_id,
+                        "recorded_at": incoming.isoformat(),
+                    }
     merged["entries"] = _pruned_entries(entries)
     merged["claims"] = _pruned_claims(claims)
+    merged["messages"] = _pruned_messages(messages)
     for digest in merged["entries"]:
         merged["claims"].pop(digest, None)
     return merged
@@ -403,6 +526,8 @@ def install(router_module: Any) -> None:
     router_module.claim_delivery = claim_delivery
     router_module.release_delivery = release_delivery
     router_module.complete_delivery = complete_delivery
+    router_module.record_participation_message = record_participation_message
+    router_module.participation_message_id = participation_message_id
     router_module._bbvg_notification_integrity_v2_installed = True
 
 
@@ -442,6 +567,11 @@ def self_test() -> None:
             assert "example.invalid" not in raw
             state = load_state()
             assert digest in state["entries"]
+            record_participation_message("123456", "token-1", 777)
+            assert participation_message_id("123456", "token-1") == 777
+            raw = STATE_PATH.read_text(encoding="utf-8")
+            assert "123456" not in raw
+            assert "token-1" not in raw
 
             config = {
                 "owner_id": "1",

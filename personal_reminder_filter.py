@@ -233,8 +233,13 @@ def _record_dispatch_failure(
     failure_count = previous_failures + 1
     dispatch_record["failure_count"] = failure_count
 
-    if status == "workflow_dispatch_failed" and failure_count < _DISPATCH_FAILURE_LIMIT:
-        retry_at = current + _DISPATCH_RETRY_AFTER
+    if status in {"workflow_dispatch_failed", "workflow_dispatch_timeout"} and failure_count < _DISPATCH_FAILURE_LIMIT:
+        retry_delay = (
+            _DISPATCH_RETRY_AFTER
+            if status == "workflow_dispatch_failed"
+            else timedelta(minutes=1)
+        )
+        retry_at = current + retry_delay
         dispatch_record.update(
             {
                 "wheel_key": wheel_key,
