@@ -1,7 +1,7 @@
 {
   "active_incidents": 1,
   "admin_panel": {
-    "age_minutes": 3,
+    "age_minutes": 7,
     "last_heartbeat_at": "2026-07-23T18:15:06.422925+00:00",
     "started_at": "2026-07-23T18:15:06.422915+00:00",
     "status": "running",
@@ -13,20 +13,20 @@
     "cached": false,
     "confidence": 0.0,
     "critical_count": 1,
-    "decision_id": "bfe8f04ff9164e98a98eeb0517cd1d1a",
+    "decision_id": "2e26935d4b9e48d59ad87bbef3273bc3",
     "finding_count": 1,
     "finding_kinds": [
       "monitor_stale"
     ],
-    "generated_at": "2026-07-23T18:18:36.774230+00:00",
-    "impact": "Система мониторинга перестала получать актуальные данные, что делает невозможным оперативное обнаружение новых инцидентов.",
+    "generated_at": "2026-07-23T18:22:28.221427+00:00",
+    "impact": "Мониторинг системы не актуален, что может привести к пропуску новых инцидентов или некорректной оценке текущего состояния.",
     "mode": "ai",
     "model": "gemini-3.1-flash-lite",
     "provider": "gemini",
     "recommended_action": "Проверить состояние основного monitor workflow и время последней успешной итерации.",
     "requires_human_attention": true,
     "severity": "critical",
-    "summary": "Критическая ошибка: основной монитор не обновлял данные в течение 23 минут.",
+    "summary": "Критическая задержка обновления основного монитора: последняя итерация была 26 минут назад.",
     "used_fallback": false,
     "version": 1,
     "warning_count": 0
@@ -63,7 +63,7 @@
     "telegram_transport": "ok",
     "wheel_api": "ok"
   },
-  "checked_at": "2026-07-23T18:18:34.602938+00:00",
+  "checked_at": "2026-07-23T18:22:26.141283+00:00",
   "discovery": {
     "active_size": 168,
     "candidate_count": 503,
@@ -89,7 +89,7 @@
     },
     "inventory_confirmation_window_hours": 6,
     "inventory_registry_generated_at": "2026-07-23T16:03:27.484154+00:00",
-    "inventory_sync_age_minutes": 135,
+    "inventory_sync_age_minutes": 138,
     "inventory_sync_state": "waiting_for_discovery_after_inventory_change"
   },
   "domain_compliance": {
@@ -108,7 +108,7 @@
   "finding_count": 1,
   "findings": [
     {
-      "detail": "Последняя итерация была 23 минут назад.",
+      "detail": "Последняя итерация была 26 минут назад.",
       "kind": "monitor_stale",
       "severity": "critical",
       "subject": "",
@@ -188,7 +188,7 @@
     "version": 3,
     "workflow_run_id": "30026917282"
   },
-  "monitor_age_minutes": 23,
+  "monitor_age_minutes": 26,
   "notification_integrity": {
     "algorithm": "HMAC-SHA256",
     "contains_personal_fields": false,
