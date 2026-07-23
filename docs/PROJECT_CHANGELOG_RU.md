@@ -6,6 +6,56 @@
 
 ---
 
+## 2026-07-23 — Репозиторий очищен от возвращённой исторической цепочки и ложных документов
+
+Удалены 43 подтверждённо устаревших файла без изменения production-поведения:
+неиспользуемая цепочка `admin_panel_runtime_v2.py`–`v24.py`, повторно
+появившиеся после прежнего удаления `monitor_resilience.py` и
+`normalize_source_ratings.py`, пять тонких `chapter*`-обёрток и 13 корневых
+исторических документов. Четыре из удалённых Markdown-файлов фактически
+содержали старый Python/YAML, а chapter-описания противоречили текущему
+личному участию, двухчасовому lifecycle и BetBoom API.
+
+Все вызовы chapter-обёрток переведены на секции единого
+`tests/production_acceptance.py`. Тест ночной политики теперь проверяет
+фактического владельца методов `bbvg.bot.interface.PanelInterfaceRuntime`, а
+preflight запрещает возврат всей цепочки `v2`–`v40`, удалённых обёрток и ложных
+документов.
+
+Активные workflow `activate-66-sources.yml` и `migrate-all-sources.yml`
+переименованы в `telegram-source-transport.yml` и
+`telegram-domain-policy.yml`; историческое число 66 удалено из действующей
+политики, inventory вычисляется из актуальных source-файлов. Восстановлены
+настоящий `README.md`, карта кода, карта production MRO, актуальный контекст и
+план следующего безопасного рефакторинга.
+
+Из `system-health.yml` удалён завершённый одноразовый блок, который должен был
+дописать уже существующую запись журнала и удалить сам себя. Его неотступленный
+многострочный текст нарушал YAML и мог приводить к запуску без jobs. Preflight
+запрещает возврат этого маркера. Два JavaScript-regex в Playwright-модулях
+переведены в raw Python-строки, поэтому полная компиляция больше не выдаёт
+`invalid escape sequence` без изменения самого JavaScript.
+
+Активный `v22-checks.yml` переименован в `current-checks.yml`; тесты
+`test_chapter3_contracts.py`, `test_ui_chapter4.py` и
+`test_chapter5_lifecycle.py` получили предметные имена
+`test_production_contracts.py`, `test_ui_contracts.py` и
+`test_wheel_lifecycle.py`. Имена workflow и pytest-классов, участвующие в
+обязательных GitHub checks, не менялись.
+
+Exact-SHA validator Control Center теперь запрещает весь удалённый диапазон
+`admin_panel_runtime_v2.py`–`v40.py`, а необязательный
+`CONTROL_CENTER_RELEASE_SHA` позволяет локально проверять candidate-коммит без
+изменения production-файла `control_center_release.txt`.
+
+Архив Mini App (`docs`-assets и `state_api`), runtime JSON, encrypted state,
+delivery ledger, callback-форматы и единственные production entrypoints не
+изменялись.
+
+**Pre-update backup:**
+`backup/2026-07-23-before-repository-cleanup` →
+`e7bf817fa3dc858704ef26cec52c723c9d5ca7e9`.
+
 ## 2026-07-23 — Восстановлено автоучастие и отключены реферальные уведомления
 
 Заголовок первичного сообщения ранее был изменён на «Обнаружено колесо BetBoom», но маршрутизатор продолжал распознавать только старый вариант «Новое колесо BetBoom». Из-за этого новое колесо классифицировалось как системное сообщение, теряло event-scoped дедупликацию и не запускало штатный recovery автоучастия. Живой пример: `dayneez`, `action_id=987`, был уведомлён в `16:15 UTC`, но соответствующий event автоучастия не появился.

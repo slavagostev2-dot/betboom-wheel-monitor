@@ -190,7 +190,7 @@ def participate(url: str) -> ParticipationResult:
             control.click(timeout=timeout_ms)
             try:
                 page.wait_for_function(
-                    """() => /участие\s+(принято|подтверждено|зарегистрировано)|вы\s+(уже\s+)?участвуете|уже\s+участвуете|участие\s+отмечено|теперь\s+ты\s+участвуешь\s+в\s+розыгрыше|вы\s+в\s+розыгрыше/i.test(document.body?.innerText || '')""",
+                    r"""() => /участие\s+(принято|подтверждено|зарегистрировано)|вы\s+(уже\s+)?участвуете|уже\s+участвуете|участие\s+отмечено|теперь\s+ты\s+участвуешь\s+в\s+розыгрыше|вы\s+в\s+розыгрыше/i.test(document.body?.innerText || '')""",
                     timeout=timeout_ms,
                 )
             except PlaywrightTimeoutError:

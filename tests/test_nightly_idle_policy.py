@@ -15,7 +15,6 @@ import nightly_discovery
 import notification_router
 import source_tier_maintenance
 import system_checks
-from admin_panel_runtime_v5 import TelegramPanelRuntimeV5
 from bbvg.bot.source_requests import SourceRequestRuntime
 from bbvg.bot.runtime import TelegramPanelRuntime
 from bbvg.bot.interface import PanelInterfaceRuntime
@@ -67,8 +66,8 @@ class NightlyIdlePolicyTests(unittest.TestCase):
 
     def test_candidate_changes_do_not_dispatch_a_nightly_scan(self) -> None:
         for method in (
-            TelegramPanelRuntimeV5.set_candidate_mode,
-            TelegramPanelRuntimeV5.restore_candidate,
+            PanelInterfaceRuntime.set_candidate_mode,
+            PanelInterfaceRuntime.restore_candidate,
             PanelInterfaceRuntime.bulk_set_intelligence_mode,
             SourceRequestRuntime.decide_source_request,
         ):

@@ -1,3 +1,4 @@
+# Stable current-contract validation.
 name: BB V.G. current checks
 run-name: BB V.G. current checks — ${{ github.event_name }}
 
@@ -78,7 +79,7 @@ jobs:
           python tests/production_acceptance.py --section stability
           python tests/production_acceptance.py --section unified
           python tests/production_acceptance.py --section ci
-          python chapter4_acceptance.py
+          python tests/production_acceptance.py --section interface
           python tests/production_acceptance.py --section lifecycle
 
       - name: Validate current production boundaries

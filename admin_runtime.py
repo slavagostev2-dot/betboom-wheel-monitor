@@ -10,7 +10,7 @@ BLOCKED_SOURCES = {"frixa_betboom", "gazazor"}
 SOURCE_REFRESH_WORKFLOWS: tuple[tuple[str, dict[str, str] | None], ...] = (
     ("nightly-discovery.yml", None),
     ("monitor.yml", {"continuous": "true", "replace": "true"}),
-    ("activate-66-sources.yml", None),
+    ("telegram-source-transport.yml", None),
     ("source-registry.yml", None),
 )
 

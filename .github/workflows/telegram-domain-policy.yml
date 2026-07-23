@@ -1,21 +1,21 @@
-name: Verify all 66 sources use telegram.me
+name: Verify approved Telegram source policy
 
 on:
   push:
     branches: [main]
     paths:
-      - ".github/workflows/migrate-all-sources.yml"
+      - ".github/workflows/telegram-domain-policy.yml"
   workflow_dispatch:
 
 permissions:
   contents: read
 
 concurrency:
-  group: bb-vg-source-policy-migration
+  group: bb-vg-source-domain-policy
   cancel-in-progress: false
 
 jobs:
-  migrate:
+  verify:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -43,8 +43,8 @@ jobs:
           primary = read_sources("public_sources.txt")
           nightly = read_sources("source_catalog.txt")
           approved = {value.casefold() for value in primary + nightly}
-          if len(approved) < 66:
-              raise SystemExit(f"Expected at least 66 approved sources, found {len(approved)}")
+          if not primary:
+              raise SystemExit("Primary source inventory is empty")
           if {value.casefold() for value in primary} & {value.casefold() for value in nightly}:
               raise SystemExit("Primary and nightly tiers overlap")
           runtime = "\n".join(
@@ -53,5 +53,7 @@ jobs:
           )
           if "https://t.me/" in runtime:
               raise SystemExit("Blocked Telegram domain remains in runtime")
+          if "telegram.me" not in runtime:
+              raise SystemExit("Approved Telegram domain is missing from runtime")
           print(f"Approved sources: {len(approved)}; primary: {len(primary)}; nightly: {len(nightly)}")
           PY

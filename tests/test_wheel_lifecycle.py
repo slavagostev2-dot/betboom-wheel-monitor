@@ -1,3 +1,5 @@
+"""Wheel lifecycle and rating contracts."""
+
 from __future__ import annotations
 
 import unittest

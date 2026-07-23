@@ -16,7 +16,7 @@ PINNED_ACTIONS = {
 VALIDATION_WORKFLOWS = {
     "bot-recovery-smoke.yml",
     "telegram-resilience-check.yml",
-    "v22-checks.yml",
+    "current-checks.yml",
     "validate-current.yml",
     "validate-private-state.yml",
 }
@@ -24,11 +24,11 @@ READ_ONLY_CHECKOUTS = VALIDATION_WORKFLOWS | {
     "admin-action.yml",
     "bot-state-backup.yml",
     "daily-report.yml",
-    "migrate-all-sources.yml",
+    "telegram-domain-policy.yml",
     "monitor-watchdog.yml",
 }
 CONTENTS_WRITE_WORKFLOWS = {
-    "activate-66-sources.yml",
+    "telegram-source-transport.yml",
     "admin-action.yml",
     "admin-bot.yml",
     "auto-participation.yml",
@@ -85,8 +85,8 @@ def test_permissions_matrix_is_narrow() -> None:
     }
     assert contents_write == CONTENTS_WRITE_WORKFLOWS
     assert actions_write == ACTIONS_WRITE_WORKFLOWS
-    assert "contents: write" not in texts["migrate-all-sources.yml"]
-    assert "actions: write" not in texts["activate-66-sources.yml"]
+    assert "contents: write" not in texts["telegram-domain-policy.yml"]
+    assert "actions: write" not in texts["telegram-source-transport.yml"]
     for name, text in texts.items():
         assert not re.search(r"^  (?:contents|actions): write$", text, re.MULTILINE), (
             f"Write permission is workflow-wide in {name}"

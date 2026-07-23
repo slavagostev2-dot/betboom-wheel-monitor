@@ -1,3 +1,5 @@
+"""Production behavior and CI contracts."""
+
 from __future__ import annotations
 
 import json
