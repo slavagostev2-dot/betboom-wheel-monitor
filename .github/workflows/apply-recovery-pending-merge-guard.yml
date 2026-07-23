@@ -131,20 +131,18 @@ jobs:
           state_path = Path("state.json")
           state = json.loads(state_path.read_text(encoding="utf-8"))
           changed = False
+          from datetime import datetime
+          def parse(value):
+              try:
+                  return datetime.fromisoformat(str(value).replace("Z", "+00:00"))
+              except (TypeError, ValueError):
+                  return None
           for record in state.get("active_wheels", {}).values():
               if not isinstance(record, dict):
                   continue
-              pending_text = str(record.get("recovered_initial_notification_pending_at") or "")
-              if not pending_text:
+              pending = parse(record.get("recovered_initial_notification_pending_at"))
+              if pending is None:
                   continue
-              from datetime import datetime
-              def parse(value):
-                  try:
-                      result = datetime.fromisoformat(str(value).replace("Z", "+00:00"))
-                  except (TypeError, ValueError):
-                      return None
-                  return result
-              pending = parse(pending_text)
               delivered = [
                   parsed
                   for field in (
@@ -153,7 +151,6 @@ jobs:
                       "first_notified_at",
                   )
                   if (parsed := parse(record.get(field))) is not None
-                  and pending is not None
                   and parsed >= pending
               ]
               if not delivered:
@@ -195,3 +192,5 @@ jobs:
             sleep $((attempt * 2))
           done
           exit 1
+
+# second push intentionally triggers the installer
