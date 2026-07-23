@@ -2,31 +2,31 @@
   "active_incidents": 1,
   "admin_panel": {
     "age_minutes": 1,
-    "last_heartbeat_at": "2026-07-23T19:48:11.182006+00:00",
-    "started_at": "2026-07-23T19:38:01.354727+00:00",
+    "last_heartbeat_at": "2026-07-23T19:51:33.406635+00:00",
+    "started_at": "2026-07-23T19:51:30.326556+00:00",
     "status": "running",
     "update_consumer": "single_getUpdates_owner",
     "version": 41
   },
   "ai_health_inspector": {
     "ai_status": "ok",
-    "cached": true,
+    "cached": false,
     "confidence": 0.0,
     "critical_count": 1,
-    "decision_id": "7712718f7c8f481fab606d6bfc1f8f56",
+    "decision_id": "d9a2c00c1d524f6eb045037a79b8064f",
     "finding_count": 1,
     "finding_kinds": [
       "rating_score_mismatch"
     ],
-    "generated_at": "2026-07-23T19:50:02.831901+00:00",
-    "impact": "Данные о рейтингах в системе недостоверны, что может привести к некорректному отображению или обработке пользовательских предпочтений.",
+    "generated_at": "2026-07-23T19:52:49.189541+00:00",
+    "impact": "Данные о рейтингах недостоверны, что может привести к некорректной работе алгоритмов принятия решений.",
     "mode": "ai",
     "model": "gemini-3.1-flash-lite",
     "provider": "gemini",
-    "recommended_action": "Проверить консистентность состояния колёс и рейтинга штатными средствами проекта.",
+    "recommended_action": "Запустить штатную процедуру проверки консистентности состояния колёс и рейтинга для устранения расхождения.",
     "requires_human_attention": true,
     "severity": "critical",
-    "summary": "Обнаружено критическое расхождение между рейтингом источников и личными голосами (1 случай).",
+    "summary": "Обнаружено критическое расхождение между рейтингом источников и личными голосами в системе BB V.G.",
     "used_fallback": false,
     "version": 1,
     "warning_count": 0
@@ -63,7 +63,7 @@
     "telegram_transport": "ok",
     "wheel_api": "ok"
   },
-  "checked_at": "2026-07-23T19:50:01.535693+00:00",
+  "checked_at": "2026-07-23T19:52:46.664181+00:00",
   "discovery": {
     "active_size": 169,
     "candidate_count": 516,
@@ -113,7 +113,7 @@
   ],
   "gpt_diagnostic_snapshot": {
     "active_incidents": 1,
-    "bot_panel_heartbeat": "2026-07-23T19:48:11.182006+00:00",
+    "bot_panel_heartbeat": "2026-07-23T19:51:33.406635+00:00",
     "checked_sources": 169,
     "configured_sources": 170,
     "domain": "telegram.me",
@@ -123,9 +123,9 @@
     "wheel_api_health": {
       "alert_threshold": 3,
       "consecutive_failures": 0,
-      "last_checked_at": "2026-07-23T19:48:22.872444+00:00",
+      "last_checked_at": "2026-07-23T19:52:06.724575+00:00",
       "last_failure_at": "2026-07-20T14:02:03.366327+00:00",
-      "last_success_at": "2026-07-23T19:48:22.872444+00:00",
+      "last_success_at": "2026-07-23T19:52:06.724575+00:00",
       "status": "ok"
     }
   },
@@ -161,31 +161,31 @@
     "brand": "BB V.G.",
     "checked_sources": 169,
     "checks_delta": 169,
-    "checks_total": 816194,
+    "checks_total": 816532,
     "consecutive_failures": 0,
     "consecutive_no_progress": 0,
-    "head_sha": "8449e566ff509190e4a4b9d322ab958b354cc3c2",
-    "iteration": 11,
+    "head_sha": "d91bf5536480d78fbc480127f6742f87aecbb3b9",
+    "iteration": 1,
     "last_failure_at": "2026-07-23T18:23:07.385796+00:00",
-    "last_iteration_at": "2026-07-23T19:48:23.051016+00:00",
-    "last_iteration_duration_seconds": 14,
+    "last_iteration_at": "2026-07-23T19:52:06.911908+00:00",
+    "last_iteration_duration_seconds": 13,
     "last_iteration_exit_code": 0,
-    "last_process_heartbeat_at": "2026-07-23T19:48:23.051016+00:00",
-    "last_successful_checks_total": 816194,
-    "last_successful_iteration_at": "2026-07-23T19:48:23.051016+00:00",
+    "last_process_heartbeat_at": "2026-07-23T19:52:06.911908+00:00",
+    "last_successful_checks_total": 816532,
+    "last_successful_iteration_at": "2026-07-23T19:52:06.911908+00:00",
     "pending_wheels": 0,
     "reachable_sources": 169,
     "restart_recommended": false,
     "run_attempt": "1",
-    "run_id": "30039520469",
-    "run_started_at": "2026-07-23T19:49:21.415051056Z",
+    "run_id": "30039669327",
+    "run_started_at": "2026-07-23T19:51:53.938330+00:00",
     "source_errors": 0,
     "stats_counter_reset": false,
-    "status": "starting",
+    "status": "running",
     "version": 3,
-    "workflow_run_id": "30039520469"
+    "workflow_run_id": "30039669327"
   },
-  "monitor_age_minutes": 1,
+  "monitor_age_minutes": 0,
   "notification_integrity": {
     "algorithm": "HMAC-SHA256",
     "contains_personal_fields": false,
@@ -257,9 +257,9 @@
   "wheel_api_health": {
     "alert_threshold": 3,
     "consecutive_failures": 0,
-    "last_checked_at": "2026-07-23T19:48:22.872444+00:00",
+    "last_checked_at": "2026-07-23T19:52:06.724575+00:00",
     "last_failure_at": "2026-07-20T14:02:03.366327+00:00",
-    "last_success_at": "2026-07-23T19:48:22.872444+00:00",
+    "last_success_at": "2026-07-23T19:52:06.724575+00:00",
     "status": "ok"
   }
 }
