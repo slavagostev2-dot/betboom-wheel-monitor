@@ -284,10 +284,10 @@
   "active_wheels": {
     "ctom17": {
       "action_id": 994,
-      "auto_participation_checked_at": "2026-07-23T15:51:31.840878+00:00",
-      "auto_participation_error": "элемент участия нажат, но подтверждение BetBoom не найдено",
-      "auto_participation_retry_allowed": false,
-      "auto_participation_status": "unconfirmed",
+      "auto_participation_checked_at": "2026-07-23T15:55:07.260397+00:00",
+      "auto_participation_error": "dispatcher_exit_1: Auto participation dispatch blocked: state push failed: error: Pulling is not possible because you have unmerged files.\nhint: Fix them up in the work tree, and then use 'git add/rm <file>'\nhint: as appropriate to mark resolution and make a commit.\nfatal: Exiting because of an unre",
+      "auto_participation_retry_allowed": true,
+      "auto_participation_status": "workflow_dispatch_retry_wait",
       "availability_status": "available",
       "button_token": "69c8516b777494",
       "deadline": "2026-07-23T16:04:03.920000+00:00",
@@ -2360,8 +2360,15 @@
       "wheel_key": "ctom12"
     },
     "ctom17#event:ec6657958e2b1c438bf9": {
+      "dispatch_error": "dispatcher_exit_1: Auto participation dispatch blocked: state push failed: error: Pulling is not possible because you have unmerged files.\nhint: Fix them up in the work tree, and then use 'git add/rm <file>'\nhint: as appropriate to mark resolution and make a commit.\nfatal: Exiting because of an unresolved conflict.",
+      "dispatch_failed_at": "2026-07-23T15:55:07.228184+00:00",
+      "failure_count": 1,
+      "last_failure_at": "2026-07-23T15:55:07.260397+00:00",
+      "manual_notification_sent": false,
+      "retry_after_at": "2026-07-23T15:58:07.260397+00:00",
       "scheduled_at": "2026-07-23T15:55:06.267834+00:00",
-      "status": "workflow_dispatch_scheduled",
+      "status": "workflow_dispatch_retry_wait",
+      "user_alert_policy": "forbidden_transport_is_not_participation_outcome",
       "wheel_key": "ctom17"
     },
     "dayneez#event:918464fee36d0d6ed7ce": {
@@ -2471,8 +2478,13 @@
       "wheel_key": "zonertg14"
     },
     "zonertw1#event:49708ed982329cd19b10": {
+      "dispatch_error": "state_push_failed: error: Pulling is not possible because you have unmerged files.\nhint: Fix them up in the work tree, and then use 'git add/rm <file>'\nhint: as appropriate to mark resolution and make a commit.\nfatal: Exiting because of an unresolved conflict.\n",
+      "dispatch_failed_at": "2026-07-23T15:55:07.228184+00:00",
+      "last_transport_detail": "dispatcher_exit_1: Auto participation dispatch blocked: state push failed: error: Pulling is not possible because you have unmerged files.\nhint: Fix them up in the work tree, and then use 'git add/rm <file>'\nhint: as appropriate to mark resolution and make a commit.\nfatal: Exiting because of an unresolved conflict.",
+      "manual_notification_sent": false,
       "scheduled_at": "2026-07-23T15:55:06.267834+00:00",
-      "status": "workflow_dispatch_scheduled",
+      "status": "outcome_already_confirmed",
+      "user_alert_policy": "forbidden_success_is_authoritative",
       "wheel_key": "zonertw1"
     },
     "zonertw1#event:835c42c994536c32c3fb": {
@@ -4524,6 +4536,7 @@
     "4af8ad666dd040236b72e64aaefbec1d2721a3335a5a5e9fecc7e41690efd56a": "2026-07-12T19:22:25.149620+00:00",
     "4db4117a7e345d18be6f1f880772826d65a7cac5be650538d5e37e28a8c5943f": "2026-07-19T22:25:40.314791+00:00",
     "4e74a82d0b15f65d66f158d885ae29cbbbd333d026bec12b958ba88925e8ffd2": "2026-07-12T18:21:24.635788+00:00",
+    "4fac1b641eed18748781ea33f25d8b5b392be07c45df5383d3c0c1b798c312e1": "2026-07-23T15:55:17.811219+00:00",
     "502f56d7dd86b647bde13e27bb9f4b64260450db69c7646111614745e38882a9": "2026-07-15T15:13:39.498960+00:00",
     "513d9995a36e28d378b8cf0661b663d7346f0a9d247f8f7c3a85ebf188998d4b": "2026-07-21T00:57:08.071796+00:00",
     "52417b27424806de9ee611da37dd11219d4acf203d05d56237efbc5706edaa74": "2026-07-18T18:37:10.880483+00:00",
@@ -4538,6 +4551,7 @@
     "59d72f2bad9172ca625aa0aede3657f0ad78ecbd64805af895dfed496dc0f27c": "2026-07-22T03:45:11.276602+00:00",
     "5a930cbc1fd16bcc81faa260d9d81a320c21d070a39b2caa59d14ed6c0b51db5": "2026-07-22T07:38:19.409318+00:00",
     "5c5d65f7f2e3ccbf3465e60a317065184b88a3e05951f80f17f1cd9d4a8967ef": "2026-07-19T01:41:51.394747+00:00",
+    "5c80578ec9986363b8d1532cc5a27ee787c9f097aa59c3e5f283b297e0645d50": "2026-07-23T15:55:17.266644+00:00",
     "5c905b12205b8fb5d7efef9def1cdb2c9e99c6d6d2fddbabd5467ad0b4768795": "2026-07-12T19:22:25.149620+00:00",
     "5dac83ecae4b2518df3fc5e96bf15d035372a2d5736e826c77ec287519694c0e": "2026-07-12T18:21:18.200134+00:00",
     "5e4960e899263c74fdacd63b2462b0febb83bef0af8e08beb270459524578664": "2026-07-22T23:30:19.026877+00:00",
@@ -4552,6 +4566,7 @@
     "681256e120eb1a3e72ba78d8f5fcabb17c171398cc66921fa89e451d97c1e71f": "2026-07-22T21:46:50.567193+00:00",
     "68ecfd5c2b78fc8aad89ae3426c79512d118ab1fd2f70456a2d917fc324693c9": "2026-07-12T18:21:18.578765+00:00",
     "69bff7372b43c983fbda160f5c96cb70655373df3057862da70923c06666399a": "2026-07-23T02:20:12.746928+00:00",
+    "69c8516b777494bcb13429cfd8212abf38d667a589b063af9102ea1033cf1cc6": "2026-07-23T15:55:17.265001+00:00",
     "69f6f8d315c4174090cf751194d079fee5fd29b38b2bf932973d55f520cec4e1": "2026-07-21T21:45:48.747415+00:00",
     "6abfa80482c56225c61566a9750a923a1fd2728f07351eaf051bab00ce696671": "2026-07-12T19:22:25.149620+00:00",
     "6b00b172b98917b6fceefd189212aa8f3b2f80c8242450a536ef2600cd21a22b": "2026-07-20T00:00:08.674091+00:00",
@@ -4663,7 +4678,9 @@
     "c9c5731a0a08b9f2b16b735af6142caefbeb1ee7c4576006c2ca03b6fd101bc8": "2026-07-20T00:04:06.903124+00:00",
     "c9d16102e38a22c6d900fb4b12a9679f9e78ae18d472102e53014c61dca4d16a": "2026-07-22T03:45:11.286726+00:00",
     "c9e7f459dd8b5117cc78351bffd12f73755044222ed4abe0e34cd9c91152cefe": "2026-07-12T19:22:25.149620+00:00",
+    "ca0455db61b8942074e291ffe6c6b8e192d809e030ee1030e302ce82610b29f4": "2026-07-23T15:55:17.605942+00:00",
     "ca2b95b04a8ed9251b5e2a67771bd55ff7fd017b984165780f1953f0d745986b": "2026-07-20T00:09:07.953641+00:00",
+    "cb4b72b001b07083d07b593675503711904165f041c75dc26ba8b9bdbb8c913d": "2026-07-23T15:55:17.606058+00:00",
     "cba7abb40c5b777f0bad9dc94c6e7edd312f0f18f58644f46df08a4c9ff8b1c5": "2026-07-21T21:45:48.740079+00:00",
     "cd431c9415b48e4b52759ec6764ae877a9573d961f26a20e9f669980ec6bc21a": "2026-07-19T21:51:32.379858+00:00",
     "cf93a1efa65615456d5e88ca4a518444cd7174c055c9c148a0c94663c64cb90c": "2026-07-18T13:22:05.043565+00:00",
@@ -4700,6 +4717,7 @@
     "f0780c1e1cc0d47a2679a4bd5f026b3b004b54b2b6da2bf8d74a17a484c89df1": "2026-07-12T17:14:34.959916+00:00",
     "f0b72128b8ce7abd7927ecd90e5b489773772d735e5eb8e4bcf4e12f88ff516d": "2026-07-12T18:21:19.249780+00:00",
     "f1db298018ac2c3ab5309836f70d9c909e12043c8e98a52331f5d2f12eac4ea6": "2026-07-15T14:58:35.999057+00:00",
+    "f23ec5ab64ade1124b70bfa57029e4e18c8a022e2e3354b038c82fffa2b7d94f": "2026-07-23T15:55:18.052921+00:00",
     "f2fbbb27412f91fad839941cfc7346a8b1f8f4090a126811996037b0bad1af13": "2026-07-18T21:28:41.930517+00:00",
     "f323384956adab64a90ad3e730235975cf68208d0ca65c106a74fb176b5c9c04": "2026-07-20T10:00:19.372388+00:00",
     "f341fa336427bb1a2127ad9d427d221c1ac8b66be3d8c028bbb34ff50264510c": "2026-07-22T08:06:19.189435+00:00",
@@ -5678,9 +5696,9 @@
   "wheel_api_health": {
     "alert_threshold": 3,
     "consecutive_failures": 0,
-    "last_checked_at": "2026-07-23T15:54:52.152435+00:00",
+    "last_checked_at": "2026-07-23T15:55:18.052689+00:00",
     "last_failure_at": "2026-07-20T14:02:03.366327+00:00",
-    "last_success_at": "2026-07-23T15:54:52.152435+00:00",
+    "last_success_at": "2026-07-23T15:55:18.052689+00:00",
     "status": "ok"
   },
   "wheel_generation_observations": {
@@ -5941,13 +5959,13 @@
       "action_id": 992,
       "first_seen_at": "2026-07-23T13:21:57.314830+00:00",
       "generation_id": "2becb376475de6514c24",
-      "last_seen_at": "2026-07-23T15:02:41.393466+00:00",
-      "observations": 10,
+      "last_seen_at": "2026-07-23T15:55:17.605775+00:00",
+      "observations": 11,
       "server_start_at": "2026-07-23T11:57:26.063000+00:00",
       "statuses": {
         "active": 1,
         "closed": 1,
-        "inactive": 8
+        "inactive": 9
       },
       "wheel_key": "ctom15"
     },
@@ -6335,13 +6353,13 @@
       "action_id": 997,
       "first_seen_at": "2026-07-23T13:22:10.171802+00:00",
       "generation_id": "78bbd6e323db4fe5a095",
-      "last_seen_at": "2026-07-23T15:02:41.674226+00:00",
-      "observations": 10,
+      "last_seen_at": "2026-07-23T15:55:18.052750+00:00",
+      "observations": 11,
       "server_start_at": "2026-07-23T12:48:53.010000+00:00",
       "statuses": {
         "active": 1,
         "closed": 1,
-        "inactive": 8
+        "inactive": 9
       },
       "wheel_key": "chopper2"
     },
