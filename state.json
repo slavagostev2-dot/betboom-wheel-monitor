@@ -144,6 +144,14 @@
       "suppress_until": "2026-07-18T16:41:36.165000+00:00",
       "url": "https://betboom.ru/freestream/shik5"
     },
+    "shik6": {
+      "alerted_at": "2026-07-23T15:00:59.394065+00:00",
+      "deadline": "2026-07-23T15:30:26.325000+00:00",
+      "identifier": "shik6",
+      "lifecycle_rule": "timer",
+      "suppress_until": "2026-07-23T15:30:26.325000+00:00",
+      "url": "https://betboom.ru/freestream/shik6"
+    },
     "shoke": {
       "alerted_at": "2026-07-19T16:19:42.303997+00:00",
       "deadline": "2026-07-19T16:46:36.347000+00:00",
@@ -312,6 +320,30 @@
       "url": "https://betboom.ru/freestream/aunkereref",
       "verification_status": "confirmed",
       "wheel_key": "aunkereref"
+    },
+    "shik6": {
+      "action_id": 1005,
+      "button_token": "c8919e6c420b80",
+      "deadline": "2026-07-23T15:30:26.325000+00:00",
+      "expires_at": "2026-07-23T17:00:59.393739+00:00",
+      "first_notified_at": "2026-07-23T15:00:59.393739+00:00",
+      "generation_id": "9b16f41da38b661ee956",
+      "identifier": "shik6",
+      "last_checked_at": "2026-07-23T15:00:59.393739+00:00",
+      "last_notification_at": "2026-07-23T15:00:59.393739+00:00",
+      "message_date": "2026-07-23T15:00:02+00:00",
+      "message_id": 6099,
+      "message_text": "😍\nКолесо фрибетов от BETBOOM уже ждет вас!\nУ вас есть 30 минут, чтобы забрать свои бонусы.\nhttps://betboom.ru/freestream/shik6\n😍\n😍\n😍\n😍\n😍\n@GShikaryan\nhttps://telegram.me/GShikaryan\nhttps://telegram.me/GShikaryan/6099\nhttps://betboom.ru/freestream/shik6",
+      "message_url": "https://telegram.me/GShikaryan/6099",
+      "method": "активность и таймер подтверждены BetBoom",
+      "page_excerpt": "",
+      "participating": false,
+      "referral_restricted": false,
+      "server_start_at": "2026-07-23T15:00:26.325000+00:00",
+      "source": "GShikaryan",
+      "status": "preliminary",
+      "url": "https://betboom.ru/freestream/shik6",
+      "verification_status": "confirmed"
     },
     "zonertg14": {
       "action_id": 699,
@@ -2262,8 +2294,9 @@
       "wheel_key": "aunkere"
     },
     "aunkereref#event:6f2e01852d9946f69911": {
+      "dispatched_at": "2026-07-23T15:00:41.237358+00:00",
       "scheduled_at": "2026-07-23T15:00:38.100078+00:00",
-      "status": "workflow_dispatch_scheduled",
+      "status": "workflow_dispatch_sent",
       "wheel_key": "aunkereref"
     },
     "brokeboys": {
@@ -2303,8 +2336,9 @@
       "wheel_key": "dyrachyo"
     },
     "helin#event:2c51084c0a29a66080a2": {
+      "dispatched_at": "2026-07-23T15:00:41.237358+00:00",
       "scheduled_at": "2026-07-23T13:23:09.245154+00:00",
-      "status": "workflow_dispatch_scheduled",
+      "status": "workflow_dispatch_sent",
       "wheel_key": "helin"
     },
     "lent#event:0bfab1be3ee2a251b3e6": {
@@ -3698,6 +3732,21 @@
       "url": "https://betboom.ru/freestream/zonertg12",
       "wheel_key": "zonertg12"
     },
+    "c8919e6c420b80": {
+      "created_at": "2026-07-23T15:00:50.268066+00:00",
+      "identifier": "shik6",
+      "message_date": "2026-07-23T15:00:02+00:00",
+      "message_id": 6099,
+      "message_text": "😍\nКолесо фрибетов от BETBOOM уже ждет вас!\nУ вас есть 30 минут, чтобы забрать свои бонусы.\nhttps://betboom.ru/freestream/shik6\n😍\n😍\n😍\n😍\n😍\n@GShikaryan\nhttps://telegram.me/GShikaryan\nhttps://telegram.me/GShikaryan/6099\nhttps://betboom.ru/freestream/shik6",
+      "message_url": "https://telegram.me/GShikaryan/6099",
+      "method": "активность и таймер подтверждены BetBoom",
+      "page_excerpt": "",
+      "post_key": "c8919e6c420b80e4f50ce862eb439f1c2f48de563714d922c9a8fe8184dde027",
+      "source": "GShikaryan",
+      "status": "preliminary",
+      "url": "https://betboom.ru/freestream/shik6",
+      "wheel_key": "shik6"
+    },
     "cb4b72b001b070": {
       "created_at": "2026-07-23T14:28:02.519674+00:00",
       "identifier": "helin",
@@ -4090,7 +4139,7 @@
       "expires_at": "2026-07-23T15:46:42.848533+00:00",
       "first_seen_at": "2026-07-22T15:46:42.848533+00:00",
       "identifier": "dayneez",
-      "last_checked_at": "2026-07-23T14:27:48.499685+00:00",
+      "last_checked_at": "2026-07-23T15:00:49.989572+00:00",
       "message_date": "2026-07-22T13:48:10+00:00",
       "message_id": 1208,
       "message_text": "Колесо Фрибетов на 10.000\n😍\nУсловия\n:\n• перейти по\nССЫЛКЕ\n• нажать «Принять участие»\nЧерез 10 минут будут итоги\n😍\n❤️\nЗабирай до 10к фрибетов по промокоду DEY\nhttps://telegram.me/dayneZz\nhttps://telegram.me/dayneZz/1208\nhttps://betboom.ru/freestream/dayneez\nhttps://betboom.ru/cyberbb?utm_campaign=esports&utm_content=DEY&utm_medium=esports&utm_source=Twitch&utm_term=DEY\nhttps://betboom.ru/cyberbb?utm_campaign=esports&amp;utm_content=DEY&amp;utm_medium=esports&amp;utm_source=Twitch&amp;utm_term=DEY",
@@ -4244,6 +4293,7 @@
     "4af8ad666dd040236b72e64aaefbec1d2721a3335a5a5e9fecc7e41690efd56a": "2026-07-12T19:22:25.149620+00:00",
     "4db4117a7e345d18be6f1f880772826d65a7cac5be650538d5e37e28a8c5943f": "2026-07-19T22:25:40.314791+00:00",
     "4e74a82d0b15f65d66f158d885ae29cbbbd333d026bec12b958ba88925e8ffd2": "2026-07-12T18:21:24.635788+00:00",
+    "4fac1b641eed18748781ea33f25d8b5b392be07c45df5383d3c0c1b798c312e1": "2026-07-23T15:00:59.784301+00:00",
     "502f56d7dd86b647bde13e27bb9f4b64260450db69c7646111614745e38882a9": "2026-07-15T15:13:39.498960+00:00",
     "513d9995a36e28d378b8cf0661b663d7346f0a9d247f8f7c3a85ebf188998d4b": "2026-07-21T00:57:08.071796+00:00",
     "52417b27424806de9ee611da37dd11219d4acf203d05d56237efbc5706edaa74": "2026-07-18T18:37:10.880483+00:00",
@@ -4347,6 +4397,7 @@
     "a83c6554b193401cc197d686361e0f952191a1ba151f45911c82c29a3e1bb989": "2026-07-14T13:29:47.673053+00:00",
     "a8f7dd87cc0cdc07bdddf11a677b1368e083e425f63ff16edf867872b802f606": "2026-07-15T20:05:10.742848+00:00",
     "a9dc8ece0d034e26b7f9bf37084e8ee967189386b94b894d866538793ae46a66": "2026-07-19T18:20:27.668323+00:00",
+    "aa09507cfe061d6b9166b7c8e17f2f9fef402cc0c32e1e198e39539ef4500175": "2026-07-23T15:00:50.125916+00:00",
     "abb4dc47ee8a83d1c8f153afadc25330a1303d2f42a3914efd89d4a0fdf98bf4": "2026-07-12T18:21:19.884502+00:00",
     "ac500d1bdc835067412d010448ba956009ea82dfbffb4d96b97b3a26861f744a": "2026-07-12T19:22:25.149620+00:00",
     "aca4a20b1e7a57517e3dc79637229d3fddcf2a12c5e6a3dd5910143f7f5fe688": "2026-07-16T01:18:31.390920+00:00",
@@ -4377,11 +4428,14 @@
     "c520430dc1382a7b7cc2cf7c979846428543d1bfa97189e3920a4ba775ba12e6": "2026-07-12T18:21:17.104918+00:00",
     "c76c303dc93e53d2ceaf12fac239b6cde7f01ac0c8f0e53dd0f179bce9d91bd7": "2026-07-15T11:18:42.831982+00:00",
     "c7ee61acadd04ca36b7f191cf5a4a45a89a1459c90cbe9a54b4269dc94df3032": "2026-07-19T22:25:40.314801+00:00",
+    "c8919e6c420b80e4f50ce862eb439f1c2f48de563714d922c9a8fe8184dde027": "2026-07-23T15:00:59.394113+00:00",
     "c9b4f7810d1d223e3a8568450036fc7cc31393788a25c6b90bf3ef72800606b7": "2026-07-17T20:34:27.007041+00:00",
     "c9c5731a0a08b9f2b16b735af6142caefbeb1ee7c4576006c2ca03b6fd101bc8": "2026-07-20T00:04:06.903124+00:00",
     "c9d16102e38a22c6d900fb4b12a9679f9e78ae18d472102e53014c61dca4d16a": "2026-07-22T03:45:11.286726+00:00",
     "c9e7f459dd8b5117cc78351bffd12f73755044222ed4abe0e34cd9c91152cefe": "2026-07-12T19:22:25.149620+00:00",
+    "ca0455db61b8942074e291ffe6c6b8e192d809e030ee1030e302ce82610b29f4": "2026-07-23T15:00:59.538614+00:00",
     "ca2b95b04a8ed9251b5e2a67771bd55ff7fd017b984165780f1953f0d745986b": "2026-07-20T00:09:07.953641+00:00",
+    "cb4b72b001b07083d07b593675503711904165f041c75dc26ba8b9bdbb8c913d": "2026-07-23T15:00:59.538738+00:00",
     "cba7abb40c5b777f0bad9dc94c6e7edd312f0f18f58644f46df08a4c9ff8b1c5": "2026-07-21T21:45:48.740079+00:00",
     "cd431c9415b48e4b52759ec6764ae877a9573d961f26a20e9f669980ec6bc21a": "2026-07-19T21:51:32.379858+00:00",
     "cf93a1efa65615456d5e88ca4a518444cd7174c055c9c148a0c94663c64cb90c": "2026-07-18T13:22:05.043565+00:00",
@@ -4418,6 +4472,7 @@
     "f0780c1e1cc0d47a2679a4bd5f026b3b004b54b2b6da2bf8d74a17a484c89df1": "2026-07-12T17:14:34.959916+00:00",
     "f0b72128b8ce7abd7927ecd90e5b489773772d735e5eb8e4bcf4e12f88ff516d": "2026-07-12T18:21:19.249780+00:00",
     "f1db298018ac2c3ab5309836f70d9c909e12043c8e98a52331f5d2f12eac4ea6": "2026-07-15T14:58:35.999057+00:00",
+    "f23ec5ab64ade1124b70bfa57029e4e18c8a022e2e3354b038c82fffa2b7d94f": "2026-07-23T15:00:59.914050+00:00",
     "f2fbbb27412f91fad839941cfc7346a8b1f8f4090a126811996037b0bad1af13": "2026-07-18T21:28:41.930517+00:00",
     "f323384956adab64a90ad3e730235975cf68208d0ca65c106a74fb176b5c9c04": "2026-07-20T10:00:19.372388+00:00",
     "f341fa336427bb1a2127ad9d427d221c1ac8b66be3d8c028bbb34ff50264510c": "2026-07-22T08:06:19.189435+00:00",
@@ -4666,6 +4721,14 @@
       "lifecycle_rule": "timer",
       "suppress_until": "2026-07-18T16:41:36.165000+00:00",
       "url": "https://betboom.ru/freestream/shik5"
+    },
+    "shik6": {
+      "alerted_at": "2026-07-23T15:00:59.394099+00:00",
+      "deadline": "2026-07-23T15:30:26.325000+00:00",
+      "identifier": "shik6",
+      "lifecycle_rule": "timer",
+      "suppress_until": "2026-07-23T15:30:26.325000+00:00",
+      "url": "https://betboom.ru/freestream/shik6"
     },
     "shoke": {
       "alerted_at": "2026-07-19T16:19:42.304029+00:00",
@@ -5196,12 +5259,11 @@
       "state": "closed"
     },
     "shik6": {
-      "action_id": 796,
-      "closed_at": "2026-07-19T17:33:56.713558+00:00",
-      "generation_id": "c37870280420a4b5fb6d",
-      "seen_at": "2026-07-19T17:33:56.713558+00:00",
-      "server_start_at": "2026-07-19T17:00:13.636000+00:00",
-      "state": "closed"
+      "action_id": 1005,
+      "generation_id": "9b16f41da38b661ee956",
+      "seen_at": "2026-07-23T15:00:59.393922+00:00",
+      "server_start_at": "2026-07-23T15:00:26.325000+00:00",
+      "state": "active"
     },
     "shoke": {
       "action_id": 938,
@@ -5381,9 +5443,9 @@
   "wheel_api_health": {
     "alert_threshold": 3,
     "consecutive_failures": 0,
-    "last_checked_at": "2026-07-23T15:00:27.803818+00:00",
+    "last_checked_at": "2026-07-23T15:00:59.913831+00:00",
     "last_failure_at": "2026-07-20T14:02:03.366327+00:00",
-    "last_success_at": "2026-07-23T15:00:27.803818+00:00",
+    "last_success_at": "2026-07-23T15:00:59.913831+00:00",
     "status": "ok"
   },
   "wheel_generation_observations": {
@@ -5643,13 +5705,13 @@
       "action_id": 992,
       "first_seen_at": "2026-07-23T13:21:57.314830+00:00",
       "generation_id": "2becb376475de6514c24",
-      "last_seen_at": "2026-07-23T14:28:53.188920+00:00",
-      "observations": 7,
+      "last_seen_at": "2026-07-23T15:00:59.538427+00:00",
+      "observations": 8,
       "server_start_at": "2026-07-23T11:57:26.063000+00:00",
       "statuses": {
         "active": 1,
         "closed": 1,
-        "inactive": 5
+        "inactive": 6
       },
       "wheel_key": "ctom15"
     },
@@ -6025,13 +6087,13 @@
       "action_id": 997,
       "first_seen_at": "2026-07-23T13:22:10.171802+00:00",
       "generation_id": "78bbd6e323db4fe5a095",
-      "last_seen_at": "2026-07-23T14:28:53.936214+00:00",
-      "observations": 7,
+      "last_seen_at": "2026-07-23T15:00:59.913892+00:00",
+      "observations": 8,
       "server_start_at": "2026-07-23T12:48:53.010000+00:00",
       "statuses": {
         "active": 1,
         "closed": 1,
-        "inactive": 5
+        "inactive": 6
       },
       "wheel_key": "chopper2"
     },
@@ -6185,15 +6247,27 @@
       "action_id": 988,
       "first_seen_at": "2026-07-23T13:22:10.027189+00:00",
       "generation_id": "998030517c28f8543095",
-      "last_seen_at": "2026-07-23T14:28:53.617626+00:00",
-      "observations": 7,
+      "last_seen_at": "2026-07-23T15:00:59.784143+00:00",
+      "observations": 8,
       "server_start_at": "2026-07-23T12:00:33.953000+00:00",
       "statuses": {
         "active": 1,
         "closed": 1,
-        "inactive": 5
+        "inactive": 6
       },
       "wheel_key": "zonertw1"
+    },
+    "9b16f41da38b661ee9563af3": {
+      "action_id": 1005,
+      "first_seen_at": "2026-07-23T15:00:59.393922+00:00",
+      "generation_id": "9b16f41da38b661ee956",
+      "last_seen_at": "2026-07-23T15:00:59.393922+00:00",
+      "observations": 1,
+      "server_start_at": "2026-07-23T15:00:26.325000+00:00",
+      "statuses": {
+        "active": 1
+      },
+      "wheel_key": "shik6"
     },
     "9c97c4fb308131d690b27760": {
       "action_id": 931,
@@ -6465,11 +6539,11 @@
     "d8cc2a509ebca95b99b8abe8": {
       "action_id": 987,
       "first_seen_at": "2026-07-22T15:46:42.848335+00:00",
-      "last_seen_at": "2026-07-23T14:27:48.499450+00:00",
-      "observations": 91,
+      "last_seen_at": "2026-07-23T15:00:49.989350+00:00",
+      "observations": 92,
       "server_start_at": null,
       "statuses": {
-        "not_started": 91
+        "not_started": 92
       },
       "wheel_key": "dayneez"
     },
@@ -6856,6 +6930,16 @@
         "message_id": 71857,
         "message_url": "https://telegram.me/amam0610/71857",
         "source": "amam0610"
+      }
+    ],
+    "shik6": [
+      {
+        "has_future_availability": false,
+        "has_future_deadline": false,
+        "message_date": "2026-07-23T15:00:02+00:00",
+        "message_id": 6099,
+        "message_url": "https://telegram.me/GShikaryan/6099",
+        "source": "GShikaryan"
       }
     ],
     "zonertg12": [
