@@ -12,6 +12,8 @@ import monitor_data
 import notification_router
 import personal_reminder_filter
 import personal_wheel_voting
+import telegram_post_links_v2
+import telegram_transport
 from bbvg.bot import runtime as bot_runtime
 
 
@@ -509,6 +511,32 @@ def test_redirected_telegram_source_moves_existing_vote_to_configured_name() -> 
         ),
         at=at,
     ) == 0
+
+
+def test_button_parser_preserves_configured_source_after_telegram_redirect() -> None:
+    aliases_before = dict(telegram_transport._source_aliases)
+    try:
+        fake_monitor = SimpleNamespace(
+            Message=bbvg_monitor_main.monitor.Message,
+            UTC=UTC,
+            now_utc=lambda: datetime(2026, 7, 23, 18, 0, tzinfo=UTC),
+            telegram_transport=telegram_transport,
+        )
+        page = """
+        <div class="tgme_widget_message" data-post="redirected_name/42">
+          <div class="tgme_widget_message_text">Колесо BetBoom</div>
+          <time datetime="2026-07-23T18:00:00+00:00"></time>
+        </div>
+        """
+        messages = telegram_post_links_v2.parse_public_channel_html(
+            fake_monitor, "configured_name", page
+        )
+        assert len(messages) == 1
+        assert messages[0].source == "configured_name"
+        assert messages[0].message_url.endswith("/redirected_name/42")
+    finally:
+        telegram_transport._source_aliases.clear()
+        telegram_transport._source_aliases.update(aliases_before)
 
 
 def test_redirect_alias_repairs_a_vote_whose_point_was_pruned() -> None:
