@@ -40,10 +40,13 @@ def _base_event_token(token: str, record: dict[str, Any]) -> str:
 
 
 def _account_identity(record: dict[str, Any]) -> tuple[str, str]:
-    key = str(record.get("account_key") or PRIMARY_ACCOUNT_KEY).strip()
+    raw_key = str(record.get("account_key") or "").strip()
+    key = raw_key or PRIMARY_ACCOUNT_KEY
     if key == SECONDARY_ACCOUNT_KEY:
         return key, str(record.get("account_label") or SECONDARY_ACCOUNT_LABEL)
-    return PRIMARY_ACCOUNT_KEY, PRIMARY_ACCOUNT_LABEL
+    if key == PRIMARY_ACCOUNT_KEY:
+        return key, str(record.get("account_label") or PRIMARY_ACCOUNT_LABEL)
+    return key, str(record.get("account_label") or key)
 
 
 def _parse_datetime(value: Any) -> datetime | None:
@@ -202,6 +205,19 @@ def _processed(record: Any) -> bool:
     )
 
 
+def _should_finalize(
+    success_record: Any,
+    failure_record: Any,
+    *,
+    all_success: bool,
+) -> bool:
+    if _processed(success_record):
+        return False
+    if _processed(failure_record) and not all_success:
+        return False
+    return True
+
+
 def _navigation() -> dict[str, Any]:
     return {
         "inline_keyboard": [
@@ -296,12 +312,14 @@ def sync_once(panel: Any) -> dict[str, int]:
         if not active_matches and not _group_is_recent(accounts):
             continue
         event_key = personal_wheel_voting.wheel_event_key(key, item)
-        if _processed(success_records.get(event_key)) or _processed(
-            failure_records.get(event_key)
+        all_success = all(value[2] for value in accounts.values())
+        if not _should_finalize(
+            success_records.get(event_key),
+            failure_records.get(event_key),
+            all_success=all_success,
         ):
             continue
 
-        all_success = all(value[2] for value in accounts.values())
         any_success = any(value[2] for value in accounts.values())
         referral_restricted = wheel_publications_v2.entry_is_referral_restricted(item)
         notifications_enabled = _notification_enabled(owner)
@@ -548,6 +566,33 @@ def self_test() -> None:
     )
     assert text.count("Участие принято") == 1
     assert "Аккаунты: <b>1 и 2</b>" in text
+    state["auto_participation_events"][
+        base + "#account:xflarxx_primary"
+    ] = {
+        "wheel_key": "wheel",
+        "event_token": base,
+        "account_key": "xflarxx_primary",
+        "account_label": "xFLARXx",
+        "status": "button_not_found",
+        "bot_failure_pending_at": "2026-07-22T12:01:20+00:00",
+        "bot_failure_status": "button_not_found",
+    }
+    isolated_groups = _settled_event_groups(
+        state, now=datetime(2026, 7, 22, 12, 10, tzinfo=UTC)
+    )
+    assert isolated_groups[base][PRIMARY_ACCOUNT_KEY][0] == base
+    assert isolated_groups[base][PRIMARY_ACCOUNT_KEY][2] is True
+    assert "xflarxx_primary" not in isolated_groups[base]
+    assert _should_finalize(
+        {},
+        {"notified_at": "2026-07-22T12:02:00+00:00"},
+        all_success=True,
+    )
+    assert not _should_finalize(
+        {},
+        {"notified_at": "2026-07-22T12:02:00+00:00"},
+        all_success=False,
+    )
 
     failure_state = copy.deepcopy(state)
     secondary = failure_state["auto_participation_events"][

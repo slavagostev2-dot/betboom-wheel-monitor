@@ -97,8 +97,12 @@ def runtime_snapshot(*, since: datetime) -> dict[str, int]:
         if isinstance(entry, dict)
     )
     checked, reachable, errors = source_cycle_counts(health, since)
-    if checked == 0:
-        checked = int(summary.get("checked_sources", 0) or 0)
+    summary_checked = int(summary.get("checked_sources", 0) or 0)
+    if summary_checked > 0:
+        # last_run_summary belongs to the monitor iteration that just finished.
+        # Per-source health timestamps may collapse Telegram redirect aliases and
+        # therefore undercount an otherwise complete cycle.
+        checked = summary_checked
         reachable = int(summary.get("reachable_sources", 0) or 0)
         errors = int(summary.get("source_errors", 0) or 0)
     return {
