@@ -300,6 +300,10 @@
   "active_wheels": {
     "kekw": {
       "action_id": 1001,
+      "auto_participation_checked_at": "2026-07-23T18:23:07.225646+00:00",
+      "auto_participation_error": "dispatcher_exit_1: Auto participation dispatch failed: repository=slavagostev2-dot/BB.V.G. ref=main workflow=auto-participation.yml HTTP 403 {\n\t\"message\": \"API rate limit exceeded for installation. If you reach out to GitHub Support for help, please include the request ID 7449:317FB6:1348FEF:4404F63",
+      "auto_participation_retry_allowed": true,
+      "auto_participation_status": "workflow_dispatch_retry_wait",
       "button_token": "9ae0444feb3934",
       "deadline": "2026-07-23T18:27:27.578000+00:00",
       "expires_at": "2026-07-23T20:23:04.663576+00:00",
@@ -2391,8 +2395,15 @@
       "wheel_key": "helin"
     },
     "kekw#event:dea4c137c6fa1fdf2d23": {
+      "dispatch_error": "dispatcher_exit_1: Auto participation dispatch failed: repository=slavagostev2-dot/BB.V.G. ref=main workflow=auto-participation.yml HTTP 403 {\n\t\"message\": \"API rate limit exceeded for installation. If you reach out to GitHub Support for help, please include the request ID 7449:317FB6:1348FEF:4404F63:6A625C0B and timestamp 2026-07-23 18:23:07 UTC. For more on scraping GitHub and how it may affect your rights, please review our Terms of Service (https:\\/\\/docs.github.com\\/en\\/site-policy\\/github-t",
+      "dispatch_failed_at": "2026-07-23T18:23:07.197711+00:00",
+      "failure_count": 1,
+      "last_failure_at": "2026-07-23T18:23:07.225646+00:00",
+      "manual_notification_sent": false,
+      "retry_after_at": "2026-07-23T18:26:07.225646+00:00",
       "scheduled_at": "2026-07-23T18:23:05.769761+00:00",
-      "status": "workflow_dispatch_scheduled",
+      "status": "workflow_dispatch_retry_wait",
+      "user_alert_policy": "forbidden_transport_is_not_participation_outcome",
       "wheel_key": "kekw"
     },
     "lent#event:0bfab1be3ee2a251b3e6": {
