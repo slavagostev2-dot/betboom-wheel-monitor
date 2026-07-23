@@ -1,5 +1,5 @@
 {
-  "active_count": 2,
+  "active_count": 1,
   "incidents": {
     "system_checks:admin_panel_not_running:3e312a33e5d944e2": {
       "detail": "Текущее состояние: validation_failed.",
@@ -158,7 +158,7 @@
       "first_seen_at": "2026-07-14T03:10:51.892284+00:00",
       "key": "system_checks:monitor_source_count:05defcc6c0898ea6",
       "kind": "monitor_source_count",
-      "last_seen_at": "2026-07-23T19:35:16.518726+00:00",
+      "last_seen_at": "2026-07-23T19:37:36.979210+00:00",
       "metadata": {},
       "notification_skipped_because_resolved_before_delivery": "2026-07-18T20:27:16.064075+00:00",
       "occurrences": 15,
@@ -167,10 +167,13 @@
       "opened_sequence": 98,
       "reopen_notification_suppressed_at": "2026-07-18T18:35:18.762046+00:00",
       "reopen_notification_suppressed_until": "2026-07-18T21:16:54.984258+00:00",
-      "resolved_sequence": 87,
+      "resolution_notification_pending": false,
+      "resolution_notified_at": "2026-07-23T19:37:38.476843+00:00",
+      "resolved_at": "2026-07-23T19:37:36.979210+00:00",
+      "resolved_sequence": 101,
       "scope": "system_checks",
       "severity": "critical",
-      "status": "active",
+      "status": "resolved",
       "subject": "",
       "title": "Основной монитор проверяет не все источники"
     },
@@ -203,9 +206,9 @@
       "first_seen_at": "2026-07-23T19:34:37.482070+00:00",
       "key": "system_checks:rating_score_mismatch:07dc22560f33b233",
       "kind": "rating_score_mismatch",
-      "last_seen_at": "2026-07-23T19:35:16.518726+00:00",
+      "last_seen_at": "2026-07-23T19:37:36.979210+00:00",
       "metadata": {},
-      "occurrences": 2,
+      "occurrences": 3,
       "open_notification_pending": false,
       "open_notified_at": "2026-07-23T19:35:18.047931+00:00",
       "opened_sequence": 99,
@@ -306,17 +309,17 @@
       "title": "Давно не выполнялась полная проверка 66 источников"
     }
   },
-  "last_change_at": "2026-07-23T19:34:37.482070+00:00",
-  "last_reconcile_at": "2026-07-23T19:35:16.518726+00:00",
+  "last_change_at": "2026-07-23T19:37:36.979210+00:00",
+  "last_reconcile_at": "2026-07-23T19:37:36.979210+00:00",
   "last_reconcile_scope": "system_checks",
   "last_summary": {
-    "active": 2,
-    "new_notification_count": 2,
+    "active": 1,
+    "new_notification_count": 0,
     "recovery_notification_count": 1,
     "scope": "system_checks"
   },
-  "sequence": 100,
+  "sequence": 101,
   "status": "initializing",
-  "updated_at": "2026-07-23T19:35:18.049403+00:00",
+  "updated_at": "2026-07-23T19:37:38.476880+00:00",
   "version": 1
 }
