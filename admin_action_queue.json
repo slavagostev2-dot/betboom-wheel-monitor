@@ -126,6 +126,12 @@
       "sequence": 1,
       "value": "1eaab6cb41f445"
     },
+    "12dab7eebb4c47f580d4c3dcb00dbd29": {
+      "action": "record_personal_vote",
+      "created_at": "2026-07-23T15:55:47.090493+00:00",
+      "sequence": 210,
+      "value": "{\"actor\":\"vote_3092cd8d69b74beb8bd2579cd902c714\",\"event_key\":\"zonertw1#generation:c3be8b2715b0f99a62a5\",\"role\":\"owner\",\"sources\":[\"kolesaBB\"],\"weight\":5,\"wheel_key\":\"zonertw1\"}"
+    },
     "17c73a307eac453ebefb3fc56cbc44de": {
       "action": "record_personal_vote",
       "created_at": "2026-07-19T13:57:30.297268+00:00",
@@ -1256,5 +1262,5 @@
     }
   },
   "format": "bbvg-admin-action-queue-v1",
-  "sequence": 209
+  "sequence": 210
 }
