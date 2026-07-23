@@ -14,6 +14,14 @@ STATE_PATH = ROOT / "incident_state.json"
 UTC = timezone.utc
 RESOLVED_RETENTION_DAYS = 30
 REOPEN_COOLDOWN_HOURS = max(1, int(os.getenv("INCIDENT_REOPEN_COOLDOWN_HOURS", "6")))
+NOTIFICATION_STABILIZATION_MINUTES = max(
+    1, int(os.getenv("INCIDENT_NOTIFICATION_STABILIZATION_MINUTES", "5"))
+)
+STABILIZED_NOTIFICATION_KINDS = {
+    "monitor_stale",
+    "monitor_source_count",
+    "rating_score_mismatch",
+}
 
 
 def now_utc() -> datetime:
@@ -88,10 +96,15 @@ def normalize_finding(value: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+def requires_notification_stabilization(kind: object) -> bool:
+    return str(kind or "").strip() in STABILIZED_NOTIFICATION_KINDS
+
+
 def reconcile(findings: Iterable[dict[str, Any]], *, scope: str) -> dict[str, Any]:
     state = load_state()
     incidents = state.setdefault("incidents", {})
-    current_time = now_utc().isoformat()
+    current = now_utc()
+    current_time = current.isoformat()
     normalized = [normalize_finding({**finding, "scope": scope}) for finding in findings]
     current_keys = {finding["key"] for finding in normalized}
     changed = False
@@ -113,13 +126,21 @@ def reconcile(findings: Iterable[dict[str, Any]], *, scope: str) -> dict[str, An
         if not was_active:
             state["sequence"] = int(state.get("sequence", 0) or 0) + 1
             entry["opened_sequence"] = state["sequence"]
+            entry["lifecycle_started_at"] = current_time
             previous_notice = parse_datetime(previous.get("open_notified_at"))
             reopened_too_soon = bool(
                 previous.get("status") == "resolved"
                 and previous_notice is not None
-                and now_utc() - previous_notice < timedelta(hours=REOPEN_COOLDOWN_HOURS)
+                and current - previous_notice < timedelta(hours=REOPEN_COOLDOWN_HOURS)
             )
-            entry["open_notification_pending"] = not reopened_too_soon
+            stabilizing = requires_notification_stabilization(entry.get("kind"))
+            entry["open_notification_pending"] = (
+                not reopened_too_soon and not stabilizing
+            )
+            if stabilizing and not reopened_too_soon:
+                entry["notification_stabilizing_until"] = (
+                    current + timedelta(minutes=NOTIFICATION_STABILIZATION_MINUTES)
+                ).isoformat()
             if reopened_too_soon:
                 entry["reopen_notification_suppressed_at"] = current_time
                 entry["reopen_notification_suppressed_until"] = (
@@ -131,8 +152,29 @@ def reconcile(findings: Iterable[dict[str, Any]], *, scope: str) -> dict[str, An
             # pending_resolved() incorrectly treat the new recovery as delivered.
             entry.pop("resolution_notified_at", None)
             changed = True
-        elif any(previous.get(name) != entry.get(name) for name in ("severity", "title", "detail", "metadata")):
-            changed = True
+        else:
+            if (
+                requires_notification_stabilization(entry.get("kind"))
+                and not entry.get("open_notified_at")
+                and not entry.get("open_notification_pending")
+            ):
+                lifecycle_started = parse_datetime(
+                    entry.get("lifecycle_started_at")
+                    or entry.get("first_seen_at")
+                )
+                if (
+                    lifecycle_started is not None
+                    and current - lifecycle_started
+                    >= timedelta(minutes=NOTIFICATION_STABILIZATION_MINUTES)
+                ):
+                    entry["open_notification_pending"] = True
+                    entry.pop("notification_stabilizing_until", None)
+                    changed = True
+            if any(
+                previous.get(name) != entry.get(name)
+                for name in ("severity", "title", "detail", "metadata")
+            ):
+                changed = True
         incidents[key] = entry
 
     for key, entry in list(incidents.items()):
@@ -265,6 +307,8 @@ def self_test() -> None:
     finding = normalize_finding({"scope": "test", "kind": "dns", "title": "DNS"})
     assert finding["key"].startswith("test:dns:")
     assert "единая сводка" in format_digest_message([finding], []).casefold()
+    assert requires_notification_stabilization("monitor_source_count")
+    assert not requires_notification_stabilization("bot_api")
     print("incident_manager self-test passed")
 
 

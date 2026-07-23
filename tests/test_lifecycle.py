@@ -17,6 +17,7 @@ import incident_manager
 import monitor
 import monitor_entry
 import monitor_data
+import monitor_health
 import rating_policy
 import recurring_wheel_events
 import security_audit
@@ -255,6 +256,150 @@ class WheelApiVerificationTests(unittest.TestCase):
 
         self.assertEqual(state["wheel_api_health"]["status"], "ok")
         self.assertEqual(state["wheel_api_health"]["consecutive_failures"], 0)
+
+    def test_transient_monitor_incident_must_stabilize_before_notification(self) -> None:
+        original_incident_path = incident_manager.STATE_PATH
+        original_incident_now = incident_manager.now_utc
+        current = datetime(2026, 7, 23, 19, 35, tzinfo=UTC)
+        finding = {
+            "kind": "monitor_source_count",
+            "title": "Основной монитор проверяет не все источники",
+            "detail": "Проверено 151 из 169.",
+            "severity": "critical",
+        }
+        try:
+            with TemporaryDirectory() as temporary:
+                incident_manager.STATE_PATH = Path(temporary) / "incidents.json"
+                incident_manager.now_utc = lambda: current
+                opened = incident_manager.reconcile(
+                    [finding], scope=system_checks.SCOPE
+                )
+                self.assertEqual(incident_manager.pending_open(opened), [])
+
+                current += timedelta(minutes=2)
+                repeated = incident_manager.reconcile(
+                    [finding], scope=system_checks.SCOPE
+                )
+                self.assertEqual(incident_manager.pending_open(repeated), [])
+
+                current += timedelta(minutes=1)
+                recovered = incident_manager.reconcile(
+                    [], scope=system_checks.SCOPE
+                )
+                self.assertEqual(incident_manager.pending_resolved(recovered), [])
+
+                current += timedelta(minutes=1)
+                incident_manager.reconcile([finding], scope=system_checks.SCOPE)
+                current += timedelta(minutes=5)
+                stabilized = incident_manager.reconcile(
+                    [finding], scope=system_checks.SCOPE
+                )
+                self.assertEqual(len(incident_manager.pending_open(stabilized)), 1)
+        finally:
+            incident_manager.STATE_PATH = original_incident_path
+            incident_manager.now_utc = original_incident_now
+
+    def test_monitor_startup_uses_fresh_process_heartbeat(self) -> None:
+        original_status_path = system_checks.STATUS_PATH
+        original_health_path = system_checks.HEALTH_PATH
+        original_public_path = system_checks.PUBLIC_SOURCES_PATH
+        original_system_now = system_checks.now_utc
+        current = datetime(2026, 7, 23, 19, 35, tzinfo=UTC)
+        try:
+            with TemporaryDirectory() as temporary:
+                root = Path(temporary)
+                status_path = root / "monitor_status.json"
+                health_path = root / "source_health.json"
+                public_path = root / "public_sources.txt"
+                public_path.write_text(
+                    "\n".join(f"source{index}" for index in range(169)) + "\n",
+                    encoding="utf-8",
+                )
+                health_path.write_text('{"sources": {}}\n', encoding="utf-8")
+                status_path.write_text(
+                    json.dumps(
+                        {
+                            "status": "starting",
+                            "last_iteration_at": (
+                                current - timedelta(minutes=12)
+                            ).isoformat(),
+                            "last_process_heartbeat_at": current.isoformat(),
+                            "checked_sources": 151,
+                            "reachable_sources": 151,
+                            "source_errors": 0,
+                        }
+                    ),
+                    encoding="utf-8",
+                )
+                system_checks.STATUS_PATH = status_path
+                system_checks.HEALTH_PATH = health_path
+                system_checks.PUBLIC_SOURCES_PATH = public_path
+                system_checks.now_utc = lambda: current
+                findings: list[dict[str, Any]] = []
+                system_checks.check_monitor_runtime({}, findings)
+                self.assertNotIn(
+                    "monitor_stale", {item["kind"] for item in findings}
+                )
+                self.assertNotIn(
+                    "monitor_source_count", {item["kind"] for item in findings}
+                )
+        finally:
+            system_checks.STATUS_PATH = original_status_path
+            system_checks.HEALTH_PATH = original_health_path
+            system_checks.PUBLIC_SOURCES_PATH = original_public_path
+            system_checks.now_utc = original_system_now
+
+    def test_monitor_health_prefers_complete_iteration_summary(self) -> None:
+        original_paths = (
+            monitor_health.STATE_PATH,
+            monitor_health.HEALTH_PATH,
+            monitor_health.STATS_PATH,
+        )
+        try:
+            with TemporaryDirectory() as temporary:
+                root = Path(temporary)
+                monitor_health.STATE_PATH = root / "state.json"
+                monitor_health.HEALTH_PATH = root / "source_health.json"
+                monitor_health.STATS_PATH = root / "source_stats.json"
+                monitor_health.STATE_PATH.write_text(
+                    json.dumps(
+                        {
+                            "last_run_summary": {
+                                "checked_sources": 169,
+                                "reachable_sources": 169,
+                                "source_errors": 0,
+                            }
+                        }
+                    ),
+                    encoding="utf-8",
+                )
+                monitor_health.HEALTH_PATH.write_text(
+                    json.dumps(
+                        {
+                            "sources": {
+                                f"source{index}": {
+                                    "last_success_at": self.current.isoformat()
+                                }
+                                for index in range(151)
+                            }
+                        }
+                    ),
+                    encoding="utf-8",
+                )
+                monitor_health.STATS_PATH.write_text(
+                    '{"sources": {}}\n', encoding="utf-8"
+                )
+                snapshot = monitor_health.runtime_snapshot(
+                    since=self.current - timedelta(minutes=1)
+                )
+                self.assertEqual(snapshot["checked_sources"], 169)
+                self.assertEqual(snapshot["reachable_sources"], 169)
+        finally:
+            (
+                monitor_health.STATE_PATH,
+                monitor_health.HEALTH_PATH,
+                monitor_health.STATS_PATH,
+            ) = original_paths
 
     def test_untimed_wheel_expires_after_two_hours(self) -> None:
         self.assertEqual(

@@ -299,28 +299,42 @@ def check_monitor_runtime(details: dict[str, Any], findings: list[dict[str, Any]
     health = load_json(HEALTH_PATH, {})
     details["monitor"] = status if isinstance(status, dict) else {}
     last_iteration = parse_datetime(status.get("last_iteration_at") if isinstance(status, dict) else None)
-    if last_iteration is None:
+    process_heartbeat = parse_datetime(
+        status.get("last_process_heartbeat_at") if isinstance(status, dict) else None
+    )
+    runtime_status = str(status.get("status") or "").casefold() if isinstance(status, dict) else ""
+    freshness_candidates = [
+        value for value in (last_iteration, process_heartbeat) if value is not None
+    ]
+    effective_heartbeat = max(freshness_candidates) if freshness_candidates else None
+    details["monitor_effective_heartbeat_at"] = (
+        effective_heartbeat.isoformat() if effective_heartbeat is not None else None
+    )
+    if effective_heartbeat is None:
         findings.append(finding(
             "monitor_status_missing",
             "Нет данных о работе основного монитора",
-            "monitor_status.json не содержит завершённой итерации.",
+            "monitor_status.json не содержит heartbeat процесса или завершённой итерации.",
             severity="critical",
         ))
     else:
-        age = now_utc() - last_iteration
+        age = now_utc() - effective_heartbeat
         details["monitor_age_minutes"] = int(age.total_seconds() // 60)
         if age > timedelta(minutes=MONITOR_MAX_AGE_MINUTES):
             findings.append(finding(
                 "monitor_stale",
                 "Основной монитор давно не обновлялся",
-                f"Последняя итерация была {int(age.total_seconds() // 60)} минут назад.",
+                f"Последний heartbeat был {int(age.total_seconds() // 60)} минут назад.",
                 severity="critical",
             ))
     checked = int(status.get("checked_sources", 0) or 0) if isinstance(status, dict) else 0
     reachable = int(status.get("reachable_sources", 0) or 0) if isinstance(status, dict) else 0
     source_errors = int(status.get("source_errors", 0) or 0) if isinstance(status, dict) else 0
     expected_primary = len(data_store.operational_sources(unique_sources(PUBLIC_SOURCES_PATH), "fast"))
-    if checked and checked < expected_primary:
+    # A fresh startup marker intentionally carries counts from the previous
+    # completed iteration. Do not diagnose those inherited counters as a new
+    # partial scan while the replacement process is still starting.
+    if runtime_status != "starting" and checked and checked < expected_primary:
         findings.append(finding(
             "monitor_source_count",
             "Основной монитор проверяет не все источники",

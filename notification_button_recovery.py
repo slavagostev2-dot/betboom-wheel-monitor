@@ -45,6 +45,16 @@ def _take_outcome_delivery_identity() -> str:
     return identity
 
 
+def _outcome_delivery_identity(
+    audience: str,
+    event_key: str,
+    *,
+    success: bool,
+) -> str:
+    phase = "success" if success else "failure"
+    return f"{audience}:{event_key}:{phase}"
+
+
 def _delivery_status(key: str) -> str:
     status_reader = getattr(notification_router, "delivery_reservation_status", None)
     if not callable(status_reader):
@@ -143,7 +153,13 @@ def _install_auto_outcome_delivery_claims() -> None:
         accounts: dict[str, tuple[str, dict[str, Any], bool]],
     ) -> tuple[str, dict[str, Any]]:
         event_key = personal_wheel_voting.wheel_event_key(key, item)
-        _set_outcome_delivery_identity(f"owner:{event_key}")
+        _set_outcome_delivery_identity(
+            _outcome_delivery_identity(
+                "owner",
+                event_key,
+                success=all(value[2] for value in accounts.values()),
+            )
+        )
         return original_result_message(key, item, accounts)
 
     def xflarxx_message_with_identity(
@@ -154,7 +170,11 @@ def _install_auto_outcome_delivery_claims() -> None:
     ) -> tuple[str, dict[str, Any]]:
         event_key = personal_wheel_voting.wheel_event_key(key, item)
         _set_outcome_delivery_identity(
-            f"xflarxx:{event_key}#account:{xflarxx_account_participation.ACCOUNT_KEY}"
+            _outcome_delivery_identity(
+                f"xflarxx#account:{xflarxx_account_participation.ACCOUNT_KEY}",
+                event_key,
+                success=success,
+            )
         )
         return original_xflarxx_message(key, item, record, success)
 
@@ -267,6 +287,12 @@ def self_test() -> None:
     )
     options = TelegramPanelRuntimeButtonRecovery._notification_options_for_role("owner")
     assert any(str(item[0]) == "auto_participation" for item in options)
+    assert _outcome_delivery_identity(
+        "owner", "wheel#action:42", success=True
+    ).endswith(":success")
+    assert _outcome_delivery_identity(
+        "owner", "wheel#action:42", success=False
+    ).endswith(":failure")
 
     original_delivery_key = notification_router.delivery_key
     original_claim = notification_router.claim_delivery
