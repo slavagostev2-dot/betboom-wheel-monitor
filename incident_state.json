@@ -312,7 +312,7 @@
     }
   },
   "last_change_at": "2026-07-23T23:09:01.753558+00:00",
-  "last_reconcile_at": "2026-07-23T23:43:10.482419+00:00",
+  "last_reconcile_at": "2026-07-23T23:43:34.162004+00:00",
   "last_reconcile_scope": "system_checks",
   "last_summary": {
     "active": 0,
@@ -322,6 +322,6 @@
   },
   "sequence": 104,
   "status": "initializing",
-  "updated_at": "2026-07-23T23:43:10.482469+00:00",
+  "updated_at": "2026-07-23T23:43:34.162055+00:00",
   "version": 1
 }

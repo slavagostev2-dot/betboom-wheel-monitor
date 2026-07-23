@@ -10,13 +10,13 @@
   },
   "ai_health_inspector": {
     "ai_status": "ok",
-    "cached": false,
+    "cached": true,
     "confidence": 0.0,
     "critical_count": 0,
-    "decision_id": "72fc1e608c4a40deaeec32b55af56e06",
+    "decision_id": "b2a80f0ea4cd4173a9d9a45a21913849",
     "finding_count": 0,
     "finding_kinds": [],
-    "generated_at": "2026-07-23T23:43:11.412818+00:00",
+    "generated_at": "2026-07-23T23:43:34.167530+00:00",
     "impact": "Отсутствует. Все сервисы работают согласно целевым показателям.",
     "mode": "ai",
     "model": "gemini-3.1-flash-lite",
@@ -40,7 +40,7 @@
     "source_tier_last_run_at": "2026-07-23T13:29:13.591142+00:00",
     "source_tier_policy": "manual_nightly_only",
     "transport_accounted_sources": 170,
-    "transport_checked_at": "2026-07-23T19:49:14.293394+00:00",
+    "transport_checked_at": "2026-07-23T23:43:01.524878+00:00",
     "transport_domain": "telegram.me",
     "transport_status": "success"
   },
@@ -61,7 +61,7 @@
     "telegram_transport": "ok",
     "wheel_api": "ok"
   },
-  "checked_at": "2026-07-23T23:43:09.211117+00:00",
+  "checked_at": "2026-07-23T23:43:33.380615+00:00",
   "discovery": {
     "active_size": 169,
     "candidate_count": 516,
@@ -175,7 +175,7 @@
     "version": 3,
     "workflow_run_id": "30052498413"
   },
-  "monitor_age_minutes": 8,
+  "monitor_age_minutes": 9,
   "monitor_effective_heartbeat_at": "2026-07-23T23:34:10.832714+00:00",
   "notification_integrity": {
     "algorithm": "HMAC-SHA256",
