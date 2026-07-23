@@ -21,6 +21,11 @@ source/rating identity, оставляя фактический redirect URL у 
 `personal_wheel_voting.py` идемпотентно переносит уже записанные vote-points с
 redirect-alias на канонический источник. Actor HMAC, вес, event identity,
 существующие голоса и пользовательские runtime-данные сохраняются.
+Фактическая production-композиция дополнительно проверена по live-логу:
+`telegram_post_links_v2.py` устанавливает button-aware parser после базового
+transport. Поэтому канонизация закреплена и на этой конечной границе; regression
+воспроизводит HTML с `data-post="redirected_name/42"` и требует настроенную
+source identity при сохранении фактического URL.
 
 Production snapshot с проблемой отдельно воспроизведён на копии: после
 канонизации число rating mismatches меняется с одного на ноль, а вес

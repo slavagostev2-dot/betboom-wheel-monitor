@@ -48,6 +48,13 @@ def parse_public_channel_html(monitor_module: Any, username: str, page: str):
 
     result = []
     for source, message_id, segment in _post_segments(page or ""):
+        observed_source = source or username
+        monitor_module.telegram_transport.register_source_alias(
+            username, observed_source
+        )
+        canonical_source = monitor_module.telegram_transport.canonical_source(
+            observed_source
+        )
         fragment = BeautifulSoup(segment, "html.parser")
         parts: list[str] = []
 
@@ -81,14 +88,14 @@ def parse_public_channel_html(monitor_module: Any, username: str, page: str):
 
         result.append(
             monitor_module.Message(
-                source=source or username,
+                source=canonical_source,
                 message_id=message_id,
                 date=date,
                 text=monitor_module.telegram_transport.rewrite_telegram_text(
                     "\n".join(dict.fromkeys(part for part in parts if part))
                 ),
                 message_url=monitor_module.telegram_transport.public_message_url(
-                    source or username, message_id
+                    observed_source, message_id
                 ),
             )
         )
