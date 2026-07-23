@@ -475,6 +475,72 @@ def test_late_second_source_expands_existing_vote_without_duplication() -> None:
     assert stats["daily"]["2026-07-17"]["totals"]["personal_vote_points"] == 10
 
 
+def test_redirected_telegram_source_moves_existing_vote_to_configured_name() -> None:
+    stats = {"version": 1, "sources": {}, "daily": {}}
+    actor = personal_wheel_voting.actor_vote_token("100", secret="test-secret")
+    at = datetime(2026, 7, 23, 18, 0, tzinfo=UTC)
+    assert personal_wheel_voting.record_personal_vote(
+        stats,
+        event_key="ctom16#action:993",
+        sources=["ct0m"],
+        actor=actor,
+        role="admin",
+        weight=5,
+        at=at,
+    )
+    vote_id = next(iter(stats["personal_wheel_votes"]))
+
+    assert personal_wheel_voting.canonicalize_personal_vote_sources(
+        stats,
+        resolver=lambda source: (
+            "ct0mislove" if str(source).casefold() == "ct0m" else str(source)
+        ),
+        at=at,
+    ) == 1
+    assert stats["personal_wheel_votes"][vote_id]["sources"] == ["ct0mislove"]
+    assert stats["sources"]["ct0m"]["quality_score"] == 0
+    assert stats["sources"]["ct0mislove"]["personal_vote_points"][vote_id] == 5
+    assert stats["sources"]["ct0mislove"]["quality_score"] == 5
+    assert stats["daily"]["2026-07-23"]["totals"]["personal_vote_points"] == 5
+    assert personal_wheel_voting.canonicalize_personal_vote_sources(
+        stats,
+        resolver=lambda source: (
+            "ct0mislove" if str(source).casefold() == "ct0m" else str(source)
+        ),
+        at=at,
+    ) == 0
+
+
+def test_redirect_alias_repairs_a_vote_whose_point_was_pruned() -> None:
+    stats = {"version": 1, "sources": {}, "daily": {}}
+    actor = personal_wheel_voting.actor_vote_token("100", secret="test-secret")
+    at = datetime(2026, 7, 23, 18, 0, tzinfo=UTC)
+    assert personal_wheel_voting.record_personal_vote(
+        stats,
+        event_key="ctom16#action:993",
+        sources=["ct0m"],
+        actor=actor,
+        role="admin",
+        weight=5,
+        at=at,
+    )
+    vote_id = next(iter(stats["personal_wheel_votes"]))
+    stats["sources"].pop("ct0m")
+    stats["daily"]["2026-07-23"]["sources"].pop("ct0m")
+    stats["daily"]["2026-07-23"]["totals"]["personal_vote_points"] = 0
+
+    assert personal_wheel_voting.canonicalize_personal_vote_sources(
+        stats,
+        resolver=lambda source: (
+            "ct0mislove" if str(source).casefold() == "ct0m" else str(source)
+        ),
+        at=at,
+    ) == 1
+    assert stats["personal_wheel_votes"][vote_id]["sources"] == ["ct0mislove"]
+    assert stats["sources"]["ct0mislove"]["personal_vote_points"][vote_id] == 5
+    assert stats["daily"]["2026-07-23"]["totals"]["personal_vote_points"] == 5
+
+
 def test_three_votes_credit_both_channels_equally() -> None:
     stats = {"version": 1, "sources": {}, "daily": {}}
     event = "zonertg8#action:693"

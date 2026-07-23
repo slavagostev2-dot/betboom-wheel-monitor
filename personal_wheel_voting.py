@@ -207,6 +207,114 @@ def reconcile_personal_vote_sources(
     return changed_pairs
 
 
+def canonicalize_personal_vote_sources(
+    data: dict[str, Any],
+    *,
+    resolver: Callable[[object], str],
+    at: datetime | None = None,
+) -> int:
+    """Move vote points from Telegram redirect aliases to configured sources."""
+
+    votes = data.get("personal_wheel_votes")
+    if not isinstance(votes, dict):
+        return 0
+    current = (at or datetime.now(UTC)).astimezone(UTC)
+    changed_votes = 0
+    for vote_id, raw_vote in votes.items():
+        if not isinstance(raw_vote, dict):
+            continue
+        try:
+            payload = normalize_vote_payload(raw_vote)
+        except (TypeError, ValueError):
+            continue
+        canonical: list[str] = []
+        seen: set[str] = set()
+        for source in payload["sources"]:
+            resolved = _clean_source(resolver(source))
+            folded = resolved.casefold()
+            if resolved and folded not in seen:
+                seen.add(folded)
+                canonical.append(resolved)
+        if [item.casefold() for item in canonical] == [
+            item.casefold() for item in payload["sources"]
+        ]:
+            continue
+
+        # Add canonical points first. The reconciliation helper is idempotent
+        # and also repairs daily aggregates when the redirected point was
+        # previously pruned as an unknown source.
+        reconcile_personal_vote_sources(
+            data,
+            event_key=payload["event_key"],
+            sources=canonical,
+            at=current,
+        )
+
+        removed = {
+            source.casefold(): source
+            for source in payload["sources"]
+            if source.casefold() not in seen
+        }
+        try:
+            voted = datetime.fromisoformat(
+                str(raw_vote.get("voted_at") or "").replace("Z", "+00:00")
+            )
+            voted = voted.astimezone(UTC) if voted.tzinfo else voted.replace(tzinfo=UTC)
+        except ValueError:
+            voted = current
+        day = voted.date().isoformat()
+        metric = "admin_votes" if payload["role"] in {"admin", "owner"} else "user_votes"
+        daily = data.setdefault("daily", {}).setdefault(
+            day, {"sources": {}, "totals": {}}
+        )
+        totals = daily.setdefault("totals", {})
+
+        for folded, source in removed.items():
+            source_key = next(
+                (
+                    key
+                    for key in data.setdefault("sources", {})
+                    if str(key).casefold() == folded
+                ),
+                source,
+            )
+            entry = data.setdefault("sources", {}).get(source_key)
+            points = entry.get("personal_vote_points") if isinstance(entry, dict) else None
+            if not isinstance(points, dict) or str(vote_id) not in points:
+                continue
+            points.pop(str(vote_id), None)
+            score = sum(max(0, int(value or 0)) for value in points.values())
+            entry["personal_vote_score"] = score
+            entry["quality_score"] = score
+            entry["personal_votes"] = max(
+                0, int(entry.get("personal_votes", 0) or 0) - 1
+            )
+            entry[metric] = max(0, int(entry.get(metric, 0) or 0) - 1)
+
+            source_day = daily.setdefault("sources", {}).get(source_key)
+            if isinstance(source_day, dict):
+                source_day["personal_votes"] = max(
+                    0, int(source_day.get("personal_votes", 0) or 0) - 1
+                )
+                source_day["personal_vote_points"] = max(
+                    0,
+                    int(source_day.get("personal_vote_points", 0) or 0)
+                    - payload["weight"],
+                )
+                source_day[metric] = max(
+                    0, int(source_day.get(metric, 0) or 0) - 1
+                )
+            totals["personal_vote_points"] = max(
+                0,
+                int(totals.get("personal_vote_points", 0) or 0)
+                - payload["weight"],
+            )
+
+        raw_vote["sources"] = canonical
+        changed_votes += 1
+    return changed_votes
+
+
 def record_personal_vote(
     data: dict[str, Any],
     *,
