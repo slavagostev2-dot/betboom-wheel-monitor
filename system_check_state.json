@@ -1,32 +1,32 @@
 {
   "active_incidents": 1,
   "admin_panel": {
-    "age_minutes": 1,
-    "last_heartbeat_at": "2026-07-23T19:51:33.406635+00:00",
-    "started_at": "2026-07-23T19:51:30.326556+00:00",
+    "age_minutes": 0,
+    "last_heartbeat_at": "2026-07-23T19:56:39.213343+00:00",
+    "started_at": "2026-07-23T19:56:35.857417+00:00",
     "status": "running",
     "update_consumer": "single_getUpdates_owner",
     "version": 41
   },
   "ai_health_inspector": {
     "ai_status": "ok",
-    "cached": false,
+    "cached": true,
     "confidence": 0.0,
     "critical_count": 1,
-    "decision_id": "d9a2c00c1d524f6eb045037a79b8064f",
+    "decision_id": "ef0b05d3aedc4b2580f6f95f44431893",
     "finding_count": 1,
     "finding_kinds": [
       "rating_score_mismatch"
     ],
-    "generated_at": "2026-07-23T19:52:49.189541+00:00",
-    "impact": "Данные о рейтингах недостоверны, что может привести к некорректной работе алгоритмов принятия решений.",
+    "generated_at": "2026-07-23T19:57:18.698407+00:00",
+    "impact": "Данные о рейтингах в системе недостоверны, что может привести к некорректному отображению или обработке пользовательских предпочтений.",
     "mode": "ai",
     "model": "gemini-3.1-flash-lite",
     "provider": "gemini",
-    "recommended_action": "Запустить штатную процедуру проверки консистентности состояния колёс и рейтинга для устранения расхождения.",
+    "recommended_action": "Проверить консистентность состояния колёс и рейтинга штатными средствами проекта.",
     "requires_human_attention": true,
     "severity": "critical",
-    "summary": "Обнаружено критическое расхождение между рейтингом источников и личными голосами в системе BB V.G.",
+    "summary": "Обнаружено критическое расхождение между рейтингом источников и личными голосами (1 случай).",
     "used_fallback": false,
     "version": 1,
     "warning_count": 0
@@ -63,7 +63,7 @@
     "telegram_transport": "ok",
     "wheel_api": "ok"
   },
-  "checked_at": "2026-07-23T19:52:46.664181+00:00",
+  "checked_at": "2026-07-23T19:57:17.407343+00:00",
   "discovery": {
     "active_size": 169,
     "candidate_count": 516,
@@ -113,7 +113,7 @@
   ],
   "gpt_diagnostic_snapshot": {
     "active_incidents": 1,
-    "bot_panel_heartbeat": "2026-07-23T19:51:33.406635+00:00",
+    "bot_panel_heartbeat": "2026-07-23T19:56:39.213343+00:00",
     "checked_sources": 169,
     "configured_sources": 170,
     "domain": "telegram.me",
@@ -164,7 +164,7 @@
     "checks_total": 816532,
     "consecutive_failures": 0,
     "consecutive_no_progress": 0,
-    "head_sha": "d91bf5536480d78fbc480127f6742f87aecbb3b9",
+    "head_sha": "14630d5bc266833e01042c12abec01030a338ee1",
     "iteration": 1,
     "last_failure_at": "2026-07-23T18:23:07.385796+00:00",
     "last_iteration_at": "2026-07-23T19:52:06.911908+00:00",
@@ -177,15 +177,15 @@
     "reachable_sources": 169,
     "restart_recommended": false,
     "run_attempt": "1",
-    "run_id": "30039669327",
-    "run_started_at": "2026-07-23T19:51:53.938330+00:00",
+    "run_id": "30040033465",
+    "run_started_at": "2026-07-23T19:56:58.259293894Z",
     "source_errors": 0,
     "stats_counter_reset": false,
-    "status": "running",
+    "status": "starting",
     "version": 3,
-    "workflow_run_id": "30039669327"
+    "workflow_run_id": "30040033465"
   },
-  "monitor_age_minutes": 0,
+  "monitor_age_minutes": 5,
   "notification_integrity": {
     "algorithm": "HMAC-SHA256",
     "contains_personal_fields": false,
