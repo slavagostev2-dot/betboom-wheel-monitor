@@ -122,7 +122,7 @@ jobs:
           PY
 
       - name: Run event-based auto participation
-        if: ${{ steps.mode.outputs.probe != 'true' }}
+        if: ${{ always() && steps.mode.outputs.probe != 'true' }}
         continue-on-error: true
         env:
           BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
@@ -136,7 +136,7 @@ jobs:
         run: python auto_participation_worker.py
 
       - name: Retry current active wheels immediately
-        if: ${{ steps.mode.outputs.probe != 'true' }}
+        if: ${{ always() && steps.mode.outputs.probe != 'true' }}
         continue-on-error: true
         env:
           BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
@@ -204,7 +204,7 @@ jobs:
           PY
 
       - name: Run second BetBoom account on fast result
-        if: ${{ steps.mode.outputs.probe != 'true' }}
+        if: ${{ always() && steps.mode.outputs.probe != 'true' }}
         continue-on-error: true
         env:
           BETBOOM_STORAGE_STATE_JSON_PART3: ${{ secrets.BETBOOM_STORAGE_STATE_JSON_PART3 }}
@@ -219,7 +219,7 @@ jobs:
             --recovery-result /tmp/bbvg-auto-participation-fast-recovery.json
 
       - name: Run xFLARXx BetBoom account on fast result
-        if: ${{ steps.mode.outputs.probe != 'true' }}
+        if: ${{ always() && steps.mode.outputs.probe != 'true' }}
         continue-on-error: true
         env:
           BETBOOM_STORAGE_STATE_JSON_PART5: ${{ secrets.BETBOOM_STORAGE_STATE_JSON_PART5 }}
@@ -275,7 +275,7 @@ jobs:
           exit 1
 
       - name: Recover fresh active wheels independently of monitor state
-        if: ${{ steps.mode.outputs.probe != 'true' }}
+        if: ${{ always() && steps.mode.outputs.probe != 'true' }}
         continue-on-error: true
         env:
           BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
@@ -295,7 +295,7 @@ jobs:
           python auto_participation_recovery.py | tee /tmp/bbvg-auto-participation-recovery.json
 
       - name: Run second BetBoom account after full recovery
-        if: ${{ steps.mode.outputs.probe != 'true' }}
+        if: ${{ always() && steps.mode.outputs.probe != 'true' }}
         continue-on-error: true
         env:
           BETBOOM_STORAGE_STATE_JSON_PART3: ${{ secrets.BETBOOM_STORAGE_STATE_JSON_PART3 }}
@@ -310,7 +310,7 @@ jobs:
             --recovery-result /tmp/bbvg-auto-participation-recovery.json
 
       - name: Run xFLARXx BetBoom account after full recovery
-        if: ${{ steps.mode.outputs.probe != 'true' }}
+        if: ${{ always() && steps.mode.outputs.probe != 'true' }}
         continue-on-error: true
         env:
           BETBOOM_STORAGE_STATE_JSON_PART5: ${{ secrets.BETBOOM_STORAGE_STATE_JSON_PART5 }}
