@@ -2396,8 +2396,9 @@
     },
     "shik6#event:9b16f41da38b661ee956": {
       "scheduled_at": "2026-07-23T15:01:32.389970+00:00",
-      "status": "workflow_dispatch_scheduled",
-      "wheel_key": "shik6"
+      "status": "workflow_dispatch_sent",
+      "wheel_key": "shik6",
+      "dispatched_at": "2026-07-23T15:01:35.362964+00:00"
     },
     "staya": {
       "dispatched_at": "2026-07-21T09:48:34.445880+00:00",
