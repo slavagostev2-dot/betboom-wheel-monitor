@@ -13,12 +13,12 @@
     "cached": true,
     "confidence": 0.0,
     "critical_count": 1,
-    "decision_id": "9261aa9d330243c6b795cc4b9db6f83c",
+    "decision_id": "7712718f7c8f481fab606d6bfc1f8f56",
     "finding_count": 1,
     "finding_kinds": [
       "rating_score_mismatch"
     ],
-    "generated_at": "2026-07-23T19:49:38.575875+00:00",
+    "generated_at": "2026-07-23T19:50:02.831901+00:00",
     "impact": "Данные о рейтингах в системе недостоверны, что может привести к некорректному отображению или обработке пользовательских предпочтений.",
     "mode": "ai",
     "model": "gemini-3.1-flash-lite",
@@ -42,7 +42,7 @@
     "source_tier_last_run_at": "2026-07-23T13:29:13.591142+00:00",
     "source_tier_policy": "manual_nightly_only",
     "transport_accounted_sources": 170,
-    "transport_checked_at": "2026-07-23T18:02:36.851876+00:00",
+    "transport_checked_at": "2026-07-23T19:49:14.293394+00:00",
     "transport_domain": "telegram.me",
     "transport_status": "success"
   },
@@ -63,7 +63,7 @@
     "telegram_transport": "ok",
     "wheel_api": "ok"
   },
-  "checked_at": "2026-07-23T19:49:37.192193+00:00",
+  "checked_at": "2026-07-23T19:50:01.535693+00:00",
   "discovery": {
     "active_size": 169,
     "candidate_count": 516,
