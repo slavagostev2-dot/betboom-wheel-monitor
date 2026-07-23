@@ -336,7 +336,7 @@ jobs:
         run: python notification_button_recovery.py
 
       - name: Start replacement control-center shift
-        if: ${{ always() && steps.run_panel.outcome != 'skipped' }}
+        if: ${{ always() && (steps.run_panel.outcome == 'success' || steps.run_panel.outcome == 'cancelled') }}
         continue-on-error: true
         env:
           GH_TOKEN: ${{ github.token }}
