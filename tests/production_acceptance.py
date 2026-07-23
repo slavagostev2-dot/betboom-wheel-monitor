@@ -59,7 +59,9 @@ def stability_acceptance() -> None:
     ]
     assert sum(source.count("python bbvg_monitor_main.py") for source in workflow_sources) == 1
     assert "state.json" not in text(".github/workflows/admin-action.yml")
-    assert "monitor-66-live.yml" not in text(".github/workflows/activate-66-sources.yml")
+    assert "monitor-66-live.yml" not in text(
+        ".github/workflows/telegram-source-transport.yml"
+    )
     assert bbvg_monitor_main.monitor.BOT_FEEDBACK_ENABLED is False
     assert bbvg_monitor_main.monitor.process_admin_actions is admin_action_queue.process_pending
     assert bbvg_monitor_main.monitor._bbvg_restart_duplicate_guard_installed is True
@@ -345,7 +347,7 @@ def interface_acceptance() -> None:
         {"inline_keyboard": TelegramPanelRuntimeV41.compact_menu_rows(True)}
     )
     assert "Mini App — архивировано" in text("MINI_APP_ARCHIVED.md")
-    assert (ROOT / "tests/test_ui_chapter4.py").exists()
+    assert (ROOT / "tests/test_ui_contracts.py").exists()
     print("Interface acceptance passed")
 
 
@@ -368,9 +370,9 @@ def lifecycle_acceptance() -> None:
     assert "record_admin_wheel_decision" in finished_source
     assert 'decision="confirmed"' in finished_source
     assert "rating_event_key" in finished_source
-    assert (ROOT / "tests/test_chapter5_lifecycle.py").exists()
-    assert "Mini App, Worker и D1 остаются архивированными" in text("CHAPTER_5_RU.md")
-    print("Chapter 5 full wheel lifecycle acceptance passed")
+    assert (ROOT / "tests/test_wheel_lifecycle.py").exists()
+    assert "Mini App — архивировано" in text("MINI_APP_ARCHIVED.md")
+    print("Full wheel lifecycle acceptance passed")
     print("Completed-wheel source rating acceptance passed")
 
 

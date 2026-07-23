@@ -53,7 +53,7 @@ def _click_candidates(page: Any, timeout_ms: int) -> tuple[bool, str]:
 
     try:
         result = page.evaluate(
-            """
+            r"""
             () => {
               const re = /(принять\s+участие|участвовать|участвую)/i;
               const nodes = Array.from(document.querySelectorAll(

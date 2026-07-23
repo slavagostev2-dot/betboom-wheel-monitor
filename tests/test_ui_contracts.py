@@ -1,3 +1,5 @@
+"""Telegram interface and navigation contracts."""
+
 from __future__ import annotations
 
 import unittest

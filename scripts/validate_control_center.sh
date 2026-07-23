@@ -2,7 +2,10 @@
 set -euo pipefail
 
 workflow_sha="${GITHUB_SHA:-}"
-release_sha="$(head -n 1 control_center_release.txt | tr -d '\r\n[:space:]')"
+release_sha="${CONTROL_CENTER_RELEASE_SHA:-}"
+if [[ -z "$release_sha" ]]; then
+  release_sha="$(head -n 1 control_center_release.txt | tr -d '\r\n[:space:]')"
+fi
 validation_stage="bootstrap"
 
 record_validation_failure() {
@@ -63,10 +66,10 @@ if ! git cat-file -e "${release_sha}^{commit}" 2>/dev/null; then
 fi
 
 validation_stage="historical_runtime_guard"
-for version in $(seq 25 40); do
+for version in $(seq 2 40); do
   legacy_path="admin_panel_runtime_v${version}.py"
   if [[ -e "$legacy_path" ]]; then
-    echo "Historical panel runtime must not exist after chapter 2C: ${legacy_path}" >&2
+    echo "Historical panel runtime must not exist: ${legacy_path}" >&2
     false
   fi
 done
@@ -84,20 +87,20 @@ validation_stage="compile_bbvg_package"
 python -m compileall -q bbvg
 validation_stage="compile_control_center_modules"
 python -m py_compile \
-  admin_bot.py admin_action.py admin_action_v2.py admin_action_v3.py admin_action_queue.py chapter1_stability.py admin_runtime.py \
+  admin_bot.py admin_action.py admin_action_v2.py admin_action_v3.py admin_action_queue.py admin_runtime.py \
   admin_panel_v2.py admin_panel_runtime_v41.py notification_button_recovery.py \
-  telegram_ui.py chapter4_acceptance.py chapter5_acceptance.py wheel_lifecycle_v2.py wheel_link_lifecycle.py wheel_scenario_suite.py \
+  telegram_ui.py wheel_lifecycle_v2.py wheel_link_lifecycle.py wheel_scenario_suite.py \
   bot_private_state.py bot_notification_state.py \
   notification_integrity_v2.py notification_router.py wheel_publications_v2.py \
-  rating_policy.py chapter2_unified_logic.py privacy_retention.py security_audit.py \
+  rating_policy.py privacy_retention.py security_audit.py \
   migrate_bot_private_state.py
 
 validation_stage="bot_private_state_self_test"
 python bot_private_state.py
 validation_stage="notification_integrity_self_test"
 python notification_integrity_v2.py --self-test
-validation_stage="chapter2_unified_logic"
-python chapter2_unified_logic.py
+validation_stage="production_acceptance_unified"
+python tests/production_acceptance.py --section unified
 validation_stage="bot_notification_state_self_test"
 python bot_notification_state.py
 validation_stage="privacy_retention_self_test"
@@ -125,28 +128,19 @@ python -m bbvg.bot.runtime --self-test
 validation_stage="runtime_v41_self_test"
 python admin_panel_runtime_v41.py --self-test
 
-validation_stage="chapter4_acceptance"
-if grep -Fq 'run: python admin_panel_runtime_v41.py' .github/workflows/admin-bot.yml; then
-  python chapter4_acceptance.py
-elif grep -Fq 'run: python notification_button_recovery.py' .github/workflows/admin-bot.yml; then
-  validation_stage="chapter4_compatibility_entrypoint"
-  python notification_button_recovery.py --self-test
-  python chapter4_acceptance.py
-  python - <<'PY'
-from tests import production_acceptance as acceptance
-
-acceptance.interface_acceptance()
-print("Chapter 4 compatibility entrypoint acceptance passed")
-PY
-else
+validation_stage="production_entrypoint"
+if ! grep -Fq 'run: python notification_button_recovery.py' .github/workflows/admin-bot.yml; then
   echo "Unknown Control Center production entrypoint" >&2
   false
 fi
+python notification_button_recovery.py --self-test
+validation_stage="production_acceptance_interface"
+python tests/production_acceptance.py --section interface
 
-validation_stage="chapter5_acceptance"
-python chapter5_acceptance.py
-validation_stage="chapter1_stability"
-python chapter1_stability.py
+validation_stage="production_acceptance_lifecycle"
+python tests/production_acceptance.py --section lifecycle
+validation_stage="production_acceptance_stability"
+python tests/production_acceptance.py --section stability
 
 validation_stage="final_control_center_contracts"
 python - <<'PY'

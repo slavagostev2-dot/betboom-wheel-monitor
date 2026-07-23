@@ -25,9 +25,7 @@ on:
       - "system_checks_v2.py"
       - "sitecustomize.py"
       - "SECURITY_RU.md"
-      - "CHAPTER_2_RU.md"
-      - "CHAPTER_4_RU.md"
-      - "chapter4_acceptance.py"
+      - "tests/production_acceptance.py"
       - "MINI_APP_ARCHIVED.md"
       - ".github/workflows/**"
   workflow_dispatch:
@@ -79,7 +77,7 @@ jobs:
             bot_private_state.py bot_notification_state.py notification_integrity_v2.py \
             migrate_bot_private_state.py privacy_retention.py security_audit.py \
             test_bot_state_fixture.py notification_preferences_v2.py \
-            admin_panel_runtime_v41.py telegram_ui.py chapter4_acceptance.py \
+            admin_panel_runtime_v41.py telegram_ui.py \
             bbvg_monitor_main.py recurring_wheel_events.py wheel_event_runtime.py \
             wheel_metadata_quality.py wheel_publications_v2.py wheel_lifecycle_v2.py \
             personal_reminder_filter.py daily_report.py source_intelligence_alerts.py \
@@ -98,7 +96,7 @@ jobs:
           python notification_preferences_v2.py
           python test_bot_state_fixture.py
           python admin_panel_runtime_v41.py --self-test
-          python chapter4_acceptance.py
+          python tests/production_acceptance.py --section interface
 
       - name: Validate privacy, role and delivery invariants
         run: |
@@ -167,8 +165,8 @@ jobs:
           assert 'archived and disabled' in pages
           assert 'archived and disabled' in worker
           assert Path('MINI_APP_ARCHIVED.md').exists()
-          assert Path('CHAPTER_2_RU.md').exists()
-          assert Path('CHAPTER_4_RU.md').exists()
+          assert Path('engineering/CODE_INVENTORY_RU.md').exists()
+          assert Path('engineering/RUNTIME_METHOD_INVENTORY_RU.md').exists()
 
           history = json.loads(Path('security_history_report.json').read_text(encoding='utf-8'))
           assert 'destructive_cleanup_required' in history

@@ -41,7 +41,7 @@ def source_values(path: str) -> list[str]:
 def main() -> None:
     legacy_panel_files = [
         f"admin_panel_runtime_v{version}.py"
-        for version in range(25, 41)
+        for version in range(2, 41)
         if (ROOT / f"admin_panel_runtime_v{version}.py").exists()
     ]
     if legacy_panel_files:
@@ -49,6 +49,46 @@ def main() -> None:
             "PRECHECK ERROR: historical panel runtime chain remains: "
             + ", ".join(legacy_panel_files)
         )
+
+    obsolete_repository_files = (
+        "chapter1_stability.py",
+        "chapter2_unified_logic.py",
+        "chapter3_acceptance.py",
+        "chapter4_acceptance.py",
+        "chapter5_acceptance.py",
+        "monitor_resilience.py",
+        "normalize_source_ratings.py",
+        "README_RU.md",
+        "PLAN_RU.md",
+        "CHANGES_RU.md",
+        "EXPORT_ANALYSIS_RU.md",
+        ".github/workflows/activate-66-sources.yml",
+        ".github/workflows/migrate-all-sources.yml",
+        ".github/workflows/v22-checks.yml",
+        "tests/test_chapter3_contracts.py",
+        "tests/test_ui_chapter4.py",
+        "tests/test_chapter5_lifecycle.py",
+    )
+    restored_obsolete_files = [
+        path for path in obsolete_repository_files if (ROOT / path).exists()
+    ]
+    if restored_obsolete_files:
+        raise SystemExit(
+            "PRECHECK ERROR: obsolete repository files returned: "
+            + ", ".join(restored_obsolete_files)
+        )
+
+    for required_document in (
+        "README.md",
+        "engineering/REFACTOR_PLAN_RU.md",
+        "engineering/CHAT_CONTEXT_RU.md",
+        "engineering/CODE_INVENTORY_RU.md",
+        "engineering/RUNTIME_METHOD_INVENTORY_RU.md",
+    ):
+        if not (ROOT / required_document).is_file():
+            raise SystemExit(
+                f"PRECHECK ERROR: required repository document is missing: {required_document}"
+            )
 
     require_text("requirements.txt", ("requests==", "beautifulsoup4==", "tzdata"))
     require_text(
@@ -114,7 +154,7 @@ def main() -> None:
         "tests/production_acceptance.py",
         (
             "def lifecycle_acceptance",
-            "Chapter 5 full wheel lifecycle acceptance passed",
+            "Full wheel lifecycle acceptance passed",
             "Completed-wheel source rating acceptance passed",
         ),
     )
@@ -229,6 +269,25 @@ def main() -> None:
         ".github/workflows/daily-report.yml",
         ("BB V.G. summaries", "period:", "daily_report.py"),
     )
+    require_text(
+        ".github/workflows/telegram-source-transport.yml",
+        ("Verify configured Telegram source transport", "source_transport_smoke.py"),
+    )
+    require_text(
+        ".github/workflows/telegram-domain-policy.yml",
+        ("Verify approved Telegram source policy", "telegram.me"),
+    )
+    require_text(
+        ".github/workflows/current-checks.yml",
+        ("BB V.G. current checks", "tests/production_acceptance.py"),
+    )
+    health_workflow = (ROOT / ".github/workflows/system-health.yml").read_text(
+        encoding="utf-8"
+    )
+    if "PARTICIPATION_RECOVERY_CHANGELOG_ONCE" in health_workflow:
+        raise SystemExit(
+            "PRECHECK ERROR: completed one-shot changelog workflow returned"
+        )
 
     active_domain_files = (
         "monitor.py",

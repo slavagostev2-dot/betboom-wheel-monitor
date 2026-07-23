@@ -41,11 +41,12 @@ docs/
 
 Обязательные документы:
 
-- `docs/REFACTOR_PLAN_RU.md`
-- `docs/CHAT_CONTEXT_RU.md`
-- `docs/CODE_INVENTORY_RU.md`
+- `README.md`
+- `engineering/REFACTOR_PLAN_RU.md`
+- `engineering/CHAT_CONTEXT_RU.md`
+- `engineering/CODE_INVENTORY_RU.md`
 - `docs/PROJECT_CHANGELOG_RU.md`
-- `docs/RUNTIME_METHOD_INVENTORY_RU.md`
+- `engineering/RUNTIME_METHOD_INVENTORY_RU.md`
 
 ## 3. Действующие точки входа
 
@@ -61,11 +62,12 @@ docs/
   `admin_panel_v2.py` для совместимых общих отчётных методов.
 - Production MRO `bbvg.bot.runtime.TelegramPanelRuntime` не содержит
   классов из `admin_panel_runtime_v*`.
-- Историческая bot-only цепочка `admin_panel_runtime_v25.py`–`v40.py`
-  удалена в главе 2C после переноса внешних preflight/CI/recovery-ссылок.
-  Возвращать эту лестницу или подключать к production более ранние versioned-
-  runtime запрещено; необходимые совместимости реализуются в действующих
-  предметных владельцах и покрываются regression-контрактами.
+- Историческая bot-only цепочка `admin_panel_runtime_v2.py`–`v40.py`
+  полностью удалена после переноса production-поведения и внешних
+  preflight/CI/recovery-ссылок. Возвращать эту лестницу или подключать к
+  production более ранние versioned-runtime запрещено; необходимые
+  совместимости реализуются в действующих предметных владельцах и покрываются
+  regression-контрактами.
 - Монитор колёс: `bbvg_monitor_main.py`, `monitor.py` и тематические модули.
 - Автоучастие: `auto_participation_worker.py` выполняет первую event-попытку; `auto_participation_recovery.py` независимо пересканирует свежие публикации текущего `public_sources.txt`, сверяет ссылки с BetBoom API и восстанавливает потерянные active/event записи; `betboom_participation_browser.py` является устойчивым Playwright fallback фактического участия. Recovery не отправляет пользователю финальный результат напрямую: `auto_participation_bot_sync.py` фиксирует публичные pending-исходы, а `auto_participation_notifications.py` внутри единственного живого Control Center объединяет результаты двух аккаунтов, личную отметку владельца, рейтинг и Telegram-уведомление. Запуски `auto-participation.yml` сериализованы без отмены активного запуска. Подтверждённый успех основной event-попытки сразу ставится в очередь Control Center; затем выполняется быстрый независимый retry только по уже найденным активным колёсам, проверяются второй аккаунт владельца и `xFLARXx`, а промежуточный результат публикуется в `state.json` до полного пересканирования источников. При объединении состояния полная идентичность более нового события (`action_id + server_start_at`) имеет приоритет над устаревшей записью того же URL. Если независимый recovery первым обнаружил колесо, он ставит обычную первичную доставку в очередь живого monitor-runtime; реферальное событие сохраняется и обрабатывается без пользовательской доставки. Полный source-recovery остаётся страховочным вторым проходом, и каждый push объединяется с последним `state.json`. Для исходной Telegram-кнопки хранится только HMAC-ссылка на message_id без chat ID; после успеха Control Center переводит кнопку в состояние «✅ Участвую».
 - Второй BetBoom-аккаунт Вячеслава использует отдельную сессию `BETBOOM_STORAGE_STATE_JSON_PART3/PART4` и предметный модуль `betboom_account_participation.py`. Его event-token содержит `#account:vyacheslav_secondary`, поэтому успех или ошибка основного аккаунта не подавляют второй. Пользовательский итог не отправляется этим модулем отдельно: агрегатор ждёт оба результата и формирует не более одного короткого сообщения на событие. Личный голос и рейтинг за одно событие остаются идемпотентными.
@@ -78,6 +80,10 @@ docs/
 - Системная диагностика не отправляет Telegram-инциденты из `push`-запуска: pending-инцидент повторно оценивается плановым health-run после стабилизации. Переменный текст AI-инспектора хранится в диагностическом state, но не включается в Telegram-дайджест и не участвует в его идентичности.
 - AI-анализ подозрительных публикаций является только вспомогательным слоем. Пост допускается к модели лишь при явном сочетании колеса, BetBoom и действия/участия; итоговая уверенность ограничивается проверяемыми признаками исходного текста. Упоминание стрима или абстрактного колеса без этих признаков не является сигналом.
 - VK-уведомления о новых нереферальных колёсах отправляются напрямую из monitor-runtime: `vk_wheel_notifications.py` определяет событие и дедупликацию, `vk_dynamic_subscribers.py` получает доступные диалоги и вызывает VK API. `vk-wheel-notification.yml` остаётся только ручным fallback/диагностикой.
+- Проверка доступности актуального inventory принадлежит
+  `.github/workflows/telegram-source-transport.yml`; политика единственного
+  Telegram-домена — `.github/workflows/telegram-domain-policy.yml`. Число
+  источников вычисляется из текущих списков и не закрепляется в имени workflow.
 
 Не добавляйте параллельный runtime или второго consumer Telegram `getUpdates`.
 

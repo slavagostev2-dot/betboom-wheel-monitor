@@ -79,7 +79,7 @@ class CurrentProductionContractTests(unittest.TestCase):
         self.assertGreaterEqual(source_intelligence.SOURCE_LIMIT, 160)
 
         workflow = (
-            root / ".github/workflows/activate-66-sources.yml"
+            root / ".github/workflows/telegram-source-transport.yml"
         ).read_text(encoding="utf-8")
         self.assertIn('"public_sources.txt"', workflow)
         self.assertIn('"source_catalog.txt"', workflow)
@@ -110,21 +110,21 @@ class CurrentProductionContractTests(unittest.TestCase):
             ("monitor.yml", {"continuous": "true", "replace": "true"}),
             calls,
         )
-        self.assertIn(("activate-66-sources.yml", None), calls)
+        self.assertIn(("telegram-source-transport.yml", None), calls)
         self.assertIn(("source-registry.yml", None), calls)
 
     def test_source_refresh_failure_does_not_hide_saved_source_change(self) -> None:
         bot = admin_runtime.RuntimeAdminBot()
 
         def dispatch(workflow: str, inputs: dict[str, str] | None = None) -> None:
-            if workflow == "activate-66-sources.yml":
+            if workflow == "telegram-source-transport.yml":
                 raise RuntimeError("temporary GitHub failure")
 
         bot.dispatch = dispatch  # type: ignore[method-assign]
 
         self.assertEqual(
             bot.refresh_source_runtime(),
-            ["activate-66-sources.yml"],
+            ["telegram-source-transport.yml"],
         )
 
     def test_administrator_decisions(self) -> None:
@@ -172,7 +172,7 @@ class CurrentProductionContractTests(unittest.TestCase):
         active_contracts = (
             root / "preflight.py",
             root / "scripts/validate_control_center.sh",
-            root / ".github/workflows/v22-checks.yml",
+            root / ".github/workflows/current-checks.yml",
             root / ".github/workflows/bot-recovery-smoke.yml",
             root / ".github/workflows/validate-private-state.yml",
             root / ".github/workflows/system-health.yml",
