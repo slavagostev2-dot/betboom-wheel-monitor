@@ -198,6 +198,13 @@ def reconcile_multisource_votes(data: dict[str, Any], state: dict[str, Any]) -> 
 
 def save_stats_with_multisource_reconciliation(data: dict[str, Any]) -> None:
     try:
+        canonicalized = personal_wheel_voting.canonicalize_personal_vote_sources(
+            data,
+            resolver=telegram_transport.canonical_source,
+            at=monitor.now_utc(),
+        )
+        if canonicalized:
+            print(f"Canonicalized Telegram source aliases in {canonicalized} rating votes")
         state = json.loads(monitor.STATE_PATH.read_text(encoding="utf-8"))
         if not isinstance(state, dict):
             state = {}

@@ -56,6 +56,7 @@ _domain_ipv4_at = 0.0
 _domain_resolve_error = ""
 _domain_resolve_error_at = 0.0
 _dns_lock = threading.Lock()
+_source_aliases: dict[str, str] = {}
 
 
 def is_transient_transport_error(value: object) -> bool:
@@ -65,6 +66,22 @@ def is_transient_transport_error(value: object) -> bool:
 
 def clean_username(value: object) -> str:
     return str(value or "").strip().lstrip("@").strip("/")
+
+
+def register_source_alias(requested: object, observed: object) -> None:
+    configured = clean_username(requested)
+    redirected = clean_username(observed)
+    if (
+        configured
+        and redirected
+        and configured.casefold() != redirected.casefold()
+    ):
+        _source_aliases.setdefault(redirected.casefold(), configured)
+
+
+def canonical_source(value: object) -> str:
+    cleaned = clean_username(value)
+    return _source_aliases.get(cleaned.casefold(), cleaned)
 
 
 def public_source_url(source: str, before: int | None = None) -> str:
@@ -339,16 +356,23 @@ def install(monitor_module: Any) -> None:
 
     def primary_fetch_public(username: str):
         messages = original_fetch_public(username)
-        return [
-            monitor_module.Message(
-                source=message.source,
-                message_id=message.message_id,
-                date=message.date,
-                text=rewrite_telegram_text(message.text),
-                message_url=public_message_url(message.source or username, message.message_id),
+        result = []
+        for message in messages:
+            observed = message.source or username
+            register_source_alias(username, observed)
+            result.append(
+                monitor_module.Message(
+                    source=canonical_source(observed),
+                    message_id=message.message_id,
+                    date=message.date,
+                    text=rewrite_telegram_text(message.text),
+                    message_url=rewrite_telegram_url(
+                        message.message_url
+                        or public_message_url(observed, message.message_id)
+                    ),
+                )
             )
-            for message in messages
-        ]
+        return result
 
     def primary_load_state():
         return rewrite_nested_urls(original_load_state())
@@ -434,6 +458,14 @@ def self_test() -> None:
     assert rewrite_telegram_url("https://t.me/s/test") == f"https://{PRIMARY_DOMAIN}/s/test"
     assert "t.me/" not in rewrite_telegram_text("https://t.me/test/1").replace("telegram.me/", "")
     assert is_transient_transport_error("NameResolutionError: failed to resolve")
+    aliases_before = dict(_source_aliases)
+    try:
+        register_source_alias("configured_name", "redirected_name")
+        assert canonical_source("@redirected_name") == "configured_name"
+        assert canonical_source("unrelated") == "unrelated"
+    finally:
+        _source_aliases.clear()
+        _source_aliases.update(aliases_before)
     assert _ipv4_answers({"Answer": [{"type": 1, "data": "149.154.167.99"}]}) == ["149.154.167.99"]
     assert 1 <= BATCH_ATTEMPTS <= 2
     assert 5 <= SOURCE_REQUEST_TIMEOUT <= 10

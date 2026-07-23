@@ -6,6 +6,30 @@
 
 ---
 
+## 2026-07-23 — Redirect Telegram-источника больше не ломает рейтинг
+
+System Health после восстановления Monitor обнаружил единственный оставшийся
+critical finding: `rating_score_mismatch` для `ct0m`. Причина подтверждена на
+production-state: настроенный источник `ct0mislove` перенаправлялся Telegram
+на публичное имя `ct0m`. Публикация и личный vote сохраняли redirect-имя, а
+monitor-статистика и source inventory использовали настроенное имя. Pruning
+удалял не входящий в inventory `ct0m`, поэтому один vote-point постоянно
+терялся и инцидент открывался снова.
+
+`telegram_transport.py` теперь сохраняет настроенное имя как каноническую
+source/rating identity, оставляя фактический redirect URL у сообщения.
+`personal_wheel_voting.py` идемпотентно переносит уже записанные vote-points с
+redirect-alias на канонический источник. Actor HMAC, вес, event identity,
+существующие голоса и пользовательские runtime-данные сохраняются.
+
+Production snapshot с проблемой отдельно воспроизведён на копии: после
+канонизации число rating mismatches меняется с одного на ноль, а вес
+существующего голоса остаётся `5`.
+
+Используется backup всего ремонта:
+`backup/2026-07-23-before-automation-reliability-repair` →
+`7dacf14c24f7a2c2c08a153eee4efdfeda8e0584`.
+
 ## 2026-07-23 — Exact-SHA Control Center и recovery без retry-шторма
 
 После repository cleanup GitHub installation API временно ответил
