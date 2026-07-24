@@ -100,8 +100,9 @@ def test_preliminary_alert_blocks_second_source_activation_alert() -> None:
     assert wheel_publications_v2._any_notification_suppressed(
         lambda _state, _link: True,
         lambda _state, _link: False,
-        {},
+        {"url_alerts": {"ctom18": {"alerted_at": "2026-07-24T12:22:47+00:00"}}},
         "https://betboom.ru/freestream/CTOM18",
+        "ctom18",
     ) is True
 
 
