@@ -296,6 +296,14 @@
       "suppress_until": "2026-07-17T17:55:42.221000+00:00",
       "url": "https://betboom.ru/freestream/zonertg8"
     },
+    "zonertw5": {
+      "alerted_at": "2026-07-24T12:39:12.939615+00:00",
+      "deadline": "2026-07-24T12:46:34.313000+00:00",
+      "identifier": "zonertw5",
+      "lifecycle_rule": "timer",
+      "suppress_until": "2026-07-24T12:46:34.313000+00:00",
+      "url": "https://betboom.ru/freestream/zonertw5"
+    },
     "zzone": {
       "alerted_at": "2026-07-19T11:01:06.363503+00:00",
       "deadline": "2026-07-19T11:30:01.156000+00:00",
@@ -329,9 +337,9 @@
       "first_notified_at": "2026-07-24T08:00:05.515161+00:00",
       "generation_id": "5c5f7c686079cda3bb70",
       "identifier": "zonertg15",
-      "last_checked_at": "2026-07-24T12:37:48.046947+00:00",
+      "last_checked_at": "2026-07-24T12:38:53.585785+00:00",
       "last_notification_at": "2026-07-24T08:00:05.515161+00:00",
-      "last_verification_at": "2026-07-24T12:37:47.684284+00:00",
+      "last_verification_at": "2026-07-24T12:38:53.351570+00:00",
       "lifecycle_changed_at": "2026-07-24T11:46:37.645995+00:00",
       "lifecycle_state": "participating",
       "message_date": "2026-07-24T07:58:38+00:00",
@@ -348,6 +356,30 @@
       "source": "mechanogun",
       "status": "unknown",
       "url": "https://betboom.ru/freestream/zonertg15",
+      "verification_status": "confirmed"
+    },
+    "zonertw5": {
+      "action_id": 1019,
+      "button_token": "932cad7086a5f1",
+      "deadline": "2026-07-24T12:46:34.313000+00:00",
+      "expires_at": "2026-07-24T14:39:12.939294+00:00",
+      "first_notified_at": "2026-07-24T12:39:12.939294+00:00",
+      "generation_id": "a9f73dd378aacbbc7cb9",
+      "identifier": "zonertw5",
+      "last_checked_at": "2026-07-24T12:39:12.939294+00:00",
+      "last_notification_at": "2026-07-24T12:39:12.939294+00:00",
+      "message_date": "2026-07-24T12:38:06+00:00",
+      "message_id": 238,
+      "message_text": "https://betboom.ru/freestream/zonertw5\nhttps://telegram.me/kolesaBB\nhttps://telegram.me/kolesaBB/238",
+      "message_url": "https://telegram.me/kolesaBB/238",
+      "method": "активность и таймер подтверждены BetBoom",
+      "page_excerpt": "",
+      "participating": false,
+      "referral_restricted": false,
+      "server_start_at": "2026-07-24T12:26:34.313000+00:00",
+      "source": "kolesaBB",
+      "status": "preliminary",
+      "url": "https://betboom.ru/freestream/zonertw5",
       "verification_status": "confirmed"
     }
   },
@@ -2561,6 +2593,11 @@
       "scheduled_at": "2026-07-22T11:17:27.712163+00:00",
       "status": "workflow_dispatch_sent",
       "wheel_key": "zonertw1"
+    },
+    "zonertw5#event:a9f73dd378aacbbc7cb9": {
+      "scheduled_at": "2026-07-24T12:39:13.405969+00:00",
+      "status": "workflow_dispatch_scheduled",
+      "wheel_key": "zonertw5"
     }
   },
   "auto_participation_event_mode_initialized_at": "2026-07-19T17:14:18.523241+00:00",
@@ -4357,6 +4394,21 @@
       "url": "https://betboom.ru/freestream/CTOM11",
       "wheel_key": "ctom11"
     },
+    "932cad7086a5f1": {
+      "created_at": "2026-07-24T12:39:02.764155+00:00",
+      "identifier": "zonertw5",
+      "message_date": "2026-07-24T12:38:06+00:00",
+      "message_id": 238,
+      "message_text": "https://betboom.ru/freestream/zonertw5\nhttps://telegram.me/kolesaBB\nhttps://telegram.me/kolesaBB/238",
+      "message_url": "https://telegram.me/kolesaBB/238",
+      "method": "активность и таймер подтверждены BetBoom",
+      "page_excerpt": "",
+      "post_key": "932cad7086a5f18962470308a311637954f8a46ed64b64a893bcd0c7b716f7a8",
+      "source": "kolesaBB",
+      "status": "preliminary",
+      "url": "https://betboom.ru/freestream/zonertw5",
+      "wheel_key": "zonertw5"
+    },
     "a5ffbea1dec738": {
       "created_at": "2026-07-21T17:31:32.923582+00:00",
       "identifier": "pomidor2",
@@ -4929,7 +4981,7 @@
     "54699460e7930dc4ba9e83820fee0031323593ac431826db8864edd1a1a3af1a": "2026-07-15T19:50:14.376715+00:00",
     "556969b49f15855843a60b8062540da59f252cd0a918f77f2a6bee21be516cb7": "2026-07-19T20:05:58.534601+00:00",
     "55e0214f74e007a47174b82f0afc8ffde5718c708858cedf49ade4d6571c4aea": "2026-07-12T15:09:13.354381+00:00",
-    "56cddd136f0dc070c4bd7659a1981a3dc8d26e63d91ff67ddea2b9d9dff229bd": "2026-07-24T12:37:57.417236+00:00",
+    "56cddd136f0dc070c4bd7659a1981a3dc8d26e63d91ff67ddea2b9d9dff229bd": "2026-07-24T12:39:13.373066+00:00",
     "56d8372d6b4ef782d0d14210985dbd56be586c344c1d8f7c41fd8409d66191c1": "2026-07-19T05:08:08.379548+00:00",
     "5739f01a3b40129196892e13136de6d6686ef71d51949ca35f5a0dafce9acb81": "2026-07-23T14:27:49.663236+00:00",
     "58975ded89719d5d83dde9028c689bb7dfa0bd48c7c2d5051df15423b1ce2327": "2026-07-12T18:21:20.530985+00:00",
@@ -5002,6 +5054,7 @@
     "8fc16d0d85802adea6cc607f19e13d01dea59fd7de8a6ca951af369bf29bd539": "2026-07-12T15:10:04.958824+00:00",
     "90923b1998075996ea90596712202f6b26b775aeeb6c8d663b45898c4516aabb": "2026-07-23T02:20:12.736981+00:00",
     "90ab32961a9de8465cd7da233a1dfc591ab3b620126d161206b66f6c5afdc202": "2026-07-12T15:09:46.050561+00:00",
+    "932cad7086a5f18962470308a311637954f8a46ed64b64a893bcd0c7b716f7a8": "2026-07-24T12:39:12.939672+00:00",
     "94b542c18180021f3aae536dba8f095ce2af0ce89eb897eef77d90825cf6950c": "2026-07-19T04:15:11.536594+00:00",
     "94bb9d38709a0c2754587807d81fc210bb262bd64383334ca51ca09a4c384c7a": "2026-07-12T19:22:25.149620+00:00",
     "952927b78a179ac9f940d5cb1f8148417df1bc602823d51078911e2529eaf8b1": "2026-07-12T19:22:25.149620+00:00",
@@ -5035,7 +5088,7 @@
     "abb4dc47ee8a83d1c8f153afadc25330a1303d2f42a3914efd89d4a0fdf98bf4": "2026-07-12T18:21:19.884502+00:00",
     "ac500d1bdc835067412d010448ba956009ea82dfbffb4d96b97b3a26861f744a": "2026-07-12T19:22:25.149620+00:00",
     "aca4a20b1e7a57517e3dc79637229d3fddcf2a12c5e6a3dd5910143f7f5fe688": "2026-07-16T01:18:31.390920+00:00",
-    "ae1ff89d74d4f8d2fc221dba7982257d84b549a049e468b79bd93f5b3da29a80": "2026-07-24T12:37:57.213934+00:00",
+    "ae1ff89d74d4f8d2fc221dba7982257d84b549a049e468b79bd93f5b3da29a80": "2026-07-24T12:39:13.182416+00:00",
     "aea3adfe1a57495bedebb3a218ec5077f88bde12c56f61357f88e09dd39c207c": "2026-07-12T18:21:24.635725+00:00",
     "afdc537505573a5527d8cd25777303862fa976e4ad974e473e51962bd8435edb": "2026-07-12T18:26:17.348868+00:00",
     "b1a700cc4ddc4ef49c1414af86ec8f6a93f12fb64e29ae1260222773f61d89e6": "2026-07-12T15:10:04.958827+00:00",
@@ -5584,6 +5637,14 @@
       "suppress_until": "2026-07-13T18:21:23.149865+00:00",
       "url": "https://betboom.ru/freestream/zonertw16"
     },
+    "zonertw5": {
+      "alerted_at": "2026-07-24T12:39:12.939655+00:00",
+      "deadline": "2026-07-24T12:46:34.313000+00:00",
+      "identifier": "zonertw5",
+      "lifecycle_rule": "timer",
+      "suppress_until": "2026-07-24T12:46:34.313000+00:00",
+      "url": "https://betboom.ru/freestream/zonertw5"
+    },
     "zonertw9": {
       "alerted_at": "2026-07-12T18:21:22.495406+00:00",
       "identifier": "zonertw9",
@@ -6095,7 +6156,7 @@
     "zonertg15": {
       "action_id": 700,
       "generation_id": "5c5f7c686079cda3bb70",
-      "seen_at": "2026-07-24T12:37:47.684284+00:00",
+      "seen_at": "2026-07-24T12:38:53.351570+00:00",
       "server_start_at": "2026-07-24T07:58:34.902000+00:00",
       "state": "active"
     },
@@ -6124,12 +6185,11 @@
       "state": "closed"
     },
     "zonertw5": {
-      "action_id": 989,
-      "closed_at": "2026-07-22T21:16:56.229280+00:00",
-      "generation_id": "1c10de1e8a1552895245",
-      "seen_at": "2026-07-22T21:16:56.229280+00:00",
-      "server_start_at": "2026-07-22T18:26:05.351000+00:00",
-      "state": "closed"
+      "action_id": 1019,
+      "generation_id": "a9f73dd378aacbbc7cb9",
+      "seen_at": "2026-07-24T12:39:12.939422+00:00",
+      "server_start_at": "2026-07-24T12:26:34.313000+00:00",
+      "state": "active"
     },
     "zzone": {
       "action_id": 879,
@@ -6151,9 +6211,9 @@
   "wheel_api_health": {
     "alert_threshold": 3,
     "consecutive_failures": 0,
-    "last_checked_at": "2026-07-24T12:37:57.416974+00:00",
+    "last_checked_at": "2026-07-24T12:39:13.372820+00:00",
     "last_failure_at": "2026-07-20T14:02:03.366327+00:00",
-    "last_success_at": "2026-07-24T12:37:57.416974+00:00",
+    "last_success_at": "2026-07-24T12:39:13.372820+00:00",
     "status": "ok"
   },
   "wheel_generation_observations": {
@@ -6522,13 +6582,13 @@
       "action_id": 1012,
       "first_seen_at": "2026-07-24T12:22:47.510685+00:00",
       "generation_id": "3edfef78dc85933e8810",
-      "last_seen_at": "2026-07-24T12:37:57.417040+00:00",
-      "observations": 11,
+      "last_seen_at": "2026-07-24T12:39:13.372879+00:00",
+      "observations": 12,
       "server_start_at": "2026-07-24T12:06:01.941000+00:00",
       "statuses": {
         "active": 5,
         "closed": 1,
-        "inactive": 5
+        "inactive": 6
       },
       "wheel_key": "ctom18"
     },
@@ -6673,11 +6733,11 @@
       "action_id": 700,
       "first_seen_at": "2026-07-24T08:00:05.515424+00:00",
       "generation_id": "5c5f7c686079cda3bb70",
-      "last_seen_at": "2026-07-24T12:37:47.684284+00:00",
-      "observations": 21,
+      "last_seen_at": "2026-07-24T12:38:53.351570+00:00",
+      "observations": 23,
       "server_start_at": "2026-07-24T07:58:34.902000+00:00",
       "statuses": {
-        "active": 21
+        "active": 23
       },
       "wheel_key": "zonertg15"
     },
@@ -7147,6 +7207,18 @@
       },
       "wheel_key": "aunkere"
     },
+    "a9f73dd378aacbbc7cb9bab3": {
+      "action_id": 1019,
+      "first_seen_at": "2026-07-24T12:39:12.939422+00:00",
+      "generation_id": "a9f73dd378aacbbc7cb9",
+      "last_seen_at": "2026-07-24T12:39:12.939422+00:00",
+      "observations": 1,
+      "server_start_at": "2026-07-24T12:26:34.313000+00:00",
+      "statuses": {
+        "active": 1
+      },
+      "wheel_key": "zonertw5"
+    },
     "abe2d71fdc6088ded240bd49": {
       "action_id": 986,
       "first_seen_at": "2026-07-22T15:21:01.696248+00:00",
@@ -7519,13 +7591,13 @@
       "action_id": 1016,
       "first_seen_at": "2026-07-24T12:22:27.243851+00:00",
       "generation_id": "ee24c02c15cf30bf1cf7",
-      "last_seen_at": "2026-07-24T12:37:57.213743+00:00",
-      "observations": 11,
+      "last_seen_at": "2026-07-24T12:39:13.182234+00:00",
+      "observations": 12,
       "server_start_at": "2026-07-24T12:06:49.461000+00:00",
       "statuses": {
         "active": 5,
         "closed": 1,
-        "inactive": 5
+        "inactive": 6
       },
       "wheel_key": "chopper2"
     },
@@ -7830,6 +7902,16 @@
         "message_id": 35723,
         "message_url": "https://telegram.me/mechanogun/35723",
         "source": "mechanogun"
+      }
+    ],
+    "zonertw5": [
+      {
+        "has_future_availability": false,
+        "has_future_deadline": false,
+        "message_date": "2026-07-24T12:38:06+00:00",
+        "message_id": 238,
+        "message_url": "https://telegram.me/kolesaBB/238",
+        "source": "kolesaBB"
       }
     ]
   }
