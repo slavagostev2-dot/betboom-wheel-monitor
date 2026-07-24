@@ -113,5 +113,5 @@ def test_fresh_telegram_url_preserves_before_and_changes_cache_key() -> None:
         before=237,
     )
 
-    assert latest.endswith("?bbvg_fresh=59476103")
-    assert history.endswith("?before=237&bbvg_fresh=59476103")
+    assert latest.endswith("?bbvg_fresh=59496503")
+    assert history.endswith("?before=237&bbvg_fresh=59496503")
