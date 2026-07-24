@@ -4271,7 +4271,7 @@
   "last_admin_action_applied_at": "2026-07-23T19:36:20.104862+00:00",
   "last_auto_participation_recovery_scan_at": "2026-07-21T19:22:00.289412+00:00",
   "last_automatic_status_at": "2026-07-17T06:35:52.571822+00:00",
-  "last_heartbeat_at": "2026-07-23T23:09:28.281490+00:00",
+  "last_heartbeat_at": "2026-07-24T05:10:05.826726+00:00",
   "last_run_kind": "schedule",
   "last_run_summary": {
     "activation_sent": 0,
@@ -4290,7 +4290,7 @@
     },
     "checked_sources": 169,
     "duplicates_suppressed": 0,
-    "inactive_waiting": 6,
+    "inactive_waiting": 0,
     "initialized_now": 0,
     "notification_errors": 0,
     "pending_expired": 0,
@@ -4324,7 +4324,7 @@
       "sent": false
     },
     "sources": 169,
-    "stale_skipped": 2,
+    "stale_skipped": 0,
     "unconfirmed_waiting": 0,
     "unknown_timer_samples_added": 0
   },
