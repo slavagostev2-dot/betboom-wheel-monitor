@@ -321,15 +321,15 @@
       "deadline": "2026-07-24T12:26:49.461000+00:00",
       "deadline_source": "api",
       "event_id": "ee24c02c15cf30bf1cf7",
-      "expires_at": "2026-07-24T14:23:24.813613+00:00",
+      "expires_at": "2026-07-24T14:25:21.320555+00:00",
       "final_reminder_sent_at": "2026-07-24T12:23:20.006675+00:00",
       "first_notified_at": "2026-07-24T12:22:27.243760+00:00",
       "generation_id": "ee24c02c15cf30bf1cf7",
       "identifier": "chopper2",
       "known_reminder_sent_at": "2026-07-24T12:23:20.006675+00:00",
-      "last_checked_at": "2026-07-24T12:23:25.305311+00:00",
+      "last_checked_at": "2026-07-24T12:25:22.061379+00:00",
       "last_notification_at": "2026-07-24T12:23:20.006675+00:00",
-      "last_verification_at": "2026-07-24T12:23:24.813613+00:00",
+      "last_verification_at": "2026-07-24T12:25:21.320555+00:00",
       "lifecycle_changed_at": "2026-07-24T12:23:20.006675+00:00",
       "lifecycle_state": "scheduled_draw",
       "message_date": "2026-07-24T12:13:15+00:00",
@@ -355,15 +355,15 @@
       "deadline": "2026-07-24T12:26:01.941000+00:00",
       "deadline_source": "api",
       "event_id": "3edfef78dc85933e8810",
-      "expires_at": "2026-07-24T14:23:24.813613+00:00",
+      "expires_at": "2026-07-24T14:25:21.320555+00:00",
       "final_reminder_sent_at": "2026-07-24T12:23:20.006675+00:00",
       "first_notified_at": "2026-07-24T12:22:47.510564+00:00",
       "generation_id": "3edfef78dc85933e8810",
       "identifier": "CTOM18",
       "known_reminder_sent_at": "2026-07-24T12:23:20.006675+00:00",
-      "last_checked_at": "2026-07-24T12:23:25.305311+00:00",
+      "last_checked_at": "2026-07-24T12:25:22.061379+00:00",
       "last_notification_at": "2026-07-24T12:23:20.006675+00:00",
-      "last_verification_at": "2026-07-24T12:23:24.813613+00:00",
+      "last_verification_at": "2026-07-24T12:25:21.320555+00:00",
       "lifecycle_changed_at": "2026-07-24T12:23:20.006675+00:00",
       "lifecycle_state": "scheduled_draw",
       "message_date": "2026-07-24T12:11:29+00:00",
@@ -397,9 +397,9 @@
       "first_notified_at": "2026-07-24T08:00:05.515161+00:00",
       "generation_id": "5c5f7c686079cda3bb70",
       "identifier": "zonertg15",
-      "last_checked_at": "2026-07-24T12:23:25.305311+00:00",
+      "last_checked_at": "2026-07-24T12:25:22.061379+00:00",
       "last_notification_at": "2026-07-24T08:00:05.515161+00:00",
-      "last_verification_at": "2026-07-24T12:23:24.813613+00:00",
+      "last_verification_at": "2026-07-24T12:25:21.320555+00:00",
       "lifecycle_changed_at": "2026-07-24T11:46:37.645995+00:00",
       "lifecycle_state": "participating",
       "message_date": "2026-07-24T07:58:38+00:00",
@@ -5640,7 +5640,7 @@
     "chopper2": {
       "action_id": 1016,
       "generation_id": "ee24c02c15cf30bf1cf7",
-      "seen_at": "2026-07-24T12:23:24.813613+00:00",
+      "seen_at": "2026-07-24T12:25:21.320555+00:00",
       "server_start_at": "2026-07-24T12:06:49.461000+00:00",
       "state": "active"
     },
@@ -5703,7 +5703,7 @@
     "ctom18": {
       "action_id": 1012,
       "generation_id": "3edfef78dc85933e8810",
-      "seen_at": "2026-07-24T12:23:24.813613+00:00",
+      "seen_at": "2026-07-24T12:25:21.320555+00:00",
       "server_start_at": "2026-07-24T12:06:01.941000+00:00",
       "state": "active"
     },
@@ -6045,7 +6045,7 @@
     "zonertg15": {
       "action_id": 700,
       "generation_id": "5c5f7c686079cda3bb70",
-      "seen_at": "2026-07-24T12:23:24.813613+00:00",
+      "seen_at": "2026-07-24T12:25:21.320555+00:00",
       "server_start_at": "2026-07-24T07:58:34.902000+00:00",
       "state": "active"
     },
@@ -6101,9 +6101,9 @@
   "wheel_api_health": {
     "alert_threshold": 3,
     "consecutive_failures": 0,
-    "last_checked_at": "2026-07-24T12:23:24.813613+00:00",
+    "last_checked_at": "2026-07-24T12:25:21.320555+00:00",
     "last_failure_at": "2026-07-20T14:02:03.366327+00:00",
-    "last_success_at": "2026-07-24T12:23:24.813613+00:00",
+    "last_success_at": "2026-07-24T12:25:21.320555+00:00",
     "status": "ok"
   },
   "wheel_generation_observations": {
@@ -6472,11 +6472,11 @@
       "action_id": 1012,
       "first_seen_at": "2026-07-24T12:22:47.510685+00:00",
       "generation_id": "3edfef78dc85933e8810",
-      "last_seen_at": "2026-07-24T12:23:24.813613+00:00",
-      "observations": 3,
+      "last_seen_at": "2026-07-24T12:25:21.320555+00:00",
+      "observations": 5,
       "server_start_at": "2026-07-24T12:06:01.941000+00:00",
       "statuses": {
-        "active": 3
+        "active": 5
       },
       "wheel_key": "ctom18"
     },
@@ -6621,11 +6621,11 @@
       "action_id": 700,
       "first_seen_at": "2026-07-24T08:00:05.515424+00:00",
       "generation_id": "5c5f7c686079cda3bb70",
-      "last_seen_at": "2026-07-24T12:23:24.813613+00:00",
-      "observations": 7,
+      "last_seen_at": "2026-07-24T12:25:21.320555+00:00",
+      "observations": 9,
       "server_start_at": "2026-07-24T07:58:34.902000+00:00",
       "statuses": {
-        "active": 7
+        "active": 9
       },
       "wheel_key": "zonertg15"
     },
@@ -7467,11 +7467,11 @@
       "action_id": 1016,
       "first_seen_at": "2026-07-24T12:22:27.243851+00:00",
       "generation_id": "ee24c02c15cf30bf1cf7",
-      "last_seen_at": "2026-07-24T12:23:24.813613+00:00",
-      "observations": 3,
+      "last_seen_at": "2026-07-24T12:25:21.320555+00:00",
+      "observations": 5,
       "server_start_at": "2026-07-24T12:06:49.461000+00:00",
       "statuses": {
-        "active": 3
+        "active": 5
       },
       "wheel_key": "chopper2"
     },
