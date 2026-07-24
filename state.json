@@ -2452,8 +2452,9 @@
     },
     "zonertg15#event:5c5f7c686079cda3bb70": {
       "scheduled_at": "2026-07-24T08:00:05.563687+00:00",
-      "status": "workflow_dispatch_scheduled",
-      "wheel_key": "zonertg15"
+      "status": "workflow_dispatch_sent",
+      "wheel_key": "zonertg15",
+      "dispatched_at": "2026-07-24T08:00:08.476609+00:00"
     },
     "zonertw1#event:49708ed982329cd19b10": {
       "dispatch_error": "state_push_failed: error: Pulling is not possible because you have unmerged files.\nhint: Fix them up in the work tree, and then use 'git add/rm <file>'\nhint: as appropriate to mark resolution and make a commit.\nfatal: Exiting because of an unresolved conflict.\n",
