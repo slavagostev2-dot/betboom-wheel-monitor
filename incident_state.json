@@ -1,5 +1,5 @@
 {
-  "active_count": 0,
+  "active_count": 1,
   "incidents": {
     "system_checks:admin_panel_not_running:3e312a33e5d944e2": {
       "detail": "Текущее состояние: validation_failed.",
@@ -23,23 +23,21 @@
       "title": "Панель управления ботом остановлена"
     },
     "system_checks:admin_panel_stale:9278d429b1e1ee67": {
-      "detail": "Последний живой сигнал был 399 минут назад.",
+      "detail": "Последний живой сигнал был 191 минут назад.",
       "first_seen_at": "2026-07-15T23:43:26.915265+00:00",
       "key": "system_checks:admin_panel_stale:9278d429b1e1ee67",
       "kind": "admin_panel_stale",
-      "last_seen_at": "2026-07-23T18:02:50.282759+00:00",
+      "last_seen_at": "2026-07-24T06:46:03.452021+00:00",
+      "lifecycle_started_at": "2026-07-24T06:46:03.452021+00:00",
       "metadata": {},
-      "occurrences": 22,
+      "occurrences": 23,
       "open_notification_pending": false,
-      "open_notified_at": "2026-07-21T21:47:51.118253+00:00",
-      "opened_sequence": 90,
-      "resolution_notification_pending": false,
-      "resolution_notified_at": "2026-07-23T18:03:12.057972+00:00",
-      "resolved_at": "2026-07-23T18:02:50.282759+00:00",
+      "open_notified_at": "2026-07-24T06:46:05.087440+00:00",
+      "opened_sequence": 105,
       "resolved_sequence": 96,
       "scope": "system_checks",
       "severity": "critical",
-      "status": "resolved",
+      "status": "active",
       "subject": "",
       "title": "Бот давно не принимает команды пользователей"
     },
@@ -311,17 +309,17 @@
       "title": "Давно не выполнялась полная проверка 66 источников"
     }
   },
-  "last_change_at": "2026-07-23T23:09:01.753558+00:00",
-  "last_reconcile_at": "2026-07-23T23:43:34.162004+00:00",
+  "last_change_at": "2026-07-24T06:46:03.452021+00:00",
+  "last_reconcile_at": "2026-07-24T06:46:03.452021+00:00",
   "last_reconcile_scope": "system_checks",
   "last_summary": {
-    "active": 0,
-    "new_notification_count": 0,
+    "active": 1,
+    "new_notification_count": 1,
     "recovery_notification_count": 0,
     "scope": "system_checks"
   },
-  "sequence": 104,
+  "sequence": 105,
   "status": "initializing",
-  "updated_at": "2026-07-23T23:43:34.162055+00:00",
+  "updated_at": "2026-07-24T06:46:05.087472+00:00",
   "version": 1
 }
