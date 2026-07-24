@@ -3,6 +3,7 @@ from __future__ import annotations
 import os
 import re
 from typing import Any
+from urllib.parse import urlparse
 
 import betboom_auto_participation as auto
 
@@ -29,11 +30,41 @@ def _matches_full_label(pattern: re.Pattern[str], value: object) -> bool:
     return bool(pattern.fullmatch(_normalized_label(value)))
 
 
-def _text(page: Any) -> str:
+def _search_roots(page: Any) -> list[Any]:
+    """Return the main document followed by every attached child frame."""
+
+    roots: list[Any] = [page]
     try:
-        return str(page.locator("body").inner_text(timeout=5000) or "")
+        main_frame = page.main_frame
+        frames = list(page.frames)
+    except Exception:
+        return roots
+    for frame in frames:
+        if frame is main_frame or frame in roots:
+            continue
+        roots.append(frame)
+    return roots
+
+
+def _root_name(root: Any, page: Any) -> str:
+    if root is page:
+        return "main"
+    try:
+        parsed = urlparse(str(getattr(root, "url", "") or ""))
+        return f"frame:{parsed.netloc or parsed.path[:40] or 'unknown'}"
+    except Exception:
+        return "frame:unknown"
+
+
+def _text(root: Any) -> str:
+    try:
+        return str(root.locator("body").inner_text(timeout=5000) or "")
     except Exception:
         return ""
+
+
+def _all_text(page: Any) -> str:
+    return "\n".join(value for value in (_text(root) for root in _search_roots(page)) if value)
 
 
 def _matching_visible_label(
@@ -60,37 +91,38 @@ def _matching_visible_label(
 
 
 def _success(page: Any) -> bool:
-    """Accept only a visible, self-contained confirmation label.
+    """Accept only a visible, self-contained confirmation label in any frame.
 
     Searching the entire body is unsafe because wheel rules and help text may
     contain phrases such as ``если вы участвуете`` without confirming the
     current account's participation in the current wheel.
     """
 
-    try:
-        locators = (
-            page.get_by_text(SUCCESS_LABEL_RE),
-            page.locator('[role="status"],[aria-live]').filter(
-                has_text=SUCCESS_LABEL_RE
-            ),
-        )
-    except Exception:
-        return False
-    return any(
-        _matching_visible_label(locator, SUCCESS_LABEL_RE)[0] is not None
-        for locator in locators
-    )
+    for root in _search_roots(page):
+        try:
+            locators = (
+                root.get_by_text(SUCCESS_LABEL_RE),
+                root.locator('[role="status"],[aria-live]').filter(
+                    has_text=SUCCESS_LABEL_RE
+                ),
+            )
+        except Exception:
+            continue
+        if any(
+            _matching_visible_label(locator, SUCCESS_LABEL_RE)[0] is not None
+            for locator in locators
+        ):
+            return True
+    return False
 
 
-def _click_candidates(page: Any, timeout_ms: int) -> tuple[bool, str]:
-    """Click only a visible control whose complete label is a participation verb."""
-
+def _click_in_root(root: Any, timeout_ms: int) -> tuple[bool, str]:
     selectors = (
-        page.get_by_role("button", name=CLICK_RE),
-        page.locator("button").filter(has_text=CLICK_RE),
-        page.locator('[role="button"]').filter(has_text=CLICK_RE),
-        page.locator("a").filter(has_text=CLICK_RE),
-        page.get_by_text(CLICK_RE),
+        root.get_by_role("button", name=CLICK_RE),
+        root.locator("button").filter(has_text=CLICK_RE),
+        root.locator('[role="button"]').filter(has_text=CLICK_RE),
+        root.locator("a").filter(has_text=CLICK_RE),
+        root.get_by_text(CLICK_RE),
     )
     for locator in selectors:
         candidate, label = _matching_visible_label(locator, CLICK_RE)
@@ -103,7 +135,7 @@ def _click_candidates(page: Any, timeout_ms: int) -> tuple[bool, str]:
             continue
 
     try:
-        result = page.evaluate(
+        result = root.evaluate(
             r"""
             () => {
               const re = /^(принять\s+участие|участвовать|участвую)[.!]?$/i;
@@ -144,34 +176,49 @@ def _click_candidates(page: Any, timeout_ms: int) -> tuple[bool, str]:
     return False, ""
 
 
-def _diagnostic_labels(page: Any) -> str:
-    """Return short visible clickable labels without storing page contents."""
+def _click_candidates(page: Any, timeout_ms: int) -> tuple[bool, str]:
+    """Click an exact participation control in the main page or any child frame."""
 
-    try:
-        locator = page.locator('button,[role="button"],a')
-        count = min(locator.count(), 40)
-    except Exception:
-        return ""
+    for root in _search_roots(page):
+        clicked, label = _click_in_root(root, timeout_ms)
+        if clicked:
+            return True, f"{_root_name(root, page)}:{label}"[:180]
+    return False, ""
+
+
+def _diagnostic_labels(page: Any) -> str:
+    """Return short visible clickable labels and frame locations, without page contents."""
+
     labels: list[str] = []
     seen: set[str] = set()
-    for index in range(count):
+    for root in _search_roots(page):
         try:
-            candidate = locator.nth(index)
-            if not candidate.is_visible():
-                continue
-            label = _normalized_label(candidate.inner_text(timeout=1000))
+            locator = root.locator('button,[role="button"],a')
+            count = min(locator.count(), 40)
         except Exception:
             continue
-        if not label or len(label) > 80:
-            continue
-        key = label.casefold()
-        if key in seen:
-            continue
-        seen.add(key)
-        labels.append(label)
-        if len(labels) >= 8:
-            break
-    return " | ".join(labels)[:220]
+        prefix = _root_name(root, page)
+        for index in range(count):
+            try:
+                candidate = locator.nth(index)
+                if not candidate.is_visible():
+                    continue
+                label = _normalized_label(candidate.inner_text(timeout=1000))
+            except Exception:
+                continue
+            if not label or len(label) > 80:
+                continue
+            rendered = f"{prefix}:{label}"
+            key = rendered.casefold()
+            if key in seen:
+                continue
+            seen.add(key)
+            labels.append(rendered)
+            if len(labels) >= 12:
+                return " | ".join(labels)[:260]
+    if len(_search_roots(page)) > 1 and not labels:
+        labels.append(f"frames:{len(_search_roots(page)) - 1}")
+    return " | ".join(labels)[:260]
 
 
 def participate(url: str) -> auto.ParticipationResult:
@@ -216,7 +263,7 @@ def participate(url: str) -> auto.ParticipationResult:
                     "BetBoom уже показывает точное подтверждение участия",
                 )
 
-            clicked, _ = _click_candidates(page, timeout_ms)
+            clicked, location = _click_candidates(page, timeout_ms)
             if not clicked:
                 page.reload(wait_until="domcontentloaded", timeout=timeout_ms)
                 try:
@@ -231,15 +278,15 @@ def participate(url: str) -> auto.ParticipationResult:
                         "already_participating",
                         "BetBoom показывает точное подтверждение после повторной загрузки",
                     )
-                clicked, _ = _click_candidates(page, timeout_ms)
+                clicked, location = _click_candidates(page, timeout_ms)
 
             if not clicked:
-                body = _text(page).casefold()
+                body = _all_text(page).casefold()
                 labels = _diagnostic_labels(page)
                 detail = (
                     "страница показывает вход/авторизацию"
                     if any(value in body for value in ("войти", "авторизоваться", "авторизация"))
-                    else "кнопка участия не найдена после точного поиска"
+                    else "кнопка участия не найдена в основном документе и frames"
                 )
                 if labels:
                     detail += f"; видимые действия: {labels}"
@@ -253,7 +300,7 @@ def participate(url: str) -> auto.ParticipationResult:
                     return auto.ParticipationResult(
                         True,
                         "participated",
-                        "BetBoom показал точное подтверждение после нажатия",
+                        f"BetBoom показал точное подтверждение после нажатия ({location})"[:300],
                     )
 
             try:
@@ -266,14 +313,14 @@ def participate(url: str) -> auto.ParticipationResult:
                 return auto.ParticipationResult(
                     True,
                     "participated",
-                    "BetBoom показал точное подтверждение после контрольной перезагрузки",
+                    f"BetBoom подтвердил участие после контрольной перезагрузки ({location})"[:300],
                 )
 
             browser.close()
             return auto.ParticipationResult(
                 False,
                 "unconfirmed",
-                "элемент участия нажат, но точное подтверждение BetBoom не найдено",
+                f"элемент участия нажат ({location}), но точное подтверждение BetBoom не найдено"[:300],
             )
     except Exception as exc:
         return auto.ParticipationResult(
