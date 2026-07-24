@@ -316,49 +316,69 @@
   "active_wheels": {
     "chopper2": {
       "action_id": 1016,
+      "availability_status": "available",
       "button_token": "ae1ff89d74d4f8",
       "deadline": "2026-07-24T12:26:49.461000+00:00",
-      "expires_at": "2026-07-24T14:22:27.243760+00:00",
+      "deadline_source": "api",
+      "event_id": "ee24c02c15cf30bf1cf7",
+      "expires_at": "2026-07-24T14:23:24.813613+00:00",
+      "final_reminder_sent_at": "2026-07-24T12:23:20.006675+00:00",
       "first_notified_at": "2026-07-24T12:22:27.243760+00:00",
       "generation_id": "ee24c02c15cf30bf1cf7",
       "identifier": "chopper2",
-      "last_checked_at": "2026-07-24T12:22:27.243760+00:00",
-      "last_notification_at": "2026-07-24T12:22:27.243760+00:00",
+      "known_reminder_sent_at": "2026-07-24T12:23:20.006675+00:00",
+      "last_checked_at": "2026-07-24T12:23:25.305311+00:00",
+      "last_notification_at": "2026-07-24T12:23:20.006675+00:00",
+      "last_verification_at": "2026-07-24T12:23:24.813613+00:00",
+      "lifecycle_changed_at": "2026-07-24T12:23:20.006675+00:00",
+      "lifecycle_state": "scheduled_draw",
       "message_date": "2026-07-24T12:13:15+00:00",
       "message_id": 237,
       "message_text": "https://betboom.ru/freestream/chopper2\nhttps://telegram.me/kolesaBB\nhttps://telegram.me/kolesaBB/237",
       "message_url": "https://telegram.me/kolesaBB/237",
-      "method": "активность и таймер подтверждены BetBoom",
+      "method": "состояние определяется пользователями BB V.G.",
+      "needs_manual_time": false,
       "page_excerpt": "",
+      "page_status": "active",
       "participating": false,
       "referral_restricted": false,
       "server_start_at": "2026-07-24T12:06:49.461000+00:00",
       "source": "kolesaBB",
-      "status": "preliminary",
+      "status": "unknown",
       "url": "https://betboom.ru/freestream/chopper2",
       "verification_status": "confirmed"
     },
     "ctom18": {
       "action_id": 1012,
+      "availability_status": "available",
       "button_token": "56cddd136f0dc0",
       "deadline": "2026-07-24T12:26:01.941000+00:00",
-      "expires_at": "2026-07-24T14:22:47.510564+00:00",
+      "deadline_source": "api",
+      "event_id": "3edfef78dc85933e8810",
+      "expires_at": "2026-07-24T14:23:24.813613+00:00",
+      "final_reminder_sent_at": "2026-07-24T12:23:20.006675+00:00",
       "first_notified_at": "2026-07-24T12:22:47.510564+00:00",
       "generation_id": "3edfef78dc85933e8810",
       "identifier": "CTOM18",
-      "last_checked_at": "2026-07-24T12:22:47.510564+00:00",
-      "last_notification_at": "2026-07-24T12:22:47.510564+00:00",
+      "known_reminder_sent_at": "2026-07-24T12:23:20.006675+00:00",
+      "last_checked_at": "2026-07-24T12:23:25.305311+00:00",
+      "last_notification_at": "2026-07-24T12:23:20.006675+00:00",
+      "last_verification_at": "2026-07-24T12:23:24.813613+00:00",
+      "lifecycle_changed_at": "2026-07-24T12:23:20.006675+00:00",
+      "lifecycle_state": "scheduled_draw",
       "message_date": "2026-07-24T12:11:29+00:00",
       "message_id": 236,
       "message_text": "https://betboom.ru/freestream/CTOM18\nhttps://telegram.me/kolesaBB\nhttps://telegram.me/kolesaBB/236",
       "message_url": "https://telegram.me/kolesaBB/236",
-      "method": "активность и таймер подтверждены BetBoom",
+      "method": "состояние определяется пользователями BB V.G.",
+      "needs_manual_time": false,
       "page_excerpt": "",
+      "page_status": "active",
       "participating": false,
       "referral_restricted": false,
       "server_start_at": "2026-07-24T12:06:01.941000+00:00",
       "source": "kolesaBB",
-      "status": "preliminary",
+      "status": "unknown",
       "url": "https://betboom.ru/freestream/CTOM18",
       "verification_status": "confirmed"
     },
@@ -377,9 +397,9 @@
       "first_notified_at": "2026-07-24T08:00:05.515161+00:00",
       "generation_id": "5c5f7c686079cda3bb70",
       "identifier": "zonertg15",
-      "last_checked_at": "2026-07-24T12:22:17.215548+00:00",
+      "last_checked_at": "2026-07-24T12:23:25.305311+00:00",
       "last_notification_at": "2026-07-24T08:00:05.515161+00:00",
-      "last_verification_at": "2026-07-24T12:22:16.840673+00:00",
+      "last_verification_at": "2026-07-24T12:23:24.813613+00:00",
       "lifecycle_changed_at": "2026-07-24T11:46:37.645995+00:00",
       "lifecycle_state": "participating",
       "message_date": "2026-07-24T07:58:38+00:00",
@@ -4245,7 +4265,7 @@
       "wheel_key": "chopper"
     },
     "56cddd136f0dc0": {
-      "created_at": "2026-07-24T12:22:27.492759+00:00",
+      "created_at": "2026-07-24T12:23:22.567198+00:00",
       "identifier": "CTOM18",
       "message_date": "2026-07-24T12:11:29+00:00",
       "message_id": 236,
@@ -4255,7 +4275,7 @@
       "page_excerpt": "",
       "post_key": "56cddd136f0dc070c4bd7659a1981a3dc8d26e63d91ff67ddea2b9d9dff229bd",
       "source": "kolesaBB",
-      "status": "preliminary",
+      "status": "final_reminder",
       "url": "https://betboom.ru/freestream/CTOM18",
       "wheel_key": "ctom18"
     },
@@ -4290,7 +4310,7 @@
       "wheel_key": "pomidor2"
     },
     "ae1ff89d74d4f8": {
-      "created_at": "2026-07-24T12:22:27.216841+00:00",
+      "created_at": "2026-07-24T12:23:20.006820+00:00",
       "identifier": "chopper2",
       "message_date": "2026-07-24T12:13:15+00:00",
       "message_id": 237,
@@ -4300,7 +4320,7 @@
       "page_excerpt": "",
       "post_key": "ae1ff89d74d4f8d2fc221dba7982257d84b549a049e468b79bd93f5b3da29a80",
       "source": "kolesaBB",
-      "status": "preliminary",
+      "status": "final_reminder",
       "url": "https://betboom.ru/freestream/chopper2",
       "wheel_key": "chopper2"
     },
@@ -4777,7 +4797,6 @@
     "08d55e1dbbeadf8d74fbfad7e9f294690fe342ebd37fa9ab7ce1a53f970936c6": "2026-07-20T02:08:24.918745+00:00",
     "0a7dbcabdcf36f8ecd98d5ee2aa810455b0cd989d24e72dc33981f4d3ab2886f": "2026-07-16T12:48:19.363854+00:00",
     "0c64230533d620f22973579313718217f90dabac7fbeabe8becf46547c04bab9": "2026-07-12T18:26:16.728188+00:00",
-    "0eb812dceb3595163f20a8ce588fb7ba505638e89f4b8ece5c60214513953d79": "2026-07-24T11:46:59.241707+00:00",
     "0ec1113c05cfa51362288f6e1ed593f96d8bd90425429d66e824181ab267a25e": "2026-07-14T17:16:37.351836+00:00",
     "0ec618745909bcab5eee341588e4a6fc9de1698c07423f58b500099f6063996e": "2026-07-12T18:21:23.777395+00:00",
     "0f77c05ff8d29b7b55e5d75659119974e49b5d30d82e90124530896c084116a7": "2026-07-18T18:37:10.658238+00:00",
@@ -5621,7 +5640,7 @@
     "chopper2": {
       "action_id": 1016,
       "generation_id": "ee24c02c15cf30bf1cf7",
-      "seen_at": "2026-07-24T12:22:27.243851+00:00",
+      "seen_at": "2026-07-24T12:23:24.813613+00:00",
       "server_start_at": "2026-07-24T12:06:49.461000+00:00",
       "state": "active"
     },
@@ -5684,7 +5703,7 @@
     "ctom18": {
       "action_id": 1012,
       "generation_id": "3edfef78dc85933e8810",
-      "seen_at": "2026-07-24T12:22:47.510685+00:00",
+      "seen_at": "2026-07-24T12:23:24.813613+00:00",
       "server_start_at": "2026-07-24T12:06:01.941000+00:00",
       "state": "active"
     },
@@ -6026,7 +6045,7 @@
     "zonertg15": {
       "action_id": 700,
       "generation_id": "5c5f7c686079cda3bb70",
-      "seen_at": "2026-07-24T12:22:16.840673+00:00",
+      "seen_at": "2026-07-24T12:23:24.813613+00:00",
       "server_start_at": "2026-07-24T07:58:34.902000+00:00",
       "state": "active"
     },
@@ -6082,9 +6101,9 @@
   "wheel_api_health": {
     "alert_threshold": 3,
     "consecutive_failures": 0,
-    "last_checked_at": "2026-07-24T12:22:27.492491+00:00",
+    "last_checked_at": "2026-07-24T12:23:24.813613+00:00",
     "last_failure_at": "2026-07-20T14:02:03.366327+00:00",
-    "last_success_at": "2026-07-24T12:22:27.492491+00:00",
+    "last_success_at": "2026-07-24T12:23:24.813613+00:00",
     "status": "ok"
   },
   "wheel_generation_observations": {
@@ -6453,11 +6472,11 @@
       "action_id": 1012,
       "first_seen_at": "2026-07-24T12:22:47.510685+00:00",
       "generation_id": "3edfef78dc85933e8810",
-      "last_seen_at": "2026-07-24T12:22:47.510685+00:00",
-      "observations": 1,
+      "last_seen_at": "2026-07-24T12:23:24.813613+00:00",
+      "observations": 3,
       "server_start_at": "2026-07-24T12:06:01.941000+00:00",
       "statuses": {
-        "active": 1
+        "active": 3
       },
       "wheel_key": "ctom18"
     },
@@ -6602,11 +6621,11 @@
       "action_id": 700,
       "first_seen_at": "2026-07-24T08:00:05.515424+00:00",
       "generation_id": "5c5f7c686079cda3bb70",
-      "last_seen_at": "2026-07-24T12:22:16.840673+00:00",
-      "observations": 5,
+      "last_seen_at": "2026-07-24T12:23:24.813613+00:00",
+      "observations": 7,
       "server_start_at": "2026-07-24T07:58:34.902000+00:00",
       "statuses": {
-        "active": 5
+        "active": 7
       },
       "wheel_key": "zonertg15"
     },
@@ -7448,11 +7467,11 @@
       "action_id": 1016,
       "first_seen_at": "2026-07-24T12:22:27.243851+00:00",
       "generation_id": "ee24c02c15cf30bf1cf7",
-      "last_seen_at": "2026-07-24T12:22:27.243851+00:00",
-      "observations": 1,
+      "last_seen_at": "2026-07-24T12:23:24.813613+00:00",
+      "observations": 3,
       "server_start_at": "2026-07-24T12:06:49.461000+00:00",
       "statuses": {
-        "active": 1
+        "active": 3
       },
       "wheel_key": "chopper2"
     },
