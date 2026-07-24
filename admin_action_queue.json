@@ -498,6 +498,12 @@
       "sequence": 62,
       "value": "{\"actor\":\"vote_52b40c32d6fb8e26f3e17863bb949f92\",\"event_key\":\"koma#action:871\",\"role\":\"owner\",\"sources\":[\"kolesaBB\"],\"weight\":5,\"wheel_key\":\"koma\"}"
     },
+    "5f4856c034954156bb07ebd2b64a5182": {
+      "action": "record_personal_vote",
+      "created_at": "2026-07-24T11:50:49.037743+00:00",
+      "sequence": 215,
+      "value": "{\"actor\":\"vote_3092cd8d69b74beb8bd2579cd902c714\",\"event_key\":\"over#generation:138f8c403f0214e44cb0\",\"role\":\"owner\",\"sources\":[\"overdrivebet\"],\"weight\":5,\"wheel_key\":\"over\"}"
+    },
     "5f86a89e1d674ba49e4aeeac81a88417": {
       "action": "participate_wheel",
       "created_at": "2026-07-16T08:22:56.597978+00:00",
@@ -1286,5 +1292,5 @@
     }
   },
   "format": "bbvg-admin-action-queue-v1",
-  "sequence": 214
+  "sequence": 215
 }
