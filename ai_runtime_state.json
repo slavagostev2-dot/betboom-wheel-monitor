@@ -1,8 +1,8 @@
 {
   "cache": {
-    "4533e6746e4331da3cc10d5c9cf7f685e7cfbe6e5872650185e763c589170d0d": {
-      "expires_at": 1784876463.4554334,
-      "text": "{\n  \"summary\": \"Критическая ошибка: панель управления не обновляла статус более 3 часов (191 минута).\",\n  \"impact\": \"Бот перестал принимать и обрабатывать команды пользователей, система управления зависла.\",\n  \"recommended_action\": \"Проверить heartbeat Control Center и последний workflow панели.\",\n  \"confidence\": \"high\"\n}"
+    "b7b401740511cae298c7e7f9d724e887aba1bdf116970784e0d2428e38fdc014": {
+      "expires_at": 1784893583.2204945,
+      "text": "{\n  \"summary\": \"Критическая задержка обновления основного монитора: последний heartbeat зафиксирован 14 минут назад.\",\n  \"impact\": \"Система мониторинга перестала обновлять данные в реальном времени, что делает невозможным оперативное обнаружение новых инцидентов.\",\n  \"recommended_action\": \"Проверить состояние основного monitor workflow и время последней успешной итерации.\",\n  \"confidence\": \"high\"\n}"
     }
   },
   "decisions": [
@@ -1227,10 +1227,20 @@
       "output_sha256": "4a14704d535b718ac7255adcf4ee0ce26275f9666c501222460ee0ea3f2b104c",
       "provider": "gemini",
       "status": "ok"
+    },
+    {
+      "cached": false,
+      "created_at": 1784892683.2204945,
+      "feature": "health_inspector",
+      "id": "afb8c05ff9ca4d4f974e6240499f985f",
+      "model": "gemini-3.1-flash-lite",
+      "output_sha256": "7bd9a585be00a09a7118894b09872c0d3570e06d4f135c8adf48b64c88cc729a",
+      "provider": "gemini",
+      "status": "ok"
     }
   ],
   "rate_calls": [
-    1784875563.4554334
+    1784892683.2204945
   ],
   "version": 1
 }
